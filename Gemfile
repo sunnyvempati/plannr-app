@@ -19,6 +19,7 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'flat-ui-sass'
-
 #####
+
+gem 'neat'
 
