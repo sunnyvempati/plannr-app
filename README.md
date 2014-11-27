@@ -13,7 +13,7 @@ Plannr Dashboard
 - Had to add this line
 `Rails.application.config.assets.precompile += ['flat-ui/**/*’]`
 Found it [here](https://github.com/wingrunr21/flat-ui-sass/issues/35)
-- added (Lato)[https://www.google.com/fonts/specimen/Lato] font
+- added [Lato](https://www.google.com/fonts/specimen/Lato) font
 
 ### React JS Front-end
 
