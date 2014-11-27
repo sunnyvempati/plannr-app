@@ -23,3 +23,5 @@ gem 'flat-ui-sass'
 
 gem 'neat'
 
+gem 'devise'
+
