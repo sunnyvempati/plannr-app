@@ -1,8 +1,6 @@
 Plannr Dashboard
 ================
 
-# Architecture doc
-
 ### Rails backend
 - fixed rbenv
 - fixed postgres
