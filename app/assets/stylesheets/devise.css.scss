@@ -1,0 +1,40 @@
+.main {
+	@include outer-container;
+	.header {
+		@include span-columns(12);
+		padding-top: 1em;
+		.logo {
+			background: url(logo.svg) no-repeat;
+			background-size: 200px 200px;
+			height: 200px;
+			width: 200px;
+			margin: 0 auto;
+		}
+	}
+	.form-container {
+		@include span-columns(4);
+		@include shift(4);
+		.field {
+			padding-top: 1em;
+		}
+		.btn-full {
+			margin-top: 1em;
+			width: 100%;
+			.login-svg {
+				background: url(login.svg) no-repeat;
+				background-size: 30px 30px;
+				height: 30px;
+				width: 30px;
+				margin: auto;
+			}
+		}
+	}
+	.main-footer {
+		@include span-columns(12);
+		text-align: center;
+		padding: 2em;
+		font-size: 1em;
+		color: #CFCFCF;
+	}
+}
+

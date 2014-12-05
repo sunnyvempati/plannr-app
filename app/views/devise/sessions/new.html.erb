@@ -1,26 +1,27 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="header">
+  <div class="content">
+    <div class="logo">
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+<div class="form-container">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "sunny@yourplannr.com" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "password" %>
+    </div>
+
+    <button type="submit" class="btn btn-default btn-full">
+      <div class="login-svg">
+      </div>
+    </button>
+  <% end %>
+</div>
+
+<div class="main-footer">
+  POWERED<b>BY</b> PLANNR
+</div>
