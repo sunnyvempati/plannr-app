@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/reactjs/react-rails.git
+  revision: b0dd8c3296ca103384717ff8e5f469a6e2313baf
+  branch: master
+  specs:
+    react-rails (1.0.0.pre)
+      connection_pool
+      execjs
+      rails (>= 3.1)
+      react-source (= 0.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,6 +55,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    connection_pool (2.1.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -94,6 +106,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.0)
+    react-source (0.12.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     sass (3.4.9)
@@ -138,6 +151,7 @@ DEPENDENCIES
   neat (>= 1.7.0.pre)
   pg
   rails (= 4.1.6)
+  react-rails!
   sass-rails (>= 5.0.0.beta1)
   spring
   turbolinks

@@ -24,3 +24,5 @@ gem 'flat-ui-sass'
 gem 'neat', '>= 1.7.0.pre'
 
 gem 'devise'
+
+gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
