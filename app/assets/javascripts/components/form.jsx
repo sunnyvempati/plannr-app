@@ -1,7 +1,8 @@
 var Form = React.createClass({
 	render: function() {
+		var all_props = this.props;
 		return (
-			<form acceptCharset="UTF-8" action={this.props.action} className={this.props.class} method={this.props.method} id={this.props.id}>
+			<form acceptCharset="UTF-8" {...all_props}>
 				{this.props.children}
 			</form>
 		);

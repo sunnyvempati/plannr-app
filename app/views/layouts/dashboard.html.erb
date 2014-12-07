@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plannr Dasboard - Welcome</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= react_component('DashboardHeader', profile: current_user.profile, root_path: root_path) %>
+<hr class="header-hr">
+
+<div class="main">
+	<div class="main-table">
+		<div class="left-menu">
+			<%= react_component('Menu') %>
+		</div>
+		<div class="right-content">
+			<%= yield %>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
+	

@@ -1,22 +1,59 @@
-// .dashboard-container {
-// 	@include linear-gradient(right, #77d9c1, #5f7cb0);
-// 	@include outer-container(100%);
-//   .logo {
-//   	background: url(logo.svg) no-repeat;
-//   	background-size: 50px 50px;
-//   	height: 50px;
-//   	width: 50px;
-//   	margin: 1em;
-//   	@include span-columns(1);
-//   }
-//   .user-menu {
-//   	@include span-columns(1);
-//   	@include shift(9);
-//   	@include omega;
-//   	.fui-user {
-//   		color: #ffffff;
-//   		font-size: 2em;
-//   		margin: 1em;
-//   	}
-//   }
-// }
+.dashboard-header {
+	@include linear-gradient(left, #77d9c1, #5f7cb0);
+	@include outer-container;
+  .logo-container {
+  	@include span-columns(1);
+  	padding: 1em;
+  	.logo {
+  		background: url(header-logo.svg) no-repeat;
+	  	background-size: 50px 50px;
+	  	height: 50px;
+	  	width: 100%;
+  	}
+  }
+  .menu-container {
+  	@include span-columns(11);
+  	.menu {
+  		line-height: 50px;
+  		vertical-align: middle;
+  		padding: 1em;
+  		float: right;
+  		.dropdown-toggle {
+  			background: transparent;
+  			.custom {
+  				font-size: 30px;
+  			}
+  		}
+  	}
+  }
+}
+
+.header-hr {
+	margin: 0;
+	border-top: 5px solid #ffffff;
+	height: 7px;
+	box-shadow: inset 0 7px 7px -7px black;
+}
+
+.main {
+	margin-top: -5px;
+	.main-table {
+		@include row(table);
+		@include fill-parent;
+		height: 100vh;
+		.left-menu {
+			@include span-columns(3);
+			@include pad();
+			box-shadow: inset -1px -1px 3px 0px #999999;
+		}
+
+		.right-content {
+			@include span-columns(9);
+			@include reset-display;
+			@include pad();
+			background-color: #E6E6E6;
+		}
+	}
+}
+
+

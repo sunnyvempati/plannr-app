@@ -1,8 +1,8 @@
 var Button = React.createClass({
 	render: function() {
-		var button_class = this.props.button_class || "btn btn-default";
+		var button_class = this.props.className || "btn btn-default";
 		return (
-			<button type={this.props.type} className={button_class}>
+			<button {...this.props} className={button_class}>
 				{this.props.children}
 			</button>
 		);

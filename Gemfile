@@ -26,3 +26,9 @@ gem 'neat', '>= 1.7.0.pre'
 gem 'devise'
 
 gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
+
+group 'development' do
+	gem 'pry'
+	gem 'pry-byebug'
+	gem 'guard-livereload', require: false
+end
