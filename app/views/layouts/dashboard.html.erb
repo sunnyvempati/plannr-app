@@ -11,14 +11,12 @@
 <%= react_component('DashboardHeader', profile: current_user.profile, root_path: root_path) %>
 <hr class="header-hr">
 
-<div class="main">
-	<div class="main-table">
-		<div class="left-menu">
-			<%= react_component('Menu') %>
-		</div>
-		<div class="right-content">
-			<%= yield %>
-		</div>
+<div class="main-content">
+	<div class="left-menu">
+		<%= react_component('Menu', name: "#{current_user.profile.first_name} #{current_user.profile.last_name}") %>
+	</div>
+	<div class="right-content">
+		<%= yield %>
 	</div>
 </div>
 

@@ -1,0 +1,15 @@
+.menu-container {
+	@include outer-container;
+	.menu-header {
+		@include span-columns(12);
+		@include omega();
+		font-size: 2em;
+		padding: 0.5em;
+	}
+	.menu-hr {
+		@include span-columns(12);
+		width: 100%;
+		height: 5px;
+		border-top: 5px solid #E6E6E6;
+	}
+}
