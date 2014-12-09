@@ -3,13 +3,28 @@
 	.menu-header {
 		@include span-columns(12);
 		@include omega();
-		font-size: 2em;
-		padding: 0.5em;
+		font-size: 1.5em;
+		padding: 20px 0 10px 30px;
+		color: $white-three-fourths;
+		border-bottom: 1px solid $white-quarter;
 	}
-	.menu-hr {
+	.menu-item-container {
 		@include span-columns(12);
-		width: 100%;
-		height: 5px;
-		border-top: 5px solid #E6E6E6;
+		padding: 1.5em;
+		.menu-item {
+			color: $white-three-fourths;
+			border-top: 1px solid $white-quarter;
+			padding: 10px 10px 10px 30px;
+			font-size: 20px;
+			&:hover {
+				color: #ffffff;
+				background-color: $white-quarter;
+				cursor: pointer;
+			}
+			.icon-pad {
+				color: $menu-icon;
+				margin-right: 1.5em;
+			}
+		}
 	}
 }

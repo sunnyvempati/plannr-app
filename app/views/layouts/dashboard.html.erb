@@ -8,18 +8,16 @@
 </head>
 <body>
 
-<%= react_component('DashboardHeader', profile: current_user.profile, root_path: root_path) %>
-<hr class="header-hr">
-
+<%= react_component('Header', profile_id:current_user.profile.id, root_path:root_path) %>
 <div class="main-content">
-	<div class="left-menu">
-		<%= react_component('Menu', name: "#{current_user.profile.first_name} #{current_user.profile.last_name}") %>
+	<div class="left">
+		<%= react_component('Menu', name:current_user.profile.full_name) %>
 	</div>
-	<div class="right-content">
+	<div class="right">
 		<%= yield %>
 	</div>
 </div>
 
+
 </body>
 </html>
-	

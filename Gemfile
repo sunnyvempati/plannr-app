@@ -27,6 +27,8 @@ gem 'devise'
 
 gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
 
+gem 'font-awesome-sass'
+
 group 'development' do
 	gem 'pry'
 	gem 'pry-byebug'

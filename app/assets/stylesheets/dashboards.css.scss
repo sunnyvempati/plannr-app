@@ -1,6 +1,7 @@
 .dashboard-header {
-	@include linear-gradient(left, #77d9c1, #5f7cb0);
+	@include linear-gradient(left, $start_grad, $end_grad);
 	@include outer-container;
+	border-bottom: 5px solid $white-quarter;
   .logo-container {
   	@include span-columns(1);
   	padding: 1em;
@@ -8,11 +9,12 @@
   		background: url(header-logo.svg) no-repeat;
 	  	background-size: 50px 50px;
 	  	height: 50px;
-	  	width: 100%;
+	  	width: 50px;
   	}
   }
   .menu-container {
   	@include span-columns(11);
+  	@include omega();
   	.menu {
   		line-height: 50px;
   		vertical-align: middle;
@@ -28,28 +30,19 @@
   }
 }
 
-.header-hr {
-	margin: 0;
-	border-top: 5px solid #ffffff;
-	height: 7px;
-	box-shadow: inset 0 7px 7px -7px black;
-}
-
 .main-content {
 	display: -webkit-flex;
   display: flex;
-  margin-top: -5px;
-	.left-menu {
+  height: 1500px;
+	.left {
 		-webkit-flex: 1;
     flex: 1;
-		box-shadow: inset -1px -1px 3px 0px #999999;
-		height: 100vh;
+    background-color: $left-menu-back;
 	}
-	.right-content {
+	.right {
 		-webkit-flex: 3;
 		flex: 3;
-		background-color: #E6E6E6;
-		height: 100vh;
+		background-color: $right-menu-back;
 		padding: 1em;
 	}
 }

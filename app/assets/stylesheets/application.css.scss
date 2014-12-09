@@ -1,14 +1,18 @@
 $max-width: 100%;
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "bourbon";
 @import "neat";
 @import "flat-ui/variables";
 @import "bootstrap";
 @import "flat-ui";
 @import url(http://fonts.googleapis.com/css?family=Lato);
+@import "variables/variables";
 @import "devise";
 @import "dashboards";
 @import "menu";
+
 
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
@@ -16,3 +20,7 @@ $max-width: 100%;
   box-sizing: border-box;
 }
 
+html, body
+{
+    height: 100%;
+}
