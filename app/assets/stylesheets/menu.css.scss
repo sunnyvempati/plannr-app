@@ -3,7 +3,8 @@
 	.menu-header {
 		@include span-columns(12);
 		@include omega();
-		font-size: 1.5em;
+		font-size: em(21);
+		font-weight: bold;
 		padding: 20px 0 10px 30px;
 		color: $white-three-fourths;
 		border-bottom: 1px solid $white-quarter;
@@ -15,16 +16,21 @@
 			color: $white-three-fourths;
 			border-top: 1px solid $white-quarter;
 			padding: 10px 10px 10px 30px;
-			font-size: 20px;
+			font-size: em(18);
+			font-weight: 500;
 			&:hover {
 				color: #ffffff;
 				background-color: $white-quarter;
 				cursor: pointer;
+				transition: background-color 0.5s ease 0;
 			}
 			.icon-pad {
-				color: $menu-icon;
+				color: #ffffff;
 				margin-right: 1.5em;
 			}
+		}
+		.active {
+			background-color: $menu-item-active;
 		}
 	}
 }

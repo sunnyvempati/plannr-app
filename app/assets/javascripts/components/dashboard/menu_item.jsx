@@ -1,14 +1,14 @@
 var MenuItem = React.createClass({
-	handleClick: function(event) {
-		console.log(event.target.child);
-	},
 	render: function() {
 		var item = this.props.item;
+		var active_class = item.href == this.props.path ? "active" : "";
 		return (
-			<div className="menu-item">
-				<i className={item.class + " icon-pad"}></i>
-				{this.props.item.name}
-			</div>
+			<a href={item.href}>
+				<div className={"menu-item " + active_class}>
+					<i className={item.icon_class + " icon-pad"} />
+					{item.name}
+				</div>
+			</a>
 		);
 	}
 });

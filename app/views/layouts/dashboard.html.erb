@@ -11,7 +11,7 @@
 <%= react_component('Header', profile_id:current_user.profile.id, root_path:root_path) %>
 <div class="main-content">
 	<div class="left">
-		<%= react_component('Menu', name:current_user.profile.full_name) %>
+		<%= react_component('Menu', name:current_user.profile.full_name, path:request.fullpath) %>
 	</div>
 	<div class="right">
 		<%= yield %>

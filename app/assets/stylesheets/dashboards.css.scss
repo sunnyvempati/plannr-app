@@ -20,6 +20,15 @@
   		vertical-align: middle;
   		padding: 1em;
   		float: right;
+  		.dropdown-menu-right {
+  			background: $left_menu_back;
+  			>li>a {
+  				color: $white-three-fourths;
+  			}
+  			.divider {
+  				background-color: $white-quarter;
+  			}
+  		}
   		.dropdown-toggle {
   			background: transparent;
   			.custom {
