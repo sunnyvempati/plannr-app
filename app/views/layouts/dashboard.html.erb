@@ -4,19 +4,28 @@
   <title>Plannr Dasboard - Welcome</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= html_import_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= react_component('Header', profile_id:current_user.profile.id, root_path:root_path) %>
-<div class="main-content">
-	<div class="left">
-		<%= react_component('Menu', name:current_user.profile.full_name, path:request.fullpath) %>
-	</div>
-	<div class="right">
-		<%= yield %>
-	</div>
-</div>
+<script>
+  blah = function(e) {
+  	alert("test");
+  }
+</script>
+
+<paper-tabs selected="{{selected}}">
+  <paper-tab>Dashboard</paper-tab>
+  <paper-tab>Tasks</paper-tab>
+  <paper-tab>Messages</paper-tab>
+</paper-tabs>
+
+<core-pages selected="{{selected}}" >
+  <div>Dashboard</div>
+  <div>Tasks</div>
+  <div>Messages</div>
+</core-pages>
 
 
 </body>

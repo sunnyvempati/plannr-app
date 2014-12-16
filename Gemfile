@@ -34,3 +34,8 @@ group 'development' do
 	gem 'pry-byebug'
 	gem 'guard-livereload', require: false
 end
+
+#polymer
+gem 'polymer-rails'
+gem 'polymer-core-rails'
+gem 'polymer-paper-rails'
