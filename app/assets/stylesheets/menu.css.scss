@@ -5,9 +5,8 @@
 		@include omega();
 		font-size: em(21);
 		font-weight: bold;
-		padding: 20px 0 10px 30px;
+		padding: 20px 0 0px 30px;
 		color: $white-three-fourths;
-		border-bottom: 1px solid $white-quarter;
 	}
 	.menu-item-container {
 		@include span-columns(12);

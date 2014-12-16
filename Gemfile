@@ -34,3 +34,7 @@ group 'development' do
 	gem 'pry-byebug'
 	gem 'guard-livereload', require: false
 end
+
+group 'development', 'test' do
+	gem 'faker'
+end
