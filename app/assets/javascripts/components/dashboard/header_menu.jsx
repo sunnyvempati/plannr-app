@@ -2,7 +2,7 @@ var HeaderMenu = React.createClass({
 	render: function() {
 		var profile_path = "/profiles/" + this.props.profile_id;
 		return (
-			<div className="menu-container">
+			<div className="header-menu-container">
 				<div className="menu">
 					<div className="btn-group">
 					  <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">

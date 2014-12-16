@@ -12,7 +12,7 @@
 	  	width: 50px;
   	}
   }
-  .menu-container {
+  .header-menu-container {
   	@include span-columns(11);
   	@include omega();
   	.menu {
@@ -51,13 +51,20 @@
 	.right {
 		-webkit-flex: 3;
 		flex: 3;
-		background-color: $right-menu-back;
-		padding: 1em;
+    background-color: $right-menu-back;
 	}
 }
 
 .dashboard-container {
-  
+  @include outer-container;
+  padding: em(40) em(80) em(20) em(20);
+  .create-event-row {
+    @include span-columns(12);
+    text-align: right;
+  }
+  .dashboard-events-container {
+    @include span-columns(12);
+  }
 }
 
 
