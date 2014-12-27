@@ -63,7 +63,41 @@
     text-align: right;
   }
   .dashboard-events-container {
-    @include span-columns(12);
+    @include outer-container;
+    color: $white-three-fourths;
+    .dashboard-event {
+      margin-top: em(50);
+      @include span-columns(12);
+      .dashboard-event-header {
+        @include outer-container;
+        padding: em(10) em(30px) em(10px) em(30px);
+        background-color: $semi-teal;
+        line-height: em(50);
+        border-bottom: 2px solid $white-quarter;
+        .dashboard-event-header-name {
+          @include span-columns(6);
+          text-align: left;
+          font-size: em(21);
+          font-weight: 700;
+        }
+        .dashboard-event-header-date {
+          font-size: em(14);
+          font-weight: 500;
+          text-align: right;
+        }
+      }
+      .dashboard-event-content {
+        @include outer-container;
+        height: 300px;
+        background-color: $left_menu_back;
+        padding: 20px;
+        .dashboard-event-client-panel {
+          @include span-columns(7);
+          height: 200px;
+          background-color: $semi-teal-transparent;
+        }
+      }
+    }
   }
 }
 

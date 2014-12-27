@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<%= react_component('Header', profile_id:current_user.profile.id, root_path:root_path) %>
+<%= react_component('Header', profile_id:current_user.profile.id, root_path:root_path, prerender: true) %>
 <div class="main-content">
 	<div class="left">
-		<%= react_component('Menu', name:current_user.profile.full_name, path:request.fullpath) %>
+		<%= react_component('Menu', name:current_user.profile.full_name, path:request.fullpath, prerender: true) %>
 	</div>
 	<div class="right">
 		<%= yield %>
