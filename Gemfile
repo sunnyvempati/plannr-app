@@ -14,20 +14,9 @@ gem 'jbuilder', '~> 2.0'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
-# Bootstrap / Flat UI
-#####
-gem 'bootstrap-sass'
-gem 'autoprefixer-rails'
-gem 'flat-ui-sass'
-#####
-
-gem 'neat', '>= 1.7.0.pre'
-
+gem 'bower-rails'
 gem 'devise'
-
 gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
-
-gem 'font-awesome-sass'
 
 group 'development' do
 	gem 'pry'

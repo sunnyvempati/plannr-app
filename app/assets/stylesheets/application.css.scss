@@ -1,9 +1,10 @@
 $max-width: 100%;
+// this is used for font-awesome
+$fa-font-path: "components-font-awesome/fonts/";
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
-@import "bourbon";
-@import "neat";
+@import "components-font-awesome/scss/font-awesome";
+@import "bourbon/app/assets/stylesheets/bourbon";
+@import "neat/app/assets/stylesheets/neat";
 @import "flat-ui/variables";
 @import "bootstrap";
 @import "flat-ui";
@@ -13,13 +14,6 @@ $max-width: 100%;
 @import "devise";
 @import "dashboards";
 @import "menu";
-
-
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
 html, body
 {

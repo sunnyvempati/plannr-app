@@ -1,0 +1,4 @@
+asset 'bootstrap-sass-official'
+asset 'flat-ui-sass'
+asset 'neat'
+asset 'components-font-awesome'
