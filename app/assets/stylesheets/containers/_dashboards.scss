@@ -1,0 +1,12 @@
+.dashboard-container {
+  display: flex;
+  height: 1500px;
+	.left {
+    flex: 1;
+    background-color: $left-menu-back;
+	}
+	.right {
+		flex: 3;
+    background-color: $right-menu-back;
+	}
+}

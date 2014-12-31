@@ -10,11 +10,8 @@ $fa-font-path: "components-font-awesome/fonts/";
 @import "variables/variables";
 @import "mixins/mixins";
 @import "atoms/atoms";
+@import "molecules/molecules";
+@import "containers/containers";
 @import "devise";
 @import "dashboards";
 @import "menu";
-
-html, body
-{
-    height: 100%;
-}

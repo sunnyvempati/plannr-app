@@ -1,0 +1,7 @@
+.header {
+	@include linear-gradient(left, $start_grad, $end_grad);
+	display: flex;
+  justify-content: space-between;
+	border-bottom: 5px solid $white-quarter;
+  height: 100px;
+}

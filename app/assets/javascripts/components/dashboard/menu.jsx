@@ -9,8 +9,8 @@ var Menu = React.createClass({
 				{name: "Vendors", icon_class: "fa fa-truck", href: "/vendors"},
 				{name: "Past Events", icon_class:"fa fa-archive", href: "/past_events"}];
 		return (
-			<div className='menu-container'>
-				<div className='menu-header'>
+			<div className='dashboard-menu'>
+				<div className='dashboard-menu-header'>
 					{this.props.name}
 				</div>
 				<MenuContent menu_items={menu_items} path={this.props.path} />
