@@ -1,10 +1,8 @@
-$max-width: 100%;
 // this is used for font-awesome
 $fa-font-path: "components-font-awesome/fonts/";
 
 @import "components-font-awesome/scss/font-awesome";
 @import "bourbon/app/assets/stylesheets/bourbon";
-@import "neat/app/assets/stylesheets/neat";
 @import "flat-ui/variables";
 @import "bootstrap";
 @import "flat-ui";

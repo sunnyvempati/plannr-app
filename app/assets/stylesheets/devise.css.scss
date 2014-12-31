@@ -1,7 +1,6 @@
 .main {
-	@include outer-container;
+	display: flex;
 	.header {
-		@include span-columns(12);
 		padding-top: 1em;
 		.logo {
 			background: url(logo.svg) no-repeat;
@@ -12,8 +11,6 @@
 		}
 	}
 	.form-container {
-		@include span-columns(4);
-		@include shift(4);
 		.field {
 			padding-top: 1em;
 		}
@@ -30,7 +27,6 @@
 		}
 	}
 	.main-footer {
-		@include span-columns(12);
 		text-align: center;
 		padding: 2em;
 		font-size: 1em;

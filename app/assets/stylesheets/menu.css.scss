@@ -1,15 +1,16 @@
 .menu-container {
-	@include outer-container;
+	display: flex;
+	flex-flow: row wrap;
+	>* {
+		flex: 1 100%;
+	}
 	.menu-header {
-		@include span-columns(12);
-		@include omega();
 		font-size: em(21);
 		font-weight: bold;
 		padding: 20px 0 0px 30px;
 		color: $white-three-fourths;
 	}
 	.menu-item-container {
-		@include span-columns(12);
 		padding: 1.5em;
 		.menu-item {
 			color: $white-three-fourths;
