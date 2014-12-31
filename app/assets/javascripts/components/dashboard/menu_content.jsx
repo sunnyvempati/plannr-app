@@ -3,7 +3,7 @@ var MenuContent = React.createClass({
 		var path = this.props.path;
 		var menu_items = this.props.menu_items.map(function(menu_item) {
 			return (
-				<MenuItem item={menu_item} path={path} />
+				<MenuItem item={menu_item} isSelected={menu_item.href == path} />
 			);
 		});
 		return (

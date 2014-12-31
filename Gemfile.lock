@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/reactjs/react-rails.git
-  revision: b0dd8c3296ca103384717ff8e5f469a6e2313baf
+  revision: 6be8f9dfde33e694ac5bb5690ad1191c24ed76ff
   branch: master
   specs:
     react-rails (1.0.0.pre)

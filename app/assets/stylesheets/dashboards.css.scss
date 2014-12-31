@@ -1,39 +1,22 @@
-.dashboard-header {
+.header {
 	@include linear-gradient(left, $start_grad, $end_grad);
 	display: flex;
   justify-content: space-between;
 	border-bottom: 5px solid $white-quarter;
-  .logo-container {
-  	padding: 1em;
-  	.logo {
-  		background: url(header-logo.svg) no-repeat;
-	  	background-size: 50px 50px;
-	  	height: 50px;
-	  	width: 50px;
-  	}
-  }
-  .header-menu-container {
-  	.menu {
-  		line-height: 50px;
-  		vertical-align: middle;
-  		padding: 1em;
-  		.dropdown-menu-right {
-  			background: $left_menu_back;
-  			>li>a {
-  				color: $white-three-fourths;
-  			}
-  			.divider {
-  				background-color: $white-quarter;
-  			}
-  		}
-  		.dropdown-toggle {
-  			background: transparent;
-  			.custom {
-  				font-size: 30px;
-  			}
-  		}
-  	}
-  }
+  height: 100px;
+}
+
+.header-menu {
+  margin: auto 20px auto auto;
+}
+
+.header-logo {
+  @include logo(50px);
+  margin: auto auto auto 20px;
+}
+
+.icon-large {
+  font-size: 30px;
 }
 
 .main-content {
@@ -48,6 +31,3 @@
     background-color: $right-menu-back;
 	}
 }
-
-
-

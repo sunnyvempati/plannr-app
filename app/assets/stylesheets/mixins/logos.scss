@@ -1,0 +1,6 @@
+@mixin logo($size) {
+  background: url(header-logo.svg) no-repeat;
+  background-size: $size $size;
+  height: $size;
+  width: $size;
+}

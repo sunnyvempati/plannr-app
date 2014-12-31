@@ -8,6 +8,7 @@ $fa-font-path: "components-font-awesome/fonts/";
 @import "flat-ui";
 @import url(http://fonts.googleapis.com/css?family=Lato);
 @import "variables/variables";
+@import "mixins/mixins";
 @import "atoms/atoms";
 @import "devise";
 @import "dashboards";

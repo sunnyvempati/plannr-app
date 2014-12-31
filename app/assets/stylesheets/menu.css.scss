@@ -1,36 +1,18 @@
 .menu-container {
+	margin: 1.5em;
 	display: flex;
 	flex-flow: row wrap;
 	>* {
 		flex: 1 100%;
 	}
-	.menu-header {
-		font-size: em(21);
-		font-weight: bold;
-		padding: 20px 0 0px 30px;
-		color: $white-three-fourths;
-	}
-	.menu-item-container {
-		padding: 1.5em;
-		.menu-item {
-			color: $white-three-fourths;
-			border-top: 1px solid $white-quarter;
-			padding: 10px 10px 10px 30px;
-			font-size: em(18);
-			font-weight: 500;
-			&:hover {
-				color: #ffffff;
-				background-color: $white-quarter;
-				cursor: pointer;
-				transition: background-color 0.5s ease 0;
-			}
-			.icon-pad {
-				color: #ffffff;
-				margin-right: 1.5em;
-			}
-		}
-		.active {
-			background-color: $menu-item-active;
-		}
-	}
 }
+
+.menu-header {
+	font-size: em(21);
+	font-weight: bold;
+	color: $white-three-fourths;
+	padding-bottom: 10px;
+}
+
+
+

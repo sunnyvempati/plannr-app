@@ -22,5 +22,7 @@ module PlannrDashboard
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","flat-ui-sass","vendor","assets")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","components-font-awesome","fonts")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","stylesheets")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","javascripts")
+    config.react.addons = true
   end
 end

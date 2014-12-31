@@ -1,0 +1,16 @@
+.menu-item {
+	color: $white-three-fourths;
+	border-top: 1px solid $white-quarter;
+	padding: 10px 10px 10px 30px;
+	font-size: em(18);
+	font-weight: 500;
+	&:hover {
+		color: #ffffff;
+		background-color: $white-quarter;
+		cursor: pointer;
+		transition: background-color 0.5s ease 0;
+	}
+	&.is-selected {
+		background-color: $menu-item-active;
+	}
+}
