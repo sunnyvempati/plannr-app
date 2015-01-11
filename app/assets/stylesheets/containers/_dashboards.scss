@@ -3,10 +3,10 @@
   height: 1500px;
 	.left {
     flex: 1;
-    background-color: $left-menu-back;
+    background-color: $plannr-secondary-bg;
 	}
 	.right {
 		flex: 3;
-    background-color: $right-menu-back;
+    background-color: $plannr-main-bg;
 	}
 }

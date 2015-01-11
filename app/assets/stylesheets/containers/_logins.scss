@@ -1,0 +1,8 @@
+.login-container {
+	display: flex;
+	flex-flow: row wrap;
+	>* {
+		flex: 1 100%;
+		padding: 20px;
+	}
+}

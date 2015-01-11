@@ -8,18 +8,7 @@ Plannr Dashboard
 ### Install bootstrap
 - Using Sass
 
-### Install Flat UI Free
-- Followed instructions [here](https://github.com/wingrunr21/flat-ui-sass)
-- Had to add this line
-`Rails.application.config.assets.precompile += ['flat-ui/**/*’]`
-Found it [here](https://github.com/wingrunr21/flat-ui-sass/issues/35)
-- added [Lato](https://www.google.com/fonts/specimen/Lato) font
-
-### React JS Front-end
-
-
-### Devise authentication
-
-
-### Plannr dashboard work
+### Using Bower
+- Add component name to `Bowerfile`
+- Run `be rake bower:install`
 

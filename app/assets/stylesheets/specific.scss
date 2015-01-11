@@ -1,0 +1,20 @@
+.form {
+	width: 100%;
+	background-color: $plannr-secondary-bg;
+ 	.form-header {
+ 		height: 10px;
+ 		background-color: $plannr-green;
+ 		width: 100%;
+ 	}
+ 	.form-content {
+ 		padding: 10px;
+ 	}
+}
+
+.form-input {
+	width: 100%;
+	background-color: #E5E5E5;
+	height: $default-input-size;
+	line-height: $default-input-size;
+	padding: 5px 10px;
+}

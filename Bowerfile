@@ -1,4 +1,3 @@
-asset 'bootstrap-sass-official'
-asset 'flat-ui-sass'
+asset 'normalize.css'
 asset 'bourbon'
 asset 'components-font-awesome'

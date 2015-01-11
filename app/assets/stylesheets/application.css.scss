@@ -3,10 +3,7 @@ $fa-font-path: "components-font-awesome/fonts/";
 
 @import "components-font-awesome/scss/font-awesome";
 @import "bourbon/app/assets/stylesheets/bourbon";
-@import "flat-ui/variables";
-@import "bootstrap";
-@import "flat-ui";
-@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Muli);
 @import "variables/variables";
 @import "mixins/mixins";
 @import "atoms/atoms";
@@ -15,3 +12,10 @@ $fa-font-path: "components-font-awesome/fonts/";
 @import "devise";
 @import "dashboards";
 @import "menu";
+@import "specific";
+
+body {
+	background-color: $plannr-main-bg;
+	font-family: 'Muli', sans-serif;
+	margin: 0;
+}
