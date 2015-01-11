@@ -1,9 +1,14 @@
-// font sizes
-$font-size-base: 14px;
-
-//input size
-$default-input-size: 20px;
-
 // main dashboard
 $dashboard-logo-size: 50px;
 $dashboard-header-height: 100px;
+
+//font
+$default-line-height: 1.4;
+$default-font-size: 14px;
+
+$font-size-computed: floor($default-line-height * $default-font-size);
+
+$input-padding-vertical: 6px;
+$input-padding-horizontal: 12px;
+
+$input-height-computed: ($font-size-computed + ($input-padding-vertical * 2)) + 2;

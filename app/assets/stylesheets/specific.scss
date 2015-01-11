@@ -14,7 +14,8 @@
 .form-input {
 	width: 100%;
 	background-color: #E5E5E5;
-	height: $default-input-size;
-	line-height: $default-input-size;
-	padding: 5px 10px;
+	height: $input-height-computed;
+	line-height: $default-line-height;
+	padding: $input-padding-vertical $input-padding-horizontal;
+	font-size: $default-font-size;
 }
