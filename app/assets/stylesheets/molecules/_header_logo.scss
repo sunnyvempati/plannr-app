@@ -1,4 +1,4 @@
 .header-logo {
-  @include logo(50px);
+  @include svg-logo($dashboard-logo-size);
   margin: auto auto auto 20px;
 }
