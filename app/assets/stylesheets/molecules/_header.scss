@@ -1,5 +1,5 @@
 .header {
-	@include linear-gradient(left, $start_grad, $end_grad);
+	@include linear-gradient(left, $plannr-green, $plannr-blue);
 	display: flex;
   justify-content: space-between;
 	border-bottom: 5px solid $white-quarter;
