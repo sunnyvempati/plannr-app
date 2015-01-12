@@ -1,0 +1,17 @@
+.form-input {
+	width: 100%;
+	height: $input-height-computed;
+	background-color: transparent;
+	line-height: $line-height-factor-default;
+	padding-top: $input-padding-vertical;
+	padding-bottom: $input-padding-vertical / 2;
+	font-size: $default-font-size;
+	color: #FFFFFF;
+	margin-bottom: $input-divider;
+	border: 1px none transparent;
+	border-bottom: 1px solid $plannr-green;
+	&:focus {
+		border: 1px none transparent;
+		border-bottom: 2px solid $plannr-blue;
+	}
+}

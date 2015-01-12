@@ -3,12 +3,19 @@ $dashboard-logo-size: 50px;
 $dashboard-header-height: 100px;
 
 //font
-$default-line-height: 1.4;
-$default-font-size: 14px;
+$line-height-factor-default: 1.4;
 
-$font-size-computed: floor($default-line-height * $default-font-size);
+$default-font-size: 16px;
+$input-padding-vertical: 16px;
+$input-divider: 8px;
 
-$input-padding-vertical: 6px;
-$input-padding-horizontal: 12px;
+$font-size-default-computed: $default-font-size * $line-height-factor-default;
 
-$input-height-computed: ($font-size-computed + ($input-padding-vertical * 2)) + 2;
+$input-height-computed: ($font-size-default-computed + ($input-padding-vertical*2)) + 1;
+
+
+//button sizes
+$btn-width-default: 88px;
+$btn-height-default: 36px;
+
+
