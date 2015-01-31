@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 	layout 'dashboard', only: [:index]
   def index
-  	render json: current_user.events
+  	@events = Event.all
+  	@header = "Events"
   end
 end

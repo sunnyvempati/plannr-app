@@ -8,8 +8,6 @@ var LoginForm = React.createClass({
 					<FormInput name="user[password]" autofocus="off" placeholder="password" type="password" label="password" />
 				</Form>
 			</div>
-			
 		);
 	}
-
 });

@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Plannr Dasboard - Welcome</title>
+  <title>Plannr - Welcome</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= react_component('Header', profile_id:current_user.profile.id, root_path:root_path, prerender: true) %>
 <div class="dashboard-container">
-	<div class="left">
-		<%= react_component('Menu', name:current_user.profile.full_name, path:request.fullpath, prerender: true) %>
+	<div class="dashboard-left-content">
+		<%= react_component('DashboardLeftNav', path:request.fullpath, prerender: true) %>
 	</div>
-	<div class="right">
+	<div class="dashboard-right-content">
+		<%= react_component('PageHeader', name:@header, prerender: true) %>
 		<%= yield %>
 	</div>
 </div>
