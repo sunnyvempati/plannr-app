@@ -1,8 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
-	
-	protected
+  
+  protected
 
-	def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(resource)
     new_profile_url
   end
 end

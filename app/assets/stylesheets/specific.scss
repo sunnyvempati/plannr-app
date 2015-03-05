@@ -1,26 +1,26 @@
 .btn {
-	height: $btn-height-default;
-	min-width: $btn-width-default;
-	color: #FFFFFF;
-	background-color: $plannr-green;
-	border: none;
-	border-radius: 1px;
-	text-transform: uppercase;
-	&:hover {
-		background-color: $button-hover;
-	}
+  height: $btn-height-default;
+  min-width: $btn-width-default;
+  color: #FFFFFF;
+  background-color: $plannr-green;
+  border: none;
+  border-radius: 1px;
+  text-transform: uppercase;
+  &:hover {
+    background-color: $button-hover;
+  }
 }
 
 .btn-raised {
-	box-shadow: 0px 3px 2px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0px 3px 2px 1px rgba(0, 0, 0, 0.075);
 }
 
 .login-form-btn {
-	margin-top: 10px;
-	float: right;
+  margin-top: 10px;
+  float: right;
 }
 
 .login-form-container {
-	width: 500px;
-	margin: auto;
+  width: 500px;
+  margin: auto;
 }

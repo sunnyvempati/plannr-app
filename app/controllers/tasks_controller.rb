@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-	layout 'dashboard'
+  layout 'dashboard'
   def index
-  	@header = "Tasks"
+    @header = "Tasks"
   end
 end

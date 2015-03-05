@@ -8,13 +8,13 @@
 </head>
 <body>
 <div class="dashboard-container">
-	<div class="dashboard-left-content">
-		<%= react_component('DashboardLeftNav', path:request.fullpath, prerender: true) %>
-	</div>
-	<div class="dashboard-right-content">
-		<%= react_component('PageHeader', name:@header, prerender: true) %>
-		<%= yield %>
-	</div>
+  <div class="dashboard-left-content">
+    <%= react_component('DashboardLeftNav', path:request.fullpath, prerender: true) %>
+  </div>
+  <div class="dashboard-right-content">
+    <%= react_component('PageHeader', name:@header, prerender: true) %>
+    <%= yield %>
+  </div>
 </div>
 
 
