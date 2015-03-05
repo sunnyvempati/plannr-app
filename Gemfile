@@ -20,10 +20,15 @@ gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
 
 group 'development' do
 	gem 'pry'
+  gem 'pry-rails'
 	gem 'pry-byebug'
 	gem 'guard-livereload', require: false
 end
 
 group 'development', 'test' do
 	gem 'faker'
+	gem 'capybara'
+	gem 'selenium-webdriver'
+	gem 'rspec-rails', '~> 3.0'
+	gem 'factory_girl_rails'
 end
