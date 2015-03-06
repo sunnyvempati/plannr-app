@@ -7,12 +7,12 @@ var MenuItem = React.createClass({
       'is-selected': this.props.isSelected
     });
     return (
-      <a href={item.href}>
+      <div className="MenuContainer-listItem">
         <div className={item_classes}>
           <i className={item.icon_class + " MenuItemIcon"} />
           {item.name}
         </div>
-      </a>
+      </div>
     );
   }
 });
