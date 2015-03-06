@@ -5,6 +5,5 @@ feature 'Sign in', :devise do
 
   scenario "user can sign in", js: true do
     sign_in(user)
-    binding.pry
   end
 end

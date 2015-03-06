@@ -1,5 +1,4 @@
 class ProfilesController < ApplicationController
-  layout 'dashboard'
   def new
     @profile = Profile.new(user: current_user)
   end

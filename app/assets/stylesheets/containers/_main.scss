@@ -1,0 +1,13 @@
+.MainContainer {
+  display: flex;
+}
+
+.MainContainer-menu {
+  flex: 0 0 $left-nav-width;
+  background-color: $plannr-secondary-bg;
+  box-shadow: 3px 0px 3px 2px rgba(0, 0, 0, 0.075);
+}
+
+.MainContainer-content {
+  flex: 1 100%;
+}

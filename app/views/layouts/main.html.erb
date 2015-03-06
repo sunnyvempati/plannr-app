@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plannr - Welcome</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="MainContainer">
+    <div class="MainContainer-menu">
+      <%= react_component('Menu', path:request.fullpath, prerender: true) %>
+    </div>
+    <div class="MainContainer-content">
+      <%= react_component('PageHeader', name:@header, prerender: true) %>
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>
