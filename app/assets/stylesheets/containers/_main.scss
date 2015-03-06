@@ -3,8 +3,7 @@
 }
 
 .MainContainer-menu {
-  flex: 0 0 $left-nav-width;
-  background-color: $plannr-secondary-bg;
+  flex: 0 0 ($fixed-increment*4);
   box-shadow: 3px 0px 3px 2px rgba(0, 0, 0, 0.075);
 }
 

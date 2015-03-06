@@ -9,7 +9,11 @@
 <body>
   <div class="MainContainer">
     <div class="MainContainer-menu">
-      <%= react_component('Menu', path:request.fullpath, prerender: true) %>
+      <%= react_component('Menu', first_name: current_user.profile.first_name,
+                                  last_name: current_user.profile.last_name,
+                                  email: current_user.email,
+                                  path:request.fullpath,
+                                  prerender: true) %>
     </div>
     <div class="MainContainer-content">
       <%= react_component('PageHeader', name:@header, prerender: true) %>

@@ -9,9 +9,9 @@ var Menu = React.createClass({
         ];
     return (
       <div className='MenuContainer'>
-        <div className='MenuContainer-header'>
-          {this.props.name}
-        </div>
+        <MenuHeader email={this.props.email}
+                    first_name={this.props.first_name}
+                    last_name={this.props.last_name} />
         <MenuContent menu_items={menu_items} path={this.props.path} />
       </div>
     );
