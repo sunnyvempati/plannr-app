@@ -7,7 +7,7 @@ var MenuContent = React.createClass({
       );
     });
     return (
-      <div>{menu_items}</div>
+      <div class="MenuContainer-menuList">{menu_items}</div>
     );
   }
 });
