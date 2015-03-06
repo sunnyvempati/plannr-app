@@ -1,0 +1,28 @@
+.PageHeader {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  height: $page-header-height;
+  background-color: $plannr-blue;
+  padding-left: $page-header-left-pad;
+}
+
+.PageHeader-appBar {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: $page-header-left-pad;
+  margin: auto;
+  color: $plannr-secondary-bg;
+}
+
+.PageHeader-title {
+  flex: 1;
+  font-size: $page-header-name-size;
+  font-weight: $page-header-name-weight;
+  line-height: $page-header-name-lh;
+  color: white;
+  margin: auto;
+}
+
+

@@ -8,9 +8,7 @@ $line-height-factor-default: 1.4;
 $default-font-size: 16px;
 $input-padding-vertical: 16px;
 $input-divider: 8px;
-
 $font-size-default-computed: $default-font-size * $line-height-factor-default;
-
 $input-height-computed: ($font-size-default-computed + ($input-padding-vertical*2)) + 1;
 
 
@@ -30,5 +28,4 @@ $page-header-name-size: 45px;
 $page-header-name-weight: 300;
 $page-header-name-lh: 48px;
 
-//nav bar 
 

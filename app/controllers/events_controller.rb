@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  layout 'dashboard', only: [:index]
+  layout 'main', only: [:index]
   before_action :authenticate_user!
   def index
     @events = Event.all

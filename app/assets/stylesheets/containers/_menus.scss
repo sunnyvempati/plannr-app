@@ -1,0 +1,23 @@
+.MenuContainer {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.MenuContainer-menuList {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.MenuContainer-listItem {
+  flex: 1 100%;
+  padding: 15px 0px 15px 15px;
+}
+
+.MenuContainer-header {
+  flex: 1 100%;
+  @include svg-logo(128px);
+  margin-left: -64px;
+  background-color: $plannr-green;
+  height: $left-nav-header-height;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}

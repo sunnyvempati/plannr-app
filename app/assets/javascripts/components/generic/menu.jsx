@@ -8,8 +8,8 @@ var Menu = React.createClass({
         {name: "Vendors", icon_class: "fa fa-truck", href: "/vendors"}
         ];
     return (
-      <div className='dashboard-menu'>
-        <div className='dashboard-menu-header'>
+      <div className='MenuContainer'>
+        <div className='MenuContainer-header'>
           {this.props.name}
         </div>
         <MenuContent menu_items={menu_items} path={this.props.path} />
