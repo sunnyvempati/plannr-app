@@ -1,5 +1,7 @@
 //metrics
-$fixed-increment: 64px;
+$size-increment: 8px;
+$grid-increment: $size-increment * 8;
+
 
 //font
 $line-height-factor-default: 1.4;
@@ -21,7 +23,7 @@ $left-nav-header-height: 64px;
 
 
 //page header
-$page-header-height: 128px;
+$page-header-height: $grid-increment * 3;
 $page-header-left-pad: 64px;
 $page-header-name-size: 45px;
 $page-header-name-weight: 300;

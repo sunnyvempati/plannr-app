@@ -1,5 +1,21 @@
 .MenuHeaderContainer {
   width: 100%;
-  height: $fixed-increment * 3;
-  background-color: $plannr-teal;
+  height: $grid-increment * 3;
+  background-color: $plannr-green;
+  padding: $size-increment * 4;
+}
+
+.MenuHeader-name,
+.MenuHeader-email {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.MenuHeader-name {
+  font-size: 20px;
+  padding-top: $size-increment * 3;
+}
+
+.MenuHeader-email {
+  font-size: 14px;
+  padding-top: $size-increment;
 }

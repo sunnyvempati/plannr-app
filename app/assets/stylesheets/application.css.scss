@@ -19,6 +19,10 @@ body {
   margin: 0;
 }
 
+html, body {
+    height: 100% !important;
+}
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;

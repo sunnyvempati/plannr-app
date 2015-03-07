@@ -9,8 +9,7 @@
 <body>
   <div class="MainContainer">
     <div class="MainContainer-menu">
-      <%= react_component('Menu', first_name: current_user.profile.first_name,
-                                  last_name: current_user.profile.last_name,
+      <%= react_component('Menu', name: current_user.profile.full_name,
                                   email: current_user.email,
                                   path:request.fullpath,
                                   prerender: true) %>

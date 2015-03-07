@@ -1,0 +1,29 @@
+.MenuList {
+  padding: $size-increment;
+}
+
+.MenuList-item {
+  display: flex;
+  font-weight: 200;
+  padding-top: $size-increment * 4;
+  padding-left: $size-increment * 3;
+  &:hover {
+    color: $black-half !important;
+    cursor: pointer;
+  }
+  &.is-selected {
+    font-weight: 700;
+    color: white;
+  }
+}
+
+.MenuList-icon {
+  font-size: 24px;
+  padding-right: 4px;
+}
+
+.MenuList-text {
+  padding-left: $size-increment * 3;
+}
+
+

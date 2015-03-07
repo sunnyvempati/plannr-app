@@ -1,18 +1,10 @@
 var Menu = React.createClass({
   render: function() {
-    var menu_items = [
-        {name: "Events", icon_class: "fa fa-tachometer", href: "/"},
-        {name: "Tasks", icon_class: "fa fa-check", href: "/tasks"},
-        {name: "Messages", icon_class: "fa fa-comments", href: "/messages"},
-        {name: "Contacts", icon_class: "fa fa-book", href: "/contacts"},
-        {name: "Vendors", icon_class: "fa fa-truck", href: "/vendors"}
-        ];
     return (
       <div className='MenuContainer'>
         <MenuHeader email={this.props.email}
-                    first_name={this.props.first_name}
-                    last_name={this.props.last_name} />
-        <MenuContent menu_items={menu_items} path={this.props.path} />
+                    name={this.props.name} />
+        <MenuContent active_path={this.props.active_path} />
       </div>
     );
   }

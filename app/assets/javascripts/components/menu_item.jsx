@@ -1,15 +1,18 @@
 var MenuItem = React.createClass({
+  handleClick: function(href) {
+    location.href = href;
+  },
   render: function() {
     var item = this.props.item;
     var cx = React.addons.classSet;
     var item_classes = cx({
-      'MenuItem': true,
+      'MenuList-item': true,
       'is-selected': this.props.isSelected
     });
     return (
-      <div className="MenuContainer-listItem">
-        <div className={item_classes}>
-          <i className={item.icon_class + " MenuItemIcon"} />
+      <div className={item_classes} onClick={this.handleClick.bind(this, this.props.item.href)}>
+        <i className={item.icon_class + " MenuList-icon"} />
+        <div className="MenuList-text">
           {item.name}
         </div>
       </div>
