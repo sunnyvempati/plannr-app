@@ -1,3 +1,4 @@
 asset 'normalize.css'
 asset 'bourbon'
 asset 'components-font-awesome'
+asset 'bower-skrollr'
