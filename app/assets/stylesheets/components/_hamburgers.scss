@@ -5,8 +5,8 @@
 
 label[for="menu-trigger"] {
   position: fixed;
-  left: $size-increment * 3;
-  top: $size-increment * 3;
+  left: 24px;
+  top: 20px;
   z-index: 100;
   cursor: pointer;
 }
@@ -26,12 +26,12 @@ label[for="menu-trigger"] {
 
 .Hamburger-trigger:checked ~ .Mask {
   visibility: visible;
+  bottom: 0;
 }
 
 .Mask {
   position: fixed;
   background-color: rgba(0,0,0,0.5);
-  left: 0; top: 0;
   height: 100%; width: 100%;
   z-index: 250;
   visibility: hidden;

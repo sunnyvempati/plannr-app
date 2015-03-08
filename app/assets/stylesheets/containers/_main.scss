@@ -2,15 +2,15 @@
   min-height: 100%;
   min-width: 100%;
   position: relative;
-  top: $page-header-height;
+  top: 0; left: 0;
   bottom: 100%;
-  left: 0;
   background-color: $body-bg;
   z-index: 50;
 }
 
 .MainContainer-content {
   padding: $size-increment;
+  margin-top: $page-header-height;
 }
 
 .MainContainer-pageHeader {
