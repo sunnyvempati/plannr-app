@@ -1,4 +1,8 @@
 .PageHeaderContainer {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
@@ -21,7 +25,7 @@
   font-weight: $page-header-name-weight;
   line-height: $page-header-name-lh;
   color: white;
-  padding: 32px 0 32px 104px;
+  padding: 32px 0 32px 80px;
 }
 
 .PageHeader-search {

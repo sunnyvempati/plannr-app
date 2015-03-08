@@ -21,10 +21,20 @@
     <i class="fa fa-bars Hamburger-icon"></i>
   </label>
   <div class="MainContainer">
-    <%= react_component('PageHeader', name:@header, prerender: true) %>
+    <div class="PageHeaderContainer">
+      <div class="PageHeader-appBar">
+        <i class="fa fa-search PageHeader-search"></i>
+      </div>
+      <div class="PageHeader-title">
+        <%= @header %>
+      </div>
+    </div>
     <div class="MainContainer-content">
       <%= yield %>
     </div>
   </div>
+  <script type="text/javascript">
+    var s = skrollr.init();
+  </script>
 </body>
 </html>

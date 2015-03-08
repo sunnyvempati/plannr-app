@@ -15,4 +15,5 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require bower-skrollr/skrollr.min
 //= require_tree .
