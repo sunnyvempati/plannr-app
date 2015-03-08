@@ -1,35 +1,22 @@
-.PageHeaderContainer {
-  position: fixed;
-  left: 0; top: 0;
-  width: 100%;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
-  height: $page-header-height;
-  background-color: $header-bg;
-  >* {
-    flex: 1 100%;
-    display: flex;
-  }
-}
-
 .PageHeader-appBar {
+  flex: 1;
+  display: flex;
   justify-content: flex-end;
-  padding-right: $size-increment * 4;
-  padding-top: $size-increment * 4;
+  padding-right: 24px;
+  height: 64px;
 }
 
 .PageHeader-title {
-  font-size: $page-header-name-size;
-  font-weight: $page-header-name-weight;
-  line-height: $page-header-name-lh;
+  flex: 1;
   color: white;
-  padding: 32px 0 32px 80px;
+  padding-left: 80px;
+  padding-top: 80px;
+  font-size: 34px;
 }
 
 .PageHeader-search {
   color: $white-quarter;
+  margin: auto 0;
 }
 
 

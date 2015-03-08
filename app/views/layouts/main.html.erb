@@ -7,10 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= react_component('Menu', name: current_user.profile.full_name,
-                              email: current_user.email,
-                              path:request.fullpath,
-                              prerender: true) %>
   <!--
   Needed for Hamburger menu
   Strict order of HTML tags
@@ -20,13 +16,26 @@
   <label for="menu-trigger">
     <i class="fa fa-bars Hamburger-icon"></i>
   </label>
+
+  <div class="Menu">
+    <%= react_component('Menu', name: current_user.profile.full_name,
+                                email: current_user.email,
+                                path:request.fullpath,
+                                prerender: true) %>
+  </div>
+
+  <!-- Mask for when Menu is open -->
+  <div class="Mask"  onClick="document.getElementById('menu-trigger').checked = false;">
+  </div>
+
+
   <div class="MainContainer">
-    <div class="PageHeaderContainer">
+    <div class="MainContainer-pageHeader" data-0="height:168px" data-56="height:64px">
+      <div class="PageHeader-title" data-56="padding-top:24px;font-size:34px;" data-57="font-size:20px;padding-top:0px;margin:auto;">
+        <%= @header %>
+      </div>
       <div class="PageHeader-appBar">
         <i class="fa fa-search PageHeader-search"></i>
-      </div>
-      <div class="PageHeader-title">
-        <%= @header %>
       </div>
     </div>
     <div class="MainContainer-content">

@@ -2,15 +2,23 @@
   min-height: 100%;
   min-width: 100%;
   position: relative;
-  top: 0;
+  top: $page-header-height;
   bottom: 100%;
   left: 0;
   background-color: $body-bg;
+  z-index: 50;
 }
 
 .MainContainer-content {
   padding: $size-increment;
-  z-index: 5;
-  position: relative;
-  margin-top: $page-header-height;
+}
+
+.MainContainer-pageHeader {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100%;
+  height: $page-header-height;
+  background-color: $header-bg;
+  display: flex;
+  flex-flow: row wrap;
 }

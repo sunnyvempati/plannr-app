@@ -1,5 +1,7 @@
 .MenuList {
   padding: $size-increment;
+  background-color: $body-bg;
+  height: 100%;
 }
 
 .MenuList-item {
