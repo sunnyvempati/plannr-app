@@ -4,7 +4,7 @@ var Menu = React.createClass({
       <div className='MenuContainer'>
         <MenuHeader email={this.props.email}
                     name={this.props.name} />
-        <MenuContent active_path={this.props.active_path} />
+        <MenuContent active_path={this.props.path} />
       </div>
     );
   }

@@ -13,13 +13,8 @@
   }
   &.is-selected {
     font-weight: 700;
-    color: white;
+    color: $black-quarter;
   }
-}
-
-.MenuList-icon {
-  font-size: 24px;
-  padding-right: 4px;
 }
 
 .MenuList-text {

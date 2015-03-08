@@ -1,4 +1,6 @@
 .MenuHeaderContainer {
+  display: flex;
+  flex-flow: row wrap;
   width: 100%;
   height: $grid-increment * 3;
   background-color: $plannr-green;

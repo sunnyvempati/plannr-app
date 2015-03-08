@@ -4,12 +4,12 @@ var PageHeader = React.createClass({
   },
   render: function() {
     return (
-      <div className="PageHeader">
+      <div className="PageHeaderContainer">
+        <div className="PageHeader-appBar">
+          <Icon className="fa fa-search PageHeader-search" />
+        </div>
         <div className="PageHeader-title">
           {this.props.name}
-        </div>
-        <div className="PageHeader-appBar">
-          <i className="fa fa-sign-out sign-out" onClick={this.signOut}></i>
         </div>
       </div>
     );

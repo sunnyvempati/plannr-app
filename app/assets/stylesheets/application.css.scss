@@ -17,6 +17,7 @@ body {
   background-color: $body-bg;
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  overflow-x: hidden;
 }
 
 html, body {
@@ -31,4 +32,9 @@ html, body {
 
 *:focus {
     outline: 0;
+}
+
+i {
+  font-size: 24px !important;
+  padding-right: 4px;
 }
