@@ -23,6 +23,7 @@ group 'development' do
   gem 'pry-rails'
 	gem 'pry-byebug'
 	gem 'guard-livereload', require: false
+  gem 'capistrano'
 end
 
 group 'development', 'test' do
