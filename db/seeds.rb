@@ -1,7 +1,12 @@
 sunny_user = User.create(email: 'sunny@yourplannr.com', password: 'plannr12', password_confirmation: 'plannr12')
 puts "Successfully created account for Sunny" if sunny_user
 
+justin_user = User.create(email: 'justin@yourplannr.com', password: 'plannr12', password_confirmation: 'plannr12')
+puts "Successfully created account for Justin" if justin_user
+
 sunny_profile = Profile.create(user: sunny_user, first_name: "Sunny", last_name: "Vempati", planner: true)
+
+justin_profile = Profile.create(user: justin_user, first_name: "Justin", last_name: "Kobylarz", planner: true)
 
 puts "Successfully created profile for Sunny" if sunny_profile
 
