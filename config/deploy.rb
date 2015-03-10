@@ -33,6 +33,7 @@ set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 
 # database config
 set :rails_env, 'staging'
+set :migration_role, 'plannr_staging_admin'
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
