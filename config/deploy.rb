@@ -32,6 +32,7 @@ set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('vendor/assets/bower_components')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -46,6 +47,13 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  desc 'copy bower_components to server'
+  task :copy_bower do
+    on roles(:all) do |host|
+      upload! 'vendor/assets/bower_components/', shared_path.join('vendor/assets/'), recursive: true
     end
   end
 
