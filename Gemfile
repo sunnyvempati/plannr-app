@@ -24,6 +24,9 @@ group 'development' do
 	gem 'pry-byebug'
 	gem 'guard-livereload', require: false
   gem 'capistrano'
+  gem 'capistrano-secrets-yml'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rails'
 end
 
 group 'development', 'test' do
