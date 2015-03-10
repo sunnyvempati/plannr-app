@@ -34,17 +34,17 @@ set :ssh_options, { keys: ["~/.ssh/plannr_deployer"] }
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 3
 
-# namespace :deploy do
+namespace :deploy do
 
-#   after :restart, :clear_cache do
-#     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    #end
-#  end
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      Here we can do anything such as:
+      within release_path do
+        execute :rake, 'cache:clear'
+      end
+    end
+ end
 
-#end
+end

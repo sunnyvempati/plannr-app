@@ -17,3 +17,6 @@
 
 # Ignore all vendor assets
 /vendor
+
+#ignore secrets
+config/secrets.yml
