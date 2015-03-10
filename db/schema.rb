@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20141216034745) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "events", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+  create_table "events", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "client_name"
     t.date     "start_date"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20141216034745) do
     t.datetime "updated_at"
   end
 
-  create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+  create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "planner"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20141216034745) do
     t.datetime "updated_at"
   end
 
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
