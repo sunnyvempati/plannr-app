@@ -18,6 +18,7 @@ staging:
   database: plannr-app_staging
   username: <%= Rails.application.secrets.username %>
   password: <%= Rails.application.secrets.password %>
+  host: 104.236.190.232
 
 production:
   <<: *default
