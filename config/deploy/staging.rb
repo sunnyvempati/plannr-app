@@ -27,7 +27,7 @@ role :app, %w{deployer@104.236.190.232}
 role :web, %w{deployer@104.236.190.232}
 role :db,  %w{deployer@104.236.190.232}
 
-server '104.236.190.232', user: 'deployer', roles: %w{web app db}
+server '104.236.190.232', user: 'deployer', roles: %w{web app}
 
 set :rails_env, :staging
 
