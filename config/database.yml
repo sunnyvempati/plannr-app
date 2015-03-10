@@ -16,8 +16,8 @@ test:
 staging:
   <<: *default
   database: plannr-app_staging
-  username: <%= Rails.application.secrets.username %>
-  password: <%= Rails.application.secrets.password %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
   host: /tmp
 
 production:
