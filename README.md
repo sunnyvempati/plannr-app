@@ -4,9 +4,9 @@ Plannr Dashboard
 ## Deployment
 
 ### Staging
--run `cap staging setup`
--run `cap staging deploy:copy_bower`
--run `cap staging deploy`
+- run `cap staging setup`
+- run `cap staging deploy:copy_bower`
+- run `cap staging deploy`
 
 
 ### Rails backend
