@@ -12,7 +12,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create!(event_params)
-    current_user.events << @event
     render :show
   end
 

@@ -18,6 +18,8 @@ gem 'bower-rails'
 gem 'devise'
 gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
 
+gem 'acts_as_tenant'
+
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'
