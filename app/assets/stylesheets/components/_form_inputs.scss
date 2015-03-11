@@ -6,12 +6,12 @@
   padding-top: $input-padding-vertical;
   padding-bottom: $input-padding-vertical / 2;
   font-size: $default-font-size;
-  color: #FFFFFF;
+  color: #000000;
   margin-bottom: $input-divider;
   border: 1px none transparent;
-  border-bottom: 1px solid $plannr-green;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   &:focus {
     border: 1px none transparent;
-    border-bottom: 2px solid $plannr-blue;
+    border-bottom: 2px solid #00bea4;
   }
 }

@@ -1,0 +1,18 @@
+.AppContainer {
+  display: flex;
+  flex-flow: row wrap;
+  >* {
+    padding: 20px;
+  }
+}
+
+.AppContainer-header {
+  flex: 1 100%;
+  background: linear-gradient(to right, #00BFA5, #7E57C2);
+}
+
+.AppContainer-content {
+  padding-top: 50px;
+  width: 500px;
+  margin: auto;
+}

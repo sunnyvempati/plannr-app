@@ -8,11 +8,14 @@
 </head>
 <body>
 
-<div class="main">
-  <%= yield %>
+<div class="AppContainer">
+  <div class="AppContainer-header">
+    <%= react_component("LoginLogo") %>
+  </div>
+  <div class="AppContainer-content">
+    <%= yield %>
+  </div>
 </div>
-
 
 </body>
 </html>
-  
