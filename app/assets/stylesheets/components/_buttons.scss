@@ -18,3 +18,60 @@
     background-color: $button-hover-color;
   }
 }
+
+.CreateEventContainer {
+  position: fixed;
+  bottom: 40px; right: 40px;
+  cursor: pointer;
+
+}
+
+.Button--action {
+  width: $btn-action-size;
+  height: $btn-action-size;
+  border-radius: 50%;
+  background-color: $action-button-color;
+  cursor: pointer;
+}
+
+.Button--actionIcon {
+  width: inherit;
+  height: inherit;
+  position: relative;
+}
+
+.action {
+  color: white;
+  margin: 16px 14px;
+}
+
+
+// .Button--action {
+//   height: 30px;
+//   width: 52px;
+//   background-color: $action-button-color;
+//   position: relative;
+//   border-radius: 2px;
+//   &:before, &:after {
+//     content: '';
+//     width: inherit;
+//     height: inherit;
+//     position: absolute;
+//     z-index: -1;
+//     background-color: inherit;
+//     border-radius: 2px;
+//   }
+//   &:before {
+//     transform: rotate(60deg);
+//   }
+//   &:after {
+//     transform: rotate(-60deg);
+//   }
+// }
+
+// .Button--actionIcon {
+//   position: absolute;
+//   color: white;
+//   margin-top: 3px; //icon size = 19x24
+//   margin-left: 16.5px;
+// }

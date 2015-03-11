@@ -11,7 +11,7 @@ var MenuItem = React.createClass({
     });
     return (
       <div className={item_classes} onClick={this.handleClick.bind(this, this.props.item.href)}>
-        <Icon className={item.icon_class} />
+        <i className={item.icon_class} />
         <div className="MenuList-text">
           {item.name}
         </div>
