@@ -1,17 +1,17 @@
-.LoginContainer {
+.AppContainer {
   display: flex;
   flex-flow: row wrap;
   >* {
-    flex: 1 100%;
     padding: 20px;
   }
 }
 
-.LoginContainer-header {
+.AppContainer-header {
+  flex: 1 100%;
   background: linear-gradient(to right, #00BFA5, #7E57C2);
 }
 
-.LoginFormContainer {
+.AppContainer-content {
   padding-top: 50px;
   width: 500px;
   margin: auto;
