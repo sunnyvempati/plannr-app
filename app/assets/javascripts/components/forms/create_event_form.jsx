@@ -10,7 +10,7 @@ var CreateEventForm = React.createClass({
         <FormInput name="event[client_name]" autofocus="off" placeholder="Who is it for?" type="text" label="client_name" />
         <FormInput name="event[start_date]" autofocus="off" placeholder="When is it?" type="datetime" label="start_date" id="start_date" />
         <FormInput name="event[location]" autofocus="off" placeholder="Where is it?" type="text" label="location" />
-        <FormInput name="event[budget]" autofocus="off" placeholder="What's the budget?" type="decimal" label="budget" id="budget" />
+        <FormInput name="event[budget]" autofocus="off" placeholder="What's the budget?" type="number" label="budget" id="budget" />
       </Form>
     );
   }

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  layout 'main', only: [:index,:new,:show]
+  layout 'main'
   before_action :authenticate_user!
   def index
     @events = Event.all
@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    binding.pry
     @event = Event.create!(event_params)
     render :show
   end
@@ -26,6 +27,8 @@ class EventsController < ApplicationController
 
 
   def event_params
-    params.require(:event).permit(:name, :client_name, :start_date, :location, :budget)
+    event_params = params.require(:event).permit(:name, :client_name, :start_date, :location, :budget)
+    event_params[:start_date] = Date.strptime(event_params[:start_date], "%m/%d/%Y")
+    event_params
   end
 end
