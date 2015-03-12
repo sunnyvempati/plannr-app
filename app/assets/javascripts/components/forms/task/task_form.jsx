@@ -2,14 +2,14 @@ var TaskForm = React.createClass({
     displayName: "TaskForm",
 
     getInitialState: function () {
-        //return populated object on edit/update methods put or patch
+        //return populated object on show/edit/update methods put or patch or get
         var retStateObject = {
             name: null,
             description: null,
             deadline: null
         }
 
-        if (this.props.method.toLowerCase() === 'patch' || this.props.method.toLowerCase() === 'put') {
+        if (this.props.method.toLowerCase() !== 'post' ) {
             retStateObject.name = this.props.task.name;
             retStateObject.description = this.props.task.description;
             retStateObject.deadline = this.props.task.deadline;
@@ -31,8 +31,9 @@ var TaskForm = React.createClass({
     },
 
     render: function () {
+        var all_props = this.props;
         return (
-            <Form action={this.props.action} method={this.props.formMethod} id={this.props.formId} submitBtnText={this.props.submitButtonText}>
+            <Form action={this.props.action} method={this.props.formMethod} id={this.props.formId} submitBtnText={this.props.submitButtonText} {...all_props }>
                 <input name="_method" type="hidden" value={this.props.method} />
                 <HiddenAuthFields auth_param={this.props.auth_param} auth_token={this.props.auth_token} />
                 <FormInput name="task[name]" autofocus="autofocus" placeholder="What is the name of your task?" type="text" label="name" value={this.state.name} onChange={this.onChangeName} />
