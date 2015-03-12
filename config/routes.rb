@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   resources :events, only: [:index, :new, :create]
 
-  resources :profiles, :tasks
+  resources :tasks
+
+  resources :profiles
 end

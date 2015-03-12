@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   layout 'main', only: [:index,:new]
   before_action :authenticate_user!
   def index
-    binding.pry
     @events = Event.all
     @header = "Events"
   end
