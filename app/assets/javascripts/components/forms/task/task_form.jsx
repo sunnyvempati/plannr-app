@@ -9,7 +9,7 @@ var TaskForm = React.createClass({
             deadline: null
         }
 
-        if (this.props.method.toLowerCase() !== 'post' ) {
+        if (this.props.route_verb.toLowerCase() === 'patch' || this.props.route_verb.toLowerCase() === 'put' || this.props.route_verb.toLowerCase() === 'get') {
             retStateObject.name = this.props.task.name;
             retStateObject.description = this.props.task.description;
             retStateObject.deadline = this.props.task.deadline;
@@ -33,8 +33,8 @@ var TaskForm = React.createClass({
     render: function () {
         var all_props = this.props;
         return (
-            <Form action={this.props.action} method={this.props.formMethod} id={this.props.formId} submitBtnText={this.props.submitButtonText} {...all_props }>
-                <input name="_method" type="hidden" value={this.props.method} />
+            <Form action={this.props.action} method={this.props.method} id={this.props.form_id}  {...all_props }>
+                <input name="_method" type="hidden" value={this.props.route_verb} />
                 <HiddenAuthFields auth_param={this.props.auth_param} auth_token={this.props.auth_token} />
                 <FormInput name="task[name]" autofocus="autofocus" placeholder="What is the name of your task?" type="text" label="name" value={this.state.name} onChange={this.onChangeName} />
                 <FormInput name="task[description]" autofocus="off" placeholder="How would you describe this task?" type="text" label="description" value={this.state.description} onChange={this.onChangeDescription} />

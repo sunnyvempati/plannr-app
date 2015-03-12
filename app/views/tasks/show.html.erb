@@ -1,17 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-
 <%= react_component("TaskForm",
                     action: task_path,
                     auth_param: request_forgery_protection_token,
                     auth_token: form_authenticity_token,
-                    submitButtonText: "???",
-                    hideSubmitButton: "true",
+                    submit_button_text: "!!!",
                     task: @task,
-                    formMethod: "GET",
+                    route_verb: "GET",
                     method: "GET",
-                    id: "task_show"
+                    form_id: "task_show",
+                    hide_submit_button: "true"
     )  %>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'List', tasks_path %>
+<%= link_to 'List', tasks_path %> |
+<%= link_to 'Edit', edit_task_path(@task) %>
+
