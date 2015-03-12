@@ -4,12 +4,20 @@ var Form = React.createClass({
     return (
       <div className="FormContainer">
         <form acceptCharset="UTF-8" {...all_props}>
-          {this.props.children}
-          <Button type="submit" className="FormSubmitButton">
-            {this.props.submitBtnText}
-          </Button>
+            {this.props.children}
+            { this.props.hideSubmitButton == 'true' ?  null : <SubmitButton {...all_props} /> }
         </form>
       </div>
     );
   }
+});
+
+var SubmitButton = React.createClass({
+    render: function() {
+        return (
+            <Button type="submit" className="FormSubmitButton" >
+            {this.props.submitBtnText}
+            </Button>
+        );
+    }
 });
