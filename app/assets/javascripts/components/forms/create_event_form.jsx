@@ -1,4 +1,7 @@
 var CreateEventForm = React.createClass({
+  changeUrl: function () {
+    location.href = '/success';
+  },
   componentDidMount: function() {
     $("#start_date").datepicker();
   },

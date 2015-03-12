@@ -14,4 +14,14 @@
     border: 1px none transparent;
     border-bottom: 2px solid #00bea4;
   }
+  &.is-invalid {
+    border-bottom: 2px solid red;
+    margin-bottom: 0;
+  }
 }
+
+.FormInput-errorMessage {
+  color: red;
+  font-size: em(12);
+}
+

@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user!
   def index
+    binding.pry
     @events = Event.all
     @header = "Events"
   end
@@ -11,7 +12,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    binding.pry
     @event = Event.create!(event_params)
     render :show
   end
