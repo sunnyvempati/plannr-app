@@ -13,15 +13,17 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @header = "Task"
   end
 
   # GET /tasks/new
   def new
-    @header = "Tell us about your task"
+    @header = "Create Task"
   end
 
   # GET /tasks/1/edit
   def edit
+    @header = "Edit Task"
 
   end
 
