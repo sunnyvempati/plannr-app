@@ -1,5 +1,6 @@
 .ui-widget {
   font-size: 1.1em;
+  font-family: 'Roboto', sans-serif;
 }
 .ui-widget .ui-widget {
   font-size: 1em;
@@ -12,7 +13,7 @@
 }
 .ui-widget-content {
   border: none;
-  background: $plannr-green;
+  background: $header-bg;
   color: #222222;
 }
 .ui-widget-content a {
@@ -20,7 +21,7 @@
 }
 .ui-widget-header {
   border: none;
-  background: $plannr-blue;
+  background: $header-bg;
   color: #eeeeee;
   font-weight: bold;
 }
@@ -34,7 +35,7 @@
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
   border: none;
-  background: $button-color;
+  background: transparent;
   font-weight: normal;
   color: #e3e3e3;
 }
@@ -174,9 +175,6 @@
 .ui-icon-circle-triangle-n { background-position: -96px -192px; }
 
 
-
-
-
 /* Overlays */
 .ui-widget-overlay {
   background: #aaaaaa url("images/ui-bg_highlight-hard_40_aaaaaa_1x100.png") 50% top repeat-x;
@@ -197,5 +195,9 @@
   top: 2px;
   width: 1.8em;
   height: 1.8em;
+}
+
+.ui-datepicker th {
+  color: white;
 }
 
