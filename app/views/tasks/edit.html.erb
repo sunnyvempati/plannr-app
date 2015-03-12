@@ -1,8 +1,14 @@
-<%= react_component("EditTaskForm", action: task_path,
+
+<%= react_component("TaskForm",
+                    action: task_path,
                     auth_param: request_forgery_protection_token,
                     auth_token: form_authenticity_token,
                     submitButtonText: "Update",
-                    task: @task)  %>
+                    task: @task,
+                    formMethod: "POST",
+                    method: "PATCH",
+                    id: "task_edit"
+    )  %>
 
 <%= link_to 'List', tasks_path %> |
 <%= link_to 'Show', @task %>
