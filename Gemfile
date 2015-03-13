@@ -15,7 +15,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'spring',        group: :development
 
 gem 'bower-rails'
-gem 'devise'
+gem 'authlogic'
 gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
 
 group 'development' do
