@@ -4,12 +4,16 @@ var Form = React.createClass({
     return (
       <div className="FormContainer">
         <form acceptCharset="UTF-8" {...all_props}>
-          {this.props.children}
-          <Button type="submit" className="FormSubmitButton">
-            {this.props.submitBtnText}
-          </Button>
+            {this.props.children}
+            <input name="_method" type="hidden" value={this.props.route_verb} />
+                <ButtonList {...all_props} />
+
+
+
         </form>
       </div>
     );
   }
 });
+
+

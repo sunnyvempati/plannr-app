@@ -45,6 +45,14 @@ class Consolidate0312 < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :tasks do |t|
+      t.string :name
+      t.text :description
+      t.datetime :deadline
+
+      t.timestamps null: false
+    end
+
     add_index :user_sessions, :session_id
     add_index :user_sessions, :updated_at
 

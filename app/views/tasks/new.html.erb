@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<%= react_component("TaskForm",
+                    action: tasks_path,
+                    auth_param: request_forgery_protection_token,
+                    auth_token: form_authenticity_token,
+                    model: @task,
+                    route_verb: "POST",
+                    method: "POST",
+                    form_id: "task_create",
+                    primary_button_text: "Create",
+                    hide_primary_button: false,
+                    secondary_button_text: "Cancel",
+                    hide_secondary_button: false,
+                    secondary_button_href: tasks_path
+    )  %>
+
+<%= link_to 'List', tasks_path %>
