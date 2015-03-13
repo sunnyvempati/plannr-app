@@ -5,6 +5,7 @@ var Form = React.createClass({
       <div className="FormContainer">
         <form acceptCharset="UTF-8" {...all_props}>
             {this.props.children}
+            <input name="_method" type="hidden" value={this.props.route_verb} />
             { this.props.hide_submit_button == 'true' ?  null : <SubmitButton {...all_props} /> }
         </form>
       </div>
