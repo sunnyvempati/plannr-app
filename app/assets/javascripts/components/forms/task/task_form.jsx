@@ -1,37 +1,46 @@
 var TaskForm = React.createClass({
-    mixins: [React.addons.LinkedStateMixin],
+  mapInputs: function(inputs) {
+    return {
+      'name': inputs.name,
+      'description': inputs.description,
+      'deadline': inputs.deadline
+    };
+  },
 
-    displayName: "TaskForm",
+  getInitialState: function() {
+    return {canSubmit: false};
+  },
 
-    getInitialState: function () {
-        //return populated object on show/edit/update methods put or patch or get
-        var retStateObject = {
-            name: null,
-            description: null,
-            deadline: null
-        }
+  enableButton: function () {
+    this.setState({
+      canSubmit: true
+    });
+  },
+  disableButton: function () {
+    this.setState({
+      canSubmit: false
+    });
+  },
 
-        if (this.props.route_verb.toLowerCase() === 'patch' || this.props.route_verb.toLowerCase() === 'put' || this.props.route_verb.toLowerCase() === 'get') {
-            retStateObject.name = this.props.model.name;
-            retStateObject.description = this.props.model.description;
-            retStateObject.deadline = this.props.model.deadline;
-        }
+  changeUrl: function() {
+    location.href = '/tasks';
+  },
 
-        return retStateObject;
-    },
-
-    render: function () {
-        var all_props = this.props;
-        return (
-            <Form action={this.props.action} method={this.props.method} id={this.props.form_id}  {...all_props }>
-                <HiddenAuthFields auth_param={this.props.auth_param} auth_token={this.props.auth_token} />
-                <FormInput name="task[name]" autofocus="autofocus" placeholder="What is the name of your task?" type="text" label="name" valueLink={this.linkState('name')} />
-                <FormInput name="task[description]" autofocus="off" placeholder="How would you describe this task?" type="text" label="description" valueLink={this.linkState('description')} />
-                <FormInput name="task[deadline]" autofocus="off" placeholder="What is the deadline for this task? (DD/MM/YYYY)" type="datetime" label="deadline" valueLink={this.linkState('deadline')} />
-
-            </Form>
-        );
-    }
-
-
+  render: function() {
+    return (
+      <div className="FormContainer">
+        <Formsy.Form url='/user_session' onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton}>
+          <FormInput type="hidden" name={this.props.auth_param} value={this.props.auth_token} />
+          <FormInput name="name" autofocus="autofocus" placeholder="What is the name of your task?" type="text" label="name" value={this.props.model.name} required/>
+          <FormInput name="description" autofocus="off" placeholder="How would you describe this task?" type="text" label="description" value={this.props.model.description} />
+          <FormInput name="deadline" autofocus="off" placeholder="What is the deadline for this task? (DD/MM/YYYY)" type="datetime" label="deadline" value={this.props.model.deadline} />
+          <ButtonList secondaryVisible={true}
+                      secondaryBtnHref={this.secondary_button_href}
+                      secondaryBtnText="Cancel"
+                      primaryBtnText={this.props.primary_button_text}
+                      action={this.props.action} />
+        </Formsy.Form>
+      </div>
+    );
+  }
 });

@@ -1,11 +1,17 @@
 var Button = React.createClass({
   render: function() {
-    var all_props = this.props;
-    var button_class = "Button Button--raised Button--primary " + this.props.className;
+    var cx = React.addons.classSet;
+    classes = {
+      'Button': true,
+      'Button--raised': true,
+      'Button--primary': true
+    };
+    classes[this.props.className] = true;
+    var btn_classes = cx(classes);
     return (
-        <button {...all_props} className={button_class}>
-            {this.props.children}
-        </button>
+      <button {...this.props} className={btn_classes}>
+          {this.props.children}
+      </button>
     );
   }
 });

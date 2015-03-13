@@ -33,9 +33,14 @@
 .Button--secondary {
   color: #000000;
   background-color: $button-secondary-color;
+  display: none;
 
   &:active, &:hover {
     background-color: $button-secondary-hover-color;
+  }
+
+  &.is-visible {
+    display: block;
   }
 }
 

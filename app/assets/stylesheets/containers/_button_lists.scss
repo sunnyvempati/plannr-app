@@ -1,0 +1,7 @@
+.ButtonListContainer {
+  display: flex;
+  justify-content: right;
+  >* {
+    margin-left: 24px;
+  }
+}

@@ -1,11 +1,17 @@
 var ButtonSecondary = React.createClass({
-    render: function () {
-        var button_class = "Button Button--raised Button--secondary " + this.props.className;
-        return (
-        <a href={this.props.action}>
-                <input type="button" type="button"  className={button_class} value={this.props.secondary_button_text}>
-                </input>
-        </a>
-        );
-    }
+  render: function() {
+    var cx = React.addons.classSet;
+    var btn_classes = cx({
+      'Button': true,
+      'Button--raised': true,
+      'Button--secondary': true,
+      'is-visible': this.props.isVisible
+    });
+    return (
+      <a href={this.props.action}>
+        <input type="button" className={btn_classes} value={this.props.children}>
+        </input>
+      </a>
+    );
+  }
 });

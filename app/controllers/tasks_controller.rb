@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   layout 'main', only: [:show, :edit, :index, :new]
-  before_action :authenticate_user!
+  before_action :authenticate_user
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -18,6 +18,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    @task = Task.new
     @header = "Create Task"
   end
 
