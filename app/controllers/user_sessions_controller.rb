@@ -1,13 +1,17 @@
 class UserSessionsController < ApplicationController
+  respond_to :html, :json
   def new
   end
 
   def create
     @user_session = UserSession.new user_params
     if @user_session.save
-      redirect_to events_path
+      respond_with @user_session
     else
-      redirect_to new_user_session_path
+      errors = {}
+      # just return first error
+      @user_session.errors.messages.each {|k,v| errors[k] = v.first}
+      render json: errors, status: 403
     end
   end
 
@@ -19,6 +23,6 @@ class UserSessionsController < ApplicationController
   protected
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user_session).permit(:email, :password)
   end
 end

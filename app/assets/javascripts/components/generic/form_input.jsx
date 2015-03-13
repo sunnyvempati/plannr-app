@@ -3,26 +3,25 @@ var FormInput = React.createClass({
   getInitialState: function() {
     return {
       isValid: true,
-      setError: false
+      showValidation: false
     };
   },
   changeValue: function (event) {
     this.setValue(event.currentTarget.value);
-
   },
-  showValidation: function (event) {
-    this.setState({
-      setError: !this.isValid()
-    });
+  OnBlur: function() {
+    this.setState({showValidation: true});
   },
   render: function() {
+    show_validation = this.state.showValidation && !this.isValid();
+
     var item = this.props.item;
     var cx = React.addons.classSet;
     var input_classes = cx({
       'FormInput': true,
-      'is-invalid': this.state.setError && !this.isValid()
+      'is-invalid': show_validation
     });
-    var error_message = this.state.setError ? this.getErrorMessage() : "";
+    error_message = show_validation ? this.getErrorMessage() : "";
     return (
       <div>
         <input className={input_classes}
@@ -31,11 +30,9 @@ var FormInput = React.createClass({
                autofocus={this.props.autofocus}
                placeholder={this.props.placeholder}
                type={this.props.type}
-               onBlur={this.showValidation}
-               onFocus={this.resetValidation} />
+               onBlur={this.OnBlur} />
         <span className="FormInput-errorMessage">{error_message}</span>
       </div>
-
     );
   }
 });

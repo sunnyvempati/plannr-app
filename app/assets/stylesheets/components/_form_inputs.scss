@@ -7,7 +7,7 @@
   padding-bottom: $input-padding-vertical / 2;
   font-size: $default-font-size;
   color: #000000;
-  margin-bottom: $input-divider;
+  margin-bottom: 8px;
   border: 1px none transparent;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   &:focus {
@@ -16,7 +16,6 @@
   }
   &.is-invalid {
     border-bottom: 2px solid red;
-    margin-bottom: 0;
   }
 }
 

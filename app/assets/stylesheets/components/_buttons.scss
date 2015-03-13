@@ -17,6 +17,11 @@
     box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.3);
     background-color: $button-hover-color;
   }
+  &:disabled {
+    background-color: #000000;
+    opacity: 0.2;
+    box-shadow: none;
+  }
 }
 
 .CreateEventContainer {

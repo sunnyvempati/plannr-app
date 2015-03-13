@@ -1,20 +1,45 @@
 var CreateEventForm = React.createClass({
+  mapInputs: function(inputs) {
+    return {
+      'name': inputs.name,
+      'client_name': inputs.client_name,
+      'start_date': inputs.start_date,
+      'location': inputs.location,
+      'budget': inputs.budget
+    };
+  },
+  getInitialState: function() {
+    return {canSubmit: false};
+  },
+  enableButton: function () {
+    this.setState({
+      canSubmit: true
+    });
+  },
+  disableButton: function () {
+    this.setState({
+      canSubmit: false
+    });
+  },
   changeUrl: function () {
-    location.href = '/success';
+    location.href = '/events';
   },
   componentDidMount: function() {
     $("#start_date").datepicker();
   },
   render: function() {
     return (
-      <Form action={this.props.action} method="post" id="new_event" submitBtnText="Create event">
-        <HiddenAuthFields auth_param={this.props.auth_param} auth_token={this.props.auth_token} />
-        <FormInput name="event[name]" autofocus="autofocus" placeholder="Name of your event" type="text" label="name" onClick={this.blah} />
-        <FormInput name="event[client_name]" autofocus="off" placeholder="Who is it for?" type="text" label="client_name" />
-        <FormInput name="event[start_date]" autofocus="off" placeholder="When is it?" type="datetime" label="start_date" id="start_date" />
-        <FormInput name="event[location]" autofocus="off" placeholder="Where is it?" type="text" label="location" />
-        <FormInput name="event[budget]" autofocus="off" placeholder="What's the budget?" type="number" label="budget" id="budget" />
-      </Form>
+      <div className="FormContainer">
+        <Formsy.Form url='/events' onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton}>
+          <FormInput type="hidden" name={this.props.auth_param} value={this.props.auth_token} />
+          <FormInput name="name" autofocus="autofocus" placeholder="Name of your event" type="text" label="name" required/>
+          <FormInput name="client_name" autofocus="autofocus" placeholder="Who is it for?" type="text" label="client_name" required/>
+          <FormInput name="location" autofocus="off" placeholder="Where is it?" type="text" label="location" />
+          <FormInput name="budget" autofocus="off" placeholder="What's the budget?" type="text" label="budget" validations="isNumeric" validationError="Has to be a number" />
+          <Button type="submit" disabled={!this.state.canSubmit} className="FormSubmitButton">Save</Button>
+        </Formsy.Form>
+      </div>
+
     );
   }
 });
