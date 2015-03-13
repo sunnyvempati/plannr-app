@@ -6,19 +6,14 @@ var Form = React.createClass({
         <form acceptCharset="UTF-8" {...all_props}>
             {this.props.children}
             <input name="_method" type="hidden" value={this.props.route_verb} />
-            { this.props.hide_submit_button == 'true' ?  null : <SubmitButton {...all_props} /> }
+                <ButtonList {...all_props} />
+
+
+
         </form>
       </div>
     );
   }
 });
 
-var SubmitButton = React.createClass({
-    render: function() {
-        return (
-            <Button type="submit" className="FormSubmitButton" >
-            {this.props.submit_button_text}
-            </Button>
-        );
-    }
-});
+

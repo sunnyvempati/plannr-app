@@ -7,15 +7,28 @@
 }
 
 .Button--raised {
-  color: #FFFFFF;
-  background-color: $button-color;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 20px;
   font-size: $btn-font-size;
   &:active, &:hover {
     box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.Button--primary {
+  color: #FFFFFF;
+  background-color: $button-color;
+  &:active, &:hover {
     background-color: $button-hover-color;
+  }
+}
+
+.Button--secondary {
+  color: #000000;
+  background-color: $button-secondary-color;
+  &:active, &:hover {
+    background-color: $button-secondary-hover-color;
   }
 }
 
