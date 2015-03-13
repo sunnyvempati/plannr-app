@@ -8,10 +8,12 @@
                     route_verb: "PATCH",
                     method: "POST",
                     form_id: "task_edit",
-                    submit_button_text: "Update",
-                    cancel_button_text: "Cancel",
-                    hide_submit_button: false,
-                    hide_cancel_button: false
+                    primary_button_text: "Update",
+                    hide_primary_button: false,
+                    secondary_button_text: "Cancel",
+                    hide_secondary_button: false,
+                    secondary_button_href: tasks_path
+
     )  %>
 
 <%= link_to 'List', tasks_path %> |

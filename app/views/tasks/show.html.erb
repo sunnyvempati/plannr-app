@@ -8,10 +8,11 @@
                     route_verb: "GET",
                     method: "GET",
                     form_id: "task_show",
-                    submit_button_text: "!!!",
-                    cancel_button_text: "Cancel",
-                    hide_submit_button: true,
-                    hide_cancel_button: true
+                    primary_button_text: "!!!",
+                    hide_primary_button: true,
+                    secondary_button_text: "Cancel",
+                    hide_secondary_button: true,
+                    secondary_button_href: tasks_path
     )  %>
 
 <%= link_to 'List', tasks_path %> |
