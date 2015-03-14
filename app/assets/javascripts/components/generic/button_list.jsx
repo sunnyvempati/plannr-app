@@ -6,9 +6,14 @@
 
 var ButtonList = React.createClass({
   render: function() {
+    var cx = React.addons.classSet;
+    var btn_container_classes = cx({
+      'ButtonListContainer': true,
+      'is-visible': this.props.showButtonList
+    });
     return (
-      <div className="ButtonListContainer">
-        <ButtonSecondary isVisible={this.props.secondaryVisible} className="FormCancelButton" action={this.props.action}>
+      <div className={btn_container_classes}>
+        <ButtonSecondary isVisible={this.props.secondaryVisible} className="FormCancelButton" secondaryHref={this.props.secondaryBtnHref}>
             {this.props.secondaryBtnText}
         </ButtonSecondary>
         <Button type="submit" className="FormSubmitButton">
@@ -18,38 +23,3 @@ var ButtonList = React.createClass({
     );
   }
 });
-
-// var ButtonList = React.createClass({
-//     render: function() {
-//         var all_props = this.props;
-//         return (
-//             <div className="Button-overlay">
-//                 { this.props.hide_primary_button === true ?  null : <SubmitButton {...all_props} /> }
-//                  { this.props.hide_secondary_button === true ?  null : <CancelButton {...all_props} /> }
-//             </div>
-//         );
-//     }
-// });
-
-
-// var SubmitButton = React.createClass({
-//     render: function() {
-//         var all_props = this.props;
-//         return (
-//             <Button type="submit" className="FormSubmitButton" {...all_props} >
-//             {this.props.primary_button_text}
-//             </Button>
-//         );
-//     }
-// });
-
-// var CancelButton = React.createClass({
-//     render: function() {
-//         var all_props = this.props;
-//         return (
-//             <ButtonSecondary type="" className="FormCancelButton=" {...all_props} >
-//                 {this.props.secondary_button_text}
-//             </ButtonSecondary>
-//         );
-//     }
-// });

@@ -1,18 +1,10 @@
 class UserSessionsController < ApplicationController
-  respond_to :html, :json
   def new
   end
 
   def create
     @user_session = UserSession.new user_params
-    if @user_session.save
-      respond_with @user_session
-    else
-      errors = {}
-      # just return first error
-      @user_session.errors.messages.each {|k,v| errors[k] = v.first}
-      render json: errors, status: 403
-    end
+    render_entity(@user_session)
   end
 
   def destroy

@@ -30,7 +30,8 @@ var FormInput = React.createClass({
                autofocus={this.props.autofocus}
                placeholder={this.props.placeholder}
                type={this.props.type}
-               onBlur={this.OnBlur} />
+               onBlur={this.OnBlur}
+               disabled={this.isFormDisabled()} />
         <span className="FormInput-errorMessage">{error_message}</span>
       </div>
     );

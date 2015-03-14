@@ -1,9 +1,12 @@
 var TaskForm = React.createClass({
   mapInputs: function(inputs) {
     return {
-      'name': inputs.name,
-      'description': inputs.description,
-      'deadline': inputs.deadline
+      'authenticity_token': inputs.authenticity_token,
+      'task': {
+        'name': inputs.name,
+        'description': inputs.description,
+        'deadline': inputs.deadline
+      }
     };
   },
 
@@ -26,19 +29,26 @@ var TaskForm = React.createClass({
     location.href = '/tasks';
   },
 
+  hiddenFields: function() {
+    return (
+      <FormInput type="hidden" name={this.props.auth_param} value={this.props.auth_token} />
+    )
+  },
+
   render: function() {
+    hidden_fields = this.props.disableForm ? "" : this.hiddenFields();
     return (
       <div className="FormContainer">
-        <Formsy.Form url='/user_session' onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton}>
-          <FormInput type="hidden" name={this.props.auth_param} value={this.props.auth_token} />
+        <Formsy.Form url={this.props.action} onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton} mapping={this.mapInputs} method={this.props.routeVerb} disabled={this.props.disableForm}>
+          {hidden_fields}
           <FormInput name="name" autofocus="autofocus" placeholder="What is the name of your task?" type="text" label="name" value={this.props.model.name} required/>
           <FormInput name="description" autofocus="off" placeholder="How would you describe this task?" type="text" label="description" value={this.props.model.description} />
           <FormInput name="deadline" autofocus="off" placeholder="What is the deadline for this task? (DD/MM/YYYY)" type="datetime" label="deadline" value={this.props.model.deadline} />
-          <ButtonList secondaryVisible={true}
+          <ButtonList showButtonList={this.props.showButtonList}
+                      secondaryVisible={true}
                       secondaryBtnHref={this.secondary_button_href}
                       secondaryBtnText="Cancel"
-                      primaryBtnText={this.props.primary_button_text}
-                      action={this.props.action} />
+                      primaryBtnText={this.props.primary_button_text} />
         </Formsy.Form>
       </div>
     );

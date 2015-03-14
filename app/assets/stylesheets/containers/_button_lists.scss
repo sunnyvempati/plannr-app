@@ -1,7 +1,12 @@
 .ButtonListContainer {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
+  padding-top: 16px;
+  display: none;
   >* {
     margin-left: 24px;
+  }
+  &.is-visible {
+    display: flex;
   }
 }

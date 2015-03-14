@@ -1,17 +1,14 @@
 class TasksController < ApplicationController
-  layout 'main', only: [:show, :edit, :index, :new]
+  layout 'main'
   before_action :authenticate_user
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  # GET /tasks
-  # GET /tasks.json
+
   def index
     @tasks = Task.all
     @header = "Tasks"
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
     @header = "Task"
   end
@@ -31,30 +28,15 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.create!(task_params)
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    @task = Task.new(task_params)
+    render_entity @task
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    @task.assign_attributes(task_params)
+    render_entity @task
   end
 
   # DELETE /tasks/1

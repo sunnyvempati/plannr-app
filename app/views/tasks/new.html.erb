@@ -5,14 +5,15 @@
                     auth_param: request_forgery_protection_token,
                     auth_token: form_authenticity_token,
                     model: @task,
-                    route_verb: "POST",
+                    routeVerb: "POST",
                     method: "POST",
                     form_id: "task_create",
                     primary_button_text: "Create",
                     hide_primary_button: false,
                     secondary_button_text: "Cancel",
                     hide_secondary_button: false,
-                    secondary_button_href: tasks_path
+                    secondary_button_href: tasks_path,
+                    showButtonList: true
     )  %>
 
 <%= link_to 'List', tasks_path %>
