@@ -36,7 +36,7 @@ var TaskForm = React.createClass({
   },
 
   render: function() {
-    hidden_fields = this.props.disableForm ? "" : this.hiddenFields();
+    var hidden_fields = this.props.disableForm ? "" : this.hiddenFields();
     return (
       <div className="FormContainer">
         <Formsy.Form  url={this.props.action}
@@ -45,7 +45,6 @@ var TaskForm = React.createClass({
                       onInvalid={this.disableButton}
                       mapping={this.mapInputs}
                       method={this.props.routeVerb}
-          xxx={this.props.disableForm}
                        >
             {hidden_fields}
             <FormInput  name="name"

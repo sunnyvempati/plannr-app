@@ -13,15 +13,13 @@ var FormInput = React.createClass({
     this.setState({showValidation: true});
   },
   render: function() {
-    show_validation = this.state.showValidation && !this.isValid();
-
-    var item = this.props.item;
+    var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({
       'FormInput': true,
       'is-invalid': show_validation
     });
-    error_message = show_validation ? this.getErrorMessage() : "";
+    var error_message = show_validation ? this.getErrorMessage() : "";
     return (
       <div>
         <input className={input_classes}

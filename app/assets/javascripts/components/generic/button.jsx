@@ -1,7 +1,7 @@
 var Button = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
-    classes = {
+    var classes = {
       'Button': true,
       'Button--raised': true,
       'Button--primary': true
