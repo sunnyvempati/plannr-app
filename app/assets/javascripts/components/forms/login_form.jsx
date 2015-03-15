@@ -25,7 +25,7 @@ var LoginForm = React.createClass({
     return (
       <div className="FormContainer">
         <Formsy.Form url='/user_session' onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton}>
-          <FormInput type="hidden" name={this.props.auth_param} value={this.props.auth_token} />
+          <FormInput type="hidden" name={this.props.authParam} value={this.props.authToken}  />
           <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" required/>
           <FormInput name="password" type="password" placeholder="password" required/>
           <Button type="submit" disabled={!this.state.canSubmit} className="FormSubmitButton">Login</Button>

@@ -8,7 +8,7 @@ var ButtonSecondary = React.createClass({
       'is-visible': this.props.isVisible
     });
     return (
-      <a href={this.props.secondaryHref}>
+      <a href={this.props.href}>
         <input type="button" className={btn_classes} value={this.props.children}>
         </input>
       </a>
