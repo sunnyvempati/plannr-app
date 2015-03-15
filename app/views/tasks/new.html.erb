@@ -2,17 +2,13 @@
 
 <%= react_component("TaskForm",
                     action: tasks_path,
-                    authParam: request_forgery_protection_token,
                     authToken: form_authenticity_token,
                     model: @task,
                     routeVerb: "POST",
-                    method: "POST",
-                    formId: "task_create",
                     primaryButtonText: "Create",
                     secondaryButtonText: "Cancel",
                     secondaryButtonVisible: true,
-                    secondaryButtonHref: tasks_path,
-                    showButtonList: true
-    )  %>
+                    secondaryButtonHref: tasks_path)  %>
 
 <%= link_to 'List', tasks_path %>
+

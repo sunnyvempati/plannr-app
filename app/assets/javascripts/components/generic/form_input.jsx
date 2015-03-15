@@ -22,7 +22,8 @@ var FormInput = React.createClass({
     var error_message = show_validation ? this.getErrorMessage() : "";
     return (
       <div>
-        <input className={input_classes}
+        <input name={this.props.name}
+               className={input_classes}
                onChange={this.changeValue}
                value={this.getValue()}
                autofocus={this.props.autofocus}

@@ -1,7 +1,12 @@
 var ButtonSecondary = React.createClass({
+  propTypes: {
+    isVisible: React.PropTypes.bool,
+    href: React.PropTypes.string,
+    buttonText: React.PropTypes.string
+  },
   render: function() {
     var cx = React.addons.classSet;
-    var btn_classes = cx({
+    var ButtonSecondaryClasses = cx({
       'Button': true,
       'Button--raised': true,
       'Button--secondary': true,
@@ -9,7 +14,9 @@ var ButtonSecondary = React.createClass({
     });
     return (
       <a href={this.props.href}>
-        <input type="button" className={btn_classes} value={this.props.children}>
+        <input type="button"
+               className={ButtonSecondaryClasses}
+               value={this.props.buttonText}>
         </input>
       </a>
     );

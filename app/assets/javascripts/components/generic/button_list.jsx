@@ -1,23 +1,30 @@
 //contains two buttons which may be toggled on or off
-//    primaryButtonText: "Submit"
-//    secondaryButtonText: "Cancel"
-//    hide_primary_button: "true"
-//    secondaryButtonVisible: "true"
+//  showButtonList: true/false
+//  primaryButtonText: "Submit"
+//  secondaryButtonText: "Cancel"
+//  secondaryButtonHref: '/events'
+//  secondaryButtonVisible: true/false
 
 var ButtonList = React.createClass({
+  propTypes: {
+    showButtonList: React.PropTypes.bool.isRequired,
+    primaryButtonText: React.PropTypes.string.isRequired,
+    secondaryButtonVisible: React.PropTypes.bool.isRequired,
+    secondaryButtonHref: React.PropTypes.string.isRequired,
+    secondaryButtonText: React.PropTypes.string.isRequired
+  },
   render: function() {
     var cx = React.addons.classSet;
-    var btn_container_classes = cx({
+    var containerClasses = cx({
       'ButtonListContainer': true,
       'is-visible': this.props.showButtonList
     });
     return (
-      <div className={btn_container_classes}>
+      <div className={containerClasses}>
         <ButtonSecondary  isVisible={this.props.secondaryButtonVisible}
                           className="FormCancelButton"
-                          href={this.props.secondaryButtonHref}>
-            {this.props.secondaryButtonText}
-        </ButtonSecondary>
+                          href={this.props.secondaryButtonHref}
+                          buttonText={this.props.secondaryButtonText} />
         <Button type="submit" className="FormSubmitButton">
           {this.props.primaryButtonText}
         </Button>
