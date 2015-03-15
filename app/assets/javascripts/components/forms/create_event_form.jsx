@@ -31,7 +31,7 @@ var CreateEventForm = React.createClass({
     return (
       <div className="FormContainer">
         <Formsy.Form url='/events' onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton}>
-          <FormInput type="hidden" name={this.props.auth_param} value={this.props.auth_token} />
+          <FormInput type="hidden" name={this.props.authParam} value={this.props.auth_token} />
           <FormInput name="name" autofocus="autofocus" placeholder="Name of your event" type="text" label="name" required/>
           <FormInput name="client_name" autofocus="autofocus" placeholder="Who is it for?" type="text" label="client_name" required/>
           <FormInput name="location" autofocus="off" placeholder="Where is it?" type="text" label="location" />
