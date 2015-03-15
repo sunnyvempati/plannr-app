@@ -36,7 +36,7 @@ var CreateEventForm = React.createClass({
           <FormInput name="client_name" autofocus="autofocus" placeholder="Who is it for?" type="text" label="client_name" required/>
           <FormInput name="location" autofocus="off" placeholder="Where is it?" type="text" label="location" />
           <FormInput name="budget" autofocus="off" placeholder="What's the budget?" type="text" label="budget" validations="isNumeric" validationError="Has to be a number" />
-          <Button type="submit" disabled={!this.state.canSubmit} className="FormSubmitButton">Save</Button>
+          <Button type="submit" disabled={!this.state.canSubmit}>Save</Button>
         </Formsy.Form>
       </div>
 

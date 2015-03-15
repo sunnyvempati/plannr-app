@@ -25,7 +25,7 @@ var ButtonList = React.createClass({
                           className="FormCancelButton"
                           href={this.props.secondaryButtonHref}
                           buttonText={this.props.secondaryButtonText} />
-        <Button type="submit" className="FormSubmitButton">
+        <Button type="submit">
           {this.props.primaryButtonText}
         </Button>
       </div>
