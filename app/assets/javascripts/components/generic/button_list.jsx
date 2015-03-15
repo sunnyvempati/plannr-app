@@ -13,7 +13,9 @@ var ButtonList = React.createClass({
     });
     return (
       <div className={btn_container_classes}>
-        <ButtonSecondary isVisible={this.props.secondaryButtonVisible} className="FormCancelButton" href={this.props.secondaryButtonHref}>
+        <ButtonSecondary  isVisible={this.props.secondaryButtonVisible}
+                          className="FormCancelButton"
+                          href={this.props.secondaryButtonHref}>
             {this.props.secondaryButtonText}
         </ButtonSecondary>
         <Button type="submit" className="FormSubmitButton">
