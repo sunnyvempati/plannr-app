@@ -31,7 +31,7 @@ var TaskForm = React.createClass({
 
   hiddenFields: function() {
     return (
-      <FormInput type="hidden" name={this.props.authParam} value={this.props.auth_token} />
+      <FormInput type="hidden" name={this.props.authParam} value={this.props.authToken} />
     )
   },
 

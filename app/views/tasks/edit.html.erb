@@ -3,7 +3,7 @@
 <%= react_component("TaskForm",
                     action: task_path,
                     authParam: request_forgery_protection_token,
-                    auth_token: form_authenticity_token,
+                    authToken: form_authenticity_token,
                     model: @task,
                     routeVerb: "PUT",
                     method: "POST",
