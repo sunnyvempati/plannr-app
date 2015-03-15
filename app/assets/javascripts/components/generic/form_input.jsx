@@ -31,7 +31,7 @@ var FormInput = React.createClass({
                placeholder={this.props.placeholder}
                type={this.props.type}
                onBlur={this.OnBlur}
-               disabled={this.isFormDisabled()} />
+               disabled={this.props.disabled} />
         <span className="FormInput-errorMessage">{error_message}</span>
       </div>
     );
