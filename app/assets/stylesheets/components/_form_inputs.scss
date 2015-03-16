@@ -1,15 +1,21 @@
 .FormInput {
   width: 100%;
-  height: $input-height-computed;
+  height: $input-height;
+  padding-top: $input-ptop;
+  padding-bottom: $input-pbottom;
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.FormInput-field {
+  @include font($subheader-font, normal, 10);
+  width: 100%;
   background-color: transparent;
-  line-height: $line-height-factor-default;
-  padding-top: $input-padding-vertical;
-  padding-bottom: $input-padding-vertical / 2;
-  font-size: $default-font-size;
   color: #000000;
-  margin-bottom: 8px;
   border: 1px none transparent;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: $input-field-pbottom;
   &:focus {
     border: 1px none transparent;
     border-bottom: 2px solid #00bea4;
@@ -19,8 +25,15 @@
   }
 }
 
-.FormInput-errorMessage {
+.FormInput-fieldErrorMessage {
   color: red;
   font-size: em(12);
+}
+
+form label {
+  display: block;
+  padding-bottom: $size-increment;
+  color: $black-half;
+  @include font($caption-font, normal, 20);
 }
 

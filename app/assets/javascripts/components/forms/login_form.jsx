@@ -8,14 +8,16 @@ var LoginForm = React.createClass({
   },
   render: function() {
     return (
-      <Form url='/user_session'
-            mapping={this.mapInputs}
-            onSuccessUrl='/events'
-            authToken={this.props.authToken}
-            primaryButtonText="Login">
-        <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" required/>
-        <FormInput name="password" type="password" placeholder="password" required/>
-      </Form>
+      <div className="FormContainer">
+        <Form url='/user_session'
+              mapping={this.mapInputs}
+              onSuccessUrl='/events'
+              authToken={this.props.authToken}
+              primaryButtonText="Login">
+          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" required/>
+          <FormInput name="password" type="password" placeholder="password" required/>
+        </Form>
+      </div>
     );
   }
 });

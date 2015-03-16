@@ -1,4 +1,9 @@
 .FormContainer {
   width: 500px;
   margin: auto;
+  &--leftAligned {
+    @extend .FormContainer;
+    margin: 0;
+    padding-left: 72px;
+  }
 }

@@ -16,12 +16,17 @@ var FormInput = React.createClass({
     var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({
-      'FormInput': true,
+      'FormInput-field': true,
       'is-invalid': show_validation
+    });
+    var form_input_classes = cx({
+      'FormInput': true,
+      'is-hidden': this.props.type == 'hidden'
     });
     var error_message = show_validation ? this.getErrorMessage() : "";
     return (
-      <div>
+      <div className={form_input_classes}>
+        <label for={this.props.id}>{this.props.label}</label>
         <input name={this.props.name}
                className={input_classes}
                onChange={this.changeValue}
@@ -30,8 +35,9 @@ var FormInput = React.createClass({
                placeholder={this.props.placeholder}
                type={this.props.type}
                onBlur={this.OnBlur}
-               disabled={this.props.disabled} />
-        <span className="FormInput-errorMessage">{error_message}</span>
+               disabled={this.props.disabled}
+               id={this.props.id} />
+        <span className="FormInput-fieldErrorMessage">{error_message}</span>
       </div>
     );
   }

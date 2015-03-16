@@ -51,23 +51,20 @@ var Form = React.createClass({
   render: function() {
     form_props = this.props;
     return (
-      <div className="FormContainer">
-        <Formsy.Form url={form_props.url}
-                     onSuccess={this.changeUrl}
-                     onValid={this.enableButton}
-                     onInvalid={this.disableButton}
-                     mapping={this.props.mapping}
-                     method={form_props.routeVerb}>
-          <FormInput type="hidden" name="authenticity_token" value={form_props.authToken}  />
-          {form_props.children}
-          <ButtonList showButtonList={form_props.showButtonList}
-                      primaryButtonText={form_props.primaryButtonText}
-                      secondaryButtonText={form_props.secondaryButtonText}
-                      secondaryButtonHref={form_props.secondaryButtonHref}
-                      secondaryButtonVisible={form_props.secondaryButtonVisible} />
-
-        </Formsy.Form>
-      </div>
+      <Formsy.Form url={form_props.url}
+                   onSuccess={this.changeUrl}
+                   onValid={this.enableButton}
+                   onInvalid={this.disableButton}
+                   mapping={this.props.mapping}
+                   method={form_props.routeVerb}>
+        <FormInput type="hidden" name="authenticity_token" value={form_props.authToken}  />
+        {form_props.children}
+        <ButtonList showButtonList={form_props.showButtonList}
+                    primaryButtonText={form_props.primaryButtonText}
+                    secondaryButtonText={form_props.secondaryButtonText}
+                    secondaryButtonHref={form_props.secondaryButtonHref}
+                    secondaryButtonVisible={form_props.secondaryButtonVisible} />
+      </Formsy.Form>
     );
   }
 });

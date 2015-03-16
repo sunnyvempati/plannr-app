@@ -8,38 +8,51 @@ var CreateEventForm = React.createClass({
       'budget': inputs.budget
     };
   },
-  getInitialState: function() {
-    return {canSubmit: false};
-  },
-  enableButton: function () {
-    this.setState({
-      canSubmit: true
-    });
-  },
-  disableButton: function () {
-    this.setState({
-      canSubmit: false
-    });
-  },
-  changeUrl: function () {
-    location.href = '/events';
-  },
-  componentDidMount: function() {
-    $("#start_date").datepicker();
-  },
   render: function() {
     return (
-      <div className="FormContainer">
-        <Formsy.Form url='/events' onSuccess={this.changeUrl} onValid={this.enableButton} onInvalid={this.disableButton}>
-          <FormInput type="hidden" name={this.props.authParam} value={this.props.authToken} />
-          <FormInput name="name" autofocus="autofocus" placeholder="Name of your event" type="text" label="name" required/>
-          <FormInput name="client_name" autofocus="autofocus" placeholder="Who is it for?" type="text" label="client_name" required/>
-          <FormInput name="location" autofocus="off" placeholder="Where is it?" type="text" label="location" />
-          <FormInput name="budget" autofocus="off" placeholder="What's the budget?" type="text" label="budget" validations="isNumeric" validationError="Has to be a number" />
-          <Button type="submit" disabled={!this.state.canSubmit}>Save</Button>
-        </Formsy.Form>
+      <div className="FormContainer--leftAligned">
+        <Form url='/events'
+              mapping={this.mapInputs}
+              onSuccessUrl='/events'
+              authToken={this.props.authToken}
+              routeVerb={this.props.routeVerb}
+              primaryButtonText={this.props.primaryButtonText}
+              secondaryButtonVisible={this.props.secondaryButtonVisible}
+              secondaryButtonHref={this.props.secondaryButtonHref}
+              showButtonList={this.props.showButtonList}>
+          <FormInput  name="name"
+                      id="event_name"
+                      autofocus="autofocus"
+                      placeholder="Give it a unique name"
+                      type="text" label="Event name*"
+                      value={this.props.model.name}
+                      disabled={this.props.disableForm}
+                      required/>
+          <FormInput  name="client_name"
+                      id="event_client_name"
+                      autofocus="autofocus"
+                      placeholder="Who's the event for?"
+                      type="text" label="Client*"
+                      value={this.props.model.client_name}
+                      disabled={this.props.disableForm}
+                      required/>
+          <FormInput  name="start_date"
+                      id="event_start_date"
+                      autofocus="autofocus"
+                      type="date" label="Start Date*"
+                      value={this.props.model.start_date}
+                      disabled={this.props.disableForm}
+                      required/>
+          <FormInput  name="budget"
+                      id="event_budget"
+                      autofocus="autofocus"
+                      placeholder="$0"
+                      type="text" label="Estimated Budget*"
+                      value={this.props.model.budget}
+                      disabled={this.props.disableForm}
+                      required/>
+        </Form>
       </div>
-
     );
   }
 });

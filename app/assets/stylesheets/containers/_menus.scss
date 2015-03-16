@@ -1,8 +1,21 @@
+@media (max-width: $small-screen) {
+  .MenuContainer {
+    left: -($grid-increment * 4);
+    background-color: $body-bg;
+  }
+}
+
+@media (min-width: $small-screen+1) {
+  .MenuContainer {
+    left: 0;
+  }
+}
+
 .MenuContainer {
   width: $grid-increment * 4;
   height: 100%;
   position: fixed;
   top: 0;
-  left: -($grid-increment * 4);
   z-index: 500;
+  background-color: $body-bg;
 }

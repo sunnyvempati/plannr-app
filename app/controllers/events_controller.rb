@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event = Event.new
     @header = "Tell us about your event";
   end
 

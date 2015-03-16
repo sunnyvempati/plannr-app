@@ -1,16 +1,29 @@
+$line-height-factor: 1.4;
+
+//font sizes
+$display-font: 34px;
+$headline-font: 24px;
+$title-font: 20px;
+$subheader-font: 16px;
+$body-2-font: 14px;
+$body-1-font: 14px;
+$caption-font: 12px;
+$button-font: 14px;
+
+//media query sizes
+$small-screen: 768px;
+
 //metrics
 $size-increment: 8px;
 $grid-increment: $size-increment * 8;
 
+//Input sizes
+$input-ptop: $size-increment * 4;
+$input-pbottom: $size-increment;
+$input-text-height: ($subheader-font + $caption-font)*1.4;
+$input-height: $input-ptop + $input-text-height + $size-increment*3;
 
-//font
-$line-height-factor-default: 1.4;
-
-$default-font-size: 16px;
-$input-padding-vertical: 16px;
-$input-divider: 8px;
-$font-size-default-computed: $default-font-size * $line-height-factor-default;
-$input-height-computed: ($font-size-default-computed + ($input-padding-vertical*2)) + 1;
+$input-field-pbottom: $size-increment;
 
 
 //button sizes
@@ -26,9 +39,3 @@ $left-nav-header-height: 64px;
 
 //page header
 $page-header-height: 168px;
-// $page-header-left-pad: 64px;
-// $page-header-name-size: 34px;
-// $page-header-name-weight: 300;
-// $page-header-name-lh: 48px;
-
-

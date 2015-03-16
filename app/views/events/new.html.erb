@@ -1,3 +1,9 @@
-<%= react_component("CreateEventForm", action: events_path,
-                                       authParam: request_forgery_protection_token,
-                                   authToken: form_authenticity_token) %>
+<%= react_component("CreateEventForm",
+                    action: events_path,
+                    authToken: form_authenticity_token,
+                    model: @event,
+                    routeVerb: "POST",
+                    primaryButtonText: "Create",
+                    secondaryButtonText: "Cancel",
+                    secondaryButtonVisible: true,
+                    secondaryButtonHref: events_path)  %>
