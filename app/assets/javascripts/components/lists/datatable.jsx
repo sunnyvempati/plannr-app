@@ -2,11 +2,6 @@ var Datatable = React.createClass({
   render: function () {
     var thisTasks = this.props.data;
     var props = this.props;
-    var cx = React.addons.classSet;
-    var item_classes = cx({
-      'MenuList-item': true,
-      'is-selected': this.props.isSelected
-    });
 
     var rows = thisTasks.map(function (task) {
       return <DatatableRow task={task} displayFields={props.displayFields} addCheckboxColumn={props.addCheckboxColumn} addActionColumn={props.addActionColumn} />
