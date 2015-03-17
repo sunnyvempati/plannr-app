@@ -1,37 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Tasks</h1>
-
-<table id="tasks" class="plannrDataTable hover less-compact">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Deadline</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><input type="checkbox"/></td>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.deadline %></td>
-        <td><%= link_to 'Show', task %>
-        <%= link_to 'Edit', edit_task_path(task) %>
-        <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%=     react_component('Datatable', data: @tasks, displayFields: %w(name description deadline), addCheckboxColumn: true, addActionColumn: true ) %>
 
 <br>
 <%= react_component('TaskActionButton', path:new_task_path, prerender: true) %>
 
 <%= link_to 'New Task', new_task_path %>
+
+
 
 
 
