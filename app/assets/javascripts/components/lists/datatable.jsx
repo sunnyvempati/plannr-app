@@ -2,13 +2,18 @@ var Datatable = React.createClass({
   render: function () {
     var thisTasks = this.props.data;
     var props = this.props;
+    var cx = React.addons.classSet;
+    var item_classes = cx({
+      'MenuList-item': true,
+      'is-selected': this.props.isSelected
+    });
 
     var rows = thisTasks.map(function (task) {
       return <DatatableRow task={task} displayFields={props.displayFields} addCheckboxColumn={props.addCheckboxColumn} addActionColumn={props.addActionColumn} />
     });
 
     return (
-      <table>
+      <table className='plannr_datatable hover less-compact'>
         <DatatableHeader displayFields={props.displayFields} addCheckboxColumn={props.addCheckboxColumn} addActionColumn={props.addActionColumn}/>
         <tbody>{rows}</tbody>
       </table>
@@ -108,7 +113,7 @@ var ActionDatatableCell = React.createClass({
     var editHref = "/tasks/" + this.props.id + "/edit";
 
     return(<td>
-      <a href={showHref}>Show</a><a href={editHref}>Edit</a><a data-confirm='Are you sure?' rel='nofollow' data-method='delete' href={showHref}>Destroy</a>
+      <a href={showHref}>Show</a> <a href={editHref}>Edit</a> <a data-confirm='Are you sure?' rel='nofollow' data-method='delete' href={showHref}>Destroy</a>
     </td>);
   }
 });

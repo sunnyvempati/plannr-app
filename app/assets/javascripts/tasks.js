@@ -2,6 +2,6 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function () {
-    $("#tasks").dataTable();
+    $(".plannr_datatable").dataTable();
   }
 )
