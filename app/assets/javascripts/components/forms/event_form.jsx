@@ -5,7 +5,9 @@ var EventForm = React.createClass({
       'client_name': inputs.client_name,
       'start_date': inputs.start_date,
       'location': inputs.location,
-      'budget': inputs.budget
+      'budget': inputs.budget,
+      'notes': inputs.notes,
+      'authenticity_token': inputs.authenticity_token
     };
   },
   render: function() {
@@ -42,7 +44,7 @@ var EventForm = React.createClass({
                       id="event_start_date"
                       autofocus="autofocus"
                       dateField={true}
-                      type="text" label="Start Date*"
+                      type="text" label="Start Date"
                       value={this.props.model.start_date}
                       disabled={this.props.disableForm}
                       placeholder="mm/dd/yyyy"/>
@@ -51,7 +53,7 @@ var EventForm = React.createClass({
                       autofocus="autofocus"
                       placeholder="$0"
                       currencyField={true}
-                      type="text" label="Estimated Budget*"
+                      type="text" label="Estimated Budget"
                       value={this.props.model.budget}
                       disabled={this.props.disableForm}
                       validations="isNumeric"

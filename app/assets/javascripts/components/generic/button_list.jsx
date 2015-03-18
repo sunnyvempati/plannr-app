@@ -9,6 +9,7 @@ var ButtonList = React.createClass({
   propTypes: {
     showButtonList: React.PropTypes.bool.isRequired,
     primaryButtonText: React.PropTypes.string.isRequired,
+    primaryDisabled: React.PropTypes.bool,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     secondaryButtonHref: React.PropTypes.string.isRequired,
     secondaryButtonText: React.PropTypes.string.isRequired
@@ -25,7 +26,7 @@ var ButtonList = React.createClass({
                           className="FormCancelButton"
                           href={this.props.secondaryButtonHref}
                           buttonText={this.props.secondaryButtonText} />
-        <Button type="submit">
+        <Button type="submit" disabled={this.props.primaryDisabled}>
           {this.props.primaryButtonText}
         </Button>
       </div>

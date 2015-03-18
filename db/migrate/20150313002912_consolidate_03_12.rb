@@ -34,6 +34,7 @@ class Consolidate0312 < ActiveRecord::Migration
       t.date :end_date
       t.float :budget
       t.string :location
+      t.text :notes
       t.uuid :user_id
 
       t.timestamps

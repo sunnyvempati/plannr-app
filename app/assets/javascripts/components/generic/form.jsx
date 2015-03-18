@@ -63,6 +63,7 @@ var Form = React.createClass({
         {form_props.children}
         <ButtonList showButtonList={form_props.showButtonList}
                     primaryButtonText={form_props.primaryButtonText}
+                    primaryDisabled={!this.state.canSubmit}
                     secondaryButtonText={form_props.secondaryButtonText}
                     secondaryButtonHref={form_props.secondaryButtonHref}
                     secondaryButtonVisible={form_props.secondaryButtonVisible} />

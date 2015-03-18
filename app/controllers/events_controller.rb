@@ -13,8 +13,15 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create!(event_params)
-    render :show
+    begin
+      event_params[:start_date] = convert_date(event_params[:start_date])
+    rescue ArgumentError => e
+      render_error({start_date: e.message})
+      return
+    end
+
+    @event = Event.new(event_params)
+    render_entity @event
   end
 
   def show
@@ -28,8 +35,6 @@ class EventsController < ApplicationController
 
 
   def event_params
-    event_params = params.require(:event).permit(:name, :client_name, :start_date, :location, :budget)
-    event_params[:start_date] = Date.strptime(event_params[:start_date], "%m/%d/%Y")
-    event_params
+    params.require(:event).permit(:name, :client_name, :start_date, :budget, :notes)
   end
 end
