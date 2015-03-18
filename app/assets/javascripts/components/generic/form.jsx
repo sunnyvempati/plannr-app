@@ -12,6 +12,7 @@
 
 var Form = React.createClass({
   propTypes: {
+    id: React.PropTypes.number,
     url: React.PropTypes.string.isRequired,
     mapping: React.PropTypes.any,
     routeVerb: React.PropTypes.string,
@@ -56,7 +57,8 @@ var Form = React.createClass({
                    onValid={this.enableButton}
                    onInvalid={this.disableButton}
                    mapping={this.props.mapping}
-                   method={form_props.routeVerb}>
+                   method={form_props.routeVerb}
+                   id={form_props.id}>
         <FormInput type="hidden" name="authenticity_token" value={form_props.authToken}  />
         {form_props.children}
         <ButtonList showButtonList={form_props.showButtonList}

@@ -14,8 +14,8 @@ var LoginForm = React.createClass({
               onSuccessUrl='/events'
               authToken={this.props.authToken}
               primaryButtonText="Login">
-          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" required/>
-          <FormInput name="password" type="password" placeholder="password" required/>
+          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Email*" required/>
+          <FormInput name="password" type="password" placeholder="password" label="Password*" required/>
         </Form>
       </div>
     );

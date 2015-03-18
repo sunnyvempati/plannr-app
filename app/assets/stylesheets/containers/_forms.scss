@@ -1,9 +1,17 @@
 .FormContainer {
-  width: 500px;
+  width: $form-container-width;
   margin: auto;
   &--leftAligned {
     @extend .FormContainer;
     margin: 0;
     padding-left: 72px;
+  }
+}
+
+.FormContainer-startDatetimeContainer {
+  display: flex;
+  justify-content: space-between;
+  >* {
+    flex: 0 $grid-increment*2;
   }
 }

@@ -9,8 +9,20 @@ var FormInput = React.createClass({
   changeValue: function (event) {
     this.setValue(event.currentTarget.value);
   },
-  OnBlur: function() {
-    this.setState({showValidation: true});
+  onBlur: function() {
+    this.setState({
+      showValidation: true,
+    });
+  },
+  componentDidMount: function () {
+    // for datepicker
+    var id = "#" + this.props.id;
+    if (this.props.dateField) {
+      $(id).datepicker();
+      $(id).change(function(e) {
+        this.changeValue(e); // this accurately sets value
+      }.bind(this));
+    }
   },
   render: function() {
     var show_validation = this.state.showValidation && !this.isValid();
@@ -34,7 +46,7 @@ var FormInput = React.createClass({
                autofocus={this.props.autofocus}
                placeholder={this.props.placeholder}
                type={this.props.type}
-               onBlur={this.OnBlur}
+               onBlur={this.onBlur}
                disabled={this.props.disabled}
                id={this.props.id} />
         <span className="FormInput-fieldErrorMessage">{error_message}</span>

@@ -1,4 +1,4 @@
-var CreateEventForm = React.createClass({
+var EventForm = React.createClass({
   mapInputs: function(inputs) {
     return {
       'name': inputs.name,
@@ -9,6 +9,7 @@ var CreateEventForm = React.createClass({
     };
   },
   render: function() {
+    var id = 'event_form';
     return (
       <div className="FormContainer--leftAligned">
         <Form url='/events'
@@ -19,7 +20,8 @@ var CreateEventForm = React.createClass({
               primaryButtonText={this.props.primaryButtonText}
               secondaryButtonVisible={this.props.secondaryButtonVisible}
               secondaryButtonHref={this.props.secondaryButtonHref}
-              showButtonList={this.props.showButtonList}>
+              showButtonList={this.props.showButtonList}
+              id={id}>
           <FormInput  name="name"
                       id="event_name"
                       autofocus="autofocus"
@@ -39,18 +41,26 @@ var CreateEventForm = React.createClass({
           <FormInput  name="start_date"
                       id="event_start_date"
                       autofocus="autofocus"
-                      type="date" label="Start Date*"
+                      dateField={true}
+                      type="text" label="Start Date*"
                       value={this.props.model.start_date}
                       disabled={this.props.disableForm}
-                      required/>
+                      placeholder="mm/dd/yyyy"/>
           <FormInput  name="budget"
                       id="event_budget"
                       autofocus="autofocus"
                       placeholder="$0"
+                      currencyField={true}
                       type="text" label="Estimated Budget*"
                       value={this.props.model.budget}
                       disabled={this.props.disableForm}
-                      required/>
+                      validations="isNumeric"
+                      validationError="Must be a number"/>
+          <TextAreaInput name="notes"
+                         form={id}
+                         className="TextAreaInput"
+                         label="Notes"
+                         placeholder="What else do you need to know?" />
         </Form>
       </div>
     );

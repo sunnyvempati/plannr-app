@@ -6,6 +6,10 @@
   &.is-hidden {
     display: none;
   }
+  &-textarea {
+    @extend .FormInput;
+    height: $grid-increment * 2;
+  }
 }
 
 .FormInput-field {
@@ -23,6 +27,7 @@
   &.is-invalid {
     border-bottom: 2px solid red;
   }
+
 }
 
 .FormInput-fieldErrorMessage {
@@ -37,3 +42,12 @@ form label {
   @include font($caption-font, normal, 20);
 }
 
+form textarea {
+  @include font($subheader-font, normal, 10);
+  width: 100%;
+  background-color: transparent;
+  border: 1px none transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  resize: none;
+  height: $grid-increment;
+}
