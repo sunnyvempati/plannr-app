@@ -31,7 +31,7 @@ function ConvertDataToRowDataArray(data, columns) {
                     row.push(<input type='checkbox' />);
                 }
                 if (value2.name === "plannr_action") {
-                    row.push(<ActionDatatableCell hrefRoot={"/tasks"} id={value.id} />);
+                    row.push(<ActionDatatableCellContent hrefRoot={"/tasks"} id={value.id} />);
                 }
             } else {
                 row.push(value[value2.name]);
@@ -41,7 +41,7 @@ function ConvertDataToRowDataArray(data, columns) {
     });
 
     return retRowData;
-}
+};
 
 function buildColumnList(displayFields, showCheckboxColumn, showActionColumn) {
     var retColumnList = [];
@@ -59,24 +59,7 @@ function buildColumnList(displayFields, showCheckboxColumn, showActionColumn) {
     }
 
     return retColumnList;
-}
-
-var DatatableHeader = React.createClass({
-    render: function () {
-        var thisColumns = this.props.columns;
-
-        var headerCells = [];
-        $.each(thisColumns, function (index, value) {
-            headerCells.push(<DatatableHeaderCell data={value.header} />);
-        });
-
-        return (<thead>
-            <tr>{headerCells}</tr>
-        </thead>);
-    }
-
-});
-
+};
 
 var DatatableRow = React.createClass({
     render: function () {
@@ -93,10 +76,34 @@ var DatatableRow = React.createClass({
     }
 });
 
-var DatatableCell = React.createClass({
-    render: function () {
-        return (<td>{this.props.data}</td>);
-    }
+var ActionDatatableCellContent = React.createClass({
+  render: function () {
+    var thisHrefRoot = this.props.hrefRoot;
+    var thisId = this.props.id;
+    var showHref = thisHrefRoot + "/" + thisId;
+    var editHref = thisHrefRoot + "/" + thisId + "/edit";
+
+    return (<span>
+      <a href={showHref}>Show</a> <br />
+      <a href={editHref}>Edit</a> <br />
+      <a data-confirm='Are you sure?' rel='nofollow' data-method='delete' href={showHref}>Destroy</a>
+    </span>);
+  }
+});
+
+var DatatableHeader = React.createClass({
+  render: function () {
+    var thisColumns = this.props.columns;
+
+    var headerCells = [];
+    $.each(thisColumns, function (index, value) {
+      headerCells.push(<DatatableHeaderCell data={value.header} />);
+    });
+
+    return (<thead>
+      <tr>{headerCells}</tr>
+    </thead>);
+  }
 });
 
 var DatatableHeaderCell = React.createClass({
@@ -105,19 +112,5 @@ var DatatableHeaderCell = React.createClass({
     }
 });
 
-var ActionDatatableCell = React.createClass({
-    render: function () {
-        var thisHrefRoot = this.props.hrefRoot;
-        var thisId = this.props.id;
-        var showHref = thisHrefRoot + "/" + thisId;
-        var editHref = thisHrefRoot + "/" + thisId + "/edit";
-
-        return (<span>
-            <a href={showHref}>Show</a>
-            <a href={editHref}>Edit</a>
-            <a data-confirm='Are you sure?' rel='nofollow' data-method='delete' href={showHref}>Destroy</a>
-        </span>);
-    }
-});
 
 
