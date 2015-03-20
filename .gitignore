@@ -20,3 +20,6 @@
 
 #ignore secrets
 config/secrets.yml
+
+# ignore RubyMine project files
+.idea/
