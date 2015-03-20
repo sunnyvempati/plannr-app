@@ -5,10 +5,11 @@ var Datatable = React.createClass({
 
         var columns = buildColumnList(props.displayFields, props.addCheckboxColumn, props.addActionColumn);
 
+      //convert to a pretty array or arrays [rows[cols]] = [ [col1, col2, etc], [col1, col2, etc], ...]
         var rowDataArray = ConvertDataToRowDataArray(thisDataArray, columns);
 
-        var rows = thisDataArray.map(function (rowData) {
-            return <DatatableRow data={rowDataArray}  />
+        var rows = rowDataArray.map(function (rowData) {
+            return <DatatableRow data={rowData}  />
         });
 
         return (
@@ -25,16 +26,15 @@ function ConvertDataToRowDataArray(data, columns) {
     $.each(data, function (index, value) {
         var row = [];
         $.each(columns, function (index2, value2) {
-            if (value2.left(6) === "plannr") {
-                if (value2 === "plannr_checkbox") {
-                    row.push("<input type='checkbox' />");
+            if (value2.name.substring(0,6) === "plannr") {
+                if (value2.name === "plannr_checkbox") {
+                    row.push(<input type='checkbox' />);
                 }
-
-                if (value2 === "plannr_actions") {
-                    row.push(<ActionDatatableCell hrefRoot={"/task"} id={value.id} />);
+                if (value2.name === "plannr_action") {
+                    row.push(<ActionDatatableCell hrefRoot={"/tasks"} id={value.id} />);
                 }
             } else {
-                row.push(value[value2]);
+                row.push(value[value2.name]);
             }
         });
         retRowData.push(row);
@@ -55,7 +55,7 @@ function buildColumnList(displayFields, showCheckboxColumn, showActionColumn) {
     })
 
     if (showActionColumn) {
-        retColumnList.push({name: "plannr_action", header: "Actions"});
+        retColumnList.push({name: "plannr_action", header: "Action"});
     }
 
     return retColumnList;
@@ -82,14 +82,13 @@ var DatatableRow = React.createClass({
     render: function () {
         var thisData = this.props.data;
 
-        var retX = [];
+        var retColumns = [];
         $.each(thisData, function (index, value) {
-            retX.push(<td>{value}</td>);
+          retColumns.push(<td>{value}</td>);
         });
 
-
         return (
-            <tr>{retX}</tr>
+            <tr>{retColumns}</tr>
         );
     }
 });
