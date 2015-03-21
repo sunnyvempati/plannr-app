@@ -409,13 +409,17 @@ table.dataTable td {
   .dataTables_length {
     //float: left; //default
 
-    //from http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
+    //alight right
+//    //from http://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right
+//    display: -webkit-flex;
+//    display: flex;
+//    -webkit-flex-direction: row;
+//    flex-direction: row;
+//    -webkit-justify-content: flex-end;
+//    justify-content: flex-end;
+
+    //hide
+    display: none;
   }
 
   // Filtering input
@@ -431,69 +435,73 @@ table.dataTable td {
 
   // Table info
   .dataTables_info {
-    clear: both;
-    float: left;
-    padding-top: 0.755em;
+    display:none;
+
+//    clear: both;
+//    float: left;
+//    padding-top: 0.755em;
   }
 
   // Paging
   .dataTables_paginate {
-    float: right;
-    text-align: right;
-    padding-top: 0.25em;
+    display:none;
 
-    .paginate_button {
-      box-sizing: border-box;
-      display: inline-block;
-      min-width: 1.5em;
-      padding: 0.5em 1em;
-      margin-left: 2px;
-      text-align: center;
-      text-decoration: none !important;
-      cursor: pointer;
-      *cursor: hand;
-
-      color: $table-control-color !important;
-      border: 1px solid transparent;
-
-      &.current,
-      &.current:hover {
-        color: $table-control-color !important;
-        border: 1px solid darken( $table-paging-button-active, 7% );
-        @include gradient(
-                lighten($table-paging-button-active, 28%),
-                $table-paging-button-active
-        );
-      }
-
-      &.disabled,
-      &.disabled:hover,
-      &.disabled:active {
-        cursor: default;
-        color: #666 !important;
-        border: 1px solid transparent;
-        background: transparent;
-        box-shadow: none;
-      }
-
-      &:hover {
-        color: white !important;
-        border: 1px solid $table-paging-button-hover;
-        @include gradient(
-                lighten($table-paging-button-hover, 28%),
-                $table-paging-button-hover
-        );
-      }
-
-      &:active {
-        outline: none;
-        @include gradient(
-                lighten($table-paging-button-hover, 10%),
-                darken($table-paging-button-hover, 2%)
-        );
-        box-shadow: inset 0 0 3px #111;
-      }
-    }
+//    float: right;
+//    text-align: right;
+//    padding-top: 0.25em;
+//
+//    .paginate_button {
+//      box-sizing: border-box;
+//      display: inline-block;
+//      min-width: 1.5em;
+//      padding: 0.5em 1em;
+//      margin-left: 2px;
+//      text-align: center;
+//      text-decoration: none !important;
+//      cursor: pointer;
+//      *cursor: hand;
+//
+//      color: $table-control-color !important;
+//      border: 1px solid transparent;
+//
+//      &.current,
+//      &.current:hover {
+//        color: $table-control-color !important;
+//        border: 1px solid darken( $table-paging-button-active, 7% );
+//        @include gradient(
+//                lighten($table-paging-button-active, 28%),
+//                $table-paging-button-active
+//        );
+//      }
+//
+//      &.disabled,
+//      &.disabled:hover,
+//      &.disabled:active {
+//        cursor: default;
+//        color: #666 !important;
+//        border: 1px solid transparent;
+//        background: transparent;
+//        box-shadow: none;
+//      }
+//
+//      &:hover {
+//        color: white !important;
+//        border: 1px solid $table-paging-button-hover;
+//        @include gradient(
+//                lighten($table-paging-button-hover, 28%),
+//                $table-paging-button-hover
+//        );
+//      }
+//
+//      &:active {
+//        outline: none;
+//        @include gradient(
+//                lighten($table-paging-button-hover, 10%),
+//                darken($table-paging-button-hover, 2%)
+//        );
+//        box-shadow: inset 0 0 3px #111;
+//      }
+//    }
   }
 
   // Processing

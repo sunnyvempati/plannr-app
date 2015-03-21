@@ -2,6 +2,8 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function () {
-    $(".plannr_datatable").dataTable();
+    $(".plannr_datatable").dataTable({
+      "lengthMenu": [[-1], ["All"]]
+    });
   }
 )
