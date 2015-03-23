@@ -13,7 +13,7 @@ var Datatable = React.createClass({
         });
 
         return (
-            <table className='plannr_datatable hover less-compact'>
+            <table id={props.id} className='plannr_datatable hover less-compact'>
                 <DatatableHeader columns={columns} />
                 <tbody>{rows}</tbody>
             </table>
@@ -51,7 +51,7 @@ function buildColumnList(displayFields, showCheckboxColumn, showActionColumn) {
     }
 
     $.each(displayFields, function (index, value) {
-        retColumnList.push({name: value, header: value})
+        retColumnList.push({name: value, header: value.replace(/_/g, ' ')})
     })
 
     if (showActionColumn) {

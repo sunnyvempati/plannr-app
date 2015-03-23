@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Tasks</h1>
-<%=     react_component('Datatable', data: @tasks, displayFields: %w(name description deadline), addCheckboxColumn: true, addActionColumn: true ) %>
+<%=     react_component('Datatable', id: "task_datatable", data: @tasks, displayFields: %w(name description deadline), addCheckboxColumn: true, addActionColumn: true ) %>
 
 <br>
 <%= react_component('TaskActionButton', path:new_task_path, prerender: true) %>
