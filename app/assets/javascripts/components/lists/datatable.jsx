@@ -17,7 +17,7 @@ var Datatable = React.createClass({
                 <DatatableHeader columns={columns} />
                 <tbody>{rows}</tbody>
             </table>
-        );
+      );
     }
 });
 
@@ -108,7 +108,12 @@ var DatatableHeader = React.createClass({
 
 var DatatableHeaderCell = React.createClass({
     render: function () {
+      if (this.props.data === '')
+      {
+        return (<th className='dt-left datatable-nosort'>{this.props.data}</th>);
+      }else {
         return (<th className='dt-left'>{this.props.data}</th>);
+      }
     }
 });
 

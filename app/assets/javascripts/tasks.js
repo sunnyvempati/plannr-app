@@ -3,7 +3,11 @@
 
 $(document).ready(function () {
     $("#task_datatable").dataTable({
-      paging:false
+      paging:false,
+      columnDefs: [{
+        targets: "datatable-nosort",
+        orderable: false
+      }]
     });
   }
 )
