@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
     $("#task_datatable").dataTable({
-      "lengthMenu": [[-1], ["All"]]
+      paging:false
     });
   }
 )
