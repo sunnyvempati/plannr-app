@@ -4,6 +4,7 @@
 $(document).ready(function () {
     $("#task_datatable").dataTable({
       paging:false,
+      order: [[1, 'asc']],
       columnDefs: [{
         targets: "datatable-nosort",
         orderable: false

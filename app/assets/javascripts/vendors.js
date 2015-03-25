@@ -3,7 +3,12 @@
 
 $(document).ready(function () {
     $("#vendor_datatable").dataTable({
-      paging: false
+      paging:false,
+      order: [[1, 'asc']],
+      columnDefs: [{
+        targets: "datatable-nosort",
+        orderable: false
+      }]
     });
   }
 )
