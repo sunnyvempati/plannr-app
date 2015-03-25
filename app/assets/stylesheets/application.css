@@ -1,6 +1,7 @@
 /*
     *= require jquery-ui/themes/base/jquery-ui
-    *= require_self
+    *= require dataTables/jquery.dataTables
+ *= require_self
     *= require main
 */
 
