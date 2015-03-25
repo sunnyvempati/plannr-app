@@ -6,7 +6,7 @@ var Datatable = React.createClass({
         var columns = buildColumnList(props.displayFields, props.addCheckboxColumn, props.addActionColumn);
 
       //convert to a pretty array or arrays [rows[cols]] = [ [col1, col2, etc], [col1, col2, etc], ...]
-        var rowDataArray = ConvertDataToRowDataArray(thisDataArray, columns);
+        var rowDataArray = ConvertDataToRowDataArray(thisDataArray, columns, props.hrefRoot);
 
         var rows = rowDataArray.map(function (rowData) {
             return <DatatableRow data={rowData}  />
@@ -21,7 +21,7 @@ var Datatable = React.createClass({
     }
 });
 
-function ConvertDataToRowDataArray(data, columns) {
+function ConvertDataToRowDataArray(data, columns, hrefRoot) {
     var retRowData = [];
     $.each(data, function (index, value) {
         var row = [];
@@ -31,7 +31,7 @@ function ConvertDataToRowDataArray(data, columns) {
                     row.push(<input type='checkbox' />);
                 }
                 if (value2.name === "plannr_action") {
-                    row.push(<ActionDatatableCellContent hrefRoot={"/tasks"} id={value.id} />);
+                    row.push(<ActionDatatableCellContent hrefRoot={hrefRoot} id={value.id} />);
                 }
             } else {
                 row.push(value[value2.name]);
@@ -108,7 +108,7 @@ var DatatableHeader = React.createClass({
 
 var DatatableHeaderCell = React.createClass({
     render: function () {
-        return (<th>{this.props.data}</th>);
+        return (<th className='dt-left'>{this.props.data}</th>);
     }
 });
 

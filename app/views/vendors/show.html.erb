@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<%= react_component("VendorForm",
+                    action: vendor_path,
+                    model: @vendor,
+                    showButtonList: false,
+                    disableForm: true,
+    ) %>
+
+<%= link_to 'List', vendors_path %> |
+<%= link_to 'Edit', edit_vendor_path(@vendor) %>
+

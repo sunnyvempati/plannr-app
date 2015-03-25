@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<%= react_component("VendorForm",
+                    action: vendors_path,
+                    authToken: form_authenticity_token,
+                    model: @vendor,
+                    routeVerb: "POST",
+                    primaryButtonText: "Create",
+                    secondaryButtonText: "Cancel",
+                    secondaryButtonVisible: true,
+                    secondaryButtonHref: vendors_path)  %>
+
+<%= link_to 'List', vendors_path %>
+
