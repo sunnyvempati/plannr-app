@@ -61,6 +61,16 @@ class Consolidate0312 < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    create_table :invitations, id: :uuid do |t|
+      t.string          :email
+      t.uuid            :company_id
+      t.uuid            :sender_id
+      t.uuid            :recipient_id
+      t.string        :token
+
+      t.timestamps null: false
+    end
+
     add_index :user_sessions, :session_id
     add_index :user_sessions, :updated_at
 

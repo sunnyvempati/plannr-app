@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   # company
 
 
-  resources :tasks, :events, :companies
+  resources :tasks, :events, :companies, :invitations, :users, :profiles, :user_sessions
 end

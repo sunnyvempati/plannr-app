@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.datetime "updated_at"
   end
 
+  create_table "invitations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "email"
+    t.uuid     "company_id"
+    t.uuid     "sender_id"
+    t.uuid     "recipient_id"
+    t.string   "token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -45,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tasks", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "deadline"
