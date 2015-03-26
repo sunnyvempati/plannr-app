@@ -1,11 +1,28 @@
 var ProfileForm = React.createClass({
+  mapInputs: function(inputs) {
+    return {
+      'profile': {
+        'first_name': inputs.first_name,
+        'last_name': inputs.last_name,
+      },
+      'authenticity_token': inputs.authenticity_token
+    };
+  },
+  changeUrl: function() {
+    location.href = '/events';
+  },
   render: function() {
     return (
-      <Form action={this.props.action} className="form" method="post" id="new_profile" submitBtnText="Save Profile">
-        <HiddenAuthFields authParam={this.props.authParam} authToken={this.props.authToken} />
-        <FormInput name="profile[first_name]" autofocus="autofocus" placeholder="First Name" type="text" />
-        <FormInput name="profile[last_name]" autofocus="off" placeholder="Last Name" type="text" />
-      </Form>
+      <div className="FormContainer">
+        <Form url='/profiles'
+              mapping={this.mapInputs}
+              onSuccess={this.changeUrl}
+              authToken={this.props.authToken}
+              primaryButtonText="Save Profile">
+          <FormInput name="first_name" type="text" placeholder="John" label="First Name*" required/>
+          <FormInput name="last_name" type="text" placeholder="Doe" label="Last Name*" required/>
+        </Form>
+      </div>
     );
   }
 });

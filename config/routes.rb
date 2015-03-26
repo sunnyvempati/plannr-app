@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
   root "events#index"
-  resources :events
-  resource :user_session, only: [:create, :new, :destroy]
-  resources :profiles, :tasks
+
+  # login
+  get 'login', to: 'user_sessions#new'
+  post 'login', to: 'user_sessions#create'
+
+  # sign up
+  get 'new_user', to: 'users#new'
+  post 'new_user', to: 'users#create'
+
+  # profile
+  get 'users/:id/profile', to: 'profiles#new'
+  post 'users/:id/profile', to: 'profiles#create'
+
+  # company
+
+
+  resources :tasks, :events, :companies
 end

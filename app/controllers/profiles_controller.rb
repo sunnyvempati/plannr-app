@@ -4,8 +4,12 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    current_user.profile = Profile.create!(profile_params)
-    redirect_to root_path
+    @profile = Profile.new(profile_params.merge(user: current_user))
+    if @profile.save
+      respond_with @profile
+    else
+      render json: errors_hash(@profile.errors), status: 403
+    end
   end
 
   def show

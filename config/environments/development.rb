@@ -32,6 +32,16 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => '3225465a8db58135e',
+    :password => '62abf789f9499b',
+    :address => 'mailtrap.io',
+    :domain => 'mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
+
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

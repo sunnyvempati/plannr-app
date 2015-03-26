@@ -46,14 +46,11 @@ var Form = React.createClass({
       canSubmit: false
     });
   },
-  changeUrl: function() {
-    location.href = this.props.onSuccessUrl;
-  },
   render: function() {
     form_props = this.props;
     return (
       <Formsy.Form url={form_props.url}
-                   onSuccess={this.changeUrl}
+                   onSuccess={this.props.onSuccess}
                    onValid={this.enableButton}
                    onInvalid={this.disableButton}
                    mapping={this.props.mapping}
