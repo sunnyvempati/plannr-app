@@ -14,9 +14,12 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require react
+//= require react-router
+//= require react_router_initializer
 //= require react_ujs
 //= require dataTables/jquery.dataTables
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
 //= require components
 //= require_tree .
+
