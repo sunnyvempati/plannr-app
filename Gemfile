@@ -26,9 +26,6 @@ gem 'responders', '~> 2.0'
 gem 'date_validator'
 
 
-# data table functionality
-gem 'jquery-datatables-rails'
-
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'

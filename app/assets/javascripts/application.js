@@ -13,9 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require datatables
 //= require react
 //= require react_ujs
-//= require dataTables/jquery.dataTables
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
 //= require components
