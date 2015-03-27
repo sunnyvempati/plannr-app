@@ -3,10 +3,10 @@ var Datatable = React.createClass({
     var thisDataArray = this.props.data;
     var props = this.props;
 
-    var columns = buildColumnList(props.displayFields, props.addCheckboxColumn, props.addActionColumn);
+    var columns = this.buildColumnList(props.displayFields, props.addCheckboxColumn, props.addActionColumn);
 
     //convert to a pretty array or arrays [rows[cols]] = [ [col1, col2, etc], [col1, col2, etc], ...]
-    var rowDataArray = ConvertDataToRowDataArray(thisDataArray, columns, props.hrefRoot);
+    var rowDataArray = this.convertDataToRowDataArray(thisDataArray, columns, props.hrefRoot);
 
     var rows = rowDataArray.map(function (rowData) {
       return <DatatableRow data={rowData}  />
@@ -18,48 +18,52 @@ var Datatable = React.createClass({
         <tbody>{rows}</tbody>
       </table>
     );
+  },
+
+  convertDataToRowDataArray: function (data, columns, hrefRoot) {
+    var retRowData = [];
+    $.each(data, function (index, value) {
+      var row = [];
+      $.each(columns, function (index2, value2) {
+        if (value2.name.substring(0, 6) === "plannr") {
+          if (value2.name === "plannr_checkbox") {
+            row.push(<input type='checkbox' />);
+          }
+          if (value2.name === "plannr_action") {
+            row.push(<ActionDatatableCellContent hrefRoot={hrefRoot} id={value.id} />);
+          }
+        } else {
+          row.push(value[value2.name]);
+        }
+      });
+      retRowData.push(row);
+    });
+
+    return retRowData;
+  },
+
+
+  buildColumnList: function (displayFields, showCheckboxColumn, showActionColumn) {
+    var retColumnList = [];
+
+    if (showCheckboxColumn) {
+      retColumnList.push({name: "plannr_checkbox", header: ""});
+    }
+
+    $.each(displayFields, function (index, value) {
+      retColumnList.push({name: value, header: value.replace(/_/g, ' ')})
+    })
+
+    if (showActionColumn) {
+      retColumnList.push({name: "plannr_action", header: "Action"});
+    }
+
+    return retColumnList;
   }
+
+
 });
 
-function ConvertDataToRowDataArray(data, columns, hrefRoot) {
-  var retRowData = [];
-  $.each(data, function (index, value) {
-    var row = [];
-    $.each(columns, function (index2, value2) {
-      if (value2.name.substring(0, 6) === "plannr") {
-        if (value2.name === "plannr_checkbox") {
-          row.push(<input type='checkbox' />);
-        }
-        if (value2.name === "plannr_action") {
-          row.push(<ActionDatatableCellContent hrefRoot={hrefRoot} id={value.id} />);
-        }
-      } else {
-        row.push(value[value2.name]);
-      }
-    });
-    retRowData.push(row);
-  });
-
-  return retRowData;
-};
-
-function buildColumnList(displayFields, showCheckboxColumn, showActionColumn) {
-  var retColumnList = [];
-
-  if (showCheckboxColumn) {
-    retColumnList.push({name: "plannr_checkbox", header: ""});
-  }
-
-  $.each(displayFields, function (index, value) {
-    retColumnList.push({name: value, header: value.replace(/_/g, ' ')})
-  })
-
-  if (showActionColumn) {
-    retColumnList.push({name: "plannr_action", header: "Action"});
-  }
-
-  return retColumnList;
-};
 
 var DatatableRow = React.createClass({
   render: function () {
