@@ -16,6 +16,9 @@
 .MainContainer-content {
   padding: $size-increment;
   margin-top: $page-header-height;
+  position: relative;
+  z-index: -10;
+
 }
 
 .MainContainer {

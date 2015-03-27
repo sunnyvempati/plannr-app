@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Vendors</h1>
+<%=     react_component('Datatable', id: "vendor_datatable", data: @vendors, displayFields: %w(name location phone primary_contact), addCheckboxColumn: true, addActionColumn: true , hrefRoot: "/vendors") %>
+
+<br>
+<%= react_component('VendorActionButton', path: new_vendor_path, prerender: true) %>
+
+<%= link_to 'New Vendor', new_vendor_path %>
+
+
+
+
+
+
+
