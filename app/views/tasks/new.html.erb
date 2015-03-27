@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <%= react_component("TaskForm",
                     action: tasks_path,
                     authToken: form_authenticity_token,
@@ -8,7 +6,7 @@
                     primaryButtonText: "Create",
                     secondaryButtonText: "Cancel",
                     secondaryButtonVisible: true,
+                    notice: notice,
                     secondaryButtonHref: tasks_path)  %>
 
-<%= link_to 'List', tasks_path %>
 

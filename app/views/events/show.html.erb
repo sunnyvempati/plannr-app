@@ -1,1 +1,19 @@
 <%= @event.name %>
+
+
+<div>
+
+  <%=
+      react_component('TaskList',
+                      id: "task_list",
+                      data: @tasks,
+                      displayFields: %w(name deadline),
+                      addCheckboxColumn: true,
+                      addActionColumn: true,
+                      notice: notice,
+                      hrefRoot: "/tasks")
+  %>
+
+
+
+</div>

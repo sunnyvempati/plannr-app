@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function () {
-    $("#task_datatable").dataTable({
+    $("#task_list").dataTable({
       paging:false,
       order: [[1, 'asc']],
       columnDefs: [{

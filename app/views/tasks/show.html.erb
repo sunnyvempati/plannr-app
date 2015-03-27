@@ -1,12 +1,12 @@
-<p id="notice"><%= notice %></p>
 
 <%= react_component("TaskForm",
                     action: task_path,
                     model: @task,
                     showButtonList: false,
                     disableForm: true,
+                    notice: notice,
+                    hrefRoot: "/tasks"
 ) %>
 
-<%= link_to 'List', tasks_path %> |
-<%= link_to 'Edit', edit_task_path(@task) %>
+
 

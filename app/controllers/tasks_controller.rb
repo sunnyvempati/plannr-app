@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @header = "Tasks"
+    n
   end
 
   def show
