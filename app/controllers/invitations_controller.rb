@@ -11,7 +11,7 @@ class InvitationsController < ApplicationController
     @invite.sender_id = current_user.id
     if @invite.save
       InviteMailer.user_invitation(@invite, new_user_path(invite_token: @invite.token)).deliver_now
-      render json: @invite, serializer: InvitationSerializer
+      render json: @invite
     else
       render_error(@invite.errors)
     end
