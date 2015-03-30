@@ -1,1 +1,8 @@
-<%= @event.name %>
+<%= react_component("EventForm",
+                    action: event_path,
+                    model: @event,
+                    showButtonList: false,
+                    disableForm: true,
+                    notice: notice,
+                    hrefRoot: "/events"
+    ) %>
