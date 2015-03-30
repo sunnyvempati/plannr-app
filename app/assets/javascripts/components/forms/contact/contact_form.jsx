@@ -3,7 +3,11 @@ var ContactForm = React.createClass({
     return {
       'authenticity_token': inputs.authenticity_token,
       'contact': {
-        'name': inputs.name
+        'name': inputs.name,
+        'email': inputs.email,
+        'phone': inputs.phone,
+        'company': inputs.company,
+        'description': inputs.description
 
       }
     };
@@ -28,11 +32,45 @@ var ContactForm = React.createClass({
             name="name"
             autofocus="autofocus"
             placeholder="What is the name of your contact?"
-            type="text" label="name"
+            type="text" 
+            label="name"
             value={this.props.model.name}
             disabled={this.props.disableForm}
             required
           />
+          <FormInput
+            name="email"
+            placeholder="What is the email of your contact?"
+            type="text" 
+            label="email"
+            value={this.props.model.email}
+            disabled={this.props.disableForm}
+          />
+          <FormInput
+            name="phone"
+            placeholder="What is the phone of your contact?"
+            type="text"
+            label="phone"
+            value={this.props.model.phone}
+            disabled={this.props.disableForm}
+          />
+          <FormInput
+            name="company"
+            placeholder="What is the company of your contact?"
+            type="text"
+            label="company"
+            value={this.props.model.company}
+            disabled={this.props.disableForm}
+          />
+          <FormInput
+            name="description"
+            placeholder="What is the description of your contact?"
+            type="text"
+            label="description"
+            value={this.props.model.description}
+            disabled={this.props.disableForm}
+          />
+          
 
         </Form>
       </div>
