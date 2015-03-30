@@ -70,9 +70,12 @@ var ContactForm = React.createClass({
             value={this.props.model.description}
             disabled={this.props.disableForm}
           />
-          
 
         </Form>
+
+        <a href={this.props.hrefRoot }>List</a>|
+        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>|
+        <a href={this.props.hrefRoot + "/" + this.props.model.id  }>Show</a>
       </div>
     );
   }
