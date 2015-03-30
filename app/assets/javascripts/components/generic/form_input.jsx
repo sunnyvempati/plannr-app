@@ -17,7 +17,7 @@ var FormInput = React.createClass({
   },
   onBlur: function() {
     this.setState({
-      showValidation: true,
+      showValidation: true
     });
   },
   componentDidMount: function () {
