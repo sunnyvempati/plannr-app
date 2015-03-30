@@ -33,3 +33,11 @@ Event.create(user: sunny_user,
 						 location: "Chicago, IL")
 
 puts "Created Dinner for Schmucks"
+
+
+
+#Add ContactTypes
+ContactType.create(name: "Client")
+ContactType.create(name: "Vendor")
+
+puts "Created ContactTypes Client and Vendor"

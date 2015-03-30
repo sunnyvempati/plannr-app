@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313002912) do
+ActiveRecord::Schema.define(version: 20150330232414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "contact_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "company"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "events", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
@@ -24,10 +40,10 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.date     "end_date"
     t.float    "budget"
     t.string   "location"
-    t.text     "notes"
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -78,5 +94,14 @@ ActiveRecord::Schema.define(version: 20150313002912) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
+
+  create_table "vendors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "phone"
+    t.string   "primary_contact"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end

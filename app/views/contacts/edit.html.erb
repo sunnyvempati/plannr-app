@@ -1,0 +1,11 @@
+<%= react_component("ContactForm",
+                    action: contact_path,
+                    authToken: form_authenticity_token,
+                    model: @contact,
+                    routeVerb: "PUT",
+                    primaryButtonText: "Update",
+                    secondaryButtonText: "Cancel",
+                    secondaryButtonVisible: true,
+                    notice: notice,
+                    secondaryButtonHref: contacts_path,
+                    hrefRoot: contacts_path)  %>
