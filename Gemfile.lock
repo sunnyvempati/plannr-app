@@ -51,6 +51,7 @@ GEM
     acts_as_tenant (0.3.7)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    american_date (1.1.0)
     arel (6.0.0)
     authlogic (3.4.5)
       activerecord (>= 3.2)
@@ -287,6 +288,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tenant
+  american_date
   authlogic
   bower-rails
   capistrano

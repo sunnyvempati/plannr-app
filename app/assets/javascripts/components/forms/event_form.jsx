@@ -49,9 +49,9 @@ var EventForm = React.createClass({
             dateField={true}
             type="text"
             label="Start Date"
-            value={this.props.model.start_date}
+            value={ isoDateToUs(this.props.model.start_date) }
             disabled={this.props.disableForm}
-            placeholder="When does it start? (YYYY/MM/DD)"
+            placeholder="When does it start? (MM/DD/YYYY)"
           />
           <FormInput
             name="end_date"
@@ -60,9 +60,9 @@ var EventForm = React.createClass({
             dateField={true}
             type="text"
             label="End Date"
-            value={this.props.model.end_date}
+            value={ isoDateToUs(this.props.model.end_date) }
             disabled={this.props.disableForm}
-            placeholder="When does it end? (YYYY/MM/DD)"
+            placeholder="When does it end? (MM/DD/YYYY)"
           />
           <FormInput
             name="description"
