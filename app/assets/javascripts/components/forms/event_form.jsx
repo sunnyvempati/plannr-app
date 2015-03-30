@@ -45,7 +45,6 @@ var EventForm = React.createClass({
           <FormInput
             name="start_date"
             id="event_start_date"
-            autofocus="autofocus"
             dateField={true}
             type="text"
             label="Start Date"
@@ -56,7 +55,6 @@ var EventForm = React.createClass({
           <FormInput
             name="end_date"
             id="event_end_date"
-            autofocus="autofocus"
             dateField={true}
             type="text"
             label="End Date"
@@ -67,7 +65,6 @@ var EventForm = React.createClass({
           <FormInput
             name="description"
             id="event_description"
-            autofocus="autofocus"
             type="text"
             label="Description"
             value={this.props.model.description}
@@ -77,7 +74,6 @@ var EventForm = React.createClass({
           <FormInput
             name="location"
             id="event_location"
-            autofocus="autofocus"
             type="text"
             label="Location"
             value={this.props.model.location}
@@ -87,7 +83,6 @@ var EventForm = React.createClass({
           <FormInput
             name="client_name"
             id="event_client_name"
-            autofocus="autofocus"
             type="text"
             label="Client"
             value={this.props.model.client_name}
@@ -97,7 +92,6 @@ var EventForm = React.createClass({
           <FormInput
             name="budget"
             id="event_budget"
-            autofocus="autofocus"
             currencyField={true}
             type="text"
             label="Estimated Budget"
