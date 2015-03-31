@@ -5,6 +5,7 @@ module ResponseHelpers
 
   def render_entity(entity)
     if entity.save
+      yield if block_given?
       respond_with entity
     else
       render json: errors_hash(entity.errors), status: 403
@@ -20,5 +21,6 @@ module ResponseHelpers
     entity_errors.messages.each {|k,v| errors[k] = v.first}
     errors
   end
+
 end
 

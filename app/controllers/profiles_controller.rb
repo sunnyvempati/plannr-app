@@ -1,15 +1,11 @@
 class ProfilesController < ApplicationController
   def new
-    @profile = Profile.new(user: current_user)
   end
 
   def create
-    @profile = Profile.new(profile_params.merge(user: current_user))
-    if @profile.save
-      respond_with @profile
-    else
-      render json: errors_hash(@profile.errors), status: 403
-    end
+    @profile = Profile.new(profile_params)
+    @profile.user = current_user
+    render_entity @profile
   end
 
   def show

@@ -8,6 +8,11 @@ Rails.application.configure do
     :port => '2525',
     :authentication => :cram_md5
   }
+
+  config.action_mailer.default_url_options = {
+    :host => 'staging.yourplannr.com',
+    :port => 3000
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

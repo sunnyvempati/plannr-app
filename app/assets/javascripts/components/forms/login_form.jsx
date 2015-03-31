@@ -6,8 +6,8 @@ var LoginForm = React.createClass({
       'authenticity_token': inputs.authenticity_token
     };
   },
-  changeUrl: function() {
-    location.href = '/events';
+  changeUrl: function(res) {
+    location.href = res.redirect_path;
   },
   render: function() {
     return (
@@ -17,9 +17,6 @@ var LoginForm = React.createClass({
               onSuccess={this.changeUrl}
               authToken={this.props.authToken}
               primaryButtonText="Login"
-              secondaryButtonVisible={true}
-              secondaryButtonHref='/new_user'
-              secondaryButtonText='Sign up'
               showButtonList={true}>
           <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Email*" required/>
           <FormInput name="password" type="password" placeholder="password" label="Password*" required/>

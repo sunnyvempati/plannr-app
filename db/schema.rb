@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.uuid     "company_id"
     t.uuid     "sender_id"
     t.uuid     "recipient_id"
+    t.boolean  "expired"
     t.string   "token"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(version: 20150313002912) do
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "planner"
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

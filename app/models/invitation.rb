@@ -1,5 +1,6 @@
 class Invitation < ActiveRecord::Base
   before_create :generate_token
+  after_initialize :defaults
 
   belongs_to :sender, class_name: "User"
   belongs_to :recipient, class_name: "User"
@@ -15,5 +16,9 @@ class Invitation < ActiveRecord::Base
 
   def user_cannot_exist
     errors.add(:email, "is already a user of Plannr") if self.email && User.find_by_email(self.email)
+  end
+
+  def defaults
+    self.expired = false
   end
 end

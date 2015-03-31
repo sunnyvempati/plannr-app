@@ -1,2 +1,5 @@
 <%= react_component("SignUpForm", action: "/new_user",
-                                  authToken: form_authenticity_token) %>
+                                  authToken: form_authenticity_token,
+                                  email: @user.email,
+                                  company: @user.company,
+                                  invite_token: @invitation.token) %>

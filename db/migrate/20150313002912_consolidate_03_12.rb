@@ -22,7 +22,6 @@ class Consolidate0312 < ActiveRecord::Migration
     create_table :profiles, id: :uuid do |t|
       t.string :first_name
       t.string :last_name
-      t.boolean :planner
       t.uuid :user_id
 
       t.timestamps
@@ -66,7 +65,8 @@ class Consolidate0312 < ActiveRecord::Migration
       t.uuid            :company_id
       t.uuid            :sender_id
       t.uuid            :recipient_id
-      t.string        :token
+      t.boolean         :expired
+      t.string          :token
 
       t.timestamps null: false
     end

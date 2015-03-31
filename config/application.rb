@@ -15,6 +15,9 @@ Bundler.require(*Rails.groups)
 
 module PlannrApp
   class Application < Rails::Application
+    # use application router for exceptions app
+    config.exceptions_app = self.routes
+
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","components-font-awesome","fonts")
     config.react.addons = true
   end

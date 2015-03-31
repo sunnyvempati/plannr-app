@@ -18,40 +18,36 @@ var InviteUsers = React.createClass({
   },
   invited: function(res) {
     // add the invite, which will re-render the component
+    this.refs.invitedEmail.resetValidation();
+    this.refs.invitedEmail.resetValue();
     invites = this.state.invites;
     invites.push(res.invitation);
     this.setState({invites: invites});
   },
   render: function() {
-    alert("wtf");
     var invites = this.state.invites.map(function(invite) {
       var status = invite.recipient ? "Joined" : "Pending";
       return (
         <tr>
           <td>{invite.email}</td>
-          <td>{status}</td>
-          <td>{invite.sender.email}</td>
+          <td>{status.toUpperCase()}</td>
         </tr>
       );
     });
     var invite_message = invites.length > 0 ? "" : "No invites";
     return (
-      <div className="InviteUsers">
+      <div className="InviteUsersContainer">
         <Form url='/invitations'
               mapping={this.mapInputs}
               authToken={this.props.authToken}
-              primaryButtonText="Invite User"
-              onSuccess={this.invited}>
+              onSuccess={this.invited}
+              primaryButtonText="Invite"
+              id="InviteUserForm">
           <FormInput type="hidden" name="company" value={this.props.company_id}  />
-          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Email*" required/>
+          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Invite*" ref="invitedEmail" />
         </Form>
 
-        <table>
-          <tr>
-            <th>User Email</th>
-            <th>Status</th>
-            <th>Invited By</th>
-          </tr>
+        <table className="UserInvitationTable">
           {invites}
           <span>{invite_message}</span>
         </table>

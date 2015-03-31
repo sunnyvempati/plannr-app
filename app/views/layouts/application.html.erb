@@ -12,10 +12,13 @@
   <div class="AppContainer-header">
     <%= react_component("LoginLogo") %>
   </div>
+
   <div class="AppContainer-content">
     <%= yield %>
   </div>
 </div>
+
+<span><%= flash[:error] %></span>
 
 </body>
 </html>

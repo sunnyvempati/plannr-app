@@ -1,20 +1,17 @@
 Rails.application.routes.draw do
   root "events#index"
 
-  # login
+  # login/logout
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
+  delete 'logout', to: 'user_sessions#destroy'
 
   # sign up
-  get 'new_user', to: 'users#new'
-  post 'new_user', to: 'users#create'
+  get 'sign_up', to: 'users#new'
+  post 'sign_up', to: 'users#create'
 
-  # profile
-  get 'users/:id/profile', to: 'profiles#new'
-  post 'users/:id/profile', to: 'profiles#create'
+  resources :tasks, :events, :companies, :invitations, :users, :profiles
 
-  # company
-
-
-  resources :tasks, :events, :companies, :invitations, :users, :profiles, :user_sessions
+  # errors
+  match '/412', to: 'errors#sign_up_precondition_failed', via: :all
 end
