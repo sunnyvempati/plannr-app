@@ -4,8 +4,8 @@
 function isoDateToUs(isoDate ) {
   var retDate;
   var separator = "-";
-  var d = new Date(isoDate);
   if (!!isoDate) {
+    var d = new Date(isoDate);
     var mm = d.getMonth() + 1;
     var dd = d.getDate() + 1;
     var yyyy = d.getFullYear();
@@ -13,6 +13,5 @@ function isoDateToUs(isoDate ) {
   }else {
     retDate = "";
   }
-
   return retDate;
 }
