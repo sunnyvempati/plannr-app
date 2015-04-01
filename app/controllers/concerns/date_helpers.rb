@@ -1,5 +1,5 @@
 module DateHelpers
-  def convert_date(date)
+  def convert_date_to_us_format(date)
     begin
       Date.strptime(date, "%m/%d/%Y")
     rescue
