@@ -34,11 +34,32 @@ class EventsController < ApplicationController
       return
     end
 
+    begin
+      event_params[:end_date] = convert_date(event_params[:end_date])
+    rescue ArgumentError => e
+      render_error({end_date: e.message})
+      return
+    end
+
     @event = Event.new(event_params)
     render_entity @event
   end
 
   def update
+    begin
+      event_params[:start_date] = convert_date(event_params[:start_date])
+    rescue ArgumentError => e
+      render_error({start_date: e.message})
+      return
+    end
+
+    begin
+      event_params[:end_date] = convert_date(event_params[:end_date])
+    rescue ArgumentError => e
+      render_error({end_date: e.message})
+      return
+    end
+
     @event.assign_attributes(event_params)
     render_entity @event
   end
