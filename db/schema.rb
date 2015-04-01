@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150330174735) do
     t.date     "end_date"
     t.float    "budget"
     t.string   "location"
+    t.text     "notes"
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -78,14 +79,5 @@ ActiveRecord::Schema.define(version: 20150330174735) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
-
-  create_table "vendors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "location"
-    t.string   "phone"
-    t.string   "primary_contact"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
 end
