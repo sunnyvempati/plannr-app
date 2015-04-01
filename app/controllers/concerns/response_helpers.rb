@@ -22,5 +22,13 @@ module ResponseHelpers
     errors
   end
 
+  def render_success(json={})
+    render json: json, status: 200
+  end
+
+  def render_redirect(url)
+    render json: {redirect_to: url}, status: 307
+  end
+
 end
 

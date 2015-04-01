@@ -18,6 +18,10 @@ class Invitation < ActiveRecord::Base
     errors.add(:email, "is already a user of Plannr") if self.email && User.find_by_email(self.email)
   end
 
+  def deliver_sign_up_instructions
+    UserMailer.user_invitation(self).deliver_now
+  end
+
   def defaults
     self.expired = false
   end

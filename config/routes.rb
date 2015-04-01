@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   get 'sign_up', to: 'users#new'
   post 'sign_up', to: 'users#create'
 
+  # password reset
+  get 'reset_password_request', to: 'password_resets#new'
+  post 'reset_password_request', to: 'password_resets#create'
+  get 'reset_password', to: 'password_resets#edit'
+  post 'reset_password', to: 'password_resets#update'
+
   resources :tasks, :events, :companies, :invitations, :users, :profiles
 
   # errors

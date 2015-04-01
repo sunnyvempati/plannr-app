@@ -7,10 +7,10 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    @invite = Invitation.new(invite_params)
-    @invite.sender_id = current_user.id
-    if @invite.save
-      UserMailer.user_invitation(@invite, sign_up_url(invite_token: @invite.token)).deliver_now
+    @invitation = Invitation.new(invite_params)
+    @invitation.sender_id = current_user.id
+    if @invitation.save
+      @invitation.deliver_sign_up_instructions
       render json: @invite
     else
       render_error(@invite.errors)
