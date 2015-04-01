@@ -1,0 +1,13 @@
+<%= react_component("VendorForm",
+                    action: vendors_path,
+                    authToken: form_authenticity_token,
+                    model: @vendor,
+                    routeVerb: "POST",
+                    primaryButtonText: "Create",
+                    secondaryButtonText: "Cancel",
+                    secondaryButtonVisible: true,
+                    secondaryButtonHref: vendors_path,
+                    notice: notice,
+                    secondaryButtonHref: vendors_path)  %>
+
+
