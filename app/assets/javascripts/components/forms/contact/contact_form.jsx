@@ -35,7 +35,7 @@ var ContactForm = React.createClass({
             autofocus="autofocus"
             placeholder="What is the name of your contact?"
             type="text" 
-            label="name"
+            label="name*"
             value={this.props.model.name}
             disabled={this.props.disableForm}
             required
