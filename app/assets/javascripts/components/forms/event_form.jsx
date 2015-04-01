@@ -1,5 +1,5 @@
 var EventForm = React.createClass({
-  mapInputs: function(inputs) {
+  mapInputs: function (inputs) {
     return {
       'name': inputs.name,
       'start_date': inputs.start_date,
@@ -15,7 +15,7 @@ var EventForm = React.createClass({
   changeUrl: function () {
     location.href = '/tasks';
   },
-  render: function() {
+  render: function () {
     var id = 'event_form';
     return (
       <div className="FormContainer--leftAligned">
@@ -110,8 +110,10 @@ var EventForm = React.createClass({
           />
         </Form>
 
-        <a href={this.props.hrefRoot }>List</a>|
-        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>|
+        <a href={this.props.hrefRoot }>List</a>
+        |
+        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>
+        |
         <a href={this.props.hrefRoot + "/" + this.props.model.id  }>Show</a>
 
       </div>
