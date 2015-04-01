@@ -1,7 +1,7 @@
 var EventFormNew = React.createClass({
 
   render: function () {
-    var action = "/events",
+    var action = "/events" ,
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",

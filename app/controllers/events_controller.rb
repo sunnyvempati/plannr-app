@@ -28,14 +28,18 @@ class EventsController < ApplicationController
 
   def create
     begin
-      event_params[:start_date] = convert_date(event_params[:start_date])
+      if event_params[:start_date].present?
+        event_params[:start_date] = convert_date(event_params[:start_date])
+      end
     rescue ArgumentError => e
       render_error({start_date: e.message})
       return
     end
 
     begin
-      event_params[:end_date] = convert_date(event_params[:end_date])
+      if event_params[:end_date].present?
+        event_params[:end_date] = convert_date(event_params[:end_date])
+      end
     rescue ArgumentError => e
       render_error({end_date: e.message})
       return
@@ -47,14 +51,18 @@ class EventsController < ApplicationController
 
   def update
     begin
-      event_params[:start_date] = convert_date(event_params[:start_date])
+      if event_params[:start_date].present?
+        event_params[:start_date] = convert_date(event_params[:start_date])
+      end
     rescue ArgumentError => e
       render_error({start_date: e.message})
       return
     end
 
     begin
-      event_params[:end_date] = convert_date(event_params[:end_date])
+      if event_params[:end_date].present?
+        event_params[:end_date] = convert_date(event_params[:end_date])
+      end
     rescue ArgumentError => e
       render_error({end_date: e.message})
       return
