@@ -36,6 +36,7 @@ class Consolidate0312 < ActiveRecord::Migration
       t.string :location
       t.text :notes
       t.uuid :user_id
+      t.text :description
 
       t.timestamps
     end
