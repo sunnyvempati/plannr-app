@@ -1,6 +1,6 @@
 var MenuHeader = React.createClass({
   render: function() {
-    var company_href = "/companies/" + this.props.company.id;
+    var company_href = "/company";
     return (
       <div className="MenuHeaderContainer">
         <Avatar />

@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   get 'reset_password', to: 'password_resets#edit'
   post 'reset_password', to: 'password_resets#update'
 
-  resources :tasks, :events, :companies, :invitations, :users, :profiles
+  # company
+  get 'company', to: 'companies#show'
 
-  # errors
-  match '/412', to: 'errors#sign_up_precondition_failed', via: :all
+  resources :tasks, :events, :invitations, :users, :profiles
 end

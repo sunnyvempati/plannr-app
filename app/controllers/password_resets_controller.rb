@@ -20,7 +20,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    binding.pry
     @user.password = reset_params[:password]
     @user.password_confirmation = reset_params[:password_confirmation]
     if @user.save
