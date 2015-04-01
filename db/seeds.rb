@@ -34,10 +34,3 @@ Event.create(user: sunny_user,
 
 puts "Created Dinner for Schmucks"
 
-
-
-#Add ContactTypes
-ContactType.create(name: "Client")
-ContactType.create(name: "Vendor")
-
-puts "Created ContactTypes Client and Vendor"
