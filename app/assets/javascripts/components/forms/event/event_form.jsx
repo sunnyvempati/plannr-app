@@ -1,4 +1,5 @@
 var EventForm = React.createClass({
+  hrefRoot: "/events",
   mapInputs: function (inputs) {
     return {
       'name': inputs.name,
@@ -110,11 +111,11 @@ var EventForm = React.createClass({
           />
         </Form>
 
-        <a href={this.props.hrefRoot }>List</a>
+        <a href={this.hrefRoot }>List</a>
         |
-        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>
+        <a href={this.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>
         |
-        <a href={this.props.hrefRoot + "/" + this.props.model.id  }>Show</a>
+        <a href={this.hrefRoot + "/" + this.props.model.id  }>Show</a>
 
       </div>
     );

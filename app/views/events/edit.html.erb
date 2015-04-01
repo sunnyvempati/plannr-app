@@ -1,11 +1,5 @@
-<%= react_component("EventForm",
-                    action: event_path,
-                    authToken: form_authenticity_token,
+<%= react_component("EventFormEdit",
                     model: @event,
-                    routeVerb: "PUT",
-                    primaryButtonText: "Update",
-                    secondaryButtonText: "Cancel",
-                    secondaryButtonVisible: true,
                     notice: notice,
-                    secondaryButtonHref: events_path,
-                    hrefRoot: events_path)  %>
+                    authToken: form_authenticity_token
+    ) %>
