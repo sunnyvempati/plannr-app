@@ -1,7 +1,7 @@
 //function for handing date formats
 
 //convert ISO date (Bing it) to US date (MM-DD-YYYY)
-function isoDateToUs(isoDate ) {
+function isoDateToUsFormat(isoDate ) {
   var retDate;
   var separator = "-";
   if (!!isoDate) {
