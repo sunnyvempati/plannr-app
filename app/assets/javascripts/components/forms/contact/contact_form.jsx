@@ -5,6 +5,7 @@ var ContactForm = React.createClass({
       'contact': {
         'name': inputs.name,
         'email': inputs.email,
+        'contact_type': inputs.contact_type,
         'phone': inputs.phone,
         'company': inputs.company,
         'description': inputs.description
@@ -29,6 +30,7 @@ var ContactForm = React.createClass({
           showButtonList={this.props.showButtonList}>
 
           <FormInput
+            id="contact_name"
             name="name"
             autofocus="autofocus"
             placeholder="What is the name of your contact?"
@@ -39,14 +41,25 @@ var ContactForm = React.createClass({
             required
           />
           <FormInput
+            id="contact_email"
             name="email"
             placeholder="What is the email of your contact?"
             type="text" 
-            label="email"
+            label="contact_email"
             value={this.props.model.email}
             disabled={this.props.disableForm}
           />
           <FormInput
+            id="contact_contact_type"
+            name="contact_type"
+            placeholder="What type of contact (client or vendor)?"
+            type="text"
+            label="type"
+            value={this.props.model.contact_type}
+            disabled={this.props.disableForm}
+          />
+          <FormInput
+            id="contact_phone"
             name="phone"
             placeholder="What is the phone of your contact?"
             type="text"
@@ -55,6 +68,7 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
           />
           <FormInput
+            id="contact_company"
             name="company"
             placeholder="What is the company of your contact?"
             type="text"
@@ -63,6 +77,7 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
           />
           <FormInput
+            id="contact_description"
             name="description"
             placeholder="What is the description of your contact?"
             type="text"
