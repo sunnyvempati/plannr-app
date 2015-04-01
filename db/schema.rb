@@ -17,6 +17,12 @@ ActiveRecord::Schema.define(version: 20150313002912) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
+  create_table "companies", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "client_name"
@@ -30,16 +36,26 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.datetime "updated_at"
   end
 
+  create_table "invitations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "email"
+    t.uuid     "company_id"
+    t.uuid     "sender_id"
+    t.uuid     "recipient_id"
+    t.boolean  "expired"
+    t.string   "token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "planner"
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tasks", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "deadline"
@@ -58,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
   add_index "user_sessions", ["updated_at"], name: "index_user_sessions_on_updated_at", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "company_id"
     t.string   "email",                           null: false
     t.string   "crypted_password",                null: false
     t.string   "password_salt",                   null: false
