@@ -1,5 +1,5 @@
 var ContactForm = React.createClass({
-  mapInputs: function(inputs) {
+  mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
       'contact': {
@@ -13,10 +13,10 @@ var ContactForm = React.createClass({
       }
     };
   },
-  changeUrl: function() {
+  changeUrl: function () {
     location.href = '/contacts';
   },
-  render: function() {
+  render: function () {
     return (
       <div className="FormContainer--leftAligned">
         <Form url={this.props.action}
@@ -34,7 +34,7 @@ var ContactForm = React.createClass({
             name="name"
             autofocus="autofocus"
             placeholder="What is the name of your contact?"
-            type="text" 
+            type="text"
             label="name*"
             value={this.props.model.name}
             disabled={this.props.disableForm}
@@ -44,7 +44,7 @@ var ContactForm = React.createClass({
             id="contact_email"
             name="email"
             placeholder="What is the email of your contact?"
-            type="text" 
+            type="text"
             label="contact_email"
             value={this.props.model.email}
             disabled={this.props.disableForm}
@@ -88,10 +88,13 @@ var ContactForm = React.createClass({
 
         </Form>
 
-        <a href={this.props.hrefRoot }>List</a>|
-        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>|
+        <a href={this.props.hrefRoot }>List</a>
+        |
+        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>
+        |
         <a href={this.props.hrefRoot + "/" + this.props.model.id  }>Show</a>
       </div>
     );
   }
 });
+
