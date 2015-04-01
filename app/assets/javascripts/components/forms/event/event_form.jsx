@@ -14,7 +14,7 @@ var EventForm = React.createClass({
     };
   },
   changeUrl: function () {
-    location.href = '/tasks';
+    location.href = this.hrefRoot;
   },
   render: function () {
     var id = 'event_form';
