@@ -17,6 +17,7 @@ var ContactForm = React.createClass({
     location.href = this.hrefRoot;
   },
   render: function () {
+    var id = 'contact_form';
     return (
       <div className="FormContainer--leftAligned">
         <Form url={this.props.action}
@@ -27,7 +28,8 @@ var ContactForm = React.createClass({
           primaryButtonText={this.props.primaryButtonText}
           secondaryButtonVisible={this.props.secondaryButtonVisible}
           secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}>
+          showButtonList={this.props.showButtonList}
+          id={id}>
 
           <FormInput
             id="contact_name"
@@ -76,16 +78,16 @@ var ContactForm = React.createClass({
             value={this.props.model.company}
             disabled={this.props.disableForm}
           />
-          <FormInput
-            id="contact_description"
+          <TextAreaInput
             name="description"
-            placeholder="What is the description of your contact?"
-            type="text"
+            id="contact_description"
+            className="TextAreaInput"
             label="description"
+            placeholder="What else do you need to know?"
             value={this.props.model.description}
             disabled={this.props.disableForm}
+            formId={id}
           />
-
         </Form>
 
         <a href={this.props.hrefRoot }>List</a>
