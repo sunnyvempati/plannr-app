@@ -1,8 +1,5 @@
 class Contact < ActiveRecord::Base
-  VENDOR = 'vendor'
-  CLIENT = 'client'
-
-  before_validation :convert_contact_type_to_lowercase
+  enum contact_type: {client: 1, vendor: 2}
 
   validates :name,
             :presence => true
@@ -10,12 +7,13 @@ class Contact < ActiveRecord::Base
                       :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
                       :message => 'is an invalid email address',
                       :allow_blank => true
-  validates_inclusion_of :contact_type,
-                         :in => [CLIENT, VENDOR],
-                         :message => 'must be ' + CLIENT + ', ' + VENDOR + ', or [blank]',
-                         :allow_blank => true
 
-  def convert_contact_type_to_lowercase
-    self.contact_type = contact_type.downcase
+  def contact_type
+    read_attribute(:contact_type).to_s
   end
+
+  def contact_type= (value)
+    write_attribute(:contact_type, value.to_i)
+  end
+
 end

@@ -42,6 +42,15 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
             required
           />
+          <SelectInput
+            nid="contact_contact_type"
+            name="contact_type"
+            className="SelectInput"
+            label="Type"
+            options={[{value: '', text: 'Select...'}, {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}]}
+            value={this.props.model.contact_type}
+            disabled={this.props.disableForm}
+          />
           <FormInput
             id="contact_email"
             name="email"
@@ -49,15 +58,6 @@ var ContactForm = React.createClass({
             type="text"
             label="contact_email"
             value={this.props.model.email}
-            disabled={this.props.disableForm}
-          />
-          <FormInput
-            id="contact_contact_type"
-            name="contact_type"
-            placeholder="What type of contact (client or vendor)?"
-            type="text"
-            label="type"
-            value={this.props.model.contact_type}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -88,6 +88,7 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
             formId={id}
           />
+
         </Form>
 
         <a href={this.props.hrefRoot }>List</a>
