@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.company = @invitation.company || Company.create(company_params)
 
     render_entity(@user) do
-      @invitation.update_attribute(:expired, true)
+      @invitation.update_attributes!(:expired, true)
     end
   end
 

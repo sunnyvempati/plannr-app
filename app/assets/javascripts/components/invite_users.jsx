@@ -25,7 +25,7 @@ var InviteUsers = React.createClass({
   },
   render: function() {
     var invites = this.state.invites.map(function(invite) {
-      var status = invite.recipient ? "Joined" : "Pending";
+      var status = invite.recepient ? "Joined" : "Pending";
       return (
         <tr>
           <td>{invite.email}</td>
