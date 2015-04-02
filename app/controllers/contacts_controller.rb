@@ -1,8 +1,8 @@
 class ContactsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_contact,
+                only: [:show, :edit, :update, :destroy]
 
   def index
     @contacts = Contact.all
@@ -41,14 +41,14 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:name, :email, :contact_type, :phone, :company, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:name, :email, :contact_type, :phone, :company, :description)
+  end
 
 end

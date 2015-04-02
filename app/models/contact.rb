@@ -2,15 +2,20 @@ class Contact < ActiveRecord::Base
   VENDOR = 'vendor'
   CLIENT = 'client'
 
-  validates :name, presence: true
-  validate :contact_contact_type
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message => 'is an invalid email address', :allow_blank => true
+  before_validation :convert_contact_type_to_lowercase
 
-  def contact_contact_type
-    if contact_type && (contact_type != CLIENT  && contact_type != VENDOR)
-        errors.add(:contact_type, 'must be ' + CLIENT + ', ' + VENDOR + ', or [blank]');
-    end
+  validates :name,
+            :presence => true
+  validates_format_of :email,
+                      :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+                      :message => 'is an invalid email address',
+                      :allow_blank => true
+  validates_inclusion_of :contact_type,
+                         :in => [CLIENT, VENDOR],
+                         :message => 'must be ' + CLIENT + ', ' + VENDOR + ', or [blank]',
+                         :allow_blank => true
+
+  def convert_contact_type_to_lowercase
+    self.contact_type = contact_type.downcase
   end
-
-
 end
