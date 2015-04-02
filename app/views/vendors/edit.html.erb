@@ -1,11 +1,5 @@
-<%= react_component("VendorForm",
-                    action: vendor_path,
-                    authToken: form_authenticity_token,
+<%= react_component("VendorFormEdit",
                     model: @vendor,
-                    routeVerb: "PUT",
-                    primaryButtonText: "Update",
-                    secondaryButtonText: "Cancel",
-                    secondaryButtonVisible: true,
                     notice: notice,
-                    secondaryButtonHref: vendors_path,
-                    hrefRoot: vendors_path)  %>
+                    authToken: form_authenticity_token
+    ) %>

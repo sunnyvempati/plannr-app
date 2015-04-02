@@ -1,4 +1,5 @@
 var VendorForm = React.createClass({
+  hrefRoot: "/vendors",
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -7,19 +8,18 @@ var VendorForm = React.createClass({
         'location': inputs.location,
         'phone': inputs.phone,
         'primary_contact': inputs.primary_contact
-
       }
     };
   },
-  changeUrl: function() {
-    location.href = '/vendors';
+  changeUrl: function () {
+    location.href = this.hrefRoot;
   },
   render: function() {
     return (
       <div className="FormContainer--leftAligned">
         <Form url={this.props.action}
           mapping={this.mapInputs}
-          onSuccessUrl='/vendors'
+          onSuccess={this.changeUrl}
           routeVerb={this.props.routeVerb}
           authToken={this.props.authToken}
           primaryButtonText={this.props.primaryButtonText}
@@ -59,7 +59,7 @@ var VendorForm = React.createClass({
           <FormInput
             id="vendor_primary_contact"
             name="primary_contact"
-            placeholder="What is the primary_contact of your vendor?"
+            placeholder="Who is the primary_contact of your vendor?"
             type="text"
             label="primary_contact"
             value={this.props.model.primary_contact}
@@ -68,9 +68,9 @@ var VendorForm = React.createClass({
 
         </Form>
 
-        <a href={this.props.hrefRoot }>List</a>|
-        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>|
-        <a href={this.props.hrefRoot + "/" + this.props.model.id  }>Show</a>
+        <a href={this.hrefRoot }>List</a>|
+        <a href={this.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>|
+        <a href={this.hrefRoot + "/" + this.props.model.id  }>Show</a>
       </div>
     );
   }
