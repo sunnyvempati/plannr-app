@@ -1,5 +1,6 @@
 var ContactForm = React.createClass({
-  mapInputs: function(inputs) {
+  hrefRoot: "/contacts",
+  mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
       'contact': {
@@ -9,19 +10,18 @@ var ContactForm = React.createClass({
         'phone': inputs.phone,
         'company': inputs.company,
         'description': inputs.description
-
       }
     };
   },
-  changeUrl: function() {
-    location.href = '/contacts';
+  changeUrl: function () {
+    location.href = this.hrefRoot;
   },
-  render: function() {
+  render: function () {
     return (
       <div className="FormContainer--leftAligned">
         <Form url={this.props.action}
           mapping={this.mapInputs}
-          onSuccessUrl='/contacts'
+          onSuccess={this.changeUrl}
           routeVerb={this.props.routeVerb}
           authToken={this.props.authToken}
           primaryButtonText={this.props.primaryButtonText}
@@ -34,7 +34,7 @@ var ContactForm = React.createClass({
             name="name"
             autofocus="autofocus"
             placeholder="What is the name of your contact?"
-            type="text" 
+            type="text"
             label="name*"
             value={this.props.model.name}
             disabled={this.props.disableForm}
@@ -44,7 +44,7 @@ var ContactForm = React.createClass({
             id="contact_email"
             name="email"
             placeholder="What is the email of your contact?"
-            type="text" 
+            type="text"
             label="contact_email"
             value={this.props.model.email}
             disabled={this.props.disableForm}
@@ -88,10 +88,13 @@ var ContactForm = React.createClass({
 
         </Form>
 
-        <a href={this.props.hrefRoot }>List</a>|
-        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>|
+        <a href={this.props.hrefRoot }>List</a>
+        |
+        <a href={this.props.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>
+        |
         <a href={this.props.hrefRoot + "/" + this.props.model.id  }>Show</a>
       </div>
     );
   }
 });
+

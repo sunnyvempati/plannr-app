@@ -28,6 +28,7 @@ class ContactsController < ApplicationController
   end
 
   def update
+    binding.pry
     @contact.assign_attributes(contact_params)
     render_entity @contact
   end

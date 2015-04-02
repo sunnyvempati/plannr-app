@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331234534) do
+ActiveRecord::Schema.define(version: 20150330231529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "companies", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -23,13 +29,10 @@ ActiveRecord::Schema.define(version: 20150331234534) do
     t.string   "phone"
     t.string   "company"
     t.text     "description"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "contact_type_id"
     t.string   "contact_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
-
-  add_index "contacts", ["contact_type_id"], name: "index_contacts_on_contact_type_id", using: :btree
 
   create_table "events", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
@@ -38,22 +41,33 @@ ActiveRecord::Schema.define(version: 20150331234534) do
     t.date     "end_date"
     t.float    "budget"
     t.string   "location"
+    t.text     "notes"
     t.uuid     "user_id"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "description"
+  end
+
+  create_table "invitations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "email"
+    t.uuid     "company_id"
+    t.uuid     "sender_id"
+    t.uuid     "recipient_id"
+    t.boolean  "expired"
+    t.string   "token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "planner"
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tasks", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "deadline"
@@ -72,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150331234534) do
   add_index "user_sessions", ["updated_at"], name: "index_user_sessions_on_updated_at", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "company_id"
     t.string   "email",                           null: false
     t.string   "crypted_password",                null: false
     t.string   "password_salt",                   null: false
@@ -92,14 +107,5 @@ ActiveRecord::Schema.define(version: 20150331234534) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
-
-  create_table "vendors", force: :cascade do |t|
-    t.string   "name"
-    t.string   "location"
-    t.string   "phone"
-    t.string   "primary_contact"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
 end

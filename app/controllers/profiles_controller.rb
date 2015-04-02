@@ -1,11 +1,11 @@
 class ProfilesController < ApplicationController
   def new
-    @profile = Profile.new(user: current_user)
   end
 
   def create
-    current_user.profile = Profile.create!(profile_params)
-    redirect_to root_path
+    @profile = Profile.new(profile_params)
+    @profile.user = current_user
+    render_entity @profile
   end
 
   def show
