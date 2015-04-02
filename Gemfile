@@ -25,8 +25,6 @@ gem 'responders', '~> 2.0'
 # validations
 gem 'date_validator'
 
-gem 'american_date'
-
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'
