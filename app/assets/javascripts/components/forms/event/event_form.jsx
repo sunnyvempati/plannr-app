@@ -23,7 +23,7 @@ var EventForm = React.createClass({
         <Form
           url={this.props.action}
           mapping={this.mapInputs}
-          onSuccessUrl={this.hrefRoot}
+          onSuccess={this.changeUrl}
           authToken={this.props.authToken}
           routeVerb={this.props.routeVerb}
           primaryButtonText={this.props.primaryButtonText}
