@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_company_tenant
 
   def set_company_tenant
-    set_current_tenant(current_user.company)
+    set_current_tenant(current_user.company) if current_user
   end
 
   private

@@ -10,8 +10,7 @@ var InviteUsers = React.createClass({
   mapInputs: function(inputs) {
     return {
       'invitation': {
-        'email': inputs.email,
-        'company_id': inputs.company
+        'email': inputs.email
       },
       'authenticity_token': inputs.authenticity_token
     };
@@ -43,7 +42,6 @@ var InviteUsers = React.createClass({
               onSuccess={this.invited}
               primaryButtonText="Invite"
               id="InviteUserForm">
-          <FormInput type="hidden" name="company" value={this.props.company_id}  />
           <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Invite*" ref="invitedEmail" />
         </Form>
 
