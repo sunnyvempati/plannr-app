@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.text     "notes"
     t.uuid     "owner_id"
     t.uuid     "company_id"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

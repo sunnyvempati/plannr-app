@@ -1,1 +1,4 @@
-<%= @event.name %>
+<%= react_component("EventFormShow",
+                    model: @event,
+                    notice: notice
+    ) %>
