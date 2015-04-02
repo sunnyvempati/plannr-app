@@ -67,7 +67,6 @@ class Consolidate0312 < ActiveRecord::Migration
       t.uuid            :company_id
       t.uuid            :sender_id
       t.uuid            :recipient_id
-      t.boolean         :expired, default: false
       t.string          :token
 
       t.timestamps null: false

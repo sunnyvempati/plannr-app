@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.company = @invitation.company || Company.create(company_params)
 
     render_entity(@user) do
-      @invitation.update_attributes!(:expired, true)
+      @invitation.update_attribute(:recipient, @user)
     end
   end
 
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
       flash[:error] = "Must be invited to sign up for Plannr"
       redirect_to login_path
     end
-    # if invitation is expired
-    if @invitation && @invitation.expired
+    # if invitation is used, recipient gets set, which means invitation has expired.
+    if @invitation && @invitation.recipient
       flash[:error] = "Invitation has expired or been used already. Request new invitation"
       redirect_to login_path
     end
