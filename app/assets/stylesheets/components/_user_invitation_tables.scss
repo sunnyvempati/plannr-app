@@ -1,0 +1,17 @@
+.UserInvitationTable {
+  width: 100%;
+  margin: 50px auto;
+
+  & th {
+    opacity: 0.5;
+    padding-bottom: 20px;
+
+  }
+
+  & tr {
+  }
+
+  & td {
+    padding-bottom: 20px;
+  }
+}
