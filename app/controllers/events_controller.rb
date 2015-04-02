@@ -2,7 +2,9 @@ class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :convert_dates_to_us_format, only: [:create, :update]
+  before_action only: [:create, :update] do
+    convert_dates_to_us_format(%w(start_date end_date))
+  end
 
   def index
     @events = Event.all
@@ -52,22 +54,16 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
   end
-  
-  def convert_dates_to_us_format
-    begin
-      event_params[:start_date] = convert_date_to_us_format(event_params[:start_date])
-    rescue ArgumentError => e
-      render_error({start_date: e.message})
-      return
-    end
 
-    begin
-      event_params[:end_date] = convert_date_to_us_format(event_params[:end_date])
-    rescue ArgumentError => e
-      render_error({end_date: e.message})
-      return
-    end
+  def convert_dates_to_us_format(dates)
+    dates.each { |date|
+      begin
+        event_params[date] = convert_date_to_us_format(event_params[date])
+      rescue ArgumentError => e
+        render_error({date => e.message})
+        return
+      end
+    }
   end
-
 
 end
