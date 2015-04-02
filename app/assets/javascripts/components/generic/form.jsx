@@ -46,17 +46,15 @@ var Form = React.createClass({
       canSubmit: false
     });
   },
-  changeUrl: function() {
-    location.href = this.props.onSuccessUrl;
-  },
   render: function() {
-    form_props = this.props;
+    var form_props = this.props;
     return (
       <Formsy.Form url={form_props.url}
-                   onSuccess={this.changeUrl}
+                   onSuccess={form_props.onSuccess}
+                   onSubmit={form_props.onSubmit}
                    onValid={this.enableButton}
                    onInvalid={this.disableButton}
-                   mapping={this.props.mapping}
+                   mapping={form_props.mapping}
                    method={form_props.routeVerb}
                    id={form_props.id}>
         <FormInput type="hidden" name="authenticity_token" value={form_props.authToken}  />

@@ -17,5 +17,6 @@
 //= require react_ujs
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
+//= require util/util
 //= require components
 //= require_tree .

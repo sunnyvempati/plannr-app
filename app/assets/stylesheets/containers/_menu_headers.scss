@@ -8,7 +8,7 @@
 }
 
 .MenuHeader-name,
-.MenuHeader-email {
+.MenuHeader-company {
   flex: 1 100%;
   color: rgba(255, 255, 255, 0.8);
   padding-top: $size-increment;
@@ -18,6 +18,6 @@
   font-size: 20px;
 }
 
-.MenuHeader-email {
+.MenuHeader-company {
   font-size: 14px;
 }

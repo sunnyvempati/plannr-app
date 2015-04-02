@@ -17,8 +17,11 @@ var FormInput = React.createClass({
   },
   onBlur: function() {
     this.setState({
-      showValidation: true,
+      showValidation: true
     });
+  },
+  resetValidation: function() {
+    this.setState({showValidation: false});
   },
   componentDidMount: function () {
     // for datepicker
@@ -32,9 +35,6 @@ var FormInput = React.createClass({
   },
   render: function() {
     var show_validation = this.state.showValidation && !this.isValid();
-    if (this.props.dateField) {
-      console.log("showValidation: "  + this.state.showValidation + " isValid: " + this.isValid());
-    }
     var cx = React.addons.classSet;
     var input_classes = cx({
       'FormInput-field': true,
