@@ -1,4 +1,5 @@
 var ContactForm = React.createClass({
+  hrefRoot: "/contacts",
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -9,19 +10,18 @@ var ContactForm = React.createClass({
         'phone': inputs.phone,
         'company': inputs.company,
         'description': inputs.description
-
       }
     };
   },
   changeUrl: function () {
-    location.href = '/contacts';
+    location.href = this.hrefRoot;
   },
   render: function () {
     return (
       <div className="FormContainer--leftAligned">
         <Form url={this.props.action}
           mapping={this.mapInputs}
-          onSuccessUrl='/contacts'
+          onSuccess={this.changeUrl}
           routeVerb={this.props.routeVerb}
           authToken={this.props.authToken}
           primaryButtonText={this.props.primaryButtonText}
