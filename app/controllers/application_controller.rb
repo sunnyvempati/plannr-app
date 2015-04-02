@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
 
   # sets current user as the tenant
   set_current_tenant_through_filter
-  before_filter :set_user_tenant
+  before_filter :set_company_tenant
 
-  def set_user_tenant
-    set_current_tenant(current_user)
+  def set_company_tenant
+    set_current_tenant(current_user.company)
   end
 
   private

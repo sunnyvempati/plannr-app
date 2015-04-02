@@ -1,10 +1,10 @@
 class Invitation < ActiveRecord::Base
+  acts_as_tenant :company
   before_create :generate_token
   after_initialize :defaults
 
   belongs_to :sender, class_name: "User"
   belongs_to :recipient, class_name: "User"
-  belongs_to :company
 
   validate :user_cannot_exist, on: :create
 

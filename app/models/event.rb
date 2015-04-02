@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  acts_as_tenant :user
+  acts_as_tenant :company
 
   validates :name, :client_name, presence: true
   validate :event_start_date

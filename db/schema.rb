@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.float    "budget"
     t.string   "location"
     t.text     "notes"
-    t.uuid     "user_id"
+    t.uuid     "owner_id"
+    t.uuid     "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
