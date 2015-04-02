@@ -5,7 +5,7 @@ module DateHelpers
         Date.strptime(date, "%m/%d/%Y")
       end
     rescue
-      raise ArgumentError.new("must bea valid date formatted: mm/dd/yyyy")
+      raise ArgumentError.new("must be a valid date formatted: mm/dd/yyyy")
     end
   end
 end
