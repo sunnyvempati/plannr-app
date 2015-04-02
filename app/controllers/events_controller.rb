@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :convert_dates_to_us_format, only: [:create, :update]
 
   def index
     @events = Event.all
@@ -23,51 +24,14 @@ class EventsController < ApplicationController
 
   def edit
     @header = "Edit Event"
-
   end
 
   def create
-    begin
-      if event_params[:start_date].present?
-        event_params[:start_date] = convert_date_to_us_format(event_params[:start_date])
-      end
-    rescue ArgumentError => e
-      render_error({start_date: e.message})
-      return
-    end
-
-    begin
-      if event_params[:end_date].present?
-        event_params[:end_date] = convert_date_to_us_format(event_params[:end_date])
-      end
-    rescue ArgumentError => e
-      render_error({end_date: e.message})
-      return
-    end
-
     @event = Event.new(event_params)
     render_entity @event
   end
 
   def update
-    begin
-      if event_params[:start_date].present?
-        event_params[:start_date] = convert_date_to_us_format(event_params[:start_date])
-      end
-    rescue ArgumentError => e
-      render_error({start_date: e.message})
-      return
-    end
-
-    begin
-      if event_params[:end_date].present?
-        event_params[:end_date] = convert_date_to_us_format(event_params[:end_date])
-      end
-    rescue ArgumentError => e
-      render_error({end_date: e.message})
-      return
-    end
-
     @event.assign_attributes(event_params)
     render_entity @event
   end
@@ -88,4 +52,22 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
   end
+  
+  def convert_dates_to_us_format
+    begin
+      event_params[:start_date] = convert_date_to_us_format(event_params[:start_date])
+    rescue ArgumentError => e
+      render_error({start_date: e.message})
+      return
+    end
+
+    begin
+      event_params[:end_date] = convert_date_to_us_format(event_params[:end_date])
+    rescue ArgumentError => e
+      render_error({end_date: e.message})
+      return
+    end
+  end
+
+
 end
