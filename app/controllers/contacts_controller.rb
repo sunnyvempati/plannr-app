@@ -28,7 +28,6 @@ class ContactsController < ApplicationController
   end
 
   def update
-    binding.pry
     @contact.assign_attributes(contact_params)
     render_entity @contact
   end
@@ -51,6 +50,5 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:name, :email, :contact_type, :phone, :company, :description)
     end
-
 
 end
