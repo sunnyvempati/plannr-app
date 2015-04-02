@@ -1,7 +1,6 @@
 class Invitation < ActiveRecord::Base
   acts_as_tenant :company
   before_create :generate_token
-  after_initialize :defaults
 
   belongs_to :sender, class_name: "User"
   belongs_to :recipient, class_name: "User"
@@ -20,9 +19,5 @@ class Invitation < ActiveRecord::Base
 
   def deliver_sign_up_instructions
     UserMailer.user_invitation(self).deliver_now
-  end
-
-  def defaults
-    self.expired = false
   end
 end
