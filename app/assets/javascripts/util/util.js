@@ -1,9 +1,9 @@
 var util = (function () {
 
-  //convert ISO date (Bing it) to US date (MM-DD-YYYY)
+  //convert ISO date (Bing it) to US date (MM/DD/YYYY)
   function isoDateToUsFormat(isoDate ) {
     var retDate;
-    var separator = "-";
+    var separator = "/";
     if (!!isoDate) {
       var d = new Date(isoDate);
       var mm = d.getMonth() + 1;
