@@ -72,6 +72,17 @@ class Consolidate0312 < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    create_table :contacts do |t|
+      t.string :name
+      t.string :email
+      t.string :phone
+      t.string :company
+      t.text :description
+      t.integer :contact_type
+
+      t.timestamps null: false
+    end
+
     add_index :user_sessions, :session_id
     add_index :user_sessions, :updated_at
 
