@@ -10,8 +10,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = {
-    :host => 'staging.yourplannr.com',
-    :port => 3000
+    :host => 'staging.yourplannr.com'
   }
   # Settings specified here will take precedence over those in config/application.rb.
 
