@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   default from: 'sunny@yourplannr.com'
 
-  def user_invitation(invite, url)
+  def user_invitation(invite)
     @company = invite.company
     @url = sign_up_url(invite_token: invite.token)
     mail(to: invite.email, subject: "Plannr invitation")

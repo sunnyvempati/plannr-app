@@ -1,7 +1,8 @@
 class Consolidate0312 < ActiveRecord::Migration
   def change
     create_table :users, id: :uuid do |t|
-      t.uuid      :company_id
+      t.uuid      :company_id,          :null => false
+      t.boolean   :company_admin,       default: false
       t.string    :email,               :null => false
       t.string    :crypted_password,    :null => false
       t.string    :password_salt,       :null => false
@@ -35,7 +36,8 @@ class Consolidate0312 < ActiveRecord::Migration
       t.float :budget
       t.string :location
       t.text :notes
-      t.uuid :user_id
+      t.uuid :owner_id
+      t.uuid :company_id
       t.text :description
 
       t.timestamps
@@ -66,7 +68,6 @@ class Consolidate0312 < ActiveRecord::Migration
       t.uuid            :company_id
       t.uuid            :sender_id
       t.uuid            :recipient_id
-      t.boolean         :expired
       t.string          :token
 
       t.timestamps null: false
