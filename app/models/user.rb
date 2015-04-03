@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
     reset_perishable_token!
     UserMailer.reset_password_instructions(self).deliver_now
   end
+
+  def company_admin?
+    self.company_admin
+  end
 end

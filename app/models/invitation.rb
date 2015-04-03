@@ -7,7 +7,7 @@ class Invitation < ActiveRecord::Base
 
   validate :user_cannot_exist, on: :create
 
-  validates :email, uniqueness: { scope: :company, message: "already invited"}
+  validates :email, uniqueness: true
 
   def generate_token
     self.token = Digest::SHA1.hexdigest([self.company_id, Time.now, rand].join)
