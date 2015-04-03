@@ -25,7 +25,8 @@ var VendorForm = React.createClass({
           primaryButtonText={this.props.primaryButtonText}
           secondaryButtonVisible={this.props.secondaryButtonVisible}
           secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}>
+          showButtonList={this.props.showButtonList}
+          id='vendor_form'>
 
           <FormInput
             id='vendor_name'
