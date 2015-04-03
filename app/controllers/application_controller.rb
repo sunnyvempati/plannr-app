@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
 
   def require_no_user
     if current_user
-      binding.pry
       store_location
       flash[:notice] = "You must be logged out to access this page"
       redirect_to root_path
@@ -38,7 +37,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     unless current_user
-      binding.pry
       store_location
       flash[:notice] = "You must be logged in to access this page"
       redirect_to login_path

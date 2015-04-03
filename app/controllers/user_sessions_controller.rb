@@ -16,7 +16,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    binding.pry
     redirect_to return_to_url(login_path)
   end
 
