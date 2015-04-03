@@ -44,7 +44,7 @@ var VendorForm = React.createClass({
             name='location'
             placeholder='What is the location of your vendor?'
             type='text' 
-            label='vendor_location'
+            label='location'
             value={this.props.model.location}
             disabled={this.props.disableForm}
           />
@@ -62,7 +62,7 @@ var VendorForm = React.createClass({
             name='primary_contact'
             placeholder='Who is the primary_contact of your vendor?'
             type='text'
-            label='primary_contact'
+            label='primary contact'
             value={this.props.model.primary_contact}
             disabled={this.props.disableForm}
           />
