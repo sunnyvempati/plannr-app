@@ -16,6 +16,13 @@ var EventForm = React.createClass({
   changeUrl: function () {
     location.href = this.hrefRoot;
   },
+  componentWillMount: function () {
+    // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
+    // this allows spaces and numbers with decimal places
+    Formsy.addValidationRule('isPresentAndNumeric', function (n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    });
+  },
   render: function () {
     var id = 'event_form';
     return (
@@ -23,7 +30,7 @@ var EventForm = React.createClass({
         <Form
           url={this.props.action}
           mapping={this.mapInputs}
-          onSuccessUrl={this.hrefRoot}
+          onSuccess={this.changeUrl}
           authToken={this.props.authToken}
           routeVerb={this.props.routeVerb}
           primaryButtonText={this.props.primaryButtonText}
@@ -99,8 +106,8 @@ var EventForm = React.createClass({
             value={this.props.model.budget}
             disabled={this.props.disableForm}
             placeholder="How much will it cost?"
-            validations="isNumeric"
-            validationError="Must be a number"
+            validations="isPresentAndNumeric"
+            validationError="Must be a number (no commas)"
           />
           <TextAreaInput
             name="notes"
