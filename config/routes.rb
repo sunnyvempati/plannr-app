@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :vendors
-
   root "events#index"
 
   # login/logout
@@ -21,5 +19,5 @@ Rails.application.routes.draw do
   # company
   get 'company', to: 'companies#show'
 
-  resources :tasks, :events, :invitations, :users, :profiles
+  resources :tasks, :events, :invitations, :users, :profiles, :vendors
 end
