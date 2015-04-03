@@ -1,5 +1,6 @@
 var ContactForm = React.createClass({
   hrefRoot: "/contacts",
+  contactTypeOptions: [ {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}],
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -43,13 +44,14 @@ var ContactForm = React.createClass({
             required
           />
           <SelectInput
-            nid="contact_contact_type"
+            id="contact_contact_type"
             name="contact_type"
             className="SelectInput"
-            label="Type"
-            options={[{value: '', text: 'Select...'}, {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}]}
+            label="type*"
+            options={this.contactTypeOptions}
             value={this.props.model.contact_type}
             disabled={this.props.disableForm}
+            required
           />
           <FormInput
             id="contact_email"
