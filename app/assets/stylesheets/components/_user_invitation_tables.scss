@@ -12,6 +12,23 @@
   }
 
   & td {
+    text-align: center;
     padding-bottom: 20px;
+    &.disabled {
+      display: none;
+    }
+  }
+}
+
+.UserInvitationTable--is-pending {
+  opacity: .5;
+}
+
+.UserInvitationTable-resend,
+.UserInvitationTable-admin {
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    opacity: .5;
   }
 }

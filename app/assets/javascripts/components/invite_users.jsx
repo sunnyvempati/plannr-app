@@ -1,6 +1,6 @@
 var InviteUsers = React.createClass({
   getInitialState: function() {
-    return { invites: [] };
+    return { invites: [], serverMessage: "" };
   },
   componentDidMount: function() {
     $.get("/invitations", function(result) {
@@ -10,13 +10,26 @@ var InviteUsers = React.createClass({
   mapInputs: function(inputs) {
     return {
       'invitation': {
-        'email': inputs.email,
-        'company_id': inputs.company
+        'email': inputs.email
       },
       'authenticity_token': inputs.authenticity_token
     };
   },
-  invited: function(res) {
+  setServerMessage: function(message) {
+    this.setState({serverMessage: message});
+  },
+  getRenderedInvites: function(invites) {
+    var rendered_invites = invites.map(function(invite) {
+      return (
+        <InviteUserRow setServerMessage={this.setServerMessage}
+                       invite={invite}
+                       admin={this.props.admin}
+                       currentUserId={this.props.currentUserId} />
+      );
+    }, this);
+    return rendered_invites;
+  },
+  onSuccess: function(res) {
     // add the invite, which will re-render the component
     this.refs.invitedEmail.resetValidation();
     this.refs.invitedEmail.resetValue();
@@ -25,32 +38,28 @@ var InviteUsers = React.createClass({
     this.setState({invites: invites});
   },
   render: function() {
-    var invites = this.state.invites.map(function(invite) {
-      var status = invite.recipient ? "Joined" : "Pending";
-      return (
-        <tr>
-          <td>{invite.email}</td>
-          <td>{status.toUpperCase()}</td>
-        </tr>
-      );
-    });
-    var invite_message = invites.length > 0 ? "" : "No invites";
+    var invites = this.getRenderedInvites(this.state.invites);
+    var invite_message = invites.length > 0 ? "" : "No users";
     return (
       <div className="InviteUsersContainer">
-        <Form url='/invitations'
-              mapping={this.mapInputs}
-              authToken={this.props.authToken}
-              onSuccess={this.invited}
-              primaryButtonText="Invite"
-              id="InviteUserForm">
-          <FormInput type="hidden" name="company" value={this.props.company_id}  />
-          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Invite*" ref="invitedEmail" />
-        </Form>
-
-        <table className="UserInvitationTable">
-          {invites}
-          <span>{invite_message}</span>
-        </table>
+        <span>{this.state.serverMessage}</span>
+        <div className="InviteUsersContainer-form">
+          <Form url='/invitations'
+                mapping={this.mapInputs}
+                authToken={this.props.authToken}
+                onSuccess={this.onSuccess}
+                primaryButtonText="Invite"
+                id="InviteUserForm">
+            <FormInput name="email" validations="isEmail" validationError="Invalid email" label="Email*" ref="invitedEmail" />
+          </Form>
+        </div>
+        <div className="InviteUsersContainer-list">
+        <h2>All Users</h2>
+          <table className="UserInvitationTable">
+            {invites}
+            <span>{invite_message}</span>
+          </table>
+        </div>
       </div>
     );
   }

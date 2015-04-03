@@ -3,7 +3,6 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user
 
   def show
-    @company = current_user.company
-    @header = "Invite users to " + @company.name
+    @header = "Invite users to " + current_user.company.name
   end
 end
