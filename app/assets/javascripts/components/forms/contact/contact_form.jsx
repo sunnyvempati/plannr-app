@@ -58,7 +58,7 @@ var ContactForm = React.createClass({
             name="email"
             placeholder="What is the email of your contact?"
             type="text"
-            label="contact_email"
+            label="email"
             value={this.props.model.email}
             disabled={this.props.disableForm}
           />
