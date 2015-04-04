@@ -58,7 +58,7 @@ class EventsController < ApplicationController
     @modified_event_params = event_params
     %w(start_date end_date).each do |date_field_name|
       @modified_event_params.except!(date_field_name)
-      @modified_event_params.merge!(date_field_name => convert_date_to_us_format(event_params[date_field_name]))
+      @modified_event_params.merge!(date_field_name => convert_us_formatted_string_to_date_type(event_params[date_field_name]))
     end
   end
 
