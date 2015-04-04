@@ -6,7 +6,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @header = "Events"
+    @header = 'Events'
   end
 
   def show
@@ -19,11 +19,11 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @header = "Tell us about your event";
+    @header = 'Tell us about your event';
   end
 
   def edit
-    @header = "Edit Event"
+    @header = 'Edit Event'
   end
 
   def create
