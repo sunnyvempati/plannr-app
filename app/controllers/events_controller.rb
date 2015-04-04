@@ -55,9 +55,8 @@ class EventsController < ApplicationController
 
   def modify_event_params
     # change date params from string to date and stored in global for use in create and update
-    date_field_names = %w(start_date end_date)
     @modified_event_params = event_params
-    date_field_names.each do |date_field_name|
+    %w(start_date end_date).each do |date_field_name|
       @modified_event_params.except!(date_field_name)
       @modified_event_params.merge!(date_field_name => convert_date_to_us_format(event_params[date_field_name]))
     end
