@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
   acts_as_tenant :company
+  belongs_to :owner, class_name: "User"
   enum contact_type: {client: 1, vendor: 2}
   validates :name,
             :presence => true
