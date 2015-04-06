@@ -78,6 +78,10 @@ class Consolidate0312 < ActiveRecord::Migration
       t.string :location
       t.string :phone
       t.string :primary_contact
+      t.uuid :owner_id
+      t.uuid :company_id
+      
+      t.timestamps null: false
     end
 
     add_index :user_sessions, :session_id

@@ -99,10 +99,14 @@ ActiveRecord::Schema.define(version: 20150313002912) do
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
 
   create_table "vendors", force: :cascade do |t|
-    t.string "name"
-    t.string "location"
-    t.string "phone"
-    t.string "primary_contact"
+    t.string   "name"
+    t.string   "location"
+    t.string   "phone"
+    t.string   "primary_contact"
+    t.uuid     "owner_id"
+    t.uuid     "company_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
