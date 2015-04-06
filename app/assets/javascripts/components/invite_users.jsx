@@ -40,10 +40,17 @@ var InviteUsers = React.createClass({
   render: function() {
     var invites = this.getRenderedInvites(this.state.invites);
     var invite_message = invites.length > 0 ? "" : "No users";
+    var cx = React.addons.classSet;
+    var inviteUsersFormClasses = cx({
+      'InviteUsersContainer-form': true,
+      'is-visible': this.props.admin
+    });
+
+
     return (
       <div className="InviteUsersContainer">
         <span>{this.state.serverMessage}</span>
-        <div className="InviteUsersContainer-form">
+        <div className={inviteUsersFormClasses}>
           <Form url='/invitations'
                 mapping={this.mapInputs}
                 authToken={this.props.authToken}
