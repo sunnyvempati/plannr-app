@@ -9,7 +9,7 @@ var ContactForm = React.createClass({
         'email': inputs.email,
         'contact_type': inputs.contact_type,
         'phone': inputs.phone,
-        'company': inputs.company,
+        'contact_company': inputs.contact_company,
         'description': inputs.description
       }
     };
@@ -50,7 +50,6 @@ var ContactForm = React.createClass({
             options={this.contactTypeOptions}
             value={this.props.model.contact_type}
             disabled={this.props.disableForm}
-            required
           />
           <FormInput
             id='contact_email'
@@ -71,12 +70,12 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
           />
           <FormInput
-            id='contact_company'
-            name='company'
+            id='contact_contact_company'
+            name='contact_company'
             placeholder='What is the company of your contact?'
             type='text'
             label='company'
-            value={this.props.model.company}
+            value={this.props.model.contact_company}
             disabled={this.props.disableForm}
           />
           <TextAreaInput

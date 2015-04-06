@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.string   "company"
+    t.string   "contact_company"
     t.text     "description"
     t.integer  "contact_type"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.uuid     "owner_id"
+    t.uuid     "company_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "events", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

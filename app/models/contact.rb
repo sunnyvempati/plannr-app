@@ -1,6 +1,6 @@
 class Contact < ActiveRecord::Base
+  acts_as_tenant :company
   enum contact_type: {client: 1, vendor: 2}
-
   validates :name,
             :presence => true
   validates_format_of :email,

@@ -77,10 +77,11 @@ class Consolidate0312 < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :phone
-      t.string :company
+      t.string :contact_company
       t.text :description
       t.integer :contact_type
-
+      t.uuid :owner_id
+      t.uuid :company_id
       t.timestamps null: false
     end
 
