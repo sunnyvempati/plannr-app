@@ -2,13 +2,11 @@ class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action only: [:create, :update] do
-    convert_dates_to_us_format(%w(start_date end_date))
-  end
+  before_action :modify_event_params, :only => [:create, :update]
 
   def index
     @events = Event.all
-    @header = "Events"
+    @header = 'Events'
   end
 
   def show
@@ -21,20 +19,20 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @header = "Tell us about your event";
+    @header = 'Tell us about your event';
   end
 
   def edit
-    @header = "Edit Event"
+    @header = 'Edit Event'
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(@modified_event_params)
     render_entity @event
   end
 
   def update
-    @event.assign_attributes(event_params)
+    @event.assign_attributes(@modified_event_params)
     render_entity @event
   end
 
@@ -55,15 +53,13 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
   end
 
-  def convert_dates_to_us_format(dates)
-    dates.each { |date|
-      begin
-        event_params[date] = convert_date_to_us_format(event_params[date])
-      rescue ArgumentError => e
-        render_error({date => e.message})
-        return
-      end
-    }
+  def modify_event_params
+    # change date params from string to date and stored in global for use in create and update
+    @modified_event_params = event_params
+    %w(start_date end_date).each do |date_field_name|
+      @modified_event_params.except!(date_field_name)
+      @modified_event_params.merge!(date_field_name => convert_us_formatted_string_to_date_type(event_params[date_field_name]))
+    end
   end
 
 end
