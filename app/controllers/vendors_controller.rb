@@ -2,9 +2,6 @@ class VendorsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
-  before_action only: [:create] do 
-    add_owner_id_to_entity_params(vendor_params)
-  end            
 
   def index
     @vendors = Vendor.all
@@ -25,7 +22,10 @@ class VendorsController < ApplicationController
   end
 
   def create
-    @vendor = Vendor.new(@modified_entity_params_for_create)
+    modified_entity_params = vendor_params
+    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user_id)
+
+    @vendor = Vendor.new(modified_entity_params)
     render_entity @vendor
   end
 
@@ -51,12 +51,6 @@ class VendorsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def vendor_params
     params.require(:vendor).permit(:name, :location, :phone, :primary_contact, :owner_id)
-  end
-
-  def add_owner_id_to_entity_params(entity_params)
-    @modified_entity_params_for_create = entity_params
-    @modified_entity_params_for_create.merge!({:owner_id =>  @current_user.id})
-
   end
 
 end
