@@ -12,6 +12,7 @@ module ParamHelpers
     date_field_names.each do |date_field_name|
       modified_entity_params.except!(date_field_name)
       modified_entity_params.merge!(date_field_name => convert_us_formatted_string_to_date_type(entity_params[date_field_name]))
+      return modified_entity_params
     end
   end
 end

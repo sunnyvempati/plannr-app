@@ -2,12 +2,6 @@ class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action only: [:create, :update] do
-    @modified_event_params = ParamHelper.convert_date_params_to_date_type(event_params, %w(start_date end_date))
-  end
-  before_action only: [:create] do 
-    @modifed_entity_params = ParamHelpers.add_owner_id_to_entity_params(event_params, @current_user_id)
-  end 
 
   def index
     @events = Event.all
@@ -32,12 +26,19 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(@modified_event_params)
+    modified_entity_params = event_params
+    modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(start_date end_date))
+    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user_id)
+
+    @event = Event.new(modified_entity_params)
     render_entity @event
   end
 
   def update
-    @event.assign_attributes(@modified_event_params)
+    modified_entity_params = event_params
+    modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(start_date end_date))
+    
+    @event.assign_attributes(modified_entity_params)
     render_entity @event
   end
 
