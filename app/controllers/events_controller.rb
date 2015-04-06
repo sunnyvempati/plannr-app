@@ -28,7 +28,7 @@ class EventsController < ApplicationController
   def create
     modified_entity_params = event_params
     modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(start_date end_date))
-    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user_id)
+    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user.id)
 
     @event = Event.new(modified_entity_params)
     render_entity @event
