@@ -1,4 +1,5 @@
 module ParamHelpers
+  include DateHelpers
   def add_owner_id_to_entity_params(entity_params, current_user_id)
     #populate the current_user_id in the owner_id property
     modified_entity_params = entity_params

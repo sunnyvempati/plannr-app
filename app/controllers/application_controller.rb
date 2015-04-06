@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   respond_to :html, :json
   include ResponseHelpers
-  include DateHelpers
   include ParamHelpers
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
