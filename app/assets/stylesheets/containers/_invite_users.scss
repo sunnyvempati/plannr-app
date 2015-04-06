@@ -3,6 +3,10 @@
   &-form {
     margin: auto;
     width: 500px;
+    display: none;
+    &.is-visible {
+      display: block;
+    }
   }
 }
 
