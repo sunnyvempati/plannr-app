@@ -23,8 +23,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    modified_entity_params = contact_params
-    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user.id)
+    modified_entity_params = add_owner_id_to_entity_params(contact_params, @current_user.id)
 
     @contact = Contact.new(modified_entity_params)
     render_entity @contact
