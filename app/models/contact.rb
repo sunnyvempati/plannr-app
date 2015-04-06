@@ -8,7 +8,7 @@ class Contact < ActiveRecord::Base
                       :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
                       :message => 'must be an email address',
                       :allow_blank => true
-  validates_uniqueness_of :email, scope: :company_id, message: 'must be unique to your company'
+  validates_uniqueness_of :email, scope: :company_id, message: 'this email already exists in your company'
 
   def contact_type
     read_attribute(:contact_type).to_s
