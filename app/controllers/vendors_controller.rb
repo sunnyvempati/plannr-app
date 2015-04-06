@@ -22,8 +22,7 @@ class VendorsController < ApplicationController
   end
 
   def create
-    modified_entity_params = vendor_params
-    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user.id)
+    modified_entity_params = add_owner_id_to_entity_params(vendor_params, @current_user.id)
 
     @vendor = Vendor.new(modified_entity_params)
     render_entity @vendor
