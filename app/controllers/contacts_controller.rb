@@ -54,20 +54,12 @@ class ContactsController < ApplicationController
     params.require(:contact).permit(:name, :email, :contact_type, :phone, :contact_company, :description, :owner_id)
   end
 
-
   def add_owner_id_to_entity_params
     @modified_entity_params = contact_params
     @modified_entity_params.merge!({:owner_id =>  @current_user.id})
     binding.pry
   end
 
-  #  def modify_event_params
-  #   # change date params from string to date and stored in global for use in create and update
-  #   @modified_event_params = event_params
-  #   %w(start_date end_date).each do |date_field_name|
-  #     @modified_event_params.except!(date_field_name)
-  #     @modified_event_params.merge!(date_field_name => convert_us_formatted_string_to_date_type(event_params[date_field_name]))
-  #   end
-  # end
-
 end
+
+
