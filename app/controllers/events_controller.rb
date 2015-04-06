@@ -2,7 +2,12 @@ class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :modify_event_params, :only => [:create, :update]
+  before_action only: [:create, :update] do
+    @modified_event_params = ParamHelper.convert_date_params_to_date_type(event_params, %w(start_date end_date))
+  end
+  before_action only: [:create] do 
+    @modifed_entity_params = ParamHelpers.add_owner_id_to_entity_params(event_params, @current_user_id)
+  end 
 
   def index
     @events = Event.all
@@ -50,16 +55,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
-  end
-
-  def modify_event_params
-    # change date params from string to date and stored in global for use in create and update
-    @modified_event_params = event_params
-    %w(start_date end_date).each do |date_field_name|
-      @modified_event_params.except!(date_field_name)
-      @modified_event_params.merge!(date_field_name => convert_us_formatted_string_to_date_type(event_params[date_field_name]))
-    end
+    params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes, :owner_id)
   end
 
 end
