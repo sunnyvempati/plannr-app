@@ -3,8 +3,9 @@ class ContactsController < ApplicationController
   before_action :authenticate_user
   before_action :set_contact,
                 only: [:show, :edit, :update, :destroy]
-  before_action :add_owner_id_to_entity_params, 
-                only: [:create]
+  before_action only: [:create] do 
+    add_owner_id_to_entity_params(contact_params)
+  end  
 
   def index
     @contacts = Contact.all
@@ -54,12 +55,9 @@ class ContactsController < ApplicationController
     params.require(:contact).permit(:name, :email, :contact_type, :phone, :contact_company, :description, :owner_id)
   end
 
-  def add_owner_id_to_entity_params
-    @modified_entity_params = contact_params
-    @modified_entity_params.merge!({:owner_id =>  @current_user.id})
-    binding.pry
+  def add_owner_id_to_entity_params(entity_params)
+    @modified_entity_params_for_create = entity_params
+    @modified_entity_params_for_create.merge!({:owner_id =>  @current_user.id})
   end
 
 end
-
-
