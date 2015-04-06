@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
+  before_action :
   before_action :set_contact,
                 only: [:show, :edit, :update, :destroy]
   def index
@@ -23,7 +24,7 @@ class ContactsController < ApplicationController
 
   def create
     modified_entity_params = contact_params
-    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user_id)
+    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user.id)
 
     @contact = Contact.new(modified_entity_params)
     render_entity @contact
