@@ -1,5 +1,5 @@
 module DateHelpers
-  def convert_date_to_us_format(date)
+  def convert_us_formatted_string_to_date_type(date)
     begin
       if date.present?
         Date.strptime(date, "%m/%d/%Y")
