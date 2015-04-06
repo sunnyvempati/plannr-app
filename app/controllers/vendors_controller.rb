@@ -56,7 +56,7 @@ class VendorsController < ApplicationController
   def add_owner_id_to_entity_params(entity_params)
     @modified_entity_params_for_create = entity_params
     @modified_entity_params_for_create.merge!({:owner_id =>  @current_user.id})
-    binding.pry
+
   end
 
 end
