@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
             :presence => true
   validates_format_of :email,
                       :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-                      :message => 'is an invalid email address',
+                      :message => 'must be an email address',
                       :allow_blank => true
   validates_uniqueness_of :email, scope: :company_id, message: 'must be unique to your company'
 
