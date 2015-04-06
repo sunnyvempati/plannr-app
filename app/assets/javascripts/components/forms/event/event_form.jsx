@@ -19,8 +19,11 @@ var EventForm = React.createClass({
   componentWillMount: function () {
     // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
     // this allows spaces and numbers with decimal places
-    Formsy.addValidationRule('isPresentAndNumeric', function (n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
+    Formsy.addValidationRule('ifPresentIsNumeric', function (n) {
+      if (!!n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
+      return true;
     });
   },
   render: function () {
@@ -106,7 +109,7 @@ var EventForm = React.createClass({
             value={this.props.model.budget}
             disabled={this.props.disableForm}
             placeholder="How much will it cost?"
-            validations="isPresentAndNumeric"
+            validations="ifPresentIsNumeric"
             validationError="Must be a number (no commas)"
           />
           <TextAreaInput
