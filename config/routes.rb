@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'sign_up', to: 'users#new'
   post 'sign_up', to: 'users#create'
   post 'toggle_admin', to: 'users#toggle_admin'
+  post 'destroy_users', to: 'users#mass_destroy'
 
   # password reset
   get 'reset_password_request', to: 'password_resets#new'
