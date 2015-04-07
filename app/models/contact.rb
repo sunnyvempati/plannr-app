@@ -1,8 +1,13 @@
 class Contact < ActiveRecord::Base
-  has_and_belongs_to_many :events
-  acts_as_tenant :company
+  has_many :event_contacts
+  has_many :events, through: :event_contacts
+
   belongs_to :owner, class_name: "User"
+  
+  acts_as_tenant :company
+  
   enum contact_type: {client: 1, vendor: 2}
+
   validates :name,
             :presence => true
   validates_format_of :email,

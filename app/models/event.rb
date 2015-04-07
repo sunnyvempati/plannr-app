@@ -1,4 +1,7 @@
 class Event < ActiveRecord::Base
+  has_many :event_contacts
+  has_many :contacts, through: :event_contacts
+
   acts_as_tenant :company
 
   validates :name, presence: true
