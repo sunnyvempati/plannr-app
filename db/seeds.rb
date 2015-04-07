@@ -48,14 +48,16 @@ puts "Created Dinner for Schmucks"
 
 
 
-
-sam_contact = Contact.create(name: "Sam Doe", email: "sam@doe.com")
+sam_contact = Contact.create(name: "Sam Doe", email: "sam@doe.com", company: plannr_company)
 puts "Successfully created contact for Sam" if sam_contact
 
-jill_contact = Contact.create(name: "Jill Doe", email: "jill@doe.com")
+jill_contact = Contact.create(name: "Jill Doe", email: "jill@doe.com", company: plannr_company)
 puts "Successfully created contact for Jill" if jill_contact
 
-john_contact = Contact.create(name: "John Doe", email: "john@doe.com")
+mike_contact = Contact.create(name: "Mike Doe", email: "mike@doe.com", company: plannr_company)
+puts "Successfully created contact for Mike" if mike_contact
+
+john_contact = Contact.create(name: "John Other", email: "john@other.com", company: other_company)
 puts "Successfully created contact for John" if john_contact 
 
 
