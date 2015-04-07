@@ -1,4 +1,5 @@
 class Contact < ActiveRecord::Base
+  has_and_belongs_to_many :events
   acts_as_tenant :company
   belongs_to :owner, class_name: "User"
   enum contact_type: {client: 1, vendor: 2}
