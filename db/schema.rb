@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "phone"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
 
-  create_table "vendors", force: :cascade do |t|
+  create_table "vendors", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "location"
     t.string   "phone"
