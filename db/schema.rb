@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150313002912) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "phone"
