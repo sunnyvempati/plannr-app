@@ -10,6 +10,11 @@ class EventsController < ApplicationController
 
   def show
     if @event
+      # TODO: get all and then separate?  No get associated first (probably smaller),get unassociated when needed.
+      
+      @associated_contacts  = retrieve_contacts_associated_to_this_event
+      @unassociated_contacts = retrieve_contacts_not_associated_to_this_event
+
       render :show
     else
       redirect_to :new
@@ -57,6 +62,15 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
+  end
+
+  def retrieve_contacts_associated_to_this_event
+    @event.contacts
+    
+  end
+
+  def retrieve_contacts_not_associated_to_this_event
+    Contact.joins("LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id").where("ec.contact_id IS null OR ec.event_id != '" + @event.id + "'").select("contacts.*")
   end
 
 end

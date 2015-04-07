@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   post 'resend_invitation', to: 'invitations#resend'
 
   # company
-  get 'company', to: 'companies#show'
+  get 'company', to: 'companies#show' 
+
+  # event_contacts
+  post 'event_contacts', to:'event_contacts#create'
+  delete 'event_contacts', to:'event_contacts#destroy'
 
   resources :tasks, :events, :invitations, :users, :profiles, :contacts
 end
