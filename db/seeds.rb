@@ -46,3 +46,17 @@ Event.create(company: plannr_company,
 
 puts "Created Dinner for Schmucks"
 
+
+
+
+sam_contact = Contact.create(name: "Sam Doe", email: "sam@doe.com")
+puts "Successfully created contact for Sam" if sam_contact
+
+jill_contact = Contact.create(name: "Jill Doe", email: "jill@doe.com")
+puts "Successfully created contact for Jill" if jill_contact
+
+john_contact = Contact.create(name: "John Doe", email: "john@doe.com")
+puts "Successfully created contact for John" if john_contact 
+
+
+
