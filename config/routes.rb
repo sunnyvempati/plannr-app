@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   # company
   get 'company', to: 'companies#show'
 
-  resources :tasks, :events, :invitations, :users, :profiles, :contacts
+  resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 end
