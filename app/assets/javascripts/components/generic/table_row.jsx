@@ -1,14 +1,14 @@
-var GridRow = React.createClass({
+var TableRow = React.createClass({
   render: function() {
     var rowColumns = this.props.columns.map(function(columnAttr) {
       return(
-        <td className="Grid-rowColumn">{this.props.data[columnAttr]}</td>
+        <div className="Table-rowItem">{this.props.data[columnAttr]}</div>
       );
     }, this);
     return (
-      <tr className="Grid-row">
+      <div className="Table-row">
         {rowColumns}
-      </tr>
+      </div>
     );
   }
 });

@@ -19,18 +19,18 @@ var CompanyUserRow = React.createClass({
     var adminText = this.state.isAdmin ? "remove" : "make";
     var data = this.props.data;
     return (
-      <tr>
-        <td>
+      <div className="Table-row">
+        <div className="Table-rowItem u-flexGrow-1">
           <input type="checkbox" onChange={this.checkboxChanged} value={this.props.data["id"]} checked={this.props.checked} />
-        </td>
-        <td>{data["email"]}</td>
-        <td>{data["name"]}</td>
-        <td>
+        </div>
+        <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
+        <div className="Table-rowItem u-flexGrow-4">{data["email"]}</div>
+        <div className="Table-rowItem u-flexGrow-2">
           <div className="UserInvitationTable-admin" onClick={this.toggleAdmin}>
             {adminText}
           </div>
-        </td>
-      </tr>
+        </div>
+      </div>
     );
   }
 });

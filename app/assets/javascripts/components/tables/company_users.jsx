@@ -13,10 +13,9 @@ var CompanyUserGrid = React.createClass({
     }.bind(this));
   },
   buttonList: function() {
+    var disabled = this.state.checkedItems.length == 0;
     return(
-      <div>
-        <Button onClick={this.DeleteUserClick}>Delete User</Button>
-      </div>
+      <Button onClick={this.DeleteUserClick} disabled={disabled}>Delete</Button>
     );
   },
   DeleteUserClick: function() {
@@ -50,8 +49,16 @@ var CompanyUserGrid = React.createClass({
       checkedItems: checkedItems
     })
   },
+  getHeaders: function() {
+    return [
+      {name: "", grow: 1},
+      {name: "Name", grow: 4},
+      {name: "Email", grow: 3},
+      {name: "Admin", grow: 2},
+    ];
+  },
   render: function() {
-    var headers = ["", "Email", "Name", "Admin"];
+    var headers = this.getHeaders();
     var columns = ["email", "name", "company_admin"];
     var customRows = this.state.results.map(function(result) {
       var checked = this.state.checkedItems.indexOf(result.id) > -1;
@@ -60,13 +67,14 @@ var CompanyUserGrid = React.createClass({
       );
     }, this);
     return (
-      <div className="CompanyUserGrid">
-        <Grid results={this.state.results}
-              headers={headers}
-              checkbox={true}
-              buttonList={this.buttonList()}
-              useCustomRowComponent={true}
-              customRows={customRows} />
+      <div className="CompanyUserTableContainer">
+        <Table results={this.state.results}
+               headers={headers}
+               checkbox={true}
+               buttonList={this.buttonList()}
+               useCustomRowComponent={true}
+               customRows={customRows}
+               title="Users" />
       </div>
     );
   }
