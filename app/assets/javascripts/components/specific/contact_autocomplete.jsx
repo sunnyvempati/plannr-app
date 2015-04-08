@@ -14,7 +14,7 @@ var ContactAutoComplete = React.createClass({
           },
           success: function( data ) {
               //add a record for the creation of a contact
-              data.data.splice(0,0,{name: "+Create", email:data.searchText, id:-1});
+              data.data.splice(0,0,{email: "+Create", name:data.searchText, id:-1});
               //format response to be array of strings
               response( $.map(data.data, function (item) {
                 return { 
@@ -39,6 +39,7 @@ var ContactAutoComplete = React.createClass({
     //controls the data show in the dd selector
     //TODO: figure out how to use existing React component
     var href = "/event_contacts?event_id=" + this.props.eventId 
+    href = href + "&searchText=" + item.label;
     href = href + "&contact_id=" + item.id;
     var a = '<a data-method="post" rel="nofollow" href="' + href + '"> + </a>';
     return $( "<li>" )
