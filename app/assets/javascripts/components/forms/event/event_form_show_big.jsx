@@ -4,9 +4,10 @@ var EventFormShowBig = React.createClass({
 
     return (
       <div>
-        <div><div>
-          <ContactAutoComplete eventId={this.props.model.id} /> <br/>
-            unassociated_contacts:
+        <div>
+          <div>
+            <ContactAutoComplete eventId={this.props.model.id} /> <br/>
+              unassociated_contacts:
             <ContactFormSelect items={this.props.unassociated_contacts} associated={false} eventId={this.props.model.id} />
           </div>
           <div>
