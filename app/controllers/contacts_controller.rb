@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_contact,  only: [:show, :edit, :update, :destroy]
+
   def index
     @contacts = Contact.all
     @header = "Contacts"
