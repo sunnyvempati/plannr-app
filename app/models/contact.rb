@@ -8,6 +8,9 @@ class Contact < ActiveRecord::Base
   
   enum contact_type: {client: 1, vendor: 2}
 
+ scope :name_or_email_like, ->(search_condition) {      where('contacts.name LIKE ? OR contacts.email LIKE ?', search_condition, search_condition)  }
+
+
   validates :name,
             :presence => true
   validates_format_of :email,

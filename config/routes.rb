@@ -27,5 +27,8 @@ Rails.application.routes.draw do
   post 'event_contacts', to:'event_contacts#create'
   delete 'event_contacts', to:'event_contacts#destroy'
 
+  # contacts
+  get 'contacts/search', to:'contacts#search'
+
   resources :tasks, :events, :invitations, :users, :profiles, :contacts
 end
