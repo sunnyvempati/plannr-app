@@ -1,5 +1,11 @@
 input[type="checkbox"] {
-  border: 1px solid $black-three-fourths;
-  width: $size-increment * 6;
-  height: $size-increment * 6;
+  -webkit-appearance: none;
+  height: $size-increment * 2;
+  width: $size-increment * 2;
+  border: solid 2px $plannr-green;
+  cursor: pointer;
+  &:checked {
+    background-color: $plannr-green;
+    content: '\2714';
+  }
 }

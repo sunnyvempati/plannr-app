@@ -21,7 +21,8 @@ var CompanyUserRow = React.createClass({
     return (
       <div className="Table-row">
         <div className="Table-rowItem u-flexGrow-1">
-          <input type="checkbox" onChange={this.checkboxChanged} value={this.props.data["id"]} checked={this.props.checked} />
+          <CheckboxInput onChange={this.checkboxChanged} value={this.props.data["id"]} checked={this.props.checked} />
+
         </div>
         <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
         <div className="Table-rowItem u-flexGrow-4">{data["email"]}</div>
