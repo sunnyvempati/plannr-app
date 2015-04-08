@@ -44,7 +44,7 @@ class ContactsController < ApplicationController
     @contacts = searchMe(params[:searchText], params[:eventId], params[:associated])
 
     respond_to do |format|
-      msg = { :status => "ok", :message => "Success!", :data => @contacts }
+      msg = { :status => "ok", :message => "Success!", :data => @contacts, :searchText =>  params[:searchText]}
       format.json  { render :json => msg } # don't do msg.to_json
     end
   end
