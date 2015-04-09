@@ -30,5 +30,8 @@ Rails.application.routes.draw do
   # contacts
   get 'contacts/search', to:'contacts#search'
 
+  get 'events/:id/associated_contacts', to: 'events#retrieve_contacts_associated_to_this_event'
+  get 'events/:id/unassociated_contacts', to: 'events#retrieve_contacts_not_associated_to_this_event'
+
   resources :tasks, :events, :invitations, :users, :profiles, :contacts
 end

@@ -1,27 +1,22 @@
 var EventFormShowBig = React.createClass({
+  getInitialState: function() {
+    return {
+      unassociated_contacts:  this.props.unassociated_contacts,
+       associated_contacts:  this.props.associated_contacts
+    };
+  },
   callback: function() {
-
     console.log('boom');
-
-    this.refs.ass.forceUpdate();
-    this.refs.unass.forceUpdate();
+    unassociated_contacts: this.refs.unass.getData();
+    associated_contacts: this.refs.ass.getData();
   },
   render: function () {
     var action = "/events";
 
     return (
       <div>
-        <div>
-          <div>
-            <ContactAutoComplete eventId={this.props.model.id} /> <br/>
-            unassociated_contacts:
-            <ContactFormSelect ref='unass' items={this.props.unassociated_contacts} associated={false} eventId={this.props.model.id} callback={this.callback} />
-          </div>
-          <div>
-            associated_contacts:
-            <ContactFormSelect ref='ass' items={this.props.associated_contacts} associated={true} eventId={this.props.model.id} callback={this.callback} />
-          </div>
-        </div>
+       
+        <ContactAssociationEditor associatedObjectId={this.props.model.id} />
         <EventForm
         action= {action}
         model={this.props.model}

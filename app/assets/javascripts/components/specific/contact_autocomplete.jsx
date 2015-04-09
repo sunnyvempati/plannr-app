@@ -1,25 +1,32 @@
 var ContactAutoComplete = React.createClass({
+  propTypes: {
+    eventId: React.PropTypes.number.isRequired,
+    callback: React.PropTypes.func.isRequired
+  },
   componentDidMount: function() {
-    var event_id = this.props.eventId;
+    var eventId = this.props.eventId;
+    var _this = this;
     $(React.findDOMNode(this))
     .autocomplete({
       source: function( request, response ) {
+
         $.ajax({
           url: "/contacts/search",
           dataType: "json",
           data: {
             searchText: request.term,
             associated: false,
-            eventId: event_id
+            eventId: eventId
           },
           success: function( data ) {
               //add a record for the creation of a contact
-              data.data.splice(0,0,{email: "+Create", name:data.searchText, id:-1});
+              data.data.splice(0,0,{email: "Create ...", name:data.searchText, id:-1});
+
               //format response to be array of strings
               response( $.map(data.data, function (item) {
                 return { 
                   label: item.name, 
-                  value: item.name, 
+                  value: '', 
                   id: item.id,
                   desc: item.email};
                 }) );
@@ -30,31 +37,74 @@ var ContactAutoComplete = React.createClass({
             }
           });
       },
-      minLength: 2})
-    .autocomplete("instance")
-    ._renderItem = this.customRenderItem;
-  },
-  customRenderItem: function( ul, item ) {
+      minLength: 2,
+      delay:300})
+.autocomplete("instance")
+._renderItem = function(ul, item) {
+  return _this.customRenderItem(ul, item, _this.ajaxAdd)};
+},
+onSuccess: function() {
+  this.props.callback();
+},
+ajaxAdd : function(itemId, searchText) {
+  var _this = this;
+  var url = "/event_contacts?event_id=" + _this.props.eventId;
+  url = url + "&contact_id=" + itemId;
+  if (typeof searchText !== 'undefined') {
+    url = url + "&searchText=" + searchText;
+  }
 
-    //controls the data show in the dd selector
-    //TODO: figure out how to use existing React component
-    var href = "/event_contacts?event_id=" + this.props.eventId 
-    href = href + "&searchText=" + item.label;
-    href = href + "&contact_id=" + item.id;
-    var a = '<a data-method="post" rel="nofollow" href="' + href + '"> + </a>';
-    return $( "<li>" )
-    .append( item.label + "<br>")
-    .append( item.desc   )
-    .append ( a )
-    .appendTo( ul );
-  },
-  componentWillUnmount: function() {
-    $(React.findDOMNode(this)).autocomplete('destroy');
-  },
-  render: function () {
+  $.ajax({
+    url: url,
+    dataType: "json",
+    type: "post",
+    success: function( data ) {
+      _this.props.callback();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+              //TODO: better error handling
+              throw "jqXHR=" + jqXHR + "; textStatus=" + textStatus + "; errorThrown" + errorThrown;
+            }
+          });
+},
+customRenderItem: function( ul, item, clickerThingee ) {
+  var a = $('<a href="#">').text('+');
+  a.click(function(){ 
+    clickerThingee(item.id, item.label); 
+    $('#contact_autocomplete').val('');
+  });
+
+  return $( "<li>" )
+  .append( item.label + "<br>")
+  .append( item.desc   )
+  .append ( a )
+  .appendTo( ul );
+},
+componentWillUnmount: function() {
+  $(React.findDOMNode(this)).autocomplete('destroy');
+},
+render: function () {
+  return (
+    <input type='text' name='contact' id='contact_autocomplete'/>
+    );
+}
+});
+
+
+
+var MyLi = React.createClass({
+
+  render: function() {
     return (
-      <input type='text' name='contact' id='contact_autocomplete'/>
+      <li>
+      {this.props.label}<br />
+      {this.props.desc}
+      <AddLink contactId={this.props.contactId} eventId={this.props.eventId} searchText={this.props.searchText} />
+      </li>
       );
   }
+
 });
+
+
 

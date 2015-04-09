@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :retrieve_contacts_associated_to_this_event, :retrieve_contacts_not_associated_to_this_event]
 
   def index
     @events = Event.all
@@ -11,10 +11,8 @@ class EventsController < ApplicationController
   def show
     if @event
       # TODO: get all and then separate?  No get associated first (probably smaller),get unassociated when needed.
-      
-      @associated_contacts  = retrieve_contacts_associated_to_this_event
-      @unassociated_contacts = retrieve_contacts_not_associated_to_this_event
-
+      # retrieve_contacts_associated_to_this_event
+      # retrieve_contacts_not_associated_to_this_event
       render :show
     else
       redirect_to :new
@@ -55,6 +53,22 @@ class EventsController < ApplicationController
     end
   end
 
+  def retrieve_contacts_associated_to_this_event
+    @associated_contacts = @event.contacts
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :data => @associated_contacts}
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
+  def retrieve_contacts_not_associated_to_this_event
+    @unassociated_contacts = Contact.joins("LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id").where("ec.contact_id IS null OR ec.event_id != '" + @event.id + "'").select("contacts.*")
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :data => @unassociated_contacts}
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
   private
   def set_event
     @event = Event.find_by_id(params[:id])
@@ -64,13 +78,6 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
   end
 
-  def retrieve_contacts_associated_to_this_event
-    @event.contacts
-    
-  end
-
-  def retrieve_contacts_not_associated_to_this_event
-    Contact.joins("LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id").where("ec.contact_id IS null OR ec.event_id != '" + @event.id + "'").select("contacts.*")
-  end
+  
 
 end
