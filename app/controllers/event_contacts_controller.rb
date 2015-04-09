@@ -37,9 +37,10 @@ class EventContactsController < ApplicationController
     # searchText is present
 
     error_message = ''
-
-    if params[:searchText] == nil 
-      error_message = error_message + 'Missing searchText parameter; '
+    if params[:contact_id] == "-1"
+      if params[:searchText] == nil 
+        error_message = error_message + 'Missing searchText parameter; '
+      end
     end
 
     if params[:event_id] == nil 
