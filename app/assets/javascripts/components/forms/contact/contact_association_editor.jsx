@@ -9,18 +9,11 @@ var ContactAssociationEditor = React.createClass({
     };
   },
   componentDidMount: function () {
+    this.refreshData();
+  },
+  refreshData: function () {
     this.getAssociatedData();
     this.getUnassociatedData();
-  },
-  callback: function () {
-    this.getUnassociatedData();
-    this.getAssociatedData();
-  },
-  onSuccessAdd: function () {
-    this.props.callback();
-  },
-  onSuccessRemove: function () {
-    this.props.callback();
   },
   getAssociatedData: function () {
     var _this = this;
@@ -67,13 +60,13 @@ var ContactAssociationEditor = React.createClass({
 
     return (<div>
       <div>
-      <ContactAutoComplete eventId={this.props.associatedObjectId} callback={this.callback} /> <br/>
+      <ContactAutoComplete eventId={this.props.associatedObjectId} callback={this.refreshData} /> <br/>
       unassociated_contacts:
-      <ContactAssociationList ref='unass' items={this.state.unassociatedItems} associated={false} associatedObjectId={this.props.associatedObjectId} onSuccessCallback={this.callback} />
+      <ContactAssociationList items={this.state.unassociatedItems} associated={false} associatedObjectId={this.props.associatedObjectId} onSuccessCallback={this.refreshData} />
       </div>
       <div>
       associated_contacts:
-      <ContactAssociationList ref='ass' items={this.state.associatedItems} associated={true} associatedObjectId={this.props.associatedObjectId} onSuccessCallback={this.callback} />
+      <ContactAssociationList  items={this.state.associatedItems} associated={true} associatedObjectId={this.props.associatedObjectId} onSuccessCallback={this.refreshData} />
       </div>
       </div>);
 }
