@@ -4,10 +4,12 @@ var ContactAssociationEditor = React.createClass({
     this.refreshUnassociatedData();
   },
   refreshAssociatedData: function () {
+    //TODO: get rid of this string
     var stateDataKey = "associatedItems";
     this.retrieveDataAsync( this, this.props.retrieveAssociatedDataUrl, stateDataKey);
   },
   refreshUnassociatedData: function () {
+    //TODO: get rid of this string
     var stateDataKey = "unassociatedItems";
     this.retrieveDataAsync( this, url, stateDataKey);
   },
