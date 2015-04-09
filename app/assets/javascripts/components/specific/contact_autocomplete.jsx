@@ -1,11 +1,11 @@
 var ContactAutoComplete = React.createClass({
   propTypes: {
-    eventId: React.PropTypes.number.isRequired,
+    associatedObjectId: React.PropTypes.number.isRequired,
     callback: React.PropTypes.func.isRequired
   },
   componentDidMount: function() {
-    var eventId = this.props.eventId;
     var _this = this;
+    var associatedObjectId = this.props.associatedObjectId;
     $(React.findDOMNode(this))
     .autocomplete({
       source: function( request, response ) {
@@ -16,7 +16,7 @@ var ContactAutoComplete = React.createClass({
           data: {
             searchText: request.term,
             associated: false,
-            eventId: eventId
+            associatedObjectId: associatedObjectId
           },
           success: function( data ) {
               //add a record for the creation of a contact
@@ -48,7 +48,7 @@ onSuccess: function() {
 },
 ajaxAdd : function(itemId, searchText) {
   var _this = this;
-  var url = "/event_contacts?event_id=" + _this.props.eventId;
+  var url = "/event_contacts?event_id=" + _this.props.associatedObjectId;
   url = url + "&contact_id=" + itemId;
   if (typeof searchText !== 'undefined') {
     url = url + "&searchText=" + searchText;
@@ -99,7 +99,7 @@ var MyLi = React.createClass({
       <li>
       {this.props.label}<br />
       {this.props.desc}
-      <AddLink contactId={this.props.contactId} eventId={this.props.eventId} searchText={this.props.searchText} />
+      <AddLink contactId={this.props.contactId} associatedObjectId={this.props.associatedObjectId} searchText={this.props.searchText} />
       </li>
       );
   }

@@ -11,9 +11,9 @@ var ContactAssociationEditor = React.createClass({
   refreshUnassociatedData: function () {
     //TODO: get rid of this string
     var stateDataKey = "unassociatedItems";
-    this.retrieveDataAsync( this, url, stateDataKey);
+    this.retrieveDataAsync( this, this.props.retrieveUnassociatedDataUrl, stateDataKey);
   },
-  retrieveDataAsync: function (context, this.props.retrieveUnassociatedDataUrl, stateDataKey) {
+  retrieveDataAsync: function (context, url, stateDataKey) {
     $.ajax({
       context: context,
       url: url,
@@ -49,7 +49,7 @@ var ContactAssociationEditor = React.createClass({
   render: function () {
     return (<div>
       <div>
-      <ContactAutoComplete eventId={this.props.associatedObjectId} callback={this.refreshData} /> <br/>
+      <ContactAutoComplete associatedObjectId={this.props.associatedObjectId} callback={this.refreshData} /> <br/>
       unassociated_contacts:
       <ContactAssociationList items={this.state.unassociatedItems} associated={false} associatedObjectId={this.props.associatedObjectId} onSuccessCallback={this.refreshData} />
       </div>

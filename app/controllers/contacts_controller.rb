@@ -42,7 +42,7 @@ class ContactsController < ApplicationController
   end
 
   def search
-    @contacts = searchMe(params[:searchText], params[:eventId], params[:associated])
+    @contacts = searchMe(params[:searchText], params[:associatedObjectId], params[:associated])
 
     respond_to do |format|
       msg = { :status => "ok", :message => "Success!", :data => @contacts, :searchText =>  params[:searchText]}
