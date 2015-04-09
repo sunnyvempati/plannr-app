@@ -30,10 +30,9 @@ var ContactAssociationEditor = React.createClass({
         throw "jqXHR=" + jqXHR + "; textStatus=" + textStatus + "; errorThrown" + errorThrown;
       });
   },
-  /* React methods */
+/* React methods */
   propTypes: {
     associatedObjectId: React.PropTypes.number.isRequired
-
   },
   getInitialState: function () {
     return {

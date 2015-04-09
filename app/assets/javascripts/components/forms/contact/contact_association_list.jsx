@@ -15,15 +15,15 @@ var ContactAssociationList = React.createClass({
       console.log('items undefined in list render')
     }
     
-    var createItem = function (item, index, isAssociated, eventId) {
+    var createItem = function (item, index, isAssociated, associatedObjectId) {
       if (isAssociated) {
         return <li key={index} value={item.id}>{item.name}({item.email})
-        <RemoveLink contactId={item.id} eventId={eventId} onSuccessCallback={_this.props.onSuccessCallback} />
+        <RemoveLink contactId={item.id} associatedObjectId={associatedObjectId} onSuccessCallback={_this.props.onSuccessCallback} />
         </li>;
       }
       else{
         return <li key={index} value={item.id}>{item.name}({item.email})
-        <AddLink contactId={item.id} eventId={eventId} onSuccessCallback={_this.props.onSuccessCallback} /></li>;  
+        <AddLink contactId={item.id} associatedObjectId={associatedObjectId} onSuccessCallback={_this.props.onSuccessCallback} /></li>;  
       }
     };
     return <ul>{this.props.items.map(
@@ -34,11 +34,9 @@ var ContactAssociationList = React.createClass({
 
 var AddLink = React.createClass({
   ajaxAdd : function () {
-    
     var _this = this;
-    
     $.ajax({
-      url: "/event_contacts?contact_id=" + _this.props.contactId + "&event_id=" + _this.props.eventId,
+      url: "/event_contacts?contact_id=" + _this.props.contactId + "&event_id=" + _this.props.associatedObjectId,
       dataType: "json",
       type: "post",
       success: function ( data ) {
@@ -58,15 +56,15 @@ var AddLink = React.createClass({
 
 var RemoveLink = React.createClass({
   getInitialState: function () {
-      return {
-          onSuccessCallback: this.props.onSuccessCallback  
-      };
+    return {
+      onSuccessCallback: this.props.onSuccessCallback  
+    };
   },
   ajaxRemove : function () {
     var _this = this;
     
     $.ajax({
-      url: "/event_contacts?contact_id=" + _this.props.contactId + "&event_id=" + _this.props.eventId,
+      url: "/event_contacts?contact_id=" + _this.props.contactId + "&event_id=" + _this.props.associatedObjectId,
       dataType: "json",
       type: "delete",
       success: function ( data ) {
@@ -90,7 +88,7 @@ var MyLink = React.createClass({
   render: function() {
     return (
       <a rel="nofollow" href='#' onClick={this.props.onClick}> remove </a>
-    );
+      );
   }
 
 });
