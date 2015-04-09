@@ -50,6 +50,7 @@ var ContactAutoComplete = React.createClass({
       this.props.callback();
     },
     ajaxAdd : function(itemId, searchText) {
+      //TODO: cleanup URLs, add specific add and add/create ?
       var _this = this;
       var url = "/event_contacts?event_id=" + _this.props.associatedObjectId;
       url = url + "&contact_id=" + itemId;
@@ -95,19 +96,7 @@ var ContactAutoComplete = React.createClass({
 
 
 
-var MyLi = React.createClass({
 
-  render: function() {
-    return (
-      <li>
-      {this.props.label}<br />
-      {this.props.desc}
-      <AddLink contactId={this.props.contactId} associatedObjectId={this.props.associatedObjectId} searchText={this.props.searchText} />
-      </li>
-      );
-  }
-
-});
 
 
 
