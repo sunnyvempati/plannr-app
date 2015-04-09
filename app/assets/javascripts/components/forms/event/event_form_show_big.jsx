@@ -1,17 +1,13 @@
 var EventFormShowBig = React.createClass({
-
   render: function () {
     var action = "/events";
-
     return (
       <div>
-
         <ContactAssociationEditor 
           associatedObjectId={this.props.model.id} 
-          retrieveAssociatedDataUrl={"/events/" + this.props.model.id + "/associated_contacts"}
-          retrieveUnassociatedDataUrl={"/events/" + this.props.model.id + "/unassociated_contacts"}
-          />
-          
+          retrieveAssociatedDataUrl={action + "/" + this.props.model.id + "/associated_contacts"}
+          retrieveUnassociatedDataUrl={action + "/" + this.props.model.id + "/unassociated_contacts"}
+        />
         <EventForm
           action= {action}
           model={this.props.model}
@@ -19,7 +15,6 @@ var EventFormShowBig = React.createClass({
           showButtonList={false}
           notice={this.props.notice}
         />
-
       </div>
       );
   }
