@@ -1,63 +1,50 @@
 var ContactAssociationEditor = React.createClass({
-  propTypes: {
-    associatedObjectId: React.PropTypes.number.isRequired
-  },
-  getInitialState: function () {
-    return {
-      associatedItems: [],
-      unassociatedItems: []
-    };
-  },
-  componentDidMount: function () {
-    this.refreshData();
-  },
   refreshData: function () {
-    this.getAssociatedData();
-    this.getUnassociatedData();
+    this.refreshAssociatedData();
+    this.refreshUnassociatedData();
   },
-  getAssociatedData: function () {
-    var _this = this;
-    var url = "/events/" + this.props.associatedObjectId + "/associated_contacts";
+  refreshAssociatedData: function () {
     var stateDataKey = "associatedItems";
-
-    this.getData(this, url)
-    .done(function(result){
+    this.retrieveDataAsync( this, this.props.retrieveAssociatedDataUrl, stateDataKey);
+  },
+  refreshUnassociatedData: function () {
+    var stateDataKey = "unassociatedItems";
+    this.retrieveDataAsync( this, url, stateDataKey);
+  },
+  retrieveDataAsync: function (context, this.props.retrieveUnassociatedDataUrl, stateDataKey) {
+    $.ajax({
+      context: context,
+      url: url,
+      dataType: "json",
+      type: "get"
+    }).done(function (result){
+      //TODO: don't setState in here, set it via callback?
       var tempState = {};
       tempState[stateDataKey] = result.data;   
-      _this.setState(tempState);
+      this.setState(tempState);
     } )
     .fail(function (jqXHR, textStatus, errorThrown) {
         //TODO: better error handling
         throw "jqXHR=" + jqXHR + "; textStatus=" + textStatus + "; errorThrown" + errorThrown;
       });
   },
-  getUnassociatedData: function () {
-    var _this = this;
-    var url = "/events/" + this.props.associatedObjectId + "/unassociated_contacts";
-    var stateDataKey = "unassociatedItems";
+  /* React methods */
+  propTypes: {
+    associatedObjectId: React.PropTypes.number.isRequired
 
-    this.getData(this, url)
-    .done(function(result){
-      var tempState = {};
-      tempState[stateDataKey] = result.data;   
-      _this.setState(tempState);
-    } )
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        //TODO: better error handling
-        throw "jqXHR=" + jqXHR + "; textStatus=" + textStatus + "; errorThrown" + errorThrown;
-      });;
   },
-  getData: function (context, url) {
-    return $.ajax({
-      context: context,
-      url: url,
-      dataType: "json",
-      type: "get"
-    });
+  getInitialState: function () {
+    return {
+      associatedItems: [],
+      unassociatedItems: [],
+      retrieveAssociatedDataUrl: this.props.retrieveAssociatedDataUrl,
+      retrieveUnassociatedDataUrl: this.props.retrieveUnassociatedDataUrl
+    };
   },
-
+  componentDidMount: function () {
+    this.refreshData();
+  },
   render: function () {
-
     return (<div>
       <div>
       <ContactAutoComplete eventId={this.props.associatedObjectId} callback={this.refreshData} /> <br/>
@@ -69,7 +56,7 @@ var ContactAssociationEditor = React.createClass({
       <ContactAssociationList  items={this.state.associatedItems} associated={true} associatedObjectId={this.props.associatedObjectId} onSuccessCallback={this.refreshData} />
       </div>
       </div>);
-}
+  }
 });
 
 
