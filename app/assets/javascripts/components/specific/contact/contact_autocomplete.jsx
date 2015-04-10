@@ -61,11 +61,12 @@ var ContactAutoComplete = React.createClass({
     .append ( a )
     .appendTo( ul );
   },
+  
+/* React Methods */
   propTypes: {
     associatedObjectId: React.PropTypes.number.isRequired,
     callback: React.PropTypes.func.isRequired
   },
-/* React Methods */
   componentDidMount: function() {
     var _this = this;
     var associatedObjectId = this.props.associatedObjectId;
