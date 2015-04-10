@@ -58,3 +58,16 @@ puts "Successfully created contact for Mike" if mike_contact
 
 john_contact = Contact.create(name: "John Other", email: "john@other.com", company: other_company)
 puts "Successfully created contact for John" if john_contact 
+
+
+balloons_vendor = Vendor.create(name: "Balloons, Inc")
+puts "Successfully create vendor for Ballons Inc"
+
+inflatable_castles_vendor = Vendor.create(name: "Inflatable Castles, Inc")
+puts "SuccessfInflatable Castlesully create vendor for Inflatable Castles Inc"
+
+jimmys_vendor = Vendor.create(name: "Jimmy's Mobile Petting Zoo")
+puts "Successfully create vendor for Jimmy's Mobile Petting Zoo"
+
+party_down_catering_vendor = Vendor.create(name: "Party down Catering, Inc")
+puts "Successfully create vendor for Party Down Catering"
