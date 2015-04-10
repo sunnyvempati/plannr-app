@@ -73,6 +73,17 @@ class Consolidate0312 < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    create_table :vendors, id: :uuid do |t|
+      t.string :name
+      t.string :location
+      t.string :phone
+      t.string :primary_contact
+      t.uuid :owner_id
+      t.uuid :company_id
+
+      t.timestamps null: false
+    end
+      
     create_table :contacts, id: :uuid do |t|
       t.string :name
       t.string :email
@@ -82,6 +93,7 @@ class Consolidate0312 < ActiveRecord::Migration
       t.integer :contact_type
       t.uuid :owner_id
       t.uuid :company_id
+      
       t.timestamps null: false
     end
 

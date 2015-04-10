@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_action :check_invitation!, :require_no_user, only: [:new, :create]
 
   # only admins can toggle admin abilities
-  before_action :check_admin, only: [:toggle_admin]
+  before_action :check_admin, only: [:toggle_admin, :index]
+
+  def index
+    render json: User.includes(:profile).order("profiles.first_name asc"), each_serializer: CompanyUserSerializer
+  end
 
   def new
     @user = User.new(email: @invitation.email, company: @invitation.company)
@@ -36,6 +40,11 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     user.update_attribute(:company_admin, !user.company_admin)
     render json: {message: "success", admin: user.company_admin}
+  end
+
+  def mass_destroy
+    User.destroy(params[:ids])
+    render json: {message: "success"}
   end
 
   private

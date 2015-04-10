@@ -119,4 +119,15 @@ ActiveRecord::Schema.define(version: 20150407041607) do
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
   add_index "users", ["persistence_token"], name: "index_users_on_persistence_token", using: :btree
 
+  create_table "vendors", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "phone"
+    t.string   "primary_contact"
+    t.uuid     "owner_id"
+    t.uuid     "company_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
 end

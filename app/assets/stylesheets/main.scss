@@ -13,6 +13,7 @@ $fa-font-path: "components-font-awesome/fonts/";
 @import "molecules/_molecules";
 @import "containers/_containers";
 @import "specific";
+@import "utils";
 
 body {
   background-color: $body-bg;
