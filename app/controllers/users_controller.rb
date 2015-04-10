@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :check_admin, only: [:toggle_admin, :index]
 
   def index
-    render json: User.all, each_serializer: CompanyUserSerializer
+    render json: User.includes(:profile).order("profiles.first_name asc"), each_serializer: CompanyUserSerializer
   end
 
   def new

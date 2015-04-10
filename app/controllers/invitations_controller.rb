@@ -3,7 +3,7 @@ class InvitationsController < ApplicationController
   before_action :check_admin, only: [:create, :resend]
 
   def index
-    @invitations = Invitation.all
+    @invitations = Invitation.all.where(recipient: nil)
     render json: @invitations, each_serializer: InvitationSerializer
   end
 
