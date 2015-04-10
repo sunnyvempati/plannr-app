@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'sign_up', to: 'users#new'
   post 'sign_up', to: 'users#create'
   post 'toggle_admin', to: 'users#toggle_admin'
+  post 'destroy_users', to: 'users#mass_destroy'
 
   # password reset
   get 'reset_password_request', to: 'password_resets#new'
@@ -33,5 +34,5 @@ Rails.application.routes.draw do
   get 'events/:id/associated_contacts', to: 'events#retrieve_contacts_associated_to_this_event'
   get 'events/:id/unassociated_contacts', to: 'events#retrieve_contacts_not_associated_to_this_event'
 
-  resources :tasks, :events, :invitations, :users, :profiles, :contacts
+  resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 end
