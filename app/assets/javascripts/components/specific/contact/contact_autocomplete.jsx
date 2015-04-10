@@ -91,7 +91,8 @@ var ContactAutoComplete = React.createClass({
     },
     render: function () {
       return (
-        <input type='text' name='contact' id='contact_autocomplete'/>
+     <input type='text' name='contact' id='contact_autocomplete' className='TileInput-field' placeholder='+ Contacts Search/Create'/>
+       
         );
     }
   });
