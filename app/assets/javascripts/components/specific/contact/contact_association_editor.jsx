@@ -32,7 +32,9 @@ var ContactAssociationEditor = React.createClass({
   },
 /* React methods */
   propTypes: {
-    associatedObjectId: React.PropTypes.number.isRequired
+    associatedObjectId: React.PropTypes.number.isRequired,
+    retrieveAssociatedDataUrl: React.PropTypes.string.isRequired,
+    retrieveUnassociatedDataUrl: React.PropTypes.string.isRequired
   },
   getInitialState: function () {
     return {
