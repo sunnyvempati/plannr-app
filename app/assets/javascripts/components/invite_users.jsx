@@ -61,7 +61,7 @@ var InviteUsers = React.createClass({
           </Form>
         </div>
         <div className="InviteUsersContainer-list">
-        <h2>All Users</h2>
+        <h2>All Invites</h2>
           <table className="UserInvitationTable">
             {invites}
             <span>{invite_message}</span>

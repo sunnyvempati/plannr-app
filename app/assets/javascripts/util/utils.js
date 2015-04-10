@@ -1,4 +1,4 @@
-var util = (function () {
+var Utils = (function () {
   return {
     //convert ISO date (Bing it) to US date (MM/DD/YYYY)
     isoDateToUsFormat: function (isoDate ) {
@@ -15,6 +15,15 @@ var util = (function () {
       }
       return retDate;
     }
+
+    // postToServer: function(url, data) {
+    //   var result = {}
+    //   $.post(url, data, function(result) {
+    //     result = {success: true, results: result}
+    //   }).fail(function(result){
+    //     result = {success: false, results: result}
+    //   })
+    // }
   }
 
 }());

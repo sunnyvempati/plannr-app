@@ -8,7 +8,7 @@
 }
 
 .MenuHeader-name,
-.MenuHeader-company {
+.MenuHeader-subheader {
   flex: 1 100%;
   color: rgba(255, 255, 255, 0.8);
   padding-top: $size-increment;
@@ -18,6 +18,6 @@
   font-size: 20px;
 }
 
-.MenuHeader-company {
+.MenuHeader-subheader {
   font-size: 14px;
 }
