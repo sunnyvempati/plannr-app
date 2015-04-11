@@ -1,4 +1,9 @@
 class Vendor < ActiveRecord::Base
+  has_many :event_vendors
+  has_many :events, through: :event_vendors
+
+  belongs_to :owner, class_name: "User"
+  
   acts_as_tenant :company
   validates :name, presence: true
   validates_format_of :phone,
