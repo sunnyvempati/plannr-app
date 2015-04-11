@@ -30,4 +30,8 @@ class Event < ActiveRecord::Base
       errors.add(:end_date, "must be equal to or later than Start Date");
     end
   end
+
+  def other_contacts
+    Contact.other_contacts(self.id)
+  end
 end

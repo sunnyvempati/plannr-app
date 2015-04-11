@@ -1,21 +1,39 @@
 class Contact < ActiveRecord::Base
+  EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  SEARCH_LIMIT = 5
   has_many :event_contacts
   has_many :events, through: :event_contacts
 
   belongs_to :owner, class_name: "User"
-  
+
   acts_as_tenant :company
-  
+
   enum contact_type: {client: 1, vendor: 2}
 
   # TODO: case sensitivity in search_condition
-  scope :name_or_email_like, ->(search_condition) {      where('contacts.name LIKE ? OR contacts.email LIKE ?', search_condition, search_condition)  }
+  scope :name_or_email_like, ->(search_condition) {
+    where()
+  }
+
+  def self.search_other_contacts(params)
+    wildcard_text = '%' + params[:text] + '%'
+    Contact.other_contacts(params[:event_id])
+      .where('contacts.name LIKE ? OR contacts.email LIKE ?', wildcard_text, wildcard_text).limit(5)
+  end
+
+  def self.other_contacts(event_id)
+    Contact.joins(
+      "LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id")
+      .where("ec.contact_id IS null
+        OR ec.event_id != '" + event_id + "'")
+      .select("contacts.*")
+  end
 
 
   validates :name,
             :presence => true
   validates_format_of :email,
-                      :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+                      :with => EMAIL_REGEX,
                       :message => 'must be an email address',
                       :allow_blank => true
   validates_format_of :phone,
@@ -32,4 +50,7 @@ class Contact < ActiveRecord::Base
     write_attribute(:contact_type, value.to_i)
   end
 
+  def self.quick_create(text)
+    text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)
+  end
 end

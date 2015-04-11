@@ -12,7 +12,7 @@ module ResponseHelpers
     end
   end
 
-  def render_error(hash)
+  def render_error(hash={})
     render json: hash, status: 403
   end
 
@@ -29,6 +29,4 @@ module ResponseHelpers
   def render_redirect(url)
     render json: {redirect_to: url}, status: 307
   end
-
 end
-

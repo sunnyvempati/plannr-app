@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_contact,  only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:get_contacts_in_event, :get_contacts_not_in_event, :search_contacts_not_in_event ]
 
   def index
     @contacts = Contact.all
@@ -41,48 +42,47 @@ class ContactsController < ApplicationController
     end
   end
 
-  def search
-    @contacts = searchMe(params[:searchText], params[:associatedObjectId], params[:associated])
+  def quick_create
+    @contact = Contact.quick_create(quick_create_params[:text])
 
-    respond_to do |format|
-      msg = { :status => "ok", :message => "Success!", :data => @contacts, :searchText =>  params[:searchText]}
-      format.json  { render :json => msg } # don't do msg.to_json
+    render_entity @contact do
+      EventContact.create(contact_id: @contact.id, event_id: quick_create_params[:event_id])
     end
   end
 
-  def search_by_name_or_email_like
-    @contacts = Contact.name_or_email_like('%' + params[:searchText] + '%')  
-
-    respond_to do |format|
-      msg = { :status => "ok", :message => "Success!", :data => @contacts }
-      format.json  { render :json => msg } # don't do msg.to_json
-    end
+  def get_contacts_in_event
+    render_success @event.contacts
   end
 
+  def get_contacts_not_in_event
+    render_success @event.other_contacts
+  end
+
+  def search_contacts_not_in_event
+    render json: Contact.search_other_contacts(search_params), each_serializer: EventContactSerializer
+  end
 
   private
+
+  def quick_contact_params
+    params.require(:quick_contact).permit(:event_id, :text)
+  end
+
+  def search_params
+    params.require(:search).permit(:event_id, :text)
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_contact
     @contact = Contact.find(params[:id])
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
     params.require(:contact).permit(:name, :email, :contact_type, :phone, :contact_company, :description)
   end
-
-  def searchMe(search, event_id, is_associated)
-    like_condition = '%' + search + '%'
-    ass_contacts = Event.find_by_id(event_id).contacts
-    .name_or_email_like(like_condition)
-
-    if is_associated == nil || is_associated.downcase == 'false'
-      Contact.name_or_email_like(like_condition)
-      .where.not(id: ass_contacts.map(&:id))      
-    else
-      Contact.name_or_email_like(like_condition)
-      .where(id: ass_contacts.map(&:id))
-    end
-  end
-
 end

@@ -22,26 +22,23 @@ Rails.application.routes.draw do
   post 'resend_invitation', to: 'invitations#resend'
 
   # company
-  get 'company', to: 'companies#show' 
+  get 'company', to: 'companies#show'
+
+  # searchable event endpoints
+  get 'events/:id/event_contacts', to: 'contacts#get_contacts_in_event'
+  get 'events/:id/other_contacts', to: 'contacts#get_contacts_not_in_event'
+  get 'events/:id/search_other_contacts', to: 'contacts#search_contacts_not_in_event'
 
   # event_contacts
   post 'event_contacts', to:'event_contacts#create'
   delete 'event_contacts', to:'event_contacts#destroy'
 
-  # event_vendors
-  post 'event_vendors', to:'event_vendors#create'
-  delete 'event_vendors', to:'event_vendors#destroy'
-
+  # # event_vendors
+  # post 'event_vendors', to:'event_vendors#create'
+  # delete 'event_vendors', to:'event_vendors#destroy'
 
   # contacts
-  get 'contacts/search', to:'contacts#search'
-  get 'events/:id/associated_contacts', to: 'events#retrieve_contacts_associated_to_this_event'
-  get 'events/:id/unassociated_contacts', to: 'events#retrieve_contacts_not_associated_to_this_event'
-
-  # vendors
-  get 'vendors/search', to:'vendors#search'
-  get 'events/:id/associated_vendors', to: 'events#retrieve_vendors_associated_to_this_event'
-  get 'events/:id/unassociated_vendors', to: 'events#retrieve_vendors_not_associated_to_this_event'
+  post '/contacts/quick_create', to: 'contacts#quick_create'
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 end
