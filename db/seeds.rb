@@ -60,14 +60,14 @@ john_contact = Contact.create(name: "John Other", email: "john@other.com", compa
 puts "Successfully created contact for John" if john_contact 
 
 
-balloons_vendor = Vendor.create(name: "Balloons, Inc")
+balloons_vendor = Vendor.create(name: "Balloons, Inc", company: plannr_company)
 puts "Successfully create vendor for Ballons Inc"
 
-inflatable_castles_vendor = Vendor.create(name: "Inflatable Castles, Inc")
+inflatable_castles_vendor = Vendor.create(name: "Inflatable Castles, Inc", company: plannr_company)
 puts "SuccessfInflatable Castlesully create vendor for Inflatable Castles Inc"
 
-jimmys_vendor = Vendor.create(name: "Jimmy's Mobile Petting Zoo")
+jimmys_vendor = Vendor.create(name: "Jimmy's Mobile Petting Zoo", company: plannr_company)
 puts "Successfully create vendor for Jimmy's Mobile Petting Zoo"
 
-party_down_catering_vendor = Vendor.create(name: "Party down Catering, Inc")
+party_down_catering_vendor = Vendor.create(name: "Party down Catering, Inc", company: plannr_company)
 puts "Successfully create vendor for Party Down Catering"
