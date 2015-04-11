@@ -28,11 +28,20 @@ Rails.application.routes.draw do
   post 'event_contacts', to:'event_contacts#create'
   delete 'event_contacts', to:'event_contacts#destroy'
 
+  # event_vendors
+  post 'event_vendors', to:'event_vendors#create'
+  delete 'event_vendors', to:'event_vendors#destroy'
+
+
   # contacts
   get 'contacts/search', to:'contacts#search'
-
   get 'events/:id/associated_contacts', to: 'events#retrieve_contacts_associated_to_this_event'
   get 'events/:id/unassociated_contacts', to: 'events#retrieve_contacts_not_associated_to_this_event'
+
+  # vendors
+  get 'vendors/search', to:'vendors#search'
+  get 'events/:id/associated_vendors', to: 'events#retrieve_vendors_associated_to_this_event'
+  get 'events/:id/unassociated_vendors', to: 'events#retrieve_vendors_not_associated_to_this_event'
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 end

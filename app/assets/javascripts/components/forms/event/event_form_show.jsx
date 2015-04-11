@@ -3,7 +3,7 @@ var EventFormShow = React.createClass({
     var action = "/events";
 
     return (
-      <EventForm
+      <EventFormBig
         action= {action}
         model={this.props.model}
         disableForm={true}

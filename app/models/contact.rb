@@ -8,6 +8,7 @@ class Contact < ActiveRecord::Base
   
   enum contact_type: {client: 1, vendor: 2}
 
+  # TODO: case sensitivity in search_condition
   scope :name_or_email_like, ->(search_condition) {      where('contacts.name LIKE ? OR contacts.email LIKE ?', search_condition, search_condition)  }
 
 

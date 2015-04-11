@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :retrieve_contacts_associated_to_this_event, :retrieve_contacts_not_associated_to_this_event]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :retrieve_contacts_associated_to_this_event, :retrieve_contacts_not_associated_to_this_event, :retrieve_vendors_associated_to_this_event, :retrieve_vendors_not_associated_to_this_event]
 
   def index
     @events = Event.all
@@ -65,6 +65,22 @@ class EventsController < ApplicationController
     @unassociated_contacts = Contact.joins("LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id").where("ec.contact_id IS null OR ec.event_id != '" + @event.id + "'").select("contacts.*")
     respond_to do |format|
       msg = { :status => "ok", :message => "Success!", :data => @unassociated_contacts}
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
+  def retrieve_vendors_associated_to_this_event
+    @associated_vendors = @event.vendors
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :data => @associated_vendors}
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
+  def retrieve_vendors_not_associated_to_this_event
+    @unassociated_vendors = Vendor.joins("LEFT OUTER JOIN event_vendors ec ON ec.vendor_id = vendors.id").where("ec.vendor_id IS null OR ec.event_id != '" + @event.id + "'").select("vendors.*")
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :data => @unassociated_vendors}
       format.json  { render :json => msg } # don't do msg.to_json
     end
   end

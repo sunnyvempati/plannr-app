@@ -41,6 +41,24 @@ class VendorsController < ApplicationController
     end
   end
 
+  def search
+    @vendors = searchMe(params[:searchText], params[:associatedObjectId], params[:associated])
+
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :data => @vendors, :searchText =>  params[:searchText]}
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
+  def search_by_name_or_email_like
+    @vendors = Vendor.name_like('%' + params[:searchText] + '%')  
+
+    respond_to do |format|
+      msg = { :status => "ok", :message => "Success!", :data => @vendors }
+      format.json  { render :json => msg } # don't do msg.to_json
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_vendor
@@ -50,6 +68,20 @@ class VendorsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def vendor_params
     params.require(:vendor).permit(:name, :location, :phone, :primary_contact)
+  end
+
+  def searchMe(search, event_id, is_associated)
+    like_condition = '%' + search + '%'
+    ass_vendors = Event.find_by_id(event_id).vendors
+    .name_like(like_condition)
+
+    if is_associated == nil || is_associated.downcase == 'false'
+      Vendor.name_like(like_condition)
+      .where.not(id: ass_vendors.map(&:id))      
+    else
+      Vendor.name_like(like_condition)
+      .where(id: ass_vendors.map(&:id))
+    end
   end
 
 end

@@ -1,8 +1,13 @@
-var EventContactsLinkAsync = React.createClass({
+var EventAssociationAddRemoveLinkAsync = React.createClass({
+  propTypes: {
+    url: React.PropTypes.string.isRequired,
+    type: React.PropTypes.oneOf(['post', 'delete']).isRequired,
+    text: React.PropTypes.string.isRequired
+  },
   onClickAsync: function() {
     var _this = this;
     $.ajax({
-      url: "/event_contacts?contact_id=" + _this.props.contactId + "&event_id=" + _this.props.associatedObjectId,
+      url: _this.props.url,
       dataType: "json",
       type: _this.props.type,
       success: function ( data ) {
@@ -14,7 +19,6 @@ var EventContactsLinkAsync = React.createClass({
             }
           });
   },
-
   render: function() {
     return (
       <a rel="nofollow" href='#' onClick={this.onClickAsync}>{this.props.text}</a>
