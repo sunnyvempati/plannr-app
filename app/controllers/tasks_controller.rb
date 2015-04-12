@@ -13,40 +13,40 @@ class TasksController < ApplicationController
     @header = "Task"
   end
 
-  # GET /tasks/new
   def new
     @task = Task.new
     @header = "Create Task"
   end
 
-  # GET /tasks/1/edit
   def edit
     @header = "Edit Task"
 
   end
 
-  # POST /tasks
-  # POST /tasks.json
   def create
     @task = Task.new(task_params)
     render_entity @task
   end
 
-  # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
     @task.assign_attributes(task_params)
     render_entity @task
   end
 
-  # DELETE /tasks/1
-  # DELETE /tasks/1.json
+  def event_tasks
+    render_success Task.all.where(event_id: event_id)
+  end
+
   def destroy
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def mass_destroy
+    render_success Task.destroy_all(id: mass_destroy_params[ids])
   end
 
   private
@@ -57,7 +57,11 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :description, :deadline)
+      params.require(:task).permit(:name, :description, :deadline, :event_id)
+    end
+
+    def mass_destroy_params
+      params.require(:destroy_opts).permit(ids: [])
     end
 
 end
