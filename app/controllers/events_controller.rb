@@ -12,11 +12,13 @@ class EventsController < ApplicationController
     if @event
       render :show
     else
-      redirect_to :new
+      # TOOD: message for user notifying of missing @event and redirect
+      redirect_to :action =>"index"
     end
   end
 
   def new
+    binding.pry
     @event = Event.new
     @header = 'Tell us about your event';
   end
