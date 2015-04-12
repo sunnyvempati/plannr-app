@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150410220007) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "event_contacts", id: false, force: :cascade do |t|
+  create_table "event_contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid "contact_id"
     t.uuid "event_id"
   end
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150410220007) do
   add_index "event_contacts", ["contact_id"], name: "index_event_contacts_on_contact_id", using: :btree
   add_index "event_contacts", ["event_id"], name: "index_event_contacts_on_event_id", using: :btree
 
-  create_table "event_vendors", id: false, force: :cascade do |t|
+  create_table "event_vendors", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid "vendor_id"
     t.uuid "event_id"
   end
