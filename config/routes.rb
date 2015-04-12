@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # event_contacts
   post 'event_contacts', to:'event_contacts#create'
   delete 'event_contacts', to:'event_contacts#destroy'
+  post 'event_contacts/mass_destroy', to:'event_contacts#mass_destroy'
 
   # # event_vendors
   # post 'event_vendors', to:'event_vendors#create'

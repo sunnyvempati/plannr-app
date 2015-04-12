@@ -1,4 +1,4 @@
-var CompanyUserGrid = React.createClass({
+var CompanyUserTable = React.createClass({
   getInitialState: function() {
     var initial = {
       "results": [],
@@ -24,7 +24,7 @@ var CompanyUserGrid = React.createClass({
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
-  spliceResults: function(results) {
+  spliceResults: function() {
     // this will need to change when pagination is introduced.
     var results = this.state.results;
     for (var i = results.length-1; i >= 0; i--) {

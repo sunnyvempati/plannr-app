@@ -1,7 +1,8 @@
 var EventFormShowBig = React.createClass({
   getInitialState: function() {
     var initial = {
-      tableData: []
+      tableData: [],
+      checkedContacts: []
     };
     return initial;
   },
@@ -13,29 +14,22 @@ var EventFormShowBig = React.createClass({
       })
     }.bind(this))
   },
-  getColumns: function() {
-    return [
-      {name: "name", header: "Name", grow: 1},
-      {name: "email", header: "Email", grow: 1}
-    ];
-  },
+
   addToContactList: function(item) {
     var tableData = this.state.tableData;
     tableData.push({name: item.name, email: item.email, id: item.contact_id});
     this.setState({tableData: tableData});
+  },
+  updateData: function(data) {
+    this.setState({tableData: data});
   },
   render: function () {
     var event = this.props.model;
     return (
       <div>
         <EventContactAutocomplete onAssociation={this.addToContactList} eventId={event.id} />
-        <Table results={this.state.tableData}
-               columns={this.getColumns()}
-               checkbox={true}
-               useCustomRowComponent={false} />
+        <EventContactsTable eventId={event.id} data={this.state.tableData} onUpdatedData={this.updateData} />
       </div>
-
-
     );
   }
 });
