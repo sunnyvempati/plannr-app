@@ -52,14 +52,10 @@ var EventContactsTable = React.createClass({
     }.bind(this));
   },
   spliceResults: function() {
-    var existingData = this.props.data;
     var deletedItems = this.state.checkedItems;
-    for (var i = existingData.length-1; i >= 0; i--) {
-      if(deletedItems.indexOf(existingData[i].id) > -1) {
-        existingData.splice(i, 1);
-      }
-    }
-    return existingData;
+    return $.map(this.props.data, function(item, index) {
+      if (deletedItems.indexOf(item.id) === -1) {
+        return item;}   } )
   },
   render: function() {
     return (
