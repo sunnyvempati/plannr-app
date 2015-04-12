@@ -59,6 +59,18 @@ puts "Successfully created contact for Mike" if mike_contact
 john_contact = Contact.create(name: "John Other", email: "john@other.com", company: other_company)
 puts "Successfully created contact for John" if john_contact 
 
+william_contact = Contact.create(name: "William Doe", email: "william@doe.com", company: plannr_company)
+puts "Successfully created contact for William" if william_contact
+
+shaun_contact = Contact.create(name: "Shaun Doe", email: "shaun@doe.com", company: plannr_company)
+puts "Successfully created contact for Shaun" if shaun_contact
+
+alex_contact = Contact.create(name: "Alex Doe", email: "alex@doe.com", company: plannr_company)
+puts "Successfully created contact for Alex" if alex_contact
+
+sally_contact = Contact.create(name: "Sally Other", email: "sally@other.com", company: other_company)
+puts "Successfully created contact for Sally" if sally_contact 
+
 
 balloons_vendor = Vendor.create(name: "Balloons, Inc", company: plannr_company)
 puts "Successfully create vendor for Ballons Inc"
@@ -71,3 +83,13 @@ puts "Successfully create vendor for Jimmy's Mobile Petting Zoo"
 
 party_down_catering_vendor = Vendor.create(name: "Party down Catering, Inc", company: plannr_company)
 puts "Successfully create vendor for Party Down Catering"
+
+
+tables_vendor = Vendor.create(name: "Tables, Inc", company: plannr_company)
+puts "Successfully create vendor for Tables Inc"
+
+chairs_vendor = Vendor.create(name: "Chairs, Inc", company: plannr_company)
+puts "Successfully create vendor for Chairs Inc"
+
+lamps_vendor = Vendor.create(name: "Lamps, Inc", company: plannr_company)
+puts "Successfully create vendor for Lamps Inc"
