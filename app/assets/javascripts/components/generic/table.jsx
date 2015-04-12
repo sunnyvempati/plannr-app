@@ -3,16 +3,17 @@ var Table = React.createClass({
     var rows = this.props.results.map(function(result) {
       return(
         <TableRow data={result}
-                  columns={this.props.columns} />
+                  columns={this.props.columns}
+                  headers={this.props.headers} />
       )
     }, this);
     return rows;
   },
   render: function() {
     var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.tableRows();
-    var tableHeaders = this.props.headers.map(function(header) {
+    var tableHeaders = this.props.columns.map(function(column) {
       return(
-        <TableHeader data={header} />
+        <TableHeader name={column.header} grow={column.grow} />
       );
     });
     var noRows = tableRows.length == 0;
@@ -21,7 +22,7 @@ var Table = React.createClass({
       'TableContainer': true,
       'is-hidden': noRows
     });
-    var message = noRows ? "No company users" : "";
+    var message = noRows ? "No items" : "";
     return (
       <div>
         <span><h2>{message}</h2></span>

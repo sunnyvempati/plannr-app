@@ -1,8 +1,9 @@
 var TableRow = React.createClass({
   render: function() {
-    var rowColumns = this.props.columns.map(function(columnAttr) {
+    var rowColumns = this.props.columns.map(function(columnData) {
+      var rowClass = "Table-rowItem " + "u-flexGrow-" + columnData.grow;
       return(
-        <div className="Table-rowItem">{this.props.data[columnAttr]}</div>
+        <div className={rowClass}>{this.props.data[columnData.name]}</div>
       );
     }, this);
     return (

@@ -14,9 +14,8 @@ var EventContactAutocomplete = React.createClass({
     $.post('/event_contacts',
       {event_contact: {event_id: event_id,contact_id: ui.item.id}},
       function(result) {
-        // add to table
-        // toast message
-      })
+        this.props.onAssociation(result.event_contact);
+      }.bind(this))
   },
   render: function() {
     return (

@@ -4,7 +4,7 @@ class EventContactsController < ApplicationController
   def create
     event_contact = EventContact.new event_contact_params
     if event_contact.save
-      render_success entity: event_contact
+      render json: event_contact, serializer: EventContactSerializer
     else
       render_error
     end

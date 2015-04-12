@@ -8,7 +8,6 @@ var CompanyUserGrid = React.createClass({
   },
   componentWillMount: function() {
     $.get("/users", function(result) {
-      var users =
       this.setState({results: result.users});
     }.bind(this));
   },
@@ -49,17 +48,15 @@ var CompanyUserGrid = React.createClass({
       checkedItems: checkedItems
     })
   },
-  getHeaders: function() {
+  getColumns: function() {
     return [
-      {name: "", grow: 1},
-      {name: "Name", grow: 4},
-      {name: "Email", grow: 3},
-      {name: "Admin", grow: 2},
+      {name: "", header: "", grow: 1},
+      {name: "name", header: "Name", grow: 4},
+      {name: "email", header: "Email", grow: 3},
+      {name: "company_admin", header: "Admin", grow: 2}
     ];
   },
   render: function() {
-    var headers = this.getHeaders();
-    var columns = ["email", "name", "company_admin"];
     var customRows = this.state.results.map(function(result) {
       var checked = this.state.checkedItems.indexOf(result.id) > -1;
       return(
@@ -69,7 +66,7 @@ var CompanyUserGrid = React.createClass({
     return (
       <div className="CompanyUserTableContainer">
         <Table results={this.state.results}
-               headers={headers}
+               columns={this.getColumns()}
                checkbox={true}
                buttonList={this.buttonList()}
                useCustomRowComponent={true}
