@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   post 'events/:id/contacts/mass_delete', to:'event_contacts#mass_delete'
   get 'events/:id/contacts', to:'event_contacts#contacts'
 
+  # tasks
+  get 'events/:id/tasks', to:'tasks#event_tasks'
+
   # # event_vendors
   # post 'event_vendors', to:'event_vendors#create'
   # delete 'event_vendors', to:'event_vendors#destroy'
