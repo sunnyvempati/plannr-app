@@ -18,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def new
-    binding.pry
     @event = Event.new
     @header = 'Tell us about your event';
   end
