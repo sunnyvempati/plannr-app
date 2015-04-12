@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407041607) do
+ActiveRecord::Schema.define(version: 20150410220007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,21 @@ ActiveRecord::Schema.define(version: 20150407041607) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "event_contacts", id: false, force: :cascade do |t|
+  create_table "event_contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid "contact_id"
     t.uuid "event_id"
   end
 
   add_index "event_contacts", ["contact_id"], name: "index_event_contacts_on_contact_id", using: :btree
   add_index "event_contacts", ["event_id"], name: "index_event_contacts_on_event_id", using: :btree
+
+  create_table "event_vendors", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid "vendor_id"
+    t.uuid "event_id"
+  end
+
+  add_index "event_vendors", ["event_id"], name: "index_event_vendors_on_event_id", using: :btree
+  add_index "event_vendors", ["vendor_id"], name: "index_event_vendors_on_vendor_id", using: :btree
 
   create_table "events", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"

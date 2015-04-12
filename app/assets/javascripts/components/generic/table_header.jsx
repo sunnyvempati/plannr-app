@@ -1,10 +1,10 @@
 var TableHeader = React.createClass({
   render: function() {
-    var data = this.props.data;
-    var growClass = "u-flexGrow-" + data.grow;
+    var props = this.props;
+    var growClass = "u-flexGrow-" + props.grow;
     var headerClass = "Table-rowItem " + growClass;
     return (
-      <div className={headerClass}>{data.name}</div>
+      <div className={headerClass}>{props.name}</div>
     );
   }
 });

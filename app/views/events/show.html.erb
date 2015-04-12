@@ -1,6 +1,2 @@
-<%= react_component("EventFormShowBig",
-                    model: @event,
-                    unassociated_contacts: @unassociated_contacts,
-                    associated_contacts: @associated_contacts,
-                    notice: notice
-    ) %>
+<%= react_component("EventDashboard",
+                    event: @event) %>
