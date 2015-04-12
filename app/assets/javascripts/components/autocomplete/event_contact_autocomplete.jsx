@@ -10,11 +10,13 @@ var EventContactAutocomplete = React.createClass({
     return $("<li>").append(item.name + "<br>" + item.email);
   },
   addContactToEvent: function(event, ui) {
-    var event_id = this.props.eventId;
-    $.post('/event_contacts',
-      {event_contact: {event_id: event_id,contact_id: ui.item.id}},
+    var eventId = this.props.eventId;
+    var url = "/events/" + eventId + "/contacts";
+    $.post(url,
+      {event_contact: {event_id: eventId,contact_id: ui.item.id}},
       function(result) {
-        this.props.onAssociation(result.event_contact);
+        console.log(result);
+        this.props.onAssociation(result.event_contact_with_contact);
       }.bind(this))
   },
   render: function() {

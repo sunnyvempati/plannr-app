@@ -4,23 +4,20 @@ class EventContactsController < ApplicationController
   def create
     event_contact = EventContact.new event_contact_params
     if event_contact.save
-      render json: event_contact, serializer: EventContactSerializer
+      render json: event_contact, serializer: EventContactWithContactSerializer
     else
       render_error
     end
   end
 
-  def destroy
-    event_contact = EventContact.where(event_id: event_contact_params[:event_id],
-                                       contact_id: event_contact_params[:contact_id]).first
-    render_success event_contact.delete
+  def contacts
+    render json: EventContact.all.where(event_id: params[:event_id]), each_serializer: EventContactWithContactSerializer
   end
 
-  def mass_destroy
-    event_contacts =   EventContact.where(event_id: mass_destroy_params[:event_id],
-                                       contact_id: mass_destroy_params[:contact_ids])
-
-    render_success event_contacts.delete_all
+  def mass_delete
+    ids = mass_delete_params[:event_contact_ids]
+    EventContact.delete_all(id: ids) if ids
+    render_success
   end
 
   private
@@ -29,7 +26,7 @@ class EventContactsController < ApplicationController
     params.require(:event_contact).permit(:event_id, :contact_id)
   end
 
-  def mass_destroy_params
-    params.require(:destroy_opts).permit(:event_id, contact_ids:[])
+  def mass_delete_params
+    params.require(:destroy_opts).permit(event_contact_ids: [])
   end
 end

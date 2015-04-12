@@ -28,10 +28,10 @@ var EventContactsTable = React.createClass({
     });
   },
   getCustomRows: function() {
-    return this.props.data.map(function(contact) {
-      var checked = this.state.checkedItems.indexOf(contact.id) > -1;
+    return this.props.data.map(function(event_contact) {
+      var checked = this.state.checkedItems.indexOf(event_contact.id) > -1;
       return(
-        <EventContactRow checkboxChanged={this.rowChanged} data={contact} checked={checked} />
+        <EventContactRow checkboxChanged={this.rowChanged} data={event_contact} checked={checked} />
       );
     }, this);
   },
@@ -43,8 +43,9 @@ var EventContactsTable = React.createClass({
   },
   DeleteContactClick: function() {
     var eventId = this.props.eventId;
-    var destroyOpts = {destroy_opts: {event_id: eventId, contact_ids: this.state.checkedItems}};
-    $.post("/event_contacts/mass_destroy",destroyOpts, function(success_result) {
+    var destroyOpts = {destroy_opts: {event_contact_ids: this.state.checkedItems}};
+    var url = "/events/" + eventId + "/contacts/mass_delete";
+    $.post(url,destroyOpts, function(success_result) {
       var newData = this.spliceResults();
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function(error_result) {
@@ -55,7 +56,9 @@ var EventContactsTable = React.createClass({
     var deletedItems = this.state.checkedItems;
     return $.map(this.props.data, function(item, index) {
       if (deletedItems.indexOf(item.id) === -1) {
-        return item;}   } )
+        return item;
+      }
+    });
   },
   render: function() {
     return (

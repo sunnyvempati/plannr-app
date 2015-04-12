@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_contact,  only: [:show, :edit, :update, :destroy]
-  before_action :set_event, only: [:get_contacts_in_event, :get_contacts_not_in_event, :search_contacts_not_in_event ]
+  before_action :set_event, only: [:contacts_not_in_event, :search_contacts_not_in_event ]
 
   def index
     @contacts = Contact.all
@@ -50,11 +50,7 @@ class ContactsController < ApplicationController
     end
   end
 
-  def get_contacts_in_event
-    render_success @event.contacts
-  end
-
-  def get_contacts_not_in_event
+  def contacts_not_in_event
     render_success @event.other_contacts
   end
 

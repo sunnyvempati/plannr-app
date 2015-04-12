@@ -7,17 +7,18 @@ var EventFormShowBig = React.createClass({
     return initial;
   },
   componentDidMount: function() {
-    var url = "/events/" + this.props.model.id + "/event_contacts";
-    $.get(url, function(results) {
+    var eventId = this.props.model.id;
+    var url = "/events/" + eventId + "/contacts";
+    $.get(url, {event_id: eventId}, function(results) {
       this.setState({
-        tableData: results.contacts
+        tableData: results.event_contacts
       })
     }.bind(this))
   },
 
   addToContactList: function(item) {
     var tableData = this.state.tableData;
-    tableData.push({name: item.name, email: item.email, id: item.contact_id});
+    tableData.push({name: item.name, email: item.email, id: item.id});
     this.setState({tableData: tableData});
   },
   updateData: function(data) {
