@@ -1,4 +1,10 @@
 class Event < ActiveRecord::Base
+  has_many :event_contacts
+  has_many :contacts, through: :event_contacts
+
+  has_many :event_vendors
+  has_many :vendors, through: :event_vendors
+
   acts_as_tenant :company
 
   validates :name, presence: true
@@ -23,5 +29,9 @@ class Event < ActiveRecord::Base
     if start_date && end_date && end_date < start_date
       errors.add(:end_date, "must be equal to or later than Start Date");
     end
+  end
+
+  def other_contacts
+    Contact.other_contacts(self.id)
   end
 end

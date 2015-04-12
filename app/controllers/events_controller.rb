@@ -12,7 +12,8 @@ class EventsController < ApplicationController
     if @event
       render :show
     else
-      redirect_to :new
+      # TOOD: message for user notifying of missing @event and redirect
+      redirect_to :action =>"index"
     end
   end
 
@@ -37,7 +38,7 @@ class EventsController < ApplicationController
   def update
     modified_entity_params = event_params
     modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(start_date end_date))
-    
+
     @event.assign_attributes(modified_entity_params)
     render_entity @event
   end
@@ -51,6 +52,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def set_event
     @event = Event.find_by_id(params[:id])
   end
@@ -58,5 +60,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
   end
-
 end
