@@ -17,6 +17,12 @@ class TasksController < ApplicationController
     @header = "Create Task"
   end
 
+  def new_event_task
+    new
+    @task.event_id = params[:event_id]
+    render action: 'new'
+  end
+
   def edit
     @header = "Edit Task"
   end
