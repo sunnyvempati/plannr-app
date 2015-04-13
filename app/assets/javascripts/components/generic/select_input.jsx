@@ -24,9 +24,13 @@ var SelectInput = React.createClass({
 
     function convertOptionsToHtml(options) {
       var retOptionsHtml = [];
-      $.each(options, function (index, value) {
-        retOptionsHtml.push(<option key={index} value={value.value}>{value.text}</option>);
-      });
+      if (!!options) {
+        $.each(options, function (index, value) {
+          retOptionsHtml.push(<option key={index} value={value.value}>{value.text}</option>);
+        });
+
+        
+      }
       return retOptionsHtml;
     }
 
