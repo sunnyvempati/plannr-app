@@ -4,7 +4,7 @@ var EventTaskListTile = React.createClass({
       tableData: []
     };
   },
-  componentWillMount: function() {
+  componentDidMount: function() {
     $.get("tasks", function(results) {
       this.setState({
         tableData: results.tasks
