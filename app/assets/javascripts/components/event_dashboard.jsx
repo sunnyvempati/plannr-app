@@ -5,7 +5,7 @@ var EventDashboard = React.createClass({
   render: function () {
     return (
       <div className="EventDashboardContainer" id="mainDashboard">
-        <RouteHandler />
+        <RouteHandler eventId={this.props.eventId} />
       </div>
     );
   }

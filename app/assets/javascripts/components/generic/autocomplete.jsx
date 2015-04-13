@@ -27,6 +27,6 @@ var Autocomplete = React.createClass({
     );
   },
   componentWillUnmount: function() {
-    $(this.getId).autocomplete('destroy');
+    $(this.getId()).autocomplete('destroy');
   }
 });
