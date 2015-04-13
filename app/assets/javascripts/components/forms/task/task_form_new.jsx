@@ -1,4 +1,7 @@
 var TaskFormNew = React.createClass({
+  propTypes: {
+    model: React.PropTypes.object.isRequired
+  },
 
   render: function () {
     var action = "/tasks" ,
@@ -13,7 +16,6 @@ var TaskFormNew = React.createClass({
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
-        notice={this.props.notice}
         routeVerb={routeVerb}
         primaryButtonText={primaryButtonText}
         secondaryButtonText={secondaryButtonText}
