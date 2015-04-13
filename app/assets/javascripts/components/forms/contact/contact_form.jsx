@@ -1,6 +1,6 @@
 var ContactForm = React.createClass({
   hrefRoot: '/contacts',
-  contactTypeOptions: [ {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}],
+  contactTypeOptions: [ {value:-1, text: 'Select...'}, {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}],
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -16,7 +16,7 @@ var ContactForm = React.createClass({
   },
   changeUrl: function () {
     location.href = this.hrefRoot;
-  },
+  },  
   render: function () {
     return (
       <div className='FormContainer--leftAligned'>
@@ -79,8 +79,8 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
           />
           <TextAreaInput
-            name='description'
             id='contact_description'
+            name='description'
             className='TextAreaInput'
             label='description'
             placeholder='What else do you need to know?'
