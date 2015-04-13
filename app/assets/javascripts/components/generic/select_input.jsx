@@ -41,6 +41,7 @@ var SelectInput = React.createClass({
           className={input_classes}
           name={this.props.name}
           form={this.props.formId} 
+          disabled={this.props.disabled}
         >
         {optionsHtml}
         </select>
