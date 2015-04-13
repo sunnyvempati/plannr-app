@@ -8,9 +8,11 @@ var EventContactListTile = React.createClass({
   },
   componentDidMount: function() {
     $.get("contacts", function(results) {
-      this.setState({
-        tableData: results.event_contacts
-      })
+      if (this.isMounted()) {
+        this.setState({
+          tableData: results.event_contacts
+        })
+      }
     }.bind(this))
   },
   addToContactList: function(item) {

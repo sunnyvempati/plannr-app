@@ -5,10 +5,12 @@ var EventTaskListTile = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("tasks", function(results) {
-      this.setState({
-        tableData: results.tasks
-      })
+    $.get("contacts", function(results) {
+      if (this.isMounted()) {
+        this.setState({
+          tableData: results.tasks
+        })
+      }
     }.bind(this))
   },
   render: function() {
