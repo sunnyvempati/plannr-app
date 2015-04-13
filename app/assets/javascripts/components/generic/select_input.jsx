@@ -27,24 +27,23 @@ var SelectInput = React.createClass({
       if (!!options) {
         $.each(options, function (index, value) {
           retOptionsHtml.push(<option key={index} value={value.value}>{value.text}</option>);
-        });
-
-        
+        });       
       }
       return retOptionsHtml;
     }
 
     return (
       <div className={form_input_classes}>
-      <label for={this.props.id}>{this.props.label}</label>
-      <select value={this.getValue()}
-      onChange={this.changeValue}
-      className={input_classes}
-      name={this.props.name}
-      form={this.props.formId}
-      >
-      {optionsHtml}
-      </select>
+        <label for={this.props.id}>{this.props.label}</label>
+        <select 
+          value={this.getValue()}
+          onChange={this.changeValue}
+          className={input_classes}
+          name={this.props.name}
+          form={this.props.formId} 
+        >
+        {optionsHtml}
+        </select>
 
       </div>
 
