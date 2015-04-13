@@ -1,16 +1,11 @@
 var EventTaskListTile = React.createClass({
-  propTypes: {
-    eventId: React.PropTypes.number.isRequired
-  },
   getInitialState: function() {
     return {
       tableData: []
     };
   },
   componentDidMount: function() {
-    var eventId = this.props.eventId;
-    var url = "/events/" + eventId + "/tasks";
-    $.get(url, function(results) {
+    $.get("tasks", function(results) {
       this.setState({
         tableData: results.tasks
       })

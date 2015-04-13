@@ -13,11 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require util/utils
 //= require react
 //= require react_ujs
 //= require react-router
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
-//= require util/utils
 //= require components
 //= require_tree .

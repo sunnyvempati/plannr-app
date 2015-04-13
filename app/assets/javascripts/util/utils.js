@@ -14,16 +14,6 @@ var Utils = (function () {
         retDate = "";
       }
       return retDate;
-    }
-
-    // postToServer: function(url, data) {
-    //   var result = {}
-    //   $.post(url, data, function(result) {
-    //     result = {success: true, results: result}
-    //   }).fail(function(result){
-    //     result = {success: false, results: result}
-    //   })
-    // }
+    },
   }
-
 }());
