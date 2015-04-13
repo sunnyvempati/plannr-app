@@ -1,24 +1,23 @@
-var EventTaskListTile = React.createClass({
+var EventTaskNewTile = React.createClass({
   getInitialState: function() {
     return {
-      tableData: []
+      model: null
     };
   },
   componentDidMount: function() {
-    $.get("tasks", function(results) {
+    $.get("tasks/new_json", function(results) {
       if (this.isMounted()) {
         this.setState({
-          tableData: results.tasks
+          model: results
         })
       }
     }.bind(this))
   },
   render: function() {
     return (
-      <div className="EventTaskListTile">
+      <div className="EventTaskNewTile">
         <Link to="tileAll">Go back to home</Link>
-        <EventTaskTable data={this.state.tableData} />
-        <Link to='tileNewTask' >New Event Task</Link>
+        <TaskFormNew model={this.state.model} authToken={this.props.authToken}/>
       </div>
     );
   }

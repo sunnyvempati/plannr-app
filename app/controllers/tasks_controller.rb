@@ -17,6 +17,12 @@ class TasksController < ApplicationController
     @header = "Create Task"
   end
 
+  def new_event_task_json
+    new
+    @task.event_id = params[:event_id]
+    render json: @task
+  end
+
   def new_event_task
     new
     @task.event_id = params[:event_id]

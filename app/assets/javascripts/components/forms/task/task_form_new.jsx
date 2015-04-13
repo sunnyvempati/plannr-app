@@ -1,28 +1,31 @@
 var TaskFormNew = React.createClass({
-  propTypes: {
-    model: React.PropTypes.object.isRequired
-  },
-
   render: function () {
-    var action = "/tasks" ,
+    var action = "/tasks",
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = "/tasks";
+      secondaryButtonHref = "/tasks",
+      returnHtml;
+
+    if (!!this.props.model){
+       returnHtml = <TaskForm
+                      action= {action}
+                      model={this.props.model}
+                      disableForm={false}
+                      showButtonList={true}
+                      routeVerb={routeVerb}
+                      primaryButtonText={primaryButtonText}
+                      secondaryButtonText={secondaryButtonText}
+                      secondaryButtonVisible={true}
+                      secondaryButtonHref={secondaryButtonHref}
+                      authToken={this.props.authToken}
+                    />;
+    } else {
+      returnHtml = <div>Loading...</div>;
+    };
 
     return (
-      <TaskForm
-        action= {action}
-        model={this.props.model}
-        disableForm={false}
-        showButtonList={true}
-        routeVerb={routeVerb}
-        primaryButtonText={primaryButtonText}
-        secondaryButtonText={secondaryButtonText}
-        secondaryButtonVisible={true}
-        secondaryButtonHref={secondaryButtonHref}
-        authToken={this.props.authToken}
-      />
+      returnHtml
     );
   }
 });
