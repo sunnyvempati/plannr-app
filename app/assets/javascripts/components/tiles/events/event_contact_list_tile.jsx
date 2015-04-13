@@ -30,6 +30,7 @@ var EventContactListTile = React.createClass({
     var eventId = this.props.eventId;
     return (
       <div className="EventContactListTileContainer">
+        <Link to="tileAll">Go back to home</Link>
         <EventContactAutocomplete onAssociation={this.addToContactList} eventId={eventId} />
         <EventContactsTable eventId={eventId} data={this.state.tableData} onUpdatedData={this.updateData} />
       </div>

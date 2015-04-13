@@ -34,6 +34,7 @@ class TasksController < ApplicationController
   end
 
   def event_tasks
+    event_id = params[:id]
     render_success Task.all.where(event_id: event_id)
   end
 
