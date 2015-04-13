@@ -6,7 +6,7 @@ var EventContactListTile = React.createClass({
     };
     return initial;
   },
-  componentDidMount: function() {
+  componentWillMount: function() {
     $.get("contacts", function(results) {
       this.setState({
         tableData: results.event_contacts
