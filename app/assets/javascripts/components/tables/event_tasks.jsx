@@ -2,7 +2,7 @@ var EventTaskTable = React.createClass({
   getColumns: function() {
     return [
       {name: "name", header: "Name", grow: 1},
-      {name: "description", header: "Email", grow: 3},
+      {name: "description", header: "Description", grow: 3},
       {name: "deadline", header: "Deadline", grow: 1}
     ];
   },
