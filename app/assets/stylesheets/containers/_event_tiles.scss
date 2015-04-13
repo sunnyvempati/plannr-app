@@ -1,0 +1,9 @@
+.EventTileContainer {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  >* {
+    flex: 1;
+    border: 1px solid $plannr-green;
+  }
+}

@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
   before_action :set_contact,  only: [:show, :edit, :update, :destroy]
-  before_action :set_event, only: [:contacts_not_in_event, :search_contacts_not_in_event ]
+  before_action :set_event, only: [:contacts_not_in_event]
 
   def index
     @contacts = Contact.all
@@ -55,7 +55,7 @@ class ContactsController < ApplicationController
   end
 
   def search_contacts_not_in_event
-    render json: Contact.search_other_contacts(search_params), each_serializer: ContactSerializer
+    render json: Contact.search_other_contacts(event_id: params[:event_id], text: search_params[:text]), each_serializer: ContactSerializer
   end
 
   private
@@ -65,7 +65,7 @@ class ContactsController < ApplicationController
   end
 
   def search_params
-    params.require(:search).permit(:event_id, :text)
+    params.require(:search).permit(:text)
   end
 
   # Use callbacks to share common setup or constraints between actions.

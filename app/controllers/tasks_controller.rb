@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   end
 
   def event_tasks
-    render_success Task.all.where(event_id: event_id)
+    render_success Task.all.where(event_id: params[:event_id])
   end
 
   def destroy
