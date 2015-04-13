@@ -22,7 +22,6 @@ var EventContactListTile = React.createClass({
     this.setState({tableData: data});
   },
   render: function() {
-    var eventId = this.props.eventId;
     return (
       <div className="EventContactListTileContainer">
         <Link to="tileAll">Go back to home</Link>
