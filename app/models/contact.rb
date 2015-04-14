@@ -32,7 +32,7 @@ class Contact < ActiveRecord::Base
 
 
   validates :name, :presence => true
-  validates :contact_type, :presence => true
+  validates :contact_type, numericality: { only_integer: true }
   validates_format_of :email,
                       :with => EMAIL_REGEX,
                       :message => 'must be an email address',
