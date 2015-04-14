@@ -12,7 +12,7 @@ var ContactForm = React.createClass({
     secondaryButtonHref: React.PropTypes.string
   },
   hrefRoot: '/contacts',
-  contactTypeOptions: [ {value:-1, text: 'Select...'}, {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}],
+  contactTypeOptions: [<option key='-1'>Select...</option>, <option key='1' value='1'>Client</option>, <option key='2' value='2'>Vendor</option>],
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -62,6 +62,7 @@ var ContactForm = React.createClass({
             options={this.contactTypeOptions}
             value={this.props.model.contact_type}
             disabled={this.props.disableForm}
+            required
           />
           <FormInput
             id='contact_email'
