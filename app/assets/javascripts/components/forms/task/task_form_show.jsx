@@ -11,7 +11,6 @@ var TaskFormShow = React.createClass({
         model={this.props.model}
         disableForm={true}
         showButtonList={false}
-        notice={this.props.notice}
       />
     );
   }

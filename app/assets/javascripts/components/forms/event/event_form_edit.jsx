@@ -16,7 +16,6 @@ var EventFormEdit = React.createClass({
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
-        notice={this.props.notice}
         routeVerb={routeVerb}
         primaryButtonText={primaryButtonText}
         secondaryButtonText={secondaryButtonText}
