@@ -1,7 +1,10 @@
 var EventDashboardRouter = React.createClass({
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired
+  },
   componentDidMount: function() {
     Router.run(this.routes(), function (Handler) {
-      React.render(<Handler eventId={this.props.event.id} authToken={this.props.authToken}/>, React.findDOMNode(this.refs.dashboard));
+      React.render(<Handler authToken={this.props.authToken}/>, React.findDOMNode(this.refs.dashboard));
     }.bind(this));
   },
   routes: function() {
