@@ -4,7 +4,7 @@ var EventDashboardRouter = React.createClass({
   },
   componentDidMount: function() {
     Router.run(this.routes(), function (Handler) {
-      React.render(<Handler authToken={this.props.authToken}/>, React.findDOMNode(this.refs.dashboard));
+      React.render(<Handler event={this.props.event} authToken={this.props.authToken}/>, React.findDOMNode(this.refs.eventDashboard));
     }.bind(this));
   },
   routes: function() {
@@ -19,7 +19,7 @@ var EventDashboardRouter = React.createClass({
   },
   render: function() {
     return (
-      <div ref="dashboard"></div>
+      <div ref="eventDashboard"></div>
     );
   }
 });

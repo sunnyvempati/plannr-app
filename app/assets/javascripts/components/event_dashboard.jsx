@@ -6,6 +6,7 @@ var EventDashboard = React.createClass({
     return (
       <div className="EventDashboardContainer" id="mainDashboard">
         <RouteHandler authToken={this.props.authToken}/>
+        <EventFormShow model={this.props.event} />
       </div>
     );
   }
