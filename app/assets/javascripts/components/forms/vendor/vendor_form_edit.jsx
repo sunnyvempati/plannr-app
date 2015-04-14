@@ -1,5 +1,8 @@
 var VendorFormEdit = React.createClass({
-
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.string
+  },
   render: function () {
     var action = "/vendors/" + this.props.model.id,
       routeVerb = "PUT",

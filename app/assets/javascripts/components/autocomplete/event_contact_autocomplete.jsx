@@ -1,4 +1,7 @@
 var EventContactAutocomplete = React.createClass({
+  propTypes: {
+    onAssociation: React.PropTypes.func.isRequired
+  },
   retrieveOtherContacts: function(request, response) {
     $.get("search_other_contacts", {search: {text: request.term}},  function(result) {
       response(result.contacts);

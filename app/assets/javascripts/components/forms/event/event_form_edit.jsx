@@ -1,5 +1,8 @@
 var EventFormEdit = React.createClass({
-
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.string
+  },
   render: function () {
     var action = "/events/" + this.props.model.id,
       routeVerb = "PUT",

@@ -1,5 +1,8 @@
 var EventFormNew = React.createClass({
-
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.string
+  },
   render: function () {
     var action = "/events" ,
       routeVerb = "POST",

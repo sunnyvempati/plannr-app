@@ -1,4 +1,8 @@
 var TaskFormNew = React.createClass({
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.string
+  },
   render: function () {
     var action = "/tasks",
       routeVerb = "POST",

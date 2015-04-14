@@ -1,4 +1,7 @@
 var EventTaskNewTile = React.createClass({
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired
+  },
   getInitialState: function() {
     return {
       model: null

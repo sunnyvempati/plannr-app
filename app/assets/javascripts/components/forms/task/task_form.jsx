@@ -1,4 +1,16 @@
 var TaskForm = React.createClass({
+  propTypes: {
+    action: React.PropTypes.string.isRequired,
+    authToken: React.PropTypes.string.isRequired,
+    primaryButtonText: React.PropTypes.string.isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    secondaryButtonVisible: React.PropTypes.bool.isRequired,
+    showButtonList: React.PropTypes.bool.isRequired,
+
+    disableForm: React.PropTypes.bool,
+    model: React.PropTypes.object,
+    secondaryButtonHref: React.PropTypes.string
+  },
   hrefRoot: '/tasks',
   mapInputs: function(inputs) {
     return {
