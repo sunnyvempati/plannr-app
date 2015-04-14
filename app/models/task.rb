@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   belongs_to :event
 
   validates :name, presence: true
-  validates :event, presence: true
+  validates :event_id, presence: true
   validate :task_deadline
 
   def self.header
