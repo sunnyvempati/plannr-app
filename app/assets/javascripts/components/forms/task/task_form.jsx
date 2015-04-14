@@ -64,31 +64,32 @@ var TaskForm = React.createClass({
     return (
         <div className='FormContainer--leftAligned'>
           <Form url={this.props.action}
-          mapping={this.mapInputs}
-          onSuccess={this.changeUrl}
-          routeVerb={this.props.routeVerb}
-          authToken={this.props.authToken}
-          primaryButtonText={this.props.primaryButtonText}
-          secondaryButtonVisible={this.props.secondaryButtonVisible}
-          secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}
-          id='task_form'>
+            mapping={this.mapInputs}
+            onSuccess={this.changeUrl}
+            routeVerb={this.props.routeVerb}
+            authToken={this.props.authToken}
+            primaryButtonText={this.props.primaryButtonText}
+            secondaryButtonVisible={this.props.secondaryButtonVisible}
+            secondaryButtonHref={this.props.secondaryButtonHref}
+            showButtonList={this.props.showButtonList}
+            id='task_form'>
 
             <FormInput
               id='task_name'
               name='name'
               autofocus='autofocus'
               type='text'
-              label='name'
+              label='Name*'
               value={task.name}
               placeholder='What is the name of your task?'
               disabled={this.props.disableForm}
-              required/>
+              required />
             <FormInput
               id='task_description'
               name='description'
               autofocus='off'
-              type='text' label='description'
+              type='text'
+              label='Description'
               value={task.description}
               placeholder='How would you describe this task?'
               disabled={this.props.disableForm} />
@@ -110,7 +111,8 @@ var TaskForm = React.createClass({
               options={this.state.eventOptions}
               value={task.eventId}
               form={'task_form'}
-              disabled={this.props.disableForm} />
+              disabled={this.props.disableForm}
+              required />
           </Form>
           <a href={this.hrefRoot }>List</a>
           |
