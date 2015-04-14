@@ -16,7 +16,7 @@ var Form = React.createClass({
     url: React.PropTypes.string.isRequired,
     mapping: React.PropTypes.any,
     routeVerb: React.PropTypes.string,
-    onSuccess: React.PropTypes.string.isRequired,
+    onSuccess: React.PropTypes.func.isRequired,
     authToken: React.PropTypes.string.isRequired,
     showButtonList: React.PropTypes.bool,
     primaryButtonText: React.PropTypes.string.isRequired,
