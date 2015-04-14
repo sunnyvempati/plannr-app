@@ -28,7 +28,7 @@ var ContactForm = React.createClass({
   },
   changeUrl: function () {
     location.href = this.hrefRoot;
-  },  
+  },
   render: function () {
     return (
       <div className='FormContainer--leftAligned'>
@@ -111,5 +111,4 @@ var ContactForm = React.createClass({
       </div>
     );
   }
-});
-
+})
