@@ -14,14 +14,16 @@ var EventForm = React.createClass({
   hrefRoot: "/events",
   mapInputs: function (inputs) {
     return {
-      'name': inputs.name,
-      'start_date': inputs.start_date,
-      'end_date': inputs.end_date,
-      'description': inputs.description,
-      'location': inputs.location,
-      'client_name': inputs.client_name,
-      'budget': inputs.budget,
-      'notes': inputs.notes,
+      'event':{
+        'name': inputs.name,
+        'start_date': inputs.start_date,
+        'end_date': inputs.end_date,
+        'description': inputs.description,
+        'location': inputs.location,
+        'client_name': inputs.client_name,
+        'budget': inputs.budget,
+        'notes': inputs.notes
+      },
       'authenticity_token': inputs.authenticity_token
     };
   },
