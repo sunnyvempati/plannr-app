@@ -11,6 +11,10 @@ class EventContactsController < ApplicationController
     end
   end
 
+  def contacts_count
+    render json: EventContact.all.where(event_id: params[:event_id]).count
+  end
+
   def contacts
     render json: EventContact.all.where(event_id: params[:event_id]), each_serializer: EventContactWithContactSerializer
   end

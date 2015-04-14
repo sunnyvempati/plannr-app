@@ -32,11 +32,13 @@ Rails.application.routes.draw do
   post 'events/:event_id/contacts', to:'event_contacts#create'
   post 'events/:event_id/contacts/mass_delete', to:'event_contacts#mass_delete'
   get 'events/:event_id/contacts', to:'event_contacts#contacts'
+  get 'events/:event_id/contacts/count', to:'event_contacts#contacts_count'
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
   get 'events/:event_id/tasks/new', to:'tasks#new_event_task'
   get 'events/:event_id/tasks/new_json', to:'tasks#new_event_task_json'
+  get 'events/:event_id/tasks/count', to:'tasks#event_tasks_count'
 
   # # event_vendors
   # post 'event_vendors', to:'event_vendors#create'
