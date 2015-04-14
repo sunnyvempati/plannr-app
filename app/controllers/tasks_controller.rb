@@ -33,6 +33,11 @@ class TasksController < ApplicationController
     @header = "Edit Task"
   end
 
+  def event_tasks_count 
+    render json: Task.all.where(event_id: params[:event_id]).count
+  end
+
+
   def create
     modified_entity_params = task_params
     modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(deadline))
