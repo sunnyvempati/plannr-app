@@ -1,6 +1,6 @@
 var ContactFormShow = React.createClass({
   propTypes: {
-    model: React.PropTypes.string
+    model: React.PropTypes.object
   },
   render: function () {
     var action = "/contacts";

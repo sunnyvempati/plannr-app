@@ -1,7 +1,7 @@
 var EventFormNew = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
-    model: React.PropTypes.string
+    model: React.PropTypes.object
   },
   render: function () {
     var action = "/events" ,
