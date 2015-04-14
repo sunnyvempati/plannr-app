@@ -54,7 +54,7 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
             required
           />
-          <SelectInput
+          <FormSelectInput
             id='contact_contact_type'
             name='contact_type'
             className='SelectInput'

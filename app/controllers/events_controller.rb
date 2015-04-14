@@ -8,8 +8,8 @@ class EventsController < ApplicationController
     @header = 'Events'
   end
 
-  def index_for_drop_down_list
-    render json: Event.all, each_serializer: EventDdlSerializer
+  def index_for_select_input
+    render json: Event.all, each_serializer: EventSelectInputSerializer
   end
 
   def show

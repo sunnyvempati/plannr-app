@@ -29,11 +29,11 @@ var TaskForm = React.createClass({
       eventOptions: <option>Loading..</option>
     };
   },
-  componentWillMount: function() {
-    this.retrieveEventDdlOptions();
+  componentDidMount: function() {
+    this.retrieveEventSelectOptionsAsync();
   },
-  retrieveEventDdlOptions: function () {
-    $.get('/events/ddl', function (result) {
+  retrieveEventSelectOptionsAsync: function () {
+    $.get('/events/select_input', function (result) {
       var options = [];
       if (!!result.events) {
         options = $.map(result.events, function (value, index) {
@@ -101,7 +101,7 @@ var TaskForm = React.createClass({
               value={ Utils.isoDateToUsFormat(task.deadline) }
               placeholder='What is the deadline for this task? (MM/DD/YYYY)'
               disabled={this.props.disableForm} />
-            <SelectInput
+            <FormSelectInput
               id='task_event_id'
               name='event_id'
               className='SelectInput'

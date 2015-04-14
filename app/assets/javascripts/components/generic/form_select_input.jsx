@@ -1,4 +1,4 @@
-var SelectInput = React.createClass({
+var FormSelectInput = React.createClass({
   propTypes: {
     options: React.PropTypes.array.isRequired // option tags
   },
