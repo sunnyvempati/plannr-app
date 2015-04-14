@@ -14,6 +14,7 @@ var EventForm = React.createClass({
   hrefRoot: "/events",
   mapInputs: function (inputs) {
     return {
+      'authenticity_token': inputs.authenticity_token,
       'event':{
         'name': inputs.name,
         'start_date': inputs.start_date,
@@ -23,8 +24,7 @@ var EventForm = React.createClass({
         'client_name': inputs.client_name,
         'budget': inputs.budget,
         'notes': inputs.notes
-      },
-      'authenticity_token': inputs.authenticity_token
+      }
     };
   },
   changeUrl: function () {

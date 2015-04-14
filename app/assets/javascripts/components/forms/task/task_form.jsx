@@ -14,11 +14,13 @@ var TaskForm = React.createClass({
   hrefRoot: '/tasks',
   mapInputs: function(inputs) {
     return {
-      'name': inputs.name,
-      'description': inputs.description,
-      'deadline': inputs.deadline,
-      'event_id': inputs.event_id,
-      'authenticity_token': inputs.authenticity_token
+      'authenticity_token': inputs.authenticity_token,
+      'task':{
+        'name': inputs.name,
+        'description': inputs.description,
+        'deadline': inputs.deadline,
+        'event_id': inputs.event_id
+      }
     };
   },
   changeUrl: function () {
