@@ -39,7 +39,6 @@ var TaskForm = React.createClass({
         options = $.map(result.events, function (value, index) {
           return (<option key={index} value={value.id}>{value.name}</option>);
         });
-        options.splice(0,0, <option key='-1'>Select...</option>)
       } else {
         options = <option>No Events</option>;
       }
