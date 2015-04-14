@@ -1,4 +1,7 @@
 var SelectInput = React.createClass({
+  propTypes: {
+    options: React.PropTypes.array.isRequired // option tags
+  },
   mixins: [Formsy.Mixin],
   getInitialState: function () {
     return {
@@ -20,34 +23,18 @@ var SelectInput = React.createClass({
       'FormInput': true,
       'is-hidden': this.props.type == 'hidden'
     });
-    var optionsHtml = convertOptionsToHtml(this.props.options);
-
-    function convertOptionsToHtml(options) {
-      var retOptionsHtml = [];
-      if (!!options) {
-        $.each(options, function (index, value) {
-          retOptionsHtml.push(<option key={index} value={value.value}>{value.text}</option>);
-        });       
-      }
-      return retOptionsHtml;
-    }
-
     return (
       <div className={form_input_classes}>
         <label for={this.props.id}>{this.props.label}</label>
-        <select 
-          value={this.getValue()}
-          onChange={this.changeValue}
-          className={input_classes}
-          name={this.props.name}
-          form={this.props.formId} 
-          disabled={this.props.disabled}
-        >
-        {optionsHtml}
+        <select value={this.getValue()}
+                onChange={this.changeValue}
+                className={input_classes}
+                name={this.props.name}
+                form={this.props.formId}
+                disabled={this.props.disabled}>
+          {this.props.options}
         </select>
-
       </div>
-
-      );
+    );
   }
 });

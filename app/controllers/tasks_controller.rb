@@ -13,30 +13,13 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
     @header = "Create Task"
-  end
-
-  def new_event_task_json
-    new
-    @task.event_id = params[:event_id]
-    render json: @task
-  end
-
-  def new_event_task
-    new
-    @task.event_id = params[:event_id]
-    render action: 'new'
+    @task = Task.new
   end
 
   def edit
     @header = "Edit Task"
   end
-
-  def event_tasks_count 
-    render json: Task.all.where(event_id: params[:event_id]).count
-  end
-
 
   def create
     modified_entity_params = task_params

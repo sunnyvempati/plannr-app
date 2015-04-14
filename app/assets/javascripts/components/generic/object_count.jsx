@@ -7,7 +7,7 @@ var ObjectCount = React.createClass({
   render: function() {
     return (
       <div>
-        <span>{this.props.count || "?"}</span> <span>{this.props.text}</span>
+        <span>{this.props.count}</span> <span>{this.props.text}</span>
       </div>
     );
   }

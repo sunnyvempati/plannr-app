@@ -7,20 +7,12 @@ var EventTaskNewTile = React.createClass({
       model: null
     };
   },
-  componentDidMount: function() {
-    $.get("tasks/new_json", function(results) {
-      if (this.isMounted()) {
-        this.setState({
-          model: results
-        })
-      }
-    }.bind(this))
-  },
   render: function() {
+    var model = {event_id: this.props.eventId};
     return (
       <div className="EventTaskNewTile">
         <Link to="tileAll">Go back to home</Link>
-        <TaskFormNew model={this.state.model} authToken={this.props.authToken}/>
+        <TaskFormNew model={model} authToken={this.props.authToken}/>
       </div>
     );
   }

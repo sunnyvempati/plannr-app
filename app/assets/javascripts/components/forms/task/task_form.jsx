@@ -6,9 +6,9 @@ var TaskForm = React.createClass({
     routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
+    model: React.PropTypes.object.isRequired,
 
     disableForm: React.PropTypes.bool,
-    model: React.PropTypes.object,
     secondaryButtonHref: React.PropTypes.string
   },
   hrefRoot: '/tasks',
@@ -26,7 +26,7 @@ var TaskForm = React.createClass({
   },
   getInitialState: function() {
     return {
-      eventOptions: [{value: -1, text: "loading..."}]
+      eventOptions: <option>Loading..</option>
     };
   },
   componentWillMount: function() {
@@ -35,13 +35,12 @@ var TaskForm = React.createClass({
   retrieveEventDdlOptions: function () {
     $.get('/events/ddl', function (result) {
       var options = [];
-      if (!!result.events){
+      if (!!result.events) {
         options = $.map(result.events, function (value, index) {
-          return {value: value.id, text: value.name};
+          return (<option key={index} value={value.id}>{value.name}</option>);
         });
-        options.splice(0,0,{value:-1, text: 'Select...'}); 
       } else {
-        options = [{value: -1, text: "No Events Found"}]
+        options = <option>No Events</option>;
       }
       this.setState({eventOptions: options});
     }.bind(this))
@@ -50,6 +49,17 @@ var TaskForm = React.createClass({
     }.bind(this));
   },
   render: function() {
+    var task = {};
+    if (this.props.model) {
+      var model = this.props.model;
+      task = {
+        name: model.name,
+        description: model.description,
+        deadline: model.deadline,
+        eventId: model.event_id,
+        id: model.id
+      };
+    }
     return (
         <div className='FormContainer--leftAligned'>
           <Form url={this.props.action}
@@ -63,53 +73,50 @@ var TaskForm = React.createClass({
           showButtonList={this.props.showButtonList}
           id='task_form'>
 
-            <FormInput  
+            <FormInput
               id='task_name'
               name='name'
               autofocus='autofocus'
-              type='text' 
+              type='text'
               label='name'
-              value={this.props.model.name}
+              value={task.name}
               placeholder='What is the name of your task?'
               disabled={this.props.disableForm}
               required/>
-            <FormInput  
+            <FormInput
               id='task_description'
               name='description'
               autofocus='off'
               type='text' label='description'
-              value={this.props.model.description}
+              value={task.description}
               placeholder='How would you describe this task?'
               disabled={this.props.disableForm} />
-            <FormInput  
+            <FormInput
               id='task_deadline'
-              name='deadline' 
+              name='deadline'
               autofocus='off'
               dateField={true}
               type='text'
               label='deadline'
-              value={ Utils.isoDateToUsFormat(this.props.model.deadline) }
+              value={ Utils.isoDateToUsFormat(task.deadline) }
               placeholder='What is the deadline for this task? (MM/DD/YYYY)'
               disabled={this.props.disableForm} />
-
             <SelectInput
               id='task_event_id'
               name='event_id'
               className='SelectInput'
               label='Event*'
               options={this.state.eventOptions}
-              value={this.props.model.event_id}
+              value={task.eventId}
               form={'task_form'}
-              disabled={this.props.disableForm}
-            />
-
+              disabled={this.props.disableForm} />
           </Form>
           <a href={this.hrefRoot }>List</a>
           |
-          <a href={this.hrefRoot + '/' + this.props.model.id + '/edit' }>Edit</a>
+          <a href={this.hrefRoot + '/' + task.id + '/edit' }>Edit</a>
           |
-          <a href={this.hrefRoot + '/' + this.props.model.id  }>Show</a>
+          <a href={this.hrefRoot + '/' + task.id  }>Show</a>
         </div>
       );
-    } 
+    }
 });
