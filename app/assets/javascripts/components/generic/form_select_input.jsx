@@ -13,6 +13,7 @@ var FormSelectInput = React.createClass({
     this.setValue(event.currentTarget.value);
   },
   render: function () {
+    //TODO: clean up React JS console warnings
     var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({
@@ -26,7 +27,8 @@ var FormSelectInput = React.createClass({
     return (
       <div className={form_input_classes}>
         <label for={this.props.id}>{this.props.label}</label>
-        <select value={this.getValue()}
+        <select id={this.props.id}
+                value={this.getValue()}
                 onChange={this.changeValue}
                 className={input_classes}
                 name={this.props.name}
