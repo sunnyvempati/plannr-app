@@ -4,6 +4,7 @@ var EventTileAll = React.createClass({
       <div className="EventTileAll">
         <EventContactSmallTile />
         <EventTaskSmallTile />
+        <EventVendorSmallTile />
       </div>
     );
   }
