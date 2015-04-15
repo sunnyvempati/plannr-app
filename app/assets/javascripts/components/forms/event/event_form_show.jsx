@@ -1,4 +1,7 @@
 var EventFormShow = React.createClass({
+  propTypes: {
+    model: React.PropTypes.object
+  },
   render: function () {
     var action = "/events";
 
@@ -8,7 +11,6 @@ var EventFormShow = React.createClass({
         model={this.props.model}
         disableForm={true}
         showButtonList={false}
-        notice={this.props.notice}
       />
     );
   }

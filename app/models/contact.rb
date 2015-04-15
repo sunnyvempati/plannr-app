@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  US_PHONE_REGEX = %r{\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z}
   SEARCH_LIMIT = 5
   has_many :event_contacts
   has_many :events, through: :event_contacts
@@ -30,14 +31,14 @@ class Contact < ActiveRecord::Base
   end
 
 
-  validates :name,
-            :presence => true
+  validates :name, :presence => true
+  validates :contact_type, numericality: { only_integer: true }
   validates_format_of :email,
                       :with => EMAIL_REGEX,
                       :message => 'must be an email address',
                       :allow_blank => true
   validates_format_of :phone,
-                      :with => %r{\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z},
+                      :with => US_PHONE_REGEX,
                       :message => 'must be a phone number in [1-]999-999-9999 [x9999] format',
                       :allow_blank => true
   validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'

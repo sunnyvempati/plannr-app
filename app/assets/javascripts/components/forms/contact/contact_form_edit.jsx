@@ -1,5 +1,8 @@
 var ContactFormEdit = React.createClass({
-
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.object
+  },
   render: function () {
     var action = "/contacts/" + this.props.model.id,
       routeVerb = "PUT",
@@ -13,7 +16,6 @@ var ContactFormEdit = React.createClass({
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
-        notice={this.props.notice}
         routeVerb={routeVerb}
         primaryButtonText={primaryButtonText}
         secondaryButtonText={secondaryButtonText}

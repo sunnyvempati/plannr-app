@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   post 'events/:event_id/contacts/mass_delete', to:'event_contacts#mass_delete'
   get 'events/:event_id/contacts', to:'event_contacts#contacts'
 
-  # tasks
+  # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
 
   # # event_vendors
@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
 
+  # TODO: specify Event routes
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 end

@@ -8,9 +8,11 @@ var EventContactListTile = React.createClass({
   },
   componentDidMount: function() {
     $.get("contacts", function(results) {
-      this.setState({
-        tableData: results.event_contacts
-      })
+      if (this.isMounted()) {
+        this.setState({
+          tableData: results.event_contacts
+        })
+      }
     }.bind(this))
   },
   addToContactList: function(item) {
@@ -22,10 +24,9 @@ var EventContactListTile = React.createClass({
     this.setState({tableData: data});
   },
   render: function() {
-    var eventId = this.props.eventId;
     return (
       <div className="EventContactListTileContainer">
-        <Link to="tileAll">Go back to home</Link>
+        <Link to="tileAll">Zoom Out</Link>
         <EventContactAutocomplete onAssociation={this.addToContactList} />
         <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
       </div>

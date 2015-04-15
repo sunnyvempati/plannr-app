@@ -1,16 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<%= react_component("TaskForm",
-                    action: task_path,
-                    authToken: form_authenticity_token,
+<%= react_component("TaskFormEdit",
                     model: @task,
-                    routeVerb: "PUT",
-                    primaryButtonText: "Update",
-                    secondaryButtonText: "Cancel",
-                    secondaryButtonVisible: true,
-                    secondaryButtonHref: tasks_path)  %>
-
-<%= link_to 'List', tasks_path %> |
-<%= link_to 'Show', @task %>
-
-
+                    authToken: form_authenticity_token
+    ) %>

@@ -1,5 +1,8 @@
 var ContactFormNew = React.createClass({
-
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.object
+  },
   render: function () {
     var action = "/contacts" ,
       routeVerb = "POST",
@@ -13,7 +16,6 @@ var ContactFormNew = React.createClass({
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
-        notice={this.props.notice}
         routeVerb={routeVerb}
         primaryButtonText={primaryButtonText}
         secondaryButtonText={secondaryButtonText}

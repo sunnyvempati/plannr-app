@@ -1,12 +1,12 @@
-var VendorFormShow = React.createClass({
+var TaskFormShow = React.createClass({
   propTypes: {
     model: React.PropTypes.object
   },
   render: function () {
-    var action = "/vendors";
+    var action = "/tasks";
 
     return (
-      <VendorForm
+      <TaskForm
         action= {action}
         model={this.props.model}
         disableForm={true}

@@ -1,5 +1,8 @@
 var EventFormEdit = React.createClass({
-
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired,
+    model: React.PropTypes.object
+  },
   render: function () {
     var action = "/events/" + this.props.model.id,
       routeVerb = "PUT",
@@ -13,7 +16,6 @@ var EventFormEdit = React.createClass({
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
-        notice={this.props.notice}
         routeVerb={routeVerb}
         primaryButtonText={primaryButtonText}
         secondaryButtonText={secondaryButtonText}

@@ -1,6 +1,18 @@
 var ContactForm = React.createClass({
+  propTypes: {
+    action: React.PropTypes.string.isRequired,
+    authToken: React.PropTypes.string.isRequired,
+    primaryButtonText: React.PropTypes.string.isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    secondaryButtonVisible: React.PropTypes.bool.isRequired,
+    showButtonList: React.PropTypes.bool.isRequired,
+
+    disableForm: React.PropTypes.bool,
+    model: React.PropTypes.object,
+    secondaryButtonHref: React.PropTypes.string
+  },
   hrefRoot: '/contacts',
-  contactTypeOptions: [ {value: '1', text: 'Client'}, {value: '2', text: 'Vendor'}],
+  contactTypeOptions: [<option key='1' value='1'>Client</option>, <option key='2' value='2'>Vendor</option>],
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -18,6 +30,19 @@ var ContactForm = React.createClass({
     location.href = this.hrefRoot;
   },
   render: function () {
+    var vendor = {};
+    if (this.props.model) {
+      var model = this.props.model;
+      vendor = {
+        name: vendor.name,
+        contactType: vendor.contact_type,
+        email: vendor.email,
+        phone: vendor.phone,
+        contactCompany: vendor.contact_company,
+        description: vendor.description,
+        id: vendor.id
+      };
+    }
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
@@ -38,18 +63,19 @@ var ContactForm = React.createClass({
             placeholder='What is the name of your contact?'
             type='text'
             label='name*'
-            value={this.props.model.name}
+            value={vendor.name}
             disabled={this.props.disableForm}
             required
           />
-          <SelectInput
+          <FormSelectInput
             id='contact_contact_type'
             name='contact_type'
             className='SelectInput'
             label='type*'
             options={this.contactTypeOptions}
-            value={this.props.model.contact_type}
+            value={vendor.contactType}
             disabled={this.props.disableForm}
+            required
           />
           <FormInput
             id='contact_email'
@@ -57,7 +83,7 @@ var ContactForm = React.createClass({
             placeholder='What is the email of your contact?'
             type='text'
             label='email'
-            value={this.props.model.email}
+            value={vendor.email}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -66,7 +92,7 @@ var ContactForm = React.createClass({
             placeholder='What is the phone of your contact?'
             type='tel'
             label='phone'
-            value={this.props.model.phone}
+            value={vendor.phone}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -75,16 +101,16 @@ var ContactForm = React.createClass({
             placeholder='What is the company of your contact?'
             type='text'
             label='company'
-            value={this.props.model.contact_company}
+            value={vendor.contactCompany}
             disabled={this.props.disableForm}
           />
           <TextAreaInput
-            name='description'
             id='contact_description'
+            name='description'
             className='TextAreaInput'
             label='description'
             placeholder='What else do you need to know?'
-            value={this.props.model.description}
+            value={vendor.description}
             disabled={this.props.disableForm}
             formId='contact_form'
           />
@@ -93,11 +119,10 @@ var ContactForm = React.createClass({
 
         <a href={this.hrefRoot }>List</a>
         |
-        <a href={this.hrefRoot + '/' + this.props.model.id + '/edit' }>Edit</a>
+        <a href={this.hrefRoot + '/' + vendor.id + '/edit' }>Edit</a>
         |
-        <a href={this.hrefRoot + '/' + this.props.model.id  }>Show</a>
+        <a href={this.hrefRoot + '/' + vendor.id  }>Show</a>
       </div>
     );
   }
-});
-
+})

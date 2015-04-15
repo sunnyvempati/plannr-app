@@ -12,11 +12,11 @@
 
 var Form = React.createClass({
   propTypes: {
-    id: React.PropTypes.number,
+    id: React.PropTypes.string,
     url: React.PropTypes.string.isRequired,
     mapping: React.PropTypes.any,
     routeVerb: React.PropTypes.string,
-    onSuccessUrl: React.PropTypes.string.isRequired,
+    onSuccess: React.PropTypes.func.isRequired,
     authToken: React.PropTypes.string.isRequired,
     showButtonList: React.PropTypes.bool,
     primaryButtonText: React.PropTypes.string.isRequired,

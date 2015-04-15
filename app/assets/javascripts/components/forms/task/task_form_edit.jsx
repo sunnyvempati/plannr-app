@@ -1,17 +1,17 @@
-var VendorFormNew = React.createClass({
+var TaskFormEdit = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
   },
   render: function () {
-    var action = "/vendors" ,
-      routeVerb = "POST",
-      primaryButtonText = "Create",
+    var action = "/tasks/" + this.props.model.id,
+      routeVerb = "PUT",
+      primaryButtonText = "Update",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = "/vendors";
+      secondaryButtonHref = "/tasks";
 
     return (
-      <VendorForm
+      <TaskForm
         action= {action}
         model={this.props.model}
         disableForm={false}
@@ -26,3 +26,4 @@ var VendorFormNew = React.createClass({
     );
   }
 });
+

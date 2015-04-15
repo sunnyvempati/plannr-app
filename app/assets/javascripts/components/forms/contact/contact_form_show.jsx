@@ -1,4 +1,7 @@
 var ContactFormShow = React.createClass({
+  propTypes: {
+    model: React.PropTypes.object
+  },
   render: function () {
     var action = "/contacts";
 
@@ -8,7 +11,6 @@ var ContactFormShow = React.createClass({
         model={this.props.model}
         disableForm={true}
         showButtonList={false}
-        notice={this.props.notice}
       />
     );
   }

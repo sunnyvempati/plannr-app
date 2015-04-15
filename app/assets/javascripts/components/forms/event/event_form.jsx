@@ -1,16 +1,30 @@
 var EventForm = React.createClass({
+  propTypes: {
+    action: React.PropTypes.string.isRequired,
+    authToken: React.PropTypes.string.isRequired,
+    primaryButtonText: React.PropTypes.string.isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    secondaryButtonVisible: React.PropTypes.bool.isRequired,
+    showButtonList: React.PropTypes.bool.isRequired,
+
+    disableForm: React.PropTypes.bool,
+    model: React.PropTypes.object,
+    secondaryButtonHref: React.PropTypes.string
+  },
   hrefRoot: "/events",
   mapInputs: function (inputs) {
     return {
-      'name': inputs.name,
-      'start_date': inputs.start_date,
-      'end_date': inputs.end_date,
-      'description': inputs.description,
-      'location': inputs.location,
-      'client_name': inputs.client_name,
-      'budget': inputs.budget,
-      'notes': inputs.notes,
-      'authenticity_token': inputs.authenticity_token
+      'authenticity_token': inputs.authenticity_token,
+      'event':{
+        'name': inputs.name,
+        'start_date': inputs.start_date,
+        'end_date': inputs.end_date,
+        'description': inputs.description,
+        'location': inputs.location,
+        'client_name': inputs.client_name,
+        'budget': inputs.budget,
+        'notes': inputs.notes
+      }
     };
   },
   changeUrl: function () {
