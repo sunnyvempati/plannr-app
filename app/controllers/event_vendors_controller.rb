@@ -9,11 +9,21 @@ class EventVendorsController < ApplicationController
   end
 
   def destroy
-   @event.vendors.delete(@vendor)
-   render_entity @event
- end
+    @event.vendors.delete(@vendor)
+    render_entity @event
+  end
 
- private
+  def vendors
+    render json: EventVendor.all.where(event_id: params[:event_id]), each_serializer: EventVendorWithVendorSerializer
+  end
+
+  def mass_delete
+    ids = mass_delete_params[:event_vendor_ids]
+    EventContact.delete_all(id: ids) if ids
+    render_success
+  end
+
+  private
   # Use callbacks to share common setup or constraints between actions.
   def set_event_vendor
 
@@ -34,16 +44,16 @@ class EventVendorsController < ApplicationController
 
     error_message = ''
     if params[:vendor_id] == "-1"
-      if params[:searchText] == nil 
+      if params[:searchText] == nil
         error_message = error_message + 'Missing searchText parameter; '
       end
     end
 
-    if params[:event_id] == nil 
+    if params[:event_id] == nil
       error_message = error_message + 'Missing event_id parameter; '
     end
 
-    if params[:vendor_id] == nil 
+    if params[:vendor_id] == nil
       error_message = error_message + 'Missing vendor_id parameter; '
     end
 
@@ -51,6 +61,10 @@ class EventVendorsController < ApplicationController
       raise error_message
     end
 
+  end
+
+  def mass_delete_params
+    params.require(:destroy_opts).permit(event_vendor_ids: [])
   end
 
 end
