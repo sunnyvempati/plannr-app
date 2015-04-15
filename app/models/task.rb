@@ -3,8 +3,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :event
 
-  validates :name, presence: true
-  validates :event_id, numericality: { only_integer: true }
+  validates :name, :event, presence: true
   validate :task_deadline
 
   def self.header

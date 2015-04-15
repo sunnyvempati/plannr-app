@@ -41,15 +41,20 @@ var TaskForm = React.createClass({
         options = $.map(result.events, function (value, index) {
           return (<option key={index} value={value.id}>{value.name}</option>);
         });
-        options.splice(0,0,<option key='-1' >Select ...</option>);
       } else {
         options = <option>No Events</option>;
       }
       this.setState({eventOptions: options});
     }.bind(this))
     .fail(function(jqXHR, textStatus, errorThrown){
-      this.setState({eventOptions: [{value: -1, text: 'error loading events'}]});
+      this.setState({eventOptions: <option>Error!!</option>});
     }.bind(this));
+  },
+  getDefaultOptionValue: function() {
+    var options = this.state.eventOptions;
+    if (options.length > 0) {
+      return options[0].props.value;
+    }
   },
   render: function() {
     var task = {};
@@ -66,15 +71,15 @@ var TaskForm = React.createClass({
     return (
         <div className='FormContainer--leftAligned'>
           <Form url={this.props.action}
-            mapping={this.mapInputs}
-            onSuccess={this.changeUrl}
-            routeVerb={this.props.routeVerb}
-            authToken={this.props.authToken}
-            primaryButtonText={this.props.primaryButtonText}
-            secondaryButtonVisible={this.props.secondaryButtonVisible}
-            secondaryButtonHref={this.props.secondaryButtonHref}
-            showButtonList={this.props.showButtonList}
-            id='task_form'>
+                mapping={this.mapInputs}
+                onSuccess={this.changeUrl}
+                routeVerb={this.props.routeVerb}
+                authToken={this.props.authToken}
+                primaryButtonText={this.props.primaryButtonText}
+                secondaryButtonVisible={this.props.secondaryButtonVisible}
+                secondaryButtonHref={this.props.secondaryButtonHref}
+                showButtonList={this.props.showButtonList}
+                id='task_form'>
 
             <FormInput
               id='task_name'
@@ -111,7 +116,7 @@ var TaskForm = React.createClass({
               className='SelectInput'
               label='Event*'
               options={this.state.eventOptions}
-              value={task.eventId}
+              value={task.eventId || this.getDefaultOptionValue()}
               form={'task_form'}
               disabled={this.props.disableForm}
               required />

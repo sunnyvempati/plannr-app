@@ -35,7 +35,6 @@ Rails.application.routes.draw do
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
-  get 'events/:event_id/tasks/new', to:'tasks#new_event_task'
 
   # # event_vendors
   # post 'event_vendors', to:'event_vendors#create'

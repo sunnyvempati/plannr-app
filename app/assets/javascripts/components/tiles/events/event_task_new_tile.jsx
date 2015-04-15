@@ -2,11 +2,6 @@ var EventTaskNewTile = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired
   },
-  getInitialState: function() {
-    return {
-      model: null
-    };
-  },
   render: function() {
     var model = {event_id: this.props.eventId};
     return (

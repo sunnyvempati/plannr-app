@@ -14,8 +14,6 @@ var EventTaskTable = React.createClass({
           columns={this.getColumns()}
           useCustomRowComponent={false}
         />
-        <ActionButton path={'tasks/new'} />
-
       </div>
     );
   }

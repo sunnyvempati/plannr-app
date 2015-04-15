@@ -18,7 +18,7 @@ var EventTaskListTile = React.createClass({
       <div className="EventTaskListTile">
         <Link to="tileAll">Zoom Out</Link>
         <EventTaskTable data={this.state.tableData} />
-        <Link to='tileNewTask' >New Event Task</Link>
+        <Link to='tileNewTask'>New Event Task</Link>
       </div>
     );
   }

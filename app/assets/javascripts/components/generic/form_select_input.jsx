@@ -3,22 +3,15 @@ var FormSelectInput = React.createClass({
     options: React.PropTypes.array.isRequired // option tags
   },
   mixins: [Formsy.Mixin],
-  getInitialState: function () {
-    return {
-      isValid: true,
-      value: this.props.value
-    };
-  },
   changeValue: function (event) {
     this.setValue(event.currentTarget.value);
   },
   render: function () {
     //TODO: clean up React JS console warnings
-    var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({
       'FormInput-field': true,
-      'is-invalid': show_validation
+      'is-invalid': !this.isValid()
     });
     var form_input_classes = cx({
       'FormInput': true,

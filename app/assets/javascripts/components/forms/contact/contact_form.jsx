@@ -12,7 +12,7 @@ var ContactForm = React.createClass({
     secondaryButtonHref: React.PropTypes.string
   },
   hrefRoot: '/contacts',
-  contactTypeOptions: [<option key='-1'>Select...</option>, <option key='1' value='1'>Client</option>, <option key='2' value='2'>Vendor</option>],
+  contactTypeOptions: [<option key='1' value='1'>Client</option>, <option key='2' value='2'>Vendor</option>],
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -30,6 +30,19 @@ var ContactForm = React.createClass({
     location.href = this.hrefRoot;
   },
   render: function () {
+    var vendor = {};
+    if (this.props.model) {
+      var model = this.props.model;
+      vendor = {
+        name: vendor.name,
+        contactType: vendor.contact_type,
+        email: vendor.email,
+        phone: vendor.phone,
+        contactCompany: vendor.contact_company,
+        description: vendor.description,
+        id: vendor.id
+      };
+    }
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
@@ -50,7 +63,7 @@ var ContactForm = React.createClass({
             placeholder='What is the name of your contact?'
             type='text'
             label='name*'
-            value={this.props.model.name}
+            value={vendor.name}
             disabled={this.props.disableForm}
             required
           />
@@ -60,7 +73,7 @@ var ContactForm = React.createClass({
             className='SelectInput'
             label='type*'
             options={this.contactTypeOptions}
-            value={this.props.model.contact_type}
+            value={vendor.contactType}
             disabled={this.props.disableForm}
             required
           />
@@ -70,7 +83,7 @@ var ContactForm = React.createClass({
             placeholder='What is the email of your contact?'
             type='text'
             label='email'
-            value={this.props.model.email}
+            value={vendor.email}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -79,7 +92,7 @@ var ContactForm = React.createClass({
             placeholder='What is the phone of your contact?'
             type='tel'
             label='phone'
-            value={this.props.model.phone}
+            value={vendor.phone}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -88,7 +101,7 @@ var ContactForm = React.createClass({
             placeholder='What is the company of your contact?'
             type='text'
             label='company'
-            value={this.props.model.contact_company}
+            value={vendor.contactCompany}
             disabled={this.props.disableForm}
           />
           <TextAreaInput
@@ -97,7 +110,7 @@ var ContactForm = React.createClass({
             className='TextAreaInput'
             label='description'
             placeholder='What else do you need to know?'
-            value={this.props.model.description}
+            value={vendor.description}
             disabled={this.props.disableForm}
             formId='contact_form'
           />
@@ -106,9 +119,9 @@ var ContactForm = React.createClass({
 
         <a href={this.hrefRoot }>List</a>
         |
-        <a href={this.hrefRoot + '/' + this.props.model.id + '/edit' }>Edit</a>
+        <a href={this.hrefRoot + '/' + vendor.id + '/edit' }>Edit</a>
         |
-        <a href={this.hrefRoot + '/' + this.props.model.id  }>Show</a>
+        <a href={this.hrefRoot + '/' + vendor.id  }>Show</a>
       </div>
     );
   }
