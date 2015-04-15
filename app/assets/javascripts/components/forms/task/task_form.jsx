@@ -15,7 +15,7 @@ var TaskForm = React.createClass({
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
-      'task':{
+      'task': {
         'name': inputs.name,
         'description': inputs.description,
         'deadline': inputs.deadline,
@@ -35,7 +35,8 @@ var TaskForm = React.createClass({
     this.retrieveEventSelectOptionsAsync();
   },
   retrieveEventSelectOptionsAsync: function () {
-    $.get('/events/select_input', function (result) {
+    $.get('/events.json', function (result) {
+      console.log(result);
       var options = [];
       if (!!result.events) {
         options = $.map(result.events, function (value, index) {
@@ -69,64 +70,64 @@ var TaskForm = React.createClass({
       };
     }
     return (
-        <div className='FormContainer--leftAligned'>
-          <Form url={this.props.action}
-                mapping={this.mapInputs}
-                onSuccess={this.changeUrl}
-                routeVerb={this.props.routeVerb}
-                authToken={this.props.authToken}
-                primaryButtonText={this.props.primaryButtonText}
-                secondaryButtonVisible={this.props.secondaryButtonVisible}
-                secondaryButtonHref={this.props.secondaryButtonHref}
-                showButtonList={this.props.showButtonList}
-                id='task_form'>
+      <div className='FormContainer--leftAligned'>
+        <Form url={this.props.action}
+              mapping={this.mapInputs}
+              onSuccess={this.changeUrl}
+              routeVerb={this.props.routeVerb}
+              authToken={this.props.authToken}
+              primaryButtonText={this.props.primaryButtonText}
+              secondaryButtonVisible={this.props.secondaryButtonVisible}
+              secondaryButtonHref={this.props.secondaryButtonHref}
+              showButtonList={this.props.showButtonList}
+              id='task_form'>
 
-            <FormInput
-              id='task_name'
-              name='name'
-              autofocus='autofocus'
-              type='text'
-              label='Name*'
-              value={task.name}
-              placeholder='What is the name of your task?'
-              disabled={this.props.disableForm}
-              required />
-            <FormInput
-              id='task_description'
-              name='description'
-              autofocus='off'
-              type='text'
-              label='Description'
-              value={task.description}
-              placeholder='How would you describe this task?'
-              disabled={this.props.disableForm} />
-            <FormInput
-              id='task_deadline'
-              name='deadline'
-              autofocus='off'
-              dateField={true}
-              type='text'
-              label='deadline'
-              value={ Utils.isoDateToUsFormat(task.deadline) }
-              placeholder='What is the deadline for this task? (MM/DD/YYYY)'
-              disabled={this.props.disableForm} />
-            <FormSelectInput
-              id='task_event_id'
-              name='event_id'
-              className='SelectInput'
-              label='Event*'
-              options={this.state.eventOptions}
-              value={task.eventId || this.getDefaultOptionValue()}
-              form={'task_form'}
-              disabled={this.props.disableForm}
-              required />
-          </Form>
-          <a href={this.hrefRoot }>List</a>
-          |
-          <a href={this.hrefRoot + '/' + task.id + '/edit' }>Edit</a>
-          |
-          <a href={this.hrefRoot + '/' + task.id  }>Show</a>
-        </div>
-      );
-    }
+          <FormInput
+            id='task_name'
+            name='name'
+            autofocus='autofocus'
+            type='text'
+            label='Name*'
+            value={task.name}
+            placeholder='What is the name of your task?'
+            disabled={this.props.disableForm}
+            required />
+          <FormInput
+            id='task_description'
+            name='description'
+            autofocus='off'
+            type='text'
+            label='Description'
+            value={task.description}
+            placeholder='How would you describe this task?'
+            disabled={this.props.disableForm} />
+          <FormInput
+            id='task_deadline'
+            name='deadline'
+            autofocus='off'
+            dateField={true}
+            type='text'
+            label='deadline'
+            value={ Utils.isoDateToUsFormat(task.deadline) }
+            placeholder='What is the deadline for this task? (MM/DD/YYYY)'
+            disabled={this.props.disableForm} />
+          <FormSelectInput
+            id='task_event_id'
+            name='event_id'
+            className='SelectInput'
+            label='Event*'
+            options={this.state.eventOptions}
+            value={task.eventId || this.getDefaultOptionValue()}
+            form={'task_form'}
+            disabled={this.props.disableForm}
+            required />
+        </Form>
+        <a href={this.hrefRoot }>List</a>
+        |
+        <a href={this.hrefRoot + '/' + task.id + '/edit' }>Edit</a>
+        |
+        <a href={this.hrefRoot + '/' + task.id  }>Show</a>
+      </div>
+    );
+  }
 });

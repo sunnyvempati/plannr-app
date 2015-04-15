@@ -22,7 +22,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    binding.pry
     modified_entity_params = task_params
     modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(deadline))
     modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user.id)

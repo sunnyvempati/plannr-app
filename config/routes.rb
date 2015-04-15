@@ -43,8 +43,6 @@ Rails.application.routes.draw do
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
 
-  # events
-  get '/events/select_input', to: 'events#index_for_select_input'
   # TODO: specify Event routes
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts

@@ -14,7 +14,6 @@ var FormInput = React.createClass({
     this.setValue(event.currentTarget.value);
   },
   render: function() {
-    console.log(this.props.name + " " + this.isValid());
     var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({

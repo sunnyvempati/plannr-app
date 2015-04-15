@@ -6,7 +6,6 @@ var EventTaskSmallTile = React.createClass({
   },
   componentDidMount: function() {
     $.get("tasks", function(results) {
-      console.log(results);
       if (this.isMounted()) {
         this.setState({
           count: results.tasks.length
