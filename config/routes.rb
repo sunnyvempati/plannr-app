@@ -37,9 +37,8 @@ Rails.application.routes.draw do
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
   get 'events/:event_id/tasks/new', to:'tasks#new_event_task'
 
-  # # event_vendors
-  # post 'event_vendors', to:'event_vendors#create'
-  # delete 'event_vendors', to:'event_vendors#destroy'
+  # event_vendors
+  get 'events/:event_id/vendors', to:'event_vendors#vendors'
 
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
