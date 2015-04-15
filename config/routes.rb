@@ -35,7 +35,6 @@ Rails.application.routes.draw do
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
-  get 'events/:event_id/tasks/new', to:'tasks#new_event_task'
 
   # event_vendors
   get 'events/:event_id/vendors', to:'event_vendors#vendors'
@@ -43,8 +42,6 @@ Rails.application.routes.draw do
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
 
-  # events
-  get '/events/select_input', to: 'events#index_for_select_input'
   # TODO: specify Event routes
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts

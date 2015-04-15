@@ -1,10 +1,5 @@
 var TextAreaInput = React.createClass({
   mixins: [Formsy.Mixin],
-  getInitialState: function() {
-    return {
-      isValid: true
-    };
-  },
   changeValue: function (event) {
     this.setValue(event.currentTarget.value);
   },

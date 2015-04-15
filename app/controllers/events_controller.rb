@@ -6,10 +6,10 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @header = 'Events'
-  end
-
-  def index_for_select_input
-    render json: Event.all, each_serializer: EventSelectInputSerializer
+    respond_to do |format|
+      format.html
+      format.json { render json: Event.all, each_serializer: EventSelectInputSerializer }
+    end
   end
 
   def show

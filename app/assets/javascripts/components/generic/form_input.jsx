@@ -1,28 +1,5 @@
 var FormInput = React.createClass({
   mixins: [Formsy.Mixin],
-  getInitialState: function() {
-    return {
-      isValid: true,
-      showValidation: false
-    };
-  },
-  changeValue: function (event) {
-    this.setValue(event.currentTarget.value);
-    if (this.props.dateField && !this.isValid()) {
-      this.setState({
-        _isValid: true,
-        _serverError: null
-      })
-    }
-  },
-  onBlur: function() {
-    this.setState({
-      showValidation: true
-    });
-  },
-  resetValidation: function() {
-    this.setState({showValidation: false});
-  },
   componentDidMount: function () {
     // for datepicker
     var id = "#" + this.props.id;
@@ -33,12 +10,15 @@ var FormInput = React.createClass({
       }.bind(this));
     }
   },
+  changeValue: function(event) {
+    this.setValue(event.currentTarget.value);
+  },
   render: function() {
     var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({
       'FormInput-field': true,
-      'is-invalid': show_validation
+      'is-invalid': !this.isValid()
     });
     var form_input_classes = cx({
       'FormInput': true,
@@ -58,7 +38,7 @@ var FormInput = React.createClass({
                onBlur={this.onBlur}
                disabled={this.props.disabled}
                id={this.props.id} />
-        <span className="FormInput-fieldErrorMessage">{error_message}</span>
+        <span className="FormInput-fieldErrorMessage">{this.getErrorMessage()}</span>
       </div>
     );
   }
