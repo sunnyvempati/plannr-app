@@ -14,7 +14,6 @@ var FormInput = React.createClass({
     this.setValue(event.currentTarget.value);
   },
   render: function() {
-    var show_validation = this.state.showValidation && !this.isValid();
     var cx = React.addons.classSet;
     var input_classes = cx({
       'FormInput-field': true,
@@ -24,7 +23,6 @@ var FormInput = React.createClass({
       'FormInput': true,
       'is-hidden': this.props.type == 'hidden'
     });
-    var error_message = show_validation ? this.getErrorMessage() : "";
     return (
       <div className={form_input_classes}>
         <label for={this.props.id}>{this.props.label}</label>
