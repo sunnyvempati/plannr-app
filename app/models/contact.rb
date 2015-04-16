@@ -20,7 +20,7 @@ class Contact < ActiveRecord::Base
   def self.search_other_contacts(params)
     wildcard_text = '%' + params[:text] + '%'
     Contact.other_contacts(params[:event_id])
-      .where('contacts.name LIKE ? OR contacts.email LIKE ?', wildcard_text, wildcard_text).limit(5)
+      .where('contacts.name LIKE ? OR contacts.email LIKE ?', wildcard_text, wildcard_text).limit(SEARCH_LIMIT)
   end
 
   def self.other_contacts(event_id)
