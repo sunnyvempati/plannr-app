@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.includes(:assigned_to).all
     @header = "Tasks"
   end
 
@@ -54,7 +54,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :event_id).merge(owner: current_user)
+    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id).merge(owner: current_user)
   end
 
   def mass_destroy_params
