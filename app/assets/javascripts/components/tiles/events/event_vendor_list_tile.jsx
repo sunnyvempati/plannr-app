@@ -13,11 +13,14 @@ var EventVendorListTile = React.createClass({
       }
     }.bind(this))
   },
+  updateData: function(data) {
+    this.setState({tableData: data});
+  },
   render: function() {
     return (
       <div className="EventVendorListTile">
         <Link to="tileAll">Zoom Out</Link>
-        <EventVendorsTable data={this.state.tableData} />
+        <EventVendorsTable data={this.state.tableData} onUpdatedData={this.updateData} />
         <Link to='tileNewVendor' >New Event Vendor</Link>
       </div>
     );

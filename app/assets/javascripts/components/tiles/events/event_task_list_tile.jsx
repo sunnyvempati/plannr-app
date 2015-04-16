@@ -13,11 +13,14 @@ var EventTaskListTile = React.createClass({
       }
     }.bind(this))
   },
+  updateData: function(data) {
+    this.setState({tableData: data});
+  },
   render: function() {
     return (
       <div className="EventTaskListTile">
         <Link to="tileAll">Zoom Out</Link>
-        <EventTaskTable data={this.state.tableData} />
+        <EventTaskTable data={this.state.tableData} onUpdatedData={this.updateData} />
         <Link to='tileNewTask'>New Event Task</Link>
       </div>
     );
