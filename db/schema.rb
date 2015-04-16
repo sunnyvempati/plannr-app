@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412223701) do
+ActiveRecord::Schema.define(version: 20150416053156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 20150412223701) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.string   "contact_company"
+    t.string   "organization"
     t.text     "description"
-    t.integer  "contact_type"
+    t.integer  "category"
     t.uuid     "owner_id"
     t.uuid     "company_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "event_contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -88,12 +88,12 @@ ActiveRecord::Schema.define(version: 20150412223701) do
   create_table "tasks", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.uuid     "event_id"
     t.uuid     "owner_id"
     t.uuid     "company_id"
+    t.date     "deadline"
   end
 
   create_table "user_sessions", force: :cascade do |t|

@@ -31,19 +31,12 @@ class EventsController < ApplicationController
   end
 
   def create
-    modified_entity_params = event_params
-    modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(start_date end_date))
-    modified_entity_params = add_owner_id_to_entity_params(modified_entity_params, @current_user.id)
-
-    @event = Event.new(modified_entity_params)
+    @event = Event.new event_params
     render_entity @event
   end
 
   def update
-    modified_entity_params = event_params
-    modified_entity_params = convert_date_params_to_date_type(modified_entity_params, %w(start_date end_date))
-
-    @event.assign_attributes(modified_entity_params)
+    @event.assign_attributes event_params
     render_entity @event
   end
 
@@ -62,6 +55,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes)
+    params.require(:event).permit(:name, :start_date, :end_date, :description, :location, :client_name, :budget, :notes).merge(owner: current_user)
   end
 end
