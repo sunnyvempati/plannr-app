@@ -34,23 +34,21 @@ class EventVendorsController < ApplicationController
 
     error_message = ''
     if params[:vendor_id] == "-1"
-      if params[:searchText] == nil 
+      if params[:searchText] == nil
         error_message = error_message + 'Missing searchText parameter; '
       end
     end
 
-    if params[:event_id] == nil 
+    if params[:event_id] == nil
       error_message = error_message + 'Missing event_id parameter; '
     end
 
-    if params[:vendor_id] == nil 
+    if params[:vendor_id] == nil
       error_message = error_message + 'Missing vendor_id parameter; '
     end
 
     if error_message != ''
       raise error_message
     end
-
   end
-
 end

@@ -22,9 +22,7 @@ class VendorsController < ApplicationController
   end
 
   def create
-    modified_entity_params = add_owner_id_to_entity_params(vendor_params, @current_user.id)
-
-    @vendor = Vendor.new(modified_entity_params)
+    @vendor = Vendor.new vendor_params
     render_entity @vendor
   end
 
@@ -51,7 +49,7 @@ class VendorsController < ApplicationController
   end
 
   def search_by_name_or_email_like
-    @vendors = Vendor.name_like('%' + params[:searchText] + '%')  
+    @vendors = Vendor.name_like('%' + params[:searchText] + '%')
 
     respond_to do |format|
       msg = { :status => "ok", :message => "Success!", :data => @vendors }
@@ -65,9 +63,8 @@ class VendorsController < ApplicationController
     @vendor = Vendor.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def vendor_params
-    params.require(:vendor).permit(:name, :location, :phone, :primary_contact)
+    params.require(:vendor).permit(:name, :location, :phone, :primary_contact).merge(owner: current_user)
   end
 
   def searchMe(search, event_id, is_associated)
@@ -77,7 +74,7 @@ class VendorsController < ApplicationController
 
     if is_associated == nil || is_associated.downcase == 'false'
       Vendor.name_like(like_condition)
-      .where.not(id: ass_vendors.map(&:id))      
+      .where.not(id: ass_vendors.map(&:id))
     else
       Vendor.name_like(like_condition)
       .where(id: ass_vendors.map(&:id))

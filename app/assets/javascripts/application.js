@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require util/utils
 //= require react
 //= require react_ujs
 //= require react-router

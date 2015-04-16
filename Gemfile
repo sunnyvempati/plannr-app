@@ -22,9 +22,6 @@ gem 'acts_as_tenant'
 
 gem 'responders', '~> 2.0'
 
-# validations
-gem 'date_validator'
-
 gem 'active_model_serializers'
 
 group 'development' do
