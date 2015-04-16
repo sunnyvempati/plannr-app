@@ -36,7 +36,6 @@ var TaskForm = React.createClass({
   },
   retrieveEventSelectOptionsAsync: function () {
     $.get('/events.json', function (result) {
-      console.log(result);
       var options = [];
       if (!!result.events) {
         options = $.map(result.events, function (value, index) {
@@ -108,7 +107,7 @@ var TaskForm = React.createClass({
             dateField={true}
             type='text'
             label='deadline'
-            value={ Utils.isoDateToUsFormat(task.deadline) }
+            value={ task.deadline }
             placeholder='What is the deadline for this task? (MM/DD/YYYY)'
             disabled={this.props.disableForm} />
           <FormSelectInput

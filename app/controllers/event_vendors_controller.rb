@@ -60,7 +60,6 @@ class EventVendorsController < ApplicationController
     if error_message != ''
       raise error_message
     end
-
   end
 
   def mass_delete_params

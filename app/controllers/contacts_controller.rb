@@ -23,9 +23,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    modified_entity_params = add_owner_id_to_entity_params(contact_params, @current_user.id)
-
-    @contact = Contact.new(modified_entity_params)
+    @contact = Contact.new contact_params
     render_entity @contact
   end
 
@@ -68,7 +66,6 @@ class ContactsController < ApplicationController
     params.require(:search).permit(:text)
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_contact
     @contact = Contact.find(params[:id])
   end
@@ -77,8 +74,9 @@ class ContactsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
-    params.require(:contact).permit(:name, :email, :contact_type, :phone, :contact_company, :description)
+    params.require(:contact)
+          .permit(:name, :email, :category, :phone, :organization, :description)
+          .merge(owner: current_user)
   end
 end
