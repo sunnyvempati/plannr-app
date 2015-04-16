@@ -36,7 +36,6 @@ var TaskForm = React.createClass({
   },
   retrieveEventSelectOptionsAsync: function () {
     $.get('/events.json', function (result) {
-      console.log(result);
       var options = [];
       if (!!result.events) {
         options = $.map(result.events, function (value, index) {
