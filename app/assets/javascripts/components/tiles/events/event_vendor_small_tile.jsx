@@ -16,7 +16,7 @@ var EventVendorSmallTile = React.createClass({
   render: function() {
     return (
       <div className="EventVendorSmallTile">
-        <Link to="tileVendors">Zoom In Vendors</Link>
+        <Link to="tileVendorsList">Zoom In - Vendors</Link>
         <ObjectCount count={this.state.count} text='Vendors' />
       </div>
     );

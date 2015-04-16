@@ -16,7 +16,7 @@ var EventTaskSmallTile = React.createClass({
   render: function() {
     return (
       <div className="EventTaskSmallTile">
-        <Link to="tileTasks">Zoom In Tasks</Link>
+        <Link to="tileTasksList">Zoom In - Tasks</Link>
         <ObjectCount count={this.state.count} text='Tasks' />
       </div>
     );

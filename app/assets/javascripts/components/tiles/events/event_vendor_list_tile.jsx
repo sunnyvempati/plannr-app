@@ -1,8 +1,10 @@
 var EventVendorListTile = React.createClass({
   getInitialState: function() {
-    return {
-      tableData: []
+    var initial = {
+      tableData: [],
+      checkedContacts: []
     };
+    return initial;
   },
   componentDidMount: function() {
     $.get("vendors", function(results) {
@@ -13,6 +15,11 @@ var EventVendorListTile = React.createClass({
       }
     }.bind(this))
   },
+  addToContactList: function(item) {
+    var tableData = this.state.tableData;
+    tableData.push({name: item.name, id: item.id});
+    this.setState({tableData: tableData});
+  },
   updateData: function(data) {
     this.setState({tableData: data});
   },
@@ -20,8 +27,9 @@ var EventVendorListTile = React.createClass({
     return (
       <div className="EventVendorListTile">
         <Link to="tileAll">Zoom Out</Link>
+        <EventContactAutocomplete onAssociation={this.addToContactList} />
+        <Link to='tileNewVendor'>New Event Vendor</Link>
         <EventVendorsTable data={this.state.tableData} onUpdatedData={this.updateData} />
-        <Link to='tileNewVendor' >New Event Vendor</Link>
       </div>
     );
   }
