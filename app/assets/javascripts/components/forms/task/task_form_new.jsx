@@ -1,6 +1,8 @@
 var TaskFormNew = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
+    userId: React.PropTypes.string.isRequired,
+
     model: React.PropTypes.object
   },
   render: function () {
@@ -20,7 +22,8 @@ var TaskFormNew = React.createClass({
                 secondaryButtonText={secondaryButtonText}
                 secondaryButtonVisible={true}
                 secondaryButtonHref={secondaryButtonHref}
-                authToken={this.props.authToken} />
+                authToken={this.props.authToken}
+                userId={this.props.userId} />
     );
   }
 });
