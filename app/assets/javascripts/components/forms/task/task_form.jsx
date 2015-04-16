@@ -69,7 +69,7 @@ var TaskForm = React.createClass({
       this.setState({assignedToOptions: <option>Error!!</option>});
     }.bind(this));
   },
-  getDefaultOptionValue: function() {
+  getDefaultEventOptionValue: function() {
     var options = this.state.eventOptions;
     if (options.length > 0) {
       return options[0].props.value;
@@ -153,7 +153,7 @@ var TaskForm = React.createClass({
             className='SelectInput'
             label='Event*'
             options={this.state.eventOptions}
-            value={task.eventId || this.getDefaultOptionValue()}
+            value={task.eventId || this.getDefaultEventOptionValue()}
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
