@@ -16,7 +16,7 @@ var EventDashboardRouter = React.createClass({
         <Route name="tileNewTask" path="tasks/new" handler={EventTaskNewTile} />
         <Route name="tileVendorsList" path="vendors" handler={EventVendorListTile} />
         <Route name="tileNewVendor" path="vendors/new" handler={EventVendorNewTile} />
-        <DefaultRoute handler={EventTileAll} />
+        <DefaultRoute handler={EventHome} />
       </Route>
     );
   },

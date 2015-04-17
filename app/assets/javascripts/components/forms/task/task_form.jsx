@@ -11,7 +11,6 @@ var TaskForm = React.createClass({
     disableForm: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string
   },
-  hrefRoot: '/tasks',
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -23,9 +22,6 @@ var TaskForm = React.createClass({
         'event_id': inputs.event_id
       }
     };
-  },
-  changeUrl: function () {
-    location.href = this.hrefRoot;
   },
   getInitialState: function() {
     return {
@@ -102,7 +98,7 @@ var TaskForm = React.createClass({
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
               mapping={this.mapInputs}
-              onSuccess={this.changeUrl}
+              onSuccess={this.props.onSuccess}
               routeVerb={this.props.routeVerb}
               authToken={this.props.authToken}
               primaryButtonText={this.props.primaryButtonText}

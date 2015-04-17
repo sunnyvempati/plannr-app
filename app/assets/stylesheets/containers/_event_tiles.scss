@@ -1,9 +1,12 @@
-.EventTileContainer {
+.EventHomeTileContainer {
   display: flex;
   flex-flow: row wrap;
-  width: 100%;
+  padding-left: $size-increment * 9;
+  padding: $size-increment * 3;
   >* {
     flex: 1;
     border: 1px solid $plannr-green;
+    margin: $size-increment * 2;
+    min-width: 300px;
   }
 }

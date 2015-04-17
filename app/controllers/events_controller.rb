@@ -14,6 +14,7 @@ class EventsController < ApplicationController
 
   def show
     if @event
+      @header = @event.name
       render :show
     else
       # TOOD: message for user notifying of missing @event and redirect

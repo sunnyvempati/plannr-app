@@ -1,0 +1,16 @@
+.Tile {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 300px;
+  &-header {
+    height: 50px;
+    width: 100%;
+    background-color: $plannr-green;
+    color: white;
+  }
+  &-content {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}
