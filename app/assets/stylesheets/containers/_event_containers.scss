@@ -1,0 +1,12 @@
+.EventContainer {
+  height: 150px;
+  padding-left: $size-increment * 9;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  >* {
+    flex: 1;
+  }
+}

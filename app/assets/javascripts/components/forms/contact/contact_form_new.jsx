@@ -4,7 +4,7 @@ var ContactFormNew = React.createClass({
     model: React.PropTypes.object
   },
   render: function () {
-    var action = "/contacts" ,
+    var action = "/contacts",
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",

@@ -26,7 +26,7 @@ var EventContactListTile = React.createClass({
   render: function() {
     return (
       <div className="EventContactListTileContainer">
-        <Link to="tileAll">Zoom Out</Link>
+        <Link to="tileAll"><i className="fa fa-arrow-left"></i></Link>
         <EventContactAutocomplete onAssociation={this.addToContactList} />
         <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
       </div>

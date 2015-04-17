@@ -7,7 +7,7 @@ var EventTaskNewTile = React.createClass({
     return (
       <div className="EventTaskNewTile">
         <Link to="tileAll">Go back to home</Link>
-        <TaskFormNew model={model} authToken={this.props.authToken}/>
+        <TaskFormNew model={model} authToken={this.props.authToken} useReactRouter={true} />
       </div>
     );
   }
