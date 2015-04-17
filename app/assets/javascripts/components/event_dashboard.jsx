@@ -11,5 +11,3 @@ var EventDashboard = React.createClass({
     );
   }
 });
-
-
