@@ -2,20 +2,25 @@ var Event = React.createClass({
   propTypes: {
     model: React.PropTypes.object
   },
+  eventInfoDivs: function(attrs) {
+    return attrs.map(function(eventAttr) {
+      return (
+        <div>{eventAttr + ": "}{this.props.model[eventAttr]}</div>
+      )
+    }, this);
+  },
   render: function () {
     var event = this.props.model;
     return (
       <div className="EventContainer">
         <div className="Event-basicInfo">
-          {event.name}
-          {event.client_name}
-          {event.location}
+          {this.eventInfoDivs(["name", "client_name", "location"])}
         </div>
         <div className="Event-dateInfo">
-          {event.start_date}
+          {this.eventInfoDivs(["start_date"])}
         </div>
         <div className="Event-budget">
-          {event.budget}
+          {this.eventInfoDivs(["budget"])}
         </div>
       </div>
     );
