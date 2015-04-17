@@ -1,6 +1,6 @@
 var TaskFormShow = React.createClass({
   propTypes: {
-    userId: React.PropTypes.string.isRequired,
+    currentUserId: React.PropTypes.string.isRequired,
 
     model: React.PropTypes.object
   },
@@ -13,7 +13,7 @@ var TaskFormShow = React.createClass({
         model={this.props.model}
         disableForm={true}
         showButtonList={false}
-        userId={this.props.userId}
+        currentUserId={this.props.currentUserId}
       />
     );
   }

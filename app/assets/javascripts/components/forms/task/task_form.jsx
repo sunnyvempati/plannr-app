@@ -69,17 +69,20 @@ var TaskForm = React.createClass({
       this.setState({assignedToOptions: <option>Error!!</option>});
     }.bind(this));
   },
-  getDefaultEventOptionValue: function() {
+  getFirstEventOptionValue: function() {
     var options = this.state.eventOptions;
     if (options.length > 0) {
       return options[0].props.value;
     }
   },
-  getDefaultAssignedToOptionValue: function() {
-    //TODO: set to current user instead of first
-    var options = this.state.assignedToOptions;
-    if (options.length > 0) {
-      return options[0].props.value;
+  getFirstAssignedToOptionValue: function() {
+    if (this.props.currentUserId) {
+      return this.props.currentUserId;
+    } else {
+      var options = this.state.assignedToOptions;
+      if (options.length > 0) {
+        return options[0].props.value;
+      }
     }
   },
   render: function() {
@@ -143,7 +146,7 @@ var TaskForm = React.createClass({
             className='SelectInput'
             label='Assigned To*'
             options={this.state.assignedToOptions}
-            value={task.assignedToId || this.getDefaultAssignedToOptionValue()}
+            value={task.assignedToId || this.props.currentUserId || this.getFirstAssignedToOptionValue()}
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
@@ -153,7 +156,7 @@ var TaskForm = React.createClass({
             className='SelectInput'
             label='Event*'
             options={this.state.eventOptions}
-            value={task.eventId || this.getDefaultEventOptionValue()}
+            value={task.eventId || this.getFirstEventOptionValue()}
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
