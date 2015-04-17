@@ -9,17 +9,15 @@ var EventTaskSmallTile = React.createClass({
       if (this.isMounted()) {
         this.setState({
           count: results.tasks.length
-        })
+        });
       }
-    }.bind(this))
+    }.bind(this));
   },
   render: function() {
     return (
-      <div className="EventTaskSmallTile">
-        <Link to="tileTasksList">Zoom In - Tasks</Link>
-        <div className="Tile">
-          <div className="Tile-header">
-          <Link to="tileTasks">Tasks</Link>
+      <div className="Tile">
+        <div className="Tile-header">
+          <Link to="tileTasksList">Tasks</Link>
         </div>
         <div className="Tile-content">
           {this.state.count + " Tasks"}

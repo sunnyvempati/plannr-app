@@ -39,22 +39,12 @@ class VendorsController < ApplicationController
     end
   end
 
-  def search
-    @vendors = searchMe(params[:searchText], params[:associatedObjectId], params[:associated])
-
-    respond_to do |format|
-      msg = { :status => "ok", :message => "Success!", :data => @vendors, :searchText =>  params[:searchText]}
-      format.json  { render :json => msg } # don't do msg.to_json
-    end
+  def vendors_not_in_event
+    render_success @event.other_vendors
   end
 
-  def search_by_name_or_email_like
-    @vendors = Vendor.name_like('%' + params[:searchText] + '%')
-
-    respond_to do |format|
-      msg = { :status => "ok", :message => "Success!", :data => @vendors }
-      format.json  { render :json => msg } # don't do msg.to_json
-    end
+  def search_vendors_not_in_event
+    render json: Vendor.search_other_vendors(event_id: params[:event_id], text: search_params[:text]), each_serializer: VendorSerializer
   end
 
   private
@@ -67,18 +57,8 @@ class VendorsController < ApplicationController
     params.require(:vendor).permit(:name, :location, :phone, :primary_contact).merge(owner: current_user)
   end
 
-  def searchMe(search, event_id, is_associated)
-    like_condition = '%' + search + '%'
-    ass_vendors = Event.find_by_id(event_id).vendors
-    .name_like(like_condition)
-
-    if is_associated == nil || is_associated.downcase == 'false'
-      Vendor.name_like(like_condition)
-      .where.not(id: ass_vendors.map(&:id))
-    else
-      Vendor.name_like(like_condition)
-      .where(id: ass_vendors.map(&:id))
-    end
+  def search_params
+    params.require(:search).permit(:text)
   end
 
 end
