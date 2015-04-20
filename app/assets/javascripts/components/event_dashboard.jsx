@@ -6,7 +6,7 @@ var EventDashboard = React.createClass({
     return (
       <div className="EventDashboardContainer" id="mainDashboard">
         <Event model={this.props.event} />
-        <RouteHandler authToken={this.props.authToken} eventId={this.props.event.id}/>
+        <RouteHandler authToken={this.props.authToken} eventId={this.props.event.id} currentUserId={this.props.currentUserId} />
       </div>
     );
   }

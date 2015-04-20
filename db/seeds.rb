@@ -1,3 +1,5 @@
+Faker::Config.locale = 'en-US'
+
 plannr_company = Company.create(name: "Plannr")
 puts "Successfully created company for Plannr" if plannr_company
 
@@ -29,20 +31,20 @@ phil_profile = Profile.create(user: josh_user, first_name: "Phil", last_name: "C
 puts "Successfully created profile for Phil" if phil_profile
 
 e = Event.create(company: plannr_company,
-            name: "26th Birthday Bash",
-            client_name: Faker::Name.name,
-            start_date: Faker::Date.forward(45),
-            budget: 2500,
-            location: "Chicago, IL")
+      name: "26th Birthday Bash",
+      client_name: Faker::Name.name,
+      start_date: Faker::Date.forward(45),
+      budget: 2500,
+      location: "Chicago, IL")
 
 puts "Created 26th Birthday Bash"
 
 Event.create(company: plannr_company,
-            name: "Dinner for Schmucks",
-            client_name: Faker::Name.name,
-            start_date: Faker::Date.forward(63),
-            budget: 1150,
-            location: "Chicago, IL")
+      name: "Dinner for Schmucks",
+      client_name: Faker::Name.name,
+      start_date: Faker::Date.forward(63),
+      budget: 1150,
+      location: "Chicago, IL")
 
 puts "Created Dinner for Schmucks"
 
@@ -73,29 +75,31 @@ puts "Successfully created contact for Sally" if sally_contact
 
 
 balloons_vendor = Vendor.create(name: "Balloons, Inc", company: plannr_company)
-puts "Successfully create vendor for Ballons Inc"
+puts "Successfully create vendor for Ballons Inc" if balloons_vendor
 
 inflatable_castles_vendor = Vendor.create(name: "Inflatable Castles, Inc", company: plannr_company)
-puts "SuccessfInflatable Castlesully create vendor for Inflatable Castles Inc"
+puts "Successfully create vendor for Inflatable Castles Inc" if inflatable_castles_vendor
 
 jimmys_vendor = Vendor.create(name: "Jimmy's Mobile Petting Zoo", company: plannr_company)
-puts "Successfully create vendor for Jimmy's Mobile Petting Zoo"
+puts "Successfully create vendor for Jimmy's Mobile Petting Zoo" if jimmys_vendor
 
 party_down_catering_vendor = Vendor.create(name: "Party down Catering, Inc", company: plannr_company)
-puts "Successfully create vendor for Party Down Catering"
+puts "Successfully create vendor for Party Down Catering" if party_down_catering_vendor
 
 
 tables_vendor = Vendor.create(name: "Tables, Inc", company: plannr_company)
-puts "Successfully create vendor for Tables Inc"
+puts "Successfully create vendor for Tables Inc" if tables_vendor
 
 chairs_vendor = Vendor.create(name: "Chairs, Inc", company: plannr_company)
-puts "Successfully create vendor for Chairs Inc"
+puts "Successfully create vendor for Chairs Inc" if chairs_vendor
 
 lamps_vendor = Vendor.create(name: "Lamps, Inc", company: plannr_company)
-puts "Successfully create vendor for Lamps Inc"
+puts "Successfully create vendor for Lamps Inc" if lamps_vendor
 
-(0..10).each do
-  Task.create(name: Faker::Lorem.sentence, description: Faker::Lorem.sentence(6), deadline: Date.today, event: e, company: plannr_company)
-
+#add 5 tasks for each user
+(0..4).each do|i|
+      User.all.each do |user|
+            t_task = Task.create(name:  "#{Faker::Hacker.verb} #{Faker::Hacker.noun}", description: Faker::Hacker.say_something_smart, deadline: Faker::Date.forward(14), event: e, company: plannr_company, assigned_to: user)
+            puts "Successfully added task #{t_task.name}" if t_task
+      end
 end
-

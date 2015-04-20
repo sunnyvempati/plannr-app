@@ -28,6 +28,7 @@ var EventContactListTile = React.createClass({
       <div className="EventContactListTileContainer">
         <Link to="tileAll"><i className="fa fa-arrow-left"></i></Link>
         <EventContactAutocomplete onAssociation={this.addToContactList} />
+        <Link to='tileNewContact'>New Event Contact</Link>
         <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
       </div>
     );

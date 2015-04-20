@@ -1,6 +1,8 @@
 var TaskFormEdit = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
+    currentUserId: React.PropTypes.string.isRequired,
+
     model: React.PropTypes.object
   },
   render: function () {
@@ -22,7 +24,7 @@ var TaskFormEdit = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
-      />
+        currentUserId={this.props.currentUserId} />
     );
   }
 });

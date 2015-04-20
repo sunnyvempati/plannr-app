@@ -1,26 +1,26 @@
-var EventTaskSmallTile = React.createClass({
+var EventVendorSmallTile = React.createClass({
   getInitialState: function() {
     return {
       count: null
     };
   },
   componentDidMount: function() {
-    $.get("tasks", function(results) {
+    $.get("vendors", function(results) {
       if (this.isMounted()) {
         this.setState({
-          count: results.tasks.length
+          count: results.event_vendors.length
         });
       }
     }.bind(this));
   },
   render: function() {
     return (
-      <div className="Tile">
+       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileTasksList">Tasks</Link>
+          <Link to="tileVendorsList">Vendors</Link>
         </div>
         <div className="Tile-content">
-          {this.state.count + " Tasks"}
+          {this.state.count + " Vendors"}
         </div>
       </div>
     );

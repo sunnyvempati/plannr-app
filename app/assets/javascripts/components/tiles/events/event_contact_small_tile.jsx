@@ -9,15 +9,15 @@ var EventContactSmallTile = React.createClass({
       if (this.isMounted()) {
         this.setState({
           count: results.event_contacts.length
-        })
+        });
       }
-    }.bind(this))
+    }.bind(this));
   },
   render: function() {
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileContacts">Contacts</Link>
+          <Link to="tileContactsList">Contacts</Link>
         </div>
         <div className="Tile-content">
           {this.state.count + " Contacts"}

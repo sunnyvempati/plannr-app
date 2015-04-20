@@ -1,6 +1,7 @@
 <%= react_component("TaskFormNew",
                     model: @task,
-                    authToken: form_authenticity_token
+                    authToken: form_authenticity_token,
+                    currentUserId: current_user.id
 
     ) %>
 

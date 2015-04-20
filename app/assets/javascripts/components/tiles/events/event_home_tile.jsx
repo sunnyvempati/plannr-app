@@ -4,6 +4,7 @@ var EventHome = React.createClass({
       <div className="EventHomeTileContainer">
         <EventContactSmallTile />
         <EventTaskSmallTile />
+        <EventVendorSmallTile />
       </div>
     );
   }

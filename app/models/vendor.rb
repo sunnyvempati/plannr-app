@@ -1,13 +1,27 @@
 class Vendor < ActiveRecord::Base
+  SEARCH_LIMIT = 5
+
   has_many :event_vendors
   has_many :events, through: :event_vendors
 
   belongs_to :owner, class_name: "User"
-  
+
   acts_as_tenant :company
 
   # TODO: case sensitivity in search_condition
-  scope :name_like, ->(search_condition) { where('lower(vendors.name) LIKE ? ', search_condition) }
+  def self.search_other_vendors(params)
+    wildcard_text = '%' + params[:text] + '%'
+    Vendor.other_vendors(params[:event_id])
+      .where('vendors.name LIKE ?', wildcard_text).limit(SEARCH_LIMIT)
+  end
+
+  def self.other_vendors(event_id)
+    Vendor.joins(
+      "LEFT OUTER JOIN event_vendors ec ON ec.vendor_id = vendors.id")
+      .where("ec.vendor_id IS null
+        OR ec.event_id != '" + event_id + "'")
+      .select("vendors.*")
+  end
 
   validates :name, presence: true
   validates_format_of :phone,

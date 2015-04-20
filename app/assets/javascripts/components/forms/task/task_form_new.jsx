@@ -9,6 +9,7 @@ var TaskFormNew = React.createClass({
   },
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
+    currentUserId: React.PropTypes.string.isRequired,
     useReactRouter: React.PropTypes.bool,
     model: React.PropTypes.object
   },
@@ -39,6 +40,7 @@ var TaskFormNew = React.createClass({
                 secondaryButtonVisible={true}
                 secondaryButtonHref={secondaryButtonHref}
                 authToken={this.props.authToken}
+                currentUserId={this.props.currentUserId}
                 onSuccess={this.onSuccess} />
     );
   }

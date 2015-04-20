@@ -34,13 +34,13 @@ var ContactForm = React.createClass({
     if (this.props.model) {
       var model = this.props.model;
       contact = {
-        name: contact.name,
-        category: contact.category,
-        email: contact.email,
-        phone: contact.phone,
-        organization: contact.organization,
-        description: contact.description,
-        id: contact.id
+        name: model.name,
+        category: model.category,
+        email: model.email,
+        phone: model.phone,
+        organization: model.organization,
+        description: model.description,
+        id: model.id
       };
     }
     return (
