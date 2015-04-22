@@ -1,5 +1,4 @@
-<%= react_component("CompanyUserTable") %>
+<%= react_component("InviteUsers",
+            authToken: form_authenticity_token) %>
 
-<%= react_component("InviteUsers", admin: @current_user.company_admin?,
-                                   currentUserId: @current_user.id,
-                                   authToken: form_authenticity_token) %>
+<%= react_component("CompanyUserTable") %>
