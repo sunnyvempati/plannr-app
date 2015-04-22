@@ -7,6 +7,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 
 require 'support/helpers/session_helpers'
+require 'support/helpers/event_helpers'
 
 
 require 'pry'
@@ -37,4 +38,5 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Features::SessionHelpers
+  config.include EventHelpers
 end

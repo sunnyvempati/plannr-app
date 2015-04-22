@@ -1,10 +1,9 @@
 FactoryGirl.define do
-  factory :'contact_form_edit.jsx' do
-    name "MyString"
-email "MyString"
-phone "MyString"
-company "MyString"
-description "MyText"
+  factory 'contact' do
+    name Faker::Name.name
+    email { Faker::Internet.email }
+    phone "343-323-2322"
+    organization Faker::Company.name
+    category ContactTypes::VENDOR
   end
-
 end

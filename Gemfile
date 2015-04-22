@@ -37,8 +37,12 @@ end
 
 group 'development', 'test' do
 	gem 'faker'
-	gem 'capybara'
-	gem 'selenium-webdriver'
-	gem 'rspec-rails', '~> 3.0'
-	gem 'factory_girl_rails'
+end
+
+group 'test' do
+    gem 'capybara'
+    gem 'selenium-webdriver'
+    gem 'rspec-rails', '~> 3.0'
+    gem 'factory_girl_rails'
+    gem 'shoulda'
 end
