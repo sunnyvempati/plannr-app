@@ -70,8 +70,4 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
   end
-
-  def check_admin
-    render json: {error: "Not an admin"}, status: 500 if !current_user.company_admin?
-  end
 end

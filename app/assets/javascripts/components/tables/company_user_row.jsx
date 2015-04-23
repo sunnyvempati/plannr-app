@@ -26,10 +26,8 @@ var CompanyUserRow = React.createClass({
         </div>
         <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
         <div className="Table-rowItem u-flexGrow-4">{data["email"]}</div>
-        <div className="Table-rowItem u-flexGrow-2">
-          <div className="UserInvitationTable-admin" onClick={this.toggleAdmin}>
+        <div className="Table-rowItem u-flexGrow-2 u-clickable" onClick={this.toggleAdmin}>
             {adminText}
-          </div>
         </div>
       </div>
     );

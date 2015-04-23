@@ -1,16 +1,4 @@
 .InviteUsersContainer {
-  margin: auto;
-  &-form {
-    margin: auto;
-    width: 500px;
-    display: none;
-    &.is-visible {
-      display: block;
-    }
-  }
-}
-
-.InviteUsersContainer-list {
-  margin: auto;
-  width: 80%;
+  padding-left: $size-increment * 7;
+  width: 300px;
 }

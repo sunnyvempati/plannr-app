@@ -48,4 +48,8 @@ class ApplicationController < ActionController::Base
   def store_location
     session[:return_to] = request.original_url
   end
+
+  def check_admin
+    render_error(message: 'Not an admin') if !current_user.company_admin?
+  end
 end

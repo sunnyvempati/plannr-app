@@ -9,6 +9,9 @@ class Invitation < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
+  # invite hasn't been accepted yet
+  scope :active_invites, -> { where(recipient: nil) }
+
   def generate_token
     self.token = Digest::SHA1.hexdigest([self.company_id, Time.now, rand].join)
   end

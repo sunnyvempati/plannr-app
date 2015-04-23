@@ -1,10 +1,10 @@
-var EventTileContainer = React.createClass({
+var EventHome = React.createClass({
   render: function() {
-    alert("test");
     return (
-      <div className="EventTileContainer" id="EventApp">
+      <div className="EventHomeTileContainer">
         <EventContactSmallTile />
         <EventTaskSmallTile />
+        <EventVendorSmallTile />
       </div>
     );
   }
