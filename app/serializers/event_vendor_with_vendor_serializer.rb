@@ -4,5 +4,4 @@ class EventVendorWithVendorSerializer < ActiveModel::Serializer
   def name
     object.vendor.name
   end
-
 end

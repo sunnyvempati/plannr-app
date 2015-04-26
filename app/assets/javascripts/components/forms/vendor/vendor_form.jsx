@@ -11,7 +11,6 @@ var VendorForm = React.createClass({
     model: React.PropTypes.object,
     secondaryButtonHref: React.PropTypes.string
   },
-  hrefRoot: '/vendors',
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -22,9 +21,6 @@ var VendorForm = React.createClass({
         'primary_contact': inputs.primary_contact
       }
     };
-  },
-  changeUrl: function () {
-    location.href = this.hrefRoot;
   },
   render: function() {
     var vendor = {};
@@ -42,7 +38,7 @@ var VendorForm = React.createClass({
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
           mapping={this.mapInputs}
-          onSuccess={this.changeUrl}
+          onSuccess={this.props.onSuccess}
           routeVerb={this.props.routeVerb}
           authToken={this.props.authToken}
           primaryButtonText={this.props.primaryButtonText}

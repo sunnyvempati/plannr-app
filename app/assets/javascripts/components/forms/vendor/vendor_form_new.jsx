@@ -1,7 +1,24 @@
 var VendorFormNew = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+  getDefaultProps: function() {
+    return {
+      useReactRouter: false
+    };
+  },
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
+  },
+  onSuccess: function() {
+    // react router keeps things in context without redirecting
+    if (this.props.useReactRouter) {
+      this.context.router.transitionTo('tileVendorsList');
+    }
+    else {
+      location.href = '/vendors';
+    }
   },
   render: function () {
     var action = "/vendors" ,
@@ -22,6 +39,7 @@ var VendorFormNew = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
+        onSuccess={this.onSuccess}
       />
     );
   }

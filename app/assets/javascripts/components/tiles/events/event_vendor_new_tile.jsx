@@ -7,7 +7,7 @@ var EventVendorNewTile = React.createClass({
     return (
       <div className="EventVendorNewTile">
         <Link to="tileAll">Go back to home</Link>
-        <VendorFormNew model={model} authToken={this.props.authToken}/>
+        <VendorFormNew model={model} authToken={this.props.authToken} useReactRouter={true}/>
       </div>
     );
   }

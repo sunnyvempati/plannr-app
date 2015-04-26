@@ -17,10 +17,11 @@ class Contact < ActiveRecord::Base
     where()
   }
 
-  def self.search_other_contacts(params)
-    wildcard_text = '%' + params[:text] + '%'
-    Contact.other_contacts(params[:event_id])
-      .where('contacts.name LIKE ? OR contacts.email LIKE ?', wildcard_text, wildcard_text).limit(5)
+  def self.search_other_contacts(event_id, term)
+    wildcard_text = '%' + term + '%'
+    Contact.other_contacts(event_id)
+      .where("contacts.name LIKE #{wildcard_text} OR contacts.email LIKE #{wildcard_text}")
+      .limit(5)
   end
 
   def self.other_contacts(event_id)

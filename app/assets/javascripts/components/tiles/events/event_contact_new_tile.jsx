@@ -7,7 +7,7 @@ var EventContactNewTile = React.createClass({
     return (
       <div className="EventContactNewTile">
         <Link to="tileAll">Go back to home</Link>
-        <ContactFormNew model={model} authToken={this.props.authToken}/>
+        <ContactFormNew model={model} authToken={this.props.authToken} useReactRouter={true}/>
       </div>
     );
   }

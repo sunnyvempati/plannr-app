@@ -26,9 +26,6 @@ var ContactForm = React.createClass({
       }
     };
   },
-  changeUrl: function () {
-    location.href = this.hrefRoot;
-  },
   render: function () {
     var contact = {};
     if (this.props.model) {
@@ -47,7 +44,7 @@ var ContactForm = React.createClass({
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
           mapping={this.mapInputs}
-          onSuccess={this.changeUrl}
+          onSuccess={this.props.onSuccess}
           routeVerb={this.props.routeVerb}
           authToken={this.props.authToken}
           primaryButtonText={this.props.primaryButtonText}

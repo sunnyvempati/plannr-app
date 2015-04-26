@@ -53,7 +53,7 @@ class ContactsController < ApplicationController
   end
 
   def search_contacts_not_in_event
-    render json: Contact.search_other_contacts(event_id: params[:event_id], text: search_params[:text]), each_serializer: ContactSerializer
+    render json: Contact.search_other_contacts(params[:event_id], search_params[:text]), each_serializer: ContactSerializer
   end
 
   private
