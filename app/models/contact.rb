@@ -13,25 +13,20 @@ class Contact < ActiveRecord::Base
   validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
 
   # TODO: case sensitivity in search_condition
-  scope :name_or_email_like, ->(search_condition) {
-    where()
+  scope :not_in, ->(event_id) {
+    joins(
+      'LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id')
+      .where("ec.contact_id IS null
+        OR ec.event_id != '#{event_id}'")
+      .select('contacts.*')
   }
 
-  def self.search_other_contacts(event_id, term)
-    wildcard_text = '%' + term + '%'
-    Contact.other_contacts(event_id)
-      .where("contacts.name LIKE #{wildcard_text} OR contacts.email LIKE #{wildcard_text}")
+  scope :search_not_in, ->(event_id, term) {
+    wildcard_text = "'%#{term}%'"
+    Contact.not_in(event_id)
+      .where("contacts.name LIKE #{wildcard_text}")
       .limit(5)
-  end
-
-  def self.other_contacts(event_id)
-    Contact.joins(
-      "LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id")
-      .where("ec.contact_id IS null
-        OR ec.event_id != '" + event_id + "'")
-      .select("contacts.*")
-  end
-
+  }
 
   validates :name, :presence => true
   validates_format_of :email,

@@ -43,5 +43,3 @@ var EventVendorsTable = React.createClass({
     );
   }
 });
-
-
