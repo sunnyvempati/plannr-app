@@ -33,6 +33,7 @@ group 'development' do
   gem 'capistrano-secrets-yml'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
+  gem 'rack-mini-profiler'
 end
 
 group 'development', 'test' do

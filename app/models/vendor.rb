@@ -1,13 +1,27 @@
 class Vendor < ActiveRecord::Base
-  has_many :event_vendors
-  has_many :events, through: :event_vendors
-
-  belongs_to :owner, class_name: "User"
-  
   acts_as_tenant :company
 
-  # TODO: case sensitivity in search_condition
-  scope :name_like, ->(search_condition) { where('lower(vendors.name) LIKE ? ', search_condition) }
+  has_many :event_vendors
+  has_many :events, through: :event_vendors
+  belongs_to :owner, class_name: 'User'
+
+  # scopes
+  scope :not_in, ->(event_id) {
+    joins('LEFT OUTER JOIN event_vendors ev ON ev.vendor_id = vendors.id')
+      .where("ev.vendor_id IS NULL
+        OR ev.event_id != '#{event_id}'")
+      .select('vendors.*')
+  }
+
+  scope :search_not_in, ->(event_id, term) {
+    wildcard_text = "'%#{term}%'"
+    Vendor.not_in(event_id)
+      .where("vendors.name LIKE #{wildcard_text}")
+      .limit(5)
+  }
+
+  # TODO: case sensitivity in name
+  scope :name_like, ->(name) { where('lower(vendors.name) LIKE ? ', name) }
 
   validates :name, presence: true
   validates_format_of :phone,

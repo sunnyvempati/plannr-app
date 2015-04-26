@@ -10,9 +10,12 @@ var EventDashboardRouter = React.createClass({
   routes: function() {
     return (
       <Route name="tileAll" path="/" handler={EventDashboard}>
-        <Route name="tileContacts" path="contacts" handler={EventContactListTile} />
-        <Route name="tileTasks" path="tasks" handler={EventTaskListTile} />
+        <Route name="tileContactsList" path="contacts" handler={EventContactListTile} />
+        <Route name="tileNewContact" path="contacts/new" handler={EventContactNewTile} />
+        <Route name="tileTasksList" path="tasks" handler={EventTaskListTile} />
         <Route name="tileNewTask" path="tasks/new" handler={EventTaskNewTile} />
+        <Route name="tileVendorsList" path="vendors" handler={EventVendorListTile} />
+        <Route name="tileNewVendor" path="vendors/new" handler={EventVendorNewTile} />
         <DefaultRoute handler={EventHome} />
       </Route>
     );

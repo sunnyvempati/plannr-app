@@ -1,7 +1,25 @@
 var ContactFormNew = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+  getDefaultProps: function() {
+    return {
+      useReactRouter: false
+    };
+  },
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
+    useReactRouter: React.PropTypes.bool,
     model: React.PropTypes.object
+  },
+  onSuccess: function() {
+    // react router keeps things in context without redirecting
+    if (this.props.useReactRouter) {
+      this.context.router.transitionTo('tileContactsList');
+    }
+    else {
+      location.href = '/contacts';
+    }
   },
   render: function () {
     var action = "/contacts",
@@ -22,6 +40,7 @@ var ContactFormNew = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
+        onSuccess={this.onSuccess}
       />
     );
   }

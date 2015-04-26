@@ -1,14 +1,14 @@
-var EventContactSmallTile = React.createClass({
+var EventVendorSmallTile = React.createClass({
   getInitialState: function() {
     return {
       count: null
     };
   },
   componentDidMount: function() {
-    $.get("contacts", function(results) {
+    $.get("vendors", function(results) {
       if (this.isMounted()) {
         this.setState({
-          count: results.event_contacts.length
+          count: results.event_vendors.length
         })
       }
     }.bind(this))
@@ -17,10 +17,10 @@ var EventContactSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileContactsList">Contacts</Link>
+          <Link to="tileVendorsList">Vendors</Link>
         </div>
         <div className="Tile-content">
-          {this.state.count + " Contacts"}
+          {this.state.count + " Vendors"}
         </div>
       </div>
     );

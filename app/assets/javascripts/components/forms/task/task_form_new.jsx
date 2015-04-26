@@ -15,7 +15,7 @@ var TaskFormNew = React.createClass({
   onSuccess: function() {
     // react router keeps things in context without redirecting
     if (this.props.useReactRouter) {
-      this.context.router.transitionTo('tileTasks');
+      this.context.router.transitionTo('tileTasksList');
     }
     else {
       location.href = '/tasks';
