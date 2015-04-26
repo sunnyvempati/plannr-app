@@ -7,7 +7,6 @@ var EventVendorRow = React.createClass({
           <CheckboxInput onChange={this.props.checkboxChanged} value={data["id"]} checked={this.props.checked} />
         </div>
         <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
-
       </div>
     );
   }
