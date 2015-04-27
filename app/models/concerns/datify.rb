@@ -9,7 +9,7 @@ module Datify
       send :validate, "#{date_attr}_format".to_sym
       define_method("#{date_attr}=") do |date_set|
         begin
-          date_result = date_set.is_a?(Date) ? date_set : Date.strptime(date_set, "%m/%d/%Y")
+          date_result = !date_set || date_set.is_a?(Date) ? date_set : Date.strptime(date_set, "%m/%d/%Y")
           write_attribute(date_attr, date_result) if date_attr && !date_attr.is_a?(Date)
           instance_variable_set("@#{date_attr}_error", nil)
         rescue

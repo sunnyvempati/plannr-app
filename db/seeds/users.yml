@@ -1,0 +1,27 @@
+sunny:
+  email: sunny@yourplannr.com
+  company_admin: true
+  first_name: Sunny
+  last_name: Vempati
+  company: Event'd
+
+justin:
+  email: justin@yourplannr.com
+  company_admin: true
+  first_name: Justin
+  last_name: Kobylarz
+  company: Plannr
+
+josh:
+  email: josh@yourplannr.com
+  company_admin: false
+  first_name: Josh
+  last_name: Haas
+  company: Plannr
+
+nicholas:
+  email: nicholas@yourplannr.com
+  company_admin: false
+  first_name: Nicholas
+  last_name: Matejcak
+  company: Event'd
