@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   has_many :event_vendors
   has_many :vendors, through: :event_vendors
   has_many :tasks
+  belongs_to :owner, class_name: "User"
 
   validates :name, :start_date, presence: true
   validate :dates
@@ -26,6 +27,8 @@ class Event < ActiveRecord::Base
 
   def dates
     errors.add(:start_date, "must be in the future") if formatted_start_date && formatted_start_date < Date.today
-    errors.add(:end_date, "must be after start date") if formatted_end_date && formatted_start_date && formatted_start_date > end_date
+    if formatted_end_date && formatted_start_date && formatted_start_date > formatted_end_date
+      errors.add(:end_date, "must be after start date")
+    end
   end
 end

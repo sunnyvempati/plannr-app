@@ -29,8 +29,5 @@ class Vendor < ActiveRecord::Base
                       :message => 'must be a phone number in [1-]999-999-9999 [x9999] format',
                       :allow_blank => true
 
-
-
-
 end
 
