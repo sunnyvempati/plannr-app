@@ -23,6 +23,7 @@ gem 'acts_as_tenant'
 gem 'responders', '~> 2.0'
 
 gem 'active_model_serializers'
+gem 'faker'
 
 group 'development' do
 	gem 'pry'
@@ -37,7 +38,6 @@ group 'development' do
 end
 
 group 'development', 'test' do
-	gem 'faker'
 	gem 'capybara'
 	gem 'selenium-webdriver'
 	gem 'rspec-rails', '~> 3.0'
