@@ -2,16 +2,18 @@ var EventContactAutocomplete = React.createClass({
   propTypes: {
     onAssociation: React.PropTypes.func.isRequired
   },
-  retrieveOtherContacts: function(request, response) {
-    $.get("search_other_contacts", {search: {text: request.term}},  function(result) {
-      response(result.contacts);
+  getInitialState: function() {
+    return {
+      contacts: []
+    };
+  },
+  retrieveContacts: function(term) {
+    $.get("search_other_contacts", {search: {text: term}},  function(result) {
+      this.setState({contacts: result.contacts});
     }.bind(this));
   },
-  renderAutoCompleteList: function(item) {
-    return $("<li>").append(item.name + "<br>" + item.email);
-  },
-  addContactToEvent: function(event, ui) {
-    var payload = {event_contact: {contact_id: ui.item.id}};
+  addContactToEvent: function(contact) {
+    var payload = {event_contact: {contact_id: contact.id}};
     $.post("contacts", payload, function(result) {
       this.props.onAssociation(result.event_contact_with_contact);
     }.bind(this))
@@ -19,8 +21,8 @@ var EventContactAutocomplete = React.createClass({
   render: function() {
     return (
       <Autocomplete name="contact"
-                    retrieveDataAsync={this.retrieveOtherContacts}
-                    renderAutoCompleteList={this.renderAutoCompleteList}
+                    retrieveData={this.retrieveContacts}
+                    data={this.state.contacts}
                     itemSelected={this.addContactToEvent} />
     );
   }

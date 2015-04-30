@@ -9,6 +9,15 @@ class UsersController < ApplicationController
     render json: User.includes(:profile).order("profiles.first_name asc"), each_serializer: CompanyUserSerializer
   end
 
+  def search
+    search_results = User.search_with(search_params[:text])
+    render json: search_results, each_serializer: CompanyUserSerializer
+  end
+
+  def show
+    render json: User.includes(:profile).find(params[:id])
+  end
+
   def new
     @user = User.new(email: @invitation.email, company: @invitation.company)
   end
@@ -55,6 +64,10 @@ class UsersController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name)
+  end
+
+  def search_params
+    params.require(:search).permit(:text)
   end
 
   def check_invitation!

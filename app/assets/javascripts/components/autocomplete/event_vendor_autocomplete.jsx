@@ -2,16 +2,18 @@ var EventVendorAutocomplete = React.createClass({
   propTypes: {
     onAssociation: React.PropTypes.func.isRequired
   },
-  retrieveOtherVendors: function(request, response) {
-    $.get("search_other_vendors", {search: {text: request.term}},  function(result) {
-      response(result.vendors);
+  getInitialState: function() {
+    return {
+      vendors: []
+    };
+  },
+  retrieveVendors: function(term) {
+    $.get("search_other_vendors", {search: {text: term}},  function(result) {
+      this.setState({vendors: result.vendors})
     }.bind(this));
   },
-  renderAutoCompleteList: function(item) {
-    return $("<li>").append(item.name);
-  },
-  addVendorToEvent: function(event, ui) {
-    var payload = {event_vendor: {vendor_id: ui.item.id}};
+  addVendorToEvent: function(vendor) {
+    var payload = {event_vendor: {vendor_id: vendor.id}};
     $.post("vendors", payload, function(result) {
       this.props.onAssociation(result.event_vendor_with_vendor);
     }.bind(this))
@@ -19,8 +21,8 @@ var EventVendorAutocomplete = React.createClass({
   render: function() {
     return (
       <Autocomplete name="vendor"
-                    retrieveDataAsync={this.retrieveOtherVendors}
-                    renderAutoCompleteList={this.renderAutoCompleteList}
+                    retrieveData={this.retrieveVendors}
+                    data={this.state.vendors}
                     itemSelected={this.addVendorToEvent} />
     );
   }

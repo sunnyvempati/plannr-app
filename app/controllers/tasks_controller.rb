@@ -50,11 +50,11 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task.includes(:assigned_to).find(params[:id])
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :event_id).merge(owner: current_user)
+    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id).merge(owner: current_user)
   end
 
   def mass_destroy_params

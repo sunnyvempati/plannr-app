@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # searchable event endpoints
   get 'events/:event_id/search_other_contacts', to: 'contacts#search_contacts_not_in_event'
   get 'events/:event_id/search_other_vendors', to: 'vendors#search_vendors_not_in_event'
+  get 'search_users', to: 'users#search'
 
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
