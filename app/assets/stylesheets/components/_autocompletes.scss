@@ -1,0 +1,12 @@
+.Autocomplete {
+  @extend .FormInput-field;
+}
+
+.ui-menu {
+  padding: 16px;
+}
+.ui-menu-item {
+  background-color: $header-bg;
+  color: $white-three-fourths;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}

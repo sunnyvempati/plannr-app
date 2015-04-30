@@ -6,6 +6,14 @@ var FormAutocompleteInput = React.createClass({
     };
   },
   mixins: [Formsy.Mixin],
+  componentDidMount: function() {
+    var assignedToValue = this.getValue();
+    if (assignedToValue) {
+      $.get("/users/" + assignedToValue, function(result) {
+        this.setState({userAssigned: true, assignedToName: result.user.name});
+      }.bind(this))
+    }
+  },
   retrieveAllUsers: function(request, response) {
     $.get("/search_users", {search: {text: request.term}}, function(result) {
       response(result.users);
@@ -23,7 +31,8 @@ var FormAutocompleteInput = React.createClass({
   },
   renderAutocomplete: function() {
     return (
-      <div className="FormAutocompleteInput">
+      <div className="FormInput">
+        <label for={this.props.id}>{this.props.label}</label>
         <Autocomplete name={this.props.name}
                       retrieveDataAsync={this.retrieveAllUsers}
                       renderAutoCompleteList={this.autocompleteUserList}

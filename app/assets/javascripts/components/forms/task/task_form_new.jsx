@@ -1,12 +1,5 @@
 var TaskFormNew = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-  getDefaultProps: function() {
-    return {
-      useReactRouter: false
-    };
-  },
+  mixins: [FormReactRouter],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     useReactRouter: React.PropTypes.bool,

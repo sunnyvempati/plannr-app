@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find_by_id(params[:id])
+    binding.pry
     if @profile
       render :show
     else

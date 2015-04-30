@@ -17,12 +17,10 @@ var Autocomplete = React.createClass({
   },
   render: function() {
     return (
-      <div className="Autocomplete">
-        <input name={this.props.name}
-               id={this.props.name + "_autocomplete"}
-               placeholder={"Start typing"}
-               className="TileInput-field" />
-      </div>
+      <input name={this.props.name}
+             id={this.props.name + "_autocomplete"}
+             placeholder={"Start typing..."}
+             className="Autocomplete" />
     );
   },
   componentWillUnmount: function() {

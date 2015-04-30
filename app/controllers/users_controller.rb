@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     render json: search_results, each_serializer: CompanyUserSerializer
   end
 
+  def show
+    render json: User.includes(:profile).find(params[:id])
+  end
+
   def new
     @user = User.new(email: @invitation.email, company: @invitation.company)
   end
