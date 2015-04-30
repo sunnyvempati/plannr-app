@@ -2,11 +2,20 @@
   @extend .FormInput-field;
 }
 
-.ui-menu {
-  padding: 16px;
+.Autocomplete-results {
+  position: relative;
+  &.hidden {
+    display: none;
+  }
 }
-.ui-menu-item {
+
+.Autocomplete-resultsItem {
+  cursor: pointer;
   background-color: $header-bg;
   color: $white-three-fourths;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  &:hover {
+    background-color: $plannr-green;
+  }
 }

@@ -7,11 +7,10 @@ class User < ActiveRecord::Base
 
   # scopes
   scope :search_with, ->(term) {
-    wildcard_text = "'%#{term}%'"
+    wildcard_text = "'%#{term.downcase}%'"
     joins(
       'INNER JOIN profiles p ON p.user_id = users.id')
-      .where("lower(p.first_name) LIKE #{wildcard_text}
-        OR lower(p.last_name) LIKE #{wildcard_text}")
+      .where("lower(p.first_name || ' ' || p.last_name) LIKE #{wildcard_text}")
       .select('users.*, p.first_name, p.last_name')
       .limit(5)
   }

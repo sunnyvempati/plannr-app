@@ -2,7 +2,8 @@ var FormAutocompleteInput = React.createClass({
   getInitialState: function() {
     return {
       userAssigned: false,
-      assignedToName: null
+      assignedToName: null,
+      users: []
     };
   },
   mixins: [Formsy.Mixin],
@@ -14,29 +15,31 @@ var FormAutocompleteInput = React.createClass({
       }.bind(this))
     }
   },
-  retrieveAllUsers: function(request, response) {
-    $.get("/search_users", {search: {text: request.term}}, function(result) {
-      response(result.users);
+  retrieveAllUsers: function(term) {
+    $.get("/search_users", {search: {text: term || ""}}, function(result) {
+      this.setState({users: result.users});
     }.bind(this));
   },
-  autocompleteUserList: function(item) {
-    return $("<li>").append(item.name);
+  userItem: function(item) {
+    return (
+      <div className="Autocomplete-resultsItem">{item.name}</div>
+    );
   },
-  addToForm: function(ui, user) {
-    this.setValue(user.item.id);
-    this.setState({userAssigned: true, assignedToName: user.item.name});
+  addToForm: function(user) {
+    this.setValue(user.id);
+    this.setState({userAssigned: true, assignedToName: user.name});
   },
   editAssignedTo: function() {
-    this.setState({userAssigned: false, assignedToName: null});
+    this.setState({userAssigned: false, assignedToName: null, users: []});
   },
   renderAutocomplete: function() {
     return (
       <div className="FormInput">
         <label for={this.props.id}>{this.props.label}</label>
         <Autocomplete name={this.props.name}
-                      retrieveDataAsync={this.retrieveAllUsers}
-                      renderAutoCompleteList={this.autocompleteUserList}
-                      itemSelected={this.addToForm} />
+                      retrieveData={this.retrieveAllUsers}
+                      itemSelected={this.addToForm}
+                      data={this.state.users} />
       </div>
     );
   },
