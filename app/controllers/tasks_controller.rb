@@ -23,7 +23,6 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new task_params
-
     render_entity @task
   end
 

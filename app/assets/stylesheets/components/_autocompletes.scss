@@ -23,7 +23,7 @@
 .Autocomplete-picked {
   @extend .FormInput-field;
   display: flex;
-  flexflow: row nowrap;
+  flex-flow: row nowrap;
   justify-content: space-between;
   >* {
     flex: 1;
