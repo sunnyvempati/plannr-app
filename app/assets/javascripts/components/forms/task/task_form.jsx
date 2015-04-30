@@ -19,7 +19,7 @@ var TaskForm = React.createClass({
         'description': inputs.description,
         'deadline': inputs.deadline,
         'event_id': inputs.event_id,
-        'assigned_to': inputs.assigned_to
+        'assigned_to_id': inputs.assigned_to
       }
     };
   },
@@ -54,6 +54,7 @@ var TaskForm = React.createClass({
     }
   },
   render: function() {
+    console.log(this.props.model);
     var task = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -118,7 +119,8 @@ var TaskForm = React.createClass({
             disabled={this.props.disableForm}
             required />
           <FormAutocompleteInput
-            name='assigned_to' />
+            name='assigned_to'
+            value={task.assigned_to_id} />
 
         </Form>
         <a href={this.hrefRoot }>List</a>
