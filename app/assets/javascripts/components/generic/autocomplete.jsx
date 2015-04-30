@@ -1,14 +1,13 @@
 var Autocomplete = React.createClass({
-  getId: function() {
+  getjQueryId: function() {
     return "#" + this.props.name + "_autocomplete";
   },
-
   componentDidMount: function() {
     var _this = this;
     var associatedObjectId = this.props.associatedObjectId;
     var dataRetrieved = this.props.retrieveDataAsync;
     var itemSelected = this.props.itemSelected;
-    $(this.getId()).autocomplete({
+    $(this.getjQueryId()).autocomplete({
       source: dataRetrieved,
       select: itemSelected
     }).autocomplete("instance")._renderItem = function(ul, item) {
@@ -27,6 +26,6 @@ var Autocomplete = React.createClass({
     );
   },
   componentWillUnmount: function() {
-    $(this.getId()).autocomplete('destroy');
+    $(this.getjQueryId()).autocomplete('destroy');
   }
 });

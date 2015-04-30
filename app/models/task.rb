@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   acts_as_tenant :company
   belongs_to :event
   belongs_to :owner, class_name: "User"
+  belongs_to :assigned_to, class_name: "User"
 
   date :deadline
 

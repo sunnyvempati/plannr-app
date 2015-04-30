@@ -23,6 +23,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new task_params
+    binding.pry
     render_entity @task
   end
 
@@ -54,7 +55,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :event_id).merge(owner: current_user)
+    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to).merge(owner: current_user)
   end
 
   def mass_destroy_params
