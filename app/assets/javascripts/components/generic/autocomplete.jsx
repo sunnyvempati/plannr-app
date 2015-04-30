@@ -26,6 +26,7 @@ var Autocomplete = React.createClass({
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(item) {
+    React.findDOMNode(this.refs.autocompleteInput).value = "";
     this.props.itemSelected(item);
   },
   updateItemName: function(name, term) {

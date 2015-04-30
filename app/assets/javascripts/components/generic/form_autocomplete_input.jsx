@@ -1,4 +1,5 @@
 var FormAutocompleteInput = React.createClass({
+  mixins: [Formsy.Mixin],
   getInitialState: function() {
     return {
       userAssigned: false,
@@ -7,7 +8,6 @@ var FormAutocompleteInput = React.createClass({
       focus: false // this is used when you click editAssignedTo
     };
   },
-  mixins: [Formsy.Mixin],
   componentDidMount: function() {
     var assignedToValue = this.getValue();
     if (assignedToValue) {
