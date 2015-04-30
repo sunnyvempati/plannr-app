@@ -3,7 +3,8 @@ var FormAutocompleteInput = React.createClass({
     return {
       userAssigned: false,
       assignedToName: null,
-      users: []
+      users: [],
+      focus: false // this is used when you click editAssignedTo
     };
   },
   mixins: [Formsy.Mixin],
@@ -30,25 +31,24 @@ var FormAutocompleteInput = React.createClass({
     this.setState({userAssigned: true, assignedToName: user.name});
   },
   editAssignedTo: function() {
-    this.setState({userAssigned: false, assignedToName: null, users: []});
+    this.setState({userAssigned: false, assignedToName: null, users: [], focus: true});
   },
   renderAutocomplete: function() {
     return (
-      <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
-        <Autocomplete name={this.props.name}
-                      retrieveData={this.retrieveAllUsers}
-                      itemSelected={this.addToForm}
-                      data={this.state.users} />
-      </div>
+      <Autocomplete name={this.props.name}
+                    retrieveData={this.retrieveAllUsers}
+                    itemSelected={this.addToForm}
+                    data={this.state.users}
+                    focus={this.state.focus} />
     );
   },
   renderAssigned: function() {
     return (
-      <div className="FormInputAssignedTo">
-        <span>Assigned to:</span>
-        <span>{this.state.assignedToName}</span>
-        <div onClick={this.editAssignedTo}>
+      <div className="Autocomplete-picked" onClick={this.editAssignedTo}>
+        <div className="Autocomplete-pickedName">
+          {this.state.assignedToName}
+        </div>
+        <div className="Autocomplete-edit">
           <i className="fa fa-pencil"></i>
         </div>
       </div>
@@ -56,6 +56,11 @@ var FormAutocompleteInput = React.createClass({
   },
   render: function() {
     var inputRender = this.state.userAssigned ? this.renderAssigned() : this.renderAutocomplete();
-    return inputRender;
+    return (
+      <div className="FormInput">
+        <label for={this.props.id}>{this.props.label}</label>
+        {inputRender}
+      </div>
+    );
   }
 });

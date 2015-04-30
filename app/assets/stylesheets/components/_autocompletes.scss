@@ -19,3 +19,20 @@
     background-color: $plannr-green;
   }
 }
+
+.Autocomplete-picked {
+  @extend .FormInput-field;
+  display: flex;
+  flexflow: row nowrap;
+  justify-content: space-between;
+  >* {
+    flex: 1;
+  }
+}
+
+.Autocomplete-edit {
+  display: flex;
+  justify-content: flex-end;
+  font-size: em(8px);
+  opacity: 0.5;
+}

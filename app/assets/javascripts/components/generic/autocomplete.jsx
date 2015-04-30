@@ -4,6 +4,11 @@ var Autocomplete = React.createClass({
       open: true
     };
   },
+  componentDidMount: function() {
+    if (this.props.focus) {
+      React.findDOMNode(this.refs.autocompleteInput).focus();
+    }
+  },
   closeResults: function() {
     if (this.isMounted()) {
       this.setState({open: false});
