@@ -1,0 +1,8 @@
+.EventDashboardContainer {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.EventDashboard-router {
+  background-color: $event-router-bg;
+}

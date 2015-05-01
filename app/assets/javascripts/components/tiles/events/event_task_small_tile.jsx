@@ -17,10 +17,18 @@ var EventTaskSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileTasksList">Tasks</Link>
+          <Link to="tileTasksList" className="Tile-headerLink">
+            <div className="Tile-imgTask"></div>
+            <div className="Tile-title">Tasks</div>
+          </Link>
         </div>
         <div className="Tile-content">
-          {this.state.count + " Tasks"}
+          <div className="TileContent-count">
+            {this.state.count}
+          </div>
+          <div className="TileContent-title">
+            Total
+          </div>
         </div>
       </div>
     );

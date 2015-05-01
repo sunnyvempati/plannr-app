@@ -1,4 +1,4 @@
 .LoginLogo {
-  @include svg-logo(300px);
+  @include svg($logo-name, 300px);
   margin: auto;
 }
