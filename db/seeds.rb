@@ -44,6 +44,14 @@ def create_events
     e.symbolize_keys!
     created_event = Event.find_or_create_by!(name: e[:name]) do |event|
       event.owner = User.find_by_email(e[:owner])
+      event.client = Contact.create!(name: Faker::Name.name,
+                                     email: Faker::Internet.email,
+                                     phone: "309-999-9999",
+                                     organization: Faker::Company.name,
+                                     description: Faker::Lorem.sentence,
+                                     category: 1,
+                                     owner: User.find_by_email(e[:owner]),
+                                     company: Company.find_by_name(e[:company]))
       event.company = Company.find_by_name(e[:company])
       event.start_date = e[:start_date]
       event.end_date = e[:end_date]
@@ -83,7 +91,7 @@ def create_contacts
                                         phone: "309-999-9999",
                                         organization: Faker::Company.name,
                                         description: Faker::Lorem.sentence,
-                                        category: 1,
+                                        category: 2,
                                         owner: User.find_by_email(c[:owner]),
                                         company: Company.find_by_name(c[:company]))
       puts "Created Contact: #{created_contact.name}" if created_contact

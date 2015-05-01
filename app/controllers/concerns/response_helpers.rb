@@ -6,7 +6,10 @@ module ResponseHelpers
   def render_entity(entity)
     if entity.save
       yield if block_given?
-      respond_with entity
+      respond_to do |format|
+        format.html
+        format.json { render_success(entity) }
+      end
     else
       render json: errors_hash(entity.errors), status: 403
     end

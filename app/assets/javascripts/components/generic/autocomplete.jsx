@@ -1,4 +1,5 @@
 var Autocomplete = React.createClass({
+  mixins: [boldAutocompleteItem],
   getInitialState: function() {
     return {
       open: true
@@ -25,12 +26,9 @@ var Autocomplete = React.createClass({
   onChange: function(e) {
     this.props.retrieveData(e.target.value);
   },
-  itemSelected: function(item) {
+  itemSelected: function(item, term) {
     React.findDOMNode(this.refs.autocompleteInput).value = "";
-    this.props.itemSelected(item);
-  },
-  updateItemName: function(name, term) {
-    return name.replace(new RegExp('(^|)(' + term + ')(|$)','ig'), '$1<b>$2</b>$3');
+    this.props.itemSelected(item, term);
   },
   getTerm: function() {
     var autocompleteComponent = React.findDOMNode(this.refs.autocompleteInput);
@@ -44,12 +42,11 @@ var Autocomplete = React.createClass({
     });
     var term = this.getTerm();
     var results = this.props.data.map(function(item) {
-      var itemName = this.updateItemName(item.name, term);
-      var defaultRenderItem = <div className="Autocomplete-resultsItem"
-             dangerouslySetInnerHTML={{__html: itemName}}></div>;
+      var itemName = this.formatMatchedCharacters(item.name, term);
+      var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (
-        <div onClick={this.itemSelected.bind(this, item)}>
+        <div onClick={this.itemSelected.bind(this, item, term)}>
           {renderItem}
         </div>
       );
