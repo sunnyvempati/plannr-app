@@ -21,7 +21,7 @@ var EventForm = React.createClass({
         'end_date': inputs.end_date,
         'description': inputs.description,
         'location': inputs.location,
-        'client': inputs.client,
+        'client_id': inputs.client,
         'budget': inputs.budget
       }
     };
