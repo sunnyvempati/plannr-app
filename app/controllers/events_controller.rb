@@ -32,7 +32,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    binding.pry
     @event = Event.new event_params
     render_entity @event
   end
