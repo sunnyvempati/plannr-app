@@ -23,7 +23,8 @@ var EventContactAutocomplete = React.createClass({
       <Autocomplete name="contact"
                     retrieveData={this.retrieveContacts}
                     data={this.state.contacts}
-                    itemSelected={this.addContactToEvent} />
+                    itemSelected={this.addContactToEvent}
+                    placeholder="Add contact to event..." />
     );
   }
 });

@@ -1,5 +1,5 @@
-@mixin svg-logo($size) {
-  background: $logo-name no-repeat;
+@mixin svg($url, $size) {
+  background: $url no-repeat;
   background-size: $size $size;
   height: $size;
   width: $size;
