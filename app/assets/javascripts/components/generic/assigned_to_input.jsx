@@ -1,4 +1,4 @@
-var FormAutocompleteInput = React.createClass({
+var AssignedToInput = React.createClass({
   mixins: [Formsy.Mixin],
   getInitialState: function() {
     return {
@@ -13,7 +13,7 @@ var FormAutocompleteInput = React.createClass({
     if (assignedToValue) {
       $.get("/users/" + assignedToValue, function(result) {
         this.setState({userAssigned: true, assignedToName: result.user.name});
-      }.bind(this))
+      }.bind(this));
     }
   },
   retrieveAllUsers: function(term) {

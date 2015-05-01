@@ -118,18 +118,12 @@ var TaskForm = React.createClass({
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
-          <FormAutocompleteInput
+          <AssignedToInput
             name='assigned_to'
             value={task.assigned_to}
             id='task_assigned_to'
             label='Assign to' />
-
         </Form>
-        <a href={this.hrefRoot }>List</a>
-        |
-        <a href={this.hrefRoot + '/' + task.id + '/edit' }>Edit</a>
-        |
-        <a href={this.hrefRoot + '/' + task.id  }>Show</a>
       </div>
     );
   }
