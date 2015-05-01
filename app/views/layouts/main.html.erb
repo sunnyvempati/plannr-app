@@ -31,22 +31,10 @@
 
 
   <div class="MainContainer">
-    <div class="MainContainer-contentHeader" data-0="height:168px" data-56="height:64px">
-      <div class="PageHeader-title" data-56="padding-top:24px;font-size:34px;" data-57="font-size:20px;padding-top:0px;margin:auto;">
-        <%= @header %>
-      </div>
-      <div class="PageHeader-appBar">
-        <i class="fa fa-search PageHeader-appBarItem"></i>
-        <a rel="nofollow" data-method="delete" href="/logout" class="icon fa fa fa-sign-out PageHeader-appBarItem"></a>
-      </div>
-    </div>
+    <%= react_component('PageHeader', header: @header, prerender: true) %>
     <div class="MainContainer-content">
       <%= yield %>
     </div>
   </div>
-
-  <script type="text/javascript">
-    var s = skrollr.init({forceHeight: false});
-  </script>
 </body>
 </html>
