@@ -16,7 +16,7 @@ class Vendor < ActiveRecord::Base
   scope :search_not_in, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     Vendor.not_in(event_id)
-      .where("vendors.name LIKE #{wildcard_text}")
+      .where("lower(vendors.name) LIKE #{wildcard_text}")
       .limit(5)
   }
 

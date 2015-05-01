@@ -24,7 +24,7 @@ class Contact < ActiveRecord::Base
   scope :search_not_in, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     Contact.not_in(event_id)
-      .where("contacts.name LIKE #{wildcard_text}")
+      .where("lower(contacts.name) LIKE #{wildcard_text}")
       .limit(5)
   }
 
