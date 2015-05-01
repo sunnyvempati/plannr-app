@@ -6,9 +6,10 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 
+require 'support/helpers/features/session_helpers'
 require 'support/helpers/session_helpers'
 require 'support/helpers/event_helpers'
-
+require "authlogic/test_case"
 
 require 'pry'
 ActiveRecord::Migration.maintain_test_schema!
@@ -39,4 +40,10 @@ RSpec.configure do |config|
 
   config.include Features::SessionHelpers
   config.include EventHelpers
+  config.include SessionHelpers
+  config.include Authlogic::TestCase
+
+  config.after(:each) do
+    ActsAsTenant.current_tenant = nil
+  end
 end
