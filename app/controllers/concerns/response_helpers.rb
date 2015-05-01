@@ -15,7 +15,7 @@ module ResponseHelpers
     end
   end
 
-  def render_error(json)
+  def render_error(json={})
     render json: json, status: 403
   end
 
