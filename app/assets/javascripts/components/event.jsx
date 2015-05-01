@@ -13,7 +13,12 @@ var Event = React.createClass({
     var event = this.props.model;
     return (
       <div className="EventContainer">
-        <div className="Event-basicInfo">
+        <div className="Event-info">
+          <div className="Info-header">
+            Client
+          </div>
+          <div className="Info-content">
+          </div>
           {this.eventInfoDivs(["name", "client_name", "location"])}
         </div>
         <div className="Event-dateInfo">
