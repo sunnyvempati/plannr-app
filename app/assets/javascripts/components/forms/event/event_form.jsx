@@ -11,7 +11,6 @@ var EventForm = React.createClass({
     model: React.PropTypes.object,
     secondaryButtonHref: React.PropTypes.string
   },
-  hrefRoot: "/events",
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -26,8 +25,8 @@ var EventForm = React.createClass({
       }
     };
   },
-  changeUrl: function () {
-    location.href = this.hrefRoot;
+  changeUrl: function (event) {
+    location.href = "/events/" + event.id + "/";
   },
   componentWillMount: function () {
     // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
