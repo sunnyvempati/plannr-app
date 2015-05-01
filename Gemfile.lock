@@ -122,6 +122,9 @@ GEM
       ffi (>= 1.0.0)
       rake
     formatador (0.2.5)
+    fuubar (2.0.0)
+      rspec (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     guard (2.12.4)
@@ -217,6 +220,10 @@ GEM
     request_store (1.1.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
     rspec-core (3.2.2)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -234,6 +241,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
     sass (3.4.13)
     sass-rails (5.0.1)
@@ -303,6 +311,7 @@ DEPENDENCIES
   capybara
   factory_girl_rails
   faker
+  fuubar
   guard-livereload
   jbuilder (~> 2.0)
   jquery-rails

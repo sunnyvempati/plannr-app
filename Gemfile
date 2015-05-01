@@ -33,6 +33,9 @@ group 'development' do
   gem 'capistrano-secrets-yml'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
+
+  # formats rspec output. Read more: http://jeffkreeftmeijer.com/2010/fuubar-the-instafailing-rspec-progress-bar-formatter/
+  gem 'fuubar'
 end
 
 group 'development', 'test' do
