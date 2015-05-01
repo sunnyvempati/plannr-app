@@ -28,6 +28,13 @@ class Contact < ActiveRecord::Base
       .limit(5)
   }
 
+  scope :search_clients, ->(term) {
+    wildcard_text = "'%#{term.downcase}%'"
+    where("lower(contacts.name) LIKE #{wildcard_text}
+        AND contacts.category = 1")
+    .limit(5)
+  }
+
   validates :name, :presence => true
   validates_format_of :email,
                       :with => EMAIL_REGEX,

@@ -21,11 +21,9 @@
       <td><%= event.name %></td>
       <td><%= event.start_date %></td>
       <td><%= event.end_date %></td>
-      <td><%= event.description %></td>
       <td><%= event.location %></td>
-      <td><%= event.client_name %></td>
       <td><%= event.budget %></td>
-      <td><%= event.notes %></td>
+      <td><%= event.description %></td>
       <td><%= link_to 'Show', event %></td>
       <td><%= link_to 'Edit', edit_event_path(event) %></td>
       <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

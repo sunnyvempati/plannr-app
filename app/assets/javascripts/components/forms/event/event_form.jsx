@@ -21,9 +21,8 @@ var EventForm = React.createClass({
         'end_date': inputs.end_date,
         'description': inputs.description,
         'location': inputs.location,
-        'client_name': inputs.client_name,
-        'budget': inputs.budget,
-        'notes': inputs.notes
+        'client': inputs.client,
+        'budget': inputs.budget
       }
     };
   },
@@ -55,7 +54,6 @@ var EventForm = React.createClass({
           secondaryButtonHref={this.props.secondaryButtonHref}
           showButtonList={this.props.showButtonList}
           id={id}>
-
           <FormInput
             name="name"
             id="event_name"
@@ -88,15 +86,6 @@ var EventForm = React.createClass({
             placeholder="When does it end? (MM/DD/YYYY)"
           />
           <FormInput
-            name="description"
-            id="event_description"
-            type="text"
-            label="Description"
-            value={this.props.model.description}
-            disabled={this.props.disableForm}
-            placeholder="What can you tell us about this event?"
-          />
-          <FormInput
             name="location"
             id="event_location"
             type="text"
@@ -105,15 +94,11 @@ var EventForm = React.createClass({
             disabled={this.props.disableForm}
             placeholder="Where will it be held?"
           />
-          <FormInput
-            name="client_name"
-            id="event_client_name"
-            type="text"
-            label="Client"
-            value={this.props.model.client_name}
-            disabled={this.props.disableForm}
-            placeholder="Who's the event for?"
-          />
+          <ClientInput
+            name='client'
+            value={this.props.model.client_id}
+            id='event_client'
+            label='Client' />
           <FormInput
             name="budget"
             id="event_budget"
@@ -127,20 +112,13 @@ var EventForm = React.createClass({
             validationError="Must be a number (no commas)"
           />
           <TextAreaInput
-            name="notes"
+            name="description"
             form={id}
             className="TextAreaInput"
-            label="Notes"
+            label="Description"
             placeholder="What else do you need to know?"
           />
         </Form>
-
-        <a href={this.hrefRoot }>List</a>
-        |
-        <a href={this.hrefRoot + "/" + this.props.model.id + "/edit" }>Edit</a>
-        |
-        <a href={this.hrefRoot + "/" + this.props.model.id  }>Show</a>
-
       </div>
     );
   }

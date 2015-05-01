@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20150501055836) do
     t.date     "end_date"
     t.float    "budget"
     t.string   "location"
-    t.text     "notes"
     t.uuid     "owner_id"
     t.uuid     "company_id"
     t.text     "description"
