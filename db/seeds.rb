@@ -53,6 +53,7 @@ def create_events
                                      owner: User.find_by_email(e[:owner]),
                                      company: Company.find_by_name(e[:company]))
       event.company = Company.find_by_name(e[:company])
+      event.location = Faker::Address.city
       event.start_date = e[:start_date]
       event.end_date = e[:end_date]
       event.budget = e[:budget]

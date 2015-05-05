@@ -15,11 +15,6 @@ var EventContactListTile = React.createClass({
       }
     }.bind(this))
   },
-  addToContactList: function(item) {
-    var tableData = this.state.tableData;
-    tableData.push({name: item.name, email: item.email, id: item.id});
-    this.setState({tableData: tableData});
-  },
   updateData: function(data) {
     this.setState({tableData: data});
   },
@@ -27,8 +22,6 @@ var EventContactListTile = React.createClass({
     return (
       <div className="EventContactListTileContainer">
         <Link to="tileAll"><i className="fa fa-arrow-left"></i></Link>
-        <EventContactAutocomplete onAssociation={this.addToContactList} />
-        <Link to='tileNewContact'>New Event Contact</Link>
         <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
       </div>
     );

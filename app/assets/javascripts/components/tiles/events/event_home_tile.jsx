@@ -2,9 +2,14 @@ var EventHome = React.createClass({
   render: function() {
     return (
       <div className="EventHomeTileContainer">
-        <EventContactSmallTile />
-        <EventTaskSmallTile />
-        <EventVendorSmallTile />
+        <div className="EventHome-row">
+          <EventTaskSmallTile />
+          <EventContactSmallTile />
+        </div>
+        <div className="EventHome-row">
+          <EventAttachmentsSmallTile />
+          <EventVendorSmallTile />
+        </div>
       </div>
     );
   }

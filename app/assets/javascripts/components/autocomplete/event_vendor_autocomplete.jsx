@@ -23,7 +23,8 @@ var EventVendorAutocomplete = React.createClass({
       <Autocomplete name="vendor"
                     retrieveData={this.retrieveVendors}
                     data={this.state.vendors}
-                    itemSelected={this.addVendorToEvent} />
+                    itemSelected={this.addVendorToEvent}
+                    placeholder="Add vendor to event..." />
     );
   }
 });

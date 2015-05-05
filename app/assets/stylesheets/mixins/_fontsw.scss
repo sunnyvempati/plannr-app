@@ -1,6 +1,6 @@
 @mixin font($size, $weight, $tracking) {
-  font-size: em($size);
+  font-size: $size;
   font-weight: $weight;
   letter-spacing: (0.001 * $tracking) * 1em;
-  line-height: em($size * $line-height-factor);
+  line-height: $size * $line-height-factor;
 }

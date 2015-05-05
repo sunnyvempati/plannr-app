@@ -1,16 +1,79 @@
 .Tile {
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
+  min-width: 400px;
+  margin: $size-increment*2 $size-increment*2 0 0;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+.Tile-header {
+  height: 112px;
+  background-color: $plannr-green;
+}
+
+.Tile-content {
+  height: 160px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-flow: column nowrap;
+  >* {
+    flex: 1;
+    align-self: center;
+  }
+}
+
+.Tile-status {
+  padding-top: $size-increment * 2;
+  @include font($headline-font, normal, 0);
+  opacity: 0.25;
+}
+
+.TileContent-count {
+  @include font($display-font, normal, 0);
+  padding-top: $size-increment * 2;
+}
+
+.TileContent-quickAdd {
   width: 300px;
-  &-header {
-    height: 50px;
-    width: 100%;
-    background-color: $plannr-green;
-    color: white;
+  padding-top: $size-increment*2;
+  display: flex;
+}
+
+.Tile-headerLink {
+  padding: $size-increment*2 0 $size-increment 0;
+  display: flex;
+  flex-flow: column nowrap;
+  color: white;
+  opacity: 0.8;
+  &:hover > .Tile-img {
+    @include svg($arrow-tile-hover-url, 56px);
   }
-  &-content {
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+  >* {
+    flex: 1;
+    align-self: center;
   }
+}
+
+.Tile-img {
+  margin-bottom: $size-increment;
+}
+
+.Tile-imgTask {
+  @extend .Tile-img;
+  @include svg($task-tile-url, 56px);
+}
+
+.Tile-imgContact {
+  @extend .Tile-img;
+  @include svg($contact-tile-url, 56px);
+}
+
+.Tile-imgVendor {
+  @extend .Tile-img;
+  @include svg($vendor-tile-url, 56px);
+}
+
+.Tile-imgAttachment {
+  @extend .Tile-img;
+  @include svg($attachment-tile-url, 56px);
 }

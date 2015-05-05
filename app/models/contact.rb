@@ -12,19 +12,14 @@ class Contact < ActiveRecord::Base
 
   validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
 
-  # TODO: case sensitivity in search_condition
   scope :not_in, ->(event_id) {
-    joins(
-      'LEFT OUTER JOIN event_contacts ec ON ec.contact_id = contacts.id')
-      .where("ec.contact_id IS null
-        OR ec.event_id != '#{event_id}'")
-      .select('contacts.*')
+      where("id not in (select contact_id from event_contacts where event_id = '#{event_id}')")
   }
 
   scope :search_not_in, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     Contact.not_in(event_id)
-      .where("contacts.name LIKE #{wildcard_text}")
+      .where("lower(contacts.name) LIKE #{wildcard_text}")
       .limit(5)
   }
 

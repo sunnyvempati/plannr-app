@@ -1,9 +1,14 @@
 .Autocomplete {
+  width: 100%;
+}
+
+.Autocomplete-input {
   @extend .FormInput-field;
 }
 
 .Autocomplete-results {
   position: relative;
+  z-index: 1000;
   &.hidden {
     display: none;
   }
