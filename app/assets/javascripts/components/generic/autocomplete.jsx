@@ -36,6 +36,7 @@ var Autocomplete = React.createClass({
   itemSelected: function(e, item, term) {
     React.findDOMNode(this.refs.autocompleteInput).value = "";
     this.props.itemSelected(item, term);
+    this.setState({term: ""});
   },
   getTerm: function() {
     var autocompleteComponent = React.findDOMNode(this.refs.autocompleteInput);
