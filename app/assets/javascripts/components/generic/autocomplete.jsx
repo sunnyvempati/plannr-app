@@ -33,7 +33,7 @@ var Autocomplete = React.createClass({
     this.setState({term: e.target.value});
     this.props.retrieveData(e.target.value);
   },
-  itemSelected: function(item, term) {
+  itemSelected: function(e, item, term) {
     React.findDOMNode(this.refs.autocompleteInput).value = "";
     this.props.itemSelected(item, term);
   },
@@ -53,15 +53,15 @@ var Autocomplete = React.createClass({
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (
-        <li onClick={this.itemSelected.bind(this, item, term)} key={item.email}>
+        <button className="Button--autocomplete" onClick={this.itemSelected.bind(this, event, item, term)} key={item.email}>
           {renderItem}
-        </li>
+        </button>
       );
     }.bind(this));
     return (
-      <ul className={resultsClasses}>
+      <div className={resultsClasses}>
         {results}
-      </ul>
+      </div>
     );
   },
   keyDown: function(e) {

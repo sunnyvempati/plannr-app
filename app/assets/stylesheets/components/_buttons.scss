@@ -54,6 +54,14 @@
   }
 }
 
+.Button--autocomplete {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: none;
+  display: block;
+}
+
 .CreateTaskContainer,
 .CreateEventContainer {
   position: fixed;
@@ -75,38 +83,9 @@
   position: relative;
 }
 
+
 .action {
   color: white;
   margin: 16px 14px;
 }
 
-
-// .Button--action {
-//   height: 30px;
-//   width: 52px;
-//   background-color: $action-button-color;
-//   position: relative;
-//   border-radius: 2px;
-//   &:before, &:after {
-//     content: '';
-//     width: inherit;
-//     height: inherit;
-//     position: absolute;
-//     z-index: -1;
-//     background-color: inherit;
-//     border-radius: 2px;
-//   }
-//   &:before {
-//     transform: rotate(60deg);
-//   }
-//   &:after {
-//     transform: rotate(-60deg);
-//   }
-// }
-
-// .Button--actionIcon {
-//   position: absolute;
-//   color: white;
-//   margin-top: 3px; //icon size = 19x24
-//   margin-left: 16.5px;
-// }
