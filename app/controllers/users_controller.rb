@@ -3,10 +3,19 @@ class UsersController < ApplicationController
   before_action :check_invitation!, :require_no_user, only: [:new, :create]
 
   # only admins can toggle admin abilities
-  before_action :check_admin, only: [:toggle_admin, :index]
+  before_action :check_admin, only: [:toggle_admin]
 
   def index
     render json: User.includes(:profile).order("profiles.first_name asc"), each_serializer: CompanyUserSerializer
+  end
+
+  def search
+    search_results = User.search_with(search_params[:text])
+    render json: search_results, each_serializer: CompanyUserSerializer
+  end
+
+  def show
+    render json: User.includes(:profile).find(params[:id])
   end
 
   def new
@@ -57,6 +66,10 @@ class UsersController < ApplicationController
     params.require(:company).permit(:name)
   end
 
+  def search_params
+    params.require(:search).permit(:text)
+  end
+
   def check_invitation!
     @invitation = Invitation.find_by_token(params[:invite_token])
     # if invitation doesn't exist, error
@@ -69,9 +82,5 @@ class UsersController < ApplicationController
       flash[:error] = "Invitation has expired or been used already. Request new invitation"
       redirect_to login_path
     end
-  end
-
-  def check_admin
-    render json: {error: "Not an admin"}, status: 500 if !current_user.company_admin?
   end
 end

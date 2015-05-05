@@ -7,16 +7,17 @@
 }
 
 .MenuList {
-  padding: $size-increment;
   background-color: $body-bg;
   height: 100%;
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .MenuList-item {
   display: flex;
   font-weight: 200;
   padding-top: $size-increment * 4;
-  padding-left: $size-increment * 3;
+  padding-left: $size-increment * 4;
   &:hover {
     color: $black-half !important;
     cursor: pointer;
@@ -27,8 +28,16 @@
   }
 }
 
-.MenuList-text {
-  padding-left: $size-increment * 3;
+.MenuList-icon {
+  flex: 1;
+  color: $black-three-fourths;
 }
 
+.MenuList-text {
+  flex: 4;
+}
 
+.MenuList-divider {
+  padding: $size-increment*2 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}

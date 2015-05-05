@@ -15,7 +15,6 @@ RSpec.describe ContactsController, type: :controller do
   describe "GET #index" do
     let(:number_of_contacts) { 2 }
 
-
     before do
       get :index
       number_of_contacts.times do
@@ -23,7 +22,7 @@ RSpec.describe ContactsController, type: :controller do
       end
     end
 
-    it "redirects to login page if not logged in" do
+    it "the correct number of contacts were created" do
       #response object has all the returned values from action
       expect(response.status).to eq(200)
       expect(assigns(:contacts).count).to eq number_of_contacts
@@ -49,7 +48,7 @@ RSpec.describe ContactsController, type: :controller do
 
     it "redirects after create" do
       expect(created_contact).to be
-      # TODO: test that it goes to the right page?  Are we always going to go the same page?  Prob not.
+      # TODO: test that it goes to the right page?  Are we always going to go the same page every time?  Prob not.
       expect(response.status).to eq (302)
     end
 
@@ -109,9 +108,29 @@ RSpec.describe ContactsController, type: :controller do
     let(:contact3) { FactoryGirl.create(:contact) }
     let(:contact4) { FactoryGirl.create(:contact) }
 
+    # TODO: can I go this in something similar to a let?
+    before do
+      contact1.events << event1
+      contact2.events << event2
+      contact3.events << event2
+      #contact4 doesn't get an event
+    end
 
+    it "returns a count of 3 contact for event 1" do
+      post :contacts_not_in_event, { id: event1.id}
+      expect(response.status).to eq 200
+      parsed_body = JSON.parse(response.body)
+      binding.pry
+      expect(parsed_body["contacts"].count).to eq 3
+    end
+
+     it "returns a count of 2 contact for event 2" do
+      post :contacts_not_in_event, { id: event2.id}
+      expect(response.status).to eq 200
+      parsed_body = JSON.parse(response.body)
+      expect(parsed_body["contacts"].count).to eq 2
+    end
 
   end
-
 
 end

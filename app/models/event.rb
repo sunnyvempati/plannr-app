@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
   has_many :event_vendors
   has_many :vendors, through: :event_vendors
   has_many :tasks
+  belongs_to :owner, class_name: "User"
+  belongs_to :client, class_name: "Contact"
 
   validates :name, :start_date, presence: true
   validate :dates

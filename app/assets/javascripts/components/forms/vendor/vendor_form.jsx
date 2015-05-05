@@ -11,7 +11,6 @@ var VendorForm = React.createClass({
     model: React.PropTypes.object,
     secondaryButtonHref: React.PropTypes.string
   },
-  hrefRoot: '/vendors',
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -23,15 +22,23 @@ var VendorForm = React.createClass({
       }
     };
   },
-  changeUrl: function () {
-    location.href = this.hrefRoot;
-  },
   render: function() {
+    var vendor = {};
+    if (this.props.model) {
+      var model = this.props.model;
+      vendor = {
+        name: model.name,
+        location: model.location,
+        phone: model.phone,
+        primary_contact: model.primary_contact,
+        id: model.id
+      };
+    }
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
           mapping={this.mapInputs}
-          onSuccess={this.changeUrl}
+          onSuccess={this.props.onSuccess}
           routeVerb={this.props.routeVerb}
           authToken={this.props.authToken}
           primaryButtonText={this.props.primaryButtonText}
@@ -45,9 +52,9 @@ var VendorForm = React.createClass({
             name='name'
             autofocus='autofocus'
             placeholder='What is the name of your vendor?'
-            type='text' 
+            type='text'
             label='name*'
-            value={this.props.model.name}
+            value={vendor.name}
             disabled={this.props.disableForm}
             required
           />
@@ -55,9 +62,9 @@ var VendorForm = React.createClass({
             id='vendor_location'
             name='location'
             placeholder='What is the location of your vendor?'
-            type='text' 
+            type='text'
             label='location'
-            value={this.props.model.location}
+            value={vendor.location}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -66,7 +73,7 @@ var VendorForm = React.createClass({
             placeholder='What is the phone of your vendor?'
             type='text'
             label='phone'
-            value={this.props.model.phone}
+            value={vendor.phone}
             disabled={this.props.disableForm}
           />
           <FormInput
@@ -75,15 +82,15 @@ var VendorForm = React.createClass({
             placeholder='Who is the primary_contact of your vendor?'
             type='text'
             label='primary contact'
-            value={this.props.model.primary_contact}
+            value={vendor.primary_contact}
             disabled={this.props.disableForm}
           />
 
         </Form>
 
         <a href={this.hrefRoot }>List</a>|
-        <a href={this.hrefRoot + '/' + this.props.model.id + '/edit' }>Edit</a>|
-        <a href={this.hrefRoot + '/' + this.props.model.id  }>Show</a>
+        <a href={this.hrefRoot + '/' + vendor.id + '/edit' }>Edit</a>|
+        <a href={this.hrefRoot + '/' + vendor.id  }>Show</a>
       </div>
     );
   }

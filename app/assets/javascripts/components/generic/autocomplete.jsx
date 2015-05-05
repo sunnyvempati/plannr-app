@@ -1,32 +1,79 @@
 var Autocomplete = React.createClass({
-  getId: function() {
-    return "#" + this.props.name + "_autocomplete";
+  mixins: [boldAutocompleteItem],
+  getInitialState: function() {
+    return {
+      open: true
+    };
   },
-
   componentDidMount: function() {
-    var _this = this;
-    var associatedObjectId = this.props.associatedObjectId;
-    var dataRetrieved = this.props.retrieveDataAsync;
-    var itemSelected = this.props.itemSelected;
-    $(this.getId()).autocomplete({
-      source: dataRetrieved,
-      select: itemSelected
-    }).autocomplete("instance")._renderItem = function(ul, item) {
-      var li = _this.props.renderAutoCompleteList(item);
-      return li.appendTo(ul);
-    }.bind(this)
+    if (this.props.focus) {
+      React.findDOMNode(this.refs.autocompleteInput).focus();
+    }
   },
-  render: function() {
+  closeResults: function() {
+    if (this.isMounted()) {
+      this.setState({open: false});
+    }
+  },
+  onBlur: function() {
+    // this timeout exists so onClick fires before onBlur
+    setTimeout(this.closeResults, 100);
+  },
+  onFocus: function(e) {
+    this.setState({open: true});
+    this.props.retrieveData(e.target.value);
+  },
+  onChange: function(e) {
+    this.props.retrieveData(e.target.value);
+  },
+  itemSelected: function(item, term) {
+    React.findDOMNode(this.refs.autocompleteInput).value = "";
+    this.props.itemSelected(item, term);
+  },
+  getTerm: function() {
+    var autocompleteComponent = React.findDOMNode(this.refs.autocompleteInput);
+    return !!autocompleteComponent ? autocompleteComponent.value : "";
+  },
+  getResults: function() {
+    var cx = React.addons.classSet;
+    var resultsClasses = cx({
+      'Autocomplete-results': true,
+      'hidden': !this.state.open
+    });
+    var term = this.getTerm();
+    var results = this.props.data.map(function(item) {
+      var itemName = this.formatMatchedCharacters(item.name, term);
+      var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
+      var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
+      return (
+        <div onClick={this.itemSelected.bind(this, item, term)}>
+          {renderItem}
+        </div>
+      );
+    }.bind(this));
     return (
-      <div className="Autocomplete">
-        <input name={this.props.name}
-               id={this.props.name + "_autocomplete"}
-               placeholder={"Start typing"}
-               className="TileInput-field" />
+      <div className={resultsClasses}>
+        {results}
       </div>
     );
   },
-  componentWillUnmount: function() {
-    $(this.getId()).autocomplete('destroy');
+  keyDown: function(e) {
+    // enter key
+    if (e.keyCode == 13) {
+      e.preventDefault();
+    }
+  },
+  render: function() {
+    return (
+      <div onBlur={this.onBlur}>
+        <input placeholder="Start typing..."
+               onFocus={this.onFocus}
+               onChange={this.onChange}
+               className="Autocomplete"
+               onKeyDown={this.keyDown}
+               ref="autocompleteInput" />
+        {this.getResults()}
+      </div>
+    );
   }
 });

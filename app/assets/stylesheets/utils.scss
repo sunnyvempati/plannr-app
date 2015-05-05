@@ -3,3 +3,15 @@
     flex-grow: $i;
   }
 }
+
+.u-clickable {
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.u-italics {
+  font-style: italic;
+}

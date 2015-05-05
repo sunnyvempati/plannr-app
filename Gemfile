@@ -23,6 +23,7 @@ gem 'acts_as_tenant'
 gem 'responders', '~> 2.0'
 
 gem 'active_model_serializers'
+gem 'faker'
 
 group 'development' do
 	gem 'pry'
@@ -33,19 +34,14 @@ group 'development' do
   gem 'capistrano-secrets-yml'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
-
+  gem 'rack-mini-profiler'
   # formats rspec output. Read more: http://jeffkreeftmeijer.com/2010/fuubar-the-instafailing-rspec-progress-bar-formatter/
   gem 'fuubar'
 end
 
 group 'development', 'test' do
-	gem 'faker'
-end
-
-group 'test' do
-    gem 'capybara'
-    gem 'selenium-webdriver'
-    gem 'rspec-rails', '~> 3.0'
-    gem 'factory_girl_rails'
-    gem 'shoulda'
+	gem 'capybara'
+	gem 'selenium-webdriver'
+	gem 'rspec-rails', '~> 3.0'
+	gem 'factory_girl_rails'
 end

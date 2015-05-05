@@ -6,20 +6,24 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = Contact.all
-    @header = "Contacts"
+    @header = 'Contacts'
   end
 
   def show
-    @header = "Contact"
+    @header = 'Contact'
+    respond_to do |format|
+      format.html
+      format.json { render json: @contact }
+    end
   end
 
   def new
     @contact = Contact.new
-    @header = "Create Contact"
+    @header = 'Create Contact'
   end
 
   def edit
-    @header = "Edit Contact"
+    @header = 'Edit Contact'
   end
 
   def create
@@ -32,12 +36,9 @@ class ContactsController < ApplicationController
     render_entity @contact
   end
 
-  def destroy
-    @contact.destroy
-    respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def search_clients
+    search_results = Contact.search_clients(search_params[:text])
+    render_success search_results
   end
 
   def quick_create
@@ -48,12 +49,16 @@ class ContactsController < ApplicationController
     end
   end
 
-  def contacts_not_in_event
-    render_success @event.other_contacts
+  def search_contacts_not_in_event
+    render json: Contact.search_not_in(params[:event_id], search_params[:text]), each_serializer: ContactSerializer
   end
 
-  def search_contacts_not_in_event
-    render json: Contact.search_other_contacts(event_id: params[:event_id], text: search_params[:text]), each_serializer: ContactSerializer
+  def destroy
+    @contact.destroy
+    respond_to do |format|
+      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private

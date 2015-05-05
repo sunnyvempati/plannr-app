@@ -18,7 +18,8 @@ var TaskForm = React.createClass({
         'name': inputs.name,
         'description': inputs.description,
         'deadline': inputs.deadline,
-        'event_id': inputs.event_id
+        'event_id': inputs.event_id,
+        'assigned_to_id': inputs.assigned_to
       }
     };
   },
@@ -61,7 +62,8 @@ var TaskForm = React.createClass({
         description: model.description,
         deadline: model.deadline,
         eventId: model.event_id,
-        id: model.id
+        id: model.id,
+        assigned_to: model.assigned_to_id
       };
     }
     return (
@@ -116,12 +118,12 @@ var TaskForm = React.createClass({
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
+          <AssignedToInput
+            name='assigned_to'
+            value={task.assigned_to}
+            id='task_assigned_to'
+            label='Assign to' />
         </Form>
-        <a href={this.hrefRoot }>List</a>
-        |
-        <a href={this.hrefRoot + '/' + task.id + '/edit' }>Edit</a>
-        |
-        <a href={this.hrefRoot + '/' + task.id  }>Show</a>
       </div>
     );
   }

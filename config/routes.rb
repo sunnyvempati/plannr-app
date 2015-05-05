@@ -25,8 +25,10 @@ Rails.application.routes.draw do
   get 'company', to: 'companies#show'
 
   # searchable event endpoints
-  get 'events/:id/other_contacts', to: 'contacts#contacts_not_in_event'
   get 'events/:event_id/search_other_contacts', to: 'contacts#search_contacts_not_in_event'
+  get 'events/:event_id/search_other_vendors', to: 'vendors#search_vendors_not_in_event'
+  get 'search_users', to: 'users#search'
+  get 'search_clients', to: 'contacts#search_clients'
 
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
@@ -36,9 +38,10 @@ Rails.application.routes.draw do
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
 
-  # # event_vendors
-  # post 'event_vendors', to:'event_vendors#create'
-  # delete 'event_vendors', to:'event_vendors#destroy'
+  # event_vendors
+  post 'events/:event_id/vendors', to:'event_vendors#create'
+  get 'events/:event_id/vendors', to:'event_vendors#vendors'
+  post 'events/:event_id/vendors/mass_delete', to:'event_vendors#mass_delete'
 
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
