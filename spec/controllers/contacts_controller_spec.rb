@@ -30,10 +30,11 @@ RSpec.describe ContactsController, type: :controller do
   end
 
 
-  describe "CREATE" do
+  describe "json create" do
     let(:this_guy_name) { "Mr. Testing Guy"}
     let(:create_params) do
       {
+        format: "json",
         contact: {
           name: this_guy_name
         }
@@ -45,12 +46,6 @@ RSpec.describe ContactsController, type: :controller do
     end
 
     let(:created_contact) { Contact.first }
-
-    it "redirects after create" do
-      expect(created_contact).to be
-      # TODO: test that it goes to the right page?  Are we always going to go the same page every time?  Prob not.
-      expect(response.status).to eq (302)
-    end
 
     it "creates specified contact" do
       expect(created_contact).to be
@@ -68,7 +63,10 @@ RSpec.describe ContactsController, type: :controller do
     let(:this_guy_name)  { "Mr. Testing Guy" }
     let(:this_guy_email)  { "guy@testing.com" }
     let(:quick_create_params) do
-      {  quick_contact: { event_id: event.id , text: "" }  }
+      {
+        format: "json",
+        quick_contact: { event_id: event.id , text: "" }
+      }
     end
 
 
@@ -100,32 +98,33 @@ RSpec.describe ContactsController, type: :controller do
   end
 
   describe 'other_contacts' do
-    let(:event1) { FactoryGirl.create(:event) }
-    let(:event2) { FactoryGirl.create(:event) }
+    let!(:event1) { FactoryGirl.create(:event) }
+    let!(:event2) { FactoryGirl.create(:event) }
 
-    let(:contact1) { FactoryGirl.create(:contact) }
-    let(:contact2) { FactoryGirl.create(:contact) }
-    let(:contact3) { FactoryGirl.create(:contact) }
-    let(:contact4) { FactoryGirl.create(:contact) }
+    let!(:contact1) { FactoryGirl.create(:contact) }
+    let!(:contact2) { FactoryGirl.create(:contact) }
+    let!(:contact3) { FactoryGirl.create(:contact) }
+    let!(:contact4) { FactoryGirl.create(:contact) }
+    let!(:contact5) { FactoryGirl.create(:contact) }
 
     # TODO: can I go this in something similar to a let?
     before do
       contact1.events << event1
       contact2.events << event2
       contact3.events << event2
-      #contact4 doesn't get an event
+      contact4.events << [event1, event2]
+      # contact5 doesn't get assigned to an event
     end
 
-    it "returns a count of 3 contact for event 1" do
-      post :contacts_not_in_event, { id: event1.id}
+    it "returns the count of contacts not in event1 " do
+      get :search_contacts_not_in_event, { event_id: event1.id, search: {text: ''} }
       expect(response.status).to eq 200
       parsed_body = JSON.parse(response.body)
-      binding.pry
       expect(parsed_body["contacts"].count).to eq 3
     end
 
-     it "returns a count of 2 contact for event 2" do
-      post :contacts_not_in_event, { id: event2.id}
+     it "returns the count of contacts not in event2" do
+      get :search_contacts_not_in_event, { event_id: event2.id, search: {text: ''} }
       expect(response.status).to eq 200
       parsed_body = JSON.parse(response.body)
       expect(parsed_body["contacts"].count).to eq 2
