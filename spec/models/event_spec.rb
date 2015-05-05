@@ -8,7 +8,6 @@ RSpec.describe Event, type: :model do
     it { should validate_presence_of(:start_date) }
 
     it 'creates a valid event' do
-      binding.pry
       expect(event).to be_valid
     end
 
