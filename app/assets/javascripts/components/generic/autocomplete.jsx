@@ -53,15 +53,15 @@ var Autocomplete = React.createClass({
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (
-        <div onClick={this.itemSelected.bind(this, item, term)} key={item.email}>
+        <li onClick={this.itemSelected.bind(this, item, term)} key={item.email}>
           {renderItem}
-        </div>
+        </li>
       );
     }.bind(this));
     return (
-      <div className={resultsClasses}>
+      <ul className={resultsClasses}>
         {results}
-      </div>
+      </ul>
     );
   },
   keyDown: function(e) {
