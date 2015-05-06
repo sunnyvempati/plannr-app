@@ -32,8 +32,7 @@
 
 .TileContent-count {
   @include font($display-font, normal, 0);
-  padding-top: $size-increment * 2;
-}
+ }
 
 .TileContent-quickAdd {
   width: 300px;
