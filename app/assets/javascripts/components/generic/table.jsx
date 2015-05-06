@@ -1,4 +1,9 @@
 var Table = React.createClass({
+  getDefaultProps: function() {
+    return {
+      showHeaders: true
+    };
+  },
   tableRows: function() {
     var rows = this.props.results.map(function(result) {
       return(
@@ -9,18 +14,32 @@ var Table = React.createClass({
     }, this);
     return rows;
   },
-  render: function() {
-    var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.tableRows();
-    var tableHeaders = this.props.columns.map(function(column) {
+  tableHeaders: function() {
+    var show = this.props.showHeaders;
+    var tableHeaders = show ? this.props.columns.map(function(column) {
       return(
         <TableHeader name={column.header} grow={column.grow} />
       );
+    }) : "";
+    var cx = React.addons.classSet;
+    var headerClasses = cx({
+      'Table-row': true,
+      'Table-header': true,
+      'u-hidden': !show
     });
+    return (
+      <div className={headerClasses}>
+        {tableHeaders}
+      </div>
+    )
+  },
+  render: function() {
+    var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.tableRows();
     var noRows = tableRows.length == 0;
     var cx = React.addons.classSet;
     var tableClass = cx({
       'TableContainer': true,
-      'is-hidden': noRows
+      'u-hidden': noRows
     });
     var message = noRows ? "No items" : "";
     return (
@@ -32,9 +51,7 @@ var Table = React.createClass({
           </div>
           <div className="TableContainer-table">
             <div className="Table">
-              <div className="Table-row Table-header">
-                {tableHeaders}
-              </div>
+              {this.tableHeaders()}
               {tableRows}
             </div>
           </div>

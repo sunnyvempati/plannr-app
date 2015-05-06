@@ -21,7 +21,6 @@ var PageHeader = React.createClass({
           {this.props.header}
         </div>
         <div className="PageHeader-appBar">
-          <i className="fa fa-search PageHeader-appBarItem"></i>
         </div>
       </div>
     );

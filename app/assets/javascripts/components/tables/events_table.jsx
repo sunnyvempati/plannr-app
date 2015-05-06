@@ -7,18 +7,8 @@ var EventsTable = React.createClass({
   componentDidMount: function() {
     this.getEvents();
   },
-  getColumns: function() {
-    return [
-      {name: "name", header: "Name", grow: 3},
-      {name: "start_date", header: "Start Date", grow: 1},
-      {name: "end_date", header: "End Date", grow: 1},
-      {name: "location", header: "Location", grow: 1},
-      {name: "budget", header: "Budget", grow: 1}
-    ];
-  },
   getEvents: function() {
     $.get("events.json", function(result) {
-      console.log(result.events);
       this.setState({events: result.events});
     }.bind(this));
   },
@@ -28,18 +18,39 @@ var EventsTable = React.createClass({
   getCustomRows: function() {
     return this.state.events.map(function(event) {
       return(
-        <div className="Table-row u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
-          <Event model={event} client={event.client} />
+        <div className="EventsTable-row" key={event.id}>
+          <div className="EventsTable-rowHeader u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
+            {event.name}
+          </div>
+          <div className="EventsTable-rowContent">
+            <Event model={event} client={event.client} editable={false} />
+          </div>
         </div>
       );
     }, this);
   },
+  search: function(e) {
+    var term = e.target.value;
+    $.get('search_events', {search: {text: term || ""}}, function(result) {
+      this.setState({events: result.events});
+    }.bind(this));
+  },
   render: function() {
     return (
-      <div className="EventsTable">
+      <div className="EventsTableContainer">
+        <div className="EventsTable-actions">
+          <div className="Actions-search">
+            <i className="fa fa-search u-dim"></i>
+            <div className="Actions-searchInput">
+              <input placeholder="Search events.."
+                     className="SearchInput"
+                     onChange={this.search} />
+            </div>
+          </div>
+        </div>
         <Table
           results={this.props.data}
-          columns={this.getColumns()}
+          showHeaders={false}
           useCustomRowComponent={true}
           customRows={this.getCustomRows()}
         />

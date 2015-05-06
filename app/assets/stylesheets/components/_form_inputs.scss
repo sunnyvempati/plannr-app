@@ -33,6 +33,11 @@
   }
 }
 
+.SearchInput {
+  @extend .FormInput-field;
+  width: 100%;
+}
+
 .FormInput-fieldErrorMessage {
   color: red;
   font-size: em(12);

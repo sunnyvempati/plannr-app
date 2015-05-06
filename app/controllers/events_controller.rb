@@ -21,6 +21,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def search
+    render json: Event.search(search_params[:text]), each_serializer: EventSelectInputSerializer
+  end
+
   def new
     @event = Event.new
     @header = 'Tell us about your event';
@@ -56,5 +60,9 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description).merge(owner: current_user)
+  end
+
+  def search_params
+    params.require(:search).permit(:text)
   end
 end

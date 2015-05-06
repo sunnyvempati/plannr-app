@@ -5,7 +5,6 @@
 }
 
 .u-clickable {
-  text-transform: uppercase;
   cursor: pointer;
   &:hover {
     opacity: .5;
@@ -18,4 +17,12 @@
 
 .u-bold {
   font-weight: 700;
+}
+
+.u-hidden {
+  display: none;
+}
+
+.u-dim {
+  opacity: 0.5;
 }
