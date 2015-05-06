@@ -23,14 +23,11 @@ var EventTaskSmallTile = React.createClass({
           </Link>
         </div>
         <div className="Tile-content">
-          <div className="TileContent-quickAdd">
-
-          </div>
           <div className="TileContent-count">
             {this.state.count}
           </div>
           <div className="TileContent-title">
-            Tasks
+            Total
           </div>
         </div>
       </div>
