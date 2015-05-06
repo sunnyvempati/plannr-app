@@ -15,12 +15,23 @@ var EventsTable = React.createClass({
   goToEvent: function(id) {
     location.href = "/events/" + id + "/";
   },
+  checkboxChanged: function() {
+    console.log("changed");
+  },
   getCustomRows: function() {
     return this.state.events.map(function(event) {
       return(
         <div className="EventsTable-row" key={event.id}>
-          <div className="EventsTable-rowHeader u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
-            {event.name}
+          <div className="EventsTable-rowHeader">
+            <div className="EventsTable-checkbox">
+              <CheckboxInput onChange={this.checkboxChanged} value={event.id} />
+            </div>
+            <div className="EventsTable-rowName u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
+              {event.name}
+            </div>
+            <div className="EventsTable-rowDaysTill">
+              {event.days_till + " days left"}
+            </div>
           </div>
           <div className="EventsTable-rowContent">
             <Event model={event} client={event.client} editable={false} />

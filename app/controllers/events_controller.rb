@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @header = 'Events'
     respond_to do |format|
       format.html
-      format.json { render json: Event.all, each_serializer: EventSelectInputSerializer }
+      format.json { render json: Event.all, each_serializer: EventSerializer }
     end
   end
 
@@ -22,7 +22,7 @@ class EventsController < ApplicationController
   end
 
   def search
-    render json: Event.search(search_params[:text]), each_serializer: EventSelectInputSerializer
+    render json: Event.search(search_params[:text]), each_serializer: EventSerializer
   end
 
   def new
