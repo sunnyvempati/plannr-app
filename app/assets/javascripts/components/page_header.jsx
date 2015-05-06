@@ -1,10 +1,16 @@
 var PageHeader = React.createClass({
+  propTypes: {
+    disableSkrollableHeader: React.PropTypes.bool
+  },
   componentDidMount: function() {
+    if (typeof(this.props.disableSkrollableHeader) === 'undefined' || this.props.disableSkrollableHeader === null || this.props.disableSkrollableHeader === false) {
       this.enableSkrollrHeader();
+    }
   },
   enableSkrollrHeader: function () {
     this.setSkrollr($('#mainHeader'), [[0, 'height:168px'], [56, 'height:64px']]);
     this.setSkrollr($('#mainTitle'), [[24, 'padding-top:18px;'], [48, 'padding-top:12px;font-size:34px;'], [56, 'padding-top:6px;'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
+    $('.MainContainer-content').css('padding-top', '168px');
     skrollr.init({forceHeight: false});
   },
   setSkrollr: function($element, data) {
