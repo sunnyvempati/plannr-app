@@ -1,4 +1,12 @@
 var EventsTable = React.createClass({
+  getInitialState: function() {
+    return {
+      events: []
+    };
+  },
+  componentDidMount: function() {
+    this.getEvents();
+  },
   getColumns: function() {
     return [
       {name: "name", header: "Name", grow: 3},
@@ -8,28 +16,20 @@ var EventsTable = React.createClass({
       {name: "budget", header: "Budget", grow: 1}
     ];
   },
+  getEvents: function() {
+    $.get("events.json", function(result) {
+      console.log(result.events);
+      this.setState({events: result.events});
+    }.bind(this));
+  },
   goToEvent: function(id) {
     location.href = "/events/" + id + "/";
   },
   getCustomRows: function() {
-    return this.props.data.map(function(event) {
+    return this.state.events.map(function(event) {
       return(
         <div className="Table-row u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
-          <div className="Table-rowItem u-flexGrow-3">
-            {event.name}
-          </div>
-          <div className="Table-rowItem u-flexGrow-1">
-            {event.start_date}
-          </div>
-          <div className="Table-rowItem u-flexGrow-1">
-            {event.end_date}
-          </div>
-          <div className="Table-rowItem u-flexGrow-1">
-            {event.location}
-          </div>
-          <div className="Table-rowItem u-flexGrow-1">
-            {event.budget}
-          </div>
+          <Event model={event} client={event.client} />
         </div>
       );
     }, this);
