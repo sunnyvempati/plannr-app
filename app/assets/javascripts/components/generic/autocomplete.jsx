@@ -7,7 +7,7 @@ var Autocomplete = React.createClass({
   mixins: [boldAutocompleteItem],
   getInitialState: function() {
     return {
-      open: true,
+      open: false,
       term: ""
     };
   },
@@ -16,31 +16,27 @@ var Autocomplete = React.createClass({
       React.findDOMNode(this.refs.autocompleteInput).focus();
     }
   },
-  closeResults: function() {
-    if (this.isMounted()) {
-      this.setState({open: false});
-    }
-  },
   onBlur: function() {
-    // this timeout exists so onClick fires before onBlur
-    setTimeout(this.closeResults, 100);
+    this.setState({open: false});
   },
   onFocus: function(e) {
     this.setState({open: true});
     this.props.retrieveData(e.target.value);
   },
   onChange: function(e) {
-    this.setState({term: e.target.value});
+    this.setState({term: e.target.value, open: true});
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(e, item, term) {
     React.findDOMNode(this.refs.autocompleteInput).value = "";
     this.props.itemSelected(item, term);
-    this.setState({term: ""});
+    this.setState({term: "", open: false});
   },
-  getTerm: function() {
-    var autocompleteComponent = React.findDOMNode(this.refs.autocompleteInput);
-    return !!autocompleteComponent ? autocompleteComponent.value : "";
+  // this is used so onBlur isn't called right
+  // before onclick which hides the entire
+  // button list.  Ask Sunny if you want a better explanation.
+  preventDefault: function(e) {
+    e.preventDefault();
   },
   getResults: function() {
     var term = this.state.term;
@@ -54,7 +50,10 @@ var Autocomplete = React.createClass({
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (
-        <button className="Button--autocomplete" onClick={this.itemSelected.bind(this, event, item, term)} key={item.email}>
+        <button className="Button--autocomplete"
+                onMouseDown={this.preventDefault}
+                onClick={this.itemSelected.bind(this, event, item, term)}
+                key={item.email}>
           {renderItem}
         </button>
       );
@@ -80,7 +79,8 @@ var Autocomplete = React.createClass({
                className="Autocomplete-input"
                onKeyDown={this.keyDown}
                onBlur={this.onBlur}
-               ref="autocompleteInput" />
+               ref="autocompleteInput">
+        </input>
         {this.getResults()}
       </div>
     );
