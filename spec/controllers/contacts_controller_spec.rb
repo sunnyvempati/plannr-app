@@ -101,20 +101,11 @@ RSpec.describe ContactsController, type: :controller do
     let!(:event1) { FactoryGirl.create(:event) }
     let!(:event2) { FactoryGirl.create(:event) }
 
-    let!(:contact1) { FactoryGirl.create(:contact) }
-    let!(:contact2) { FactoryGirl.create(:contact) }
-    let!(:contact3) { FactoryGirl.create(:contact) }
-    let!(:contact4) { FactoryGirl.create(:contact) }
+    let!(:contact1) { FactoryGirl.create(:contact, events: [event1]) }
+    let!(:contact2) { FactoryGirl.create(:contact, events: [event2]) }
+    let!(:contact3) { FactoryGirl.create(:contact, events: [event2]) }
+    let!(:contact4) { FactoryGirl.create(:contact, events: [event1, event2]) }
     let!(:contact5) { FactoryGirl.create(:contact) }
-
-    # TODO: can I go this in something similar to a let?
-    before do
-      contact1.events << event1
-      contact2.events << event2
-      contact3.events << event2
-      contact4.events << [event1, event2]
-      # contact5 doesn't get assigned to an event
-    end
 
     it "returns the count of contacts not in event1 " do
       get :search_contacts_not_in_event, { event_id: event1.id, search: {text: ''} }
