@@ -1,0 +1,25 @@
+.TableMenu {
+  background-color: $body-bg;
+  position: absolute;
+  z-index: 10000;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  width: 300px;
+}
+
+.TableMenu-item,
+.TableMenu-header {
+  padding: 8px 8px 8px 24px;
+}
+
+.TableMenu-item {
+  color: $black-three-fourths;
+  &:hover {
+    background-color: $black-quarter;
+    cursor: pointer;
+  }
+}
+
+.TableMenu-header {
+  color: $black-quarter;
+  padding-top: $size-increment*2;
+}

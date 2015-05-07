@@ -10,6 +10,7 @@
 
 .Actions-search {
   display: flex;
+  align-items: center;
 }
 
 .Actions-searchInput {
@@ -19,6 +20,7 @@
 
 .Actions-icons {
   display: flex;
+  align-items: center;
 }
 
 .EventsTable-row {
@@ -28,7 +30,7 @@
 }
 
 .EventsTable-rowContent {
-  padding: $size-increment*2 $size-increment*2 $size-increment*2 $size-increment*7;
+  padding: $size-increment*2 $size-increment*2 $size-increment*2 $size-increment*7+2;
 }
 
 .EventsTable-rowHeader {

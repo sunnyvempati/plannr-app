@@ -1,7 +1,8 @@
 var EventsTable = React.createClass({
   getInitialState: function() {
     return {
-      events: []
+      events: [],
+      showSortMenu: false
     };
   },
   componentDidMount: function() {
@@ -48,6 +49,24 @@ var EventsTable = React.createClass({
       this.setState({events: result.events});
     }.bind(this));
   },
+  sortMenu: function() {
+    var show = this.state.showSortMenu;
+    var cx = React.addons.classSet;
+    var sortMenuClasses = cx({
+      'TableMenu': true,
+      'u-hidden': !show
+    });
+    return (
+      <div className={sortMenuClasses}>
+        <div className="TableMenu-header">Sort By:</div>
+        <div className="TableMenu-item">Name</div>
+        <div className="TableMenu-item">Start Date</div>
+      </div>
+    )
+  },
+  toggleSort: function() {
+    this.setState({showSortMenu: !this.state.showSortMenu});
+  },
   render: function() {
     return (
       <div className="EventsTableContainer">
@@ -63,13 +82,20 @@ var EventsTable = React.createClass({
                      className="SearchInput"
                      onChange={this.search} />
             </div>
-            <div className="Actions-sort">
+            <div className="Actions-sort"
+                 onClick={this.toggleSort}>
               <i className="fa fa-sort tableIcon u-clickable"></i>
+              {this.sortMenu()}
             </div>
-
-            <i className="fa fa-tag tableIcon u-clickable"></i>
-            <i className="fa fa-folder tableIcon u-clickable"></i>
-            <i className="fa fa-trash tableIcon u-clickable"></i>
+            <div>
+              <i className="fa fa-tag tableIcon u-clickable"></i>
+            </div>
+            <div>
+              <i className="fa fa-folder tableIcon u-clickable"></i>
+            </div>
+            <div>
+              <i className="fa fa-trash tableIcon u-clickable"></i>
+            </div>
           </div>
         </div>
         <Table
