@@ -1,9 +1,11 @@
-@media (max-width: $small-screen) {
+//menu z-index: 8000-8900
+//this is coupled with _menu.scss
+//@media (max-width: $small-screen) {
   label[for="menu-trigger"] {
     position: fixed;
     left: 24px;
     top: 20px;
-    z-index: 100;
+    z-index: 8000;
     cursor: pointer;
     display: block;
   }
@@ -27,15 +29,15 @@
   .Hamburger-icon {
     color: $white-quarter;
   }
-}
+//}
 
-@media (min-width: $small-screen+1) {
-  label[for="menu-trigger"] {
-    display: none;
-  }
-  .Hamburger-trigger {
-    position: fixed;
-    bottom: 0;
-    clip: rect(0,0,0,0);
-  }
-}
+// @media (min-width: $small-screen+1) {
+//   label[for="menu-trigger"] {
+//     display: none;
+//   }
+//   .Hamburger-trigger {
+//     position: fixed;
+//     bottom: 0;
+//     clip: rect(0,0,0,0);
+//   }
+// }

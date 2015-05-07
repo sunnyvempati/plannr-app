@@ -1,38 +1,39 @@
-@media (max-width: $small-screen) {
+//z-index: 2000-2999
+// @media (max-width: $small-screen) {
   .MainContainer, .MainContainer-contentHeader {
     left: 0;
   }
-}
+// }
 
-@media (min-width: $small-screen+1) {
-  .MainContainer, .MainContainer-contentHeader {
-    left: $grid-increment*4;
-  }
-  .MainContainer {
-    padding-right: $grid-increment*4; // so content doesn't overflow
-  }
-}
+// @media (min-width: $small-screen+1) {
+  // .MainContainer, .MainContainer-contentHeader {
+  //   left: $grid-increment*4;
+  // }
+  // .MainContainer {
+  //   padding-right: $grid-increment*4; // so content doesn't overflow
+  // }
+// }
 
 .MainContainer-content {
-  margin-top: $page-header-height;
+  padding-top: 64px;
   height: 100%;
 }
 
 .MainContainer {
   height: 100%;
   width: 100%;
-  position: relative;
+//  position: relative;
   top: 0;
   bottom: 100%;
   background-color: $body-bg;
-  z-index: 50;
+  z-index: 2000;
 }
 
 .MainContainer-contentHeader {
   position: fixed;
   top: 0;
   width: 100%;
-  height: $page-header-height;
+  //height: $page-header-height;
   background-color: $header-bg;
   display: flex;
   flex-flow: row wrap;

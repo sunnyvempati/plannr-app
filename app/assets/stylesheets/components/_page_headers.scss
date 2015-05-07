@@ -1,8 +1,9 @@
-@media (min-width: $small-screen+1) {
-  .PageHeader-appBar {
-    margin-right: ($grid-increment*4);
-  }
-}
+//z-index: 6000-6900
+// @media (min-width: $small-screen+1) {
+//   .PageHeader-appBar {
+//     margin-right: ($grid-increment*4);
+//   }
+// }
 
 .PageHeader-appBar {
   flex: 1;
@@ -24,4 +25,17 @@
   color: $white-quarter;
   margin: auto 0;
   padding-left: 8px;
+}
+
+//main div in PageHeader react component
+#mainHeader {
+  z-index: 6000;
+  height: 64px;
+}
+
+#mainTitle {
+  padding-top: 0px;
+  font-size: 20px;
+  margin: auto;
+
 }
