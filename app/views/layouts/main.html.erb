@@ -33,7 +33,7 @@
   <div class="MainContainer">
 
     <div class="MainContainer-content">
-      <%= react_component('PageHeader', header: @header, disableSkrollableHeader: @disable_skrollable_header, prerender: true) %>
+      <%= react_component('PageHeader', header: @header, disableSkrollableHeader: (!@disable_skrollable_header.nil? || false), prerender: true) %>
       <%= yield %>
     </div>
   </div>
