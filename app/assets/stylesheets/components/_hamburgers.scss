@@ -1,5 +1,4 @@
 //this is coupled with _menu.scss
-//@media (max-width: $small-screen) {
   label[for="menu-trigger"] {
     position: fixed;
     left: 24px;
@@ -28,15 +27,3 @@
   .Hamburger-icon {
     color: $white-quarter;
   }
-//}
-
-// @media (min-width: $small-screen+1) {
-//   label[for="menu-trigger"] {
-//     display: none;
-//   }
-//   .Hamburger-trigger {
-//     position: fixed;
-//     bottom: 0;
-//     clip: rect(0,0,0,0);
-//   }
-// }

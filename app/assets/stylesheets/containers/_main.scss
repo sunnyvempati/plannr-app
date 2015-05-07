@@ -6,7 +6,6 @@
 .MainContainer {
   height: 100%;
   width: 100%;
-//  position: relative;
   top: 0;
   bottom: 100%;
   background-color: $body-bg;
@@ -17,7 +16,6 @@
   position: fixed;
   top: 0;
   width: 100%;
-  //height: $page-header-height;
   background-color: $header-bg;
   display: flex;
   flex-flow: row wrap;
