@@ -8,7 +8,7 @@ var PageHeader = React.createClass({
     disableSkrollableHeader: React.PropTypes.bool
   },
   componentDidMount: function() {
-    if (this.props.disableSkrollableHeader === false) {
+    if (!this.props.disableSkrollableHeader) {
       this.enableSkrollrHeader();
     }
   },
