@@ -4,10 +4,11 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
+    @events = sort_params ? Event.order("#{sort_params[:entity]} #{sort_params[:order]}") : Event.order("name asc")
     @header = 'Events'
     respond_to do |format|
       format.html
-      format.json { render json: Event.all, each_serializer: EventSerializer }
+      format.json { render json: @events, each_serializer: EventSerializer }
     end
   end
 
@@ -60,6 +61,10 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description).merge(owner: current_user)
+  end
+
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
   end
 
   def search_params

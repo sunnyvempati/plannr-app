@@ -1,8 +1,7 @@
 var EventsTable = React.createClass({
   getInitialState: function() {
     return {
-      events: [],
-      showSortMenu: false
+      events: []
     };
   },
   componentDidMount: function() {
@@ -49,23 +48,18 @@ var EventsTable = React.createClass({
       this.setState({events: result.events});
     }.bind(this));
   },
-  sortMenu: function() {
-    var show = this.state.showSortMenu;
-    var cx = React.addons.classSet;
-    var sortMenuClasses = cx({
-      'TableMenu': true,
-      'u-hidden': !show
-    });
-    return (
-      <div className={sortMenuClasses}>
-        <div className="TableMenu-header">Sort By:</div>
-        <div className="TableMenu-item">Name</div>
-        <div className="TableMenu-item">Start Date</div>
-      </div>
-    )
+  // entity to sort by
+  // asc is a boolean value giving us the order
+  sortBy: function(entity, order) {
+    $.get('events.json', {sort: {entity: entity, order: order}}, function(result) {
+      this.setState({events: result.events});
+    }.bind(this));
   },
-  toggleSort: function() {
-    this.setState({showSortMenu: !this.state.showSortMenu});
+  sortEntities: function() {
+    return [
+      {entity: "name", display: "Name"},
+      {entity: "start_date", display: "Start Date"}
+    ]
   },
   render: function() {
     return (
@@ -73,25 +67,21 @@ var EventsTable = React.createClass({
         <div className="EventsTable-actions">
           <div className="Actions-icons">
             <div className="Actions-search">
-              <input type="checkbox" id="search-trigger" className="SearchToggle u-checkboxHidden">
-              </input>
-              <label htmlFor="search-trigger">
-                <i className="fa fa-search tableIcon u-clickable"></i>
-              </label>
+              <i className="fa fa-search tableIcon u-clickable"></i>
               <input placeholder="Search events.."
                      className="SearchInput"
                      onChange={this.search} />
             </div>
-            <div className="Actions-sort"
-                 onClick={this.toggleSort}>
-              <i className="fa fa-sort tableIcon u-clickable"></i>
-              {this.sortMenu()}
+            <div className="Actions-sort">
+              <SortMenu entities={this.sortEntities()}
+                        sort={this.sortBy}
+                        defaultEntity="name" />
             </div>
             <div>
-              <i className="fa fa-tag tableIcon u-clickable"></i>
+              <i className="fa fa-tag tableIcon"></i>
             </div>
             <div>
-              <i className="fa fa-folder tableIcon u-clickable"></i>
+              <i className="fa fa-folder tableIcon"></i>
             </div>
             <div>
               <i className="fa fa-trash tableIcon u-clickable"></i>
