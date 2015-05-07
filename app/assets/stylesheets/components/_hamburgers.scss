@@ -1,42 +1,29 @@
 //this is coupled with _menu.scss
-//@media (max-width: $small-screen) {
-  label[for="menu-trigger"] {
-    position: fixed;
-    left: 24px;
-    top: 20px;
-    z-index: $navigation-menu-z-index;
-    cursor: pointer;
-    display: block;
-  }
-  .Menu .MenuContainer {
-    transition: left 0.2s;
-  }
-  .Hamburger-trigger:checked ~ .Menu .MenuContainer {
-    left: 0;
-    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.4);
-  }
+label[for="menu-trigger"] {
+  position: fixed;
+  left: 24px;
+  top: 20px;
+  z-index: $navigation-menu-z-index;
+  cursor: pointer;
+  display: block;
+}
+.Menu .MenuContainer {
+  transition: left 0.2s;
+}
+.Hamburger-trigger:checked ~ .Menu .MenuContainer {
+  left: 0;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.4);
+}
 
-  .Hamburger-trigger:checked ~ .MainContainer {
-    pointer-events: none;
-  }
+.Hamburger-trigger:checked ~ .MainContainer {
+  pointer-events: none;
+}
 
-  .Hamburger-trigger:checked ~ .Mask {
-    visibility: visible;
-    bottom: 0;
-  }
+.Hamburger-trigger:checked ~ .Mask {
+  visibility: visible;
+  bottom: 0;
+}
 
-  .Hamburger-icon {
-    color: $white-quarter;
-  }
-//}
-
-// @media (min-width: $small-screen+1) {
-//   label[for="menu-trigger"] {
-//     display: none;
-//   }
-//   .Hamburger-trigger {
-//     position: fixed;
-//     bottom: 0;
-//     clip: rect(0,0,0,0);
-//   }
-// }
+.Hamburger-icon {
+  color: $white-quarter;
+}

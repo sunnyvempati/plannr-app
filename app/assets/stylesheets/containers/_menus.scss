@@ -1,17 +1,3 @@
-//this is coupled with _hanmburger.scss
-//@media (max-width: $small-screen) {
-  // .MenuContainer {
-  //   left: -($grid-increment * 4);
-  //   background-color: $body-bg;
-  // }
-// }
-
-// @media (min-width: $small-screen+1) {
-//   .MenuContainer {
-//     left: 0;
-//   }
-// }
-
 .MenuContainer {
   left: -($grid-increment * 4);
   width: $grid-increment * 4;
