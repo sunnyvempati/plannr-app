@@ -1,3 +1,4 @@
+//z-index: 2000-2999
 @media (max-width: $small-screen) {
   .MainContainer, .MainContainer-contentHeader {
     left: 0;
@@ -14,7 +15,7 @@
 }
 
 .MainContainer-content {
-  margin-top: $page-header-height;
+  padding-top: 64px;
   height: 100%;
 }
 
@@ -25,14 +26,14 @@
   top: 0;
   bottom: 100%;
   background-color: $body-bg;
-  z-index: 50;
+  z-index: 2000;
 }
 
 .MainContainer-contentHeader {
   position: fixed;
   top: 0;
   width: 100%;
-  height: $page-header-height;
+  //height: $page-header-height;
   background-color: $header-bg;
   display: flex;
   flex-flow: row wrap;
