@@ -1,9 +1,10 @@
 .Tile {
   display: flex;
   flex-flow: column nowrap;
-  min-width: 400px;
+  min-width: 340px;
   margin: $size-increment*2 $size-increment*2 0 0;
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  z-index: $tile-z-index;
 }
 
 .Tile-header {
@@ -30,8 +31,7 @@
 
 .TileContent-count {
   @include font($display-font, normal, 0);
-  padding-top: $size-increment * 2;
-}
+ }
 
 .TileContent-quickAdd {
   width: 300px;
