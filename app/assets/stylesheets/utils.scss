@@ -26,3 +26,9 @@
 .u-dim {
   opacity: 0.5;
 }
+
+.u-checkboxHidden {
+  position: fixed;
+  bottom: 0;
+  clip: rect(0,0,0,0);
+}

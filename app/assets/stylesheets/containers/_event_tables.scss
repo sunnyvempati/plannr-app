@@ -4,18 +4,21 @@
 
 .EventsTable-actions {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  padding: $size-increment*4 $size-increment * 6;
+  padding: $size-increment*5 $size-increment*7;
   display: flex;
 }
 
 .Actions-search {
   display: flex;
-  align-items: center;
 }
 
 .Actions-searchInput {
   padding-left: 32px;
   width: 500px;
+}
+
+.Actions-icons {
+  display: flex;
 }
 
 .EventsTable-row {
@@ -58,4 +61,14 @@
   @include font($title-font, normal, 0);
   display: flex;
   justify-content: flex-end;
+}
+
+.SearchInput {
+  @extend .FormInput-field;
+  transition: width 140ms;
+  width: 0;
+}
+
+.SearchToggle:checked ~ .SearchInput {
+  width: 300px;
 }

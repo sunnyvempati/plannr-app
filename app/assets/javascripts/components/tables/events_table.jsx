@@ -52,13 +52,24 @@ var EventsTable = React.createClass({
     return (
       <div className="EventsTableContainer">
         <div className="EventsTable-actions">
-          <div className="Actions-search">
-            <i className="fa fa-search u-dim"></i>
-            <div className="Actions-searchInput">
+          <div className="Actions-icons">
+            <div className="Actions-search">
+              <input type="checkbox" id="search-trigger" className="SearchToggle u-checkboxHidden">
+              </input>
+              <label htmlFor="search-trigger">
+                <i className="fa fa-search tableIcon u-clickable"></i>
+              </label>
               <input placeholder="Search events.."
                      className="SearchInput"
                      onChange={this.search} />
             </div>
+            <div className="Actions-sort">
+              <i className="fa fa-sort tableIcon u-clickable"></i>
+            </div>
+
+            <i className="fa fa-tag tableIcon u-clickable"></i>
+            <i className="fa fa-folder tableIcon u-clickable"></i>
+            <i className="fa fa-trash tableIcon u-clickable"></i>
           </div>
         </div>
         <Table

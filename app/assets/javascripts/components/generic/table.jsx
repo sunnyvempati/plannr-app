@@ -44,7 +44,7 @@ var Table = React.createClass({
     var message = noRows ? "No items" : "";
     return (
       <div>
-        <span><h2>{message}</h2></span>
+        <span>{message}</span>
         <div className={tableClass}>
           <div className="TableContainer-actionBtns">
             {this.props.buttonList}
