@@ -1,9 +1,14 @@
 var PageHeader = React.createClass({
+  getDefaultProps: function() {
+    return {
+      disableSkrollableHeader: false
+    };
+  },
   propTypes: {
     disableSkrollableHeader: React.PropTypes.bool
   },
   componentDidMount: function() {
-    if (typeof(this.props.disableSkrollableHeader) === 'undefined' || this.props.disableSkrollableHeader === null || this.props.disableSkrollableHeader === false) {
+    if (!this.props.disableSkrollableHeader) {
       this.enableSkrollrHeader();
     }
   },
@@ -24,7 +29,7 @@ var PageHeader = React.createClass({
   render: function() {
     return (
       <div id="mainHeader"
-           className="MainContainer-contentHeader">
+           className="PageHeader">
         <div id="mainTitle"
              className="PageHeader-title">
           {this.props.header}
