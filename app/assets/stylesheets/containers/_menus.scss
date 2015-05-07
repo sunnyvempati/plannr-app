@@ -1,3 +1,4 @@
+//this is coupled with _hanmburger.scss
 @media (max-width: $small-screen) {
   .MenuContainer {
     left: -($grid-increment * 4);
@@ -16,6 +17,6 @@
   height: 100%;
   position: fixed;
   top: 0;
-  z-index: 500;
+  z-index: $navigation-menu-z-index;
   background-color: $body-bg;
 }
