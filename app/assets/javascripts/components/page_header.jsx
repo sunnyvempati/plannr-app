@@ -29,7 +29,7 @@ var PageHeader = React.createClass({
   render: function() {
     return (
       <div id="mainHeader"
-           className="MainContainer-contentHeader">
+           className="PageHeader">
         <div id="mainTitle"
              className="PageHeader-title">
           {this.props.header}

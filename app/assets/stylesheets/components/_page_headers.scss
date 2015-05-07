@@ -12,27 +12,24 @@
   height: 64px;
 }
 
+.PageHeader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $header-bg;
+  display: flex;
+  align-items: center;
+}
+
 .PageHeader-title {
   @include font($display-font, normal, 0);
-  flex: 1;
   color: white;
   padding-left: 80px;
-  padding-top: 80px;
+  font-size: 20px;
 }
 
 .PageHeader-appBarItem {
   color: $white-quarter;
   margin: auto 0;
   padding-left: 8px;
-}
-
-#mainHeader {
-  height: 64px;
-}
-
-#mainTitle {
-  padding-top: 0px;
-  font-size: 20px;
-  margin: auto;
-
 }
