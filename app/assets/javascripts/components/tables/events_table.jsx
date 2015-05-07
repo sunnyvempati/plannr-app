@@ -23,11 +23,13 @@ var EventsTable = React.createClass({
       return(
         <div className="EventsTable-row" key={event.id}>
           <div className="EventsTable-rowHeader">
-            <div className="EventsTable-checkbox">
-              <CheckboxInput onChange={this.checkboxChanged} value={event.id} />
-            </div>
-            <div className="EventsTable-rowName u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
-              {event.name}
+            <div className="EventsTable-rowName">
+              <div className="EventsTable-checkbox">
+                <CheckboxInput onChange={this.checkboxChanged} value={event.id} />
+              </div>
+              <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
+                {event.name}
+              </div>
             </div>
             <div className="EventsTable-rowDaysTill">
               {event.days_till + " days left"}
