@@ -19,6 +19,7 @@
   background-color: $header-bg;
   display: flex;
   align-items: center;
+  z-index: $page-header-z-index;
 }
 
 .PageHeader-title {
