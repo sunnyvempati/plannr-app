@@ -1,29 +1,29 @@
 //this is coupled with _menu.scss
-  label[for="menu-trigger"] {
-    position: fixed;
-    left: 24px;
-    top: 20px;
-    z-index: $navigation-menu-z-index;
-    cursor: pointer;
-    display: block;
-  }
-  .Menu .MenuContainer {
-    transition: left 0.2s;
-  }
-  .Hamburger-trigger:checked ~ .Menu .MenuContainer {
-    left: 0;
-    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.4);
-  }
+label[for="menu-trigger"] {
+  position: fixed;
+  left: 24px;
+  top: 20px;
+  z-index: $navigation-menu-z-index;
+  cursor: pointer;
+  display: block;
+}
+.Menu .MenuContainer {
+  transition: left 0.2s;
+}
+.Hamburger-trigger:checked ~ .Menu .MenuContainer {
+  left: 0;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.4);
+}
 
-  .Hamburger-trigger:checked ~ .MainContainer {
-    pointer-events: none;
-  }
+.Hamburger-trigger:checked ~ .MainContainer {
+  pointer-events: none;
+}
 
-  .Hamburger-trigger:checked ~ .Mask {
-    visibility: visible;
-    bottom: 0;
-  }
+.Hamburger-trigger:checked ~ .Mask {
+  visibility: visible;
+  bottom: 0;
+}
 
-  .Hamburger-icon {
-    color: $white-quarter;
-  }
+.Hamburger-icon {
+  color: $white-quarter;
+}
