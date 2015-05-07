@@ -1,11 +1,10 @@
-//menu z-index: 8000-8900
 //this is coupled with _menu.scss
 @media (max-width: $small-screen) {
   label[for="menu-trigger"] {
     position: fixed;
     left: 24px;
     top: 20px;
-    z-index: 8000;
+    z-index: $navigation-menu-z-index;
     cursor: pointer;
     display: block;
   }

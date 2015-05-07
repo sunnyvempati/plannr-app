@@ -1,4 +1,3 @@
-//z-index: 6000-6900
 @media (min-width: $small-screen+1) {
   .PageHeader-appBar {
     margin-right: ($grid-increment*4);
@@ -29,7 +28,7 @@
 
 //main div in PageHeader react component
 #mainHeader {
-  z-index: 6000;
+  z-index: $page-header-z-index;
   height: 64px;
 }
 
