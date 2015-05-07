@@ -33,6 +33,7 @@
   >* {
     flex: 1;
   }
+
 }
 
 .Autocomplete-edit {
@@ -40,4 +41,8 @@
   justify-content: flex-end;
   font-size: em(8px);
   opacity: 0.5;
+}
+
+.Button--autocomplete {
+
 }
