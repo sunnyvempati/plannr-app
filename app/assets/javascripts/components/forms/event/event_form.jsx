@@ -24,8 +24,8 @@ var EventForm = React.createClass({
       }
     };
   },
-  changeUrl: function (event) {
-    location.href = "/events/" + event.id + "/";
+  changeUrl: function (result) {
+    location.href = "/events/" + result.event.id + "/";
   },
   componentWillMount: function () {
     // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
@@ -112,6 +112,7 @@ var EventForm = React.createClass({
           <TextAreaInput
             name="description"
             form={id}
+            value={this.props.model.description}
             className="TextAreaInput"
             label="Description"
             placeholder="What else do you need to know?"
