@@ -25,6 +25,14 @@ var Event = React.createClass({
       'u-flexGrow-4': true,
       'u-hidden': !this.props.editable
     });
+    var client = this.props.client;
+    var clientName = "", clientOrg = "", clientEmail = "", clientPhone = "";
+    if (!!client) {
+      clientName = client.name;
+      clientOrg = client.organization;
+      clientEmail = client.email;
+      clientPhone = client.phone;
+    }
     return (
       <div className="EventContainer">
         <div className="Event-info u-flexGrow-2">
@@ -32,10 +40,10 @@ var Event = React.createClass({
             Client
           </div>
           <div className="Info-content">
-            <div className="u-bold">{this.props.client.name}</div>
-            {this.props.client.organization}<br />
-            {this.props.client.email}<br />
-            {this.props.client.phone}
+            <div className="u-bold">{clientName}</div>
+            {clientOrg}<br />
+            {clientEmail}<br />
+            {clientPhone}
           </div>
         </div>
         <div className="Event-info u-flexGrow-2">
