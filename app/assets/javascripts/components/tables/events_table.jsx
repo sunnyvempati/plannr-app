@@ -1,8 +1,8 @@
 var EventsTable = React.createClass({
+  mixins: [TableCheckbox],
   getInitialState: function() {
     return {
-      events: [],
-      selectedEvents: []
+      events: []
     };
   },
   componentDidMount: function() {
@@ -16,17 +16,15 @@ var EventsTable = React.createClass({
   goToEvent: function(id) {
     location.href = "/events/" + id + "/";
   },
-  checkboxChanged: function(checked, value) {
-
-  },
   getCustomRows: function() {
     return this.state.events.map(function(event) {
+      var checked = this.state.checkedItems.indexOf(event.id) > -1;
       return(
         <div className="EventsTable-row" key={event.id}>
           <div className="EventsTable-rowHeader">
             <div className="EventsTable-rowName">
               <div className="EventsTable-checkbox">
-                <CheckboxInput onChange={this.checkboxChanged} value={event.id} />
+                <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} />
               </div>
               <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
                 {event.name}
@@ -62,6 +60,12 @@ var EventsTable = React.createClass({
       {entity: "start_date", display: "Start Date"}
     ]
   },
+  deleteEvents: function() {
+    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
+    $.post("/destroy_events", destroyOpts, function(result) {
+      this.setState({events: this.spliceResults(this.state.events), checkedItems: []});
+    }.bind(this));
+  },
   render: function() {
     return (
       <div className="EventsTableContainer">
@@ -84,7 +88,7 @@ var EventsTable = React.createClass({
             <div>
               <i className="fa fa-folder tableIcon"></i>
             </div>
-            <div>
+            <div onClick={this.deleteEvents}>
               <i className="fa fa-trash tableIcon u-clickable"></i>
             </div>
           </div>

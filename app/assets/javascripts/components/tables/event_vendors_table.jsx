@@ -23,7 +23,7 @@ var EventVendorsTable = React.createClass({
   DeleteVendorClick: function() {
     var destroyOpts = {destroy_opts: {event_vendor_ids: this.state.checkedItems}};
     $.post("vendors/mass_delete",destroyOpts, function(success_result) {
-      var newData = this.spliceResults();
+      var newData = this.spliceResults(this.props.data);
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);

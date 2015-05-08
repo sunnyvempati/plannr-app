@@ -53,6 +53,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def mass_delete
+    ids = mass_delete_params[:ids]
+    Event.delete_all(id: ids) if ids
+    render_success
+  end
+
   private
 
   def set_event
@@ -69,5 +75,9 @@ class EventsController < ApplicationController
 
   def search_params
     params.require(:search).permit(:text)
+  end
+
+  def mass_delete_params
+    params.require(:destroy_opts).permit(ids: [])
   end
 end

@@ -23,8 +23,8 @@ var EventContactsTable = React.createClass({
   },
   DeleteContactClick: function() {
     var destroyOpts = {destroy_opts: {event_contact_ids: this.state.checkedItems}};
-    $.post("contacts/mass_delete",destroyOpts, function(success_result) {
-      var newData = this.spliceResults();
+    $.post("contacts/mass_delete", destroyOpts, function(success_result) {
+      var newData = this.spliceResults(this.props.data);
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);

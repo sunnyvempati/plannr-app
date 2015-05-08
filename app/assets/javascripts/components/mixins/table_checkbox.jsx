@@ -20,9 +20,9 @@ var TableCheckbox = {
       checkedItems: checkedItems
     });
   },
-  spliceResults: function() {
+  spliceResults: function(data) {
     var deletedItems = this.state.checkedItems;
-    return $.map(this.props.data, function(item, index) {
+    return $.map(data, function(item, index) {
       if (deletedItems.indexOf(item.id) === -1) {
         return item;
       }

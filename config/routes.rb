@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   post '/contacts/quick_create', to: 'contacts#quick_create'
 
   # TODO: specify Event routes
+  post 'destroy_events', to: 'events#mass_delete'
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 end
