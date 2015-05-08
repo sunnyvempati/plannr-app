@@ -66,6 +66,7 @@ var TaskForm = React.createClass({
         assigned_to: model.assigned_to_id
       };
     }
+    var id = 'task_form';
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
@@ -77,7 +78,7 @@ var TaskForm = React.createClass({
               secondaryButtonVisible={this.props.secondaryButtonVisible}
               secondaryButtonHref={this.props.secondaryButtonHref}
               showButtonList={this.props.showButtonList}
-              id='task_form'>
+              id={id}>
 
           <FormInput
             id='task_name'
@@ -89,15 +90,6 @@ var TaskForm = React.createClass({
             placeholder='What is the name of your task?'
             disabled={this.props.disableForm}
             required />
-          <FormInput
-            id='task_description'
-            name='description'
-            autofocus='off'
-            type='text'
-            label='Description'
-            value={task.description}
-            placeholder='How would you describe this task?'
-            disabled={this.props.disableForm} />
           <FormInput
             id='task_deadline'
             name='deadline'
@@ -123,6 +115,13 @@ var TaskForm = React.createClass({
             value={task.assigned_to}
             id='task_assigned_to'
             label='Assign to' />
+          <TextAreaInput
+            name="description"
+            form={id}
+            className="TextAreaInput"
+            label="Description"
+            disabled={this.props.disableForm}
+            placeholder="How would you describe this task?" />
         </Form>
       </div>
     );
