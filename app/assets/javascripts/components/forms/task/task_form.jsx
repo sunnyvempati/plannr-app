@@ -79,7 +79,6 @@ var TaskForm = React.createClass({
               secondaryButtonHref={this.props.secondaryButtonHref}
               showButtonList={this.props.showButtonList}
               id={id}>
-
           <FormInput
             id='task_name'
             name='name'
@@ -118,6 +117,7 @@ var TaskForm = React.createClass({
           <TextAreaInput
             name="description"
             form={id}
+            value={task.description}
             className="TextAreaInput"
             label="Description"
             disabled={this.props.disableForm}
