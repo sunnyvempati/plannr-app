@@ -42,8 +42,7 @@ var Autocomplete = React.createClass({
   },
   getResults: function() {
     var term = this.state.term;
-    var cx = React.addons.classSet;
-    var resultsClasses = cx({
+    var resultsClasses = classNames({
       'Autocomplete-results': true,
       'hidden': !this.state.open
     });

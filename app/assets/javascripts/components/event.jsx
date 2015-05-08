@@ -19,8 +19,7 @@ var Event = React.createClass({
   },
   render: function () {
     var event = this.props.model;
-    var cx = React.addons.classSet;
-    var editClasses = cx({
+    var editClasses = classNames({
       'Event-edit': true,
       'u-flexGrow-4': true,
       'u-hidden': !this.props.editable

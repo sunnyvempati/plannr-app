@@ -16,6 +16,7 @@
 //= require react
 //= require react_ujs
 //= require react-router
+//= require classnames
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
 //= require components

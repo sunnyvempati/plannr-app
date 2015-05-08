@@ -53,8 +53,7 @@ var ClientInput = React.createClass({
   },
   clientItem: function(item, term) {
     var itemName = this.formatMatchedCharacters(item.name, term);
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
+    var itemClasses = classNames({
       'Autocomplete-resultsItem': true,
       'u-italics': item.id == -1
     });

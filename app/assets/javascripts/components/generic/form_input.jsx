@@ -14,12 +14,11 @@ var FormInput = React.createClass({
     this.setValue(event.currentTarget.value);
   },
   render: function() {
-    var cx = React.addons.classSet;
-    var input_classes = cx({
+    var input_classes = classNames({
       'FormInput-field': true,
       'is-invalid': !this.isValid()
     });
-    var form_input_classes = cx({
+    var form_input_classes = classNames({
       'FormInput': true,
       'is-hidden': this.props.type == 'hidden'
     });

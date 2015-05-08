@@ -8,12 +8,11 @@ var FormSelectInput = React.createClass({
   },
   render: function () {
     //TODO: clean up React JS console warnings
-    var cx = React.addons.classSet;
-    var input_classes = cx({
+    var input_classes = classNames({
       'FormInput-field': true,
       'is-invalid': !this.isValid()
     });
-    var form_input_classes = cx({
+    var form_input_classes = classNames({
       'FormInput': true,
       'is-hidden': this.props.type == 'hidden'
     });

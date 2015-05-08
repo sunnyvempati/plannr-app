@@ -1,12 +1,11 @@
 var Avatar = React.createClass({
   render: function() {
-    given_class = this.props.additional_classes;
+    var given_class = this.props.additional_classes;
+    var classes = {};
 
-    var cx = React.addons.classSet;
-    classes = {};
     classes['Avatar'] = true;
     classes[given_class] = given_class;
-    var avatar_class = cx(classes);
+    var avatar_class = classNames(classes);
 
     return (
       <div className={avatar_class}>

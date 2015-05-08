@@ -5,8 +5,7 @@ var ButtonSecondary = React.createClass({
     buttonText: React.PropTypes.string
   },
   render: function() {
-    var cx = React.addons.classSet;
-    var ButtonSecondaryClasses = cx({
+    var ButtonSecondaryClasses = classNames({
       'Button': true,
       'Button--raised': true,
       'Button--secondary': true,
