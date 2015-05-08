@@ -16,8 +16,6 @@ class Vendor < ActiveRecord::Base
     .limit(5)
   }
 
-
-
   # TODO: case sensitivity in name
   scope :name_like, ->(name) { where('lower(vendors.name) LIKE ? ', name) }
 
