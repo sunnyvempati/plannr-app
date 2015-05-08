@@ -39,12 +39,16 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new event_params
-    render_entity @event
+    render_entity @event do
+      EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id)
+    end
   end
 
   def update
     @event.assign_attributes event_params
-    render_entity @event
+    render_entity @event do
+      EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id)
+    end
   end
 
   def destroy
