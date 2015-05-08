@@ -1,7 +1,8 @@
 var EventsTable = React.createClass({
   getInitialState: function() {
     return {
-      events: []
+      events: [],
+      selectedEvents: []
     };
   },
   componentDidMount: function() {
@@ -15,8 +16,8 @@ var EventsTable = React.createClass({
   goToEvent: function(id) {
     location.href = "/events/" + id + "/";
   },
-  checkboxChanged: function() {
-    console.log("changed");
+  checkboxChanged: function(checked, value) {
+
   },
   getCustomRows: function() {
     return this.state.events.map(function(event) {

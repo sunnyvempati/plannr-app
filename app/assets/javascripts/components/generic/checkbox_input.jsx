@@ -4,9 +4,13 @@ var CheckboxInput = React.createClass({
       checked: false
     };
   },
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({checked: nextProps.checked});
+  },
   checkChanged: function() {
-    this.setState({checked: !this.state.checked});
-    this.props.onChange(this.state.checked);
+    var checked = !this.state.checked;
+    this.setState({checked: checked});
+    this.props.onChange(checked, this.props.value);
   },
   render: function() {
     var cx = React.addons.classSet;
