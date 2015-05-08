@@ -35,13 +35,13 @@ var CompanyUserTable = React.createClass({
     this.setState({results: results, checkedItems: []});
     return results;
   },
-  rowChanged: function(e) {
+  rowChanged: function(checked, value) {
     var checkedItems = this.state.checkedItems;
-    if (e.target.checked) {
-      checkedItems.push(e.target.value);
+    if (checked) {
+      checkedItems.push(value);
     }
     else {
-      index = checkedItems.indexOf(e.target.value);
+      index = checkedItems.indexOf(value);
       checkedItems.splice(index, 1);
     }
     this.setState({

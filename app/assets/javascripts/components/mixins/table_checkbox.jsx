@@ -7,22 +7,22 @@ var TableCheckbox = {
   componentWillReceiveProps: function() {
     this.setState({checkedItems: []});
   },
-  rowChanged: function(e) {
+  rowChanged: function(checked, value) {
     var checkedItems = this.state.checkedItems;
-    if (e.target.checked) {
-      checkedItems.push(e.target.value);
+    if (checked) {
+      checkedItems.push(value);
     }
     else {
-      index = checkedItems.indexOf(e.target.value);
+      index = checkedItems.indexOf(value);
       checkedItems.splice(index, 1);
     }
     this.setState({
       checkedItems: checkedItems
     });
   },
-  spliceResults: function() {
+  spliceResults: function(data) {
     var deletedItems = this.state.checkedItems;
-    return $.map(this.props.data, function(item, index) {
+    return $.map(data, function(item, index) {
       if (deletedItems.indexOf(item.id) === -1) {
         return item;
       }

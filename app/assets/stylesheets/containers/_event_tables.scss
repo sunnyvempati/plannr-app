@@ -1,0 +1,71 @@
+.EventsTable-actions {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: $size-increment*5 $size-increment*7;
+  display: flex;
+  align-items: center;
+}
+
+.EventsTable-table {
+  padding-right: $size-increment*15;
+}
+
+.Actions-search {
+  display: flex;
+  align-items: center;
+  padding-right: $size-increment*2;
+}
+
+.Actions-searchInput {
+  padding-left: 32px;
+  width: 500px;
+}
+
+.EventsTable-row {
+  padding-top: $size-increment * 4;
+  margin-left: $size-increment * 6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.EventsTable-rowContent {
+  padding: $size-increment*2 $size-increment*2 $size-increment*2 $size-increment*7+2;
+}
+
+.EventsTable-rowHeader {
+  display: flex;
+  align-items: center;
+  >* {
+    flex: 1;
+  }
+}
+
+.EventsTable-rowName {
+  display: flex;
+  align-items: center;
+  >* {
+    align-self: center;
+  }
+}
+
+.EventsTable-checkbox {
+  padding-right: $size-increment * 5;
+}
+
+.EventsTable-name {
+  @include font($headline-font, 500, 0);
+  color: $black-half;
+}
+
+.EventsTable-rowDaysTill {
+  color: $black-quarter;
+  @include font($title-font, normal, 0);
+  display: flex;
+  justify-content: flex-end;
+  padding-right: $size-increment * 4;
+}
+
+.EventsTable-createEvent {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  @include svg($create-event-url, 56px);
+}

@@ -1,6 +1,6 @@
 .FormInput {
   width: 100%;
-  height: $input-height;
+  height: $input-height-with-label;
   padding-top: $input-ptop;
   padding-bottom: $input-pbottom;
   &.is-hidden {
@@ -36,6 +36,11 @@
 .FormInput-fieldErrorMessage {
   color: red;
   font-size: em(12);
+}
+
+.SearchInput {
+  @extend .FormInput-field;
+  width: 400px;
 }
 
 form label {

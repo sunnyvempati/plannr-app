@@ -6,7 +6,6 @@ var EventForm = React.createClass({
     routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
-
     disableForm: React.PropTypes.bool,
     model: React.PropTypes.object,
     secondaryButtonHref: React.PropTypes.string

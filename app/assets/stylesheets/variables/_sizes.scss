@@ -21,7 +21,9 @@ $grid-increment: $size-increment * 8;
 $input-ptop: $size-increment * 4;
 $input-pbottom: $size-increment;
 $input-text-height: ($subheader-font + $caption-font)*1.4;
-$input-height: $input-ptop + $input-text-height + $size-increment*3;
+$input-height-with-label: $input-ptop + $input-text-height + $size-increment*3;
+
+$input-height: $subheader-font*1.4;
 
 $input-field-pbottom: $size-increment;
 

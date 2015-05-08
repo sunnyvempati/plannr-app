@@ -1,6 +1,7 @@
 .FormContainer {
   width: $form-container-width;
   margin: auto;
+  padding-bottom: $size-increment * 10;
   &--leftAligned {
     @extend .FormContainer;
     margin: 0;

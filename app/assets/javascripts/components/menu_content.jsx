@@ -41,7 +41,7 @@ var MenuContent = React.createClass({
            href="/logout"
            className="MenuList-item">
           <div className="MenuList-icon">
-            <i className="fa fa-sign-out" />
+            <i className="fa fa-sign-out MenuIcon" />
           </div>
           <div className="MenuList-text">
             Sign Out

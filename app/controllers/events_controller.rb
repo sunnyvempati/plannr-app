@@ -4,11 +4,11 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    @events = sort_params ? Event.order("#{sort_params[:entity]} #{sort_params[:order]}") : Event.order("name asc")
     @header = 'Events'
     respond_to do |format|
       format.html
-      format.json { render json: Event.all, each_serializer: EventSelectInputSerializer }
+      format.json { render json: @events, each_serializer: EventSerializer }
     end
   end
 
@@ -22,6 +22,10 @@ class EventsController < ApplicationController
       # TOOD: message for user notifying of missing @event and redirect
       redirect_to :action =>"index"
     end
+  end
+
+  def search
+    render json: Event.search(search_params[:text]), each_serializer: EventSerializer
   end
 
   def new
@@ -51,6 +55,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def mass_delete
+    ids = mass_delete_params[:ids]
+    Event.delete_all(id: ids) if ids
+    render_success
+  end
+
   private
 
   def set_event
@@ -59,5 +69,17 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description).merge(owner: current_user)
+  end
+
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
+  end
+
+  def search_params
+    params.require(:search).permit(:text)
+  end
+
+  def mass_delete_params
+    params.require(:destroy_opts).permit(ids: [])
   end
 end

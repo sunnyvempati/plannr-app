@@ -1,0 +1,40 @@
+.SortMenu {
+  background-color: $body-bg;
+  position: absolute;
+  z-index: 10000;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  width: 300px;
+}
+
+.SortMenu-item,
+.SortMenu-header {
+  padding: 8px 8px 8px 24px;
+}
+
+.SortMenu-item {
+  color: $black-three-fourths;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: $black-quarter;
+    cursor: pointer;
+  }
+  >* {
+    flex: 1;
+  }
+}
+
+.SortMenu-order {
+  font-size: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 $size-increment;
+  opacity: 0.5;
+  color: $black-three-fourths;
+}
+
+.SortMenu-header {
+  color: $black-quarter;
+  padding-top: $size-increment*2;
+}

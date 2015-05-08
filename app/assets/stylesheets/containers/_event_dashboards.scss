@@ -6,3 +6,10 @@
 .EventDashboard-router {
   background-color: $event-router-bg;
 }
+
+.EventDashboard-event {
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  position: relative;
+  padding: $size-increment*3 $size-increment*8 $size-increment*4 $size-increment*11;
+  height: $size-increment * 17;
+}

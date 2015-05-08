@@ -18,7 +18,7 @@ var ButtonList = React.createClass({
     var cx = React.addons.classSet;
     var containerClasses = cx({
       'ButtonListContainer': true,
-      'is-visible': this.props.showButtonList
+      'u-hidden': !this.props.showButtonList
     });
     return (
       <div className={containerClasses}>

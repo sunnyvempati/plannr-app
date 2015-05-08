@@ -17,6 +17,11 @@ class Event < ActiveRecord::Base
   validates :name, :start_date, presence: true
   validate :dates
 
+  scope :search, ->(term) {
+    wildcard_text = "'%#{term.downcase}%'"
+    where("lower(events.name) LIKE #{wildcard_text}")
+  }
+
   def self.header
     'Events'
   end
