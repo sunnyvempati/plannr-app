@@ -60,6 +60,7 @@
   @include font($title-font, normal, 0);
   display: flex;
   justify-content: flex-end;
+  padding-right: $size-increment * 4;
 }
 
 .EventsTable-createEvent {
