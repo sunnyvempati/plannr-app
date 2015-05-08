@@ -11,4 +11,9 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  # best practice. Read more : http://betterspecs.org/#expect
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
 end

@@ -21,3 +21,5 @@
 #ignore secrets
 config/secrets.yml
 .powenv
+
+output.html
