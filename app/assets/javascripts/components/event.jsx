@@ -20,7 +20,7 @@ var Event = React.createClass({
   render: function () {
     var event = this.props.model;
     var cx = React.addons.classSet;
-    var edit_classes = cx({
+    var editClasses = cx({
       'Event-edit': true,
       'u-flexGrow-4': true,
       'u-hidden': !this.props.editable
@@ -70,7 +70,7 @@ var Event = React.createClass({
             {event.budget}
           </div>
         </div>
-        <div className={edit_classes}>
+        <div className={editClasses}>
           <div className="Edit-btn">
             <button className="Button Button--simple" onClick={this.editEvent.bind(this, event.id)}>
               Edit
