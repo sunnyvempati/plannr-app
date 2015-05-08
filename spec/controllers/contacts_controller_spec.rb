@@ -97,7 +97,7 @@ RSpec.describe ContactsController, type: :controller do
 
   end
 
-  describe 'other_contacts' do
+  describe 'search_contacts_not_in_event with no search text' do
     let!(:event1) { FactoryGirl.create(:event) }
     let!(:event2) { FactoryGirl.create(:event) }
 
