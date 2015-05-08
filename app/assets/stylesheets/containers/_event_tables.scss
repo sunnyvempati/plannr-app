@@ -1,14 +1,12 @@
-.EventsTableContainer {
-  width: 90%;
-}
-
 .EventsTable-actions {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: $size-increment*5 $size-increment*7;
   display: flex;
-  &:after {
-    @include svg($create-event-url, 56px);
-  }
+  align-items: center;
+}
+
+.EventsTable-table {
+  padding-right: $size-increment*15;
 }
 
 .Actions-search {
@@ -20,11 +18,6 @@
 .Actions-searchInput {
   padding-left: 32px;
   width: 500px;
-}
-
-.Actions-icons {
-  display: flex;
-  align-items: center;
 }
 
 .EventsTable-row {
@@ -70,4 +63,8 @@
 }
 
 .EventsTable-createEvent {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  @include svg($create-event-url, 56px);
 }

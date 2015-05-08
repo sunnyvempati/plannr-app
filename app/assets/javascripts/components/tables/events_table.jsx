@@ -70,37 +70,35 @@ var EventsTable = React.createClass({
     return (
       <div className="EventsTableContainer">
         <div className="EventsTable-actions">
-          <div className="Actions-icons">
-            <div className="Actions-search">
-              <i className="fa fa-search tableIcon u-clickable"></i>
-              <input placeholder="Search events.."
-                     className="SearchInput"
-                     onChange={this.search} />
-            </div>
-            <div className="Actions-sort">
-              <SortMenu entities={this.sortEntities()}
-                        sort={this.sortBy}
-                        defaultEntity="name" />
-            </div>
-            <div>
-              <i className="fa fa-tag tableIcon"></i>
-            </div>
-            <div>
-              <i className="fa fa-folder tableIcon"></i>
-            </div>
-            <div onClick={this.deleteEvents}>
-              <i className="fa fa-trash tableIcon u-clickable"></i>
-            </div>
+          <div className="Actions-search">
+            <i className="fa fa-search tableIcon"></i>
+            <input placeholder="Search events.."
+                   className="SearchInput"
+                   onChange={this.search} />
           </div>
-          <div className="EventsTable-createEvent">
+          <div className="Actions-sort">
+            <SortMenu entities={this.sortEntities()}
+                      sort={this.sortBy}
+                      defaultEntity="name" />
+          </div>
+          <div>
+            <i className="fa fa-tag tableIcon"></i>
+          </div>
+          <div>
+            <i className="fa fa-folder tableIcon"></i>
+          </div>
+          <div onClick={this.deleteEvents}>
+            <i className="fa fa-trash tableIcon u-clickable"></i>
           </div>
         </div>
-        <Table
-          results={this.props.data}
-          showHeaders={false}
-          useCustomRowComponent={true}
-          customRows={this.getCustomRows()}
-        />
+        <div className="EventsTable-table">
+          <Table
+            results={this.props.data}
+            showHeaders={false}
+            useCustomRowComponent={true}
+            customRows={this.getCustomRows()}
+          />
+        </div>
       </div>
     );
   }
