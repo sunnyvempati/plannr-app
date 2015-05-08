@@ -1,9 +1,8 @@
 FactoryGirl.define do
   factory :vendor do
-    name "MyString"
-location "MyString"
-phone "MyString"
-primary_contact "MyString"
+    name Faker::Company.name
+    location Faker::Address.city
+    phone "343-323-2322"
+    primary_contact Faker::Name.name
   end
-
 end

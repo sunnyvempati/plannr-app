@@ -63,7 +63,7 @@ class ContactsController < ApplicationController
 
   private
 
-  def quick_contact_params
+  def quick_create_params
     params.require(:quick_contact).permit(:event_id, :text)
   end
 

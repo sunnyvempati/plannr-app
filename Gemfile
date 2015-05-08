@@ -42,4 +42,8 @@ group 'development', 'test' do
 	gem 'selenium-webdriver'
 	gem 'rspec-rails', '~> 3.0'
 	gem 'factory_girl_rails'
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  # formats rspec output. Read more: http://jeffkreeftmeijer.com/2010/fuubar-the-instafailing-rspec-progress-bar-formatter/
+  gem 'fuubar'
 end
