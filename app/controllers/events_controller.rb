@@ -41,7 +41,7 @@ class EventsController < ApplicationController
   def update
     @event.assign_attributes event_params
     render_entity @event do
-      if EventContact.where(contact_id: @event.client_id, event_id: @event.id).count == 0
+      if !@event.contacts.exists?(@event.client_id)
         EventContact.create(contact_id: @event.client_id, event_id: @event.id)
       end
     end
