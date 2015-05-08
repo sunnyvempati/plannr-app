@@ -28,6 +28,7 @@ var Autocomplete = React.createClass({
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(e, item, term) {
+    e.preventDefault();
     React.findDOMNode(this.refs.autocompleteInput).value = "";
     this.props.itemSelected(item, term);
     this.setState({term: "", open: false});
