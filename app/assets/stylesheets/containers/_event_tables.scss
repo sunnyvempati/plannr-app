@@ -6,6 +6,9 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   padding: $size-increment*5 $size-increment*7;
   display: flex;
+  &:after {
+    @include svg($create-event-url, 56px);
+  }
 }
 
 .Actions-search {
@@ -66,4 +69,5 @@
   justify-content: flex-end;
 }
 
-
+.EventsTable-createEvent {
+}

@@ -92,6 +92,8 @@ var EventsTable = React.createClass({
               <i className="fa fa-trash tableIcon u-clickable"></i>
             </div>
           </div>
+          <div className="EventsTable-createEvent">
+          </div>
         </div>
         <Table
           results={this.props.data}
