@@ -8,7 +8,7 @@ var EventFormEdit = React.createClass({
       routeVerb = "PUT",
       primaryButtonText = "Update",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = "/events";
+      secondaryButtonHref = action;
 
     return (
       <EventForm
