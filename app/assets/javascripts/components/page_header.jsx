@@ -1,7 +1,21 @@
 var PageHeader = React.createClass({
+  getDefaultProps: function() {
+    return {
+      disableSkrollableHeader: false
+    };
+  },
+  propTypes: {
+    disableSkrollableHeader: React.PropTypes.bool
+  },
   componentDidMount: function() {
+    if (!this.props.disableSkrollableHeader) {
+      this.enableSkrollrHeader();
+    }
+  },
+  enableSkrollrHeader: function () {
     this.setSkrollr($('#mainHeader'), [[0, 'height:168px'], [56, 'height:64px']]);
-    this.setSkrollr($('#mainTitle'), [[56, 'padding-top:24px;font-size:34px;'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
+    this.setSkrollr($('#mainTitle'), [[24, 'padding-top:18px;'], [48, 'padding-top:12px;font-size:34px;'], [56, 'padding-top:6px;'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
+    $('.MainContainer-content').css('padding-top', '168px');
     skrollr.init({forceHeight: false});
   },
   setSkrollr: function($element, data) {
@@ -15,9 +29,9 @@ var PageHeader = React.createClass({
   render: function() {
     return (
       <div id="mainHeader"
-           className="MainContainer-contentHeader">
-        <div className="PageHeader-title"
-             id="mainTitle">
+           className="PageHeader">
+        <div id="mainTitle"
+             className="PageHeader-title">
           {this.props.header}
         </div>
         <div className="PageHeader-appBar">

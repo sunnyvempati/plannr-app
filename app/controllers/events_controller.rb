@@ -15,6 +15,8 @@ class EventsController < ApplicationController
   def show
     if @event
       @header = @event.name
+      # fixed header at top of view
+      @disable_skrollable_header = true
       render :show
     else
       # TOOD: message for user notifying of missing @event and redirect
