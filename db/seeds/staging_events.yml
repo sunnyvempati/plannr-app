@@ -1,0 +1,15 @@
+pool_party:
+  name: X-Men Pool Party
+  start_date: 08/11/2015
+  end_date: 08/12/2015
+  budget: 1000
+  owner: wolverine@xmen.com
+  company: X-Men
+
+cocktail_mixer:
+  name: Mutant Cocktail Mixer
+  start_date: 09/15/2015
+  end_date: 09/18/2015
+  budget: 26000
+  owner: raven@bom.com
+  company: Brotherhood of Mutants

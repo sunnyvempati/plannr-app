@@ -1,0 +1,56 @@
+wolverine:
+  email: wolverine@xmen.com
+  company_admin: true
+  first_name: Logan
+  last_name: Wolf
+  company: X-Men
+
+storm:
+  email: storm@xmen.com
+  company_admin: true
+  first_name: Storm
+  last_name: Chaser
+  company: X-Men
+
+iceman:
+  email: iceman@xmen.com
+  company_admin: false
+  first_name: Iceman
+  last_name: Jones
+  company: X-Men
+
+rogue:
+  email: rogue@xmen.com
+  company_admin: false
+  first_name: Rogue
+  last_name: Chaka
+  company: X-Men
+
+magneto:
+  email: magneto@bom.com
+  company_admin: true
+  first_name: Magneto
+  last_name: Johnson
+  company: Brotherhood of Mutants
+
+raven:
+  email: raven@bom.com
+  company_admin: true
+  first_name: Raven
+  last_name: Symone
+  company: Brotherhood of Mutants
+
+quicksilver:
+  email: quicksilver@bom.com
+  company_admin: false
+  first_name: Quick
+  last_name: Silver
+  company: Brotherhood of Mutants
+
+juggernaut:
+  email: juggernaut@bom.com
+  company_admin: false
+  first_name: Jugger
+  last_name: Naut
+  company: Brotherhood of Mutants
+

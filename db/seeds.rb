@@ -5,12 +5,10 @@ require 'faker'
 
 # yml seed file path: db/seeds/*
 def load_ymls
-  @companies = YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', 'companies.yml')))
-  @users = YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', 'users.yml')))
-  @events = YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', 'events.yml')))
-  @vendors = YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', 'vendors.yml')))
-  @contacts = YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', 'contacts.yml')))
-  @tasks = YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', 'tasks.yml')))
+  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks'].each do |file|
+    filename = ENV["staging"] ? "staging_#{file}.yml" : "#{file}.yml"
+    instance_variable_set("@#{file}", YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', filename))))
+  end
 end
 #----
 
