@@ -20,7 +20,4 @@ module PlannrApp
     config.action_controller.default_url_options = { :trailing_slash => true }
   end
 
-
-  Rack::MiniProfiler.config.position = 'right'
-
 end
