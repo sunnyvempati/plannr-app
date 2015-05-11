@@ -6,7 +6,7 @@ class EventSerializer < ActiveModel::Serializer
   end
 
   def days_till
-    rational_date = object.formatted_start_date - Date.today
+    rational_date = object.start_date - Date.today
     # round to ceiling
     rational_date.ceil
   end

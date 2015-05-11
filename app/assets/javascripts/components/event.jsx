@@ -17,6 +17,9 @@ var Event = React.createClass({
       )
     }, this);
   },
+  changedValue: function(e) {
+    console.log(e);
+  },
   render: function () {
     var event = this.props.model;
     var cx = React.addons.classSet;
