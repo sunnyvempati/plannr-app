@@ -3,7 +3,11 @@ class EventVendorsController < ApplicationController
 
   def create
     event_vendor = EventVendor.new event_id: params[:event_id]
-    event_vendor.vendor_id = event_vendor_params[:vendor_id]
+    if event_vendor_params[:vendor_id]
+      event_vendor.vendor_id = event_vendor_params[:vendor_id]
+    else
+      event_vendor.vendor_id = Vendor.create!(name: event_vendor_params[:name]).id
+    end
     if event_vendor.save
       render json: event_vendor, serializer: EventVendorWithVendorSerializer
     else
@@ -28,7 +32,7 @@ class EventVendorsController < ApplicationController
   end
 
   def event_vendor_params
-    params.require(:event_vendor).permit(:vendor_id)
+    params.require(:event_vendor).permit(:vendor_id, :name)
   end
 
 end
