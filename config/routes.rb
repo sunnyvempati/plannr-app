@@ -51,4 +51,7 @@ Rails.application.routes.draw do
   post 'destroy_events', to: 'events#mass_delete'
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
+
+   # vendors
+  post '/vendors/searchEm', to: 'vendors#search'
 end

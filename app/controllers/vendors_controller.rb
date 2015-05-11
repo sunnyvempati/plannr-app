@@ -10,6 +10,10 @@ class VendorsController < ApplicationController
 
   def show
     @header = "Vendor"
+    respond_to do |format|
+      format.html
+      format.json { render json: @vendor }
+    end
   end
 
   def new
@@ -33,6 +37,11 @@ class VendorsController < ApplicationController
 
   def search_vendors_not_in_event
     render json: Vendor.search_not_in(params[:event_id], search_params[:text])
+  end
+
+  def search
+    search_results = Vendor.search(search_params[:text])
+    render_success search_results
   end
 
   def destroy

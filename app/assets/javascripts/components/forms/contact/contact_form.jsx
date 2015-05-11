@@ -74,6 +74,12 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
             required
           />
+          <VendorInput
+            name='vendor'
+            value={this.props.model.vendor_id}
+            id='client_vendor'
+            label='Vendor'
+          />
           <FormInput
             id='contact_email'
             name='email'
