@@ -79,7 +79,7 @@ var ContactForm = React.createClass({
           <VendorInput
             name='vendor'
             value={contact.vendor_id}
-            id='vendor_id'
+            id='contact_vendor'
             label='Vendor'
           />
           <FormInput

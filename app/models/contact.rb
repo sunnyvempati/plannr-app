@@ -42,8 +42,7 @@ class Contact < ActiveRecord::Base
                       :allow_blank => true
   validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'
 
-  # TODO: fix; not working as I  think it should
-  # validates :vendor_id, :presence => true, :if => :category, inclusion: { in: [VENDOR] }
+  validates_presence_of :vendor, :if => "category==#{VENDOR}"
 
   def self.quick_create(text)
     text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)
