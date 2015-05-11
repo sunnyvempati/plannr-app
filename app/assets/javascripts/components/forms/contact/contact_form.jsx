@@ -22,7 +22,8 @@ var ContactForm = React.createClass({
         'category': inputs.category,
         'phone': inputs.phone,
         'organization': inputs.organization,
-        'description': inputs.description
+        'description': inputs.description,
+        'vendor_id': inputs.vendor
       }
     };
   },
@@ -37,7 +38,8 @@ var ContactForm = React.createClass({
         phone: model.phone,
         organization: model.organization,
         description: model.description,
-        id: model.id
+        id: model.id,
+        vendor_id: model.vendor_id
       };
     }
     return (
@@ -76,8 +78,8 @@ var ContactForm = React.createClass({
           />
           <VendorInput
             name='vendor'
-            value={this.props.model.vendor_id}
-            id='client_vendor'
+            value={contact.vendor_id}
+            id='vendor_id'
             label='Vendor'
           />
           <FormInput
