@@ -4,7 +4,7 @@ var Autocomplete = React.createClass({
       placeholder: "Start typing..."
     };
   },
-  mixins: [boldAutocompleteItem],
+  mixins: [AutocompleteBoldItem],
   getInitialState: function() {
     return {
       open: false,
