@@ -12,7 +12,9 @@ var ClientInput = React.createClass({
     var clientValue = this.getValue();
     if (clientValue) {
       $.get("/contacts/" + clientValue + ".json", function(result) {
-        this.setState({clientSelected: true, clientName: result.contact.name});
+        if (this.isMounted()) {
+          this.setState({clientSelected: true, clientName: result.contact.name});
+        }
       }.bind(this));
     }
   },

@@ -12,7 +12,9 @@ var VendorInput = React.createClass({
     var vendorValue = this.getValue();
     if (vendorValue) {
       $.get("/vendors/" + vendorValue + ".json", function(result) {
-        this.setState({vendorSelected: true, vendorName: result.vendor.name});
+        if (this.isMounted()) {
+          this.setState({vendorSelected: true, vendorName: result.vendor.name});
+        }
       }.bind(this));
     }
   },
