@@ -34,7 +34,6 @@ var ClientInput = React.createClass({
     }.bind(this));
   },
   addToForm: function(client, term) {
-    var client_id = 0, name = "";
     if (client.id == -1) {
       // category 1 = client contact
       // take term which is the text value in input field
