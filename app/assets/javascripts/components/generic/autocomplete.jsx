@@ -1,4 +1,11 @@
 var Autocomplete = React.createClass({
+  propTypes: {
+    itemSelected: React.PropTypes.func,
+    focus: React.PropTypes.bool,
+    retrieveData: React.PropTypes.func,
+    renderItem: React.PropTypes.func,
+    data: React.PropTypes.array
+  },
   getDefaultProps: function() {
     return {
       placeholder: "Start typing..."
