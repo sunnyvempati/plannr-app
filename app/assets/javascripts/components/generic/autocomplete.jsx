@@ -62,7 +62,7 @@ var Autocomplete = React.createClass({
         <div className="Button--autocomplete"
                 onMouseDown={this.preventDefault}
                 onClick={this.itemSelected.bind(this, event, item, term)}
-                key={item.email}>
+                key={item.id}>
           {renderItem}
         </div>
       );
