@@ -13,7 +13,6 @@ var CompanyUserRow = React.createClass({
     }.bind(this));
   },
   render: function() {
-    var adminText = this.state.isAdmin ? "remove" : "make";
     var data = this.props.data;
     return (
       <div className="Table-row">
@@ -22,8 +21,8 @@ var CompanyUserRow = React.createClass({
         </div>
         <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
         <div className="Table-rowItem u-flexGrow-4">{data["email"]}</div>
-        <div className="Table-rowItem u-flexGrow-2 u-clickable" onClick={this.toggleAdmin}>
-            {adminText}
+        <div className="Table-rowItem u-flexGrow-2">
+            <ToggleButton handleClick={this.toggleAdmin} />
         </div>
       </div>
     );

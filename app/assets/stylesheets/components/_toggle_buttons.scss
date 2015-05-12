@@ -1,0 +1,35 @@
+.ToggleContainer {
+  position: relative;
+  width: 36px;
+  height: 14px;
+}
+
+.Toggle-bar {
+  background-color: #000000;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.26;
+  transition: background-color linear .08s;
+  [checked] & {
+    opacity: 0.5;
+    background-color: #0f9d58;
+  }
+}
+
+.Toggle-button {
+  background-color: #f1f1f1;
+  position: absolute;
+  top: -3px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.4);
+  transition: transform linear .08s, background-color linear .08s;
+  [checked] & {
+    background-color: #0f9d58;
+    transform: translate(16px, 0);
+  }
+}
