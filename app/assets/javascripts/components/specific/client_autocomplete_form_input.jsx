@@ -1,5 +1,4 @@
-//TODO: rename to vendor_autocomplete_form_input
-var VendorInput = React.createClass({
+var ClientAutocompleteFormInput = React.createClass({
   mixins: [Formsy.Mixin, boldAutocompleteItem],
   propTypes: {
     id: React.PropTypes.string,
@@ -9,28 +8,28 @@ var VendorInput = React.createClass({
   },
   getCreateNewAutocompleteItem: function() {
     return {
-      name: "Create New Vendor",
+      name: "Create New Client",
       id: -1
     }
   },
   retrieveAutocompleteListAsync: function(term) {
-    $.post("/vendors/search", {search: {text: term || ""}}, function(result) {
-      var vendors = result.vendors;
-      if(vendors.length == 0) {
-        vendors.push(this.getCreateNewAutocompleteItem());
+    $.post("/search_clients", {search: {text: term || ""}}, function(result) {
+      var contacts = result.contacts;
+      if(contacts.length == 0) {
+        contacts.push(this.getCreateNewAutocompleteItem());
       }
-      this.setState({autocompleteList: vendors});
+      this.setState({autocompleteList: contacts});
     }.bind(this));
   },
   onAutocompleteItemSelected: function(id, name) {
     this.setValue(id);
     this.setState({autocompleteSelectedValue: {id: id, name: name}});
   },
-  setAutocompleteValueAsync: function(vendorId) {
-    if (vendorId) {
-      $.get("/vendors/" + vendorId + ".json", function(result) {
+  setAutocompleteValueAsync: function(clientId) {
+    if (clientId) {
+      $.get("/clients/" + clientId + ".json", function(result) {
         if (this.isMounted()) {
-          this.setState({autocompleteSelectedValue: {id: result.vendor.id, name: result.vendor.name}});
+          this.setState({autocompleteSelectedValue: {id: result.client.id, name: result.client.name}});
         }
       }.bind(this));
     }
@@ -57,7 +56,7 @@ var VendorInput = React.createClass({
                               autocompleteSelectedValue={this.state.autocompleteSelectedValue}
                               autocompleteList={this.state.autocompleteList}
                               onClickToEdit={this.onClickToEdit}
-                              label={'vendor'}
+                              label={'client'}
                               focus={this.state.autocompleteFormInputFocus} />
       );
   }
