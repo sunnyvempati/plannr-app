@@ -8,7 +8,7 @@ var VendorInput = React.createClass({
     }
   },
   retrieveAutocompleteListAsync: function(term) {
-    $.post("/vendors/searchEm", {search: {text: term || ""}}, function(result) {
+    $.post("/vendors/search", {search: {text: term || ""}}, function(result) {
       var vendors = result.vendors;
       if(vendors.length == 0) {
         vendors.push(this.getCreateNewAutocompleteItem());
