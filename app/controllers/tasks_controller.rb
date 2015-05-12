@@ -22,7 +22,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    binding.pry
     @task = Task.new task_params
     render_entity @task
   end
