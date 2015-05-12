@@ -1,11 +1,8 @@
 class Task < ActiveRecord::Base
-  include Datify
   acts_as_tenant :company
   belongs_to :event
   belongs_to :owner, class_name: 'User'
   belongs_to :assigned_to, class_name: 'User'
-
-  date :deadline
 
   validates :name, :event, presence: true
   validate :deadline_in_future
@@ -18,8 +15,7 @@ class Task < ActiveRecord::Base
   end
 
   def deadline_in_future
-    # use formatted_deadline for formatted date
-    if formatted_deadline && formatted_deadline < Date.today
+    if deadline && deadline < Date.today
       errors.add(:deadline, "must be in the future");
     end
   end
