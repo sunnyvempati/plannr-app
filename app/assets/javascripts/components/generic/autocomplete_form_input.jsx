@@ -1,4 +1,5 @@
 var AutocompleteFormInput = React.createClass({
+  mixins: [boldAutocompleteItem],
   propTypes: {
     autocompleteSelectedValue: React.PropTypes.objectOf({
       id: React.PropTypes.number,
@@ -13,12 +14,6 @@ var AutocompleteFormInput = React.createClass({
     itemSelected: React.PropTypes.func,
     autocompleteList: React.PropTypes.array,
     focus: React.PropTypes.bool
-  },
-  mixins: [boldAutocompleteItem],
-
-  setAutocompleteValue: function(id, name) {
-    this.setValue(id);
-    this.setState({autocompleteValueSelected: true, autocompleteSelectedName: name});
   },
   renderAutocompleteListItem: function(item, term) {
     var itemName = this.formatMatchedCharacters(item.name, term);

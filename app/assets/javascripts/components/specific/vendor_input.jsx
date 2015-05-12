@@ -1,6 +1,12 @@
 //TODO: rename to vendor_autocomplete_form_input
 var VendorInput = React.createClass({
   mixins: [Formsy.Mixin, boldAutocompleteItem],
+  propTypes: {
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    value: React.PropTypes.string,
+    label: React.PropTypes.string
+  },
   getCreateNewAutocompleteItem: function() {
     return {
       name: "Create New Vendor",
@@ -32,12 +38,6 @@ var VendorInput = React.createClass({
   onClickToEdit: function() {
     this.setState({ autocompleteSelectedValue: { id: -2, name: ''}  });
     this.setState({ autocompleteFormInputFocus: true });
-  },
-  propTypes: {
-    id: React.PropTypes.string,
-    name: React.propTypes.string,
-    value: React.PropTypes.string,
-    label: React.PropTypes.string
   },
   getInitialState: function() {
     return {
