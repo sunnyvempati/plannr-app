@@ -13,7 +13,7 @@
   pointer-events: none;
   opacity: 0.26;
   transition: background-color linear .08s;
-  [checked] & {
+  &.checked {
     opacity: 0.5;
     background-color: #0f9d58;
   }
@@ -28,7 +28,7 @@
   border-radius: 50%;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.4);
   transition: transform linear .08s, background-color linear .08s;
-  [checked] & {
+  &.checked {
     background-color: #0f9d58;
     transform: translate(16px, 0);
   }

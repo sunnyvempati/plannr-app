@@ -22,7 +22,7 @@ var CompanyUserRow = React.createClass({
         <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
         <div className="Table-rowItem u-flexGrow-4">{data["email"]}</div>
         <div className="Table-rowItem u-flexGrow-2">
-            <ToggleButton handleClick={this.toggleAdmin} />
+          <ToggleButton checked={this.state.isAdmin} handleClick={this.toggleAdmin} />
         </div>
       </div>
     );
