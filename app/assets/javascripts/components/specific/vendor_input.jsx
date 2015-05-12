@@ -1,3 +1,4 @@
+//TODO: rename to vendor_autocomplete_form_input
 var VendorInput = React.createClass({
   mixins: [Formsy.Mixin, boldAutocompleteItem],
   getCreateNewAutocompleteItem: function() {
@@ -15,25 +16,11 @@ var VendorInput = React.createClass({
       this.setState({autocompleteList: vendors});
     }.bind(this));
   },
-  addToForm: function(id, name) {
-    this.setState({autocompleteSelectedValue: {id: id, name: name}});
+  onAutocompleteItemSelected: function(id, name) {
     this.setValue(id);
+    this.setState({autocompleteSelectedValue: {id: id, name: name}});
   },
-
-  // TODO: put in mixin?
-  getInitialState: function() {
-    return {
-      autocompleteList: [],
-      autocompleteSelectedValue: {id: -1, name: ''},
-      autocompleteFormInputFocus: false
-    };
-  },
-  componentDidMount: function() {
-    this.setAutocompleteValueAsync();
-  },
-
-  setAutocompleteValueAsync: function() {
-    var vendorId = this.getValue();
+  setAutocompleteValueAsync: function(vendorId) {
     if (vendorId) {
       $.get("/vendors/" + vendorId + ".json", function(result) {
         if (this.isMounted()) {
@@ -46,11 +33,27 @@ var VendorInput = React.createClass({
     this.setState({ autocompleteSelectedValue: { id: -2, name: ''}  });
     this.setState({ autocompleteFormInputFocus: true });
   },
+  propTypes: {
+    id: React.PropTypes.string,
+    name: React.propTypes.string,
+    value: React.PropTypes.string,
+    label: React.PropTypes.string
+  },
+  getInitialState: function() {
+    return {
+      autocompleteList: [],
+      autocompleteSelectedValue: {id: -2, name: ''},
+      autocompleteFormInputFocus: false
+    };
+  },
+  componentDidMount: function() {
+    this.setAutocompleteValueAsync(this.getValue());
+  },
   render: function() {
     return (
       <AutocompleteFormInput  name={this.props.name}
                               retrieveData={this.retrieveAutocompleteListAsync}
-                              itemSelected={this.addToForm}
+                              itemSelected={this.onAutocompleteItemSelected}
                               autocompleteSelectedValue={this.state.autocompleteSelectedValue}
                               autocompleteList={this.state.autocompleteList}
                               onClickToEdit={this.onClickToEdit}

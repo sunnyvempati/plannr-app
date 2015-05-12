@@ -1,20 +1,22 @@
 var Autocomplete = React.createClass({
   propTypes: {
-    itemSelected: React.PropTypes.func,
+    itemSelected: React.PropTypes.func.isRequired,
+    retrieveData: React.PropTypes.func.isRequired,
+    renderItem: React.PropTypes.func.isRequired,
+
     focus: React.PropTypes.bool,
-    retrieveData: React.PropTypes.func,
-    renderItem: React.PropTypes.func,
     data: React.PropTypes.array
   },
   getDefaultProps: function() {
     return {
-      placeholder: "Start typing..."
+      placeholder: "Start typing...",
+      focus: false,
+      data: []
     };
   },
   mixins: [boldAutocompleteItem],
   getInitialState: function() {
     return {
-      //open: false,
       term: ""
     };
   },
@@ -24,15 +26,12 @@ var Autocomplete = React.createClass({
     }
   },
   onBlur: function() {
-    //this.setState({open: false});
   },
   onFocus: function(e) {
-    //this.setState({open: true});
     this.props.retrieveData(e.target.value);
   },
   onChange: function(e) {
     this.setState({term: e.target.value});
-    //this.setState({term: e.target.value, open: true});
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(e, item, term) {
@@ -40,7 +39,6 @@ var Autocomplete = React.createClass({
     input.value = "";
     input.blur();
     this.props.itemSelected(item.id, item.name);
-    //this.setState({term: "", open: false});
     this.setState({term: ""});
   },
   // this is used so onBlur isn't called right
@@ -54,8 +52,6 @@ var Autocomplete = React.createClass({
     var cx = React.addons.classSet;
     var resultsClasses = cx({
       'Autocomplete-results': true
-      // ,
-      // 'hidden': !this.state.open
     });
     var results = this.props.data.map(function(item) {
       var itemName = this.formatMatchedCharacters(item.name, term);
