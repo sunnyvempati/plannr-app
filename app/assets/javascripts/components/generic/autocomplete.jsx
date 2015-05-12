@@ -14,7 +14,7 @@ var Autocomplete = React.createClass({
   mixins: [boldAutocompleteItem],
   getInitialState: function() {
     return {
-      open: false,
+      //open: false,
       term: ""
     };
   },
@@ -24,22 +24,24 @@ var Autocomplete = React.createClass({
     }
   },
   onBlur: function() {
-    this.setState({open: false});
+    //this.setState({open: false});
   },
   onFocus: function(e) {
-    this.setState({open: true});
+    //this.setState({open: true});
     this.props.retrieveData(e.target.value);
   },
   onChange: function(e) {
-    this.setState({term: e.target.value, open: true});
+    this.setState({term: e.target.value});
+    //this.setState({term: e.target.value, open: true});
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(e, item, term) {
     var input = React.findDOMNode(this.refs.autocompleteInput);
     input.value = "";
     input.blur();
-    this.props.itemSelected(item, term);
-    this.setState({term: "", open: false});
+    this.props.itemSelected(item.id, item.name);
+    //this.setState({term: "", open: false});
+    this.setState({term: ""});
   },
   // this is used so onBlur isn't called right
   // before onclick which hides the entire
@@ -47,12 +49,13 @@ var Autocomplete = React.createClass({
   preventDefault: function(e) {
     e.preventDefault();
   },
-  getResults: function() {
+  renderAutocompleteList: function() {
     var term = this.state.term;
     var cx = React.addons.classSet;
     var resultsClasses = cx({
-      'Autocomplete-results': true,
-      'hidden': !this.state.open
+      'Autocomplete-results': true
+      // ,
+      // 'hidden': !this.state.open
     });
     var results = this.props.data.map(function(item) {
       var itemName = this.formatMatchedCharacters(item.name, term);
@@ -88,9 +91,10 @@ var Autocomplete = React.createClass({
                className="Autocomplete-input"
                onKeyDown={this.keyDown}
                onBlur={this.onBlur}
-               ref="autocompleteInput">
+               ref="autocompleteInput"
+               id={this.props.id}>
         </input>
-        {this.getResults()}
+        {this.renderAutocompleteList()}
       </div>
     );
   }
