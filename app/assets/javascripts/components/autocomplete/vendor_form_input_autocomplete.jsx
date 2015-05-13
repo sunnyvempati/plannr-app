@@ -1,4 +1,4 @@
-var VendorInput = React.createClass({
+var VendorFormInputAutocomplete = React.createClass({
   mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
   getInitialState: function() {
     return {
