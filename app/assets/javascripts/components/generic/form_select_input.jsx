@@ -5,6 +5,7 @@ var FormSelectInput = React.createClass({
   mixins: [Formsy.Mixin],
   changeValue: function (event) {
     this.setValue(event.currentTarget.value);
+    this.props.onChangeCallback(event.currentTarget.value);
   },
   render: function () {
     //TODO: clean up React JS console warnings

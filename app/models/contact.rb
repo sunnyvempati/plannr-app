@@ -11,8 +11,6 @@ class Contact < ActiveRecord::Base
 
   acts_as_tenant :company
 
-  validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
-
   scope :not_in, ->(event_id) {
       where("id not in (select contact_id from event_contacts where event_id = '#{event_id}')")
   }
@@ -31,6 +29,7 @@ class Contact < ActiveRecord::Base
     .limit(5)
   }
 
+  validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
   validates :name, :presence => true
   validates_format_of :email,
                       :with => EMAIL_REGEX,
@@ -43,6 +42,7 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'
 
   validates_presence_of :vendor, :if => "category==#{VENDOR}"
+  validates :vendor, absence: true, :if => "category==#{CLIENT}"
 
   def self.quick_create(text)
     text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)
