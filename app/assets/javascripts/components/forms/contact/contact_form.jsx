@@ -30,6 +30,32 @@ var ContactForm = React.createClass({
   contactTypeOnChange: function(value) {
     this.setState({category: value});
   },
+  vendorOrganizationField: function (category, contact, propsDisableForm) {
+    // conditionally display either contact_organization field or contact_vendor
+    // based on category (client or vendor)
+    var retHtml;
+    if (this.state.category == 1) {
+      retHtml = <FormInput
+                  id='contact_organization'
+                  name='organization'
+                  placeholder='What is the company of your contact?'
+                  type='text'
+                  label='organization'
+                  value={contact.organization}
+                  disabled={propsDisableForm}
+                  />;
+    }
+    else {
+      retHtml = <VendorInput
+                  name='vendor'
+                  value={contact.vendor_id}
+                  id='contact_vendor'
+                  label='vendor'
+                  disabled={propsDisableForm}
+                  />;
+    }
+    return retHtml;
+  },
   getInitialState: function() {
     return {
       category: this.props.model.category
@@ -50,26 +76,7 @@ var ContactForm = React.createClass({
         vendor_id: model.vendor_id
       };
     }
-    var partial;
-    if (this.state.category == 1) {
-      partial = <FormInput
-                  id='contact_organization'
-                  name='organization'
-                  placeholder='What is the company of your contact?'
-                  type='text'
-                  label='organization'
-                  value={contact.organization}
-                  disabled={this.props.disableForm}
-                  />;
-    }
-    else {
-      partial = <VendorInput
-                  name='vendor'
-                  value={contact.vendor_id}
-                  id='contact_vendor'
-                  label='vendor'
-                  />;
-    }
+
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
@@ -105,7 +112,7 @@ var ContactForm = React.createClass({
             onChangeCallback={this.contactTypeOnChange}
             required
           />
-          {partial}
+          { this.vendorOrganizationField(this.state.category, contact, this.props.disableForm) }
           <FormInput
             id='contact_email'
             name='email'
