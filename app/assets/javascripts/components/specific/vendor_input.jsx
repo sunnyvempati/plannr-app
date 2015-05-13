@@ -1,5 +1,5 @@
 var VendorInput = React.createClass({
-  mixins: [Formsy.Mixin, boldAutocompleteItem],
+  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
   getInitialState: function() {
     return {
       vendorSelected: false,
@@ -18,17 +18,11 @@ var VendorInput = React.createClass({
       }.bind(this));
     }
   },
-  getCreateNewVendorItem: function() {
-    return {
-      name: "Create New Vendor",
-      id: -1
-    }
-  },
   retrieveVendors: function(term) {
     $.post("/vendors/searchEm", {search: {text: term || ""}}, function(result) {
       var vendors = result.vendors;
       if(vendors.length == 0) {
-        vendors.push(this.getCreateNewVendorItem());
+        vendors.push(this.getNewItem("vendor"));
       }
       this.setState({vendors: vendors});
     }.bind(this));
@@ -50,19 +44,6 @@ var VendorInput = React.createClass({
   editVendor: function() {
     this.setState({vendorSelected: false, vendorName: null, vendors: [], focus: true});
   },
-  vendorItem: function(item, term) {
-    var itemName = this.formatMatchedCharacters(item.name, term);
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
-      'Autocomplete-resultsItem': true,
-      'u-italics': item.id == -1
-    });
-    return (
-      <div className={itemClasses}
-           dangerouslySetInnerHTML={{__html: itemName}}>
-      </div>
-    );
-  },
   renderAutocomplete: function() {
     return (
       <Autocomplete name={this.props.name}
@@ -70,7 +51,7 @@ var VendorInput = React.createClass({
                     itemSelected={this.addToForm}
                     data={this.state.vendors}
                     focus={this.state.focus}
-                    renderItem={this.vendorItem} />
+                    renderItem={this.renderItem} />
     );
   },
   renderSelectedVendor: function() {
