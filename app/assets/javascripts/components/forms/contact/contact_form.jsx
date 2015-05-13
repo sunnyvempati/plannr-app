@@ -27,6 +27,14 @@ var ContactForm = React.createClass({
       }
     };
   },
+  contactTypeOnChange: function(value) {
+    this.setState({category: value});
+  },
+  getInitialState: function() {
+    return {
+      category: this.props.model.category
+    };
+  },
   render: function () {
     var contact = {};
     if (this.props.model) {
@@ -41,6 +49,26 @@ var ContactForm = React.createClass({
         id: model.id,
         vendor_id: model.vendor_id
       };
+    }
+    var partialForVendorOrOrginizationField;
+    if (this.state.category === 1) {
+      partialForVendorOrOrginizationField = <FormInput
+                  id='contact_organization'
+                  name='organization'
+                  placeholder='What is the company of your contact?'
+                  type='text'
+                  label='organization'
+                  value={contact.organization}
+                  disabled={this.props.disableForm}
+                  />;
+    }
+    else {
+      partialForVendorOrOrginizationField = <VendorInput
+                  name='vendor'
+                  value={contact.vendor_id}
+                  id='contact_vendor'
+                  label='vendor'
+                  />;
     }
     return (
       <div className='FormContainer--leftAligned'>
@@ -74,14 +102,10 @@ var ContactForm = React.createClass({
             options={this.typeOptions}
             value={contact.category || 1}
             disabled={this.props.disableForm}
+            onChangeCallback={this.contactTypeOnChange}
             required
           />
-          <VendorInput
-            name='vendor'
-            value={contact.vendor_id}
-            id='contact_vendor'
-            label='Vendor'
-          />
+          {partialForVendorOrOrginizationField}
           <FormInput
             id='contact_email'
             name='email'
@@ -98,15 +122,6 @@ var ContactForm = React.createClass({
             type='tel'
             label='phone'
             value={contact.phone}
-            disabled={this.props.disableForm}
-          />
-          <FormInput
-            id='contact_organization'
-            name='organization'
-            placeholder='What is the company of your contact?'
-            type='text'
-            label='organization'
-            value={contact.organization}
             disabled={this.props.disableForm}
           />
           <TextAreaInput
