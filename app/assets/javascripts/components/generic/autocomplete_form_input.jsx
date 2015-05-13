@@ -1,5 +1,4 @@
 var AutocompleteFormInput = React.createClass({
-  mixins: [boldAutocompleteItem],
   propTypes: {
     autocompleteSelectedValue: React.PropTypes.objectOf({
       id: React.PropTypes.number,
@@ -15,19 +14,7 @@ var AutocompleteFormInput = React.createClass({
     autocompleteList: React.PropTypes.array,
     focus: React.PropTypes.bool
   },
-  renderAutocompleteListItem: function(item, term) {
-    var itemName = this.formatMatchedCharacters(item.name, term);
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
-      'Autocomplete-resultsItem': true,
-      'u-italics': item.id == -1
-    });
-    return (
-      <div className={itemClasses}
-           dangerouslySetInnerHTML={{__html: itemName}}>
-      </div>
-    );
-  },
+
   renderSelectedAutocompleteItem: function() {
     return (
       <div className="Autocomplete-picked" onClick={this.props.onClickToEdit}>
@@ -47,7 +34,6 @@ var AutocompleteFormInput = React.createClass({
                     itemSelected={this.props.itemSelected}
                     data={this.props.autocompleteList}
                     focus={this.props.focus}
-                    renderItem={this.renderAutocompleteListItem}
                     id={this.props.id} />
     );
   },

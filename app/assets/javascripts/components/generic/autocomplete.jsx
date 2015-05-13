@@ -47,6 +47,21 @@ var Autocomplete = React.createClass({
   preventDefault: function(e) {
     e.preventDefault();
   },
+  renderAutocompleteListItem: function(item, term) {
+    var itemName = this.formatMatchedCharacters(item.name, term);
+    var cx = React.addons.classSet;
+    var itemClasses = cx({
+      'Autocomplete-resultsItem': true,
+      'u-italics': item.id == -1
+    });
+    //TODO: Why dangerously set inner html when you can just supply it in HTML
+    // like we do in renderSelectedAutocompleteItem or render?
+    return (
+      <div className={itemClasses}
+           dangerouslySetInnerHTML={{__html: itemName}}>
+      </div>
+    );
+  },
   renderAutocompleteList: function() {
     var term = this.state.term;
     var cx = React.addons.classSet;
@@ -56,7 +71,7 @@ var Autocomplete = React.createClass({
     var results = this.props.data.map(function(item) {
       var itemName = this.formatMatchedCharacters(item.name, term);
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
-      var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
+      var renderItem = !!this.renderAutocompleteListItem ? this.renderAutocompleteListItem(item, term) : defaultRenderItem;
       return (
         <div className="Button--autocomplete"
                 onMouseDown={this.preventDefault}
