@@ -43,6 +43,7 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'
 
   validates_presence_of :vendor, :if => "category==#{VENDOR}"
+  validates :vendor, absence: true, :if => "category==#{CLIENT}"
 
   def self.quick_create(text)
     text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)
