@@ -1,4 +1,6 @@
+//TODO: add functionality to show/hide selected value or increment number.
 var VendorAutocompleteFormInput = React.createClass({
+  //TODO: rename mixin to something more generic
   mixins: [Formsy.Mixin, boldAutocompleteItem],
   propTypes: {
     id: React.PropTypes.string,
