@@ -50,9 +50,9 @@ var ContactForm = React.createClass({
         vendor_id: model.vendor_id
       };
     }
-    var partialForVendorOrOrginizationField;
-    if (this.state.category === 1) {
-      partialForVendorOrOrginizationField = <FormInput
+    var partial;
+    if (this.state.category == 1) {
+      partial = <FormInput
                   id='contact_organization'
                   name='organization'
                   placeholder='What is the company of your contact?'
@@ -63,7 +63,7 @@ var ContactForm = React.createClass({
                   />;
     }
     else {
-      partialForVendorOrOrginizationField = <VendorInput
+      partial = <VendorInput
                   name='vendor'
                   value={contact.vendor_id}
                   id='contact_vendor'
@@ -105,7 +105,7 @@ var ContactForm = React.createClass({
             onChangeCallback={this.contactTypeOnChange}
             required
           />
-          {partialForVendorOrOrginizationField}
+          {partial}
           <FormInput
             id='contact_email'
             name='email'
