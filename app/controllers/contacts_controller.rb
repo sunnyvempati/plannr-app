@@ -81,7 +81,7 @@ class ContactsController < ApplicationController
 
   def contact_params
     params.require(:contact)
-          .permit(:name, :email, :category, :phone, :organization, :description)
+          .permit(:name, :email, :category, :phone, :organization, :description, :vendor_id)
           .merge(owner: current_user)
   end
 end

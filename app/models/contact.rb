@@ -5,6 +5,7 @@ class Contact < ActiveRecord::Base
   SEARCH_LIMIT = 5
   has_many :event_contacts
   has_many :events, through: :event_contacts
+  belongs_to :vendor
 
   belongs_to :owner, class_name: "User"
 
@@ -40,6 +41,8 @@ class Contact < ActiveRecord::Base
                       :message => 'must be a phone number in [1-]999-999-9999 [x9999] format',
                       :allow_blank => true
   validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'
+
+  validates_presence_of :vendor, :if => "category==#{VENDOR}"
 
   def self.quick_create(text)
     text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)

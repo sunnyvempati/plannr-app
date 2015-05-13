@@ -89,16 +89,13 @@ var TaskForm = React.createClass({
             placeholder='What is the name of your task?'
             disabled={this.props.disableForm}
             required />
-          <FormInput
-            id='task_deadline'
-            name='deadline'
-            autofocus='off'
-            dateField={true}
-            type='text'
-            label='deadline'
-            value={ task.deadline }
-            placeholder='What is the deadline for this task? (MM/DD/YYYY)'
-            disabled={this.props.disableForm} />
+          <DatePickerInput
+            name="deadline"
+            label="Deadline"
+            value={ !!task.deadline ? moment(task.deadline) : task.deadline }
+            placeholder="When's' it due?"
+            minDate={moment()}
+          />
           <FormSelectInput
             id='task_event_id'
             name='event_id'

@@ -5,6 +5,8 @@ class Vendor < ActiveRecord::Base
   has_many :events, through: :event_vendors
   belongs_to :owner, class_name: 'User'
 
+  has_many :contacts
+
   scope :not_in, ->(event_id) {
     where("id not in (select vendor_id from event_vendors where event_id = '#{event_id}')")
   }
@@ -14,6 +16,11 @@ class Vendor < ActiveRecord::Base
     Vendor.not_in(event_id)
     .where("lower(vendors.name) LIKE #{wildcard_text}")
     .limit(5)
+  }
+
+  scope :search, ->(term) {
+    wildcard_text = "'%#{term}%'"
+    Vendor.where("lower(vendors.name) LIKE #{wildcard_text}");
   }
 
   # TODO: case sensitivity in name

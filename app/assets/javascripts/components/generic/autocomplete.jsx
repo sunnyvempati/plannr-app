@@ -1,10 +1,17 @@
 var Autocomplete = React.createClass({
+  propTypes: {
+    itemSelected: React.PropTypes.func,
+    focus: React.PropTypes.bool,
+    retrieveData: React.PropTypes.func,
+    renderItem: React.PropTypes.func,
+    data: React.PropTypes.array
+  },
   getDefaultProps: function() {
     return {
       placeholder: "Start typing..."
     };
   },
-  mixins: [boldAutocompleteItem],
+  mixins: [AutocompleteBoldItem],
   getInitialState: function() {
     return {
       open: false,
@@ -54,7 +61,7 @@ var Autocomplete = React.createClass({
         <div className="Button--autocomplete"
                 onMouseDown={this.preventDefault}
                 onClick={this.itemSelected.bind(this, event, item, term)}
-                key={item.email}>
+                key={item.id}>
           {renderItem}
         </div>
       );

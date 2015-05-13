@@ -10,6 +10,11 @@ var EventForm = React.createClass({
     model: React.PropTypes.object,
     secondaryButtonHref: React.PropTypes.string
   },
+  getInitialState: function() {
+    return {
+      startDate: null
+    };
+  },
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -27,6 +32,9 @@ var EventForm = React.createClass({
   changeUrl: function (result) {
     location.href = "/events/" + result.event.id + "/";
   },
+  setStartDate: function(date) {
+    this.setState({startDate: date});
+  },
   componentWillMount: function () {
     // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
     // this allows spaces and numbers with decimal places
@@ -39,6 +47,8 @@ var EventForm = React.createClass({
   },
   render: function () {
     var id = 'event_form';
+    var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
+    var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
     return (
       <div className="FormContainer--leftAligned">
         <Form
@@ -63,25 +73,20 @@ var EventForm = React.createClass({
             disabled={this.props.disableForm}
             required
           />
-          <FormInput
+          <DatePickerInput
             name="start_date"
-            id="event_start_date"
-            dateField={true}
-            type="text"
             label="Start Date"
-            value={ this.props.model.start_date }
-            disabled={this.props.disableForm}
-            placeholder="When does it start? (MM/DD/YYYY)"
+            value={startDate}
+            placeholder="When does it start?"
+            onValueSet={this.setStartDate}
+            minDate={moment()}
           />
-          <FormInput
+          <DatePickerInput
             name="end_date"
-            id="event_end_date"
-            dateField={true}
-            type="text"
             label="End Date"
-            value={ this.props.model.end_date }
-            disabled={this.props.disableForm}
-            placeholder="When does it end? (MM/DD/YYYY)"
+            value={endDate}
+            placeholder="When does it end?"
+            minDate={this.state.startDate}
           />
           <FormInput
             name="location"

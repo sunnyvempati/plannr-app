@@ -1,15 +1,5 @@
 var FormInput = React.createClass({
   mixins: [Formsy.Mixin],
-  componentDidMount: function () {
-    // for datepicker
-    var id = "#" + this.props.id;
-    if (this.props.dateField) {
-      $(id).datepicker();
-      $(id).change(function(e) {
-        this.changeValue(e); // this accurately sets value
-      }.bind(this));
-    }
-  },
   changeValue: function(event) {
     this.setValue(event.currentTarget.value);
   },
@@ -24,7 +14,7 @@ var FormInput = React.createClass({
     });
     return (
       <div className={form_input_classes}>
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         <input name={this.props.name}
                className={input_classes}
                onChange={this.changeValue}

@@ -22,7 +22,8 @@ var ContactForm = React.createClass({
         'category': inputs.category,
         'phone': inputs.phone,
         'organization': inputs.organization,
-        'description': inputs.description
+        'description': inputs.description,
+        'vendor_id': inputs.vendor
       }
     };
   },
@@ -37,7 +38,8 @@ var ContactForm = React.createClass({
         phone: model.phone,
         organization: model.organization,
         description: model.description,
-        id: model.id
+        id: model.id,
+        vendor_id: model.vendor_id
       };
     }
     return (
@@ -73,6 +75,12 @@ var ContactForm = React.createClass({
             value={contact.category || 1}
             disabled={this.props.disableForm}
             required
+          />
+          <VendorInput
+            name='vendor'
+            value={contact.vendor_id}
+            id='contact_vendor'
+            label='Vendor'
           />
           <FormInput
             id='contact_email'

@@ -1,7 +1,7 @@
 asset 'normalize.css'
 asset 'components-font-awesome'
 asset 'bower-skrollr'
-asset 'jquery-ui'
 asset 'formsy-react', '0.9.0'
 asset 'react-router'
 asset 'classnames'
+asset 'react-date-picker'
