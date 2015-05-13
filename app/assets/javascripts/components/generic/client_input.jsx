@@ -1,5 +1,5 @@
 var ClientInput = React.createClass({
-  mixins: [Formsy.Mixin, boldAutocompleteItem],
+  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
   getInitialState: function() {
     return {
       clientSelected: false,
@@ -18,17 +18,14 @@ var ClientInput = React.createClass({
       }.bind(this));
     }
   },
-  getCreateNewContactItem: function() {
-    return {
-      name: "Create New Contact",
-      id: -1
-    }
-  },
   retrieveClients: function(term) {
     $.get("/search_clients", {search: {text: term || ""}}, function(result) {
       var contacts = result.contacts;
       if(contacts.length == 0) {
-        contacts.push(this.getCreateNewContactItem());
+        // uses autocomplete render new mixin
+        // to create a row item "Create new contact"
+        // the argument is the entity to create
+        contacts.push(this.getNewItem("contact"));
       }
       this.setState({clients: contacts});
     }.bind(this));
@@ -52,19 +49,6 @@ var ClientInput = React.createClass({
   editClient: function() {
     this.setState({clientSelected: false, clientName: null, clients: [], focus: true});
   },
-  clientItem: function(item, term) {
-    var itemName = this.formatMatchedCharacters(item.name, term);
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
-      'Autocomplete-resultsItem': true,
-      'u-italics': item.id == -1
-    });
-    return (
-      <div className={itemClasses}
-           dangerouslySetInnerHTML={{__html: itemName}}>
-      </div>
-    );
-  },
   renderAutocomplete: function() {
     return (
       <Autocomplete name={this.props.name}
@@ -72,7 +56,7 @@ var ClientInput = React.createClass({
                     itemSelected={this.addToForm}
                     data={this.state.clients}
                     focus={this.state.focus}
-                    renderItem={this.clientItem} />
+                    renderItem={this.renderItem} />
     );
   },
   renderSelectedClient: function() {

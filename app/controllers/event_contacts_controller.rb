@@ -3,7 +3,11 @@ class EventContactsController < ApplicationController
 
   def create
     event_contact = EventContact.new event_id: params[:event_id]
-    event_contact.contact_id = event_contact_params[:contact_id]
+    if event_contact_params[:contact_id]
+      event_contact.contact_id = event_contact_params[:contact_id]
+    else
+      event_contact.contact_id = Contact.create!(name: event_contact_params[:name]).id
+    end
     if event_contact.save
       render json: event_contact, serializer: EventContactWithContactSerializer
     else
@@ -24,7 +28,7 @@ class EventContactsController < ApplicationController
   private
 
   def event_contact_params
-    params.require(:event_contact).permit(:contact_id)
+    params.require(:event_contact).permit(:contact_id, :name)
   end
 
   def mass_delete_params
