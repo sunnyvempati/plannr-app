@@ -53,5 +53,5 @@ Rails.application.routes.draw do
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 
    # vendors
-  post '/vendors/search', to: 'vendors#search'
+  post '/vendors/searchEm', to: 'vendors#search'
 end

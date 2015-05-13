@@ -76,7 +76,7 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
             required
           />
-          <VendorAutocompleteFormInput
+          <VendorInput
             name='vendor'
             value={contact.vendor_id}
             id='contact_vendor'

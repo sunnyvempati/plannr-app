@@ -1,22 +1,20 @@
 var Autocomplete = React.createClass({
   propTypes: {
-    itemSelected: React.PropTypes.func.isRequired,
-    retrieveData: React.PropTypes.func.isRequired,
-    renderItem: React.PropTypes.func.isRequired,
-
+    itemSelected: React.PropTypes.func,
     focus: React.PropTypes.bool,
+    retrieveData: React.PropTypes.func,
+    renderItem: React.PropTypes.func,
     data: React.PropTypes.array
   },
   getDefaultProps: function() {
     return {
-      placeholder: "Start typing...",
-      focus: false,
-      data: []
+      placeholder: "Start typing..."
     };
   },
   mixins: [boldAutocompleteItem],
   getInitialState: function() {
     return {
+      open: false,
       term: ""
     };
   },
@@ -26,20 +24,22 @@ var Autocomplete = React.createClass({
     }
   },
   onBlur: function() {
+    this.setState({open: false});
   },
   onFocus: function(e) {
+    this.setState({open: true});
     this.props.retrieveData(e.target.value);
   },
   onChange: function(e) {
-    this.setState({term: e.target.value});
+    this.setState({term: e.target.value, open: true});
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(e, item, term) {
     var input = React.findDOMNode(this.refs.autocompleteInput);
     input.value = "";
     input.blur();
-    this.props.itemSelected(item.id, item.name);
-    this.setState({term: ""});
+    this.props.itemSelected(item, term);
+    this.setState({term: "", open: false});
   },
   // this is used so onBlur isn't called right
   // before onclick which hides the entire
@@ -47,31 +47,17 @@ var Autocomplete = React.createClass({
   preventDefault: function(e) {
     e.preventDefault();
   },
-  renderAutocompleteListItem: function(item, term) {
-    var itemName = this.formatMatchedCharacters(item.name, term);
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
-      'Autocomplete-resultsItem': true,
-      'u-italics': item.id == -1
-    });
-    //TODO: Why dangerously set inner html when you can just supply it in HTML
-    // like we do in renderSelectedAutocompleteItem or render?
-    return (
-      <div className={itemClasses}
-           dangerouslySetInnerHTML={{__html: itemName}}>
-      </div>
-    );
-  },
-  renderAutocompleteList: function() {
+  getResults: function() {
     var term = this.state.term;
     var cx = React.addons.classSet;
     var resultsClasses = cx({
-      'Autocomplete-results': true
+      'Autocomplete-results': true,
+      'hidden': !this.state.open
     });
     var results = this.props.data.map(function(item) {
       var itemName = this.formatMatchedCharacters(item.name, term);
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
-      var renderItem = !!this.renderAutocompleteListItem ? this.renderAutocompleteListItem(item, term) : defaultRenderItem;
+      var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (
         <div className="Button--autocomplete"
                 onMouseDown={this.preventDefault}
@@ -102,10 +88,9 @@ var Autocomplete = React.createClass({
                className="Autocomplete-input"
                onKeyDown={this.keyDown}
                onBlur={this.onBlur}
-               ref="autocompleteInput"
-               id={this.props.id}>
+               ref="autocompleteInput">
         </input>
-        {this.renderAutocompleteList()}
+        {this.getResults()}
       </div>
     );
   }
