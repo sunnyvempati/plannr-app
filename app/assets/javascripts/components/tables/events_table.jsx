@@ -17,6 +17,7 @@ var EventsTable = React.createClass({
     location.href = "/events/" + id + "/";
   },
   getCustomRows: function() {
+    var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
     return this.state.events.map(function(event) {
       var checked = this.state.checkedItems.indexOf(event.id) > -1;
       return(
@@ -24,7 +25,7 @@ var EventsTable = React.createClass({
           <div className="EventsTable-rowHeader">
             <div className="EventsTable-rowName">
               <div className="EventsTable-checkbox">
-                <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} />
+                <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
               </div>
               <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
                 {event.name}
@@ -82,7 +83,7 @@ var EventsTable = React.createClass({
           sortItems={this.sortItems()}
           handleSortClick={this.sortBy}
           handleSearch={this.search}
-          showActions={true}
+          showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}
           extraPadding={true}
         />

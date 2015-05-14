@@ -9,6 +9,9 @@
   padding-top: $size-increment * 4;
   margin-left: $size-increment * 6;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  &:hover .Checkbox {
+    display: block;
+  }
 }
 
 .EventsTable-rowContent {
