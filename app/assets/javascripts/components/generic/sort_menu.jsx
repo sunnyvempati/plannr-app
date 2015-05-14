@@ -25,8 +25,7 @@ var SortMenu = React.createClass({
     var active = this.state.activeEntity;
     var orderClass = this.state.sortAscending ? "fa fa-sort-asc" : "fa fa-sort-desc";
     var menuItems = this.props.entities.map(function(item) {
-      var cx = React.addons.classSet;
-      var iconClasses = cx({
+      var iconClasses = classNames({
         'SortMenu-order': true,
         'u-hidden': active != item.entity
       });
@@ -45,8 +44,7 @@ var SortMenu = React.createClass({
   },
   render: function() {
     var show = this.state.showSortMenu;
-    var cx = React.addons.classSet;
-    var sortMenuClasses = cx({
+    var sortMenuClasses = classNames({
       'SortMenu': true,
       'u-hidden': !show
     });

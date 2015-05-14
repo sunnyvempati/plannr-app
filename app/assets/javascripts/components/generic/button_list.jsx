@@ -15,8 +15,7 @@ var ButtonList = React.createClass({
     secondaryButtonText: React.PropTypes.string.isRequired
   },
   render: function() {
-    var cx = React.addons.classSet;
-    var containerClasses = cx({
+    var containerClasses = classNames({
       'ButtonListContainer': true,
       'u-hidden': !this.props.showButtonList
     });

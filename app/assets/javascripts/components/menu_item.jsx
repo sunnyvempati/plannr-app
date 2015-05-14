@@ -4,8 +4,7 @@ var MenuItem = React.createClass({
   },
   render: function() {
     var item = this.props.item;
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
+    var itemClasses = classNames({
       'MenuList-item': true,
       'is-selected': this.props.isSelected
     });
