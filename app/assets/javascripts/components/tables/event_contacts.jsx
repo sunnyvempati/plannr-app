@@ -27,6 +27,17 @@ var EventContactsTable = React.createClass({
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
+  sortBy: function(entity, order) {
+    $.get('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
+      this.props.onUpdatedData(result.event_contacts);
+    }.bind(this));
+  },
+  search: function(e) {
+    var term = e.target.value;
+    $.get('search_event_contacts', {search: {text: term || ""}}, function(result) {
+      this.props.onUpdatedData(result.event_contacts);
+    }.bind(this));
+  },
   render: function() {
     return (
       <Table
