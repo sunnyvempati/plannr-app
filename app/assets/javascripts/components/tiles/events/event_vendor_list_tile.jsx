@@ -19,8 +19,7 @@ var EventVendorListTile = React.createClass({
   render: function() {
     return (
       <div className="EventVendorListTile">
-        <Link to="tileAll"><i className="fa fa-arrow-left"></i></Link>
-        <EventVendorsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+        Vendorss
       </div>
     );
   }

@@ -5,11 +5,15 @@ var Table = React.createClass({
     };
   },
   getRows: function() {
+    var hideCheckbox = this.props.checkedItems.length > 0 ? false : true;
     var rows = this.props.results.map(function(result) {
+      var checked = this.props.checkedItems.indexOf(result.id) > -1;
       return(
         <TableRow data={result}
                   columns={this.props.columns}
-                  headers={this.props.headers} />
+                  rowChanged={this.props.rowChanged}
+                  checked={checked}
+                  hideCheckbox={hideCheckbox} />
       )
     }, this);
     return rows;

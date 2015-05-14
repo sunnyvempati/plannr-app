@@ -7,7 +7,7 @@
 .Table-toolbar {
   display: flex;
   flex-flow: row nowrap;
-  padding: $size-increment*4 $size-increment*2;
+  padding: $size-increment*4 $size-increment*3;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   &.extraPad {
     padding: $size-increment*5 $size-increment*6;
@@ -30,10 +30,26 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    @include font($body-1-font, normal, 0);
+    color: $black-half;
     &Item {
       text-align: left;
       flex: 1;
-      padding: $size-increment * 3;
+      padding: $size-increment*2;
     }
+    &:hover .Checkbox {
+      display: block;
+    }
+    &:hover {
+      background-color: rgba(0,0,0,0.15);
+    }
+    &.selected {
+      transition: all 0.5s;
+      background-color: $plannr-teal;
+      color: $white-three-fourths;
+    }
+  }
+  &-checkbox {
+    padding-left: $size-increment*3;
   }
 }

@@ -2,26 +2,23 @@ var EventContactsTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
     return [
-      {name: "id", header: "", grow: 1},
-      {name: "name", header: "Name", grow: 3},
-      {name: "email", header: "Email", grow: 3}
+      {name: "name", grow: 10},
+      {name: "phone", grow: 5},
+      {name: "email", grow: 10}
     ];
   },
-  getCustomRows: function() {
-    return this.props.data.map(function(event_contact) {
-      var checked = this.state.checkedItems.indexOf(event_contact.id) > -1;
-      return(
-        <EventContactRow checkboxChanged={this.rowChanged} data={event_contact} checked={checked} />
-      );
-    }, this);
+  actionItems: function() {
+    return [
+      {name: "Remove from event", handler: this.removeAssociation}
+    ]
   },
-  buttonList: function() {
-    var disabled = this.state.checkedItems.length == 0;
-    return(
-      <Button onClick={this.DeleteContactClick} disabled={disabled}>Remove Contact</Button>
-    );
+  sortItems: function() {
+    return [
+      {entity: "name", display: "Name", default: true},
+      {entity: "email", display: "Email"}
+    ]
   },
-  DeleteContactClick: function() {
+  removeAssociation: function() {
     var destroyOpts = {destroy_opts: {event_contact_ids: this.state.checkedItems}};
     $.post("contacts/mass_delete", destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.props.data);
@@ -32,15 +29,19 @@ var EventContactsTable = React.createClass({
   },
   render: function() {
     return (
-      <div className="EventContactsTableContainer">
-        <Table
-          results={this.props.data}
-          columns={this.getColumns()}
-          useCustomRowComponent={true}
-          buttonList={this.buttonList()}
-          customRows={this.getCustomRows()}
-        />
-      </div>
+      <Table
+        results={this.props.data}
+        columns={this.getColumns()}
+        useCustomRowComponent={false}
+        checkedItems={this.state.checkedItems}
+        rowChanged={this.rowChanged}
+        sortItems={this.sortItems()}
+        handleSortClick={this.sortBy}
+        handleSearch={this.search}
+        showActions={this.state.checkedItems.length > 0}
+        actionItems={this.actionItems()}
+        extraPadding={false}
+      />
     );
   }
 });
