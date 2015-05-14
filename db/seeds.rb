@@ -90,7 +90,7 @@ def create_contacts
                                         phone: "309-999-9999",
                                         organization: Faker::Company.name,
                                         description: Faker::Lorem.sentence,
-                                        category: 2,
+                                        category: 1,
                                         owner: User.find_by_email(c[:owner]),
                                         company: Company.find_by_name(c[:company]))
       puts "Created Contact: #{created_contact.name}" if created_contact

@@ -12,7 +12,9 @@ var ClientInput = React.createClass({
     var clientValue = this.getValue();
     if (clientValue) {
       $.get("/contacts/" + clientValue + ".json", function(result) {
-        this.setState({clientSelected: true, clientName: result.contact.name});
+        if (this.isMounted()) {
+          this.setState({clientSelected: true, clientName: result.contact.name});
+        }
       }.bind(this));
     }
   },
@@ -29,7 +31,6 @@ var ClientInput = React.createClass({
     }.bind(this));
   },
   addToForm: function(client, term) {
-    var client_id = 0, name = "";
     if (client.id == -1) {
       // category 1 = client contact
       // take term which is the text value in input field
