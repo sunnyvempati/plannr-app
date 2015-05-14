@@ -1,10 +1,24 @@
 .TableContainer {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  &-actionBtns {
-    margin-left: auto;
+  flex-flow: column nowrap;
+}
+
+.Table-toolbar {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: $size-increment*4 $size-increment*2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  &.extraPad {
+    padding: $size-increment*5 $size-increment*6;
   }
+  >* {
+    padding-right: $size-increment*2;
+  }
+}
+
+.Table-data {
+  width: 90%;
 }
 
 .Table {
@@ -12,11 +26,6 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   padding-top: $size-increment * 2;
-  &-header {
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    color: $black-quarter;
-  }
   &-row {
     display: flex;
     flex-flow: row nowrap;

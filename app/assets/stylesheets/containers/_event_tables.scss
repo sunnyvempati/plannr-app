@@ -5,21 +5,6 @@
   align-items: center;
 }
 
-.EventsTable-table {
-  padding-right: $size-increment*15;
-}
-
-.Actions-search {
-  display: flex;
-  align-items: center;
-  padding-right: $size-increment*2;
-}
-
-.Actions-searchInput {
-  padding-left: 32px;
-  width: 500px;
-}
-
 .EventsTable-row {
   padding-top: $size-increment * 4;
   margin-left: $size-increment * 6;
@@ -61,11 +46,4 @@
   display: flex;
   justify-content: flex-end;
   padding-right: $size-increment * 4;
-}
-
-.EventsTable-createEvent {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  @include svg($create-event-url, 56px);
 }

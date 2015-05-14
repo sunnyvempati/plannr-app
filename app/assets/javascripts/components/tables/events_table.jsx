@@ -54,9 +54,9 @@ var EventsTable = React.createClass({
       this.setState({events: result.events});
     }.bind(this));
   },
-  sortEntities: function() {
+  sortItems: function() {
     return [
-      {entity: "name", display: "Name"},
+      {entity: "name", display: "Name", default: true},
       {entity: "start_date", display: "Start Date"}
     ]
   },
@@ -66,39 +66,26 @@ var EventsTable = React.createClass({
       this.setState({events: this.spliceResults(this.state.events), checkedItems: []});
     }.bind(this));
   },
+  actionItems: function() {
+    return [
+      {name: "Delete", handler: this.deleteEvents}
+    ]
+  },
   render: function() {
     return (
       <div className="EventsTableContainer">
-        <div className="EventsTable-actions">
-          <div className="Actions-search">
-            <i className="fa fa-search tableIcon"></i>
-            <input placeholder="Search events.."
-                   className="SearchInput"
-                   onChange={this.search} />
-          </div>
-          <div className="Actions-sort">
-            <SortMenu entities={this.sortEntities()}
-                      sort={this.sortBy}
-                      defaultEntity="name" />
-          </div>
-          <div>
-            <i className="fa fa-tag tableIcon"></i>
-          </div>
-          <div>
-            <i className="fa fa-folder tableIcon"></i>
-          </div>
-          <div onClick={this.deleteEvents}>
-            <i className="fa fa-trash tableIcon u-clickable"></i>
-          </div>
-        </div>
-        <div className="EventsTable-table">
-          <Table
-            results={this.props.data}
-            showHeaders={false}
-            useCustomRowComponent={true}
-            customRows={this.getCustomRows()}
-          />
-        </div>
+        <Table
+          results={this.props.data}
+          showHeaders={false}
+          useCustomRowComponent={true}
+          customRows={this.getCustomRows()}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sortBy}
+          handleSearch={this.search}
+          showActions={true}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+        />
       </div>
     );
   }
