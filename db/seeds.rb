@@ -53,7 +53,7 @@ def create_events
       event.company = Company.find_by_name(e[:company])
       event.location = Faker::Address.city
       event.start_date = Date.strptime(e[:start_date], '%m/%d/%Y')
-      event.end_date = Date.strptime(e[:end_date], '%m/%d/%Y')
+      event.end_date = Date.strptime(e[:end_date], '%m/%d/%Y') if e[:end_date]
       event.budget = e[:budget]
       event.description = Faker::Lorem.paragraph
     end
