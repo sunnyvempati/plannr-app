@@ -21,8 +21,7 @@ var Table = React.createClass({
         <TableHeader name={column.header} grow={column.grow} />
       );
     }) : "";
-    var cx = React.addons.classSet;
-    var headerClasses = cx({
+    var headerClasses = classNames({
       'Table-row': true,
       'Table-header': true,
       'u-hidden': !show
@@ -36,8 +35,7 @@ var Table = React.createClass({
   render: function() {
     var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.tableRows();
     var noRows = tableRows.length == 0;
-    var cx = React.addons.classSet;
-    var tableClass = cx({
+    var tableClass = classNames({
       'TableContainer': true,
       'u-hidden': noRows
     });

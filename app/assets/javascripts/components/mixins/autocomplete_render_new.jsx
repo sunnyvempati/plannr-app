@@ -10,8 +10,7 @@ var AutocompleteRenderNew = {
     if (item.id != -1) {
       itemName = this.formatMatchedCharacters(itemName, term);
     }
-    var cx = React.addons.classSet;
-    var itemClasses = cx({
+    var itemClasses = classNames({
       'Autocomplete-resultsItem': true,
       'u-italics': item.id == -1
     });

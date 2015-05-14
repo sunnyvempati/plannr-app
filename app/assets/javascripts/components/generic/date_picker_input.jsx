@@ -7,8 +7,7 @@ var DatePickerInput = React.createClass({
     }
   },
   render: function() {
-    var cx = React.addons.classSet;
-    var inputClasses = cx({
+    var inputClasses = classNames({
       'FormInput-field': true,
       'is-invalid': !this.isValid()
     });
