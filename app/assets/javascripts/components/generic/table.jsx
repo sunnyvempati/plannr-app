@@ -39,7 +39,7 @@ var Table = React.createClass({
           </div>
           <div className="Toolbar-search">
             <i className="fa fa-search tableIcon"></i>
-            <input placeholder="Search events.."
+            <input placeholder={this.props.searchPlaceholder}
                    className="SearchInput"
                    onChange={this.props.handleSearch} />
           </div>

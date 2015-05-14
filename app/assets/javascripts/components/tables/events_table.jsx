@@ -85,6 +85,7 @@ var EventsTable = React.createClass({
           showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}
           extraPadding={true}
+          searchPlaceholder="Search Events..."
         />
       </div>
     );
