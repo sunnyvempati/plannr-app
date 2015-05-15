@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'events/:event_id/search_other_vendors', to: 'vendors#search_vendors_not_in_event'
   get 'events/:event_id/search_event_contacts', to: 'event_contacts#search'
   get 'events/:event_id/search_event_vendors', to: 'event_vendors#search'
+  get 'events/:event_id/search_event_tasks', to: 'tasks#search_in_events'
   get 'search_users', to: 'users#search'
   get 'search_clients', to: 'contacts#search_clients'
   get 'search_events', to: 'events#search'
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
+  post '/tasks/mass_delete', to:'tasks#mass_destroy'
 
   # event_vendors
   post 'events/:event_id/vendors', to:'event_vendors#create'

@@ -5,7 +5,7 @@ var EventTaskListTile = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("tasks", function(results) {
+    $.get("tasks.json", function(results) {
       if (this.isMounted()) {
         this.setState({
           tableData: results.tasks
@@ -18,9 +18,7 @@ var EventTaskListTile = React.createClass({
   },
   render: function() {
     return (
-      <div className="EventTaskListTile">
-        Tasksss
-      </div>
+      <EventTasksTable data={this.state.tableData} onUpdatedData={this.updateData} />
     );
   }
 });
