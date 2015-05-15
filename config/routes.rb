@@ -60,4 +60,5 @@ Rails.application.routes.draw do
 
    # vendors
   post '/vendors/search', to: 'vendors#search'
+  post '/vendors/mass_delete', to:'vendors#mass_destroy'
 end
