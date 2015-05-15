@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'events/:event_id/search_event_contacts', to: 'event_contacts#search'
   get 'events/:event_id/search_event_vendors', to: 'event_vendors#search'
   get 'events/:event_id/search_event_tasks', to: 'tasks#search_in_events'
+  get 'search_tasks', to: 'tasks#search'
   get 'search_users', to: 'users#search'
   get 'search_clients', to: 'contacts#search_clients'
   get 'search_events', to: 'events#search'

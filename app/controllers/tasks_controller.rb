@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: Task.all.order(order) }
+      format.json { render json: Task.all.order(order), each_serializer: TaskWithEventSerializer }
     end
   end
 

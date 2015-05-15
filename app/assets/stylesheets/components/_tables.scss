@@ -19,6 +19,7 @@
 
 .Table-data {
   width: 90%;
+  padding-top: $size-increment*2;
 }
 
 .Table {
@@ -32,6 +33,9 @@
     align-items: center;
     @include font($body-1-font, normal, 0);
     color: $black-half;
+    &.extraPad {
+      padding-left: $size-increment*3;
+    }
     &Item {
       text-align: left;
       flex: 1;

@@ -13,7 +13,8 @@ var Table = React.createClass({
                   columns={this.props.columns}
                   rowChanged={this.props.rowChanged}
                   checked={checked}
-                  hideCheckbox={hideCheckbox} />
+                  hideCheckbox={hideCheckbox}
+                  extraPad={this.props.extraPadding} />
       )
     }, this);
     return rows;

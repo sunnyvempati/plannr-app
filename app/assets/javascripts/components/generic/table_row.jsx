@@ -8,6 +8,7 @@ var TableRow = React.createClass({
     }, this);
     var rowClasses = classNames({
       'Table-row': true,
+      'extraPad': this.props.extraPad,
       'selected': this.props.checked
     });
     return (
