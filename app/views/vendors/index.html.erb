@@ -1,31 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= react_component("VendorsTable", prerender: true) %>
 
-<h1>Listing Vendors</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Phone</th>
-    <th>Primary Contact</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @vendors.each do |vendor| %>
-    <tr>
-      <td><%= vendor.name %></td>
-      <td><%= vendor.location %></td>
-      <td><%= vendor.phone %></td>
-      <td><%= vendor.primary_contact %></td>
-      <td><%= link_to 'Show', vendor %></td>
-      <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
-      <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
 <br /><br /><br />
 <a href="/tasks/new">New Vendor</a>

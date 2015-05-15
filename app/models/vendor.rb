@@ -20,7 +20,7 @@ class Vendor < ActiveRecord::Base
 
   scope :search, ->(term) {
     wildcard_text = "'%#{term}%'"
-    Vendor.where("lower(vendors.name) LIKE #{wildcard_text}");
+    Vendor.where("lower(vendors.name) LIKE #{wildcard_text}")
   }
 
   # TODO: case sensitivity in name

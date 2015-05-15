@@ -17,6 +17,7 @@ var EventsTable = React.createClass({
     location.href = "/events/" + id + "/";
   },
   getCustomRows: function() {
+    var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
     return this.state.events.map(function(event) {
       var checked = this.state.checkedItems.indexOf(event.id) > -1;
       return(
@@ -24,7 +25,7 @@ var EventsTable = React.createClass({
           <div className="EventsTable-rowHeader">
             <div className="EventsTable-rowName">
               <div className="EventsTable-checkbox">
-                <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} />
+                <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
               </div>
               <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
                 {event.name}
@@ -54,9 +55,9 @@ var EventsTable = React.createClass({
       this.setState({events: result.events});
     }.bind(this));
   },
-  sortEntities: function() {
+  sortItems: function() {
     return [
-      {entity: "name", display: "Name"},
+      {entity: "name", display: "Name", default: true},
       {entity: "start_date", display: "Start Date"}
     ]
   },
@@ -66,39 +67,25 @@ var EventsTable = React.createClass({
       this.setState({events: this.spliceResults(this.state.events), checkedItems: []});
     }.bind(this));
   },
+  actionItems: function() {
+    return [
+      {name: "Delete", handler: this.deleteEvents}
+    ]
+  },
   render: function() {
     return (
       <div className="EventsTableContainer">
-        <div className="EventsTable-actions">
-          <div className="Actions-search">
-            <i className="fa fa-search tableIcon"></i>
-            <input placeholder="Search events.."
-                   className="SearchInput"
-                   onChange={this.search} />
-          </div>
-          <div className="Actions-sort">
-            <SortMenu entities={this.sortEntities()}
-                      sort={this.sortBy}
-                      defaultEntity="name" />
-          </div>
-          <div>
-            <i className="fa fa-tag tableIcon"></i>
-          </div>
-          <div>
-            <i className="fa fa-folder tableIcon"></i>
-          </div>
-          <div onClick={this.deleteEvents}>
-            <i className="fa fa-trash tableIcon u-clickable"></i>
-          </div>
-        </div>
-        <div className="EventsTable-table">
-          <Table
-            results={this.props.data}
-            showHeaders={false}
-            useCustomRowComponent={true}
-            customRows={this.getCustomRows()}
-          />
-        </div>
+        <Table
+          useCustomRowComponent={true}
+          customRows={this.getCustomRows()}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sortBy}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+          searchPlaceholder="Search Events..."
+        />
       </div>
     );
   }

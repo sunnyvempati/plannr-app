@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'sign_up', to: 'users#new'
   post 'sign_up', to: 'users#create'
   post 'toggle_admin', to: 'users#toggle_admin'
-  post 'destroy_users', to: 'users#mass_destroy'
+  post '/users/mass_delete', to: 'users#mass_delete'
 
   # password reset
   get 'reset_password_request', to: 'password_resets#new'
@@ -27,9 +27,15 @@ Rails.application.routes.draw do
   # searchable event endpoints
   get 'events/:event_id/search_other_contacts', to: 'contacts#search_contacts_not_in_event'
   get 'events/:event_id/search_other_vendors', to: 'vendors#search_vendors_not_in_event'
+  get 'events/:event_id/search_event_contacts', to: 'event_contacts#search'
+  get 'events/:event_id/search_event_vendors', to: 'event_vendors#search'
+  get 'events/:event_id/search_event_tasks', to: 'tasks#search_in_events'
+  get 'search_tasks', to: 'tasks#search'
   get 'search_users', to: 'users#search'
   get 'search_clients', to: 'contacts#search_clients'
+  get 'search_contacts', to: 'contacts#search'
   get 'search_events', to: 'events#search'
+
 
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
@@ -38,6 +44,7 @@ Rails.application.routes.draw do
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
+  post '/tasks/mass_delete', to:'tasks#mass_destroy'
 
   # event_vendors
   post 'events/:event_id/vendors', to:'event_vendors#create'
@@ -46,6 +53,7 @@ Rails.application.routes.draw do
 
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
+  post '/contacts/mass_delete', to:'contacts#mass_destroy'
 
   # TODO: specify Event routes
   post 'destroy_events', to: 'events#mass_delete'
@@ -54,4 +62,5 @@ Rails.application.routes.draw do
 
    # vendors
   post '/vendors/search', to: 'vendors#search'
+  post '/vendors/mass_delete', to:'vendors#mass_destroy'
 end

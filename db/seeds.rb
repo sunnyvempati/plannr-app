@@ -57,6 +57,7 @@ def create_events
       event.budget = e[:budget]
       event.description = Faker::Lorem.paragraph
     end
+    EventContact.find_or_create_by!(event: created_event, contact: created_event.client)
     puts "Created Event: #{created_event.name}" if created_event
   end
 end
@@ -109,7 +110,9 @@ def create_tasks
                       description: "#{Faker::Hacker.say_something_smart}",
                       event: Event.find_by_name(t[:event]),
                       owner: User.find_by_email(t[:owner]),
-                      company: Company.find_by_name(t[:company]))
+                      company: Company.find_by_name(t[:company]),
+                      assigned_to: User.find_by_email(t[:assigned_to]),
+                      deadline: Date.today + 1.days)
       puts "Created Task: #{created_task.name}" if created_task
     end
   end

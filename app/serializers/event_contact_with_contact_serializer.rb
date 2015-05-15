@@ -1,5 +1,5 @@
 class EventContactWithContactSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :contact_id
+  attributes :id, :name, :phone, :email, :contact_id
 
   def name
     object.contact.name
@@ -7,5 +7,9 @@ class EventContactWithContactSerializer < ActiveModel::Serializer
 
   def email
     object.contact.email
+  end
+
+  def phone
+    object.contact.phone
   end
 end

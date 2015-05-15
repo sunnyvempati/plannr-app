@@ -16,7 +16,13 @@ class EventVendorsController < ApplicationController
   end
 
   def vendors
-    render json: EventVendor.all.where(event_id: params[:event_id]), each_serializer: EventVendorWithVendorSerializer
+    order = sort_params ? "vendors.#{sort_params[:entity]} #{sort_params[:order]}" : 'vendors.name asc'
+    vendors = EventVendor.vendors(params[:event_id]).order(order)
+    render json: vendors, each_serializer: EventVendorWithVendorSerializer
+  end
+
+  def search
+    render json: EventVendor.search(params[:event_id], search_params[:text]), each_serializer: EventVendorWithVendorSerializer
   end
 
   def mass_delete
@@ -35,4 +41,11 @@ class EventVendorsController < ApplicationController
     params.require(:event_vendor).permit(:vendor_id, :name)
   end
 
+  def search_params
+    params.require(:search).permit(:text)
+  end
+
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
+  end
 end

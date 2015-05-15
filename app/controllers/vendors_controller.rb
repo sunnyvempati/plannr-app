@@ -4,8 +4,12 @@ class VendorsController < ApplicationController
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @vendors = Vendor.all
     @header = "Vendors"
+    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
+    respond_to do |format|
+      format.html
+      format.json { render json: Vendor.all.order(order) }
+    end
   end
 
   def show
@@ -52,6 +56,10 @@ class VendorsController < ApplicationController
     end
   end
 
+  def mass_destroy
+    render_success Vendor.destroy_all(id: mass_destroy_params[:ids])
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_vendor
@@ -65,5 +73,12 @@ class VendorsController < ApplicationController
   def vendor_params
     params.require(:vendor).permit(:name, :location, :phone, :primary_contact).merge(owner: current_user)
   end
-end
 
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
+  end
+
+  def mass_destroy_params
+    params.require(:destroy_opts).permit(ids: [])
+  end
+end

@@ -14,14 +14,21 @@ var CompanyUserRow = React.createClass({
   },
   render: function() {
     var data = this.props.data;
+    var rowClasses = classNames({
+      'Table-row': true,
+      'selected': this.props.checked
+    });
     return (
-      <div className="Table-row">
-        <div className="Table-rowItem u-flexGrow-1">
-          <CheckboxInput onChange={this.props.checkChanged} value={this.props.data["id"]} checked={this.props.checked} />
+      <div className={rowClasses}>
+        <div className="Table-checkbox u-flexGrow-1">
+          <CheckboxInput onChange={this.props.checkChanged}
+                         value={data.id}
+                         checked={this.props.checked}
+                         hideCheckbox={this.props.hideCheckbox} />
         </div>
-        <div className="Table-rowItem u-flexGrow-3">{data["name"]}</div>
-        <div className="Table-rowItem u-flexGrow-4">{data["email"]}</div>
-        <div className="Table-rowItem u-flexGrow-2">
+        <div className="Table-rowItem u-flexGrow-10">{data.name}</div>
+        <div className="Table-rowItem u-flexGrow-6">{data.email}</div>
+        <div className="Table-rowItem u-flexGrow-4">
           <ToggleButton checked={this.state.isAdmin} handleClick={this.toggleAdmin} />
         </div>
       </div>

@@ -10,6 +10,16 @@ class Task < ActiveRecord::Base
   # scopes
   scope :event_tasks, ->(event_id) { where(event_id: event_id)}
 
+  scope :search_in_event, ->(event_id, term) {
+    wildcard_text = "'%#{term}%'"
+    event_tasks(event_id).where("lower(tasks.name) LIKE #{wildcard_text}")
+  }
+
+  scope :search, ->(term) {
+    wildcard_text = "'%#{term}%'"
+    where("lower(tasks.name) LIKE #{wildcard_text}")
+  }
+
   def self.header
     "Tasks"
   end

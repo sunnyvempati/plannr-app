@@ -1,4 +1,4 @@
-.SortMenu {
+.TableMenu {
   background-color: $body-bg;
   position: absolute;
   z-index: 10000;
@@ -6,12 +6,12 @@
   width: 300px;
 }
 
-.SortMenu-item,
-.SortMenu-header {
+.TableMenu-item,
+.TableMenu-header {
   padding: 8px 8px 8px 24px;
 }
 
-.SortMenu-item {
+.TableMenu-item {
   color: $black-three-fourths;
   display: flex;
   align-items: center;
@@ -24,8 +24,8 @@
   }
 }
 
-.SortMenu-order {
-  font-size: 20px;
+.TableMenu-order {
+  font-size: $body-1-font;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -34,7 +34,7 @@
   color: $black-three-fourths;
 }
 
-.SortMenu-header {
+.TableMenu-header {
   color: $black-quarter;
   padding-top: $size-increment*2;
 }
