@@ -13,3 +13,19 @@ cocktail_mixer:
   budget: 26000
   owner: raven@bom.com
   company: Brotherhood of Mutants
+
+third_quarter_strategy:
+  name: Third Quarter Strategy Session
+  start_date: 08/05/2015
+  end_date: 08/05/2015
+  budget: 500
+  owner: raven@bom.com
+  company: Brotherhood of Mutants
+
+holiday_party:
+  name: X-Men Holiday Party
+  start_date: 12/18/2015
+  end_date: 12/19/2015
+  budget: 20000
+  owner: raven@bom.com
+  company: Brotherhood of Mutants
