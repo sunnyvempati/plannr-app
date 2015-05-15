@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'search_tasks', to: 'tasks#search'
   get 'search_users', to: 'users#search'
   get 'search_clients', to: 'contacts#search_clients'
+  get 'search_contacts', to: 'contacts#search'
   get 'search_events', to: 'events#search'
 
 
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
 
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
+  post '/contacts/mass_delete', to:'contacts#mass_destroy'
 
   # TODO: specify Event routes
   post 'destroy_events', to: 'events#mass_delete'

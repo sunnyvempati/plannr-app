@@ -29,6 +29,11 @@ class Contact < ActiveRecord::Base
     .limit(5)
   }
 
+  scope :search, ->(term) {
+    wildcard_text = "'%#{term.downcase}%'"
+    where("lower(contacts.name) LIKE #{wildcard_text}")
+  }
+
   validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
   validates :name, :presence => true
   validates_format_of :email,

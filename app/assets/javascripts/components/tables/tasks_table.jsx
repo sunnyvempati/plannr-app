@@ -18,11 +18,6 @@ var TasksTable = React.createClass({
       {name: "event", grow: 10}
     ];
   },
-  actionItems: function() {
-    return [
-      {name: "Delete", handler: this.deleteTasks}
-    ]
-  },
   sortItems: function() {
     return [
       {entity: "name", display: "Name", default: true},
