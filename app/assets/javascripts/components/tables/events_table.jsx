@@ -76,7 +76,6 @@ var EventsTable = React.createClass({
     return (
       <div className="EventsTableContainer">
         <Table
-          results={this.props.data}
           useCustomRowComponent={true}
           customRows={this.getCustomRows()}
           sortItems={this.sortItems()}

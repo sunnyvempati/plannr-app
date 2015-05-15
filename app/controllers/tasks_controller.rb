@@ -4,11 +4,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = params[:event_id] ? Task.where(event_id: params[:event_id]) : Task.all
     @header = "Tasks"
+    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: @tasks }
+      format.json { render json: Task.all.order(order) }
     end
   end
 

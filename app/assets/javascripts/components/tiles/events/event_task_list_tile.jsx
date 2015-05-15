@@ -18,7 +18,9 @@ var EventTaskListTile = React.createClass({
   },
   render: function() {
     return (
-      <EventTasksTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      <EventTasksTable data={this.state.tableData}
+                       onUpdatedData={this.updateData}
+                       extraPadding={false} />
     );
   }
 });
