@@ -57,6 +57,7 @@ def create_events
       event.budget = e[:budget]
       event.description = Faker::Lorem.paragraph
     end
+    EventContact.find_or_create_by!(event: created_event, contact: created_event.client)
     puts "Created Event: #{created_event.name}" if created_event
   end
 end

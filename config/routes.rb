@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'events/:event_id/search_other_contacts', to: 'contacts#search_contacts_not_in_event'
   get 'events/:event_id/search_other_vendors', to: 'vendors#search_vendors_not_in_event'
   get 'events/:event_id/search_event_contacts', to: 'event_contacts#search'
+  get 'events/:event_id/search_event_vendors', to: 'event_vendors#search'
   get 'search_users', to: 'users#search'
   get 'search_clients', to: 'contacts#search_clients'
   get 'search_events', to: 'events#search'
