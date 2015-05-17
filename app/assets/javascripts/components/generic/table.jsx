@@ -4,6 +4,9 @@ var Table = React.createClass({
       showHeaders: true
     };
   },
+  handleRowClick: function(data) {
+    this.props.onClick(data);
+  },
   getRows: function() {
     var hideCheckbox = this.props.checkedItems.length > 0 ? false : true;
     var rows = this.props.results.map(function(result) {
@@ -14,7 +17,9 @@ var Table = React.createClass({
                   rowChanged={this.props.rowChanged}
                   checked={checked}
                   hideCheckbox={hideCheckbox}
-                  extraPad={this.props.extraPadding} />
+                  extraPad={this.props.extraPadding}
+                  key={result.id}
+                  onClick={this.handleRowClick.bind(this, result)} />
       )
     }, this);
     return rows;
@@ -32,6 +37,7 @@ var Table = React.createClass({
     var message = noRows ? "No items" : "";
     var padClass = this.props.extraPadding ? "extraPad" : "";
     var actionClass = this.props.showActions ? "" : "u-hidden";
+    var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
       <div className="TableContainer">
         <div className={"Table-toolbar " + padClass}>
@@ -50,7 +56,9 @@ var Table = React.createClass({
           </div>
         </div>
         <div className="Table-data">
-          {tableRows}
+          <ReactCSSTransitionGroup transitionName="Table-row">
+            {tableRows}
+          </ReactCSSTransitionGroup>
         </div>
       </div>
     );

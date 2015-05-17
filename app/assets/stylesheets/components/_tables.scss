@@ -52,6 +52,13 @@
       background-color: $plannr-teal;
       color: $white-three-fourths;
     }
+    &-enter {
+      opacity: 0.01;
+      transition: opacity .2s;
+      &-active {
+        opacity: 1;
+      }
+    }
   }
   &-checkbox {
     padding-left: $size-increment*3;

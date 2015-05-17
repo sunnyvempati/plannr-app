@@ -49,22 +49,29 @@ var ContactsTable = React.createClass({
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
+  openContactModal: function(data) {
+    var modal = React.createElement(ShowContactModal, {data: data});
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
-      <Table
-        results={this.state.contacts}
-        columns={this.getColumns()}
-        useCustomRowComponent={false}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
-        handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
-        actionItems={this.actionItems()}
-        extraPadding={true}
-        searchPlaceholder="Search Contacts..."
-      />
+      <div>
+        <Table
+          results={this.state.contacts}
+          columns={this.getColumns()}
+          useCustomRowComponent={false}
+          checkedItems={this.state.checkedItems}
+          rowChanged={this.rowChanged}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sortBy}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+          searchPlaceholder="Search Contacts..."
+          onClick={this.openContactModal}
+        />
+      </div>
     );
   }
 });
