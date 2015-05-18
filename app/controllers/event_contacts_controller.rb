@@ -22,6 +22,13 @@ class EventContactsController < ApplicationController
            each_serializer: EventContactWithContactSerializer
   end
 
+  def events
+    order = sort_params ? "contacts.#{sort_params[:entity]} #{sort_params[:order]}" : 'events.name asc'
+    events = EventContact.events(params[:contact_id]).order(order)
+    render json: events,
+           each_serializer: EventContactWithEventSerializer
+  end
+
   def search
     render json: EventContact.search(params[:event_id], search_params[:text]), each_serializer: EventContactWithContactSerializer
   end

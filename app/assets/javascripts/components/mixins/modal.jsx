@@ -3,12 +3,14 @@ var Modal = {
     this.overlayNode = document.createElement('div');
     this.overlayNode.className = 'Overlay';
     document.body.appendChild(this.overlayNode);
+    $("body").addClass("u-noScroll");
   },
   closeModal: function() {
     $("#main").removeClass("dialogOpen");
     React.unmountComponentAtNode(document.getElementById('modal'));
   },
   componentWillUnmount: function() {
+    $("body").removeClass("u-noScroll");
     document.body.removeChild(this.overlayNode);
   },
   render: function() {

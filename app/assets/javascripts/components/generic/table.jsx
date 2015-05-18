@@ -1,7 +1,8 @@
 var Table = React.createClass({
   getDefaultProps: function() {
     return {
-      showHeaders: true
+      showToolbar: true,
+      extraPadding: false
     };
   },
   handleRowClick: function(data) {
@@ -31,29 +32,40 @@ var Table = React.createClass({
       );
     }
   },
+  renderToolbar: function() {
+    var actionClasses = classNames({
+      'Toolbar-actions': true,
+      'u-hidden': !this.props.showActions
+    })
+    var toolbarClasses = classNames({
+      'Table-toolbar': true,
+      'extraPad': this.props.extraPadding
+    });
+    return (
+      <div className={toolbarClasses}>
+        <div className={actionClasses}>
+          {this.actionMenu()}
+        </div>
+        <div className="Toolbar-search">
+          <i className="fa fa-search tableIcon"></i>
+          <input placeholder={this.props.searchPlaceholder}
+                 className="SearchInput"
+                 onChange={this.props.handleSearch} />
+        </div>
+        <div className="Toolbar-sort">
+          <TableSort items={this.props.sortItems}
+                     handleSortClick={this.props.handleSortClick} />
+        </div>
+      </div>
+    );
+  },
   render: function() {
     var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.getRows();
-    var noRows = tableRows.length == 0;
-    var message = noRows ? "No items" : "";
-    var padClass = this.props.extraPadding ? "extraPad" : "";
-    var actionClass = this.props.showActions ? "" : "u-hidden";
+    var message = tableRows.length == 0 ? "No items" : "";
+    var renderedToolbar = this.props.showToolbar ? this.renderToolbar() : null;
     return (
       <div className="TableContainer">
-        <div className={"Table-toolbar " + padClass}>
-          <div className={"Toolbar-actions " + actionClass}>
-            {this.actionMenu()}
-          </div>
-          <div className="Toolbar-search">
-            <i className="fa fa-search tableIcon"></i>
-            <input placeholder={this.props.searchPlaceholder}
-                   className="SearchInput"
-                   onChange={this.props.handleSearch} />
-          </div>
-          <div className="Toolbar-sort">
-            <TableSort items={this.props.sortItems}
-                       handleSortClick={this.props.handleSortClick} />
-          </div>
-        </div>
+        {renderedToolbar}
         <div className="Table-data">
           {tableRows}
         </div>
