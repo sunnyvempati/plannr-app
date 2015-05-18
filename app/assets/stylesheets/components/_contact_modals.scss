@@ -1,0 +1,16 @@
+.ContactModal {
+  height: 500px;
+  width: 600px;
+}
+
+.ContactModal-close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.CloseContent {
+  opacity: 0.5;
+  font-size: 16px;
+  padding: $size-increment*2;
+}
+

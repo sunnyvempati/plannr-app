@@ -14,7 +14,7 @@ var Modal = {
   render: function() {
     return (
       <div className="ModalContainer">
-        <div className="Modal-dialog" onBlur={this.closeModal} id="dialog">
+        <div className="Modal-dialog" id="dialog">
           <div className="Modal-content">
             {this.renderModalContent()}
           </div>

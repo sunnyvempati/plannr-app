@@ -37,7 +37,6 @@ var Table = React.createClass({
     var message = noRows ? "No items" : "";
     var padClass = this.props.extraPadding ? "extraPad" : "";
     var actionClass = this.props.showActions ? "" : "u-hidden";
-    var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
     return (
       <div className="TableContainer">
         <div className={"Table-toolbar " + padClass}>
@@ -56,9 +55,7 @@ var Table = React.createClass({
           </div>
         </div>
         <div className="Table-data">
-          <ReactCSSTransitionGroup transitionName="Table-row">
-            {tableRows}
-          </ReactCSSTransitionGroup>
+          {tableRows}
         </div>
       </div>
     );
