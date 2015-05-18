@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514181812) do
+ActiveRecord::Schema.define(version: 20150518204901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "attachment_limits", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "get_count"
+    t.integer  "put_count"
+    t.integer  "space_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "attachment_statuses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "get_count"
+    t.integer  "put_count"
+    t.integer  "space_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "attachments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
