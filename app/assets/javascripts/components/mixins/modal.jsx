@@ -16,6 +16,9 @@ var Modal = {
       <div className="ModalContainer">
         <div className="Modal-dialog" id="dialog">
           <div className="Modal-content">
+            <div className="Modal-close" onClick={this.closeModal}>
+              <i className="fa fa-times"></i>
+            </div>
             {this.renderModalContent()}
           </div>
         </div>

@@ -1,16 +1,45 @@
 .ContactModal {
-  height: 500px;
-  width: 600px;
+  width: 800px;
+  padding: $size-increment*4;
+  background-color: $modal-bg;
+  position: relative;
 }
 
-.ContactModal-close {
+.Modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  @include font(24px, 500, 0);
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+.ContactModal-header {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
 }
 
-.CloseContent {
-  opacity: 0.5;
-  font-size: 16px;
-  padding: $size-increment*2;
+.ContactModal-headerIcon {
+  font-size: 24px;
+  color: $black-half;
 }
 
+.ContactModal-title {
+  @include font(16px, normal, 100);
+  padding-left: $size-increment*4;
+  color: $black-half;
+}
+
+.ContactModal-infoContainer {
+  display: flex;
+  >* {
+    flex: 1;
+  }
+}
+
+.ContactModal-info {
+  margin: $size-increment*2;
+  background-color: $body-bg;
+  height: 300px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+}
