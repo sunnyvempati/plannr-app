@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150514181812) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "attachments", force: :cascade do |t|
+  create_table "attachments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "file_attachment"
     t.datetime "created_at",      null: false
