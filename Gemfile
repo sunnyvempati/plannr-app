@@ -26,6 +26,10 @@ gem 'active_model_serializers'
 gem 'faker'
 gem 'autoprefixer-rails'
 
+gem 'carrierwave', '~> 0.10.0'
+#gem 'fog-aws', '~> 0.2.2'
+gem 'fog', '~> 1.24.0'
+
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'

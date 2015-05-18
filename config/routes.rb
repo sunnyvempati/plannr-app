@@ -54,4 +54,8 @@ Rails.application.routes.draw do
 
    # vendors
   post '/vendors/search', to: 'vendors#search'
+
+  # attachments
+  resources :attachments, only: [:index, :new, :create, :destroy]
+
 end
