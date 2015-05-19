@@ -68,12 +68,12 @@ def create_vendors
   5.times do
     @vendors.values.each do |v|
       v.symbolize_keys!
-      created_vendor = Vendor.create!(name: Faker::Company.name,
-                   location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
-                   phone: "309-999-9999",
-                   primary_contact: Faker::Name.name,
-                   owner: User.find_by_email(v[:owner]),
-                   company: Company.find_by_name(v[:company]))
+      created_vendor = Vendor.create!( name: Faker::Company.name,
+                                       location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
+                                       phone: "309-999-9999",
+                                       primary_contact: Faker::Name.name,
+                                       owner: User.find_by_email(v[:owner]),
+                                       company: Company.find_by_name(v[:company]))
       puts "Created Vendor: #{created_vendor.name}" if created_vendor
     end
   end
@@ -85,14 +85,15 @@ def create_contacts
   10.times do
     @contacts.values.each do |c|
       c.symbolize_keys!
-      created_contact = Contact.create!(name: Faker::Name.name,
-                                        email: Faker::Internet.email,
-                                        phone: "309-999-9999",
-                                        organization: Faker::Company.name,
-                                        description: Faker::Lorem.sentence,
-                                        category: 1,
-                                        owner: User.find_by_email(c[:owner]),
-                                        company: Company.find_by_name(c[:company]))
+      created_contact =
+      Contact.create!(name: Faker::Name.name,
+                      email: Faker::Internet.email,
+                      phone: "309-999-9999",
+                      organization: Faker::Company.name,
+                      description: Faker::Lorem.sentence,
+                      category: 1,
+                      owner: User.find_by_email(c[:owner]),
+                      company: Company.find_by_name(c[:company]))
       puts "Created Contact: #{created_contact.name}" if created_contact
     end
   end
@@ -104,12 +105,11 @@ def create_tasks
   5.times do
     @tasks.values.each do |t|
       t.symbolize_keys!
-      created_task = Task.create!(
-                      name: "#{Faker::Hacker.verb} #{Faker::Hacker.noun}",
-                      description: "#{Faker::Hacker.say_something_smart}",
-                      event: Event.find_by_name(t[:event]),
-                      owner: User.find_by_email(t[:owner]),
-                      company: Company.find_by_name(t[:company]))
+      created_task = Task.create!(name: "#{Faker::Hacker.verb} #{Faker::Hacker.noun}",
+                                  description: "#{Faker::Hacker.say_something_smart}",
+                                  event: Event.find_by_name(t[:event]),
+                                  owner: User.find_by_email(t[:owner]),
+                                  company: Company.find_by_name(t[:company]))
       puts "Created Task: #{created_task.name}" if created_task
     end
   end
@@ -124,7 +124,13 @@ def create_attachment_limits
     end
   end
 
+  company_limit = AttachmentLimit.find_by(@attachment_limits['company_limit'])
+  Company.all.each do |c|
+    c.attachment_limit = company_limit
+    c.save
+  end
 end
+
 
 # commands
 # ----

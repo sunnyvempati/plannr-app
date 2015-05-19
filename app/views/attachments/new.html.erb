@@ -14,6 +14,7 @@
     <%= f.text_field :name %>
     <%= f.label :file_attachment %>
     <%= f.file_field :file_attachment %>
+    <%= f.hidden_field :file_attachment_cache %>
     <%= f.submit "Save", class: "btn btn-primary" %>
   <% end %>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518204901) do
+ActiveRecord::Schema.define(version: 20150519002220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,24 +26,28 @@ ActiveRecord::Schema.define(version: 20150518204901) do
   end
 
   create_table "attachment_statuses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.integer  "get_count"
-    t.integer  "put_count"
-    t.integer  "space_count"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "get_count",   default: 0
+    t.integer  "put_count",   default: 0
+    t.float    "space_count", default: 0.0
+    t.uuid     "company_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "attachments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
     t.string   "file_attachment"
+    t.uuid     "owner_id"
+    t.uuid     "company_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
   create_table "companies", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.uuid     "attachment_limit_id"
   end
 
   create_table "contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

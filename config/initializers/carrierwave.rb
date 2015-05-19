@@ -14,7 +14,7 @@ class AttachmentFileUploader < CarrierWave::Uploader::Base
 
   CarrierWave.configure do |config|
     config.fog_credentials = {
-      # TODO: move id and ey with DB credentials
+      # TODO: move id and key with DB credentials
       :provider               => 'AWS',                        # required
       :aws_access_key_id      => 'AKIAI2BHUZAVXYKNK7WQ',                        # required
       :aws_secret_access_key  => '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',                        # required
@@ -66,9 +66,9 @@ class AttachmentFileUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_white_list
-    %w(jpg jpeg gif png)
-  end
+  # def extension_white_list
+  #   %w(jpg jpeg gif png)
+  # end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
