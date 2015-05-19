@@ -22,4 +22,8 @@
 config/secrets.yml
 .powenv
 
+# used for rspec output
 output.html
+
+# temp folder used by attachments
+/public/uploads
