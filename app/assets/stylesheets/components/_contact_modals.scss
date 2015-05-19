@@ -38,27 +38,8 @@
   }
 }
 
-.Panel {
-  margin: $size-increment*2;
-  background-color: $body-bg;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
-  padding: $size-increment;
-}
-
-.Panel-title {
-  @include font($title-font, normal, 0);
-  padding: $size-increment*2;
-  color: $black-three-fourths;
-}
-
 .IconWithText {
   color: $black-half;
 }
-
-.PanelIcon {
-  font-size: 16px;
-  padding: $size-increment*2;
-}
-
 
 

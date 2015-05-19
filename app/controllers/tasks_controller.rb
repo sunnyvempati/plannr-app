@@ -46,7 +46,7 @@ class TasksController < ApplicationController
 
   def event_tasks
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
-    render_success Task.event_tasks(params[:event_id]).order(order)
+    render json: Task.event_tasks(params[:event_id]).order(order)
   end
 
   def destroy

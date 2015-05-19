@@ -19,25 +19,39 @@ var ShowContactModal = React.createClass({
   },
   getEventRows: function() {
     return this.state.contactEvents.map(function(event) {
+      // need trailing slash for react router
+      var eventHref = "/events/" + event.event_id + "/";
       return (
-        <div className="Table-row">
-          <div className="u-flexGrow-5">
-            <i className="fa fa-ticket"></i>
-            {event.name}
+        <div className="MiniTable-row">
+          <div className="MiniTable-rowItem u-flexGrow-1">
+            <i className="fa fa-ticket MiniTableIcon"></i>
+            <a href={eventHref} target="_blank">{event.name}</a>
           </div>
-          <div className="u-flexGrow-5">
+          <div className="MiniTable-rowItem u-flexGrow-1 u-flexEnd">
             {event.start_date}
           </div>
         </div>
       )
     }.bind(this))
   },
+  eventsPanel: function() {
+    if (this.state.contactEvents.length > 0) {
+      return (
+        <div className="Panel">
+          <div className="Panel-title">Events</div>
+          <div className="Panel-content">
+            <div className="MiniTable">
+              {this.getEventRows()}
+            </div>
+          </div>
+        </div>
+      );
+    }
+  },
   renderModalContent: function() {
     var contact = this.props.data;
-    var contactEventsShowClasses = classNames({
-      'Panel': true,
-      'u-hidden': this.state.contactEvents.length == 0
-    });
+    var emailHref = "mailto:" + contact.email;
+    var telHref = "tel:+1" + contact.phone;
     return (
       <div className="ContactModal">
         {this.renderCloseModal()}
@@ -57,11 +71,11 @@ var ShowContactModal = React.createClass({
             <div className="Panel-content">
               <div className="IconWithText">
                 <i className="fa fa-envelope PanelIcon"></i>
-                {contact.email}
+                <a href={emailHref}>{contact.email}</a>
               </div>
               <div className="IconWithText">
                 <i className="fa fa-phone PanelIcon"></i>
-                {contact.phone}
+                <a href={telHref}>{contact.phone}</a>
               </div>
               <div className="IconWithText">
                 <i className="fa fa-building PanelIcon"></i>
@@ -69,16 +83,7 @@ var ShowContactModal = React.createClass({
               </div>
             </div>
           </div>
-          <div className={contactEventsShowClasses}>
-            <div className="Panel-title">Events</div>
-            <div className="Panel-content">
-              <Table
-                useCustomRowComponent={true}
-                customRows={this.getEventRows()}
-                showToolbar={false}
-              />
-            </div>
-          </div>
+          {this.eventsPanel()}
         </div>
       </div>
     )
