@@ -52,11 +52,12 @@ def create_events
                                      company: Company.find_by_name(e[:company]))
       event.company = Company.find_by_name(e[:company])
       event.location = Faker::Address.city
-      event.start_date = e[:start_date]
-      event.end_date = e[:end_date]
+      event.start_date = Date.strptime(e[:start_date], '%m/%d/%Y')
+      event.end_date = Date.strptime(e[:end_date], '%m/%d/%Y') if e[:end_date]
       event.budget = e[:budget]
       event.description = Faker::Lorem.paragraph
     end
+    EventContact.find_or_create_by!(event: created_event, contact: created_event.client)
     puts "Created Event: #{created_event.name}" if created_event
   end
 end
@@ -105,11 +106,14 @@ def create_tasks
   5.times do
     @tasks.values.each do |t|
       t.symbolize_keys!
-      created_task = Task.create!(name: "#{Faker::Hacker.verb} #{Faker::Hacker.noun}",
-                                  description: "#{Faker::Hacker.say_something_smart}",
-                                  event: Event.find_by_name(t[:event]),
-                                  owner: User.find_by_email(t[:owner]),
-                                  company: Company.find_by_name(t[:company]))
+      created_task = Task.create!(
+                      name: "#{Faker::Hacker.verb} #{Faker::Hacker.noun}",
+                      description: "#{Faker::Hacker.say_something_smart}",
+                      event: Event.find_by_name(t[:event]),
+                      owner: User.find_by_email(t[:owner]),
+                      company: Company.find_by_name(t[:company]),
+                      assigned_to: User.find_by_email(t[:assigned_to]),
+                      deadline: Date.today + 1.days)
       puts "Created Task: #{created_task.name}" if created_task
     end
   end

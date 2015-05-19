@@ -2,8 +2,22 @@
   owner: storm@xmen.com
   company: X-Men
   event: X-Men Pool Party
+  assigned_to: iceman@xmen.com
 
 2:
   owner: raven@bom.com
   company: Brotherhood of Mutants
   event: Mutant Cocktail Mixer
+  assigned_to: juggernaut@bom.com
+
+3:
+  owner: raven@bom.com
+  company: Brotherhood of Mutants
+  event: X-Men Holiday Party
+  assigned_to: quicksilver@bom.com
+
+4:
+  owner: raven@bom.com
+  company: Brotherhood of Mutants
+  event: X-Men Holiday Party
+  assigned_to: magneto@bom.com

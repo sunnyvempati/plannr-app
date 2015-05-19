@@ -5,8 +5,12 @@ class ContactsController < ApplicationController
   before_action :set_event, only: [:contacts_not_in_event]
 
   def index
-    @contacts = Contact.all
     @header = 'Contacts'
+    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
+    respond_to do |format|
+      format.html
+      format.json { render json: Contact.all.order(order) }
+    end
   end
 
   def show
@@ -41,6 +45,10 @@ class ContactsController < ApplicationController
     render_success search_results
   end
 
+  def search
+    render_success Contact.search(search_params[:text])
+  end
+
   def quick_create
     @contact = Contact.quick_create(quick_create_params[:text])
 
@@ -61,7 +69,15 @@ class ContactsController < ApplicationController
     end
   end
 
+  def mass_destroy
+    render_success Contact.destroy_all(id: mass_destroy_params[:ids])
+  end
+
   private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
   def quick_create_params
     params.require(:quick_contact).permit(:event_id, :text)
@@ -75,8 +91,12 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
   end
 
-  def set_event
-    @event = Event.find(params[:id])
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
+  end
+
+  def mass_destroy_params
+    params.require(:destroy_opts).permit(ids: [])
   end
 
   def contact_params

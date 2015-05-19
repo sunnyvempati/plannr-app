@@ -1,58 +1,73 @@
 var Table = React.createClass({
   getDefaultProps: function() {
     return {
-      showHeaders: true
+      showToolbar: true,
+      extraPadding: false
     };
   },
-  tableRows: function() {
+  handleRowClick: function(data) {
+    this.props.onClick(data);
+  },
+  getRows: function() {
+    var hideCheckbox = this.props.checkedItems.length > 0 ? false : true;
     var rows = this.props.results.map(function(result) {
+      var checked = this.props.checkedItems.indexOf(result.id) > -1;
       return(
         <TableRow data={result}
                   columns={this.props.columns}
-                  headers={this.props.headers} />
+                  rowChanged={this.props.rowChanged}
+                  checked={checked}
+                  hideCheckbox={hideCheckbox}
+                  extraPad={this.props.extraPadding}
+                  key={result.id}
+                  onClick={this.handleRowClick.bind(this, result)} />
       )
     }, this);
     return rows;
   },
-  tableHeaders: function() {
-    var show = this.props.showHeaders;
-    var tableHeaders = show ? this.props.columns.map(function(column) {
-      return(
-        <TableHeader name={column.header} grow={column.grow} />
+  actionMenu: function() {
+    if (this.props.showActions) {
+      return (
+        <TableAction items={this.props.actionItems} />
       );
-    }) : "";
-    var headerClasses = classNames({
-      'Table-row': true,
-      'Table-header': true,
-      'u-hidden': !show
+    }
+  },
+  renderToolbar: function() {
+    var actionClasses = classNames({
+      'Toolbar-actions': true,
+      'u-hidden': !this.props.showActions
+    })
+    var toolbarClasses = classNames({
+      'Table-toolbar': true,
+      'extraPad': this.props.extraPadding
     });
     return (
-      <div className={headerClasses}>
-        {tableHeaders}
+      <div className={toolbarClasses}>
+        <div className={actionClasses}>
+          {this.actionMenu()}
+        </div>
+        <div className="Toolbar-search">
+          <i className="fa fa-search tableIcon"></i>
+          <input placeholder={this.props.searchPlaceholder}
+                 className="SearchInput"
+                 onChange={this.props.handleSearch} />
+        </div>
+        <div className="Toolbar-sort">
+          <TableSort items={this.props.sortItems}
+                     handleSortClick={this.props.handleSortClick} />
+        </div>
       </div>
-    )
+    );
   },
   render: function() {
-    var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.tableRows();
-    var noRows = tableRows.length == 0;
-    var tableClass = classNames({
-      'TableContainer': true,
-      'u-hidden': noRows
-    });
-    var message = noRows ? "No items" : "";
+    var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.getRows();
+    var message = tableRows.length == 0 ? "No items" : "";
+    var renderedToolbar = this.props.showToolbar ? this.renderToolbar() : null;
     return (
-      <div>
-        <span>{message}</span>
-        <div className={tableClass}>
-          <div className="TableContainer-actionBtns">
-            {this.props.buttonList}
-          </div>
-          <div className="TableContainer-table">
-            <div className="Table">
-              {this.tableHeaders()}
-              {tableRows}
-            </div>
-          </div>
+      <div className="TableContainer">
+        {renderedToolbar}
+        <div className="Table-data">
+          {tableRows}
         </div>
       </div>
     );

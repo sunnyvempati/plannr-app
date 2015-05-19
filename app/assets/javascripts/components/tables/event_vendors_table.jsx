@@ -2,25 +2,22 @@ var EventVendorsTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
     return [
-      {name: "id", header: "", grow: 1},
-      {name: "name", header: "Name", grow: 3}
+      {name: "name", grow: 10},
+      {name: "phone", grow: 5},
+      {name: "location", grow: 10}
     ];
   },
-  getCustomRows: function() {
-    return this.props.data.map(function(event_vendor) {
-      var checked = this.state.checkedItems.indexOf(event_vendor.id) > -1;
-      return(
-        <EventVendorRow checkboxChanged={this.rowChanged} data={event_vendor} checked={checked} />
-      );
-    }, this);
+  actionItems: function() {
+    return [
+      {name: "Remove from event", handler: this.removeAssociation}
+    ]
   },
-  buttonList: function() {
-    var disabled = this.state.checkedItems.length == 0;
-    return(
-      <Button onClick={this.DeleteVendorClick} disabled={disabled}>Remove Vendor</Button>
-    );
+  sortItems: function() {
+    return [
+      {entity: "name", display: "Name", default: true}
+    ]
   },
-  DeleteVendorClick: function() {
+  removeAssociation: function() {
     var destroyOpts = {destroy_opts: {event_vendor_ids: this.state.checkedItems}};
     $.post("vendors/mass_delete",destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.props.data);
@@ -29,17 +26,33 @@ var EventVendorsTable = React.createClass({
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
+  sortBy: function(entity, order) {
+    $.get('vendors.json', {sort: {entity: entity, order: order}}, function(result) {
+      this.props.onUpdatedData(result.event_vendors);
+    }.bind(this));
+  },
+  search: function(e) {
+    var term = e.target.value;
+    $.get('search_event_vendors', {search: {text: term || ""}}, function(result) {
+      this.props.onUpdatedData(result.event_vendors);
+    }.bind(this));
+  },
   render: function() {
     return (
-      <div className="EventVendorsTableContainer">
-        <Table
-          results={this.props.data}
-          columns={this.getColumns()}
-          useCustomRowComponent={true}
-          buttonList={this.buttonList()}
-          customRows={this.getCustomRows()}
-        />
-      </div>
+      <Table
+        results={this.props.data}
+        columns={this.getColumns()}
+        useCustomRowComponent={false}
+        checkedItems={this.state.checkedItems}
+        rowChanged={this.rowChanged}
+        sortItems={this.sortItems()}
+        handleSortClick={this.sortBy}
+        handleSearch={this.search}
+        showActions={this.state.checkedItems.length > 0}
+        actionItems={this.actionItems()}
+        extraPadding={false}
+        searchPlaceholder="Search Vendors..."
+      />
     );
   }
 });

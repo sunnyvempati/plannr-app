@@ -3,6 +3,7 @@
 //= require react
 //= require react_ujs
 //= require react-router
+//= require react_router_init
 //= require classnames
 //= require moment
 //= require tether

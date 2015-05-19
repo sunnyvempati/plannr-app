@@ -6,9 +6,6 @@
 
 .u-clickable {
   cursor: pointer;
-  &:hover {
-    opacity: .5;
-  }
 }
 
 .u-italics {
@@ -31,4 +28,13 @@
   position: fixed;
   bottom: 0;
   clip: rect(0,0,0,0);
+}
+
+.u-noScroll {
+  overflow: hidden;
+}
+
+.u-flexEnd {
+  display: flex;
+  justify-content: flex-end;
 }

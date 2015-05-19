@@ -1,0 +1,11 @@
+.TableSort-display {
+  display: flex;
+  >* {
+    padding-right: $size-increment;
+  }
+}
+
+.TableSort-orderDisplay {
+  @include font($body-1-font, 600, 0);
+  color: $black-quarter;
+}

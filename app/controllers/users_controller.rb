@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   before_action :check_admin, only: [:toggle_admin]
 
   def index
-    render json: User.includes(:profile).order("profiles.first_name asc"), each_serializer: CompanyUserSerializer
+    order = sort_params ? "profiles.#{sort_params[:entity]} #{sort_params[:order]}" : 'profiles.first_name asc'
+    render json: User.includes(:profile).order(order), each_serializer: CompanyUserSerializer
   end
 
   def search
@@ -51,9 +52,9 @@ class UsersController < ApplicationController
     render json: {message: "success", admin: user.company_admin}
   end
 
-  def mass_destroy
-    User.destroy(params[:ids])
-    render json: {message: "success"}
+  def mass_delete
+    User.delete_all(id: mass_delete_params[:ids])
+    render_success
   end
 
   private
@@ -68,6 +69,14 @@ class UsersController < ApplicationController
 
   def search_params
     params.require(:search).permit(:text)
+  end
+
+  def mass_delete_params
+    params.require(:destroy_opts).permit(ids: [])
+  end
+
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
   end
 
   def check_invitation!

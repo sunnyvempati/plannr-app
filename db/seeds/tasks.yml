@@ -2,18 +2,22 @@
   owner: sunny@yourplannr.com
   company: Event'd
   event: Catersource Conference 2015
+  assigned_to: sunny@yourplannr.com
 
 2:
   owner: sunny@yourplannr.com
   company: Event'd
   event: Event'd Monthly Happy Hour
+  assigned_to: nicholas@yourplannr.com
 
 3:
   owner: justin@yourplannr.com
   company: Plannr
   event: Plannr Launch Party
+  assigned_to: justin@yourplannr.com
 
 4:
   owner: justin@yourplannr.com
   company: Plannr
   event: Plannr Yearly Board Meeting
+  assigned_to: josh@yourplannr.com

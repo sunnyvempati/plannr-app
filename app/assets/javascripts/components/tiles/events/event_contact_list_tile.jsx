@@ -1,10 +1,9 @@
 var EventContactListTile = React.createClass({
+  mixins: [TableCheckbox],
   getInitialState: function() {
-    var initial = {
-      tableData: [],
-      checkedContacts: []
+    return {
+      tableData: []
     };
-    return initial;
   },
   componentDidMount: function() {
     $.get("contacts", function(results) {
@@ -20,10 +19,7 @@ var EventContactListTile = React.createClass({
   },
   render: function() {
     return (
-      <div className="EventContactListTileContainer">
-        <Link to="tileAll"><i className="fa fa-arrow-left"></i></Link>
-        <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
-      </div>
+      <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
     );
   }
 });

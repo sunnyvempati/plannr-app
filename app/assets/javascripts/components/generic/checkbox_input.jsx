@@ -15,7 +15,8 @@ var CheckboxInput = React.createClass({
   render: function() {
     var checkboxClasses = classNames({
       'Checkbox': true,
-      'is-checked': this.state.checked
+      'is-checked': this.state.checked,
+      'u-hidden': this.props.hideCheckbox
     });
     return (
       <div className="CheckboxContainer" onClick={this.checkChanged}>

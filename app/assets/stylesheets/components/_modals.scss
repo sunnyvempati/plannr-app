@@ -1,0 +1,13 @@
+.Modal-dialog {
+  box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+  background-color: $modal-bg;
+  z-index: $dialog-box-z-index;
+  overflow: scroll;
+  animation-name: center-transition;
+  animation-duration: 0.2s;
+}
+
+@keyframes center-transition {
+  0% {transform: scale(0.5); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
+}

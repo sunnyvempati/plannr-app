@@ -16,7 +16,21 @@ class EventContactsController < ApplicationController
   end
 
   def contacts
-    render json: EventContact.all.where(event_id: params[:event_id]), each_serializer: EventContactWithContactSerializer
+    order = sort_params ? "contacts.#{sort_params[:entity]} #{sort_params[:order]}" : 'contacts.name asc'
+    contacts = EventContact.contacts(params[:event_id]).order(order)
+    render json: contacts,
+           each_serializer: EventContactWithContactSerializer
+  end
+
+  def events
+    order = sort_params ? "contacts.#{sort_params[:entity]} #{sort_params[:order]}" : 'events.name asc'
+    events = EventContact.events(params[:contact_id]).order(order)
+    render json: events,
+           each_serializer: EventContactWithEventSerializer
+  end
+
+  def search
+    render json: EventContact.search(params[:event_id], search_params[:text]), each_serializer: EventContactWithContactSerializer
   end
 
   def mass_delete
@@ -33,5 +47,13 @@ class EventContactsController < ApplicationController
 
   def mass_delete_params
     params.require(:destroy_opts).permit(event_contact_ids: [])
+  end
+
+  def search_params
+    params.require(:search).permit(:text)
+  end
+
+  def sort_params
+    params.require(:sort).permit(:entity, :order) if params[:sort]
   end
 end
