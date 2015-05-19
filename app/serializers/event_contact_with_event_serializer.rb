@@ -1,3 +1,5 @@
+include ActionView::Helpers::DateHelper
+
 class EventContactWithEventSerializer < ActiveModel::Serializer
   attributes :id, :name, :start_date, :event_id
 
@@ -6,6 +8,7 @@ class EventContactWithEventSerializer < ActiveModel::Serializer
   end
 
   def start_date
+    binding.pry
     object.event.start_date
   end
 end
