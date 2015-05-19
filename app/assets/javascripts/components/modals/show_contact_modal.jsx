@@ -6,7 +6,7 @@ var ShowContactModal = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("contacts/events", {contact_id: this.props.data.id},  function(result) {
+    $.get("/contacts/events", {contact_id: this.props.data.id},  function(result) {
       this.setState({contactEvents: result.event_contacts});
     }.bind(this));
   },
