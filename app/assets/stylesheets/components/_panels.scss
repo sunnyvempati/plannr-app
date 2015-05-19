@@ -8,8 +8,8 @@
 }
 
 @keyframes panel-enter {
-  0% {transformY: scale(0.5); opacity: 0;}
-  100% {transform: scale(1); opacity: 1;}
+  0% {transform: translateY(-50px); opacity: 0;}
+  100% {transform: translateY(0px); opacity: 1;}
 }
 
 .Panel-title {

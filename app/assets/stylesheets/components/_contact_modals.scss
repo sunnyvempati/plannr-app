@@ -25,7 +25,7 @@
 }
 
 .ContactModal-title {
-  @include font(16px, normal, 100);
+  @include font(16px, normal, 50);
   padding-left: $size-increment*4;
   color: $black-half;
 }
