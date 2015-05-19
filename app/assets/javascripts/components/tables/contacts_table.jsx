@@ -49,6 +49,10 @@ var ContactsTable = React.createClass({
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
+  openContactModal: function(data) {
+    var modal = React.createElement(ShowContactModal, {data: data});
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
       <Table
@@ -64,8 +68,8 @@ var ContactsTable = React.createClass({
         actionItems={this.actionItems()}
         extraPadding={true}
         searchPlaceholder="Search Contacts..."
+        onClick={this.openContactModal}
       />
     );
   }
 });
-

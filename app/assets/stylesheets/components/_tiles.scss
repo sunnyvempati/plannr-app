@@ -4,6 +4,13 @@
   min-width: 340px;
   margin: $size-increment*2 $size-increment*2 0 0;
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  animation-name: tile-enter;
+  animation-duration: 0.5s;
+}
+
+@keyframes tile-enter {
+  0% {transform: scale(0.5); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
 }
 
 .Tile-header {

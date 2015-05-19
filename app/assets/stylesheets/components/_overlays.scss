@@ -1,0 +1,11 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: $dialog-overlay-z-index;
+  opacity: 0.5;
+  transition: opacity 2s;
+}

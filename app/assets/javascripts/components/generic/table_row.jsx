@@ -3,11 +3,12 @@ var TableRow = React.createClass({
     var rowColumns = this.props.columns.map(function(columnData) {
       var rowClass = "Table-rowItem " + "u-flexGrow-" + columnData.grow;
       return(
-        <div className={rowClass}>{this.props.data[columnData.name]}</div>
+        <div className={rowClass} onClick={this.props.onClick} key={columnData.name}>{this.props.data[columnData.name]}</div>
       );
     }, this);
     var rowClasses = classNames({
       'Table-row': true,
+      'u-clickable': true,
       'extraPad': this.props.extraPad,
       'selected': this.props.checked
     });

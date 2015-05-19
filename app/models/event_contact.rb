@@ -10,6 +10,11 @@ class EventContact < ActiveRecord::Base
     .where("event_id = '#{event_id}'")
   }
 
+  scope :events, ->(contact_id) {
+    includes(:event)
+    .where("contact_id = '#{contact_id}'")
+  }
+
   scope :search, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     contacts(event_id).where("lower(contacts.name) LIKE #{wildcard_text}")

@@ -38,6 +38,16 @@ var EventContactsTable = React.createClass({
       this.props.onUpdatedData(result.event_contacts);
     }.bind(this));
   },
+  openContactModal: function(data) {
+    var contact = {
+      id: data.contact_id,
+      email: data.email,
+      name: data.name,
+      phone: data.phone
+    };
+    var modal = React.createElement(ShowContactModal, {data: contact});
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
       <Table
@@ -53,6 +63,7 @@ var EventContactsTable = React.createClass({
         actionItems={this.actionItems()}
         extraPadding={false}
         searchPlaceholder="Search Contacts..."
+        onClick={this.openContactModal}
       />
     );
   }
