@@ -10,7 +10,7 @@ class Event < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
 
-  validates :name, :start_date, presence: true
+  validates :name, presence: true
   validate :dates
 
   scope :search, ->(term) {
