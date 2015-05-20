@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'search_clients', to: 'contacts#search_clients'
   get 'search_contacts', to: 'contacts#search'
   get 'search_events', to: 'events#search'
+  get 'search_vendors', to: 'vendors#search'
 
 
   # event_contacts

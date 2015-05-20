@@ -1,4 +1,7 @@
 <%= react_component("VendorsTable", prerender: true) %>
 
-<br /><br /><br />
-<a href="/tasks/new">New Vendor</a>
+<%= react_component('ActionButton',
+    class: "ActionButton-event",
+    path: new_vendor_path,
+    label: "Create Vendor",
+    prerender: true) %>

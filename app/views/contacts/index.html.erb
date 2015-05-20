@@ -1,4 +1,8 @@
 <%= react_component("ContactsTable", prerender: true) %>
-<br /><br /><br />
-<a href="/contacts/new">New Contact</a>
+
+<%= react_component('ActionButton',
+    class: "ActionButton-event",
+    path: new_contact_path,
+    label: "Create Contact",
+    prerender: true) %>
 

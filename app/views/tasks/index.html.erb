@@ -1,4 +1,7 @@
 <%= react_component("TasksTable", prerender: true) %>
 
-<br /><br /><br />
-<a href="/tasks/new">New Task</a>
+<%= react_component('ActionButton',
+    class: "ActionButton-event",
+    path: new_task_path,
+    label: "Create Task",
+    prerender: true) %>
