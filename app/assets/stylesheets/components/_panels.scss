@@ -12,10 +12,21 @@
   100% {transform: translateY(0px); opacity: 1;}
 }
 
+.Panel-header {
+  display: flex;
+  >* {
+    flex: 1;
+  }
+}
+
 .Panel-title {
   @include font($title-font, normal, 0);
   padding: $size-increment*2;
   color: $black-three-fourths;
+}
+
+.Panel-editIcon {
+  color: $black-quarter;
 }
 
 .PanelIcon {

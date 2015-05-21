@@ -6,7 +6,7 @@ var ContactsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("contacts.json", function(result) {
+    $.get("/contacts.json", function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -50,7 +50,7 @@ var ContactsTable = React.createClass({
     }.bind(this));
   },
   openContactModal: function(data) {
-    var modal = React.createElement(ShowContactModal, {data: data});
+    var modal = React.createElement(ContactModalRouter, {data: data});
     React.render(modal, document.getElementById('modal'));
   },
   render: function() {

@@ -1,5 +1,4 @@
 var ShowContactModal = React.createClass({
-  mixins: [Modal],
   getInitialState: function() {
     return {
       contactEvents: []
@@ -48,7 +47,7 @@ var ShowContactModal = React.createClass({
       );
     }
   },
-  renderModalContent: function() {
+  render: function() {
     var contact = this.props.data;
     var emailHref = "mailto:" + contact.email;
     var telHref = "tel:+1" + contact.phone;
@@ -65,8 +64,13 @@ var ShowContactModal = React.createClass({
         </div>
         <div className="ContactModal-content">
           <div className="Panel">
-            <div className="Panel-title">
-              Contact Info
+            <div className="Panel-header">
+              <div className="Panel-title">
+                Contact Info
+              </div>
+              <Link to="tileEditContact" params={{header: "Edit Contact"}} className="Panel-editIcon u-flexEnd">
+                <i className="fa fa-pencil PanelIcon"></i>
+              </Link>
             </div>
             <div className="Panel-content">
               <div className="IconWithText">
