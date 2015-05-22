@@ -18,7 +18,10 @@ var EventVendorListTile = React.createClass({
   },
   render: function() {
     return (
-      <EventVendorsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      <div>
+        <ActionButton class="ActionButton-vendors" path="/vendors/new" label="Create Vendor" prerender="true" />
+        <EventVendorsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      </div>
     );
   }
 });

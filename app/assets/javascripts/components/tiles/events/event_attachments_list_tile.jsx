@@ -19,7 +19,11 @@ var EventAttachmentsListTile = React.createClass({
   },
   render: function() {
     return (
-      <EventAttachmentsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      <div>
+        <ActionButton class="ActionButton-attachment" path="/attachments/new" label="Create Attachment" prerender="true" />
+        <EventAttachmentsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      </div>
+
     );
   }
 });

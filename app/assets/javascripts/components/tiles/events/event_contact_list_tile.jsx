@@ -19,7 +19,10 @@ var EventContactListTile = React.createClass({
   },
   render: function() {
     return (
-      <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      <div>
+        <ActionButton class="ActionButton-contacts" path="/contacts/new" label="Create Contact" prerender="true" />
+        <EventContactsTable data={this.state.tableData} onUpdatedData={this.updateData} />
+      </div>
     );
   }
 });

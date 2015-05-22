@@ -51,8 +51,6 @@ var EventAttachmentsTable = React.createClass({
   // },
   render: function() {
     return (
-      <div>
-        <ActionButton class="ActionButton-attachment" path="/attachments/new" label="Create Attachment" prerender="true" />
          <Table
           results={this.props.data}
           columns={this.getColumns()}
@@ -67,7 +65,6 @@ var EventAttachmentsTable = React.createClass({
           extraPadding={false}
           searchPlaceholder="Search Attachments..."
         />
-      </div>
     );
   }
 });
