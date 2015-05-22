@@ -1,6 +1,10 @@
+<% session[:return_to] ||= request.referer %>
+
 <%= react_component("AttachmentFormNew",
                     model: @attachment,
-                    authToken: form_authenticity_token
+                    authToken: form_authenticity_token,
+                    secondaryButtonHref: session[:return_to]
+
     ) %>
 
 

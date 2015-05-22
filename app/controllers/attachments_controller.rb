@@ -17,7 +17,8 @@ class AttachmentsController < ApplicationController
   def create
     @attachment = Attachment.new(event_id: attachment_params[:event_id], description: attachment_params[:description], file_name: attachment_params[:file_attachment][:file_name], file_link: attachment_params[:file_attachment][:file_contents])
     if @attachment.save
-      redirect_to attachments_path, notice: "The attachment #{@attachment.file_name} has been uploaded."
+      binding.pry
+      redirect_to session[:return_to], notice: "The attachment #{@attachment.file_name} has been uploaded."
     else
       render "new"
     end
