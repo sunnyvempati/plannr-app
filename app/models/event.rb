@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   has_many :event_vendors
   has_many :vendors, through: :event_vendors
   has_many :tasks
+  has_many :attachments
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
 
@@ -16,6 +17,12 @@ class Event < ActiveRecord::Base
   scope :search, ->(term) {
     wildcard_text = "'%#{term.downcase}%'"
     where("lower(events.name) LIKE #{wildcard_text}")
+  }
+
+  scope :attachments, ->(event_id) {
+    includes(:attachment)
+    .joins('INNER JOIN attachments ON events.id = attachments.event_id')
+    .where("event_id = '#{event_id}'")
   }
 
   def self.header

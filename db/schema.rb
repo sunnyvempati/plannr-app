@@ -35,12 +35,15 @@ ActiveRecord::Schema.define(version: 20150519002220) do
   end
 
   create_table "attachments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name"
-    t.string   "file_attachment"
+    t.string   "file_name"
+    t.string   "file_extension"
+    t.string   "file_link"
+    t.text     "description"
+    t.uuid     "event_id"
     t.uuid     "owner_id"
     t.uuid     "company_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "companies", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
