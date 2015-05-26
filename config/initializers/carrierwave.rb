@@ -27,6 +27,8 @@ class AttachmentFileUploader < CarrierWave::Uploader::Base
     # }
     # TODO: move
     config.fog_directory =  'plannr-development'
+
+    #config.fog_directory  = "plannr-#{Rails.env}"
     config.fog_public     = false                                   # optional, defaults to true
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
   end
