@@ -1,8 +1,6 @@
 class AttachmentFileUploader < CarrierWave::Uploader::Base
   Fog.credentials_path = Rails.root.join('config/fog_credentials.yml')
 
-
-  storage :fog
   # causes CarrierWave to fail noisily
   # this is to make error obvious while developing
   CarrierWave.configure do |config|
@@ -28,7 +26,7 @@ class AttachmentFileUploader < CarrierWave::Uploader::Base
     #   #:path_style             => true     # use old-style path
     # }
     # TODO: move
-    config.fog_directory  = 'plannr-first-test'                     # required, aka Amazon bucket
+    config.fog_directory =  'plannr-development'
     config.fog_public     = false                                   # optional, defaults to true
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
   end

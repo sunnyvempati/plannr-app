@@ -17,7 +17,7 @@ RSpec.describe Attachment, type: :model do
         uploader_test = Attachment.new
         uploader_test.file_link = File.open(test_file_name)
         uploader_test.save!
-        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
+        expect(uploader_test.file_link.url).to match /.*\/plannr-development.*/
         FakeFS.deactivate!
       end
 
@@ -32,7 +32,7 @@ RSpec.describe Attachment, type: :model do
         uploader_test = Attachment.new
         uploader_test.file_link = File.open(test_file_name)
         uploader_test.save!
-        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
+        expect(uploader_test.file_link.url).to match /.*\/plannr-development.*/
         FakeFS.deactivate!
       end
 
@@ -47,24 +47,24 @@ RSpec.describe Attachment, type: :model do
         uploader_test = Attachment.new
         uploader_test.file_link = File.open(test_file_name)
         uploader_test.save!
-        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
+        expect(uploader_test.file_link.url).to match /.*\/plannr-development.*/
         FakeFS.deactivate!
       end
 
-      it 'uploads a 11MB test file to dev-bucket on s3' do
-        test_file_name = 'test_file_11MB'
-        FakeFS.activate!
-        File.open(test_file_name, 'w') do |f|
-          3000000.times do
-            f.puts('foo')
-          end
-        end
-        uploader_test = Attachment.new
-        uploader_test.file_link = File.open(test_file_name)
-        uploader_test.save!
-        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
-        FakeFS.deactivate!
-      end
+      # it 'uploads a 11MB test file to dev-bucket on s3' do
+      #   test_file_name = 'test_file_11MB'
+      #   FakeFS.activate!
+      #   File.open(test_file_name, 'w') do |f|
+      #     3000000.times do
+      #       f.puts('foo')
+      #     end
+      #   end
+      #   uploader_test = Attachment.new
+      #   uploader_test.file_link = File.open(test_file_name)
+      #   uploader_test.save!
+      #   expect(uploader_test.file_link.url).to match /.*\/plannr-development.*/
+      #   FakeFS.deactivate!
+      # end
     end
   end
 end
