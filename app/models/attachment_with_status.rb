@@ -1,5 +1,6 @@
 class AttachmentWithStatus
-  def initalize(attachment)
+
+  def initialize(attachment)
     @attachment=attachment
   end
 
