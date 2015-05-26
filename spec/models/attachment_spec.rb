@@ -1,26 +1,51 @@
 require 'rails_helper'
+require 'fakefs/spec_helpers'
 
 RSpec.describe Attachment, type: :model do
-  include CarrierWave::Test::Matchers
 
-  before do
-    AttachmentFileUploader.enable_processing = true
-    @uploader = AttachmentFileUploader.new(@attachment, :attachment_file)
+  describe AttachmentFileUploader do
+    include FakeFS::SpecHelpers
 
-    File.open('/Users/justinkobylarz/Documents/test upload file copy.txt') do |f|
-      @yy = @uploader.store!(f)
+    context 'for non-production environment' do
+      it 'uploads a tiny test file to dev-bucket on s3' do
+        FakeFS.activate!
+        File.open('test_file', 'w') do |f|
+          f.puts('foo') # this is required or uploader_test.file.url will be nil
+        end
+        uploader_test = Attachment.new
+        uploader_test.file_link = File.open('test_file')
+        uploader_test.save!
+        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
+        FakeFS.deactivate!
+      end
+
+      it 'uploads a 270KB test file to dev-bucket on s3' do
+        FakeFS.activate!
+        File.open('test_file', 'w') do |f|
+          90000.times do
+            f.puts('foo') # this is required or uploader_test.file.url will be nil
+          end
+        end
+        uploader_test = Attachment.new
+        uploader_test.file_link = File.open('test_file')
+        uploader_test.save!
+        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
+        FakeFS.deactivate!
+      end
+
+      it 'uploads a 1MB test file to dev-bucket on s3' do
+        FakeFS.activate!
+        File.open('test_file', 'w') do |f|
+          360000.times do
+            f.puts('foo') # this is required or uploader_test.file.url will be nil
+          end
+        end
+        uploader_test = Attachment.new
+        uploader_test.file_link = File.open('test_file')
+        uploader_test.save!
+        expect(uploader_test.file_link.url).to match /.*\/plannr-first-test.*/
+        FakeFS.deactivate!
+      end
     end
   end
-
-  it "has some permisions" do
-    #x = @uploader have_permission(0777)
-
-    #expect @uploader have_permission(0777)
-  end
-
-  after do
-    AttachmentFileUploader.enable_processing = false
-    @uploader.remove!
-  end
-
 end

@@ -15,7 +15,7 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = Attachment.new(event_id: attachment_params[:event_id], description: attachment_params[:description], file_name: attachment_params[:file_attachment][:file_name], file_link: attachment_params[:file_attachment][:file_contents])
+    @attachment = AttachmentWithStatus.new(Attachment.new(event_id: attachment_params[:event_id], description: attachment_params[:description], file_name: attachment_params[:file_attachment][:file_name], file_link: attachment_params[:file_attachment][:file_contents]))
 
     # render_entity @attachment do
     #   redirect_to session[:return_to] || attachments_path, notice: "The attachment #{@attachment.file_name} has been uploaded."
@@ -29,7 +29,7 @@ class AttachmentsController < ApplicationController
   end
 
   def destroy
-    @attachment = Attachment.find(params[:id])
+    @attachment = AttachmentWithStatus.new(Attachment.find(params[:id]))
     if @attachment.destroy
       redirect_to attachments_path, notice:  "The attachment #{@attachment.name} has been deleted."
     end

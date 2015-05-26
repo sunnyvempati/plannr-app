@@ -5,14 +5,6 @@ class Attachment < ActiveRecord::Base
 
   validate :company_not_over_limits, :on => :create
 
-  after_save do |attachment|
-    AttachmentStatus.update_for_uploaded_file(attachment.company, attachment.file_link.file.size)
-  end
-
-  before_destroy do |attachment|
-    AttachmentStatus.update_for_destroyed_file(attachment.company, attachment.file_link.file.size)
-  end
-
   # TODO: event_attachment (and task_attachments) aren't good names, change them
   scope :event_attachments, ->(event_id) { where(event_id: event_id)}
 
@@ -22,16 +14,18 @@ class Attachment < ActiveRecord::Base
   }
 
   def company_not_over_limits
-    attachment_status =  self.company.attachment_status
-    attachment_limit = self.company.attachment_limit
+    if self.company != nil
+      attachment_status =  self.company.attachment_status
+      attachment_limit = self.company.attachment_limit
 
-    if attachment_status != nil
-      if attachment_status.put_count > attachment_limit.put_count
-        errors.add(:file_attachment, 'company is over upload count limit')
-      end
+      if attachment_status != nil
+        if attachment_status.put_count > attachment_limit.put_count
+          errors.add(:file_attachment, 'company is over upload count limit')
+        end
 
-      if attachment_status.space_count > attachment_limit.space_count
-        errors.add(:file_attachment, 'company is over upload space limit')
+        if attachment_status.space_count > attachment_limit.space_count
+          errors.add(:file_attachment, 'company is over upload space limit')
+        end
       end
     end
   end
