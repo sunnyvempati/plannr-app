@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'fakefs/spec_helpers'
+require 'support/helpers/fog_helper' #used to prevent actual upload of files
 
 RSpec.describe Attachment, type: :model do
 
