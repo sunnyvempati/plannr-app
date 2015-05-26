@@ -1,4 +1,6 @@
 class AttachmentFileUploader < CarrierWave::Uploader::Base
+  Fog.credentials_path = Rails.root.join('config/fog_credentials.yml')
+
 
   storage :fog
   # causes CarrierWave to fail noisily
@@ -13,16 +15,18 @@ class AttachmentFileUploader < CarrierWave::Uploader::Base
   # http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
 
   CarrierWave.configure do |config|
-    config.fog_credentials = {
-      # TODO: move id and key with DB credentials
-      :provider               => 'AWS',                        # required
-      :aws_access_key_id      => 'AKIAI2BHUZAVXYKNK7WQ',                        # required
-      :aws_secret_access_key  => '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',                        # required
-      #:region                 => 'us-west-1',                  # optional, defaults to 'us-east-1'
-      :host                   => 's3-us-west-2.amazonaws.com',             # optional, defaults to nil
-      #:endpoint               => 'https://s3-us-west-2.amazonaws.com', # optional, defaults to nil
-      #:path_style             => true     # use old-style path
-    }
+    config.fog_credentials = {:provider => 'AWS'}
+    # config.fog_directory  = fog_dir
+    # config.fog_credentials = {
+    #   # TODO: move id and key with DB credentials
+    #   :provider               => 'AWS',                        # required
+    #   :aws_access_key_id      => 'AKIAI2BHUZAVXYKNK7WQ',                        # required
+    #   :aws_secret_access_key  => '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',                        # required
+    #   #:region                 => 'us-west-1',                  # optional, defaults to 'us-east-1'
+    #   :host                   => 's3-us-west-2.amazonaws.com',             # optional, defaults to nil
+    #   #:endpoint               => 'https://s3-us-west-2.amazonaws.com', # optional, defaults to nil
+    #   #:path_style             => true     # use old-style path
+    # }
     # TODO: move
     config.fog_directory  = 'plannr-first-test'                     # required, aka Amazon bucket
     config.fog_public     = false                                   # optional, defaults to true
