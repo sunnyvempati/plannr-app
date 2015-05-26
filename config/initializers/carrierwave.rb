@@ -14,21 +14,10 @@ class AttachmentFileUploader < CarrierWave::Uploader::Base
 
   CarrierWave.configure do |config|
     config.fog_credentials = {:provider => 'AWS'}
-    # config.fog_directory  = fog_dir
-    # config.fog_credentials = {
-    #   # TODO: move id and key with DB credentials
-    #   :provider               => 'AWS',                        # required
-    #   :aws_access_key_id      => 'AKIAI2BHUZAVXYKNK7WQ',                        # required
-    #   :aws_secret_access_key  => '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',                        # required
-    #   #:region                 => 'us-west-1',                  # optional, defaults to 'us-east-1'
-    #   :host                   => 's3-us-west-2.amazonaws.com',             # optional, defaults to nil
-    #   #:endpoint               => 'https://s3-us-west-2.amazonaws.com', # optional, defaults to nil
-    #   #:path_style             => true     # use old-style path
-    # }
-    # TODO: move
+    # TODO: get to work with dev/test/prod
     config.fog_directory =  'plannr-development'
-
     #config.fog_directory  = "plannr-#{Rails.env}"
+
     config.fog_public     = false                                   # optional, defaults to true
     config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
   end
