@@ -51,4 +51,5 @@ group 'development', 'test' do
   gem 'shoulda-matchers'
   # formats rspec output. Read more: http://jeffkreeftmeijer.com/2010/fuubar-the-instafailing-rspec-progress-bar-formatter/
   gem 'fuubar'
+  gem "fakefs", :require => "fakefs/safe"
 end
