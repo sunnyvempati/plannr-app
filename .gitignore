@@ -27,3 +27,5 @@ output.html
 
 # temp folder used by attachments
 /public/uploads
+
+config/fog_credentials.yml
