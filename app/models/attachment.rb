@@ -5,7 +5,6 @@ class Attachment < ActiveRecord::Base
 
   validate :company_not_over_limits, :on => :create
 
-  # TODO: event_attachment (and task_attachments) aren't good names, change them
   scope :event_attachments, ->(event_id) { where(event_id: event_id)}
 
   scope :search_in_event, ->(event_id, term) {
