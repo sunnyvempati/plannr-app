@@ -17,7 +17,7 @@ RSpec.describe Event, type: :model do
     end
 
     it 'ends after it starts' do
-      event.end_date = event.formatted_start_date - 2.days
+      event.end_date = event.start_date - 2.days
       expect(event).to_not be_valid
     end
   end
