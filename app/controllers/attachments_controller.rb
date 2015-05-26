@@ -1,3 +1,4 @@
+require 'attachment_with_status'
 class AttachmentsController < ApplicationController
   before_action :authenticate_user
 
@@ -15,12 +16,10 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = AttachmentWithStatus.new(Attachment.new(event_id: attachment_params[:event_id], description: attachment_params[:description], file_name: attachment_params[:file_attachment][:file_name], file_link: attachment_params[:file_attachment][:file_contents]))
+    @attachment = AttachmentWithStatus.new(
+      Attachment.new(event_id: attachment_params[:event_id], description: attachment_params[:description], file_name: attachment_params[:file_attachment][:file_name], file_link: attachment_params[:file_attachment][:file_contents])
+      )
 
-    # render_entity @attachment do
-    #   redirect_to session[:return_to] || attachments_path, notice: "The attachment #{@attachment.file_name} has been uploaded."
-    #   return
-    # end
     if @attachment.save
       redirect_to session[:return_to] || attachments_path, notice: "The attachment #{@attachment.file_name} has been uploaded."
     else
