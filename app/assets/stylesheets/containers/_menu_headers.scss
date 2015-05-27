@@ -1,23 +1,24 @@
 .MenuHeaderContainer {
   display: flex;
-  flex-flow: row wrap;
+  align-items: center;
   width: 100%;
-  height: $page-header-height;
   background-color: $plannr-green;
   padding: $size-increment * 4;
 }
 
-.MenuHeader-name,
-.MenuHeader-subheader {
-  flex: 1 100%;
-  color: rgba(255, 255, 255, 0.8);
-  padding-top: $size-increment;
+.MenuHeader-logo {
+  @include svg($logo-name, 64px);
 }
 
-.MenuHeader-name {
-  font-size: 20px;
+.MenuHeader-title {
+  padding-left: $size-increment*2;
+  color: $white-three-fourths;
 }
 
-.MenuHeader-subheader {
-  font-size: 14px;
+.MenuHeader-mainTitle {
+  @include font($subheader-font, 600, 0);
+}
+
+.MenuHeader-subTitle {
+  @include font($caption-font, 100, 50);
 }
