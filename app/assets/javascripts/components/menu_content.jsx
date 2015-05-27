@@ -23,19 +23,38 @@ var MenuContent = React.createClass({
       }
     ];
   },
+  goToCompanyPage: function() {
+    location.href = '/company';
+  },
+  companyItem: function() {
+    var company = this.props.company;
+    if (this.props.admin) {
+      return (
+        <div className="MenuList-companyName u-clickableOnHover"
+             onClick={this.goToCompanyPage}>
+          {company.name}
+        </div>
+      );
+    } else {
+      return (
+        <div className="MenuList-companyName">
+          {company.name}
+        </div>
+      )
+    }
+  },
   render: function() {
+    console.log(this.props.company);
     var mainMenuItems = this.mainMenuItems();
-    var active_path = this.props.active_path;
+    var activePath = this.props.activePath;
     var mainMenuItems = mainMenuItems.map(function(menu_item) {
       return (
-        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == active_path} />
+        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == activePath} />
       );
     });
     return (
       <div className="MenuList">
-        <div className="MenuList-companyName">
-          {this.props.company.name}
-        </div>
+        {this.companyItem()}
         {mainMenuItems}
       </div>
 
