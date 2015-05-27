@@ -31,22 +31,12 @@ var MenuContent = React.createClass({
         <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == active_path} />
       );
     });
-    var secondaryMenuItems = <a rel="nofollow" data-method="delete" href="/logout" className="icon fa fa fa-sign-out">Logout</a>;
     return (
       <div className="MenuList">
+        <div className="MenuList-companyName">
+          {this.props.company.name}
+        </div>
         {mainMenuItems}
-        <div className="MenuList-divider"></div>
-        <a rel="nofollow"
-           data-method="delete"
-           href="/logout"
-           className="MenuList-item">
-          <div className="MenuList-icon">
-            <i className="fa fa-sign-out MenuIcon" />
-          </div>
-          <div className="MenuList-text">
-            Sign Out
-          </div>
-        </a>
       </div>
 
     );
