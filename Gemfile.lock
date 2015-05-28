@@ -59,6 +59,8 @@ GEM
       activesupport (>= 3.2)
       request_store (~> 1.0)
       scrypt (~> 1.2)
+    autoprefixer-rails (4.0.1)
+      execjs
     bower-rails (0.9.2)
     builder (3.2.2)
     byebug (3.5.1)
@@ -305,6 +307,7 @@ DEPENDENCIES
   active_model_serializers
   acts_as_tenant
   authlogic
+  autoprefixer-rails
   bower-rails
   capistrano
   capistrano-rails
