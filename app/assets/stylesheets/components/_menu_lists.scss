@@ -3,33 +3,32 @@
   height: 100%;
   display: flex;
   flex-flow: column wrap;
+  padding: $size-increment*3;
 }
 
 .MenuList-item {
   display: flex;
-  font-weight: 200;
   padding-top: $size-increment * 4;
-  padding-left: $size-increment * 4;
-  &:hover {
-    color: $black-half !important;
-    cursor: pointer;
-  }
+  @include font($body-1-font, normal, 0);
   &.is-selected {
     font-weight: 700;
-    color: $black-quarter;
+    opacity: 0.5;
+  }
+  &:hover {
+    opacity: 0.5;
   }
 }
 
 .MenuList-icon {
   flex: 1;
-  color: $black-three-fourths;
+  font-size: 20px;
 }
 
 .MenuList-text {
-  flex: 4;
+  flex: 3;
 }
 
-.MenuList-divider {
-  padding: $size-increment*2 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+.MenuList-companyName {
+  @include font($subheader-font, 600, 25);
+  color: $black-three-fourths;
 }

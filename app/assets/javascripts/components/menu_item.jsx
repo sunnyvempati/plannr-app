@@ -6,14 +6,17 @@ var MenuItem = React.createClass({
     var item = this.props.item;
     var itemClasses = classNames({
       'MenuList-item': true,
+      'u-clickable': true,
       'is-selected': this.props.isSelected
     });
-    var iconClasses = item.icon_class + " MenuIcon";
+    var iconClasses = {
+      'MenuList-icon': true,
+      'u-dim': this.props.isSelected
+    };
+    iconClasses[this.props.item.icon_class] = true;
     return (
       <div className={itemClasses} onClick={this.handleClick.bind(this, this.props.item.href)}>
-        <div className="MenuList-icon">
-          <i className={iconClasses} />
-        </div>
+        <i className={classNames(iconClasses)} />
         <div className="MenuList-text">
           {item.name}
         </div>

@@ -23,30 +23,39 @@ var MenuContent = React.createClass({
       }
     ];
   },
+  goToCompanyPage: function() {
+    location.href = '/company';
+  },
+  companyItem: function() {
+    var company = this.props.company;
+    if (this.props.admin) {
+      return (
+        <div className="MenuList-companyName u-clickableOnHover"
+             onClick={this.goToCompanyPage}>
+          {company.name}
+        </div>
+      );
+    } else {
+      return (
+        <div className="MenuList-companyName">
+          {company.name}
+        </div>
+      )
+    }
+  },
   render: function() {
+    console.log(this.props.company);
     var mainMenuItems = this.mainMenuItems();
-    var active_path = this.props.active_path;
+    var activePath = this.props.activePath;
     var mainMenuItems = mainMenuItems.map(function(menu_item) {
       return (
-        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == active_path} />
+        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == activePath} />
       );
     });
-    var secondaryMenuItems = <a rel="nofollow" data-method="delete" href="/logout" className="icon fa fa fa-sign-out">Logout</a>;
     return (
       <div className="MenuList">
+        {this.companyItem()}
         {mainMenuItems}
-        <div className="MenuList-divider"></div>
-        <a rel="nofollow"
-           data-method="delete"
-           href="/logout"
-           className="MenuList-item">
-          <div className="MenuList-icon">
-            <i className="fa fa-sign-out MenuIcon" />
-          </div>
-          <div className="MenuList-text">
-            Sign Out
-          </div>
-        </a>
       </div>
 
     );
