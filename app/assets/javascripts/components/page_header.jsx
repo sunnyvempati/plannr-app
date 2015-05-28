@@ -13,9 +13,9 @@ var PageHeader = React.createClass({
     }
   },
   enableSkrollrHeader: function () {
-    this.setSkrollr($('#mainHeader'), [[0, 'height:168px'], [56, 'height:64px']]);
+    this.setSkrollr($('#mainHeader'), [[0, 'height:128px'], [56, 'height:64px']]);
     this.setSkrollr($('#mainTitle'), [[56, 'padding-top:6px;font-size:34px'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
-    $('.MainContainer-content').css('padding-top', '168px');
+    $('.MainContainer-content').css('padding-top', '128px');
     skrollr.init({forceHeight: false});
   },
   setSkrollr: function($element, data) {
@@ -34,7 +34,8 @@ var PageHeader = React.createClass({
              className="PageHeader-title">
           {this.props.header}
         </div>
-        <div className="PageHeader-appBar">
+        <div className="PageHeader-profile">
+          <ProfileDropdownMenu name={this.props.name} />
         </div>
       </div>
     );

@@ -1,0 +1,26 @@
+.ProfileTrigger {
+  @include font($subheader-font, 500, 50);
+  color: white;
+  margin: auto 0;
+  padding-left: 8px;
+  text-transform: uppercase;
+}
+
+.ProfileIcon {
+  font-size: 12px;
+  padding-left: $size-increment;
+}
+
+.DropdownMenu {
+  position: relative;
+}
+
+.DropdownMenu-options {
+  position: absolute;
+  background-color: $body-bg;
+  height: 100px;
+  width: 150px;
+  right: 0;
+  z-index: $profile-menu-z-index;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+}
