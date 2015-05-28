@@ -4,10 +4,6 @@ var ProfileDropdownMenu = React.createClass({
       open: false
     };
   },
-  test: function() {
-    console.log(this.getDOMNode());
-    console.log(document.activeElement);
-  },
   getProfileMenu: function() {
     var profile = this.props.profile;
     return (
