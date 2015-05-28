@@ -1,0 +1,37 @@
+.ProfileTrigger {
+  @include font($subheader-font, 500, 50);
+  color: white;
+  margin: auto 0;
+  padding-left: 8px;
+  text-transform: uppercase;
+}
+
+.ProfileIcon {
+  font-size: 12px;
+  padding-left: $size-increment;
+}
+
+.ProfileMenu {
+  padding: $size-increment*2;
+}
+
+.ProfileMenu-name {
+  @include font($body-1-font, 500, 50);
+}
+
+.ProfileMenu-email {
+  font-style: italics;
+  @include font($caption-font, normal, 0);
+}
+
+.ProfileMenu-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: $size-increment;
+}
+
+.ProfileMenu-actions {
+  @include font($caption-font, normal, 0);
+  padding-top: $size-increment;
+  display: flex;
+  justify-content: flex-end;
+}

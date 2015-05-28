@@ -35,7 +35,7 @@ var PageHeader = React.createClass({
           {this.props.header}
         </div>
         <div className="PageHeader-profile">
-          <ProfileDropdownMenu name={this.props.name} />
+          <ProfileDropdownMenu profile={this.props.profile} email={this.props.email} />
         </div>
       </div>
     );

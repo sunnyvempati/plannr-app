@@ -36,7 +36,9 @@
     <%= react_component('PageHeader',
               header: @header,
               disableSkrollableHeader: (@disable_skrollable_header || false),
-              name: current_user.profile.first_name,
+              profile: current_user.profile,
+              email: current_user.email,
+              userId: current_user.id,
               prerender: true) %>
     <div class="MainContainer-content">
       <%= yield %>
