@@ -11,12 +11,3 @@
   background-color: $body-bg;
   z-index: $main-content-z-index;
 }
-
-.MainContainer-contentHeader {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: $header-bg;
-  display: flex;
-  flex-flow: row wrap;
-}

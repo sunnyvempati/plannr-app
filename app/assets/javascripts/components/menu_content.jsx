@@ -44,7 +44,6 @@ var MenuContent = React.createClass({
     }
   },
   render: function() {
-    console.log(this.props.company);
     var mainMenuItems = this.mainMenuItems();
     var activePath = this.props.activePath;
     var mainMenuItems = mainMenuItems.map(function(menu_item) {

@@ -1,0 +1,21 @@
+.DropdownMenu {
+  position: relative;
+}
+
+.DropdownMenu-options {
+  position: absolute;
+  background-color: $body-bg;
+  right: 0;
+  z-index: $profile-menu-z-index;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-flow: column nowrap;
+  &.default {
+    height: 100px;
+    width: 200px;
+  }
+}
+
+.DropdownMenu-item {
+
+}

@@ -1,16 +1,9 @@
-.PageHeader-appBar {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 24px;
-  height: 64px;
-}
-
 .PageHeader {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: $header-bg;
+  height: 64px;
   display: flex;
   align-items: center;
   z-index: $page-header-z-index;
@@ -23,8 +16,10 @@
   font-size: 20px;
 }
 
-.PageHeader-appBarItem {
-  color: $white-quarter;
-  margin: auto 0;
-  padding-left: 8px;
+.PageHeader-profile {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 24px;
 }
