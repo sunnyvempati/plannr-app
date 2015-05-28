@@ -22,7 +22,7 @@ var TableAction = React.createClass({
     return (
       <div className="TableActionContainer" onClick={this.toggleMenu}>
         <div className="TableSort-display u-clickable">
-          <i className="fa fa-magic tableIcon"></i>
+          <i className="fa fa-ellipsis-v tableIcon"></i>
         </div>
         {this.actionMenu()}
       </div>
