@@ -1,0 +1,5381 @@
+@charset "UTF-8";/*
+
+
+*/
+
+
+
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+/* line 9, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%
+  /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+/* line 19, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+/* line 33, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 54, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline
+  /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 67, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+/* line 77, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 89, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+/* line 98, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+/* line 110, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+/* line 118, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+/* line 127, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+/* line 136, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+/* line 145, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 154, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 162, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 170, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+sup {
+  top: -0.5em;
+}
+
+/* line 174, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+/* line 185, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+/* line 193, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+/* line 204, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 212, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 221, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+/* line 229, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+/* line 252, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0
+  /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+/* line 266, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 277, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+/* line 290, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 302, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 311, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 322, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+/* line 334, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0
+  /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 346, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+/* line 356, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  box-sizing: content-box
+  /* 2 */
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 367, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 376, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+/* line 387, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0
+  /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+/* line 396, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 405, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 416, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 421, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/normalize.css/normalize.css */
+td,
+th {
+  padding: 0;
+}
+
+/*!
+ *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("components-font-awesome/fonts//fontawesome-webfont.eot?v=4.3.0");
+  src: url("components-font-awesome/fonts//fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"), url("components-font-awesome/fonts//fontawesome-webfont.woff2?v=4.3.0") format("woff2"), url("components-font-awesome/fonts//fontawesome-webfont.woff?v=4.3.0") format("woff"), url("components-font-awesome/fonts//fontawesome-webfont.ttf?v=4.3.0") format("truetype"), url("components-font-awesome/fonts//fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_core.scss */
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+/* makes the font 33% larger relative to the icon container */
+/* line 5, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_larger.scss */
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_larger.scss */
+.fa-2x {
+  font-size: 2em;
+}
+
+/* line 11, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_larger.scss */
+.fa-3x {
+  font-size: 3em;
+}
+
+/* line 12, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_larger.scss */
+.fa-4x {
+  font-size: 4em;
+}
+
+/* line 13, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_larger.scss */
+.fa-5x {
+  font-size: 5em;
+}
+
+/* line 3, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_fixed-width.scss */
+.fa-fw {
+  width: 1.28571em;
+  text-align: center;
+}
+
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_list.scss */
+.fa-ul {
+  padding-left: 0;
+  margin-left: 2.14286em;
+  list-style-type: none;
+}
+/* line 8, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_list.scss */
+.fa-ul > li {
+  position: relative;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_list.scss */
+.fa-li {
+  position: absolute;
+  left: -2.14286em;
+  width: 2.14286em;
+  top: 0.14286em;
+  text-align: center;
+}
+/* line 16, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_list.scss */
+.fa-li.fa-lg {
+  left: -1.85714em;
+}
+
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_bordered-pulled.scss */
+.fa-border {
+  padding: .2em .25em .15em;
+  border: solid 0.08em #eee;
+  border-radius: .1em;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_bordered-pulled.scss */
+.pull-right {
+  float: right;
+}
+
+/* line 11, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_bordered-pulled.scss */
+.pull-left {
+  float: left;
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_bordered-pulled.scss */
+.fa.pull-left {
+  margin-right: .3em;
+}
+/* line 15, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_bordered-pulled.scss */
+.fa.pull-right {
+  margin-left: .3em;
+}
+
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_animated.scss */
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_animated.scss */
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_rotated-flipped.scss */
+.fa-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/* line 5, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_rotated-flipped.scss */
+.fa-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/* line 6, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_rotated-flipped.scss */
+.fa-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+/* line 8, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_rotated-flipped.scss */
+.fa-flip-horizontal {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_rotated-flipped.scss */
+.fa-flip-vertical {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_rotated-flipped.scss */
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  -webkit-filter: none;
+          filter: none;
+}
+
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_stacked.scss */
+.fa-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+}
+
+/* line 12, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_stacked.scss */
+.fa-stack-1x, .fa-stack-2x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 18, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_stacked.scss */
+.fa-stack-1x {
+  line-height: inherit;
+}
+
+/* line 19, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_stacked.scss */
+.fa-stack-2x {
+  font-size: 2em;
+}
+
+/* line 20, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_stacked.scss */
+.fa-inverse {
+  color: #fff;
+}
+
+/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+   readers do not read off random characters that represent icons */
+/* line 4, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-glass:before {
+  content: "";
+}
+
+/* line 5, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-music:before {
+  content: "";
+}
+
+/* line 6, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-search:before {
+  content: "";
+}
+
+/* line 7, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-envelope-o:before {
+  content: "";
+}
+
+/* line 8, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-heart:before {
+  content: "";
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-star:before {
+  content: "";
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-star-o:before {
+  content: "";
+}
+
+/* line 11, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-user:before {
+  content: "";
+}
+
+/* line 12, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-film:before {
+  content: "";
+}
+
+/* line 13, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-th-large:before {
+  content: "";
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-th:before {
+  content: "";
+}
+
+/* line 15, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-th-list:before {
+  content: "";
+}
+
+/* line 16, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-check:before {
+  content: "";
+}
+
+/* line 17, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-remove:before,
+.fa-close:before,
+.fa-times:before {
+  content: "";
+}
+
+/* line 20, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-search-plus:before {
+  content: "";
+}
+
+/* line 21, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-search-minus:before {
+  content: "";
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-power-off:before {
+  content: "";
+}
+
+/* line 23, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-signal:before {
+  content: "";
+}
+
+/* line 24, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-gear:before,
+.fa-cog:before {
+  content: "";
+}
+
+/* line 26, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-trash-o:before {
+  content: "";
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-home:before {
+  content: "";
+}
+
+/* line 28, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-o:before {
+  content: "";
+}
+
+/* line 29, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-clock-o:before {
+  content: "";
+}
+
+/* line 30, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-road:before {
+  content: "";
+}
+
+/* line 31, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-download:before {
+  content: "";
+}
+
+/* line 32, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-o-down:before {
+  content: "";
+}
+
+/* line 33, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-o-up:before {
+  content: "";
+}
+
+/* line 34, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-inbox:before {
+  content: "";
+}
+
+/* line 35, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-play-circle-o:before {
+  content: "";
+}
+
+/* line 36, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-rotate-right:before,
+.fa-repeat:before {
+  content: "";
+}
+
+/* line 38, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-refresh:before {
+  content: "";
+}
+
+/* line 39, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-list-alt:before {
+  content: "";
+}
+
+/* line 40, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-lock:before {
+  content: "";
+}
+
+/* line 41, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-flag:before {
+  content: "";
+}
+
+/* line 42, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-headphones:before {
+  content: "";
+}
+
+/* line 43, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-volume-off:before {
+  content: "";
+}
+
+/* line 44, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-volume-down:before {
+  content: "";
+}
+
+/* line 45, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-volume-up:before {
+  content: "";
+}
+
+/* line 46, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-qrcode:before {
+  content: "";
+}
+
+/* line 47, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-barcode:before {
+  content: "";
+}
+
+/* line 48, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tag:before {
+  content: "";
+}
+
+/* line 49, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tags:before {
+  content: "";
+}
+
+/* line 50, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-book:before {
+  content: "";
+}
+
+/* line 51, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bookmark:before {
+  content: "";
+}
+
+/* line 52, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-print:before {
+  content: "";
+}
+
+/* line 53, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-camera:before {
+  content: "";
+}
+
+/* line 54, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-font:before {
+  content: "";
+}
+
+/* line 55, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bold:before {
+  content: "";
+}
+
+/* line 56, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-italic:before {
+  content: "";
+}
+
+/* line 57, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-text-height:before {
+  content: "";
+}
+
+/* line 58, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-text-width:before {
+  content: "";
+}
+
+/* line 59, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-align-left:before {
+  content: "";
+}
+
+/* line 60, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-align-center:before {
+  content: "";
+}
+
+/* line 61, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-align-right:before {
+  content: "";
+}
+
+/* line 62, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-align-justify:before {
+  content: "";
+}
+
+/* line 63, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-list:before {
+  content: "";
+}
+
+/* line 64, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dedent:before,
+.fa-outdent:before {
+  content: "";
+}
+
+/* line 66, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-indent:before {
+  content: "";
+}
+
+/* line 67, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-video-camera:before {
+  content: "";
+}
+
+/* line 68, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-photo:before,
+.fa-image:before,
+.fa-picture-o:before {
+  content: "";
+}
+
+/* line 71, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pencil:before {
+  content: "";
+}
+
+/* line 72, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-map-marker:before {
+  content: "";
+}
+
+/* line 73, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-adjust:before {
+  content: "";
+}
+
+/* line 74, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tint:before {
+  content: "";
+}
+
+/* line 75, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-edit:before,
+.fa-pencil-square-o:before {
+  content: "";
+}
+
+/* line 77, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-share-square-o:before {
+  content: "";
+}
+
+/* line 78, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-check-square-o:before {
+  content: "";
+}
+
+/* line 79, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrows:before {
+  content: "";
+}
+
+/* line 80, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-step-backward:before {
+  content: "";
+}
+
+/* line 81, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-fast-backward:before {
+  content: "";
+}
+
+/* line 82, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-backward:before {
+  content: "";
+}
+
+/* line 83, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-play:before {
+  content: "";
+}
+
+/* line 84, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pause:before {
+  content: "";
+}
+
+/* line 85, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-stop:before {
+  content: "";
+}
+
+/* line 86, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-forward:before {
+  content: "";
+}
+
+/* line 87, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-fast-forward:before {
+  content: "";
+}
+
+/* line 88, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-step-forward:before {
+  content: "";
+}
+
+/* line 89, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-eject:before {
+  content: "";
+}
+
+/* line 90, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-left:before {
+  content: "";
+}
+
+/* line 91, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-right:before {
+  content: "";
+}
+
+/* line 92, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-plus-circle:before {
+  content: "";
+}
+
+/* line 93, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-minus-circle:before {
+  content: "";
+}
+
+/* line 94, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-times-circle:before {
+  content: "";
+}
+
+/* line 95, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-check-circle:before {
+  content: "";
+}
+
+/* line 96, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-question-circle:before {
+  content: "";
+}
+
+/* line 97, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-info-circle:before {
+  content: "";
+}
+
+/* line 98, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-crosshairs:before {
+  content: "";
+}
+
+/* line 99, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-times-circle-o:before {
+  content: "";
+}
+
+/* line 100, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-check-circle-o:before {
+  content: "";
+}
+
+/* line 101, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ban:before {
+  content: "";
+}
+
+/* line 102, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-left:before {
+  content: "";
+}
+
+/* line 103, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-right:before {
+  content: "";
+}
+
+/* line 104, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-up:before {
+  content: "";
+}
+
+/* line 105, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-down:before {
+  content: "";
+}
+
+/* line 106, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mail-forward:before,
+.fa-share:before {
+  content: "";
+}
+
+/* line 108, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-expand:before {
+  content: "";
+}
+
+/* line 109, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-compress:before {
+  content: "";
+}
+
+/* line 110, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-plus:before {
+  content: "";
+}
+
+/* line 111, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-minus:before {
+  content: "";
+}
+
+/* line 112, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-asterisk:before {
+  content: "";
+}
+
+/* line 113, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-exclamation-circle:before {
+  content: "";
+}
+
+/* line 114, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-gift:before {
+  content: "";
+}
+
+/* line 115, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-leaf:before {
+  content: "";
+}
+
+/* line 116, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-fire:before {
+  content: "";
+}
+
+/* line 117, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-eye:before {
+  content: "";
+}
+
+/* line 118, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-eye-slash:before {
+  content: "";
+}
+
+/* line 119, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-warning:before,
+.fa-exclamation-triangle:before {
+  content: "";
+}
+
+/* line 121, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-plane:before {
+  content: "";
+}
+
+/* line 122, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-calendar:before {
+  content: "";
+}
+
+/* line 123, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-random:before {
+  content: "";
+}
+
+/* line 124, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-comment:before {
+  content: "";
+}
+
+/* line 125, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-magnet:before {
+  content: "";
+}
+
+/* line 126, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-up:before {
+  content: "";
+}
+
+/* line 127, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-down:before {
+  content: "";
+}
+
+/* line 128, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-retweet:before {
+  content: "";
+}
+
+/* line 129, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-shopping-cart:before {
+  content: "";
+}
+
+/* line 130, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-folder:before {
+  content: "";
+}
+
+/* line 131, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-folder-open:before {
+  content: "";
+}
+
+/* line 132, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrows-v:before {
+  content: "";
+}
+
+/* line 133, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrows-h:before {
+  content: "";
+}
+
+/* line 134, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bar-chart-o:before,
+.fa-bar-chart:before {
+  content: "";
+}
+
+/* line 136, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-twitter-square:before {
+  content: "";
+}
+
+/* line 137, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-facebook-square:before {
+  content: "";
+}
+
+/* line 138, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-camera-retro:before {
+  content: "";
+}
+
+/* line 139, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-key:before {
+  content: "";
+}
+
+/* line 140, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-gears:before,
+.fa-cogs:before {
+  content: "";
+}
+
+/* line 142, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-comments:before {
+  content: "";
+}
+
+/* line 143, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-thumbs-o-up:before {
+  content: "";
+}
+
+/* line 144, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-thumbs-o-down:before {
+  content: "";
+}
+
+/* line 145, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-star-half:before {
+  content: "";
+}
+
+/* line 146, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-heart-o:before {
+  content: "";
+}
+
+/* line 147, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sign-out:before {
+  content: "";
+}
+
+/* line 148, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-linkedin-square:before {
+  content: "";
+}
+
+/* line 149, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-thumb-tack:before {
+  content: "";
+}
+
+/* line 150, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-external-link:before {
+  content: "";
+}
+
+/* line 151, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sign-in:before {
+  content: "";
+}
+
+/* line 152, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-trophy:before {
+  content: "";
+}
+
+/* line 153, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-github-square:before {
+  content: "";
+}
+
+/* line 154, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-upload:before {
+  content: "";
+}
+
+/* line 155, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-lemon-o:before {
+  content: "";
+}
+
+/* line 156, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-phone:before {
+  content: "";
+}
+
+/* line 157, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-square-o:before {
+  content: "";
+}
+
+/* line 158, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bookmark-o:before {
+  content: "";
+}
+
+/* line 159, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-phone-square:before {
+  content: "";
+}
+
+/* line 160, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-twitter:before {
+  content: "";
+}
+
+/* line 161, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-facebook-f:before,
+.fa-facebook:before {
+  content: "";
+}
+
+/* line 163, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-github:before {
+  content: "";
+}
+
+/* line 164, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-unlock:before {
+  content: "";
+}
+
+/* line 165, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-credit-card:before {
+  content: "";
+}
+
+/* line 166, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-rss:before {
+  content: "";
+}
+
+/* line 167, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hdd-o:before {
+  content: "";
+}
+
+/* line 168, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bullhorn:before {
+  content: "";
+}
+
+/* line 169, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bell:before {
+  content: "";
+}
+
+/* line 170, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-certificate:before {
+  content: "";
+}
+
+/* line 171, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hand-o-right:before {
+  content: "";
+}
+
+/* line 172, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hand-o-left:before {
+  content: "";
+}
+
+/* line 173, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hand-o-up:before {
+  content: "";
+}
+
+/* line 174, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hand-o-down:before {
+  content: "";
+}
+
+/* line 175, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-left:before {
+  content: "";
+}
+
+/* line 176, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-right:before {
+  content: "";
+}
+
+/* line 177, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-up:before {
+  content: "";
+}
+
+/* line 178, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-down:before {
+  content: "";
+}
+
+/* line 179, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-globe:before {
+  content: "";
+}
+
+/* line 180, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-wrench:before {
+  content: "";
+}
+
+/* line 181, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tasks:before {
+  content: "";
+}
+
+/* line 182, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-filter:before {
+  content: "";
+}
+
+/* line 183, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-briefcase:before {
+  content: "";
+}
+
+/* line 184, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrows-alt:before {
+  content: "";
+}
+
+/* line 185, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-group:before,
+.fa-users:before {
+  content: "";
+}
+
+/* line 187, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chain:before,
+.fa-link:before {
+  content: "";
+}
+
+/* line 189, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cloud:before {
+  content: "";
+}
+
+/* line 190, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-flask:before {
+  content: "";
+}
+
+/* line 191, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cut:before,
+.fa-scissors:before {
+  content: "";
+}
+
+/* line 193, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-copy:before,
+.fa-files-o:before {
+  content: "";
+}
+
+/* line 195, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-paperclip:before {
+  content: "";
+}
+
+/* line 196, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-save:before,
+.fa-floppy-o:before {
+  content: "";
+}
+
+/* line 198, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-square:before {
+  content: "";
+}
+
+/* line 199, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-navicon:before,
+.fa-reorder:before,
+.fa-bars:before {
+  content: "";
+}
+
+/* line 202, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-list-ul:before {
+  content: "";
+}
+
+/* line 203, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-list-ol:before {
+  content: "";
+}
+
+/* line 204, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-strikethrough:before {
+  content: "";
+}
+
+/* line 205, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-underline:before {
+  content: "";
+}
+
+/* line 206, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-table:before {
+  content: "";
+}
+
+/* line 207, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-magic:before {
+  content: "";
+}
+
+/* line 208, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-truck:before {
+  content: "";
+}
+
+/* line 209, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pinterest:before {
+  content: "";
+}
+
+/* line 210, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pinterest-square:before {
+  content: "";
+}
+
+/* line 211, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-google-plus-square:before {
+  content: "";
+}
+
+/* line 212, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-google-plus:before {
+  content: "";
+}
+
+/* line 213, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-money:before {
+  content: "";
+}
+
+/* line 214, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-caret-down:before {
+  content: "";
+}
+
+/* line 215, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-caret-up:before {
+  content: "";
+}
+
+/* line 216, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-caret-left:before {
+  content: "";
+}
+
+/* line 217, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-caret-right:before {
+  content: "";
+}
+
+/* line 218, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-columns:before {
+  content: "";
+}
+
+/* line 219, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-unsorted:before,
+.fa-sort:before {
+  content: "";
+}
+
+/* line 221, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-down:before,
+.fa-sort-desc:before {
+  content: "";
+}
+
+/* line 223, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-up:before,
+.fa-sort-asc:before {
+  content: "";
+}
+
+/* line 225, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-envelope:before {
+  content: "";
+}
+
+/* line 226, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-linkedin:before {
+  content: "";
+}
+
+/* line 227, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-rotate-left:before,
+.fa-undo:before {
+  content: "";
+}
+
+/* line 229, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-legal:before,
+.fa-gavel:before {
+  content: "";
+}
+
+/* line 231, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dashboard:before,
+.fa-tachometer:before {
+  content: "";
+}
+
+/* line 233, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-comment-o:before {
+  content: "";
+}
+
+/* line 234, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-comments-o:before {
+  content: "";
+}
+
+/* line 235, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-flash:before,
+.fa-bolt:before {
+  content: "";
+}
+
+/* line 237, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sitemap:before {
+  content: "";
+}
+
+/* line 238, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-umbrella:before {
+  content: "";
+}
+
+/* line 239, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-paste:before,
+.fa-clipboard:before {
+  content: "";
+}
+
+/* line 241, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-lightbulb-o:before {
+  content: "";
+}
+
+/* line 242, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-exchange:before {
+  content: "";
+}
+
+/* line 243, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cloud-download:before {
+  content: "";
+}
+
+/* line 244, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cloud-upload:before {
+  content: "";
+}
+
+/* line 245, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-user-md:before {
+  content: "";
+}
+
+/* line 246, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-stethoscope:before {
+  content: "";
+}
+
+/* line 247, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-suitcase:before {
+  content: "";
+}
+
+/* line 248, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bell-o:before {
+  content: "";
+}
+
+/* line 249, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-coffee:before {
+  content: "";
+}
+
+/* line 250, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cutlery:before {
+  content: "";
+}
+
+/* line 251, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-text-o:before {
+  content: "";
+}
+
+/* line 252, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-building-o:before {
+  content: "";
+}
+
+/* line 253, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hospital-o:before {
+  content: "";
+}
+
+/* line 254, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ambulance:before {
+  content: "";
+}
+
+/* line 255, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-medkit:before {
+  content: "";
+}
+
+/* line 256, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-fighter-jet:before {
+  content: "";
+}
+
+/* line 257, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-beer:before {
+  content: "";
+}
+
+/* line 258, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-h-square:before {
+  content: "";
+}
+
+/* line 259, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-plus-square:before {
+  content: "";
+}
+
+/* line 260, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-double-left:before {
+  content: "";
+}
+
+/* line 261, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-double-right:before {
+  content: "";
+}
+
+/* line 262, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-double-up:before {
+  content: "";
+}
+
+/* line 263, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-double-down:before {
+  content: "";
+}
+
+/* line 264, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-left:before {
+  content: "";
+}
+
+/* line 265, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-right:before {
+  content: "";
+}
+
+/* line 266, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-up:before {
+  content: "";
+}
+
+/* line 267, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angle-down:before {
+  content: "";
+}
+
+/* line 268, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-desktop:before {
+  content: "";
+}
+
+/* line 269, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-laptop:before {
+  content: "";
+}
+
+/* line 270, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tablet:before {
+  content: "";
+}
+
+/* line 271, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mobile-phone:before,
+.fa-mobile:before {
+  content: "";
+}
+
+/* line 273, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-circle-o:before {
+  content: "";
+}
+
+/* line 274, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-quote-left:before {
+  content: "";
+}
+
+/* line 275, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-quote-right:before {
+  content: "";
+}
+
+/* line 276, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-spinner:before {
+  content: "";
+}
+
+/* line 277, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-circle:before {
+  content: "";
+}
+
+/* line 278, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mail-reply:before,
+.fa-reply:before {
+  content: "";
+}
+
+/* line 280, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-github-alt:before {
+  content: "";
+}
+
+/* line 281, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-folder-o:before {
+  content: "";
+}
+
+/* line 282, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-folder-open-o:before {
+  content: "";
+}
+
+/* line 283, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-smile-o:before {
+  content: "";
+}
+
+/* line 284, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-frown-o:before {
+  content: "";
+}
+
+/* line 285, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-meh-o:before {
+  content: "";
+}
+
+/* line 286, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-gamepad:before {
+  content: "";
+}
+
+/* line 287, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-keyboard-o:before {
+  content: "";
+}
+
+/* line 288, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-flag-o:before {
+  content: "";
+}
+
+/* line 289, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-flag-checkered:before {
+  content: "";
+}
+
+/* line 290, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-terminal:before {
+  content: "";
+}
+
+/* line 291, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-code:before {
+  content: "";
+}
+
+/* line 292, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mail-reply-all:before,
+.fa-reply-all:before {
+  content: "";
+}
+
+/* line 294, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-star-half-empty:before,
+.fa-star-half-full:before,
+.fa-star-half-o:before {
+  content: "";
+}
+
+/* line 297, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-location-arrow:before {
+  content: "";
+}
+
+/* line 298, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-crop:before {
+  content: "";
+}
+
+/* line 299, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-code-fork:before {
+  content: "";
+}
+
+/* line 300, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-unlink:before,
+.fa-chain-broken:before {
+  content: "";
+}
+
+/* line 302, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-question:before {
+  content: "";
+}
+
+/* line 303, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-info:before {
+  content: "";
+}
+
+/* line 304, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-exclamation:before {
+  content: "";
+}
+
+/* line 305, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-superscript:before {
+  content: "";
+}
+
+/* line 306, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-subscript:before {
+  content: "";
+}
+
+/* line 307, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-eraser:before {
+  content: "";
+}
+
+/* line 308, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-puzzle-piece:before {
+  content: "";
+}
+
+/* line 309, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-microphone:before {
+  content: "";
+}
+
+/* line 310, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-microphone-slash:before {
+  content: "";
+}
+
+/* line 311, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-shield:before {
+  content: "";
+}
+
+/* line 312, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-calendar-o:before {
+  content: "";
+}
+
+/* line 313, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-fire-extinguisher:before {
+  content: "";
+}
+
+/* line 314, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-rocket:before {
+  content: "";
+}
+
+/* line 315, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-maxcdn:before {
+  content: "";
+}
+
+/* line 316, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-circle-left:before {
+  content: "";
+}
+
+/* line 317, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-circle-right:before {
+  content: "";
+}
+
+/* line 318, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-circle-up:before {
+  content: "";
+}
+
+/* line 319, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-chevron-circle-down:before {
+  content: "";
+}
+
+/* line 320, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-html5:before {
+  content: "";
+}
+
+/* line 321, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-css3:before {
+  content: "";
+}
+
+/* line 322, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-anchor:before {
+  content: "";
+}
+
+/* line 323, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-unlock-alt:before {
+  content: "";
+}
+
+/* line 324, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bullseye:before {
+  content: "";
+}
+
+/* line 325, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ellipsis-h:before {
+  content: "";
+}
+
+/* line 326, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ellipsis-v:before {
+  content: "";
+}
+
+/* line 327, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-rss-square:before {
+  content: "";
+}
+
+/* line 328, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-play-circle:before {
+  content: "";
+}
+
+/* line 329, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ticket:before {
+  content: "";
+}
+
+/* line 330, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-minus-square:before {
+  content: "";
+}
+
+/* line 331, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-minus-square-o:before {
+  content: "";
+}
+
+/* line 332, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-level-up:before {
+  content: "";
+}
+
+/* line 333, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-level-down:before {
+  content: "";
+}
+
+/* line 334, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-check-square:before {
+  content: "";
+}
+
+/* line 335, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pencil-square:before {
+  content: "";
+}
+
+/* line 336, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-external-link-square:before {
+  content: "";
+}
+
+/* line 337, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-share-square:before {
+  content: "";
+}
+
+/* line 338, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-compass:before {
+  content: "";
+}
+
+/* line 339, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-toggle-down:before,
+.fa-caret-square-o-down:before {
+  content: "";
+}
+
+/* line 341, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-toggle-up:before,
+.fa-caret-square-o-up:before {
+  content: "";
+}
+
+/* line 343, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-toggle-right:before,
+.fa-caret-square-o-right:before {
+  content: "";
+}
+
+/* line 345, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-euro:before,
+.fa-eur:before {
+  content: "";
+}
+
+/* line 347, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-gbp:before {
+  content: "";
+}
+
+/* line 348, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dollar:before,
+.fa-usd:before {
+  content: "";
+}
+
+/* line 350, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-rupee:before,
+.fa-inr:before {
+  content: "";
+}
+
+/* line 352, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cny:before,
+.fa-rmb:before,
+.fa-yen:before,
+.fa-jpy:before {
+  content: "";
+}
+
+/* line 356, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ruble:before,
+.fa-rouble:before,
+.fa-rub:before {
+  content: "";
+}
+
+/* line 359, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-won:before,
+.fa-krw:before {
+  content: "";
+}
+
+/* line 361, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bitcoin:before,
+.fa-btc:before {
+  content: "";
+}
+
+/* line 363, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file:before {
+  content: "";
+}
+
+/* line 364, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-text:before {
+  content: "";
+}
+
+/* line 365, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-alpha-asc:before {
+  content: "";
+}
+
+/* line 366, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-alpha-desc:before {
+  content: "";
+}
+
+/* line 367, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-amount-asc:before {
+  content: "";
+}
+
+/* line 368, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-amount-desc:before {
+  content: "";
+}
+
+/* line 369, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-numeric-asc:before {
+  content: "";
+}
+
+/* line 370, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sort-numeric-desc:before {
+  content: "";
+}
+
+/* line 371, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-thumbs-up:before {
+  content: "";
+}
+
+/* line 372, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-thumbs-down:before {
+  content: "";
+}
+
+/* line 373, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-youtube-square:before {
+  content: "";
+}
+
+/* line 374, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-youtube:before {
+  content: "";
+}
+
+/* line 375, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-xing:before {
+  content: "";
+}
+
+/* line 376, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-xing-square:before {
+  content: "";
+}
+
+/* line 377, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-youtube-play:before {
+  content: "";
+}
+
+/* line 378, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dropbox:before {
+  content: "";
+}
+
+/* line 379, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-stack-overflow:before {
+  content: "";
+}
+
+/* line 380, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-instagram:before {
+  content: "";
+}
+
+/* line 381, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-flickr:before {
+  content: "";
+}
+
+/* line 382, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-adn:before {
+  content: "";
+}
+
+/* line 383, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bitbucket:before {
+  content: "";
+}
+
+/* line 384, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bitbucket-square:before {
+  content: "";
+}
+
+/* line 385, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tumblr:before {
+  content: "";
+}
+
+/* line 386, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tumblr-square:before {
+  content: "";
+}
+
+/* line 387, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-long-arrow-down:before {
+  content: "";
+}
+
+/* line 388, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-long-arrow-up:before {
+  content: "";
+}
+
+/* line 389, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-long-arrow-left:before {
+  content: "";
+}
+
+/* line 390, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-long-arrow-right:before {
+  content: "";
+}
+
+/* line 391, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-apple:before {
+  content: "";
+}
+
+/* line 392, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-windows:before {
+  content: "";
+}
+
+/* line 393, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-android:before {
+  content: "";
+}
+
+/* line 394, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-linux:before {
+  content: "";
+}
+
+/* line 395, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dribbble:before {
+  content: "";
+}
+
+/* line 396, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-skype:before {
+  content: "";
+}
+
+/* line 397, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-foursquare:before {
+  content: "";
+}
+
+/* line 398, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-trello:before {
+  content: "";
+}
+
+/* line 399, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-female:before {
+  content: "";
+}
+
+/* line 400, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-male:before {
+  content: "";
+}
+
+/* line 401, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-gittip:before,
+.fa-gratipay:before {
+  content: "";
+}
+
+/* line 403, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sun-o:before {
+  content: "";
+}
+
+/* line 404, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-moon-o:before {
+  content: "";
+}
+
+/* line 405, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-archive:before {
+  content: "";
+}
+
+/* line 406, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bug:before {
+  content: "";
+}
+
+/* line 407, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-vk:before {
+  content: "";
+}
+
+/* line 408, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-weibo:before {
+  content: "";
+}
+
+/* line 409, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-renren:before {
+  content: "";
+}
+
+/* line 410, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pagelines:before {
+  content: "";
+}
+
+/* line 411, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-stack-exchange:before {
+  content: "";
+}
+
+/* line 412, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-o-right:before {
+  content: "";
+}
+
+/* line 413, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-arrow-circle-o-left:before {
+  content: "";
+}
+
+/* line 414, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-toggle-left:before,
+.fa-caret-square-o-left:before {
+  content: "";
+}
+
+/* line 416, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dot-circle-o:before {
+  content: "";
+}
+
+/* line 417, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-wheelchair:before {
+  content: "";
+}
+
+/* line 418, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-vimeo-square:before {
+  content: "";
+}
+
+/* line 419, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-turkish-lira:before,
+.fa-try:before {
+  content: "";
+}
+
+/* line 421, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-plus-square-o:before {
+  content: "";
+}
+
+/* line 422, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-space-shuttle:before {
+  content: "";
+}
+
+/* line 423, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-slack:before {
+  content: "";
+}
+
+/* line 424, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-envelope-square:before {
+  content: "";
+}
+
+/* line 425, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-wordpress:before {
+  content: "";
+}
+
+/* line 426, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-openid:before {
+  content: "";
+}
+
+/* line 427, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-institution:before,
+.fa-bank:before,
+.fa-university:before {
+  content: "";
+}
+
+/* line 430, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mortar-board:before,
+.fa-graduation-cap:before {
+  content: "";
+}
+
+/* line 432, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-yahoo:before {
+  content: "";
+}
+
+/* line 433, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-google:before {
+  content: "";
+}
+
+/* line 434, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-reddit:before {
+  content: "";
+}
+
+/* line 435, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-reddit-square:before {
+  content: "";
+}
+
+/* line 436, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-stumbleupon-circle:before {
+  content: "";
+}
+
+/* line 437, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-stumbleupon:before {
+  content: "";
+}
+
+/* line 438, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-delicious:before {
+  content: "";
+}
+
+/* line 439, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-digg:before {
+  content: "";
+}
+
+/* line 440, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pied-piper:before {
+  content: "";
+}
+
+/* line 441, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pied-piper-alt:before {
+  content: "";
+}
+
+/* line 442, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-drupal:before {
+  content: "";
+}
+
+/* line 443, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-joomla:before {
+  content: "";
+}
+
+/* line 444, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-language:before {
+  content: "";
+}
+
+/* line 445, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-fax:before {
+  content: "";
+}
+
+/* line 446, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-building:before {
+  content: "";
+}
+
+/* line 447, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-child:before {
+  content: "";
+}
+
+/* line 448, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-paw:before {
+  content: "";
+}
+
+/* line 449, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-spoon:before {
+  content: "";
+}
+
+/* line 450, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cube:before {
+  content: "";
+}
+
+/* line 451, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cubes:before {
+  content: "";
+}
+
+/* line 452, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-behance:before {
+  content: "";
+}
+
+/* line 453, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-behance-square:before {
+  content: "";
+}
+
+/* line 454, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-steam:before {
+  content: "";
+}
+
+/* line 455, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-steam-square:before {
+  content: "";
+}
+
+/* line 456, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-recycle:before {
+  content: "";
+}
+
+/* line 457, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-automobile:before,
+.fa-car:before {
+  content: "";
+}
+
+/* line 459, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cab:before,
+.fa-taxi:before {
+  content: "";
+}
+
+/* line 461, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tree:before {
+  content: "";
+}
+
+/* line 462, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-spotify:before {
+  content: "";
+}
+
+/* line 463, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-deviantart:before {
+  content: "";
+}
+
+/* line 464, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-soundcloud:before {
+  content: "";
+}
+
+/* line 465, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-database:before {
+  content: "";
+}
+
+/* line 466, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-pdf-o:before {
+  content: "";
+}
+
+/* line 467, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-word-o:before {
+  content: "";
+}
+
+/* line 468, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-excel-o:before {
+  content: "";
+}
+
+/* line 469, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-powerpoint-o:before {
+  content: "";
+}
+
+/* line 470, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-photo-o:before,
+.fa-file-picture-o:before,
+.fa-file-image-o:before {
+  content: "";
+}
+
+/* line 473, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-zip-o:before,
+.fa-file-archive-o:before {
+  content: "";
+}
+
+/* line 475, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-sound-o:before,
+.fa-file-audio-o:before {
+  content: "";
+}
+
+/* line 477, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-movie-o:before,
+.fa-file-video-o:before {
+  content: "";
+}
+
+/* line 479, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-file-code-o:before {
+  content: "";
+}
+
+/* line 480, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-vine:before {
+  content: "";
+}
+
+/* line 481, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-codepen:before {
+  content: "";
+}
+
+/* line 482, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-jsfiddle:before {
+  content: "";
+}
+
+/* line 483, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-life-bouy:before,
+.fa-life-buoy:before,
+.fa-life-saver:before,
+.fa-support:before,
+.fa-life-ring:before {
+  content: "";
+}
+
+/* line 488, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-circle-o-notch:before {
+  content: "";
+}
+
+/* line 489, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ra:before,
+.fa-rebel:before {
+  content: "";
+}
+
+/* line 491, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ge:before,
+.fa-empire:before {
+  content: "";
+}
+
+/* line 493, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-git-square:before {
+  content: "";
+}
+
+/* line 494, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-git:before {
+  content: "";
+}
+
+/* line 495, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hacker-news:before {
+  content: "";
+}
+
+/* line 496, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tencent-weibo:before {
+  content: "";
+}
+
+/* line 497, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-qq:before {
+  content: "";
+}
+
+/* line 498, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-wechat:before,
+.fa-weixin:before {
+  content: "";
+}
+
+/* line 500, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-send:before,
+.fa-paper-plane:before {
+  content: "";
+}
+
+/* line 502, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-send-o:before,
+.fa-paper-plane-o:before {
+  content: "";
+}
+
+/* line 504, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-history:before {
+  content: "";
+}
+
+/* line 505, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-genderless:before,
+.fa-circle-thin:before {
+  content: "";
+}
+
+/* line 507, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-header:before {
+  content: "";
+}
+
+/* line 508, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-paragraph:before {
+  content: "";
+}
+
+/* line 509, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sliders:before {
+  content: "";
+}
+
+/* line 510, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-share-alt:before {
+  content: "";
+}
+
+/* line 511, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-share-alt-square:before {
+  content: "";
+}
+
+/* line 512, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bomb:before {
+  content: "";
+}
+
+/* line 513, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-soccer-ball-o:before,
+.fa-futbol-o:before {
+  content: "";
+}
+
+/* line 515, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-tty:before {
+  content: "";
+}
+
+/* line 516, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-binoculars:before {
+  content: "";
+}
+
+/* line 517, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-plug:before {
+  content: "";
+}
+
+/* line 518, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-slideshare:before {
+  content: "";
+}
+
+/* line 519, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-twitch:before {
+  content: "";
+}
+
+/* line 520, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-yelp:before {
+  content: "";
+}
+
+/* line 521, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-newspaper-o:before {
+  content: "";
+}
+
+/* line 522, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-wifi:before {
+  content: "";
+}
+
+/* line 523, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-calculator:before {
+  content: "";
+}
+
+/* line 524, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-paypal:before {
+  content: "";
+}
+
+/* line 525, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-google-wallet:before {
+  content: "";
+}
+
+/* line 526, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc-visa:before {
+  content: "";
+}
+
+/* line 527, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc-mastercard:before {
+  content: "";
+}
+
+/* line 528, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc-discover:before {
+  content: "";
+}
+
+/* line 529, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc-amex:before {
+  content: "";
+}
+
+/* line 530, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc-paypal:before {
+  content: "";
+}
+
+/* line 531, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc-stripe:before {
+  content: "";
+}
+
+/* line 532, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bell-slash:before {
+  content: "";
+}
+
+/* line 533, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bell-slash-o:before {
+  content: "";
+}
+
+/* line 534, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-trash:before {
+  content: "";
+}
+
+/* line 535, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-copyright:before {
+  content: "";
+}
+
+/* line 536, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-at:before {
+  content: "";
+}
+
+/* line 537, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-eyedropper:before {
+  content: "";
+}
+
+/* line 538, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-paint-brush:before {
+  content: "";
+}
+
+/* line 539, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-birthday-cake:before {
+  content: "";
+}
+
+/* line 540, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-area-chart:before {
+  content: "";
+}
+
+/* line 541, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pie-chart:before {
+  content: "";
+}
+
+/* line 542, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-line-chart:before {
+  content: "";
+}
+
+/* line 543, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-lastfm:before {
+  content: "";
+}
+
+/* line 544, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-lastfm-square:before {
+  content: "";
+}
+
+/* line 545, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-toggle-off:before {
+  content: "";
+}
+
+/* line 546, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-toggle-on:before {
+  content: "";
+}
+
+/* line 547, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bicycle:before {
+  content: "";
+}
+
+/* line 548, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-bus:before {
+  content: "";
+}
+
+/* line 549, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ioxhost:before {
+  content: "";
+}
+
+/* line 550, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-angellist:before {
+  content: "";
+}
+
+/* line 551, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cc:before {
+  content: "";
+}
+
+/* line 552, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-shekel:before,
+.fa-sheqel:before,
+.fa-ils:before {
+  content: "";
+}
+
+/* line 555, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-meanpath:before {
+  content: "";
+}
+
+/* line 556, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-buysellads:before {
+  content: "";
+}
+
+/* line 557, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-connectdevelop:before {
+  content: "";
+}
+
+/* line 558, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-dashcube:before {
+  content: "";
+}
+
+/* line 559, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-forumbee:before {
+  content: "";
+}
+
+/* line 560, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-leanpub:before {
+  content: "";
+}
+
+/* line 561, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-sellsy:before {
+  content: "";
+}
+
+/* line 562, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-shirtsinbulk:before {
+  content: "";
+}
+
+/* line 563, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-simplybuilt:before {
+  content: "";
+}
+
+/* line 564, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-skyatlas:before {
+  content: "";
+}
+
+/* line 565, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cart-plus:before {
+  content: "";
+}
+
+/* line 566, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-cart-arrow-down:before {
+  content: "";
+}
+
+/* line 567, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-diamond:before {
+  content: "";
+}
+
+/* line 568, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-ship:before {
+  content: "";
+}
+
+/* line 569, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-user-secret:before {
+  content: "";
+}
+
+/* line 570, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-motorcycle:before {
+  content: "";
+}
+
+/* line 571, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-street-view:before {
+  content: "";
+}
+
+/* line 572, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-heartbeat:before {
+  content: "";
+}
+
+/* line 573, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-venus:before {
+  content: "";
+}
+
+/* line 574, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mars:before {
+  content: "";
+}
+
+/* line 575, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mercury:before {
+  content: "";
+}
+
+/* line 576, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-transgender:before {
+  content: "";
+}
+
+/* line 577, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-transgender-alt:before {
+  content: "";
+}
+
+/* line 578, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-venus-double:before {
+  content: "";
+}
+
+/* line 579, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mars-double:before {
+  content: "";
+}
+
+/* line 580, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-venus-mars:before {
+  content: "";
+}
+
+/* line 581, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mars-stroke:before {
+  content: "";
+}
+
+/* line 582, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mars-stroke-v:before {
+  content: "";
+}
+
+/* line 583, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-mars-stroke-h:before {
+  content: "";
+}
+
+/* line 584, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-neuter:before {
+  content: "";
+}
+
+/* line 585, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-facebook-official:before {
+  content: "";
+}
+
+/* line 586, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-pinterest-p:before {
+  content: "";
+}
+
+/* line 587, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-whatsapp:before {
+  content: "";
+}
+
+/* line 588, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-server:before {
+  content: "";
+}
+
+/* line 589, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-user-plus:before {
+  content: "";
+}
+
+/* line 590, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-user-times:before {
+  content: "";
+}
+
+/* line 591, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-hotel:before,
+.fa-bed:before {
+  content: "";
+}
+
+/* line 593, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-viacoin:before {
+  content: "";
+}
+
+/* line 594, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-train:before {
+  content: "";
+}
+
+/* line 595, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-subway:before {
+  content: "";
+}
+
+/* line 596, /Users/vemparty/Developer/plannr-app/vendor/assets/bower_components/components-font-awesome/scss/_icons.scss */
+.fa-medium:before {
+  content: "";
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList {
+  background-color: #f9f9f9;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column wrap;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  padding: 24px;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 32px;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 19.6px;
+}
+/* line 13, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList-item.is-selected {
+  font-weight: 700;
+  opacity: 0.5;
+}
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList-item:hover {
+  opacity: 0.5;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList-icon {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 20px;
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList-text {
+  -webkit-box-flex: 3;
+  -webkit-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+/* line 31, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_menu_lists.scss */
+.MenuList-companyName {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  line-height: 22.4px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__triangle {
+  margin-top: -8px;
+  margin-left: -8px;
+}
+
+/* line 5, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__triangle, .datepicker__triangle:before {
+  box-sizing: content-box;
+  position: absolute;
+  border: 8px solid transparent;
+  height: 0;
+  width: 1px;
+  border-top: none;
+  border-bottom-color: #3A4042;
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__triangle:before {
+  content: "";
+  z-index: -1;
+  border-width: 8px;
+  top: -1px;
+  left: -8px;
+  border-bottom-color: #aeaeae;
+}
+
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker {
+  font-size: 11px;
+  background-color: #3A4042;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid #aeaeae;
+  border-radius: 2px;
+  display: inline-block;
+  position: relative;
+}
+
+/* line 33, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__container {
+  position: absolute;
+  display: inline-block;
+  z-index: 4000;
+}
+
+/* line 39, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__triangle {
+  position: absolute;
+  left: 50px;
+}
+
+/* line 44, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__header {
+  text-align: center;
+  background-color: #3A4042;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 8px;
+  position: relative;
+}
+
+/* line 52, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__current-month {
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* line 58, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__navigation {
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  width: 0;
+  border: 6px solid transparent;
+}
+
+/* line 67, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__navigation--previous {
+  left: 10px;
+  border-right-color: #ccc;
+}
+
+/* line 71, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__navigation--previous:hover {
+  border-right-color: #b3b3b3;
+}
+
+/* line 74, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__navigation--next {
+  right: 10px;
+  border-left-color: #ccc;
+}
+
+/* line 78, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__navigation--next:hover {
+  border-left-color: #b3b3b3;
+}
+
+/* line 82, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__week-day {
+  color: #ccc;
+  display: inline-block;
+  width: 28px;
+  line-height: 24px;
+}
+
+/* line 89, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__month {
+  margin: 5px;
+  text-align: center;
+}
+
+/* line 94, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day {
+  color: rgba(255, 255, 255, 0.75);
+  display: inline-block;
+  width: 24px;
+  line-height: 24px;
+  text-align: center;
+  margin: 2px;
+  cursor: pointer;
+}
+
+/* line 103, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day:hover {
+  border-radius: 2px;
+  background-color: #606FAD;
+}
+
+/* line 107, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day--today {
+  font-weight: 700;
+}
+
+/* line 110, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day--selected {
+  border-radius: 2px;
+  background-color: #606FAD;
+  color: #fff;
+}
+
+/* line 115, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day--selected:hover {
+  background-color: #1d5d90;
+}
+
+/* line 118, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day--disabled {
+  cursor: default;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* line 122, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_date_pickers.scss */
+.datepicker__day--disabled:hover {
+  background-color: transparent;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput, .FormInput-textarea {
+  width: 100%;
+  height: 95.2px;
+  padding-top: 32px;
+  padding-bottom: 8px;
+}
+/* line 6, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput.is-hidden, .is-hidden.FormInput-textarea {
+  display: none;
+}
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput-textarea {
+  height: 128px;
+}
+
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput-field, .datepicker__input, .SearchInput, .Autocomplete-input, .Autocomplete-picked {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0.01em;
+  line-height: 22.4px;
+  width: 100%;
+  background-color: transparent;
+  color: #000000;
+  border: 1px none transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 8px;
+}
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput-field:focus, .datepicker__input:focus, .SearchInput:focus, .Autocomplete-input:focus, .Autocomplete-picked:focus {
+  border: 1px none transparent;
+  border-bottom: 2px solid #00bea4;
+}
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput-field.is-invalid, .is-invalid.datepicker__input, .is-invalid.SearchInput, .is-invalid.Autocomplete-input, .is-invalid.Autocomplete-picked {
+  border-bottom: 2px solid red;
+}
+/* line 30, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput-field:disabled, .datepicker__input:disabled, .SearchInput:disabled, .Autocomplete-input:disabled, .Autocomplete-picked:disabled {
+  color: rgba(0, 0, 0, 0.26);
+  border-bottom: 1px dotted;
+}
+
+/* line 36, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.FormInput-fieldErrorMessage {
+  color: red;
+  font-size: 12px;
+}
+
+/* line 41, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+.SearchInput {
+  width: 400px;
+}
+
+/* line 46, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+form label {
+  display: block;
+  padding-bottom: 8px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  line-height: 16.8px;
+}
+
+/* line 53, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_form_inputs.scss */
+form textarea {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0.01em;
+  line-height: 22.4px;
+  width: 100%;
+  background-color: transparent;
+  border: 1px none transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  resize: none;
+  height: 64px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button {
+  height: 36px;
+  min-width: 88px;
+  border: none;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--raised {
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--raised:active, .Button--raised:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* line 20, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--primary {
+  color: #FFFFFF;
+  background-color: #00BEA4;
+}
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--primary:active, .Button--primary:hover {
+  background-color: #008573;
+}
+/* line 26, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--primary:disabled {
+  background-color: #000000;
+  opacity: 0.2;
+  box-shadow: none;
+}
+
+/* line 33, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--secondary {
+  color: #000000;
+  background-color: #FFFFFF;
+  display: none;
+}
+/* line 38, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--secondary:active, .Button--secondary:hover {
+  background-color: #CECECE;
+}
+/* line 42, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--secondary.is-visible {
+  display: block;
+}
+
+/* line 48, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--simple {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.75);
+  -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* line 52, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--simple:hover {
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* line 57, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--autocomplete {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: none;
+  display: block;
+}
+
+/* line 65, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.CreateTaskContainer,
+.CreateEventContainer {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+}
+
+/* line 72, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--action {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #7D56C1;
+  cursor: pointer;
+}
+
+/* line 80, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.Button--actionIcon {
+  width: inherit;
+  height: inherit;
+  position: relative;
+}
+
+/* line 87, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_buttons.scss */
+.action {
+  color: white;
+  margin: 16px 14px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_page_headers.scss */
+.PageHeader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #3A4042;
+  height: 64px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 5000;
+}
+
+/* line 12, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_page_headers.scss */
+.PageHeader-title {
+  font-size: 34px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 47.6px;
+  color: white;
+  padding-left: 80px;
+  font-size: 20px;
+}
+
+/* line 19, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_page_headers.scss */
+.PageHeader-profile {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 24px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_avatars.scss */
+.Avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #767676;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_hamburgers.scss */
+label[for="menu-trigger"] {
+  position: fixed;
+  left: 24px;
+  top: 20px;
+  z-index: 8000;
+  cursor: pointer;
+  display: block;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_hamburgers.scss */
+.Menu .MenuContainer {
+  -webkit-transition: left 0.2s;
+          transition: left 0.2s;
+}
+
+/* line 13, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_hamburgers.scss */
+.Hamburger-trigger:checked ~ .Menu .MenuContainer {
+  left: 0;
+  box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* line 18, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_hamburgers.scss */
+.Hamburger-trigger:checked ~ .MainContainer {
+  pointer-events: none;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_hamburgers.scss */
+.Hamburger-trigger:checked ~ .Mask {
+  visibility: visible;
+  bottom: 0;
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_hamburgers.scss */
+.Hamburger-icon {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 20px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_masks.scss */
+.Mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  z-index: 8000;
+  visibility: hidden;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable {
+  width: 100%;
+  margin: 50px auto;
+}
+/* line 5, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable th {
+  opacity: 0.5;
+  padding-bottom: 20px;
+}
+/* line 14, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable td {
+  text-align: center;
+  padding-bottom: 20px;
+}
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable td.disabled {
+  display: none;
+}
+
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable--is-pending {
+  opacity: .5;
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable-resend,
+.UserInvitationTable-admin {
+  text-transform: uppercase;
+  cursor: pointer;
+}
+/* line 31, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_user_invitation_tables.scss */
+.UserInvitationTable-resend:hover,
+.UserInvitationTable-admin:hover {
+  opacity: .5;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.TableContainer, .MiniTable {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+/* line 7, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-toolbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  padding: 32px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+/* line 12, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-toolbar.extraPad {
+  padding: 40px 48px;
+}
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-toolbar > * {
+  padding-right: 16px;
+}
+
+/* line 20, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-data {
+  width: 90%;
+  padding-top: 16px;
+}
+
+/* line 25, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-top: 16px;
+}
+/* line 30, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 19.6px;
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 36, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-row.extraPad {
+  padding-left: 24px;
+}
+/* line 39, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-rowItem {
+  text-align: left;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 16px;
+}
+/* line 44, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-row:hover .Checkbox {
+  display: block;
+}
+/* line 47, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-row:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+/* line 50, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-row.selected {
+  -webkit-transition: all 0.5s;
+          transition: all 0.5s;
+  background-color: #518eaa;
+  color: rgba(255, 255, 255, 0.75);
+}
+/* line 63, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tables.scss */
+.Table-checkbox {
+  padding-left: 24px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_checkboxes.scss */
+.CheckboxContainer {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_checkboxes.scss */
+.Checkbox {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  border: solid 2px #5a5a5a;
+  border-radius: 2px;
+  pointer-events: none;
+  -webkit-transition: background-color 140ms, border-color 140ms;
+          transition: background-color 140ms, border-color 140ms;
+}
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_checkboxes.scss */
+.Checkbox.is-checked {
+  background-color: #00aaa1;
+  border-color: #00aaa1;
+}
+
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_checkboxes.scss */
+#checkmark {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+  position: absolute;
+  top: 0px;
+  left: 4px;
+  width: 6px;
+  height: 10px;
+  border-style: solid;
+  border-top: none;
+  border-left: none;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  border-color: white;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  min-width: 340px;
+  margin: 16px 16px 0 0;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  -webkit-animation-name: tile-enter;
+          animation-name: tile-enter;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+
+@-webkit-keyframes tile-enter {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tile-enter {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+/* line 16, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-header {
+  height: 112px;
+  background-color: #00aaa1;
+}
+
+/* line 21, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-content {
+  height: 160px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+/* line 26, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-content > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+}
+
+/* line 32, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-status {
+  padding-top: 16px;
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 33.6px;
+  opacity: 0.25;
+}
+
+/* line 38, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.TileContent-count {
+  font-size: 34px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 47.6px;
+}
+
+/* line 42, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.TileContent-quickAdd {
+  width: 300px;
+  padding-top: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* line 48, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-headerLink {
+  padding: 16px 0 8px 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  color: white;
+  opacity: 0.8;
+}
+/* line 54, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-headerLink:hover > .Tile-img, .Tile-headerLink:hover > .Tile-imgTask, .Tile-headerLink:hover > .Tile-imgContact, .Tile-headerLink:hover > .Tile-imgVendor, .Tile-headerLink:hover > .Tile-imgAttachment {
+  background: url(Arrow_Tile_Hover.svg) no-repeat;
+  background-size: 56px 56px;
+  height: 56px;
+  width: 56px;
+}
+/* line 57, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-headerLink > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+}
+
+/* line 63, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-img, .Tile-imgTask, .Tile-imgContact, .Tile-imgVendor, .Tile-imgAttachment {
+  margin-bottom: 8px;
+}
+
+/* line 67, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-imgTask {
+  background: url(Task_Tile.svg) no-repeat;
+  background-size: 56px 56px;
+  height: 56px;
+  width: 56px;
+}
+
+/* line 72, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-imgContact {
+  background: url(Contact_Tile.svg) no-repeat;
+  background-size: 56px 56px;
+  height: 56px;
+  width: 56px;
+}
+
+/* line 77, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-imgVendor {
+  background: url(Vendor_Tile.svg) no-repeat;
+  background-size: 56px 56px;
+  height: 56px;
+  width: 56px;
+}
+
+/* line 82, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_tiles.scss */
+.Tile-imgAttachment {
+  background: url(Attachment_Tile.svg) no-repeat;
+  background-size: 56px 56px;
+  height: 56px;
+  width: 56px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete {
+  width: 100%;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-results {
+  position: relative;
+  z-index: 4000;
+}
+/* line 12, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-results.hidden {
+  display: none;
+}
+
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-resultsItem {
+  cursor: pointer;
+  background-color: #3A4042;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-resultsItem:hover {
+  background-color: #00aaa1;
+}
+
+/* line 28, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-picked {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/* line 33, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-picked > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 38, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_autocompletes.scss */
+.Autocomplete-edit {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  font-size: em(8px);
+  opacity: 0.5;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_icons.scss */
+.tableIcon {
+  font-size: 20px;
+  padding-right: 8px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu {
+  background-color: #f9f9f9;
+  position: absolute;
+  z-index: 10000;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  width: 300px;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu-item,
+.TableMenu-header {
+  padding: 8px 8px 8px 24px;
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu-item {
+  color: rgba(0, 0, 0, 0.75);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* line 18, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu-item:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu-item > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu-order {
+  font-size: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 8px;
+  opacity: 0.5;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* line 37, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_menus.scss */
+.TableMenu-header {
+  color: rgba(0, 0, 0, 0.25);
+  padding-top: 16px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_action_buttons.scss */
+.ActionButton {
+  position: absolute;
+  right: 48px;
+  top: 208px;
+  width: 64px;
+  cursor: pointer;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_action_buttons.scss */
+.ActionButton-svg {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_action_buttons.scss */
+.ActionButton-event {
+  background: url(create_event_icon.svg) no-repeat;
+  background-size: 64px 64px;
+  height: 64px;
+  width: 64px;
+}
+
+/* line 18, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_action_buttons.scss */
+.ActionButton-label {
+  color: #00aaa1;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 16.8px;
+  position: absolute;
+  padding-top: 4px;
+  left: -4px;
+  width: 80px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_toggle_buttons.scss */
+.ToggleContainer {
+  position: relative;
+  width: 36px;
+  height: 14px;
+}
+
+/* line 7, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_toggle_buttons.scss */
+.Toggle-bar {
+  background-color: #000000;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.26;
+  -webkit-transition: background-color linear .08s;
+          transition: background-color linear .08s;
+}
+/* line 16, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_toggle_buttons.scss */
+.Toggle-bar.checked {
+  opacity: 0.5;
+  background-color: #00aaa1;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_toggle_buttons.scss */
+.Toggle-button {
+  background-color: #f1f1f1;
+  position: absolute;
+  top: -3px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.4);
+  -webkit-transition: -webkit-transform linear .08s, background-color linear .08s;
+          transition: transform linear .08s, background-color linear .08s;
+}
+/* line 31, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_toggle_buttons.scss */
+.Toggle-button.checked {
+  background-color: #00aaa1;
+  -webkit-transform: translate(16px, 0);
+      -ms-transform: translate(16px, 0);
+          transform: translate(16px, 0);
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_sorts.scss */
+.TableSort-display {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+/* line 3, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_sorts.scss */
+.TableSort-display > * {
+  padding-right: 8px;
+}
+
+/* line 8, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_table_sorts.scss */
+.TableSort-orderDisplay {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 19.6px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_event_app_tiles.scss */
+.EventAppTile {
+  margin: 16px;
+  min-height: 500px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* line 8, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_event_app_tiles.scss */
+.EventAppTitle {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 28px;
+  position: relative;
+  top: 40px;
+  left: 72px;
+}
+
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_event_app_tiles.scss */
+.EventApp-nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  margin-top: -28px;
+  padding-top: 16px;
+}
+
+/* line 25, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_event_app_tiles.scss */
+.EventApp-headerIcon {
+  padding: 24px 40px;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 29, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_event_app_tiles.scss */
+.EventApp-headerIcon.active {
+  opacity: 0.5;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+/* line 35, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_event_app_tiles.scss */
+.EventApp-homeIcon {
+  padding: 24px 40px;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_modals.scss */
+.Modal-dialog {
+  box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+  background-color: #E5E5E5;
+  z-index: 10000;
+  overflow: scroll;
+  -webkit-animation-name: center-transition;
+          animation-name: center-transition;
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
+}
+
+@-webkit-keyframes center-transition {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes center-transition {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_overlays.scss */
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 9999;
+  opacity: 0.5;
+  -webkit-transition: opacity 2s;
+          transition: opacity 2s;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.ContactModal {
+  width: 700px;
+  height: 600px;
+  padding: 32px;
+  position: relative;
+}
+
+/* line 8, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.Modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  line-height: 33.6px;
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.ContactModal-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.ContactModal-headerIcon {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.ContactModal-title {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  line-height: 22.4px;
+  padding-left: 32px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* line 33, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.ContactModal-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+/* line 36, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.ContactModal-content > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 41, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_contact_modals.scss */
+.IconWithText {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_panels.scss */
+.Panel {
+  margin: 16px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  padding: 8px;
+  -webkit-animation-name: panel-enter;
+          animation-name: panel-enter;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+
+@-webkit-keyframes panel-enter {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes panel-enter {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    opacity: 1;
+  }
+}
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_panels.scss */
+.Panel-title {
+  font-size: 20px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 28px;
+  padding: 16px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* line 21, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_panels.scss */
+.PanelIcon {
+  font-size: 16px;
+  padding: 16px;
+}
+
+/* line 5, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_mini_tables.scss */
+.MiniTableIcon {
+  font-size: 18px;
+  padding-right: 16px;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_mini_tables.scss */
+.MiniTable-row {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 19.6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_mini_tables.scss */
+.MiniTable-rowItem {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 8px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_dropdown_menus.scss */
+.DropdownMenu {
+  position: relative;
+}
+
+/* line 5, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_dropdown_menus.scss */
+.DropdownMenu-options {
+  position: absolute;
+  background-color: #f9f9f9;
+  right: 0;
+  z-index: 6000;
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+/* line 13, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_dropdown_menus.scss */
+.DropdownMenu-options.default {
+  height: 100px;
+  width: 200px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileTrigger {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 22.4px;
+  color: white;
+  margin: auto 0;
+  padding-left: 8px;
+  text-transform: uppercase;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileIcon {
+  font-size: 12px;
+  padding-left: 8px;
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileMenu {
+  padding: 16px;
+}
+
+/* line 18, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileMenu-name {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 19.6px;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileMenu-email {
+  font-style: italics;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 16.8px;
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileMenu-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 8px;
+}
+
+/* line 32, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/components/_profile_menus.scss */
+.ProfileMenu-actions {
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 16.8px;
+  padding-top: 8px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/molecules/_login_logo.scss */
+.LoginLogo {
+  background: url(logo.svg) no-repeat;
+  background-size: 300px 300px;
+  height: 300px;
+  width: 300px;
+  margin: auto;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_menus.scss */
+.MenuContainer {
+  left: -256px;
+  width: 256px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 8000;
+  background-color: #f9f9f9;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_main.scss */
+.MainContainer-content {
+  padding-top: 64px;
+  height: 100%;
+}
+
+/* line 6, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_main.scss */
+.MainContainer {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 100%;
+  background-color: #f9f9f9;
+  z-index: 2000;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_app.scss */
+.AppContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+/* line 4, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_app.scss */
+.AppContainer > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 100%;
+      -ms-flex: 1 100%;
+          flex: 1 100%;
+  padding: 20px;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_app.scss */
+.AppContainer-header {
+  background: -webkit-linear-gradient(left, #00BFA5, #7E57C2);
+  background: linear-gradient(to right, #00BFA5, #7E57C2);
+}
+
+/* line 14, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_app.scss */
+.AppContainer-content {
+  padding-top: 50px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_menu_headers.scss */
+.MenuHeaderContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  background-color: #00aaa1;
+  padding: 32px;
+}
+
+/* line 9, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_menu_headers.scss */
+.MenuHeader-logo {
+  background: url(logo.svg) no-repeat;
+  background-size: 64px 64px;
+  height: 64px;
+  width: 64px;
+}
+
+/* line 13, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_menu_headers.scss */
+.MenuHeader-title {
+  padding-left: 16px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* line 18, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_menu_headers.scss */
+.MenuHeader-mainTitle {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 22.4px;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_menu_headers.scss */
+.MenuHeader-subTitle {
+  font-size: 12px;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  line-height: 16.8px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_forms.scss */
+.FormContainer, .FormContainer--leftAligned {
+  width: 448px;
+  margin: auto;
+  padding-bottom: 80px;
+}
+/* line 5, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_forms.scss */
+.FormContainer--leftAligned {
+  margin: 0;
+  padding-left: 72px;
+}
+
+/* line 12, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_forms.scss */
+.FormContainer-startDatetimeContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/* line 15, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_forms.scss */
+.FormContainer-startDatetimeContainer > * {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 128px;
+      -ms-flex: 0 128px;
+          flex: 0 128px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_button_lists.scss */
+.ButtonListContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-top: 16px;
+}
+/* line 5, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_button_lists.scss */
+.ButtonListContainer > * {
+  margin-left: 24px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_invite_users.scss */
+.InviteUsersContainer {
+  padding-left: 56px;
+  width: 300px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_company_user_grids.scss */
+.CompanyUserTableContainer {
+  padding-top: 24px;
+  padding-left: 72px;
+  width: 80%;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tiles.scss */
+.EventHomeTileContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  padding-left: 24px;
+}
+
+/* line 7, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tiles.scss */
+.EventHome-row {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 100%;
+      -ms-flex: 1 100%;
+          flex: 1 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+/* line 11, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tiles.scss */
+.EventHome-row > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_events.scss */
+.EventContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+/* line 7, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_events.scss */
+.Edit-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+/* line 12, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_events.scss */
+.Info-header {
+  opacity: 0.5;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 16.8px;
+}
+
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_events.scss */
+.Info-content {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 19.6px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_dashboards.scss */
+.EventDashboardContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column wrap;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+}
+
+/* line 6, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_dashboards.scss */
+.EventDashboard-router {
+  background-color: #F0F0F0;
+}
+
+/* line 10, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_dashboards.scss */
+.EventDashboard-event {
+  box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
+  position: relative;
+  padding: 24px 64px 32px 88px;
+  height: 136px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-actions {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 40px 56px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+/* line 8, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-row {
+  padding-top: 32px;
+  margin-left: 48px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+/* line 12, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-row:hover .Checkbox {
+  display: block;
+}
+
+/* line 17, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-rowContent {
+  padding: 16px 16px 16px 58px;
+}
+
+/* line 21, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-rowHeader {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* line 24, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-rowHeader > * {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+/* line 29, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-rowName {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+/* line 32, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-rowName > * {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center;
+}
+
+/* line 37, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-checkbox {
+  padding-right: 40px;
+}
+
+/* line 41, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  line-height: 33.6px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* line 46, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_event_tables.scss */
+.EventsTable-rowDaysTill {
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: normal;
+  letter-spacing: 0em;
+  line-height: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 32px;
+}
+
+/* line 1, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/containers/_modals.scss */
+.ModalContainer {
+  position: fixed;
+  z-index: 10000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-1 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-2 {
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-3 {
+  -webkit-box-flex: 3;
+  -webkit-flex-grow: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-4 {
+  -webkit-box-flex: 4;
+  -webkit-flex-grow: 4;
+      -ms-flex-positive: 4;
+          flex-grow: 4;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-5 {
+  -webkit-box-flex: 5;
+  -webkit-flex-grow: 5;
+      -ms-flex-positive: 5;
+          flex-grow: 5;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-6 {
+  -webkit-box-flex: 6;
+  -webkit-flex-grow: 6;
+      -ms-flex-positive: 6;
+          flex-grow: 6;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-7 {
+  -webkit-box-flex: 7;
+  -webkit-flex-grow: 7;
+      -ms-flex-positive: 7;
+          flex-grow: 7;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-8 {
+  -webkit-box-flex: 8;
+  -webkit-flex-grow: 8;
+      -ms-flex-positive: 8;
+          flex-grow: 8;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-9 {
+  -webkit-box-flex: 9;
+  -webkit-flex-grow: 9;
+      -ms-flex-positive: 9;
+          flex-grow: 9;
+}
+
+/* line 2, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexGrow-10 {
+  -webkit-box-flex: 10;
+  -webkit-flex-grow: 10;
+      -ms-flex-positive: 10;
+          flex-grow: 10;
+}
+
+/* line 7, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-clickable {
+  cursor: pointer;
+}
+
+/* line 11, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-clickableOnHover {
+  cursor: pointer;
+}
+/* line 13, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-clickableOnHover:hover {
+  opacity: 0.5;
+}
+
+/* line 18, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-italics {
+  font-style: italic;
+}
+
+/* line 22, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-bold {
+  font-weight: 700;
+}
+
+/* line 26, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-hidden {
+  display: none;
+}
+
+/* line 30, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-dim {
+  opacity: 0.5;
+}
+
+/* line 34, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-checkboxHidden {
+  position: fixed;
+  bottom: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* line 40, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-noScroll {
+  overflow: hidden;
+}
+
+/* line 44, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/utils.scss */
+.u-flexEnd {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+/* line 16, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+body {
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 23, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+html, body {
+  height: 100% !important;
+}
+
+/* line 27, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 33, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+*:focus {
+  outline: 0;
+}
+
+/* line 37, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+i, .icon {
+  font-size: 24px;
+}
+
+/* line 41, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+.icon {
+  text-decoration: none;
+}
+
+/* line 45, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* line 50, /Users/vemparty/Developer/plannr-app/app/assets/stylesheets/main.scss */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
