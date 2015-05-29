@@ -6,10 +6,15 @@ var TasksTable = React.createClass({
     };
   },
   componentDidMount: function() {
+    this.getAllTasks();
+  },
+  getAllTasks: function() {
     $.get("tasks.json", function(result) {
-      console.log(result);
       this.setState({tasks: result.tasks});
     }.bind(this));
+  },
+  getUserTasks: function() {
+    console.log("user tasks");
   },
   getColumns: function() {
     return [
@@ -52,6 +57,12 @@ var TasksTable = React.createClass({
       {name: "Delete", handler: this.deleteTasks}
     ]
   },
+  filterItems: function() {
+    return [
+      {name: "All Tasks", handler: this.getAllTasks, default: true},
+      {name: "My Tasks", handler: this.getUserTasks}
+    ]
+  },
   render: function() {
     return (
       <Table
@@ -67,6 +78,8 @@ var TasksTable = React.createClass({
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
         extraPadding={true}
+        filterable={true}
+        filterItems={this.filterItems()}
         searchPlaceholder="Search Tasks..."
       />
     );

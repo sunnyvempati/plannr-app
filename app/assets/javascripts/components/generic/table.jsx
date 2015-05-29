@@ -2,7 +2,8 @@ var Table = React.createClass({
   getDefaultProps: function() {
     return {
       showToolbar: true,
-      extraPadding: false
+      extraPadding: false,
+      filterable: false
     };
   },
   handleRowClick: function(data) {
@@ -32,6 +33,13 @@ var Table = React.createClass({
       );
     }
   },
+  filterMenu: function() {
+    if (this.props.filterable) {
+      return (
+        <TableFilter items={this.props.filterItems} />
+      );
+    }
+  },
   renderToolbar: function() {
     var actionClasses = classNames({
       'Toolbar-actions': true,
@@ -41,6 +49,10 @@ var Table = React.createClass({
       'Table-toolbar': true,
       'extraPad': this.props.extraPadding
     });
+    var filterClasses = classNames({
+      'Toolbar-filter': true,
+      'u-hidden': !this.props.filterable
+    })
     return (
       <div className={toolbarClasses}>
         <div className={actionClasses}>
@@ -55,6 +67,9 @@ var Table = React.createClass({
         <div className="Toolbar-sort">
           <TableSort items={this.props.sortItems}
                      handleSortClick={this.props.handleSortClick} />
+        </div>
+        <div className={filterClasses}>
+          {this.filterMenu()}
         </div>
       </div>
     );

@@ -38,7 +38,7 @@ var ProfileDropdownMenu = React.createClass({
     return (
       <DropdownMenu trigger={this.getTrigger()}
                     customOptions={this.getProfileMenu()}
-                    triggerClass="ProfileTrigger" />
+                    align="right" />
     );
   }
 });

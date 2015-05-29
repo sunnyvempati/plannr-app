@@ -1,0 +1,11 @@
+.TableFilter-trigger {
+  @extend .TableSort-display;
+}
+
+.TableFilter-options {
+  width: 200px;
+}
+
+.TableFilter-display {
+  @extend .TableSort-orderDisplay;
+}
