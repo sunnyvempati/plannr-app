@@ -49,7 +49,6 @@ class TasksController < ApplicationController
   end
 
   def event_tasks
-    binding.pry
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     render json: Task.event_tasks(params[:event_id]).order(order)
   end
