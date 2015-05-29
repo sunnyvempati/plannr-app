@@ -7,6 +7,9 @@ class Task < ActiveRecord::Base
   validates :name, :event, presence: true
   validate :deadline_in_future
 
+  include TaskStatuses
+  validates :status, inclusion: { in: [NEW, IN_PROGRESS, COMPLETED] }
+
   # scopes
   scope :event_tasks, ->(event_id) { where(event_id: event_id)}
 
@@ -18,6 +21,17 @@ class Task < ActiveRecord::Base
   scope :search, ->(term) {
     wildcard_text = "'%#{term}%'"
     where("lower(tasks.name) LIKE #{wildcard_text}")
+  }
+
+  scope :completed, { where(status: COMPLETE) }
+  scope :completed_for_event, ->(event_id) {
+    completed.where(event_id: event_id)
+  }
+  scope :user_tasks, ->(user_id) {
+    where(assigned_to: user_id)
+  }
+  scope :user_tasks_for_event, ->(user_id, event_id) {
+    user_tasks.where(event: event_id)
   }
 
   def self.header
