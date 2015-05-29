@@ -23,7 +23,7 @@ class Task < ActiveRecord::Base
     where("lower(tasks.name) LIKE #{wildcard_text}")
   }
 
-  scope :completed, { where(status: COMPLETE) }
+  scope :completed, -> { where(status: COMPLETE) }
   scope :completed_for_event, ->(event_id) {
     completed.where(event_id: event_id)
   }

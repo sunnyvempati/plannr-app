@@ -7,21 +7,24 @@ var TasksTable = React.createClass({
   },
   componentDidMount: function() {
     $.get("tasks.json", function(result) {
+      console.log(result);
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
   getColumns: function() {
     return [
-      {name: "name", grow: 10},
-      {name: "assigned_to", grow: 10},
-      {name: "deadline", grow: 5},
-      {name: "event", grow: 10}
+      {name: "name", grow: 10, header: "Name"},
+      {name: "deadline", grow: 4, header: "Due Date"},
+      {name: "status", grow: 4, header: "Status"},
+      {name: "assigned_to", grow: 4, header: "Assigned to"},
+      {name: "event", grow: 10, header: "Event"}
     ];
   },
   sortItems: function() {
     return [
       {entity: "name", display: "Name", default: true},
-      {entity: "deadline", display: "Due Date"}
+      {entity: "deadline", display: "Due Date"},
+      {entity: "status", display: "Status"}
     ]
   },
   deleteTasks: function() {
@@ -54,6 +57,7 @@ var TasksTable = React.createClass({
       <Table
         results={this.state.tasks}
         columns={this.getColumns()}
+        showHeaders={true}
         useCustomRowComponent={false}
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}

@@ -20,6 +20,9 @@
 .Table-data {
   width: 90%;
   padding-top: $size-increment*2;
+  &.extraPad {
+    padding-left: $size-increment*3;
+  }
 }
 
 .Table {
@@ -27,15 +30,20 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   padding-top: $size-increment * 2;
+  &-header {
+    display: flex;
+    align-items: center;
+    @include font($body-1-font, 600, 10);
+    color: $black-half;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
   &-row {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     @include font($body-1-font, normal, 0);
     color: $black-half;
-    &.extraPad {
-      padding-left: $size-increment*3;
-    }
+
     &Item {
       text-align: left;
       flex: 1;
@@ -52,15 +60,9 @@
       background-color: $plannr-teal;
       color: $white-three-fourths;
     }
-    // &-enter {
-    //   opacity: 0.01;
-    //   transition: opacity .2s;
-    //   &-active {
-    //     opacity: 1;
-    //   }
-    // }
   }
   &-checkbox {
     padding-left: $size-increment*3;
+    width: 25px;
   }
 }

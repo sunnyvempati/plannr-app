@@ -2,9 +2,9 @@ var EventTasksTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
     return [
-      {name: "name", grow: 10},
-      {name: "assigned_to", grow: 10},
-      {name: "deadline", grow: 5}
+      {name: "name", grow: 10, header: "Name"},
+      {name: "assigned_to", grow: 10, header: "Assigned to"},
+      {name: "deadline", grow: 5, header: "Due Date"}
     ];
   },
   actionItems: function() {
@@ -42,6 +42,7 @@ var EventTasksTable = React.createClass({
     return (
       <Table
         results={this.props.data}
+        showHeaders={true}
         columns={this.getColumns()}
         useCustomRowComponent={false}
         checkedItems={this.state.checkedItems}
