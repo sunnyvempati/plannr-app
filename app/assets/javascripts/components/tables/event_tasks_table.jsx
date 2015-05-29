@@ -38,6 +38,12 @@ var EventTasksTable = React.createClass({
       this.props.onUpdatedData(result.tasks);
     }.bind(this));
   },
+  filterItems: function() {
+    return [
+      {name: "All Tasks", handler: this.getEventTasks, default: true},
+      {name: "My Tasks", handler: this.getUserTasks}
+    ]
+  },
   render: function() {
     return (
       <Table

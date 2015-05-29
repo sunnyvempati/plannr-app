@@ -14,7 +14,9 @@ var TasksTable = React.createClass({
     }.bind(this));
   },
   getUserTasks: function() {
-    console.log("user tasks");
+    $.get("user_tasks", function(result) {
+      this.setState({tasks: result.tasks});
+    }.bind(this));
   },
   getColumns: function() {
     return [

@@ -8,8 +8,12 @@ class TasksController < ApplicationController
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: Task.all.order(order), each_serializer: TaskWithEventSerializer }
+      format.json { render json: Task.includes(:assigned_to).all.order(order), each_serializer: TaskWithEventSerializer }
     end
+  end
+
+  def for_user
+    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id), each_serializer: TaskWithEventSerializer
   end
 
   def show

@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  include Filterable
   acts_as_tenant :company
   belongs_to :event
   belongs_to :owner, class_name: 'User'
@@ -23,16 +24,16 @@ class Task < ActiveRecord::Base
     where("lower(tasks.name) LIKE #{wildcard_text}")
   }
 
-  scope :completed, -> { where(status: COMPLETE) }
-  scope :completed_for_event, ->(event_id) {
-    completed.where(event_id: event_id)
-  }
-  scope :user_tasks, ->(user_id) {
-    where(assigned_to: user_id)
-  }
-  scope :user_tasks_for_event, ->(user_id, event_id) {
-    user_tasks.where(event: event_id)
-  }
+  # scope :completed, -> { where(status: COMPLETE) }
+  # scope :completed_for_event, ->(event_id) {
+  #   completed.where(event_id: event_id)
+  # }
+  # scope :user_tasks, ->(user_id) {
+  #   where(assigned_to: user_id)
+  # }
+  # scope :user_tasks_for_event, ->(user_id, event_id) {
+  #   user_tasks.where(event: event_id)
+  # }
 
   def self.header
     "Tasks"
