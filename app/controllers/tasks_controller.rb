@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def for_user
-    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id), each_serializer: TaskWithEventSerializer
+    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]), each_serializer: TaskWithEventSerializer
   end
 
   def show
@@ -30,6 +30,7 @@ class TasksController < ApplicationController
   end
 
   def create
+    binding.pry
     @task = Task.new task_params
     render_entity @task
   end
@@ -72,7 +73,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id).merge(owner: current_user)
+    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id, :status).merge(owner: current_user)
   end
 
   def search_params
