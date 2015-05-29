@@ -8,8 +8,12 @@ class TasksController < ApplicationController
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: Task.all.order(order), each_serializer: TaskWithEventSerializer }
+      format.json { render json: Task.includes(:assigned_to).all.order(order), each_serializer: TaskWithEventSerializer }
     end
+  end
+
+  def for_user
+    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]), each_serializer: TaskWithEventSerializer
   end
 
   def show
@@ -68,7 +72,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id).merge(owner: current_user)
+    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id, :status).merge(owner: current_user)
   end
 
   def search_params

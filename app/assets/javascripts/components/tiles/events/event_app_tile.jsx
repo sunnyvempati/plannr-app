@@ -57,7 +57,7 @@ var EventAppTile = React.createClass({
         </div>
         {this.renderNavItems()}
         <div className="EventApp-content">
-          <RouteHandler />
+          <RouteHandler eventId={this.props.eventId} />
         </div>
       </div>
     );

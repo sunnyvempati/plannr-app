@@ -1,21 +1,43 @@
 .DropdownMenu {
   position: relative;
+
 }
+
+
 
 .DropdownMenu-options {
   position: absolute;
   background-color: $body-bg;
-  right: 0;
   z-index: $profile-menu-z-index;
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-flow: column nowrap;
   &.default {
-    height: 100px;
-    width: 200px;
+    width: 300px;
+  }
+  &.is-leftAligned {
+    left: 0;
+  }
+  &.is-rightAligned {
+    right: 0;
   }
 }
 
 .DropdownMenu-item {
+  color: $black-three-fourths;
+  display: flex;
+  align-items: center;
+  padding: 8px 8px 8px 24px;
+  &:hover {
+    background-color: $black-quarter;
+    cursor: pointer;
+  }
+  >* {
+    flex: 1;
+  }
+}
 
+.DropdownMenu-optionsHeader {
+  color: $black-quarter;
+  padding: 16px 8px 8px 24px;
 }

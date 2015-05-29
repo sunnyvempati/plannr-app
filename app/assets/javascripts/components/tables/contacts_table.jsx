@@ -12,11 +12,11 @@ var ContactsTable = React.createClass({
   },
   getColumns: function() {
     return [
-      {name: "name", grow: 10},
-      {name: "email", grow: 10},
-      {name: "phone", grow: 5},
-      {name: "organization", grow: 10},
-      {name: "type", grow: 5}
+      {name: "name", grow: 10, header: "Name"},
+      {name: "email", grow: 10, header: "Email"},
+      {name: "phone", grow: 5, header: "Phone"},
+      {name: "organization", grow: 10, header: "Company"},
+      {name: "type", grow: 5, header: "Type"}
     ];
   },
   actionItems: function() {
@@ -67,6 +67,7 @@ var ContactsTable = React.createClass({
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
         extraPadding={true}
+        showHeaders={true}
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
       />

@@ -2,9 +2,9 @@ var EventContactsTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
     return [
-      {name: "name", grow: 10},
-      {name: "phone", grow: 5},
-      {name: "email", grow: 10}
+      {name: "name", grow: 10, header: "Name"},
+      {name: "phone", grow: 5, header: "Phone"},
+      {name: "email", grow: 10, header: "Email"}
     ];
   },
   actionItems: function() {
@@ -54,6 +54,7 @@ var EventContactsTable = React.createClass({
         results={this.props.data}
         columns={this.getColumns()}
         useCustomRowComponent={false}
+        showHeaders={true}
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
