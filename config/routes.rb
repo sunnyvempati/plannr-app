@@ -67,6 +67,9 @@ Rails.application.routes.draw do
   # TODO: specify Event routes
   post 'destroy_events', to: 'events#mass_delete'
 
+  # tasks
+  get 'user_tasks', to: 'tasks#for_user'
+
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 
    # vendors

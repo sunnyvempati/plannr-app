@@ -12,9 +12,9 @@ var VendorsTable = React.createClass({
   },
   getColumns: function() {
     return [
-      {name: "name", grow: 10},
-      {name: "location", grow: 10},
-      {name: "phone", grow: 5},
+      {name: "name", grow: 10, header: "Name"},
+      {name: "location", grow: 10, header: "Location"},
+      {name: "phone", grow: 5, header: "Phone"},
     ];
   },
   actionItems: function() {
@@ -58,6 +58,7 @@ var VendorsTable = React.createClass({
         results={this.state.vendors}
         columns={this.getColumns()}
         useCustomRowComponent={false}
+        showHeaders={true}
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}

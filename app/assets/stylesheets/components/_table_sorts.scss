@@ -7,5 +7,18 @@
 
 .TableSort-orderDisplay {
   @include font($body-1-font, 600, 0);
-  color: $black-quarter;
+  color: $black-half;
+}
+
+.TableSortMenu {
+  width: 400px;
+}
+.TableSortMenu-itemOrder {
+  font-size: $body-1-font;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 $size-increment;
+  opacity: 0.5;
+  color: $black-three-fourths;
 }

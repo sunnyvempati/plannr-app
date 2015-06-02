@@ -2,9 +2,10 @@ var EventTasksTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
     return [
-      {name: "name", grow: 10},
-      {name: "assigned_to", grow: 10},
-      {name: "deadline", grow: 5}
+      {name: "name", grow: 10, header: "Name"},
+      {name: "deadline", grow: 4, header: "Due Date"},
+      {name: "status", grow: 4, header: "Status"},
+      {name: "assigned_to", grow: 4, header: "Assigned to"}
     ];
   },
   actionItems: function() {
@@ -15,7 +16,8 @@ var EventTasksTable = React.createClass({
   sortItems: function() {
     return [
       {entity: "name", display: "Name", default: true},
-      {entity: "deadline", display: "Due Date"}
+      {entity: "deadline", display: "Due Date"},
+      {entity: "status", display: "Status"}
     ]
   },
   deleteTasks: function() {
@@ -38,10 +40,17 @@ var EventTasksTable = React.createClass({
       this.props.onUpdatedData(result.tasks);
     }.bind(this));
   },
+  filterItems: function() {
+    return [
+      {name: "All Tasks", handler: this.props.reloadTasks, default: true},
+      {name: "My Tasks", handler: this.props.getUserTasks}
+    ]
+  },
   render: function() {
     return (
       <Table
         results={this.props.data}
+        showHeaders={true}
         columns={this.getColumns()}
         useCustomRowComponent={false}
         checkedItems={this.state.checkedItems}
@@ -51,7 +60,8 @@ var EventTasksTable = React.createClass({
         handleSearch={this.search}
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
-        extraPadding={false}
+        filterable={true}
+        filterItems={this.filterItems()}
         searchPlaceholder="Search Tasks..."
       />
     );

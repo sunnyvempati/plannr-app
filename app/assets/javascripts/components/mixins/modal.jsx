@@ -1,5 +1,5 @@
 var Modal = {
-  componentWillMount() {
+  componentWillMount: function() {
     this.overlayNode = document.createElement('div');
     this.overlayNode.className = 'Overlay';
     document.body.appendChild(this.overlayNode);
