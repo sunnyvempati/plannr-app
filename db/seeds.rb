@@ -7,7 +7,9 @@ require 'faker'
 def load_ymls
   ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks', 'attachment_limits'].each do |file|
     filename = ENV["staging"] ? "staging_#{file}.yml" : "#{file}.yml"
+    print "filename=@#{filename}..."
     instance_variable_set("@#{file}", YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', filename))))
+    puts "success"
   end
 end
 #----
