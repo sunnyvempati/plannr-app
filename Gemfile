@@ -27,7 +27,6 @@ gem 'faker'
 gem 'autoprefixer-rails'
 
 gem 'carrierwave', '~> 0.10.0'
-gem 'carrierwave-base64'
 gem 'fog', '~> 1.24.0'
 
 group 'development' do

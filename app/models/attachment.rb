@@ -1,5 +1,5 @@
 class Attachment < ActiveRecord::Base
-  mount_base64_uploader :file_link, AttachmentFileUploader
+  mount_uploader :file_link, AttachmentFileUploader
   belongs_to :event
   acts_as_tenant :company
 
