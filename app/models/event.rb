@@ -19,12 +19,6 @@ class Event < ActiveRecord::Base
     where("lower(events.name) LIKE #{wildcard_text}")
   }
 
-  scope :attachments, ->(event_id) {
-    includes(:attachment)
-    .joins('INNER JOIN attachments ON events.id = attachments.event_id')
-    .where("event_id = '#{event_id}'")
-  }
-
   def self.header
     'Events'
   end
