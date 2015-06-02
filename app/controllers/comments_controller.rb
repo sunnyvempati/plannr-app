@@ -1,13 +1,13 @@
 class CommentsController < ApplicationController
-  before_action :find_klass
+  before_action :find_commentable
   before_action :find_comment, only: :destroy
 
   def index
-    render_success @klass.comments
+    render_success @commentable.comments.includes(:commenter).order("created_at desc")
   end
 
   def create
-    created_comment @klass.comments.create!(comment_params)
+    created_comment = @commentable.comments.create!(comment_params)
     render_success created_comment
   end
 
@@ -21,12 +21,12 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body).merge(commenter: current_user)
   end
 
-  def find_klass
-    @klass = params[:commentable_type].capitalize.constantize
-    # @commenter = klass.find(params[:commentable_id])
+  def find_commentable
+    klass = params[:commentable_type].capitalize.constantize
+    @commentable = klass.find(params[:commentable_id])
   end
 
   def find_comment
-    @comment = @klass.find(params[:commentable_id])
+    @comment = Comment.find(params[:id])
   end
 end

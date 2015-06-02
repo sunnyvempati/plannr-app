@@ -1,0 +1,55 @@
+.Comments-title {
+  @include font($subheader-font, 600, 0);
+  background-color: $header-bg;
+  color: white;
+  padding-left: $size-increment*4;
+}
+
+.CommentIcon {
+  padding: $size-increment*2;
+  font-size: 24px;
+}
+
+.Comments-input {
+  padding: 24px 0 24px 104px;
+  width: 50%;
+}
+
+.Comments-list {
+  height: 300px;
+  padding: 24px 0 0 104px;
+  margin-right: 104px;
+  overflow-y: auto;
+}
+
+.Comments-listItem {
+  width: 80%;
+  margin-bottom: $size-increment*2;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.ListItem-title {
+  display: flex;
+  align-items: center;
+  >* {
+    flex: 1;
+  }
+}
+
+.ListItem-commenter {
+  @include font($title-font, normal, 20);
+  color: $black-half;
+  padding-bottom: $size-increment;
+}
+
+.ListItem-time {
+  display: flex;
+  justify-content: flex-end;
+  @include font($body-1-font, normal, 0);
+  color: $black-quarter;
+}
+
+.ListItem-text {
+  color: $black-quarter;
+  padding-bottom: $size-increment*2;
+}
