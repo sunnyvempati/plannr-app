@@ -21,7 +21,7 @@ class AttachmentsController < ApplicationController
       )
 
     if @attachment.save
-      redirect_to session[:return_to] || attachments_path, notice: "The attachment #{@attachment.file_name} has been uploaded."
+      redirect_to session[:return_to] || attachments_path, notice: "The attachment has been uploaded."
     else
       render "new"
     end
@@ -34,15 +34,9 @@ class AttachmentsController < ApplicationController
     end
   end
 
-  def quick_create
-    @attachment = Attachment.quick_create(attachment_params)
-
-    render_entity @attachment
-  end
-
   def event_attachments
-    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
-    render json: Event.find_by_id(params[:event_id]).attachments
+    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'file_name asc'
+    render json: Event.find_by_id(params[:event_id]).attachments.order(order)
   end
 
   def search_in_events
@@ -57,11 +51,6 @@ class AttachmentsController < ApplicationController
   private
   def attachment_params
     params.require(:attachment)
-      .permit(:event_id,  :description, file_attachment: [:file_contents, :file_name])
-  end
-
-  def quick_create_params
-    params.require(:quick_create)
       .permit(:event_id,  :description, file_attachment: [:file_contents, :file_name])
   end
 
