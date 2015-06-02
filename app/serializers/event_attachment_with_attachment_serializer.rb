@@ -1,5 +1,5 @@
 class EventAttachmentWithAttachmentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :file_attachment
+  attributes :id, :name, :description, :file_attachment
 
   def description
     object.attachment.description
