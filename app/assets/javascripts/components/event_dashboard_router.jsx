@@ -23,6 +23,7 @@ var EventDashboardRouter = React.createClass({
   render: function() {
     return (
       <div ref="eventDashboard"></div>
+      Test
     );
   }
 });
