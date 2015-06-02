@@ -1,14 +1,12 @@
 var FileInput = React.createClass({
   mixins: [Formsy.Mixin],
   changeValue: function(event) {
-    // get a base-64 encoded version of the file
-    var self = this;
     var reader = new FileReader();
     var file = event.target.files[0];
 
     reader.onload = function(upload, file_name, file_extension) {
-      self.setFileContents(upload.target.result);
-    }
+      this.setFileContents(upload.target.result);
+    }.bind(this)
 
     this.setState({file_name: event.target.files[0].name});
     reader.readAsDataURL(file);
