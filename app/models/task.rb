@@ -16,12 +16,12 @@ class Task < ActiveRecord::Base
 
   scope :search_in_event, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
-    event_tasks(event_id).where("lower(tasks.name) LIKE #{wildcard_text}")
+    event_tasks(event_id).where("lower(tasks.name) LIKE lower(#{wildcard_text})")
   }
 
   scope :search, ->(term) {
     wildcard_text = "'%#{term}%'"
-    where("lower(tasks.name) LIKE #{wildcard_text}")
+    where("lower(tasks.name) LIKE lower(#{wildcard_text})")
   }
 
   # scope :completed, -> { where(status: COMPLETE) }

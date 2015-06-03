@@ -18,20 +18,20 @@ class Contact < ActiveRecord::Base
   scope :search_not_in, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     Contact.not_in(event_id)
-      .where("lower(contacts.name) LIKE #{wildcard_text}")
+      .where("lower(contacts.name) LIKE lower(#{wildcard_text})")
       .limit(5)
   }
 
   scope :search_clients, ->(term) {
     wildcard_text = "'%#{term.downcase}%'"
-    where("lower(contacts.name) LIKE #{wildcard_text}
+    where("lower(contacts.name) LIKE lower(#{wildcard_text})
         AND contacts.category = 1")
     .limit(5)
   }
 
   scope :search, ->(term) {
     wildcard_text = "'%#{term.downcase}%'"
-    where("lower(contacts.name) LIKE #{wildcard_text}")
+    where("lower(contacts.name) LIKE lower(#{wildcard_text})")
   }
 
   validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true

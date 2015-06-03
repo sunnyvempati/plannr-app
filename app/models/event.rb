@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
 
   scope :search, ->(term) {
     wildcard_text = "'%#{term.downcase}%'"
-    where("lower(events.name) LIKE #{wildcard_text}")
+    where("lower(events.name) LIKE lower(#{wildcard_text})")
   }
 
   def self.header

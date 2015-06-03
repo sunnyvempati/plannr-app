@@ -17,6 +17,6 @@ class EventContact < ActiveRecord::Base
 
   scope :search, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
-    contacts(event_id).where("lower(contacts.name) LIKE #{wildcard_text}")
+    contacts(event_id).where("lower(contacts.name) LIKE lower(#{wildcard_text})")
   }
 end
