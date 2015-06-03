@@ -1,6 +1,6 @@
 var FileInput = React.createClass({
   mixins: [Formsy.Mixin],
-  changeValue: function(event) {
+  changeValue: function(event) {// All of this
     var reader = new FileReader();
     var file = event.target.files[0];
 
@@ -8,7 +8,6 @@ var FileInput = React.createClass({
       this.setFileContents(upload.target.result);
     }.bind(this)
 
-    this.setState({file_name: event.target.files[0].name});
     reader.readAsDataURL(file);
   },
   setFileContents: function(fileContents) {

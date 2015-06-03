@@ -1,18 +1,4 @@
-//var AttachmentActionButton = React.createClass({
-//  render: function() {
-//    return (
-//        <div className="ActionButton" onClick={this.props.onClick}>
-//          <div className="ActionButton-svg">
-//            <div className={this.props.class}></div>
-//            <AttachmentBrowse eventId={this.props.eventId} onAssociation={this.incrementCount} />
-//          </div>
-//          <div className="ActionButton-label">{this.props.label}</div>
-//        </div>
-//    );
-//  }
-//});
-
-var AttachmentActionButton = React.createClass({
+var AttachmentBrowse = React.createClass({
   getInitialState: function () {
     return {loading: false, fileName: ''};
   },

@@ -4,8 +4,7 @@ var EventAttachmentsTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
     return [
-      {name: "file_name", grow: 4},
-      {name: "description", grow: 6}
+      {name: "file_name", grow: 4, header: "File Name"}
     ];
   },
   actionItems: function() {
@@ -15,8 +14,7 @@ var EventAttachmentsTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "file_name", display: "File Name", default: true},
-      {entity: "description", display: "Description"}
+      {entity: "file_name", display: "File Name", default: true}
     ]
   },
   removeAssociation: function() {
@@ -39,22 +37,34 @@ var EventAttachmentsTable = React.createClass({
       this.props.onUpdatedData(result.attachments);
     }.bind(this));
   },
-  // openAttachmentModal: function(data) {
-  //   var attachment = {
-  //     id: data.attachment_id,
-  //     file_name: data.file_name,
-  //     description: data.description,
-  //     file_attachment: data.file_attachment
-  //   };
-  //   var modal = React.createElement(ShowAttachmentModal, {data: attachment});
-  //   React.render(modal, document.getElementById('modal'));
-  // },
+  getCustomRows: function() {
+    var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
+    return this.props.data.map(function(attachment) {
+      var checked = this.state.checkedItems.indexOf(attachment.id) > -1;
+      return(
+          <div className="AttachmentsTable-row" key={attachment.id}>
+            <div className="AttachmentsTable-rowHeader">
+              <div className="AttachmentsTable-rowName">
+                <div className="AttachmentsTable-checkbox">
+                  <CheckboxInput onChange={this.rowChanged} value={attachment.id} checked={checked} hideCheckbox={hideCheckbox} />
+                </div>
+                <div className="AttachmentsTable-name u-clickable" >
+                  <a href={attachment.file_link.url} target='_blank'>{attachment.file_name}</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+      );
+    }, this);
+  },
   render: function() {
     return (
          <Table
           results={this.props.data}
           columns={this.getColumns()}
           useCustomRowComponent={false}
+          customRows={this.getCustomRows()}
           checkedItems={this.state.checkedItems}
           rowChanged={this.rowChanged}
           sortItems={this.sortItems()}
@@ -63,6 +73,7 @@ var EventAttachmentsTable = React.createClass({
           showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}
           extraPadding={false}
+          showHeaders={true}
           searchPlaceholder="Search Attachments..."
         />
     );

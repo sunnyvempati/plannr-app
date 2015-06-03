@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   get 'events/:event_id/attachments/new', to:'attachments#quick_create'
   get 'events/:event_id/attachments', to: 'attachments#event_attachments'
   post 'events/:event_id/attachments/mass_delete', to:'attachments#mass_destroy'
+  post 'events/:event_id/attachments/', to: 'attachments#create'
 
 
   # contacts

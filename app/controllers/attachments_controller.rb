@@ -16,15 +16,8 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = AttachmentWithStatus.new(
-      Attachment.new(event_id: attachment_params[:event_id], description: attachment_params[:description], file_name: attachment_params[:file_attachment][:file_name], file_link: attachment_params[:file_attachment][:file_contents])
-      )
-
-    if @attachment.save
-      redirect_to session[:return_to] || attachments_path, notice: "The attachment has been uploaded."
-    else
-      render "new"
-    end
+    @attachment = AttachmentWithStatus.new(Attachment.new(attachment_params))
+    render_entity @attachment
   end
 
   def destroy
@@ -51,7 +44,8 @@ class AttachmentsController < ApplicationController
   private
   def attachment_params
     params.require(:attachment)
-      .permit(:event_id,  :description, file_attachment: [:file_contents, :file_name])
+      .permit(:file_name, :file_link)
+      .merge(event_id: params[:event_id])
   end
 
   # TODO: sort mixin
