@@ -12,4 +12,3 @@
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
 //= require components
-//= require_tree .

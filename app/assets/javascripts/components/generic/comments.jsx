@@ -9,7 +9,7 @@ var Comments = React.createClass({
   },
   getParams: function(comment) {
     return {
-      comment,
+      comment: comment,
       commentable_type: this.props.entity,
       commentable_id: this.props.entity_id
     }
