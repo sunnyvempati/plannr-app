@@ -62,6 +62,7 @@ var EventTasksTable = React.createClass({
         actionItems={this.actionItems()}
         filterable={true}
         filterItems={this.filterItems()}
+        tableDataClassName="scrollable"
         searchPlaceholder="Search Tasks..."
       />
     );

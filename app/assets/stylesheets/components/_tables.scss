@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
+  overflow-y: auto;
 }
 
 .Table-toolbar {
@@ -20,6 +21,10 @@
 .Table-data {
   width: 90%;
   padding-top: $size-increment*2;
+  &.scrollable {
+    height: 350px;
+    overflow-y: auto;
+  }
   &.extraPad {
     padding-left: $size-increment*3;
   }

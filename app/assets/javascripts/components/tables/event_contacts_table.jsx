@@ -63,6 +63,7 @@ var EventContactsTable = React.createClass({
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
         extraPadding={false}
+        tableDataClassName="scrollable"
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
       />
