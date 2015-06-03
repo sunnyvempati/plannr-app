@@ -9,20 +9,23 @@ var EventDashboardRouter = React.createClass({
   },
   routes: function() {
     return (
-      <Route name="tileAll" path="/" handler={EventDashboard}>
+      <Route name="tileAll" path="/" handler={EventDashboard} ignoreScrollBehavior={true}>
         <Route name="tileEventApp" path="nav" handler={EventAppTile}>
           <Route name="tileContactsList" path="contacts" handler={EventContactListTile} />
           <Route name="tileTasksList" path="tasks" handler={EventTaskListTile} />
           <Route name="tileAttachmentsList" path="attachments" handler={EventAttachmentsListTile} />
           <Route name="tileVendorsList" path="vendors" handler={EventVendorListTile} />
         </Route>
-        <DefaultRoute handler={EventHome} />
+        <DefaultRoute handler={EventHome}  />
       </Route>
     );
   },
   render: function() {
     return (
-      <div ref="eventDashboard"></div>
+      <div>
+        <div ref="eventDashboard"></div>
+        <Comments entity="Event" entity_id={this.props.event.id} authToken={this.props.authToken} />
+      </div>
     );
   }
 });
