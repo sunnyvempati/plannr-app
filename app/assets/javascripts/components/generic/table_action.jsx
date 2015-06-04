@@ -8,7 +8,7 @@ var TableAction = React.createClass({
   },
   getItems: function() {
     return this.props.items.filter(function(item) {
-      return item.global;
+      return item.massAction;
     })
   },
   render: function() {

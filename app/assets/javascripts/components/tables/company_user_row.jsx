@@ -12,6 +12,32 @@ var CompanyUserRow = React.createClass({
       // this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
+  handleActionClick: function(item) {
+    item.handler(this.props.data.id);
+  },
+  getActionTrigger: function() {
+    return (
+      <div className="Table-actionTrigger">
+        <i className="fa fa-ellipsis-v TableRowAction"></i>
+      </div>
+    )
+  },
+  getRowActionMenu: function() {
+    var globalItems = this.props.actionItems.map(function(item) {
+      return (
+        <div className="DropdownMenu-item"
+             onClick={this.handleActionClick.bind(this, item)}
+             key={item.name}>
+          {item.name}
+        </div>
+      )
+    }.bind(this));
+    return (
+      <div className="TableRow-actions">
+        {globalItems}
+      </div>
+    )
+  },
   render: function() {
     var data = this.props.data;
     var rowClasses = classNames({
@@ -31,6 +57,9 @@ var CompanyUserRow = React.createClass({
         <div className="Table-rowItem u-flexGrow-4">
           <ToggleButton checked={this.state.isAdmin} handleClick={this.toggleAdmin} />
         </div>
+        <DropdownMenu trigger={this.getActionTrigger()}
+                      customOptions={this.getRowActionMenu()}
+                      align="right" />
       </div>
     );
   }

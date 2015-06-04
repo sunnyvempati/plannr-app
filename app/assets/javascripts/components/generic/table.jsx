@@ -99,7 +99,7 @@ var Table = React.createClass({
       'Table-data': true,
       'extraPad': this.props.extraPadding
     };
-    dataClasses[this.props.tableDataClassName] = true;
+    dataClasses[this.props.tableDataClassName] = !!this.props.tableDataClassName;
     return (
       <div className="TableContainer">
         {renderedToolbar}

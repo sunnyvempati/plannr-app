@@ -19,7 +19,9 @@ var VendorsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteTasks}
+      // global means the action is available as a mass action
+      {name: "Edit", handler: this.handleEdit, massAction: false},
+      {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
   sortItems: function() {
@@ -27,10 +29,14 @@ var VendorsTable = React.createClass({
       {entity: "name", display: "Name", default: true}
     ]
   },
-  deleteVendors: function() {
-    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
+  handleEdit: function(id) {
+    location.href = "/vendors/"+id+"/edit";
+  },
+  handleDelete: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('vendors/mass_delete', destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.state.vendors);
+      var newData = this.spliceResults(this.state.vendors, deletionIds);
       this.setState({vendors: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
@@ -46,11 +52,6 @@ var VendorsTable = React.createClass({
     $.get('search_vendors', {search: {text: term || ""}}, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
-  },
-  actionItems: function() {
-    return [
-      {name: "Delete", handler: this.deleteVendors}
-    ]
   },
   render: function() {
     return (

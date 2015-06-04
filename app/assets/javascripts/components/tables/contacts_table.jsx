@@ -21,9 +21,9 @@ var ContactsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      // global false means the action only shows on rows
-      {name: "Edit", handler: this.handleEdit, global: false},
-      {name: "Delete", handler: this.handleDelete, global: true}
+      // global means the action is available as a mass action
+      {name: "Edit", handler: this.handleEdit, massAction: false},
+      {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
   sortItems: function() {
@@ -35,7 +35,7 @@ var ContactsTable = React.createClass({
     location.href = "/contacts/"+id+"/edit";
   },
   handleDelete: function(id) {
-    var deletionIds = !!id ? id : this.state.checkedItems;
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('/contacts/mass_delete', destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.state.contacts, deletionIds);

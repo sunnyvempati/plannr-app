@@ -21,6 +21,7 @@
 .Table-data {
   width: 90%;
   padding-top: $size-increment*2;
+  padding-right: $size-increment;
   &.scrollable {
     height: 350px;
     overflow-y: auto;

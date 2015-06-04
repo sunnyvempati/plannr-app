@@ -34,7 +34,7 @@ class EventContactsController < ApplicationController
   end
 
   def mass_delete
-    ids = mass_delete_params[:event_contact_ids]
+    ids = mass_delete_params[:ids]
     EventContact.delete_all(id: ids) if ids
     render_success
   end
@@ -46,7 +46,7 @@ class EventContactsController < ApplicationController
   end
 
   def mass_delete_params
-    params.require(:destroy_opts).permit(event_contact_ids: [])
+    params.require(:destroy_opts).permit(ids: [])
   end
 
   def search_params
