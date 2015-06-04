@@ -1,5 +1,5 @@
 var ContactsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [TableCheckbox, Router.Navigation],
   getInitialState: function() {
     return {
       contacts: []
@@ -45,7 +45,7 @@ var ContactsTable = React.createClass({
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
+    $.get('/contacts.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -55,28 +55,35 @@ var ContactsTable = React.createClass({
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
-  openContactModal: function(data) {
-    var modal = React.createElement(ShowContactModal, {data: data});
-    React.render(modal, document.getElementById('modal'));
+  goToContact: function(data) {
+    this.transitionTo('contact', {id: data.id});
+    // var modal = React.createElement(ShowContactModal, {data: data});
+    // React.render(modal, document.getElementById('modal'));
   },
   render: function() {
     return (
-      <Table
-        results={this.state.contacts}
-        columns={this.getColumns()}
-        useCustomRowComponent={false}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
-        handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
-        actionItems={this.actionItems()}
-        extraPadding={true}
-        showHeaders={true}
-        searchPlaceholder="Search Contacts..."
-        onClick={this.openContactModal}
-      />
+      <div>
+        <ActionButton class="ActionButton-event"
+                      path="/contacts/new"
+                      label="Create Contact" />
+        <Table
+          results={this.state.contacts}
+          columns={this.getColumns()}
+          useCustomRowComponent={false}
+          checkedItems={this.state.checkedItems}
+          rowChanged={this.rowChanged}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sortBy}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+          showHeaders={true}
+          searchPlaceholder="Search Contacts..."
+          onClick={this.goToContact}
+        />
+      </div>
+
     );
   }
 });

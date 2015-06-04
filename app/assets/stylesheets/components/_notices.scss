@@ -1,0 +1,4 @@
+.Notice {
+  @include font($title-font, 500, 10);
+  opacity: 0.5;
+}

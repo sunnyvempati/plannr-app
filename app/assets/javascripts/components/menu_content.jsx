@@ -8,17 +8,17 @@ var MenuContent = React.createClass({
       },
       { name: "Tasks",
         icon_class: "fa fa-check",
-        href: "/tasks",
+        href: "/tasks/",
         key: '2'
       },
       { name: "Contacts",
         icon_class: "fa fa-book",
-        href: "/contacts",
+        href: "/contacts/",
         key: '3'
       },
       { name: "Vendors",
         icon_class: "fa fa-truck",
-        href: "/vendors",
+        href: "/vendors/",
         key: '4'
       }
     ];

@@ -24,7 +24,13 @@ var EventDashboardRouter = React.createClass({
     return (
       <div>
         <div ref="eventDashboard"></div>
-        <Comments entity="Event" entity_id={this.props.event.id} authToken={this.props.authToken} />
+        <div className="EventComments-title">
+          <i className="fa fa-comments CommentIcon"></i>
+          Comments
+        </div>
+        <div className="EventComments">
+          <Comments entity="Event" entity_id={this.props.event.id} authToken={this.props.authToken} />
+        </div>
       </div>
     );
   }
