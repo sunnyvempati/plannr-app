@@ -57,9 +57,6 @@
     &:hover .Checkbox {
       display: block;
     }
-    &:hover {
-      background-color: rgba(0,0,0,0.15);
-    }
     &.selected {
       transition: all 0.5s;
       background-color: $plannr-teal;
@@ -70,4 +67,22 @@
     padding-left: $size-increment*3;
     width: 25px;
   }
+}
+
+.Table-action {
+  width: 18px;
+}
+
+.TableRow-actions {
+  width: 150px;
+}
+
+.Table-actionTrigger {
+  display: flex;
+  justify-content: center;
+  width: 18px;
+}
+
+.TableRowAction {
+  font-size: 18px;
 }

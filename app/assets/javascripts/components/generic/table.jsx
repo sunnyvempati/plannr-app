@@ -21,7 +21,8 @@ var Table = React.createClass({
                   hideCheckbox={hideCheckbox}
                   extraPad={this.props.extraPadding}
                   key={result.id}
-                  onClick={this.handleRowClick.bind(this, result)} />
+                  onClick={this.handleRowClick.bind(this, result)}
+                  actionItems={this.props.actionItems} />
       )
     }, this);
     return rows;
@@ -85,6 +86,7 @@ var Table = React.createClass({
       <div className="Table-header">
         <div className="Table-checkbox u-flexGrow-1"></div>
         {headers}
+        <div className="Table-action"></div>
       </div>
     );
   },

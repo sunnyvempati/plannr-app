@@ -6,7 +6,7 @@ var ContactsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("contacts.json", function(result) {
+    $.get("/contacts.json", function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -21,7 +21,9 @@ var ContactsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteContacts}
+      // global false means the action only shows on rows
+      {name: "Edit", handler: this.handleEdit, global: false},
+      {name: "Delete", handler: this.handleDelete, global: true}
     ]
   },
   sortItems: function() {
@@ -29,10 +31,14 @@ var ContactsTable = React.createClass({
       {entity: "name", display: "Name", default: true}
     ]
   },
-  deleteContacts: function() {
-    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
-    $.post('contacts/mass_delete', destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.state.contacts);
+  handleEdit: function(id) {
+    location.href = "/contacts/"+id+"/edit";
+  },
+  handleDelete: function(id) {
+    var deletionIds = !!id ? id : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
+    $.post('/contacts/mass_delete', destroyOpts, function(success_result) {
+      var newData = this.spliceResults(this.state.contacts, deletionIds);
       this.setState({contacts: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
