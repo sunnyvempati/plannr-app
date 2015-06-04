@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   has_many :vendors, through: :event_vendors
   has_many :tasks
   has_many :attachments
+  has_many :comments, as: :commentable
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
 
@@ -16,7 +17,7 @@ class Event < ActiveRecord::Base
 
   scope :search, ->(term) {
     wildcard_text = "'%#{term.downcase}%'"
-    where("lower(events.name) LIKE #{wildcard_text}")
+    where("lower(events.name) LIKE lower(#{wildcard_text})")
   }
 
   def self.header

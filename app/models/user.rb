@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     wildcard_text = "'%#{term.downcase}%'"
     joins(
       'INNER JOIN profiles p ON p.user_id = users.id')
-      .where("lower(p.first_name || ' ' || p.last_name) LIKE #{wildcard_text}")
+      .where("lower(p.first_name || ' ' || p.last_name) LIKE lower(#{wildcard_text})")
       .select('users.*, p.first_name, p.last_name')
       .limit(5)
   }

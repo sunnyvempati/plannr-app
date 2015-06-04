@@ -21,7 +21,8 @@ var Table = React.createClass({
                   hideCheckbox={hideCheckbox}
                   extraPad={this.props.extraPadding}
                   key={result.id}
-                  onClick={this.handleRowClick.bind(this, result)} />
+                  onClick={this.handleRowClick.bind(this, result)}
+                  actionItems={this.props.actionItems} />
       )
     }, this);
     return rows;
@@ -85,6 +86,7 @@ var Table = React.createClass({
       <div className="Table-header">
         <div className="Table-checkbox u-flexGrow-1"></div>
         {headers}
+        <div className="Table-action"></div>
       </div>
     );
   },
@@ -93,14 +95,15 @@ var Table = React.createClass({
     var message = tableRows.length == 0 ? "No items" : "";
     var renderedToolbar = this.props.showToolbar ? this.renderToolbar() : null;
     var tableHeaders = this.props.showHeaders ? this.getHeaders() : null;
-    var dataClasses = classNames({
+    var dataClasses = {
       'Table-data': true,
       'extraPad': this.props.extraPadding
-    })
+    };
+    dataClasses[this.props.tableDataClassName] = !!this.props.tableDataClassName;
     return (
       <div className="TableContainer">
         {renderedToolbar}
-        <div className={dataClasses}>
+        <div className={classNames(dataClasses)}>
           {tableHeaders}
           {tableRows}
         </div>

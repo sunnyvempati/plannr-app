@@ -14,17 +14,14 @@ class Vendor < ActiveRecord::Base
   scope :search_not_in, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     Vendor.not_in(event_id)
-    .where("lower(vendors.name) LIKE #{wildcard_text}")
+    .where("lower(vendors.name) LIKE lower(#{wildcard_text})")
     .limit(5)
   }
 
   scope :search, ->(term) {
     wildcard_text = "'%#{term}%'"
-    Vendor.where("lower(vendors.name) LIKE #{wildcard_text}")
+    Vendor.where("lower(vendors.name) LIKE lower(#{wildcard_text})")
   }
-
-  # TODO: case sensitivity in name
-  scope :name_like, ->(name) { where('lower(vendors.name) LIKE ? ', name) }
 
   validates :name, presence: true
   validates_format_of :phone,
@@ -33,4 +30,3 @@ class Vendor < ActiveRecord::Base
                       :allow_blank => true
 
 end
-

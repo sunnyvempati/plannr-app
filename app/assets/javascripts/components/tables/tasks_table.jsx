@@ -34,14 +34,18 @@ var TasksTable = React.createClass({
       {entity: "status", display: "Status"}
     ]
   },
-  deleteTasks: function() {
-    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
+  handleDelete: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('tasks/mass_delete', destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.state.tasks);
+      var newData = this.spliceResults(this.state.tasks, deletionIds);
       this.setState({tasks: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
+  },
+  handleEdit: function(id) {
+    location.href = "/tasks/"+id+"/edit";
   },
   sortBy: function(entity, order) {
     $.get('tasks.json', {sort: {entity: entity, order: order}}, function(result) {
@@ -56,7 +60,9 @@ var TasksTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteTasks}
+      // global means the action is available as a mass action
+      {name: "Edit", handler: this.handleEdit, massAction: false},
+      {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
   filterItems: function() {

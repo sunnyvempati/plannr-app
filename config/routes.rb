@@ -80,4 +80,8 @@ Rails.application.routes.draw do
   # attachments
   resources :attachments, only: [:index, :new, :create, :destroy]
 
+  # comments
+  get '/comments', to: 'comments#index'
+  post '/comments', to: 'comments#create'
+
 end

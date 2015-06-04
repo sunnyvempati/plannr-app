@@ -1,5 +1,4 @@
 var EventContactListTile = React.createClass({
-  mixins: [TableCheckbox],
   getInitialState: function() {
     return {
       tableData: []

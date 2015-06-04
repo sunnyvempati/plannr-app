@@ -9,7 +9,7 @@ var EventContactsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Remove from event", handler: this.removeAssociation}
+      {name: "Remove", handler: this.removeAssociation, massAction: true}
     ]
   },
   sortItems: function() {
@@ -18,10 +18,11 @@ var EventContactsTable = React.createClass({
       {entity: "email", display: "Email"}
     ]
   },
-  removeAssociation: function() {
-    var destroyOpts = {destroy_opts: {event_contact_ids: this.state.checkedItems}};
+  removeAssociation: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("contacts/mass_delete", destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.props.data);
+      var newData = this.spliceResults(this.props.data, deletionIds);
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
@@ -63,6 +64,7 @@ var EventContactsTable = React.createClass({
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
         extraPadding={false}
+        tableDataClassName="scrollable"
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
       />

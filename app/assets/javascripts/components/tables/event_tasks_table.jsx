@@ -10,7 +10,7 @@ var EventTasksTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteTasks}
+      {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
   sortItems: function() {
@@ -20,10 +20,11 @@ var EventTasksTable = React.createClass({
       {entity: "status", display: "Status"}
     ]
   },
-  deleteTasks: function() {
-    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
+  handleDelete: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('/tasks/mass_delete',destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.props.data);
+      var newData = this.spliceResults(this.props.data, deletionIds);
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
@@ -62,6 +63,7 @@ var EventTasksTable = React.createClass({
         actionItems={this.actionItems()}
         filterable={true}
         filterItems={this.filterItems()}
+        tableDataClassName="scrollable"
         searchPlaceholder="Search Tasks..."
       />
     );

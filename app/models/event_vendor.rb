@@ -12,6 +12,6 @@ class EventVendor < ActiveRecord::Base
 
   scope :search, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
-    vendors(event_id).where("lower(vendors.name) LIKE #{wildcard_text}")
+    vendors(event_id).where("lower(vendors.name) LIKE lower(#{wildcard_text})")
   }
 end

@@ -1,4 +1,30 @@
 var TableRow = React.createClass({
+  handleActionClick: function(item) {
+    item.handler(this.props.data.id);
+  },
+  getRowActionMenu: function() {
+    var globalItems = this.props.actionItems.map(function(item) {
+      return (
+        <div className="DropdownMenu-item"
+             onClick={this.handleActionClick.bind(this, item)}
+             key={item.name}>
+          {item.name}
+        </div>
+      )
+    }.bind(this));
+    return (
+      <div className="TableRow-actions">
+        {globalItems}
+      </div>
+    )
+  },
+  getActionTrigger: function() {
+    return (
+      <div className="Table-actionTrigger">
+        <i className="fa fa-ellipsis-v TableRowAction"></i>
+      </div>
+    )
+  },
   render: function() {
     var rowColumns = this.props.columns.map(function(columnData) {
       var rowClass = "Table-rowItem " + "u-flexGrow-" + columnData.grow;
@@ -21,6 +47,9 @@ var TableRow = React.createClass({
                          hideCheckbox={this.props.hideCheckbox} />
         </div>
         {rowColumns}
+        <DropdownMenu trigger={this.getActionTrigger()}
+                      customOptions={this.getRowActionMenu()}
+                      align="right" />
       </div>
     );
   }
