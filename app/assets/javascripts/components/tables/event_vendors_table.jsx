@@ -9,7 +9,7 @@ var EventVendorsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Remove from event", handler: this.removeAssociation}
+      {name: "Remove", handler: this.removeAssociation, massAction: true}
     ]
   },
   sortItems: function() {
@@ -17,10 +17,11 @@ var EventVendorsTable = React.createClass({
       {entity: "name", display: "Name", default: true}
     ]
   },
-  removeAssociation: function() {
-    var destroyOpts = {destroy_opts: {event_vendor_ids: this.state.checkedItems}};
+  removeAssociation: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("vendors/mass_delete",destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.props.data);
+      var newData = this.spliceResults(this.props.data, deletionIds);
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
@@ -52,6 +53,7 @@ var EventVendorsTable = React.createClass({
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
         extraPadding={false}
+        tableDataClassName="scrollable"
         searchPlaceholder="Search Vendors..."
       />
     );

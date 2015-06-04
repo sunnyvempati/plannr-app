@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
+  overflow-y: auto;
 }
 
 .Table-toolbar {
@@ -20,6 +21,11 @@
 .Table-data {
   width: 90%;
   padding-top: $size-increment*2;
+  padding-right: $size-increment;
+  &.scrollable {
+    height: 350px;
+    overflow-y: auto;
+  }
   &.extraPad {
     padding-left: $size-increment*3;
   }
@@ -52,9 +58,6 @@
     &:hover .Checkbox {
       display: block;
     }
-    &:hover {
-      background-color: rgba(0,0,0,0.15);
-    }
     &.selected {
       transition: all 0.5s;
       background-color: $plannr-teal;
@@ -65,4 +68,22 @@
     padding-left: $size-increment*3;
     width: 25px;
   }
+}
+
+.Table-action {
+  width: 18px;
+}
+
+.TableRow-actions {
+  width: 150px;
+}
+
+.Table-actionTrigger {
+  display: flex;
+  justify-content: center;
+  width: 18px;
+}
+
+.TableRowAction {
+  font-size: 18px;
 }

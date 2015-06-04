@@ -23,13 +23,12 @@ var DropdownMenu = React.createClass({
     this.setState({active: !this.state.active}, this.setFocus);
   },
   itemClicked: function(item) {
-    this.closeMenu();
     item.handler();
   },
   dropdownMenuItems: function() {
     return this.props.items.map(function(item) {
       return (
-        <div className="DropdownMenu-item" onClick={item.handler} key={item.name}>
+        <div className="DropdownMenu-item" onClick={this.itemClicked.bind(this, item)} key={item.name}>
           {item.name}
         </div>
       )

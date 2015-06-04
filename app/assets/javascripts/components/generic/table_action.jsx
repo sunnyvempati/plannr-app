@@ -6,11 +6,16 @@ var TableAction = React.createClass({
       </div>
     )
   },
+  getItems: function() {
+    return this.props.items.filter(function(item) {
+      return item.massAction;
+    })
+  },
   render: function() {
     return (
       <DropdownMenu trigger={this.getTrigger()}
                     header="Actions"
-                    items={this.props.items} />
+                    items={this.getItems()} />
     );
   }
 });

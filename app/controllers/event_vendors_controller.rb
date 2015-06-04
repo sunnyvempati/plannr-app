@@ -26,7 +26,7 @@ class EventVendorsController < ApplicationController
   end
 
   def mass_delete
-    ids = mass_delete_params[:event_vendor_ids]
+    ids = mass_delete_params[:ids]
     EventVendor.delete_all(id: ids) if ids
     render_success
   end
@@ -34,7 +34,7 @@ class EventVendorsController < ApplicationController
   private
 
   def mass_delete_params
-    params.require(:destroy_opts).permit(event_vendor_ids: [])
+    params.require(:destroy_opts).permit(ids: [])
   end
 
   def event_vendor_params
