@@ -13,7 +13,7 @@ var Event = React.createClass({
   eventInfoDivs: function(attrs) {
     return attrs.map(function(eventAttr) {
       return (
-        <div>{eventAttr + ": "}{this.props.model[eventAttr]}</div>
+        <div>{eventAttr + ": " + this.props.model[eventAttr]}</div>
       )
     }, this);
   },
