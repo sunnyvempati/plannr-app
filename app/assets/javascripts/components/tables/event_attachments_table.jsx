@@ -1,5 +1,3 @@
-//TODO: change row so filename is displayed, but linked in pop-up
-
 var EventAttachmentsTable = React.createClass({
   mixins: [TableCheckbox],
   getColumns: function() {
@@ -42,19 +40,18 @@ var EventAttachmentsTable = React.createClass({
     return this.props.data.map(function(attachment) {
       var checked = this.state.checkedItems.indexOf(attachment.id) > -1;
       return(
-          <div className="AttachmentsTable-row" key={attachment.id}>
-            <div className="AttachmentsTable-rowHeader">
-              <div className="AttachmentsTable-rowName">
-                <div className="AttachmentsTable-checkbox">
-                  <CheckboxInput onChange={this.rowChanged} value={attachment.id} checked={checked} hideCheckbox={hideCheckbox} />
+          <div className="Table-row" key={attachment.id}>
+                <div className="Table-checkbox u-flexGrow-1">
+                  <CheckboxInput onChange={this.props.rowChanged}
+                                 value={this.props.data.id}
+                                 checked={this.props.checked}
+                                 hideCheckbox={this.props.hideCheckbox} />
                 </div>
-                <div className="AttachmentsTable-name u-clickable" >
+                <div className="Table-rowItem u-flexGrow-10" >
                   <a href={attachment.file_link.url} target='_blank'>{attachment.file_name}</a>
                 </div>
               </div>
-            </div>
 
-          </div>
       );
     }, this);
   },
@@ -63,7 +60,7 @@ var EventAttachmentsTable = React.createClass({
          <Table
           results={this.props.data}
           columns={this.getColumns()}
-          useCustomRowComponent={false}
+          useCustomRowComponent={true}
           customRows={this.getCustomRows()}
           checkedItems={this.state.checkedItems}
           rowChanged={this.rowChanged}
