@@ -28,7 +28,7 @@ var EventAttachmentsSmallTile = React.createClass({
         </div>
         <div className="Tile-content">
           <div className="TileContent-quickAdd">
-            <AttachmentBrowse eventId={this.props.eventId} onAssociation={this.incrementCount} />
+            <AttachmentActionButtonUploadBrowse eventId={this.props.eventId} onAssociation={this.incrementCount} />
           </div>
           <div className="TileContent-count">
             {this.state.count}

@@ -98,13 +98,10 @@
 }
 
 .ClickableFileUploadButton {
-  //TODO: button is clickable with this
-  // but it doesn't raise on hover.
-  // I want both
   position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
-
-
 
 .ClickableFileUploadButton input.upload {
   position: absolute;
@@ -116,6 +113,5 @@
   cursor: pointer;
   opacity: 0;
   filter: alpha(opacity=0);
-  height: $btn-height-default;
+  pointer-events: none;
 }
-

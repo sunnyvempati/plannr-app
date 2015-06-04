@@ -1,12 +1,15 @@
 var EventAttachmentsListTile = React.createClass({
   mixins: [TableCheckbox],
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       tableData: []
     };
   },
-  componentDidMount: function() {
-    $.get("attachments", function(results) {
+  componentDidMount: function () {
+    this.retrieveData();
+  },
+  retrieveData: function (){
+    $.get("attachments", function (results) {
       if (this.isMounted()) {
         this.setState({
           tableData: results.attachments
@@ -14,15 +17,20 @@ var EventAttachmentsListTile = React.createClass({
       }
     }.bind(this))
   },
-  updateData: function(data) {
+  updateData: function (data) {
     this.setState({tableData: data});
   },
-  render: function() {
+  //TODO: more descriptive name - onAddCallback?
+  onAssociation: function () {
+    this.retrieveData();
+  },
+  render: function () {
     return (
-      <div>
-        <ActionButton class="ActionButton-attachment" path="/attachments/new" label="Create Attachment" prerender="true" />
-        <EventAttachmentsTable data={this.state.tableData} onUpdatedData={this.updateData} />
-      </div>
+        <div>
+          <AttachmentActionButtonUploadIcon eventId={this.props.eventId}
+                                            onAssociation={this.onAssociation}/>
+          <EventAttachmentsTable data={this.state.tableData} onUpdatedData={this.updateData}/>
+        </div>
 
     );
   }

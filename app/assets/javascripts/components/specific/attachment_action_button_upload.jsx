@@ -1,6 +1,23 @@
-var AttachmentBrowse = React.createClass({
+var AttachmentActionButtonUpload = React.createClass({
+  propTypes: {
+    children: React.PropTypes.element.isRequired,
+    onAssociation: React.PropTypes.func
+  },
   getInitialState: function () {
     return {loading: false, fileName: ''};
+  },
+  componentDidMount: function () {
+    this.causeChildElementToActLikeInputTypeFile();
+  },
+  causeChildElementToActLikeInputTypeFile: function () {
+    //$childElement is the element that I want to click on
+    //$filePickerElement is the input type=file
+    //when you click on the $childElement, act like you clicked on the $filePickerElement
+    var $childElement = $(this.refs.onlyChild.getDOMNode())[0];
+    $childElement.addEventListener("click", function () {
+      var $filePickerElement = $(this.refs.filePicker.getDOMNode())[0];
+      $filePickerElement.click();
+    }.bind(this), false);
   },
   changeValue: function () {
     var reader = new FileReader();
@@ -14,13 +31,18 @@ var AttachmentBrowse = React.createClass({
   },
   postToServer: function (params) {
     $.post("attachments.json", params, function (result) {
-      //use data in result to update our table (@attachment.save)
+      //TODO: use data in result to update our table (add record to table, do I need ID of new record? It
+      // should be in there)
       this.props.onAssociation(result.attachment);
-      //clear file name from browse - file inputs are picky
-      var control = $("#file_picker");
-      control.replaceWith(control.clone(true));
-      this.setState({loading: false, fileName: ''});
+      this.reset();
     }.bind(this));
+  },
+  reset: function () {
+    //clear file name from browse - file inputs don't like being touched
+    // so I replace the control with a clone
+    var control = $(this.refs.filePicker.getDOMNode());
+    control.replaceWith(control.clone(true));
+    this.setState({loading: false, fileName: ''});
   },
   getParams: function (fileContents, fileName) {
     return {
@@ -39,18 +61,20 @@ var AttachmentBrowse = React.createClass({
       'u-hidden': this.state.loading,
       'ClickableFileUploadButton': true
     });
-    var buttonClasses = classNames({
-      'Button Button--raised Button--primary': true
-    });
     return (
         <div className="AttachmentBrowseContainer">
           <i className={spinnerClasses}></i>
+
           <div className={inputClasses}>
-            <button className={buttonClasses}>Browse</button>
+            {
+              //clone child element to assign ref dynamically
+              React.cloneElement(this.props.children, {ref: 'onlyChild'})
+            }
             <input name='file_picker'
                    onChange={this.changeValue}
                    type='file'
                    id='file_picker'
+                   ref='filePicker'
                    className='upload'/>
           </div>
         </div>
