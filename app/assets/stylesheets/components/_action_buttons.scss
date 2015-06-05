@@ -1,9 +1,11 @@
 .ActionButton {
-  position: absolute;
-  right: 48px;
-  top: 208px;
-  width: 64px;
+  position: relative;
   cursor: pointer;
+  height: 20px;
+  top: 32px;
+  &.extraPad {
+    top: 40px;
+  }
 }
 
 .ActionButton-svg {
@@ -11,15 +13,26 @@
   align-items: center;
 }
 
-.ActionButton-event {
+.ActionButton-createEvent {
   @include svg($create-event-url, 64px);
+}
+
+.ActionButton-createContact {
+  @include svg($create-contact-url, 64px);
+}
+
+.ActionButton-createVendor {
+  @include svg($create-vendor-url, 64px);
+}
+
+.ActionButton-createTask {
+  @include svg($create-task-url, 64px);
 }
 
 .ActionButton-label {
   color: $plannr-green;
   @include font($caption-font, 600, 0);
-  position: absolute;
   padding-top: 4px;
-  left: -4px;
+  margin-left: -4px;
   width: $size-increment*10;
 }

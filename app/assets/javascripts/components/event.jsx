@@ -34,7 +34,7 @@ var Event = React.createClass({
     }
     return (
       <div className="EventContainer">
-        <div className="Event-info u-flexGrow-2">
+        <div className="Event-info u-flexGrow-2 Event-client">
           <div className="Info-header">
             Client
           </div>

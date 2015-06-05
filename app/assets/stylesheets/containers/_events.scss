@@ -9,6 +9,10 @@
   justify-content: flex-end;
 }
 
+.Event-client {
+  width: 250px;
+}
+
 .Info-header {
   opacity: 0.5;
   @include font($caption-font, normal, 0);

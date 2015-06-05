@@ -13,6 +13,13 @@ var Modal = {
     $("body").removeClass("u-noScroll");
     document.body.removeChild(this.overlayNode);
   },
+  renderCloseModal: function() {
+    return (
+      <div className="Modal-close" onClick={this.closeModal}>
+        <div className="Modal-closeIcon"></div>
+      </div>
+    );
+  },
   render: function() {
     return (
       <div className="ModalContainer">

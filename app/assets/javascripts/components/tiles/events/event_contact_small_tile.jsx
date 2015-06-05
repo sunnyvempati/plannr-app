@@ -21,7 +21,7 @@ var EventContactSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileContactsList" className="Tile-headerLink">
+          <Link to="eventContacts" className="Tile-headerLink">
             <div className="Tile-imgContact"></div>
             <div className="Tile-title">Contacts</div>
           </Link>

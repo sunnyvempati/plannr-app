@@ -21,7 +21,7 @@ var EventAttachmentsSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileAttachmentsList" className="Tile-headerLink">
+          <Link to="eventAttachments" className="Tile-headerLink">
             <div className="Tile-imgAttachment"></div>
             <div className="Tile-title">Attachments</div>
           </Link>

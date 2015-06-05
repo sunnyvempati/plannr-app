@@ -56,21 +56,29 @@ var Table = React.createClass({
     })
     return (
       <div className={toolbarClasses}>
-        <div className={actionClasses}>
-          {this.actionMenu()}
+        <div className="Toolbar-items">
+          <div className={actionClasses}>
+            {this.actionMenu()}
+          </div>
+          <div className="Toolbar-search">
+            <i className="fa fa-search tableIcon"></i>
+            <input placeholder={this.props.searchPlaceholder}
+                   className="SearchInput"
+                   onChange={this.props.handleSearch} />
+          </div>
+          <div className="Toolbar-sort">
+            <TableSort items={this.props.sortItems}
+                       handleSortClick={this.props.handleSortClick} />
+          </div>
+          <div className={filterClasses}>
+            {this.filterMenu()}
+          </div>
         </div>
-        <div className="Toolbar-search">
-          <i className="fa fa-search tableIcon"></i>
-          <input placeholder={this.props.searchPlaceholder}
-                 className="SearchInput"
-                 onChange={this.props.handleSearch} />
-        </div>
-        <div className="Toolbar-sort">
-          <TableSort items={this.props.sortItems}
-                     handleSortClick={this.props.handleSortClick} />
-        </div>
-        <div className={filterClasses}>
-          {this.filterMenu()}
+        <div className="Toolbar-actionButton">
+          <ActionButton handleClick={this.props.actionButtonClick}
+                        label={this.props.actionButtonText}
+                        svgClass={this.props.actionButtonSVGClass}
+                        extraPad={this.props.extraPadding} />
         </div>
       </div>
     );

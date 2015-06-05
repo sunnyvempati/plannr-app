@@ -1,8 +1,12 @@
-.Comments-title {
+.EventComments-title {
   @include font($subheader-font, 600, 0);
   background-color: $header-bg;
   color: white;
   padding-left: $size-increment*4;
+}
+
+.EventComments {
+  padding-left: $size-increment*10;
 }
 
 .CommentIcon {
@@ -11,20 +15,20 @@
 }
 
 .Comments-input {
-  padding: 24px 0 24px 104px;
-  width: 50%;
+  padding: 24px 0 24px 24px;
+  width: 70%;
 }
 
 .Comments-list {
-  height: 300px;
-  padding: 24px 0 0 104px;
+  padding: 24px 0 0 24px;
   margin-right: 104px;
   margin-bottom: $size-increment*5;
+  height: 300px;
   overflow-y: auto;
 }
 
 .Comments-listItem {
-  width: 80%;
+  width: 100%;
   margin-bottom: $size-increment*2;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }

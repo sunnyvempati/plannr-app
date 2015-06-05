@@ -1,5 +1,5 @@
 var ContactsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [TableCheckbox, Router.Navigation],
   getInitialState: function() {
     return {
       contacts: []
@@ -15,7 +15,7 @@ var ContactsTable = React.createClass({
       {name: "name", grow: 10, header: "Name"},
       {name: "email", grow: 10, header: "Email"},
       {name: "phone", grow: 5, header: "Phone"},
-      {name: "organization", grow: 10, header: "Company"},
+      {name: "company", grow: 10, header: "Company"},
       {name: "type", grow: 5, header: "Type"}
     ];
   },
@@ -45,7 +45,7 @@ var ContactsTable = React.createClass({
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
+    $.get('/contacts.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -55,9 +55,11 @@ var ContactsTable = React.createClass({
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
-  openContactModal: function(data) {
-    var modal = React.createElement(ShowContactModal, {data: data});
-    React.render(modal, document.getElementById('modal'));
+  goToContact: function(data) {
+    this.transitionTo('contact', {id: data.id});
+  },
+  handleActionButtonClick: function() {
+    location.href = "/vendors/new";
   },
   render: function() {
     return (
@@ -75,7 +77,10 @@ var ContactsTable = React.createClass({
         extraPadding={true}
         showHeaders={true}
         searchPlaceholder="Search Contacts..."
-        onClick={this.openContactModal}
+        onClick={this.goToContact}
+        actionButtonText="Create Contact"
+        actionButtonClick={this.handleActionButtonClick}
+        actionButtonSVGClass="createContact"
       />
     );
   }

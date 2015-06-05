@@ -29,10 +29,6 @@ var Comments = React.createClass({
   render: function() {
     return (
       <div className="Comments">
-        <div className="Comments-title">
-          <i className="fa fa-comments CommentIcon"></i>
-          Comments
-        </div>
         <CommentInput onAdd={this.addComment} />
         <CommentList data={this.state.comments} />
       </div>

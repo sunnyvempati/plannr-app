@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   get 'search_events', to: 'events#search'
   get 'search_vendors', to: 'vendors#search'
 
-
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
   post 'events/:event_id/contacts/mass_delete', to:'event_contacts#mass_delete'
@@ -53,6 +52,7 @@ Rails.application.routes.draw do
   post 'events/:event_id/vendors', to:'event_vendors#create'
   get 'events/:event_id/vendors', to:'event_vendors#vendors'
   post 'events/:event_id/vendors/mass_delete', to:'event_vendors#mass_delete'
+  get 'vendors/events', to:'event_vendors#events'
 
   # event attachments
   get 'events/:event_id/attachments/new', to:'attachments#quick_create'
@@ -76,6 +76,7 @@ Rails.application.routes.draw do
    # vendors
   post '/vendors/search', to: 'vendors#search'
   post '/vendors/mass_delete', to:'vendors#mass_destroy'
+  get '/vendors/:id/contacts', to: 'vendors#contacts'
 
   # attachments
   resources :attachments, only: [:index, :new, :create, :destroy]

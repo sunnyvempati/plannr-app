@@ -12,13 +12,13 @@ var VendorFormNew = React.createClass({
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
   },
-  onSuccess: function() {
+  onSuccess: function(result) {
     // react router keeps things in context without redirecting
     if (this.props.useReactRouter) {
       this.context.router.transitionTo('tileVendorsList');
     }
     else {
-      location.href = '/vendors';
+      location.href = '/vendors/#/view/'+result.vendor.id;
     }
   },
   render: function () {

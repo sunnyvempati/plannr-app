@@ -68,7 +68,7 @@ var EventForm = React.createClass({
             autofocus="autofocus"
             placeholder="Give it a unique name"
             type="text"
-            label="Event name*"
+            label="Name*"
             value={this.props.model.name}
             disabled={this.props.disableForm}
             required
@@ -107,7 +107,7 @@ var EventForm = React.createClass({
             id="event_budget"
             currencyField={true}
             type="text"
-            label="Estimated Budget"
+            label="Budget"
             value={this.props.model.budget}
             disabled={this.props.disableForm}
             placeholder="How much will it cost?"

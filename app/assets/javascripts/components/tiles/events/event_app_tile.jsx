@@ -5,10 +5,10 @@ var EventAppTile = React.createClass({
   },
   navItems: function() {
     return [
-      {to: "tileTasksList", iconClass: "fa fa-check"},
-      {to: "tileContactsList", iconClass: "fa fa-book"},
-      {to: "tileVendorsList", iconClass: "fa fa-truck"},
-      {to: "tileAttachmentsList", iconClass: "fa fa-paperclip"}
+      {to: "eventTasks", iconClass: "fa fa-check"},
+      {to: "eventContacts", iconClass: "fa fa-book"},
+      {to: "eventVendors", iconClass: "fa fa-truck"},
+      {to: "eventAttachments", iconClass: "fa fa-paperclip"}
     ]
   },
   renderNavItems: function() {

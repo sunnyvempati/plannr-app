@@ -1,5 +1,31 @@
 var EventTasksTable = React.createClass({
   mixins: [TableCheckbox],
+  getInitialState: function() {
+    return {
+      eventTasks: []
+    };
+  },
+  componentDidMount: function() {
+    this.getEventTasks();
+  },
+  getEventTasks: function() {
+    $.get("tasks.json", function(results) {
+      if (this.isMounted()) {
+        this.setState({
+          eventTasks: results.tasks
+        })
+      }
+    }.bind(this))
+  },
+  getUserTasks: function() {
+    $.get("/user_tasks", function(results) {
+      if (this.isMounted()) {
+        this.setState({
+          eventTasks: results.tasks
+        })
+      }
+    }.bind(this))
+  },
   getColumns: function() {
     return [
       {name: "name", grow: 10, header: "Name"},
@@ -24,33 +50,33 @@ var EventTasksTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('/tasks/mass_delete',destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.props.data, deletionIds);
-      this.props.onUpdatedData(newData);
+      var newData = this.spliceResults(this.state.eventTasks, deletionIds);
+      this.setState({eventTasks: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function(entity, order) {
     $.get('tasks.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.props.onUpdatedData(result.tasks);
+      this.setState({eventTasks: result.tasks});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
     $.get('search_event_tasks', {search: {text: term || ""}}, function(result) {
-      this.props.onUpdatedData(result.tasks);
+      this.setState({eventTasks: result.tasks});
     }.bind(this));
   },
   filterItems: function() {
     return [
-      {name: "All Tasks", handler: this.props.reloadTasks, default: true},
-      {name: "My Tasks", handler: this.props.getUserTasks}
+      {name: "All Tasks", handler: this.getEventTasks, default: true},
+      {name: "My Tasks", handler: this.getUserTasks}
     ]
   },
   render: function() {
     return (
       <Table
-        results={this.props.data}
+        results={this.state.eventTasks}
         showHeaders={true}
         columns={this.getColumns()}
         useCustomRowComponent={false}

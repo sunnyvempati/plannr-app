@@ -1,36 +1,33 @@
-.ContactModal {
+.EntityModal {
   width: 700px;
-  height: 600px;
   padding: $size-increment*4;
   position: relative;
 }
 
-.Modal-close {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  @include font(24px, 500, 0);
-  opacity: 0.25;
-  cursor: pointer;
+.AddEntityModal {
+  @extend .EntityModal;
+  height: 400px;
+  width: 500px;
+  transition: height 0.2s linear;
 }
 
-.ContactModal-header {
+.EntityModal-header {
   display: flex;
   align-items: center;
 }
 
-.ContactModal-headerIcon {
+.EntityModal-headerIcon {
   font-size: 24px;
   color: $black-half;
 }
 
-.ContactModal-title {
+.EntityModal-title {
   @include font(16px, normal, 50);
   padding-left: $size-increment*4;
   color: $black-half;
 }
 
-.ContactModal-content {
+.EntityModal-content {
   display: flex;
   flex-flow: column nowrap;
   >* {
@@ -41,5 +38,3 @@
 .IconWithText {
   color: $black-half;
 }
-
-

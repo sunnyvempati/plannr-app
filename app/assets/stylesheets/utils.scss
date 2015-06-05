@@ -4,6 +4,13 @@
   }
 }
 
+.u-flex {
+  display: flex;
+  >* {
+    flex: 1;
+  }
+}
+
 .u-clickable {
   cursor: pointer;
 }

@@ -18,7 +18,8 @@ var VendorForm = React.createClass({
         'name': inputs.name,
         'location': inputs.location,
         'phone': inputs.phone,
-        'primary_contact': inputs.primary_contact
+        'primary_contact_id': inputs.primary_contact_id,
+        'description': inputs.description
       }
     };
   },
@@ -30,8 +31,9 @@ var VendorForm = React.createClass({
         name: model.name,
         location: model.location,
         phone: model.phone,
-        primary_contact: model.primary_contact,
-        id: model.id
+        primary_contact_id: model.primary_contact_id,
+        id: model.id,
+        description: model.description
       };
     }
     return (
@@ -53,7 +55,7 @@ var VendorForm = React.createClass({
             autofocus='autofocus'
             placeholder='What is the name of your vendor?'
             type='text'
-            label='name*'
+            label='Name*'
             value={vendor.name}
             disabled={this.props.disableForm}
             required
@@ -63,7 +65,7 @@ var VendorForm = React.createClass({
             name='location'
             placeholder='What is the location of your vendor?'
             type='text'
-            label='location'
+            label='Location'
             value={vendor.location}
             disabled={this.props.disableForm}
           />
@@ -72,25 +74,26 @@ var VendorForm = React.createClass({
             name='phone'
             placeholder='What is the phone of your vendor?'
             type='text'
-            label='phone'
+            label='Phone'
             value={vendor.phone}
             disabled={this.props.disableForm}
           />
-          <FormInput
+          <PrimaryContactInput
+            name='primary_contact_id'
+            value={vendor.primary_contact_id}
             id='vendor_primary_contact'
-            name='primary_contact'
-            placeholder='Who is the primary_contact of your vendor?'
-            type='text'
-            label='primary contact'
-            value={vendor.primary_contact}
+            label='Primary Contact' />
+          <TextAreaInput
+            id='vendor_description'
+            name='description'
+            className='TextAreaInput'
+            label='Description'
+            placeholder='What else do you need to know?'
+            value={vendor.description}
             disabled={this.props.disableForm}
+            formId='contact_form'
           />
-
         </Form>
-
-        <a href={this.hrefRoot }>List</a>|
-        <a href={this.hrefRoot + '/' + vendor.id + '/edit' }>Edit</a>|
-        <a href={this.hrefRoot + '/' + vendor.id  }>Show</a>
       </div>
     );
   }

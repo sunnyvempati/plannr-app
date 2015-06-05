@@ -5,7 +5,8 @@ var EventVendorSmallTile = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("vendors", function(results) {
+    $.get("vendors.json", function(results) {
+      console.log(results);
       if (this.isMounted()) {
         this.setState({
           count: results.event_vendors.length
@@ -21,7 +22,7 @@ var EventVendorSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileVendorsList" className="Tile-headerLink">
+          <Link to="eventVendors" className="Tile-headerLink">
             <div className="Tile-imgVendor"></div>
             <div className="Tile-title">Vendors</div>
           </Link>

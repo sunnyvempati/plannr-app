@@ -1,11 +1,12 @@
 class Vendor < ActiveRecord::Base
   acts_as_tenant :company
 
+  has_many :comments, as: :commentable
   has_many :event_vendors
   has_many :events, through: :event_vendors
-  belongs_to :owner, class_name: 'User'
-
   has_many :contacts
+  belongs_to :owner, class_name: 'User'
+  belongs_to :primary_contact, class_name: 'Contact'
 
   scope :not_in, ->(event_id) {
     where("id not in (select vendor_id from event_vendors where event_id = '#{event_id}')")

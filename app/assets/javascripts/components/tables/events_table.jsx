@@ -69,8 +69,11 @@ var EventsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteEvents}
+      {name: "Delete", handler: this.deleteEvents, massAction: true}
     ]
+  },
+  handleActionClick: function() {
+    location.href = "/events/new";
   },
   render: function() {
     return (
@@ -85,6 +88,9 @@ var EventsTable = React.createClass({
           actionItems={this.actionItems()}
           extraPadding={true}
           searchPlaceholder="Search Events..."
+          actionButtonText="Create Event"
+          actionButtonClick={this.handleActionClick}
+          actionButtonSVGClass="createEvent"
         />
       </div>
     );
