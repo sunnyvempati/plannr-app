@@ -18,8 +18,8 @@ var AttachmentActionButtonUpload = React.createClass({
   },
   postToServer: function (params) {
     $.post("attachments.json", params, function (result) {
-      //TODO: use data in result to update our table (add record to table, do I need ID of new record? It
-      // should be in there)
+      //TODO: use data in result to update our table
+      //I currently refresh all the data in the table
       this.props.onAssociation(result.attachment);
       this.reset();
     }.bind(this));
