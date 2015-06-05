@@ -24,7 +24,7 @@ var EventAttachmentsTable = React.createClass({
   },
   actionItems: function () {
     return [
-      {name: "Delete", handler: this.handleDelete}
+      {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
   sortItems: function () {
