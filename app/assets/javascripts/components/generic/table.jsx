@@ -76,7 +76,8 @@ var Table = React.createClass({
         </div>
         <div className="Toolbar-actionButton">
           <ActionButton handleClick={this.props.actionButtonClick}
-                        label={this.props.actionButtonText} />
+                        label={this.props.actionButtonText}
+                        extraPad={this.props.extraPadding} />
         </div>
       </div>
     );

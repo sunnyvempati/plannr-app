@@ -79,6 +79,7 @@ var EventContactsTable = React.createClass({
         tableDataClassName="scrollable"
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
+        actionButtonText="Add Contact"
       />
     );
   }

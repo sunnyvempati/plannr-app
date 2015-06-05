@@ -1,7 +1,12 @@
 var ActionButton = React.createClass({
   render: function() {
+    console.log(this.props.extraPad);
+    var actionButtonClasses = classNames({
+      'ActionButton': true,
+      'extraPad': this.props.extraPad
+    });
     return (
-      <div className="ActionButton" onClick={this.props.handleClick}>
+      <div className={actionButtonClasses} onClick={this.props.handleClick}>
         <div className="ActionButton-svg">
           <div className="ActionButton-event"></div>
         </div>
