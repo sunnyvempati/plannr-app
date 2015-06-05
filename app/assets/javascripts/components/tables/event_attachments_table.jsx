@@ -117,7 +117,7 @@ var EventAttachmentsTable = React.createClass({
   getActionButton: function () {
     return (
         <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
-                          onAssociation={this.retrieveData}/>
+                          onAssociation={this.retrieveData} />
     );
   },
   render: function () {
