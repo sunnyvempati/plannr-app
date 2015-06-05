@@ -38,4 +38,3 @@ var AttachmentFormEdit = React.createClass({
     );
   }
 });
-

@@ -15,4 +15,3 @@ var AttachmentFormShow = React.createClass({
     );
   }
 });
-
