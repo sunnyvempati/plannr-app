@@ -6,13 +6,25 @@
 }
 
 .Table-toolbar {
-  display: flex;
-  flex-flow: row nowrap;
   padding: $size-increment*4 $size-increment*3;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
   &.extraPad {
     padding: $size-increment*5 $size-increment*6;
   }
+  >* {
+    flex: 1;
+  }
+}
+
+.Toolbar-actionButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Toolbar-items {
+  display: flex;
+  flex-flow: row nowrap;
   >* {
     padding-right: $size-increment*2;
   }

@@ -1,9 +1,8 @@
 .ActionButton {
-  position: absolute;
-  right: 48px;
-  top: 208px;
-  width: 64px;
+  position: relative;
+  top: 40px;
   cursor: pointer;
+  height: 20px;
 }
 
 .ActionButton-svg {
@@ -18,8 +17,7 @@
 .ActionButton-label {
   color: $plannr-green;
   @include font($caption-font, 600, 0);
-  position: absolute;
   padding-top: 4px;
-  left: -4px;
+  margin-left: -4px;
   width: $size-increment*10;
 }
