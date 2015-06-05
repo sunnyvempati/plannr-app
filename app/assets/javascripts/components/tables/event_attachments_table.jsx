@@ -38,7 +38,7 @@ var EventAttachmentsTable = React.createClass({
   handleDelete: function (id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post("attachments/mass_delete", destroyOpts, function (success_result) {
+    $.post("attachments/mass_delete", destroyOpts, function () {
       var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
       this.setState({eventAttachments: newData});
     }.bind(this)).fail(function (error_result) {
