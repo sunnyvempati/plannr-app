@@ -17,14 +17,14 @@ var EventAttachmentsSmallTile = React.createClass({
     var count = this.state.count;
     this.setState({count: count + 1});
   },
-  getActionButtonWrapper: function () {
+  getActionButtonClickableElement: function () {
     return (
         <button className='Button Button--raised Button--primary'>Browse</button>
     );
   },
   getActionButton: function () {
     return (
-        <AttachmentBrowse clickableElement={this.getActionButtonWrapper()}
+        <AttachmentBrowse clickableElement={this.getActionButtonClickableElement()}
                                       onAssociation={this.incrementCount}/>
     );
   },

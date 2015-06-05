@@ -106,7 +106,7 @@ var EventAttachmentsTable = React.createClass({
       );
     }, this);
   },
-  getActionButtonWrapper: function () {
+  getAttachmentButtonClickableElement: function () {
     return (
         <ActionButton handleClick={this.openAddModal}
                       label='Add Attachment'
@@ -116,7 +116,7 @@ var EventAttachmentsTable = React.createClass({
   },
   getActionButton: function () {
     return (
-        <AttachmentBrowse clickableElement={this.getActionButtonWrapper()}
+        <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
                                       onAssociation={this.retrieveData}/>
     );
   },
