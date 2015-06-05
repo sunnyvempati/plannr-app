@@ -11,3 +11,12 @@
   0% {transform: scale(0.5); opacity: 0;}
   100% {transform: scale(1); opacity: 1;}
 }
+
+.Modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  @include font(24px, 500, 0);
+  opacity: 0.25;
+  cursor: pointer;
+}

@@ -69,12 +69,21 @@ def create_vendors
   5.times do
     @vendors.values.each do |v|
       v.symbolize_keys!
+      primary_contact = Contact.create!(name: Faker::Name.name,
+                                        email: Faker::Internet.email,
+                                        phone: "309-999-9999",
+                                        organization: Faker::Company.name,
+                                        description: Faker::Lorem.sentence,
+                                        category: 1,
+                                        owner: User.find_by_email(v[:owner]),
+                                        company: Company.find_by_name(v[:company]))
       created_vendor = Vendor.create!(name: Faker::Company.name,
                    location: "#{Faker::Address.city}, #{Faker::Address.state_abbr}",
                    phone: "309-999-9999",
-                   primary_contact: Faker::Name.name,
+                   primary_contact: primary_contact,
                    owner: User.find_by_email(v[:owner]),
-                   company: Company.find_by_name(v[:company]))
+                   company: Company.find_by_name(v[:company]),
+                   description: Faker::Lorem.paragraph)
       puts "Created Vendor: #{created_vendor.name}" if created_vendor
     end
   end

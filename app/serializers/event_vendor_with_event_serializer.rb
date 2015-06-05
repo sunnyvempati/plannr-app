@@ -1,4 +1,4 @@
-class EventContactWithEventSerializer < ActiveModel::Serializer
+class EventVendorWithEventSerializer < ActiveModel::Serializer
   attributes :id, :name, :start_date, :event_id
 
   def name

@@ -53,7 +53,7 @@ var EventContactsTable = React.createClass({
       this.props.onUpdatedData(result.event_contacts);
     }.bind(this));
   },
-  goToContact: function(data) {
+  openContactModal: function(data) {
     var contact = {
       id: data.contact_id,
       name: data.name
@@ -78,7 +78,7 @@ var EventContactsTable = React.createClass({
         extraPadding={false}
         tableDataClassName="scrollable"
         searchPlaceholder="Search Contacts..."
-        onClick={this.goToContact}
+        onClick={this.openContactModal}
       />
     );
   }

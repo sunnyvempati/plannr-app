@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: Contact.all.order(order) }
+      format.json { render json: Contact.includes(:vendor).all.order(order) }
     end
   end
 

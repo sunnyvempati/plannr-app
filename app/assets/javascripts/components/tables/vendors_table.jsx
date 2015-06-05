@@ -1,5 +1,5 @@
 var VendorsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [TableCheckbox, Router.Navigation],
   getInitialState: function() {
     return {
       vendors: []
@@ -53,23 +53,32 @@ var VendorsTable = React.createClass({
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
+  goToVendor: function(data) {
+    this.transitionTo('vendor', {id: data.id});
+  },
   render: function() {
     return (
-      <Table
-        results={this.state.vendors}
-        columns={this.getColumns()}
-        useCustomRowComponent={false}
-        showHeaders={true}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
-        handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
-        actionItems={this.actionItems()}
-        extraPadding={true}
-        searchPlaceholder="Search Vendors..."
-      />
+      <div>
+        <ActionButton class="ActionButton-event"
+                      path="/vendors/new"
+                      label="Create Vendor" />
+        <Table
+          results={this.state.vendors}
+          columns={this.getColumns()}
+          useCustomRowComponent={false}
+          showHeaders={true}
+          checkedItems={this.state.checkedItems}
+          rowChanged={this.rowChanged}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sortBy}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+          searchPlaceholder="Search Vendors..."
+          onClick={this.goToVendor}
+        />
+      </div>
     );
   }
 });

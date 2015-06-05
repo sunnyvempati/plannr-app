@@ -31,7 +31,7 @@ var ContactCards = {
           </div>
           <div className="IconWithText">
             <i className="fa fa-building CardIcon"></i>
-            {contact.organization}
+            {contact.company}
           </div>
         </div>
       </div>

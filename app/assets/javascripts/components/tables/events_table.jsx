@@ -69,7 +69,7 @@ var EventsTable = React.createClass({
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteEvents}
+      {name: "Delete", handler: this.deleteEvents, massAction: true}
     ]
   },
   render: function() {

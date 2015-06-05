@@ -1,5 +1,5 @@
 var Vendor = React.createClass({
-  mixins: [Router.State, Router.Navigation, AssociatedEvents],
+  mixins: [Router.State, Router.Navigation, VendorCards, AssociatedEvents],
   componentDidMount: function() {
     this.getDetails(this.props.params.id);
     this.getEvents();
@@ -12,37 +12,48 @@ var Vendor = React.createClass({
   backToList: function() {
     this.transitionTo('vendors');
   },
-  // renderVendor: function() {
-  //   var vendor = this.state.vendor;
-  //   if (vendors) {
-  //     return (
-  //       <div>
-  //         <div className="Show-header">
-  //           <div onClick={this.backToList} className="u-clickable">
-  //             <i className="fa fa-arrow-left ShowHeaderIcon"></i>
-  //           </div>
-  //           <div className="Show-name">
-  //             {vendor.name}
-  //           </div>
-  //         </div>
-  //         <div className="Show-content">
-  //           <div className="u-flex">
-  //             <div>
-  //               {this.renderContactInfo(vendor)}
-  //               {this.renderDescription(vendor.description)}
-  //               {this.renderEvents()}
-  //             </div>
-  //             {this.renderComments()}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     )
-  //   }
-  // },
+  renderComments: function() {
+    return (
+      <div className="Card">
+        <div className="Card-title">Comments</div>
+        <div className="Card-content">
+          <Comments entity="Vendor"
+                    entity_id={this.props.params.id} />
+        </div>
+      </div>
+    )
+  },
+  renderVendor: function() {
+    var vendor = this.state.vendor;
+    if (vendor) {
+      return (
+        <div>
+          <div className="Show-header">
+            <div onClick={this.backToList} className="u-clickable">
+              <i className="fa fa-arrow-left ShowHeaderIcon"></i>
+            </div>
+            <div className="Show-name">
+              {vendor.name}
+            </div>
+          </div>
+          <div className="Show-content">
+            <div className="u-flex">
+              <div>
+                {this.renderVendorInfo(vendor)}
+                {this.renderDescription(vendor.description)}
+                {this.renderEvents()}
+              </div>
+              {this.renderComments()}
+            </div>
+          </div>
+        </div>
+      )
+    }
+  },
   render: function() {
     return (
       <div className="Show">
-        test
+        {this.renderVendor()}
       </div>
     );
   }

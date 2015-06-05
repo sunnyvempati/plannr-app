@@ -1,14 +1,14 @@
 class VendorsController < ApplicationController
   layout 'main'
   before_action :authenticate_user
-  before_action :set_vendor, only: [:show, :edit, :update, :destroy]
+  before_action :set_vendor, only: [:show, :edit, :update, :destroy, :contacts]
 
   def index
     @header = "Vendors"
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: Vendor.all.order(order) }
+      format.json { render json: Vendor.includes(:primary_contact).all.order(order) }
     end
   end
 
@@ -18,6 +18,10 @@ class VendorsController < ApplicationController
       format.html
       format.json { render json: @vendor }
     end
+  end
+
+  def contacts
+    render_success @vendor.contacts
   end
 
   def new

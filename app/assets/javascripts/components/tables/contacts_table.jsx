@@ -15,7 +15,7 @@ var ContactsTable = React.createClass({
       {name: "name", grow: 10, header: "Name"},
       {name: "email", grow: 10, header: "Email"},
       {name: "phone", grow: 5, header: "Phone"},
-      {name: "organization", grow: 10, header: "Company"},
+      {name: "company", grow: 10, header: "Company"},
       {name: "type", grow: 5, header: "Type"}
     ];
   },
@@ -57,8 +57,6 @@ var ContactsTable = React.createClass({
   },
   goToContact: function(data) {
     this.transitionTo('contact', {id: data.id});
-    // var modal = React.createElement(ShowContactModal, {data: data});
-    // React.render(modal, document.getElementById('modal'));
   },
   render: function() {
     return (

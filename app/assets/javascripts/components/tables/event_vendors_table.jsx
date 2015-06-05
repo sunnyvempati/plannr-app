@@ -38,6 +38,14 @@ var EventVendorsTable = React.createClass({
       this.props.onUpdatedData(result.event_vendors);
     }.bind(this));
   },
+  openVendorModal: function(data) {
+    var vendor = {
+      id: data.vendor_id,
+      name: data.name
+    };
+    var modal = React.createElement(ShowVendorModal, {data: vendor});
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
       <Table
@@ -55,6 +63,7 @@ var EventVendorsTable = React.createClass({
         extraPadding={false}
         tableDataClassName="scrollable"
         searchPlaceholder="Search Vendors..."
+        onClick={this.openVendorModal}
       />
     );
   }

@@ -69,6 +69,7 @@ Rails.application.routes.draw do
    # vendors
   post '/vendors/search', to: 'vendors#search'
   post '/vendors/mass_delete', to:'vendors#mass_destroy'
+  get '/vendors/:id/contacts', to: 'vendors#contacts'
 
   # comments
   get '/comments', to: 'comments#index'
