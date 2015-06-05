@@ -29,7 +29,8 @@ var CompanyUserTable = React.createClass({
                         data={user}
                         checkChanged={this.rowChanged}
                         hideCheckbox={hideCheckbox}
-                        actionItems={this.actionItems()} />
+                        actionItems={this.actionItems()}
+                        key={user.id} />
       );
     }.bind(this));
   },

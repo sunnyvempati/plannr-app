@@ -73,7 +73,7 @@ def create_vendors
                                         email: Faker::Internet.email,
                                         phone: "309-999-9999",
                                         organization: Faker::Company.name,
-                                        description: Faker::Lorem.sentence,
+                                        description: Faker::Lorem.paragraph,
                                         category: 1,
                                         owner: User.find_by_email(v[:owner]),
                                         company: Company.find_by_name(v[:company]))
@@ -99,7 +99,7 @@ def create_contacts
                                         email: Faker::Internet.email,
                                         phone: "309-999-9999",
                                         organization: Faker::Company.name,
-                                        description: Faker::Lorem.sentence,
+                                        description: Faker::Lorem.paragraph,
                                         category: 1,
                                         owner: User.find_by_email(c[:owner]),
                                         company: Company.find_by_name(c[:company]))
