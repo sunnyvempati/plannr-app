@@ -4,16 +4,16 @@ var AttachmentBrowse = React.createClass({
     onAssociation: React.PropTypes.func
   },
   getInitialState: function () {
-    return {loading: false, fileName: ''};
+    return {loading: false};
   },
   changeValue: function () {
     var reader = new FileReader();
     var file = event.target.files[0];
     reader.onload = function (upload) {
-      var params = this.getParams(upload.target.result, this.state.fileName);
+      var params = this.getParams(upload.target.result, file.name);
       this.postToServer(params);
     }.bind(this);
-    this.setState({loading: true, fileName: file.name});
+    this.setState({loading: true});
     reader.readAsDataURL(file);
   },
   postToServer: function (params) {
