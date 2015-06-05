@@ -7,7 +7,7 @@ var EventAttachmentsTable = React.createClass({
   },
   actionItems: function () {
     return [
-      {name: "Remove from event", handler: this.removeAssociation}
+      {name: "Delete", handler: this.handleDelete}
     ]
   },
   sortItems: function () {
@@ -15,10 +15,12 @@ var EventAttachmentsTable = React.createClass({
       {entity: "file_name", display: "File Name", default: true}
     ]
   },
-  removeAssociation: function () {
-    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
+  //TODO: rename to delete
+  handleDelete: function (id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("attachments/mass_delete", destroyOpts, function (success_result) {
-      var newData = this.spliceResults(this.props.data);
+      var newData = this.spliceResults(this.props.data, deletionIds);
       this.props.onUpdatedData(newData);
     }.bind(this)).fail(function (error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
@@ -35,6 +37,34 @@ var EventAttachmentsTable = React.createClass({
       this.props.onUpdatedData(result.attachments);
     }.bind(this));
   },
+  handleActionClick: function (item, attachmentId) {
+    item.handler(attachmentId);
+  },
+  getRowActionMenu: function (attachmentId) {
+    var ai = this.actionItems();
+    var globalItems = ai.map(function (item) {
+      return (
+          <div className="DropdownMenu-item"
+               onClick={this.handleActionClick.bind(this, item, attachmentId)}
+               key={item.name}>
+            {item.name}
+          </div>
+      )
+    }.bind(this));
+    return (
+        <div className="TableRow-actions">
+          {globalItems}
+        </div>
+    )
+  },
+  getActionTrigger: function () {
+    //just the "thing" that is clickable?
+    return (
+        <div className="Table-actionTrigger">
+          <i className="fa fa-ellipsis-v TableRowAction"></i>
+        </div>
+    )
+  },
   getCustomRows: function () {
     var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
     return this.props.data.map(function (attachment) {
@@ -42,14 +72,18 @@ var EventAttachmentsTable = React.createClass({
       return (
           <div className="Table-row" key={attachment.id}>
             <div className="Table-checkbox u-flexGrow-1">
-              <CheckboxInput onChange={this.props.rowChanged}
-                             value={this.props.data.id}
-                             checked={this.props.checked}
-                             hideCheckbox={this.props.hideCheckbox}/>
+              <CheckboxInput onChange={this.rowChanged}
+                             value={attachment.id}
+                             checked={checked}
+                             hideCheckbox={hideCheckbox}/>
             </div>
             <div className="Table-rowItem u-flexGrow-10">
               <a href={attachment.file_link.url} target='_blank'>{attachment.file_name}</a>
             </div>
+            <DropdownMenu
+                trigger={this.getActionTrigger()}
+                customOptions={this.getRowActionMenu(attachment.id)}
+                align="right"/>
           </div>
 
       );
@@ -59,6 +93,7 @@ var EventAttachmentsTable = React.createClass({
     return (
         <Table
             results={this.props.data}
+            showHeaders={true}
             columns={this.getColumns()}
             useCustomRowComponent={true}
             customRows={this.getCustomRows()}
@@ -70,7 +105,6 @@ var EventAttachmentsTable = React.createClass({
             showActions={this.state.checkedItems.length > 0}
             actionItems={this.actionItems()}
             extraPadding={false}
-            showHeaders={true}
             searchPlaceholder="Search Attachments..."
             />
     );
