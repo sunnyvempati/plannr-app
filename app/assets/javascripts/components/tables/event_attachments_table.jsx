@@ -1,5 +1,8 @@
 var EventAttachmentsTable = React.createClass({
   mixins: [TableCheckbox],
+  propTypes: {
+    setServerMessage: React.PropTypes.func
+  },
   getInitialState: function () {
     return {
       eventAttachments: []
