@@ -1,4 +1,4 @@
-var AttachmentActionButtonUpload = React.createClass({
+var AttachmentBrowse = React.createClass({
   propTypes: {
     clickableElement: React.PropTypes.element.isRequired,
     onAssociation: React.PropTypes.func
@@ -53,7 +53,7 @@ var AttachmentActionButtonUpload = React.createClass({
       'ClickableFileUploadButton': true
     });
     return (
-        <div className="AttachmentActionButtonUploadContainer">
+        <div className="AttachmentBrowseContainer">
           <i className={spinnerClasses}></i>
 
           <div className={inputClasses} onClick={this.clickFilePicker}>

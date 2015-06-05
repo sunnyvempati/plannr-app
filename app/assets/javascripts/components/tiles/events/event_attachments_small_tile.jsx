@@ -24,7 +24,7 @@ var EventAttachmentsSmallTile = React.createClass({
   },
   getActionButton: function () {
     return (
-        <AttachmentActionButtonUpload clickableElement={this.getActionButtonWrapper()}
+        <AttachmentBrowse clickableElement={this.getActionButtonWrapper()}
                                       onAssociation={this.incrementCount}/>
     );
   },
