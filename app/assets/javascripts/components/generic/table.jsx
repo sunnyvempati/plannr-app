@@ -1,4 +1,25 @@
 var Table = React.createClass({
+  propTypes: {
+    onClick: React.PropTypes.func,
+    checkedItems: React.PropTypes.array,
+    results: React.PropTypes.array,
+    columns: React.PropTypes.array,
+    rowChanged: React.PropTypes.func,
+    extraPadding: React.PropTypes.bool,
+    actionItems: React.PropTypes.array,
+    showActions: React.PropTypes.bool,
+    filterItems: React.PropTypes.array,
+    filterable: React.PropTypes.bool,
+    searchPlaceholder: React.PropTypes.string,
+    handleSearch: React.PropTypes.func,
+    handleSortClick: React.PropTypes.func,
+    sortItems: React.PropTypes.array,
+    showHeaders: React.PropTypes.bool,
+    showToolbar: React.PropTypes.bool,
+    useCustomRowComponent: React.PropTypes.bool,
+    customRows: React.PropTypes.array,
+    tableDataClassName: React.PropTypes.string
+  },
   getDefaultProps: function() {
     return {
       showToolbar: true,
