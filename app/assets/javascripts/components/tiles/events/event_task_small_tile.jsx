@@ -17,7 +17,7 @@ var EventTaskSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileTasksList" className="Tile-headerLink">
+          <Link to="eventTasks" className="Tile-headerLink">
             <div className="Tile-imgTask"></div>
             <div className="Tile-title">Tasks</div>
           </Link>
