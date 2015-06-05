@@ -85,7 +85,7 @@ var EventAttachmentsTable = React.createClass({
     )
   },
   getCustomRows: function () {
-    var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
+    var hideCheckbox = this.state.checkedItems.length <= 0;
     return this.state.eventAttachments.map(function (attachment) {
       var checked = this.state.checkedItems.indexOf(attachment.id) > -1;
       return (
