@@ -1,6 +1,6 @@
 var AttachmentActionButtonUpload = React.createClass({
   propTypes: {
-    children: React.PropTypes.element.isRequired,
+    clickableElement: React.PropTypes.element,
     onAssociation: React.PropTypes.func
   },
   getInitialState: function () {
