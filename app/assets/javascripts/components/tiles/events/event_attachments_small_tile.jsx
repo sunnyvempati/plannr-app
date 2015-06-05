@@ -25,7 +25,7 @@ var EventAttachmentsSmallTile = React.createClass({
   getActionButton: function () {
     return (
         <AttachmentBrowse clickableElement={this.getActionButtonClickableElement()}
-                                      onAssociation={this.incrementCount}/>
+                          onAssociation={this.incrementCount}/>
     );
   },
   render: function () {
