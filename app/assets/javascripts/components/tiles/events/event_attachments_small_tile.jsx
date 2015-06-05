@@ -19,36 +19,36 @@ var EventAttachmentsSmallTile = React.createClass({
   },
   getActionButtonClickableElement: function () {
     return (
-        <button className='Button Button--raised Button--primary'>Browse</button>
+      <button className='Button Button--raised Button--primary'>Browse</button>
     );
   },
   getActionButton: function () {
     return (
-        <AttachmentBrowse clickableElement={this.getActionButtonClickableElement()}
-                          onAssociation={this.incrementCount}/>
+      <AttachmentBrowse clickableElement={this.getActionButtonClickableElement()}
+                        onAssociation={this.incrementCount}/>
     );
   },
   render: function () {
     return (
-        <div className="Tile">
-          <div className="Tile-header">
-            <Link to="eventAttachments" className="Tile-headerLink">
-              <div className="Tile-imgAttachment"></div>
-              <div className="Tile-title">Attachments</div>
-            </Link>
+      <div className="Tile">
+        <div className="Tile-header">
+          <Link to="eventAttachments" className="Tile-headerLink">
+            <div className="Tile-imgAttachment"></div>
+            <div className="Tile-title">Attachments</div>
+          </Link>
+        </div>
+        <div className="Tile-content">
+          <div className="TileContent-quickAdd">
+            {this.getActionButton()}
           </div>
-          <div className="Tile-content">
-            <div className="TileContent-quickAdd">
-              {this.getActionButton()}
-            </div>
-            <div className="TileContent-count">
-              {this.state.count}
-            </div>
-            <div className="TileContent-title">
-              Attachments
-            </div>
+          <div className="TileContent-count">
+            {this.state.count}
+          </div>
+          <div className="TileContent-title">
+            Attachments
           </div>
         </div>
+      </div>
     );
   }
 });
