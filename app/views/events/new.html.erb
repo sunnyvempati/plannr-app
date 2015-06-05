@@ -1,10 +1,4 @@
-<% session[:return_to] ||= request.referer %>
-
 <%= react_component("EventFormNew",
                     model: @event,
-                    authToken: form_authenticity_token,
-                    secondaryButtonHref: session[:return_to]
-
+                    authToken: form_authenticity_token
     ) %>
-
-

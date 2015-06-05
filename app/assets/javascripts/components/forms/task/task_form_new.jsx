@@ -20,7 +20,7 @@ var TaskFormNew = React.createClass({
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = this.props.secondaryButtonHref || "/tasks";
+      secondaryButtonHref = "/tasks";
 
     return (
       <TaskForm action={action}

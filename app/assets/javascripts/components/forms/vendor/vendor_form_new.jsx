@@ -26,7 +26,7 @@ var VendorFormNew = React.createClass({
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = this.props.secondaryButtonHref || "/vendors";
+      secondaryButtonHref = "/vendors";
 
     return (
       <VendorForm

@@ -27,7 +27,7 @@ var ContactFormNew = React.createClass({
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = this.props.secondaryButtonHref || "/contacts";
+      secondaryButtonHref = "/contacts";
 
     return (
       <ContactForm

@@ -1,11 +1,5 @@
-<% session[:return_to] ||= request.referer %>
-
 <%= react_component("VendorFormNew",
                     model: @vendor,
                     notice: notice,
-                    authToken: form_authenticity_token,
-                    secondaryButtonHref: session[:return_to]
-
+                    authToken: form_authenticity_token
     ) %>
-
-
