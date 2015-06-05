@@ -12,13 +12,13 @@ var ContactFormNew = React.createClass({
     useReactRouter: React.PropTypes.bool,
     model: React.PropTypes.object
   },
-  onSuccess: function() {
+  onSuccess: function(result) {
     // react router keeps things in context without redirecting
     if (this.props.useReactRouter) {
       this.context.router.transitionTo('tileContactsList');
     }
     else {
-      location.href = '/contacts';
+      location.href = '/contacts/#/view/'+result.contact.id;
     }
   },
   render: function () {

@@ -4,15 +4,29 @@
 
 .Show-header {
   display: flex;
-  align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  >* {
+    flex: 1;
+  }
+}
+
+.Show-nav {
+  display: flex;
+  align-items: center;
   >* {
     padding: $size-increment*5;
   }
 }
 
+.Show-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: $size-increment*15;
+}
+
 .ShowHeaderIcon {
-  opacity: 0.25;
+  opacity: 0.4;
   font-size: 24px;
 }
 

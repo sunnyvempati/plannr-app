@@ -3,6 +3,9 @@ var ContactFormEdit = React.createClass({
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
   },
+  goToContact: function(result) {
+    location.href = "/contacts/#/view/"+result.contact.id;
+  },
   render: function () {
     var action = "/contacts/" + this.props.model.id,
       routeVerb = "PUT",
@@ -22,6 +25,7 @@ var ContactFormEdit = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
+        onSuccess={this.goToContact}
       />
     );
   }

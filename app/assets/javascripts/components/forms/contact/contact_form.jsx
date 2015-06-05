@@ -96,7 +96,7 @@ var ContactForm = React.createClass({
             autofocus='autofocus'
             placeholder='What is the name of your contact?'
             type='text'
-            label='name*'
+            label='Name*'
             value={contact.name}
             disabled={this.props.disableForm}
             required
@@ -105,7 +105,7 @@ var ContactForm = React.createClass({
             id='contact_type'
             name='category'
             className='SelectInput'
-            label='type*'
+            label='Type*'
             options={this.typeOptions}
             value={contact.category || 1}
             disabled={this.props.disableForm}
@@ -118,7 +118,7 @@ var ContactForm = React.createClass({
             name='email'
             placeholder='What is the email of your contact?'
             type='text'
-            label='email'
+            label='Email'
             value={contact.email}
             disabled={this.props.disableForm}
           />
@@ -127,7 +127,7 @@ var ContactForm = React.createClass({
             name='phone'
             placeholder='What is the phone of your contact?'
             type='tel'
-            label='phone'
+            label='Phone'
             value={contact.phone}
             disabled={this.props.disableForm}
           />
@@ -135,20 +135,13 @@ var ContactForm = React.createClass({
             id='contact_description'
             name='description'
             className='TextAreaInput'
-            label='description'
+            label='Description'
             placeholder='What else do you need to know?'
             value={contact.description}
             disabled={this.props.disableForm}
             formId='contact_form'
           />
-
         </Form>
-
-        <a href={this.hrefRoot }>List</a>
-        |
-        <a href={this.hrefRoot + '/' + contact.id + '/edit' }>Edit</a>
-        |
-        <a href={this.hrefRoot + '/' + contact.id  }>Show</a>
       </div>
     );
   }

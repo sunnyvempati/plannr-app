@@ -68,7 +68,7 @@ var EventForm = React.createClass({
             autofocus="autofocus"
             placeholder="Give it a unique name"
             type="text"
-            label="Event name*"
+            label="Name*"
             value={this.props.model.name}
             disabled={this.props.disableForm}
             required

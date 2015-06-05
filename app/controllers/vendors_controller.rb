@@ -75,7 +75,7 @@ class VendorsController < ApplicationController
   end
 
   def vendor_params
-    params.require(:vendor).permit(:name, :location, :phone, :primary_contact_id).merge(owner: current_user)
+    params.require(:vendor).permit(:name, :location, :phone, :primary_contact_id, :description).merge(owner: current_user)
   end
 
   def sort_params

@@ -26,14 +26,22 @@ var Vendor = React.createClass({
   renderVendor: function() {
     var vendor = this.state.vendor;
     if (vendor) {
+      var editHref = "/vendors/"+vendor.id+"/edit";
       return (
         <div>
           <div className="Show-header">
-            <div onClick={this.backToList} className="u-clickable">
-              <i className="fa fa-arrow-left ShowHeaderIcon"></i>
+            <div className="Show-nav">
+              <div onClick={this.backToList} className="u-clickable">
+                <i className="fa fa-arrow-left ShowHeaderIcon"></i>
+              </div>
+              <div className="Show-name">
+                {vendor.name}
+              </div>
             </div>
-            <div className="Show-name">
-              {vendor.name}
+            <div className="Show-actions">
+              <a href={editHref}>
+                <i className="fa fa-pencil ShowHeaderIcon"></i>
+              </a>
             </div>
           </div>
           <div className="Show-content">
