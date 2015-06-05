@@ -13,8 +13,20 @@
   align-items: center;
 }
 
-.ActionButton-event {
+.ActionButton-createEvent {
   @include svg($create-event-url, 64px);
+}
+
+.ActionButton-createContact {
+  @include svg($create-contact-url, 64px);
+}
+
+.ActionButton-createVendor {
+  @include svg($create-vendor-url, 64px);
+}
+
+.ActionButton-createTask {
+  @include svg($create-task-url, 64px);
 }
 
 .ActionButton-label {

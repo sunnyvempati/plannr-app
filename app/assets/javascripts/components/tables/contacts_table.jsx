@@ -80,6 +80,7 @@ var ContactsTable = React.createClass({
         onClick={this.goToContact}
         actionButtonText="Create Contact"
         actionButtonClick={this.handleActionButtonClick}
+        actionButtonSVGClass="createContact"
       />
     );
   }

@@ -16,7 +16,7 @@ var Modal = {
   renderCloseModal: function() {
     return (
       <div className="Modal-close" onClick={this.closeModal}>
-        <i className="fa fa-times"></i>
+        <div className="Modal-closeIcon"></div>
       </div>
     );
   },

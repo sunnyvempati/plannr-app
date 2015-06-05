@@ -94,6 +94,7 @@ var TasksTable = React.createClass({
         searchPlaceholder="Search Tasks..."
         actionButtonText="Create Task"
         actionButtonClick={this.handleActionButtonClick}
+        actionButtonSVGClass="createTask"
       />
     );
   }

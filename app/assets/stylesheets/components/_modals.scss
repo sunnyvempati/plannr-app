@@ -16,7 +16,11 @@
   position: absolute;
   top: 24px;
   right: 24px;
-  @include font(24px, 500, 0);
   opacity: 0.25;
   cursor: pointer;
 }
+
+.Modal-closeIcon {
+  @include svg($close-url, 24px);
+}
+

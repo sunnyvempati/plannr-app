@@ -32,7 +32,7 @@ var Vendor = React.createClass({
           <div className="Show-header">
             <div className="Show-nav">
               <div onClick={this.backToList} className="u-clickable">
-                <i className="fa fa-arrow-left ShowHeaderIcon"></i>
+                <div className="BackIcon"></div>
               </div>
               <div className="Show-name">
                 {vendor.name}

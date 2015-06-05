@@ -78,6 +78,7 @@ var VendorsTable = React.createClass({
         onClick={this.goToVendor}
         actionButtonText="Create Vendor"
         actionButtonClick={this.handleActionButtonClick}
+        actionButtonSVGClass="createVendor"
       />
     );
   }

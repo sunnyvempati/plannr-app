@@ -87,6 +87,7 @@ var EventVendorsTable = React.createClass({
         onClick={this.openVendorModal}
         actionButtonText="Add Vendor"
         actionButtonClick={this.openAddModal}
+        actionButtonSVGClass="createVendor"
       />
     );
   }

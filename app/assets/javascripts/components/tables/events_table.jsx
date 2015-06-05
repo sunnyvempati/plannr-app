@@ -90,6 +90,7 @@ var EventsTable = React.createClass({
           searchPlaceholder="Search Events..."
           actionButtonText="Create Event"
           actionButtonClick={this.handleActionClick}
+          actionButtonSVGClass="createEvent"
         />
       </div>
     );

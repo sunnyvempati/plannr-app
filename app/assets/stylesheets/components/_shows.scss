@@ -39,3 +39,8 @@
   display: flex;
   flex-flow: column nowrap;
 }
+
+.BackIcon {
+  opacity: 0.25;
+  @include svg($back-arrow-url, 24px);
+}
