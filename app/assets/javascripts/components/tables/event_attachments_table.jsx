@@ -8,7 +8,7 @@ var EventAttachmentsTable = React.createClass({
   componentDidMount: function () {
     this.retrieveData();
   },
-  retrieveData: function (){
+  retrieveData: function () {
     $.get("attachments", function (results) {
       if (this.isMounted()) {
         this.setState({
@@ -116,7 +116,8 @@ var EventAttachmentsTable = React.createClass({
   },
   getActionButton: function () {
     return (
-       <AttachmentActionButtonUpload wrapperXxx={this.getActionButtonWrapper()} onAssociation={this.retrieveData}/>
+        <AttachmentActionButtonUpload wrapperXxx={this.getActionButtonWrapper()}
+                                      onAssociation={this.retrieveData}/>
     );
   },
   render: function () {
