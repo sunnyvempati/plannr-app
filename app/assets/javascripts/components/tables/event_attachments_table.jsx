@@ -17,7 +17,7 @@ var EventAttachmentsTable = React.createClass({
       }
     }.bind(this))
   },
-  getColumns: function () {
+  columns: function () {
     return [
       {name: "file_name", grow: 10, header: "File Name"}
     ];
@@ -32,7 +32,6 @@ var EventAttachmentsTable = React.createClass({
       {entity: "file_name", display: "File Name", default: true}
     ]
   },
-  //TODO: rename to delete
   handleDelete: function (id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
@@ -124,7 +123,7 @@ var EventAttachmentsTable = React.createClass({
     return (
         <Table
             results={this.state.eventAttachments}
-            columns={this.getColumns()}
+            columns={this.columns()}
             useCustomRowComponent={true}
             showHeaders={true}
             customRows={this.getCustomRows()}
