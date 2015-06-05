@@ -75,7 +75,7 @@ def create_vendors
                                         email: Faker::Internet.email,
                                         phone: "309-999-9999",
                                         organization: Faker::Company.name,
-                                        description: Faker::Lorem.sentence,
+                                        description: Faker::Lorem.paragraph,
                                         category: 1,
                                         owner: User.find_by_email(v[:owner]),
                                         company: Company.find_by_name(v[:company]))
@@ -97,15 +97,14 @@ def create_contacts
   10.times do
     @contacts.values.each do |c|
       c.symbolize_keys!
-      created_contact =
-      Contact.create!(name: Faker::Name.name,
-                      email: Faker::Internet.email,
-                      phone: "309-999-9999",
-                      organization: Faker::Company.name,
-                      description: Faker::Lorem.sentence,
-                      category: 1,
-                      owner: User.find_by_email(c[:owner]),
-                      company: Company.find_by_name(c[:company]))
+      created_contact = Contact.create!(name: Faker::Name.name,
+                                        email: Faker::Internet.email,
+                                        phone: "309-999-9999",
+                                        organization: Faker::Company.name,
+                                        description: Faker::Lorem.paragraph,
+                                        category: 1,
+                                        owner: User.find_by_email(c[:owner]),
+                                        company: Company.find_by_name(c[:company]))
       puts "Created Contact: #{created_contact.name}" if created_contact
     end
   end
