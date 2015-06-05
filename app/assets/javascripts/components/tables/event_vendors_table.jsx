@@ -6,6 +6,9 @@ var EventVendorsTable = React.createClass({
     };
   },
   componentDidMount: function() {
+    this.getEventVendors();
+  },
+  getEventVendors: function() {
     $.get("vendors", function(results) {
       if (this.isMounted()) {
         this.setState({
@@ -36,7 +39,7 @@ var EventVendorsTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("vendors/mass_delete",destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.state.eventVendors, deletionIds);
-      this.setState({eventVendors: newData});
+      this.setState({eventVendors: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
@@ -60,6 +63,10 @@ var EventVendorsTable = React.createClass({
     var modal = React.createElement(ShowVendorModal, {data: vendor});
     React.render(modal, document.getElementById('modal'));
   },
+  openAddModal: function() {
+    var modal = React.createElement(AddVendorModal, {refreshData: this.getEventVendors});
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
       <Table
@@ -78,6 +85,8 @@ var EventVendorsTable = React.createClass({
         tableDataClassName="scrollable"
         searchPlaceholder="Search Vendors..."
         onClick={this.openVendorModal}
+        actionButtonText="Add Vendor"
+        actionButtonClick={this.openAddModal}
       />
     );
   }

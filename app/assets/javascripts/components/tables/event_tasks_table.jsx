@@ -51,7 +51,7 @@ var EventTasksTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('/tasks/mass_delete',destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.state.eventTasks, deletionIds);
-      this.setState({eventTasks: newData});
+      this.setState({eventTasks: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));

@@ -1,6 +1,5 @@
 var ActionButton = React.createClass({
   render: function() {
-    console.log(this.props.extraPad);
     var actionButtonClasses = classNames({
       'ActionButton': true,
       'extraPad': this.props.extraPad
