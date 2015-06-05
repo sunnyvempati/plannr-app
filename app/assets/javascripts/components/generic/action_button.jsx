@@ -1,9 +1,9 @@
 var ActionButton = React.createClass({
-  //propTypes: {
-  //  label: React.propTypes.t,
-  //  handleClick: React.propTypes.func,
-  //  svgClass: React.propTypes.string
-  //},
+  propTypes: {
+    label: React.PropTypes.string,
+    handleClick: React.PropTypes.func,
+    svgClass: React.PropTypes.string
+  },
   render: function() {
     var actionButtonClasses = classNames({
       'ActionButton': true,
