@@ -3,12 +3,15 @@ var VendorFormEdit = React.createClass({
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
   },
+  goToVendor: function(result) {
+    location.href = "/vendors/#/view/"+result.vendor.id;
+  },
   render: function () {
     var action = "/vendors/" + this.props.model.id,
       routeVerb = "PUT",
       primaryButtonText = "Update",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = "/vendors";
+      secondaryButtonHref = action;
 
     return (
       <VendorForm
@@ -22,6 +25,7 @@ var VendorFormEdit = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
+        onSuccess={this.goToVendor}
       />
     );
   }

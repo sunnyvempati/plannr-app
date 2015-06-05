@@ -5,7 +5,8 @@ var EventVendorSmallTile = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("vendors", function(results) {
+    $.get("vendors.json", function(results) {
+      console.log(results);
       if (this.isMounted()) {
         this.setState({
           count: results.event_vendors.length

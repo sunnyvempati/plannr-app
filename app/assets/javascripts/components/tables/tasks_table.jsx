@@ -71,6 +71,9 @@ var TasksTable = React.createClass({
       {name: "My Tasks", handler: this.getUserTasks}
     ]
   },
+  handleActionButtonClick: function() {
+    location.href = "/tasks/new";
+  },
   render: function() {
     return (
       <Table
@@ -89,6 +92,8 @@ var TasksTable = React.createClass({
         filterable={true}
         filterItems={this.filterItems()}
         searchPlaceholder="Search Tasks..."
+        actionButtonText="Create Task"
+        actionButtonClick={this.handleActionButtonClick}
       />
     );
   }

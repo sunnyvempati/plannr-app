@@ -14,11 +14,7 @@ class ContactsController < ApplicationController
   end
 
   def show
-    @header = 'Contact'
-    respond_to do |format|
-      format.html
-      format.json { render json: @contact }
-    end
+    render_success @contact
   end
 
   def new

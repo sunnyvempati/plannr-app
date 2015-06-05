@@ -1,8 +1,14 @@
 .EntityModal {
   width: 700px;
-  height: 600px;
   padding: $size-increment*4;
   position: relative;
+}
+
+.AddEntityModal {
+  @extend .EntityModal;
+  height: 400px;
+  width: 500px;
+  transition: height 0.2s linear;
 }
 
 .EntityModal-header {

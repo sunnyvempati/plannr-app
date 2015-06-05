@@ -48,7 +48,7 @@ var MenuContent = React.createClass({
     var activePath = this.props.activePath;
     var mainMenuItems = mainMenuItems.map(function(menu_item) {
       return (
-        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == activePath} />
+        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == activePath + "/"} />
       );
     });
     return (

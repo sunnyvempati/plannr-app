@@ -6,6 +6,9 @@ var EventContactsTable = React.createClass({
     };
   },
   componentDidMount: function() {
+    this.getEventContacts()
+  },
+  getEventContacts: function() {
     $.get("contacts", function(results) {
       if (this.isMounted()) {
         this.setState({
@@ -37,20 +40,20 @@ var EventContactsTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("contacts/mass_delete", destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.state.eventContacts, deletionIds);
-      this.setState({eventContacts: newData});
+      this.setState({eventContacts: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function(entity, order) {
     $.get('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.props.onUpdatedData(result.event_contacts);
+      this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
     $.get('search_event_contacts', {search: {text: term || ""}}, function(result) {
-      this.props.onUpdatedData(result.event_contacts);
+      this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
   openContactModal: function(data) {
@@ -59,6 +62,10 @@ var EventContactsTable = React.createClass({
       name: data.name
     };
     var modal = React.createElement(ShowContactModal, {data: contact});
+    React.render(modal, document.getElementById('modal'));
+  },
+  openAddModal: function() {
+    var modal = React.createElement(AddContactModal, {refreshData: this.getEventContacts});
     React.render(modal, document.getElementById('modal'));
   },
   render: function() {
@@ -79,6 +86,8 @@ var EventContactsTable = React.createClass({
         tableDataClassName="scrollable"
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
+        actionButtonText="Add Contact"
+        actionButtonClick={this.openAddModal}
       />
     );
   }
