@@ -29,6 +29,10 @@
   @include svg($create-task-url, 64px);
 }
 
+.ActionButton-createAttachment {
+  @include svg($create-attachment-url, 64px);
+}
+
 .ActionButton-label {
   color: $plannr-green;
   @include font($caption-font, 600, 0);
