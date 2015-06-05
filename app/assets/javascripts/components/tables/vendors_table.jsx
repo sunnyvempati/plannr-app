@@ -6,7 +6,7 @@ var VendorsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("vendors.json", function(result) {
+    $.get("/vendors.json", function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
@@ -35,7 +35,7 @@ var VendorsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post('vendors/mass_delete', destroyOpts, function(success_result) {
+    $.post('/vendors/mass_delete', destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.state.vendors, deletionIds);
       this.setState({vendors: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
@@ -43,13 +43,13 @@ var VendorsTable = React.createClass({
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('vendors.json', {sort: {entity: entity, order: order}}, function(result) {
+    $.get('/vendors.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_vendors', {search: {text: term || ""}}, function(result) {
+    $.get('/search_vendors', {search: {text: term || ""}}, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },

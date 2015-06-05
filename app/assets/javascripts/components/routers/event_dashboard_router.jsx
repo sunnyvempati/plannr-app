@@ -11,7 +11,7 @@ var EventDashboardRouter = React.createClass({
     return (
       <Route name="tileAll" path="/" handler={EventDashboard} ignoreScrollBehavior={true}>
         <Route name="tileEventApp" path="nav" handler={EventAppTile}>
-          <Route name="tileContactsList" path="contacts" handler={EventContactListTile} />
+          <Route name="eventContacts" path="contacts" handler={EventContactsTable} />
           <Route name="tileTasksList" path="tasks" handler={EventTaskListTile} />
           <Route name="tileAttachmentsList" path="attachments" handler={EventAttachmentsListTile} />
           <Route name="tileVendorsList" path="vendors" handler={EventVendorListTile} />

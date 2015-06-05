@@ -9,12 +9,12 @@ var TasksTable = React.createClass({
     this.getAllTasks();
   },
   getAllTasks: function() {
-    $.get("tasks.json", function(result) {
+    $.get("/tasks.json", function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
   getUserTasks: function() {
-    $.get("user_tasks", function(result) {
+    $.get("/user_tasks", function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
@@ -48,13 +48,13 @@ var TasksTable = React.createClass({
     location.href = "/tasks/"+id+"/edit";
   },
   sortBy: function(entity, order) {
-    $.get('tasks.json', {sort: {entity: entity, order: order}}, function(result) {
+    $.get('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_tasks', {search: {text: term || ""}}, function(result) {
+    $.get('/search_tasks', {search: {text: term || ""}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },

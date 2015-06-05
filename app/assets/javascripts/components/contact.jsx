@@ -1,23 +1,14 @@
 var Contact = React.createClass({
-  mixins: [Router.State, Router.Navigation],
+  mixins: [Router.State, Router.Navigation, ContactCards],
   getInitialState: function() {
     return {
-      contact: null,
       events: [],
       eventsLoaded: false
     };
   },
   componentDidMount: function() {
-    this.getDetails();
+    this.getDetails(this.props.params.id);
     this.getEvents();
-  },
-  getDetails: function() {
-    var url = '/contacts/' + this.props.params.id + '.json';
-    $.get(url, function(result) {
-      if(this.isMounted()) {
-        this.setState({contact: result.contact});
-      }
-    }.bind(this));
   },
   getEvents: function() {
     $.get("/contacts/events", {contact_id: this.props.params.id},  function(result) {
@@ -26,32 +17,6 @@ var Contact = React.createClass({
   },
   backToList: function() {
     this.transitionTo('contacts');
-  },
-  renderContactInfo: function() {
-    var contact = this.state.contact;
-    var emailHref = "mailto:" + contact.email;
-    var telHref = "tel:+1" + contact.phone;
-    return (
-      <div className="Card">
-        <div className="Card-title">
-          Contact Info
-        </div>
-        <div className="Card-content">
-          <div className="IconWithText">
-            <i className="fa fa-envelope CardIcon"></i>
-            <a href={emailHref}>{contact.email}</a>
-          </div>
-          <div className="IconWithText">
-            <i className="fa fa-phone CardIcon"></i>
-            <a href={telHref}>{contact.phone}</a>
-          </div>
-          <div className="IconWithText">
-            <i className="fa fa-building CardIcon"></i>
-            {contact.organization}
-          </div>
-        </div>
-      </div>
-    )
   },
   renderEvents: function() {
     if (this.state.eventsLoaded) {
@@ -102,16 +67,6 @@ var Contact = React.createClass({
       </div>
     )
   },
-  renderDescription: function() {
-    return (
-      <div className="Card">
-        <div className="Card-title">Description</div>
-        <div className="Card-content">
-          {this.state.contact.description}
-        </div>
-      </div>
-    )
-  },
   renderContact: function() {
     var contact = this.state.contact;
     if (this.state.contact) {
@@ -128,8 +83,8 @@ var Contact = React.createClass({
           <div className="Show-content">
             <div className="u-flex">
               <div>
-                {this.renderContactInfo()}
-                {this.renderDescription()}
+                {this.renderContactInfo(this.state.contact)}
+                {this.renderDescription(this.state.contact.description)}
                 {this.renderEvents()}
               </div>
               {this.renderComments()}
