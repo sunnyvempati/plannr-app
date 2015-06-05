@@ -7,7 +7,7 @@ class AttachmentsController < ApplicationController
     @attachments = Attachment.all
     respond_to do |format|
       format.html
-      format.json { render json: @attachments}
+      format.json { render json: @attachments }
     end
   end
 
@@ -23,7 +23,7 @@ class AttachmentsController < ApplicationController
   def destroy
     @attachment = AttachmentWithStatus.new(Attachment.find(params[:id]))
     if @attachment.destroy
-      redirect_to attachments_path, notice:  "The attachment #{@attachment.name} has been deleted."
+      redirect_to attachments_path, notice: "The attachment #{@attachment.name} has been deleted."
     end
   end
 
