@@ -31,6 +31,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new task_params
+    @task.status = 1 # TODO
     render_entity @task
   end
 

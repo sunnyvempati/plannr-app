@@ -1,5 +1,4 @@
 module TaskStatuses
-  NEW = 1
-  IN_PROGRESS = 2
-  COMPLETED = 3
+  TODO = 1
+  COMPLETED = 2
 end

@@ -11,7 +11,6 @@ var TaskForm = React.createClass({
     disableForm: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string
   },
-  statusOptions: [<option key='1' value='1'>New</option>, <option key='2' value='2'>In Progress</option>, <option key='3' value='3'>Completed</option>],
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -20,8 +19,7 @@ var TaskForm = React.createClass({
         'description': inputs.description,
         'deadline': inputs.deadline,
         'event_id': inputs.event_id,
-        'assigned_to_id': inputs.assigned_to,
-        'status': inputs.status
+        'assigned_to_id': inputs.assigned_to
       }
     };
   },
@@ -108,16 +106,6 @@ var TaskForm = React.createClass({
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
-          <FormSelectInput
-            id='task_status'
-            name='status'
-            className='SelectInput'
-            label='Status*'
-            options={this.statusOptions}
-            value={task.status || 1}
-            disabled={this.props.disableForm}
-            required
-          />
           <AssignedToInput
             name='assigned_to'
             value={task.assigned_to}

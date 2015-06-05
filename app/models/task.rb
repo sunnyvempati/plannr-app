@@ -9,7 +9,7 @@ class Task < ActiveRecord::Base
   validate :deadline_in_future
 
   include TaskStatuses
-  validates :status, inclusion: { in: [NEW, IN_PROGRESS, COMPLETED] }
+  validates :status, inclusion: { in: [TODO, COMPLETED] }
 
   # scopes
   scope :event_tasks, ->(event_id) { where(event_id: event_id)}
