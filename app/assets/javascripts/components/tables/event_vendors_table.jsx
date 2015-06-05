@@ -67,6 +67,14 @@ var EventVendorsTable = React.createClass({
     var modal = React.createElement(AddVendorModal, {refreshData: this.getEventVendors});
     React.render(modal, document.getElementById('modal'));
   },
+  getActionButton: function () {
+    return (
+      <ActionButton handleClick={this.openAddModal}
+                    label='Add Vendor'
+                    svgClass='createVendor'
+                    extraPad={false} />
+    );
+  },
   render: function() {
     return (
       <Table
@@ -85,9 +93,7 @@ var EventVendorsTable = React.createClass({
         tableDataClassName="scrollable"
         searchPlaceholder="Search Vendors..."
         onClick={this.openVendorModal}
-        actionButtonText="Add Vendor"
-        actionButtonClick={this.openAddModal}
-        actionButtonSVGClass="createVendor"
+        actionButton={this.getActionButton()}
       />
     );
   }
