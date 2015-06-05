@@ -15,7 +15,6 @@ var FormSelectInput = React.createClass({
     this.props.onChangeCallback(event.currentTarget.value);
   },
   render: function () {
-    //TODO: clean up React JS console warnings
     var input_classes = classNames({
       'FormInput-field': true,
       'is-invalid': !this.isValid()
