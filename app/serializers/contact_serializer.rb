@@ -1,5 +1,5 @@
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :phone, :organization, :type
+  attributes :id, :name, :email, :phone, :company, :type, :description
 
   def type
     if object.category == 1
@@ -7,5 +7,9 @@ class ContactSerializer < ActiveModel::Serializer
     else
       "Vendor"
     end
+  end
+
+  def company
+    return object.organization ? object.organization : object.vendor.name
   end
 end

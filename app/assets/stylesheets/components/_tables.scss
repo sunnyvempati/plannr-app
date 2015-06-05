@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  overflow-y: auto;
+  padding-bottom: $size-increment*2;
 }
 
 .Table-toolbar {

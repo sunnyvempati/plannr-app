@@ -1,5 +1,10 @@
 var CommentList = React.createClass({
   getRenderedList: function() {
+    if (this.props.data.length == 0) {
+      return (
+        <div className="Notice">No Comments</div>
+      )
+    }
     return this.props.data.map(function(comment) {
       return (
         <div className="Comments-listItem">

@@ -1,0 +1,27 @@
+.Show {
+  width: 100%;
+}
+
+.Show-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  >* {
+    padding: $size-increment*5;
+  }
+}
+
+.ShowHeaderIcon {
+  opacity: 0.25;
+  font-size: 24px;
+}
+
+.Show-name {
+  @include font($headline-font, normal, 10);
+}
+
+.Show-content {
+  padding: 0 80px;
+  display: flex;
+  flex-flow: column nowrap;
+}

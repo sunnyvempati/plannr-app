@@ -11,10 +11,10 @@ var EventDashboardRouter = React.createClass({
     return (
       <Route name="tileAll" path="/" handler={EventDashboard} ignoreScrollBehavior={true}>
         <Route name="tileEventApp" path="nav" handler={EventAppTile}>
-          <Route name="tileContactsList" path="contacts" handler={EventContactListTile} />
-          <Route name="tileTasksList" path="tasks" handler={EventTaskListTile} />
-          <Route name="tileAttachmentsList" path="attachments" handler={EventAttachmentsListTile} />
-          <Route name="tileVendorsList" path="vendors" handler={EventVendorListTile} />
+          <Route name="eventContacts" path="contacts" handler={EventContactsTable} />
+          <Route name="eventTasks" path="tasks" handler={EventTasksTable} />
+          <Route name="eventAttachments" path="attachments" handler={EventAttachmentsListTile} />
+          <Route name="eventVendors" path="vendors" handler={EventVendorsTable} />
         </Route>
         <DefaultRoute handler={EventHome}  />
       </Route>
@@ -24,7 +24,13 @@ var EventDashboardRouter = React.createClass({
     return (
       <div>
         <div ref="eventDashboard"></div>
-        <Comments entity="Event" entity_id={this.props.event.id} authToken={this.props.authToken} />
+        <div className="EventComments-title">
+          <i className="fa fa-comments CommentIcon"></i>
+          Comments
+        </div>
+        <div className="EventComments">
+          <Comments entity="Event" entity_id={this.props.event.id} authToken={this.props.authToken} />
+        </div>
       </div>
     );
   }

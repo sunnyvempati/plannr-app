@@ -21,6 +21,13 @@ class EventVendorsController < ApplicationController
     render json: vendors, each_serializer: EventVendorWithVendorSerializer
   end
 
+  def events
+    order = sort_params ? "vendors.#{sort_params[:entity]} #{sort_params[:order]}" : 'events.name asc'
+    events = EventVendor.events(params[:vendor_id]).order(order)
+    render json: events,
+           each_serializer: EventVendorWithEventSerializer
+  end
+
   def search
     render json: EventVendor.search(params[:event_id], search_params[:text]), each_serializer: EventVendorWithVendorSerializer
   end

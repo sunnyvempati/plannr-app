@@ -21,7 +21,7 @@ var EventVendorSmallTile = React.createClass({
     return (
       <div className="Tile">
         <div className="Tile-header">
-          <Link to="tileVendorsList" className="Tile-headerLink">
+          <Link to="eventVendors" className="Tile-headerLink">
             <div className="Tile-imgVendor"></div>
             <div className="Tile-title">Vendors</div>
           </Link>

@@ -10,6 +10,11 @@ class EventVendor < ActiveRecord::Base
     .where("event_id = '#{event_id}'")
   }
 
+  scope :events, ->(vendor_id) {
+    includes(:event)
+    .where("vendor_id = '#{vendor_id}'")
+  }
+
   scope :search, ->(event_id, term) {
     wildcard_text = "'%#{term}%'"
     vendors(event_id).where("lower(vendors.name) LIKE lower(#{wildcard_text})")

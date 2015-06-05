@@ -1,12 +1,12 @@
 var VendorsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [TableCheckbox, Router.Navigation],
   getInitialState: function() {
     return {
       vendors: []
     };
   },
   componentDidMount: function() {
-    $.get("vendors.json", function(result) {
+    $.get("/vendors.json", function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
@@ -35,7 +35,7 @@ var VendorsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post('vendors/mass_delete', destroyOpts, function(success_result) {
+    $.post('/vendors/mass_delete', destroyOpts, function(success_result) {
       var newData = this.spliceResults(this.state.vendors, deletionIds);
       this.setState({vendors: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
@@ -43,33 +43,42 @@ var VendorsTable = React.createClass({
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('vendors.json', {sort: {entity: entity, order: order}}, function(result) {
+    $.get('/vendors.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_vendors', {search: {text: term || ""}}, function(result) {
+    $.get('/search_vendors', {search: {text: term || ""}}, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
+  goToVendor: function(data) {
+    this.transitionTo('vendor', {id: data.id});
+  },
   render: function() {
     return (
-      <Table
-        results={this.state.vendors}
-        columns={this.getColumns()}
-        useCustomRowComponent={false}
-        showHeaders={true}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
-        handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
-        actionItems={this.actionItems()}
-        extraPadding={true}
-        searchPlaceholder="Search Vendors..."
-      />
+      <div>
+        <ActionButton class="ActionButton-event"
+                      path="/vendors/new"
+                      label="Create Vendor" />
+        <Table
+          results={this.state.vendors}
+          columns={this.getColumns()}
+          useCustomRowComponent={false}
+          showHeaders={true}
+          checkedItems={this.state.checkedItems}
+          rowChanged={this.rowChanged}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sortBy}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+          searchPlaceholder="Search Vendors..."
+          onClick={this.goToVendor}
+        />
+      </div>
     );
   }
 });

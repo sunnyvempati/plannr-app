@@ -1,5 +1,19 @@
 var EventContactsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [TableCheckbox, Router.Navigation],
+  getInitialState: function() {
+    return {
+      eventContacts: []
+    };
+  },
+  componentDidMount: function() {
+    $.get("contacts", function(results) {
+      if (this.isMounted()) {
+        this.setState({
+          eventContacts: results.event_contacts
+        })
+      }
+    }.bind(this))
+  },
   getColumns: function() {
     return [
       {name: "name", grow: 10, header: "Name"},
@@ -22,8 +36,8 @@ var EventContactsTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("contacts/mass_delete", destroyOpts, function(success_result) {
-      var newData = this.spliceResults(this.props.data, deletionIds);
-      this.props.onUpdatedData(newData);
+      var newData = this.spliceResults(this.state.eventContacts, deletionIds);
+      this.setState({eventContacts: newData});
     }.bind(this)).fail(function(error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
@@ -42,9 +56,7 @@ var EventContactsTable = React.createClass({
   openContactModal: function(data) {
     var contact = {
       id: data.contact_id,
-      email: data.email,
-      name: data.name,
-      phone: data.phone
+      name: data.name
     };
     var modal = React.createElement(ShowContactModal, {data: contact});
     React.render(modal, document.getElementById('modal'));
@@ -52,7 +64,7 @@ var EventContactsTable = React.createClass({
   render: function() {
     return (
       <Table
-        results={this.props.data}
+        results={this.state.eventContacts}
         columns={this.getColumns()}
         useCustomRowComponent={false}
         showHeaders={true}

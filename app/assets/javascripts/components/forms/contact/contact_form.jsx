@@ -58,7 +58,7 @@ var ContactForm = React.createClass({
   },
   getInitialState: function() {
     return {
-      category: this.props.model.category
+      category: this.props.model.category || 1
     };
   },
   render: function () {
