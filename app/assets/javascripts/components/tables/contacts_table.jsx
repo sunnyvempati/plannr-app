@@ -59,7 +59,7 @@ var ContactsTable = React.createClass({
     this.transitionTo('contact', {id: data.id});
   },
   handleActionButtonClick: function() {
-    location.href = "/vendors/new";
+    location.href = "/contacts/new";
   },
   render: function() {
     return (
