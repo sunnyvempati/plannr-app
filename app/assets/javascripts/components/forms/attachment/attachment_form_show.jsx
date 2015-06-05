@@ -6,12 +6,12 @@ var AttachmentFormShow = React.createClass({
     var action = "/attachments";
 
     return (
-      <AttachmentForm
-        action= {action}
-        model={this.props.model}
-        disableForm={true}
-        showButtonList={false}
-      />
+        <AttachmentForm
+            action={action}
+            model={this.props.model}
+            disableForm={true}
+            showButtonList={false}
+            />
     );
   }
 });

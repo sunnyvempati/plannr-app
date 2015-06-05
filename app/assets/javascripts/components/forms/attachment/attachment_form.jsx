@@ -11,7 +11,7 @@ var AttachmentForm = React.createClass({
     disableForm: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string
   },
-  mapInputs: function(inputs) {
+  mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
       'attachment': {
@@ -23,12 +23,12 @@ var AttachmentForm = React.createClass({
       }
     };
   },
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       eventOptions: <option>Loading..</option>
     };
   },
-  componentDidMount: function() {
+  componentDidMount: function () {
     this.retrieveEventSelectOptionsAsync();
   },
   retrieveEventSelectOptionsAsync: function () {
@@ -43,17 +43,17 @@ var AttachmentForm = React.createClass({
       }
       this.setState({eventOptions: options});
     }.bind(this))
-    .fail(function(jqXHR, textStatus, errorThrown){
-      this.setState({eventOptions: <option>Error!!</option>});
-    }.bind(this));
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          this.setState({eventOptions: <option>Error!!</option>});
+        }.bind(this));
   },
-  getDefaultOptionValue: function() {
+  getDefaultOptionValue: function () {
     var options = this.state.eventOptions;
     if (options.length > 0) {
       return options[0].props.value;
     }
   },
-  render: function() {
+  render: function () {
     var attachment = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -68,47 +68,47 @@ var AttachmentForm = React.createClass({
     }
     var id = 'attachment_form';
     return (
-      <div className='FormContainer--leftAligned'>
-        <Form url={this.props.action}
-              mapping={this.mapInputs}
-              onSuccess={this.props.onSuccess}
-              routeVerb={this.props.routeVerb}
-              authToken={this.props.authToken}
-              primaryButtonText={this.props.primaryButtonText}
-              secondaryButtonVisible={this.props.secondaryButtonVisible}
-              secondaryButtonHref={this.props.secondaryButtonHref}
-              showButtonList={this.props.showButtonList}
-              id={id}>
-          <FileInput
-            id='attachment_file_attachment'
-            name='file_attachment'
-            type='text'
-            label='file attachment*'
-            placeholder='What is the name of your attachment?'
-            disabled={this.props.disableForm}
-            required />
-          <FormInput
-            id='attachment_description'
-            name='description'
-            autofocus='autofocus'
-            type='text'
-            label='Description'
-            value={attachment.description}
-            placeholder='What is the description of your attachment?'
-            disabled={this.props.disableForm} />
-          <FormSelectInput
-            id='attachment_event_id'
-            name='event_id'
-            className='SelectInput'
-            label='Event*'
-            options={this.state.eventOptions}
-            value={attachment.eventId || this.getDefaultOptionValue()}
-            form={'attachment_form'}
-            disabled={this.props.disableForm}
-            required />
+        <div className='FormContainer--leftAligned'>
+          <Form url={this.props.action}
+                mapping={this.mapInputs}
+                onSuccess={this.props.onSuccess}
+                routeVerb={this.props.routeVerb}
+                authToken={this.props.authToken}
+                primaryButtonText={this.props.primaryButtonText}
+                secondaryButtonVisible={this.props.secondaryButtonVisible}
+                secondaryButtonHref={this.props.secondaryButtonHref}
+                showButtonList={this.props.showButtonList}
+                id={id}>
+            <FileInput
+                id='attachment_file_attachment'
+                name='file_attachment'
+                type='text'
+                label='file attachment*'
+                placeholder='What is the name of your attachment?'
+                disabled={this.props.disableForm}
+                required/>
+            <FormInput
+                id='attachment_description'
+                name='description'
+                autofocus='autofocus'
+                type='text'
+                label='Description'
+                value={attachment.description}
+                placeholder='What is the description of your attachment?'
+                disabled={this.props.disableForm}/>
+            <FormSelectInput
+                id='attachment_event_id'
+                name='event_id'
+                className='SelectInput'
+                label='Event*'
+                options={this.state.eventOptions}
+                value={attachment.eventId || this.getDefaultOptionValue()}
+                form={'attachment_form'}
+                disabled={this.props.disableForm}
+                required/>
 
-        </Form>
-      </div>
+          </Form>
+        </div>
     );
   }
 });
