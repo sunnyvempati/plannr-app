@@ -109,8 +109,8 @@ var EventAttachmentsTable = React.createClass({
   getActionButtonWrapper: function () {
     return (
         <ActionButton handleClick={this.openAddModal}
-                      label='Add Contact'
-                      svgClass='createContact'
+                      label='Add Attachment'
+                      svgClass='createAttachment'
                       extraPad={false}/>
     );
   },
