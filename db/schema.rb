@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150605055715) do
   create_table "comments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "body"
     t.uuid     "commenter_id"
-    t.integer  "commentable_id"
+    t.uuid     "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false

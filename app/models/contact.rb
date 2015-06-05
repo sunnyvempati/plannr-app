@@ -1,5 +1,7 @@
 class Contact < ActiveRecord::Base
   include ContactTypes
+  acts_as_tenant :company
+
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   US_PHONE_REGEX = %r{\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z}
   SEARCH_LIMIT = 5
@@ -7,10 +9,7 @@ class Contact < ActiveRecord::Base
   has_many :event_contacts
   has_many :events, through: :event_contacts
   belongs_to :vendor
-
   belongs_to :owner, class_name: "User"
-
-  acts_as_tenant :company
 
   scope :not_in, ->(event_id) {
       where("id not in (select contact_id from event_contacts where event_id = '#{event_id}')")
@@ -47,8 +46,8 @@ class Contact < ActiveRecord::Base
                       :allow_blank => true
   validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'
 
-  validates_presence_of :vendor, :if => "category==#{VENDOR}"
-  validates :vendor, absence: true, :if => "category==#{CLIENT}"
+  # validates_presence_of :vendor, :if => "category==#{VENDOR}"
+  # validates :vendor, absence: true, :if => "category==#{CLIENT}"
 
   def self.quick_create(text)
     text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)

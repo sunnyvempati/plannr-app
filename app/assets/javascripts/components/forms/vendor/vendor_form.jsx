@@ -30,7 +30,7 @@ var VendorForm = React.createClass({
         name: model.name,
         location: model.location,
         phone: model.phone,
-        primary_contact: model.primary_contact,
+        primary_contact: (model.primary_contact && model.primary_contact.id) || 0,
         id: model.id
       };
     }
@@ -76,16 +76,11 @@ var VendorForm = React.createClass({
             value={vendor.phone}
             disabled={this.props.disableForm}
           />
-          <FormInput
-            id='vendor_primary_contact'
+          <PrimaryContactInput
             name='primary_contact'
-            placeholder='Who is the primary_contact of your vendor?'
-            type='text'
-            label='primary contact'
             value={vendor.primary_contact}
-            disabled={this.props.disableForm}
-          />
-
+            id='vendor_primary_contact'
+            label='Primary Contact' />
         </Form>
 
         <a href={this.hrefRoot }>List</a>|

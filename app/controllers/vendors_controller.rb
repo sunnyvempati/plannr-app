@@ -34,7 +34,9 @@ class VendorsController < ApplicationController
   end
 
   def create
+    primary_contact_id = params[:vendor][:primary_contact]
     @vendor = Vendor.new vendor_params
+    @vendor.primary_contact = Contact.find(primary_contact_id) if primary_contact_id
     render_entity @vendor
   end
 
@@ -75,7 +77,7 @@ class VendorsController < ApplicationController
   end
 
   def vendor_params
-    params.require(:vendor).permit(:name, :location, :phone, :primary_contact).merge(owner: current_user)
+    params.require(:vendor).permit(:name, :location, :phone).merge(owner: current_user)
   end
 
   def sort_params

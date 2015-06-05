@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   get 'search_events', to: 'events#search'
   get 'search_vendors', to: 'vendors#search'
 
-
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
   post 'events/:event_id/contacts/mass_delete', to:'event_contacts#mass_delete'
