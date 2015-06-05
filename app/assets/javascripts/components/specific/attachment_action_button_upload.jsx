@@ -25,7 +25,7 @@ var AttachmentActionButtonUpload = React.createClass({
     }.bind(this));
   },
   reset: function () {
-    //TODO: do without jQuery
+    //TODO: do without jQuery; find a replacement for replaceWith without jQuery
     //clear file name from browse - file inputs don't like being touched
     // so I replace the control with a clone
     var control = $(this.refs.filePicker.getDOMNode());
