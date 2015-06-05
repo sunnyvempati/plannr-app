@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   post 'events/:event_id/vendors', to:'event_vendors#create'
   get 'events/:event_id/vendors', to:'event_vendors#vendors'
   post 'events/:event_id/vendors/mass_delete', to:'event_vendors#mass_delete'
+  get 'vendors/events', to:'event_vendors#events'
 
   # contacts
   post '/contacts/quick_create', to: 'contacts#quick_create'
