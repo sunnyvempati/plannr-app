@@ -57,7 +57,7 @@ var AttachmentActionButtonUpload = React.createClass({
           <i className={spinnerClasses}></i>
 
           <div className={inputClasses} onClick={this.clickFilePicker}>
-            {this.props.wrapperXxx}
+            {this.props.clickableElement}
             <input name='file_picker'
                    onChange={this.changeValue}
                    type='file'

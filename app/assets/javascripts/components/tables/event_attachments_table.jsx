@@ -116,7 +116,7 @@ var EventAttachmentsTable = React.createClass({
   },
   getActionButton: function () {
     return (
-        <AttachmentActionButtonUpload wrapperXxx={this.getActionButtonWrapper()}
+        <AttachmentActionButtonUpload clickableElement={this.getActionButtonWrapper()}
                                       onAssociation={this.retrieveData}/>
     );
   },
