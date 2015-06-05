@@ -6,19 +6,6 @@ var AttachmentActionButtonUpload = React.createClass({
   getInitialState: function () {
     return {loading: false, fileName: ''};
   },
-  componentDidMount: function () {
-    this.causeChildElementToActLikeInputTypeFile();
-  },
-  causeChildElementToActLikeInputTypeFile: function () {
-    //$childElement is the element that I want to click on
-    //$filePickerElement is the input type=file
-    //when you click on the $childElement, act like you clicked on the $filePickerElement
-    var $childElement = $(this.refs.onlyChild.getDOMNode())[0];
-    $childElement.addEventListener("click", function () {
-      var $filePickerElement = $(this.refs.filePicker.getDOMNode())[0];
-      $filePickerElement.click();
-    }.bind(this), false);
-  },
   changeValue: function () {
     var reader = new FileReader();
     var file = event.target.files[0];
@@ -38,6 +25,7 @@ var AttachmentActionButtonUpload = React.createClass({
     }.bind(this));
   },
   reset: function () {
+    //TODO: do without jQuery
     //clear file name from browse - file inputs don't like being touched
     // so I replace the control with a clone
     var control = $(this.refs.filePicker.getDOMNode());
@@ -52,6 +40,9 @@ var AttachmentActionButtonUpload = React.createClass({
       }
     }
   },
+  clickFilePicker: function () {
+    this.refs.filePicker.getDOMNode().click();
+  },
   render: function () {
     var spinnerClasses = classNames({
       'fa fa-spinner fa-pulse fa-2x': this.state.loading,
@@ -62,14 +53,11 @@ var AttachmentActionButtonUpload = React.createClass({
       'ClickableFileUploadButton': true
     });
     return (
-        <div className="AttachmentBrowseContainer">
+        <div className="AttachmentActionButtonUploadContainer">
           <i className={spinnerClasses}></i>
 
-          <div className={inputClasses}>
-            {
-              //clone child element to assign ref dynamically
-              React.cloneElement(this.props.children, {ref: 'onlyChild'})
-            }
+          <div className={inputClasses} onClick={this.clickFilePicker}>
+            {this.props.wrapperXxx}
             <input name='file_picker'
                    onChange={this.changeValue}
                    type='file'

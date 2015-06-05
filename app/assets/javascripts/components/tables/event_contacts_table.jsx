@@ -68,6 +68,14 @@ var EventContactsTable = React.createClass({
     var modal = React.createElement(AddContactModal, {refreshData: this.getEventContacts});
     React.render(modal, document.getElementById('modal'));
   },
+  getActionButton: function () {
+    return (
+        <ActionButton handleClick={this.openAddModal}
+                      label='Add Contact'
+                      svgClass='createContact'
+                      extraPad={false} />
+    );
+  },
   render: function() {
     return (
       <Table
@@ -86,9 +94,7 @@ var EventContactsTable = React.createClass({
         tableDataClassName="scrollable"
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
-        actionButtonText="Add Contact"
-        actionButtonClick={this.openAddModal}
-        actionButtonSVGClass="createContact"
+        actionButton={this.getActionButton()}
       />
     );
   }

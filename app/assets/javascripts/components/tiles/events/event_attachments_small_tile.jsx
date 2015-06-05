@@ -17,6 +17,16 @@ var EventAttachmentsSmallTile = React.createClass({
     var count = this.state.count;
     this.setState({count: count+1});
   },
+  getActionButtonWrapper: function () {
+    return (
+        <button className='Button Button--raised Button--primary'>Browse</button>
+    );
+  },
+  getActionButton: function () {
+    return (
+        <AttachmentActionButtonUpload wrapperXxx={this.getActionButtonWrapper()} onAssociation={this.incrementCount} />
+    );
+  },
   render: function() {
     return (
       <div className="Tile">
@@ -28,7 +38,7 @@ var EventAttachmentsSmallTile = React.createClass({
         </div>
         <div className="Tile-content">
           <div className="TileContent-quickAdd">
-            <AttachmentActionButtonUploadBrowse eventId={this.props.eventId} onAssociation={this.incrementCount} />
+            {this.getActionButton()}
           </div>
           <div className="TileContent-count">
             {this.state.count}

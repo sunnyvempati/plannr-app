@@ -1,8 +1,25 @@
 var EventAttachmentsTable = React.createClass({
   mixins: [TableCheckbox],
+  getInitialState: function () {
+    return {
+      eventAttachments: []
+    };
+  },
+  componentDidMount: function () {
+    this.retrieveData();
+  },
+  retrieveData: function (){
+    $.get("attachments", function (results) {
+      if (this.isMounted()) {
+        this.setState({
+          eventAttachments: results.attachments
+        })
+      }
+    }.bind(this))
+  },
   getColumns: function () {
     return [
-      {name: "file_name", grow: 4, header: "File Name"}
+      {name: "file_name", grow: 10, header: "File Name"}
     ];
   },
   actionItems: function () {
@@ -20,21 +37,21 @@ var EventAttachmentsTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("attachments/mass_delete", destroyOpts, function (success_result) {
-      var newData = this.spliceResults(this.props.data, deletionIds);
-      this.props.onUpdatedData(newData);
+      var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
+      this.setState({eventAttachments: newData});
     }.bind(this)).fail(function (error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function (entity, order) {
     $.get('attachments.json', {sort: {entity: entity, order: order}}, function (result) {
-      this.props.onUpdatedData(result.attachments);
+      this.setState({eventAttachments: result.attachments});
     }.bind(this));
   },
   search: function (e) {
     var term = e.target.value;
     $.get('search_event_attachments', {search: {text: term || ""}}, function (result) {
-      this.props.onUpdatedData(result.attachments);
+      this.setState({eventAttachments: result.attachments});
     }.bind(this));
   },
   handleActionClick: function (item, attachmentId) {
@@ -67,7 +84,7 @@ var EventAttachmentsTable = React.createClass({
   },
   getCustomRows: function () {
     var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
-    return this.props.data.map(function (attachment) {
+    return this.state.eventAttachments.map(function (attachment) {
       var checked = this.state.checkedItems.indexOf(attachment.id) > -1;
       return (
           <div className="Table-row" key={attachment.id}>
@@ -89,13 +106,26 @@ var EventAttachmentsTable = React.createClass({
       );
     }, this);
   },
+  getActionButtonWrapper: function () {
+    return (
+        <ActionButton handleClick={this.openAddModal}
+                      label='Add Contact'
+                      svgClass='createContact'
+                      extraPad={false}/>
+    );
+  },
+  getActionButton: function () {
+    return (
+       <AttachmentActionButtonUpload wrapperXxx={this.getActionButtonWrapper()} onAssociation={this.retrieveData}/>
+    );
+  },
   render: function () {
     return (
         <Table
-            results={this.props.data}
-            showHeaders={true}
+            results={this.state.eventAttachments}
             columns={this.getColumns()}
             useCustomRowComponent={true}
+            showHeaders={true}
             customRows={this.getCustomRows()}
             checkedItems={this.state.checkedItems}
             rowChanged={this.rowChanged}
@@ -105,7 +135,9 @@ var EventAttachmentsTable = React.createClass({
             showActions={this.state.checkedItems.length > 0}
             actionItems={this.actionItems()}
             extraPadding={false}
+            tableDataClassName="scrollable"
             searchPlaceholder="Search Attachments..."
+            actionButton={this.getActionButton()}
             />
     );
   }
