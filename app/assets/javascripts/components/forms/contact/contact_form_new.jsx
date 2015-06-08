@@ -1,6 +1,7 @@
 var ContactFormNew = React.createClass({
   contextTypes: {
-    router: React.PropTypes.func
+    router: React.PropTypes.func,
+    secondaryButtonHref: React.PropTypes.string
   },
   getDefaultProps: function() {
     return {

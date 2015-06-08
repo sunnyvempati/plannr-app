@@ -1,7 +1,6 @@
 .ActionButton {
   position: relative;
   cursor: pointer;
-  height: 20px;
   top: 32px;
   &.extraPad {
     top: 40px;
@@ -27,6 +26,10 @@
 
 .ActionButton-createTask {
   @include svg($create-task-url, 64px);
+}
+
+.ActionButton-createAttachment {
+  @include svg($create-attachment-url, 64px);
 }
 
 .ActionButton-label {

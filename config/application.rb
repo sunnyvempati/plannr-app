@@ -18,6 +18,7 @@ module PlannrApp
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","components-font-awesome","fonts")
     config.react.addons = true
     config.action_controller.default_url_options = { :trailing_slash => true }
+    config.active_record.raise_in_transactional_callbacks = true
   end
 
 end

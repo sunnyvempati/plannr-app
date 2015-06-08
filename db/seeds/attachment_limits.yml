@@ -1,0 +1,19 @@
+amazon_aws_free_limits:
+  get_count: 20000
+  put_count: 2000
+  space_count: 5000
+
+company_limit:
+  get_count: 1000
+  put_count: 100
+  space_count: 250
+
+company_warning_high:
+  get_count: 800
+  put_count: 80
+  space_count: 200
+
+company_warning_medium:
+  get_count: 600
+  put_count: 60
+  space_count: 150

@@ -3,7 +3,8 @@ var TaskFormNew = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     useReactRouter: React.PropTypes.bool,
-    model: React.PropTypes.object
+    model: React.PropTypes.object,
+    secondaryButtonHref: React.PropTypes.string
   },
   onSuccess: function() {
     // react router keeps things in context without redirecting

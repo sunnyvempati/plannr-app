@@ -10,13 +10,6 @@ var Event = React.createClass({
   editEvent: function(id) {
     location.href = "/events/" + id + "/edit/";
   },
-  eventInfoDivs: function(attrs) {
-    return attrs.map(function(eventAttr) {
-      return (
-        <div>{eventAttr + ": "}{this.props.model[eventAttr]}</div>
-      )
-    }, this);
-  },
   render: function () {
     var event = this.props.model;
     var editClasses = classNames({

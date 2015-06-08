@@ -59,7 +59,15 @@ var ContactsTable = React.createClass({
     this.transitionTo('contact', {id: data.id});
   },
   handleActionButtonClick: function() {
-    location.href = "/vendors/new";
+    location.href = "/contacts/new";
+  },
+  getActionButton: function () {
+    return (
+      <ActionButton handleClick={this.handleActionButtonClick}
+                    label='Add Contact'
+                    svgClass='createContact'
+                    extraPad={false} />
+    );
   },
   render: function() {
     return (
@@ -78,10 +86,7 @@ var ContactsTable = React.createClass({
         showHeaders={true}
         searchPlaceholder="Search Contacts..."
         onClick={this.goToContact}
-        actionButtonText="Create Contact"
-        actionButtonClick={this.handleActionButtonClick}
-        actionButtonSVGClass="createContact"
-      />
+        actionButton={this.getActionButton()}/>
     );
   }
 });

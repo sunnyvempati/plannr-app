@@ -74,6 +74,14 @@ var TasksTable = React.createClass({
   handleActionButtonClick: function() {
     location.href = "/tasks/new";
   },
+  getActionButton: function () {
+    return (
+        <ActionButton handleClick={this.handleActionButtonClick}
+                      label='Create Task'
+                      svgClass='createContact'
+                      extraPad={true} />
+    );
+  },
   render: function() {
     return (
       <Table
@@ -92,9 +100,7 @@ var TasksTable = React.createClass({
         filterable={true}
         filterItems={this.filterItems()}
         searchPlaceholder="Search Tasks..."
-        actionButtonText="Create Task"
-        actionButtonClick={this.handleActionButtonClick}
-        actionButtonSVGClass="createTask"
+        actionButton={this.getActionButton()}
       />
     );
   }
