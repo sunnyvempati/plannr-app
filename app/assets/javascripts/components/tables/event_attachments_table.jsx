@@ -111,7 +111,6 @@ var EventAttachmentsTable = React.createClass({
   getAttachmentButtonClickableElement: function () {
     return (
         <ActionButton handleClick={this.openAddModal}
-                      label='Add Attachment'
                       svgClass='createAttachment'
                       extraPad={false}/>
     );
@@ -119,7 +118,7 @@ var EventAttachmentsTable = React.createClass({
   getActionButton: function () {
     return (
         <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
-                          onAssociation={this.retrieveData}/>
+                          onAssociation={this.retrieveData} />
     );
   },
   render: function () {
@@ -141,7 +140,7 @@ var EventAttachmentsTable = React.createClass({
             tableDataClassName="scrollable"
             searchPlaceholder="Search Attachments..."
             actionButton={this.getActionButton()}
-            />
+        />
     );
   }
 });

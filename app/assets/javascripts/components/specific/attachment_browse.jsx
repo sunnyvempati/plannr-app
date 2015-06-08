@@ -53,7 +53,7 @@ var AttachmentBrowse = React.createClass({
       'ClickableFileUploadButton': true
     });
     return (
-        <div className="AttachmentBrowseContainer">
+        <div>
           <i className={spinnerClasses}></i>
 
           <div className={inputClasses} onClick={this.clickFilePicker}>

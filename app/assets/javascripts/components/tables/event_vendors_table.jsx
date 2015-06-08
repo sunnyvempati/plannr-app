@@ -70,7 +70,6 @@ var EventVendorsTable = React.createClass({
   getActionButton: function () {
     return (
       <ActionButton handleClick={this.openAddModal}
-                    label='Add Vendor'
                     svgClass='createVendor'
                     extraPad={false} />
     );

@@ -71,7 +71,6 @@ var EventContactsTable = React.createClass({
   getActionButton: function () {
     return (
         <ActionButton handleClick={this.openAddModal}
-                      label='Add Contact'
                       svgClass='createContact'
                       extraPad={false} />
     );

@@ -22,7 +22,7 @@ var EventAttachmentsSmallTile = React.createClass({
       <button className='Button Button--raised Button--primary'>Browse</button>
     );
   },
-  getActionButton: function () {
+  getBrowseButton: function () {
     return (
       <AttachmentBrowse clickableElement={this.getActionButtonClickableElement()}
                         onAssociation={this.incrementCount}/>
@@ -39,7 +39,7 @@ var EventAttachmentsSmallTile = React.createClass({
         </div>
         <div className="Tile-content">
           <div className="TileContent-quickAdd">
-            {this.getActionButton()}
+            {this.getBrowseButton()}
           </div>
           <div className="TileContent-count">
             {this.state.count}
