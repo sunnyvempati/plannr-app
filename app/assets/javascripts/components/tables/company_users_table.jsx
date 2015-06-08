@@ -24,7 +24,7 @@ var CompanyUserTable = React.createClass({
     var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
     return this.state.users.map(function(user) {
       var checked = this.state.checkedItems.indexOf(user.id) > -1;
-      return(
+      return (
         <CompanyUserRow checked={checked}
                         data={user}
                         checkChanged={this.rowChanged}

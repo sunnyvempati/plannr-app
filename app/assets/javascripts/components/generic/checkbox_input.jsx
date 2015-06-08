@@ -1,7 +1,7 @@
 var CheckboxInput = React.createClass({
   getInitialState: function() {
     return {
-      checked: false
+      checked: this.props.checked
     };
   },
   componentWillReceiveProps: function(nextProps) {
@@ -15,6 +15,7 @@ var CheckboxInput = React.createClass({
   render: function() {
     var checkboxClasses = classNames({
       'Checkbox': true,
+      'is-rounded': this.props.rounded,
       'is-checked': this.state.checked,
       'u-hidden': this.props.hideCheckbox
     });

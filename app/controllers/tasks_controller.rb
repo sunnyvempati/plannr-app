@@ -13,11 +13,11 @@ class TasksController < ApplicationController
   end
 
   def for_user
-    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]), each_serializer: TaskWithEventSerializer
+    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]).where(filter_params).order('name asc'), each_serializer: TaskWithEventSerializer
   end
 
   def show
-    @header = "Task"
+    render_success @task
   end
 
   def new
@@ -72,7 +72,7 @@ class TasksController < ApplicationController
   private
 
   def filter_params
-    params[:filter].permit(:assigned_to, :status)
+    params[:filter].permit(:assigned_to, :status) if params[:filter]
   end
 
   def set_task
