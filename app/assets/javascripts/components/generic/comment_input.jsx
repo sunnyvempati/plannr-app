@@ -22,7 +22,7 @@ var CommentInput = React.createClass({
     var inputClasses = classNames({
       "Autocomplete-input": true,
       "is-invalid": this.state.errorState
-    })
+    });
     return (
       <div className="Comments-input">
         <input placeholder="Add Comment"
