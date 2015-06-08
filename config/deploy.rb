@@ -28,7 +28,7 @@ set :rbenv_ruby, File.read('.ruby-version').strip
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push('config/secrets.yml').push('config/fog_credentials.yml')
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')

@@ -39,6 +39,7 @@ group 'development' do
   gem 'capistrano-secrets-yml'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
+  gem 'capistrano-linked-files'
   gem 'rack-mini-profiler'
 end
 

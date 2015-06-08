@@ -8,6 +8,7 @@ require 'capistrano/secrets_yml'
 require 'capistrano/rbenv'
 require 'capistrano/bundler'
 require 'capistrano/rails/migrations'
+require 'capistrano/linked_files'
 
 # Include tasks from other gems included in your Gemfile
 #
