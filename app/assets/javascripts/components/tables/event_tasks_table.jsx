@@ -6,10 +6,11 @@ var EventTasksTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getEventTasks();
+    // filter and get all to do items
+    this.getEventTasks({status: 1});
   },
-  getEventTasks: function() {
-    $.get("tasks.json", function(results) {
+  getEventTasks: function(filterParams) {
+    $.get("tasks.json", {filter: filterParams}, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventTasks: results.tasks
@@ -69,7 +70,8 @@ var EventTasksTable = React.createClass({
   },
   filterItems: function() {
     return [
-      {name: "All Tasks", handler: this.getEventTasks, default: true},
+      {name: "Tasks to do", handler: this.getEventTasks.bind(this, {status: 1}), default: true},
+      {name: "Completed Tasks", handler: this.getEventTasks.bind(this, {status: 2})},
       {name: "My Tasks", handler: this.getUserTasks}
     ]
   },
