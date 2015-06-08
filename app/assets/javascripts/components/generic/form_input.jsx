@@ -1,5 +1,13 @@
 var FormInput = React.createClass({
   mixins: [Formsy.Mixin],
+  propTypes: {
+    type: React.PropTypes.string,
+    id: React.PropTypes.string,
+    name: React.PropTypes.string,
+    autofocus: React.PropTypes.bool,
+    placeholder: React.PropTypes.string,
+    disabled: React.PropTypes.bool
+  },
   changeValue: function(event) {
     this.setValue(event.currentTarget.value);
   },
