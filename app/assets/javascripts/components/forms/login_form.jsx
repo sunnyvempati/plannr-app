@@ -2,17 +2,17 @@ var LoginForm = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired
   },
-  mapInputs: function(inputs) {
+  mapInputs: function (inputs) {
     return {
       'email': inputs.email,
       'password': inputs.password,
       'authenticity_token': inputs.authenticity_token
     };
   },
-  changeUrl: function(res) {
+  changeUrl: function (res) {
     location.href = res.redirect_path;
   },
-  render: function() {
+  render: function () {
     return (
       <div className="FormContainer">
         <Form url='/login'
@@ -23,10 +23,18 @@ var LoginForm = React.createClass({
               showButtonList={true}
               secondaryButtonText="Reset Password"
               secondaryButtonHref="/reset_password_request"
-              secondaryButtonVisible={true}
-              >
-          <FormInput name="email" validations="isEmail" validationError="Invalid email" placeholder="email" label="Email*" required/>
-          <FormInput name="password" type="password" placeholder="password" label="Password*" required/>
+              secondaryButtonVisible={true}>
+          <FormInput name="email"
+                     validations="isEmail"
+                     validationError="Invalid email"
+                     placeholder="email"
+                     label="Email*"
+                     required/>
+          <FormInput name="password"
+                     type="password"
+                     placeholder="password"
+                     label="Password*"
+                     required/>
         </Form>
       </div>
     );
