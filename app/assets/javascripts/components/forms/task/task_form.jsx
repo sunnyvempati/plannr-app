@@ -16,7 +16,6 @@ var TaskForm = React.createClass({
       'authenticity_token': inputs.authenticity_token,
       'task': {
         'name': inputs.name,
-        'description': inputs.description,
         'deadline': inputs.deadline,
         'event_id': inputs.event_id,
         'assigned_to_id': inputs.assigned_to
@@ -67,6 +66,7 @@ var TaskForm = React.createClass({
       };
     }
     var id = 'task_form';
+    var eventHidden = !task.eventId ? "" : "hidden";
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
@@ -92,14 +92,14 @@ var TaskForm = React.createClass({
           <DatePickerInput
             name="deadline"
             label="Deadline"
-            value={ !!task.deadline ? moment(task.deadline) : task.deadline }
+            value={ !!task.deadline ? moment(task.deadline) : null }
             placeholder="When's' it due?"
             minDate={moment()}
           />
           <FormSelectInput
             id='task_event_id'
             name='event_id'
-            className='SelectInput'
+            type={eventHidden}
             label='Event*'
             options={this.state.eventOptions}
             value={task.eventId || this.getDefaultOptionValue()}
@@ -111,14 +111,6 @@ var TaskForm = React.createClass({
             value={task.assigned_to}
             id='task_assigned_to'
             label='Assign to' />
-          <TextAreaInput
-            name="description"
-            form={id}
-            value={task.description}
-            className="TextAreaInput"
-            label="Description"
-            disabled={this.props.disableForm}
-            placeholder="How would you describe this task?" />
         </Form>
       </div>
     );

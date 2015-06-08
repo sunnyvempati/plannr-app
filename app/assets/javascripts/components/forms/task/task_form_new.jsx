@@ -1,5 +1,5 @@
 var TaskFormNew = React.createClass({
-  mixins: [FormReactRouter],
+  mixins: [FormReactRouter, Router.Navigation],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     useReactRouter: React.PropTypes.bool,
@@ -8,7 +8,7 @@ var TaskFormNew = React.createClass({
   onSuccess: function() {
     // react router keeps things in context without redirecting
     if (this.props.useReactRouter) {
-      this.context.router.transitionTo('tileTasksList');
+      this.props.onSuccess();
     }
     else {
       location.href = '/tasks';
@@ -19,8 +19,7 @@ var TaskFormNew = React.createClass({
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = "/tasks";
-
+      secondaryButtonHref = '/tasks';
     return (
       <TaskForm action={action}
                 model={this.props.model}
@@ -29,7 +28,7 @@ var TaskFormNew = React.createClass({
                 routeVerb={routeVerb}
                 primaryButtonText={primaryButtonText}
                 secondaryButtonText={secondaryButtonText}
-                secondaryButtonVisible={true}
+                secondaryButtonVisible={!this.props.useReactRouter}
                 secondaryButtonHref={secondaryButtonHref}
                 authToken={this.props.authToken}
                 onSuccess={this.onSuccess} />

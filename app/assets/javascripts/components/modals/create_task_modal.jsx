@@ -13,13 +13,19 @@ var CreateTaskModal = React.createClass({
             <i className="fa fa-user"></i>
           </div>
           <div className="EntityModal-title">
-            <h1>
-              Create Task
-            </h1>
+            <h1>Create Task</h1>
           </div>
         </div>
         <div className="EntityModal-content">
-          <TaskFormNew />
+          <div className="Card">
+            <div className="Card-content">
+              <TaskFormNew
+                useReactRouter={true}
+                onSuccess={this.closeAndRefreshData}
+                authToken={this.props.authToken}
+                model={this.props.model} />
+            </div>
+          </div>
         </div>
       </div>
     )

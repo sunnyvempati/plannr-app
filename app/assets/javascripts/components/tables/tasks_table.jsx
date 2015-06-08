@@ -72,8 +72,7 @@ var TasksTable = React.createClass({
     ]
   },
   handleActionButtonClick: function() {
-    var modal = React.createElement(CreateTaskModal);
-    React.render(modal, document.getElementById('modal'));
+    location.href = "/tasks/new";
   },
   render: function() {
     return (

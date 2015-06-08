@@ -50,6 +50,7 @@ var EventAppTile = React.createClass({
     }
   },
   render: function() {
+    console.log();
     return (
       <div className="EventAppTile">
         <div className="EventAppTitle">
@@ -57,7 +58,7 @@ var EventAppTile = React.createClass({
         </div>
         {this.renderNavItems()}
         <div className="EventApp-content">
-          <RouteHandler eventId={this.props.eventId} />
+          <RouteHandler eventId={this.props.eventId} authToken={this.props.authToken} />
         </div>
       </div>
     );

@@ -1,8 +1,8 @@
 .Modal-dialog {
   box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.3);
-  background-color: $modal-bg;
   z-index: $dialog-box-z-index;
   overflow: scroll;
+  position: relative;
   animation-name: center-transition;
   animation-duration: 0.2s;
 }

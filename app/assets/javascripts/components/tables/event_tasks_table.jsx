@@ -73,6 +73,15 @@ var EventTasksTable = React.createClass({
       {name: "My Tasks", handler: this.getUserTasks}
     ]
   },
+  openCreateTaskModal: function() {
+    var props = {
+      model: {event_id: this.props.eventId},
+      authToken: this.props.authToken,
+      refreshData: this.getEventTasks
+    }
+    var modal = React.createElement(CreateTaskModal, props);
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
       <Table
@@ -91,6 +100,9 @@ var EventTasksTable = React.createClass({
         filterItems={this.filterItems()}
         tableDataClassName="scrollable"
         searchPlaceholder="Search Tasks..."
+        actionButtonText="Create Task"
+        actionButtonClick={this.openCreateTaskModal}
+        actionButtonSVGClass="createTask"
       />
     );
   }
