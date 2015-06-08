@@ -24,13 +24,17 @@ var EventTaskSmallTile = React.createClass({
         <div>
           {toDoTasks}
           {completedTasks}
-          {toDoTasks / completedTasks * 100}
+          {toDoTasks / tasks.length * 100}
         </div>
       )
     }
   },
-  quickCreateTask: function(task) {
-    console.log(task);
+  quickCreateTask: function(params) {
+    $.post("/tasks.json", params, function(result) {
+      var oldTasks = this.state.tasks;
+      oldTasks.push(result.task);
+      this.setState({tasks: oldTasks});
+    }.bind(this));
   },
   render: function () {
     var inputClasses = classNames({
@@ -47,7 +51,7 @@ var EventTaskSmallTile = React.createClass({
         </div>
         <div className="Tile-content">
           <div className="TileContent-quickAdd">
-            <TaskQuickAddInput onAdd={this.quickCreateTask} />
+            <TaskQuickAddInput onAdd={this.quickCreateTask} eventId={this.props.eventId} />
           </div>
           <div className="TileContent-count">
             {this.getTaskContent()}
