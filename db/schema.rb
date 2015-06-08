@@ -17,6 +17,35 @@ ActiveRecord::Schema.define(version: 20150605055715) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
+  create_table "attachment_limits", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "get_count"
+    t.integer  "put_count"
+    t.integer  "space_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "attachment_statuses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "get_count",   default: 0
+    t.integer  "put_count",   default: 0
+    t.float    "space_count", default: 0.0
+    t.uuid     "company_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "attachments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "file_name"
+    t.string   "file_extension"
+    t.string   "file_link"
+    t.text     "description"
+    t.uuid     "event_id"
+    t.uuid     "owner_id"
+    t.uuid     "company_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "comments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "body"
     t.uuid     "commenter_id"
@@ -28,8 +57,9 @@ ActiveRecord::Schema.define(version: 20150605055715) do
 
   create_table "companies", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.uuid     "attachment_limit_id"
   end
 
   create_table "contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

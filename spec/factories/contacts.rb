@@ -4,6 +4,6 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     phone "815-968-2311"
     organization { Faker::Company.name }
-    category ContactTypes::VENDOR
+    category ContactTypes::CLIENT
   end
 end

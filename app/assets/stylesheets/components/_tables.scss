@@ -12,19 +12,20 @@
   &.extraPad {
     padding: $size-increment*5 $size-increment*6;
   }
-  >* {
-    flex: 1;
-  }
+
 }
 
 .Toolbar-actionButton {
   display: flex;
   justify-content: flex-end;
+  flex: 1;
+  height: 20px;
 }
 
 .Toolbar-items {
   display: flex;
   flex-flow: row nowrap;
+  flex: 6;
   >* {
     padding-right: $size-increment*2;
   }

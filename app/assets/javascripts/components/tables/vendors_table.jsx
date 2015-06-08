@@ -59,6 +59,14 @@ var VendorsTable = React.createClass({
   handleActionButtonClick: function() {
     location.href = "/vendors/new";
   },
+  getActionButton: function () {
+    return (
+      <ActionButton handleClick={this.handleActionButtonClick}
+                    label='Add Vendor'
+                    svgClass='createVendor'
+                    extraPad={false} />
+    );
+  },
   render: function() {
     return (
       <Table
@@ -76,10 +84,7 @@ var VendorsTable = React.createClass({
         extraPadding={true}
         searchPlaceholder="Search Vendors..."
         onClick={this.goToVendor}
-        actionButtonText="Create Vendor"
-        actionButtonClick={this.handleActionButtonClick}
-        actionButtonSVGClass="createVendor"
-      />
+        actionButton={this.getActionButton()}/>
     );
   }
 });

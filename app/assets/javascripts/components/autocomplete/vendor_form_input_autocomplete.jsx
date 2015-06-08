@@ -1,6 +1,11 @@
 var VendorFormInputAutocomplete = React.createClass({
   mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
-  getInitialState: function() {
+  propTypes: {
+    id: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired
+  },
+  getInitialState: function () {
     return {
       vendorSelected: false,
       vendorName: null,

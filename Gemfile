@@ -26,6 +26,10 @@ gem 'active_model_serializers'
 gem 'faker'
 gem 'autoprefixer-rails'
 
+gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave-base64'
+gem 'fog', '~> 1.24.0'
+
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'
@@ -47,4 +51,5 @@ group 'development', 'test' do
   gem 'shoulda-matchers'
   # formats rspec output. Read more: http://jeffkreeftmeijer.com/2010/fuubar-the-instafailing-rspec-progress-bar-formatter/
   gem 'fuubar'
+  gem "fakefs", :require => "fakefs/safe"
 end

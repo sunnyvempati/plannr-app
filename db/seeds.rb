@@ -5,9 +5,11 @@ require 'faker'
 
 # yml seed file path: db/seeds/*
 def load_ymls
-  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks'].each do |file|
+  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks', 'attachment_limits'].each do |file|
     filename = ENV["staging"] ? "staging_#{file}.yml" : "#{file}.yml"
+    print "filename=@#{filename}..."
     instance_variable_set("@#{file}", YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', filename))))
+    puts "success"
   end
 end
 #----
@@ -128,10 +130,27 @@ def create_tasks
   end
 end
 
+def create_attachment_limits
+  return if AttachmentLimit.all.count > 4
+
+  @attachment_limits.values.each do |al|
+    if AttachmentLimit.find_or_create_by!(al)
+      puts "Created attachment_limit (get_count): #{al["get_count"]}"
+    end
+  end
+
+  company_limit = AttachmentLimit.find_by(@attachment_limits['company_limit'])
+  Company.all.each do |c|
+    c.attachment_limit = company_limit
+    c.save
+  end
+end
+
+
 # commands
 # ----
 load_ymls
-%w(companies users events vendors contacts tasks).each do |entity|
+%w(companies users events vendors contacts tasks attachment_limits).each do |entity|
   send("create_#{entity}")
 end
 # ----

@@ -7,11 +7,12 @@ class Event < ActiveRecord::Base
   has_many :event_vendors
   has_many :vendors, through: :event_vendors
   has_many :tasks
+  has_many :attachments
   has_many :comments, as: :commentable
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
 
-  validates :name, :start_date, presence: true
+  validates :name, presence: true
   validate :dates
 
   scope :search, ->(term) {
