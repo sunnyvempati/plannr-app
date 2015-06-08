@@ -1,4 +1,7 @@
 var LoginForm = React.createClass({
+  propTypes: {
+    authToken: React.PropTypes.string.isRequired
+  },
   mapInputs: function(inputs) {
     return {
       'email': inputs.email,
