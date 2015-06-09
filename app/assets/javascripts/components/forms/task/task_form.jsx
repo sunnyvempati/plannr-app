@@ -18,7 +18,8 @@ var TaskForm = React.createClass({
         'name': inputs.name,
         'deadline': inputs.deadline,
         'event_id': inputs.event_id,
-        'assigned_to_id': inputs.assigned_to
+        'assigned_to_id': inputs.assigned_to,
+        'description': inputs.description
       }
     };
   },
@@ -62,7 +63,8 @@ var TaskForm = React.createClass({
         deadline: model.deadline,
         eventId: model.event_id,
         id: model.id,
-        assigned_to: model.assigned_to_id
+        assigned_to: model.assigned_to_id,
+        description: model.description
       };
     }
     var id = 'task_form';
@@ -111,6 +113,14 @@ var TaskForm = React.createClass({
             value={task.assigned_to}
             id='task_assigned_to'
             label='Assign to' />
+          <TextAreaInput
+            name="description"
+            form={id}
+            value={task.description}
+            className="TextAreaInput"
+            label="Description"
+            disabled={this.props.disableForm}
+            placeholder="How would you describe this task?" />
         </Form>
       </div>
     );

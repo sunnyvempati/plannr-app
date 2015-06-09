@@ -80,7 +80,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :deadline, :event_id, :assigned_to_id, :status).merge(owner: current_user)
+    params.require(:task).permit(:name, :deadline, :event_id, :assigned_to_id, :status, :description).merge(owner: current_user)
   end
 
   def search_params
