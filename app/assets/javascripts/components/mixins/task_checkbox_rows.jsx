@@ -12,11 +12,14 @@ var TaskCheckboxRows = {
       data: { task: { id: task_id, status: status }}
     })
     .success(function(result) {
+      var statusDisplay = status == 1 ? "To do" : "Completed";
+      this.toast("Task status changed: " + statusDisplay);
       var newData = this.spliceResults(this.state.tasks, result.task.id);
       this.setState({tasks: newData});
     }.bind(this));
   },
-  getCustomRows: function() {
+  // global shows event
+  getCustomRows: function(global) {
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
     var rows =  this.state.tasks.map(function(task) {
       return (
@@ -24,6 +27,7 @@ var TaskCheckboxRows = {
                  actionItems={this.actionItems()}
                  key={task.id}
                  checkChanged={this.handleCheck}
+                 global={global}
         />
       )
     }.bind(this));

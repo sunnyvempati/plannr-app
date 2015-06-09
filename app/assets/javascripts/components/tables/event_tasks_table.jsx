@@ -1,5 +1,5 @@
 var EventTasksTable = React.createClass({
-  mixins: [TaskCheckboxRows],
+  mixins: [TaskCheckboxRows, ToastMessages],
   componentDidMount: function() {
     // filter and get all to do items
     this.getEventTasks({status: 1});
@@ -46,7 +46,8 @@ var EventTasksTable = React.createClass({
   handleDelete: function (id) {
     var destroyOpts = {destroy_opts: {ids: [id]}};
     $.post('/tasks/mass_delete', destroyOpts, function (success_result) {
-      var newData = this.spliceResults(this.state.eventTasks, [id]);
+      this.toast('Task deleted successfully.');
+      var newData = this.spliceResults(this.state.tasks, [id]);
       this.setState({tasks: newData});
     }.bind(this)).fail(function (error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
@@ -105,7 +106,7 @@ var EventTasksTable = React.createClass({
         showHeaders={true}
         columns={this.getColumns()}
         useCustomRowComponent={true}
-        customRows={this.getCustomRows()}
+        customRows={this.getCustomRows(false)}
         sortItems={this.sortItems()}
         handleSortClick={this.sortBy}
         handleSearch={this.search}

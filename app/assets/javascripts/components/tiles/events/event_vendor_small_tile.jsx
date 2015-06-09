@@ -1,4 +1,5 @@
 var EventVendorSmallTile = React.createClass({
+  mixins: [ToastMessages],
   getInitialState: function() {
     return {
       count: null
@@ -13,7 +14,8 @@ var EventVendorSmallTile = React.createClass({
       }
     }.bind(this))
   },
-  incrementCount: function() {
+  incrementCount: function(associatedVendor) {
+    this.toast(associatedVendor.name + " has been added to this event.");
     var count = this.state.count;
     this.setState({count: count+1});
   },

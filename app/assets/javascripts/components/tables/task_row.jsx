@@ -25,6 +25,13 @@ var TaskRow = React.createClass({
       </div>
     )
   },
+  eventRow: function() {
+    return (
+      <div className="Table-rowItem u-flexGrow-10">
+        {this.props.data.event}
+      </div>
+    )
+  },
   render: function() {
     var data = this.props.data;
     var completed = data.status == 'Completed';
@@ -32,6 +39,7 @@ var TaskRow = React.createClass({
       'Table-row': true,
       'task-selected': completed
     });
+    var eventRow = this.props.global ? this.eventRow() : null;
     return (
       <div className={rowClasses}>
         <div className="Table-checkbox u-flexGrow-1">
@@ -46,6 +54,7 @@ var TaskRow = React.createClass({
         </div>
         <div className="Table-rowItem u-flexGrow-4">{data.assigned_to}
         </div>
+        {eventRow}
         <DropdownMenu trigger={this.getActionTrigger()}
                       customOptions={this.getRowActionMenu()}
                       align="right" />

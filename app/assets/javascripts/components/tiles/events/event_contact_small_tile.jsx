@@ -1,4 +1,5 @@
 var EventContactSmallTile = React.createClass({
+  mixins: [ToastMessages],
   getInitialState: function() {
     return {
       count: null
@@ -13,7 +14,8 @@ var EventContactSmallTile = React.createClass({
       }
     }.bind(this))
   },
-  incrementCount: function() {
+  incrementCount: function(associatedContact) {
+    this.toast(associatedContact.name + " has been added to this event.");
     var count = this.state.count;
     this.setState({count: count+1});
   },
