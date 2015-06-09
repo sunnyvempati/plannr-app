@@ -1,4 +1,5 @@
 var EventTaskSmallTile = React.createClass({
+  mixins: [ToastMessages],
   getInitialState: function () {
     return {
       tasks: null
@@ -53,6 +54,7 @@ var EventTaskSmallTile = React.createClass({
   },
   quickCreateTask: function(params) {
     $.post("/tasks.json", params, function(result) {
+      this.toast("Successfully created task.");
       var oldTasks = this.state.tasks;
       oldTasks.push(result.task);
       this.setState({tasks: oldTasks});

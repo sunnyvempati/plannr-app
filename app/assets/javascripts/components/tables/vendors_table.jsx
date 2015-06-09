@@ -1,5 +1,5 @@
 var VendorsTable = React.createClass({
-  mixins: [TableCheckbox, Router.Navigation],
+  mixins: [TableCheckbox, ToastMessages, Router.Navigation],
   getInitialState: function() {
     return {
       vendors: []
@@ -36,6 +36,7 @@ var VendorsTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post('/vendors/mass_delete', destroyOpts, function(success_result) {
+      this.toast(deletionIds.length + " vendor(s) deleted.");
       var newData = this.spliceResults(this.state.vendors, deletionIds);
       this.setState({vendors: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {
