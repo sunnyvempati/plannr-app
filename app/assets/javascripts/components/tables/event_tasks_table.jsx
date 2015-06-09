@@ -1,9 +1,5 @@
 var EventTasksTable = React.createClass({
-  getInitialState: function () {
-    return {
-      eventTasks: []
-    };
-  },
+  mixins: [TaskCheckboxRows],
   componentDidMount: function() {
     // filter and get all to do items
     this.getEventTasks({status: 1});
@@ -12,7 +8,7 @@ var EventTasksTable = React.createClass({
     $.get("tasks.json", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
-          eventTasks: results.tasks
+          tasks: results.tasks
         })
       }
     }.bind(this))
@@ -21,7 +17,7 @@ var EventTasksTable = React.createClass({
     $.get("/user_tasks", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
-          eventTasks: results.tasks
+          tasks: results.tasks
         })
       }
     }.bind(this))
@@ -51,27 +47,20 @@ var EventTasksTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: [id]}};
     $.post('/tasks/mass_delete', destroyOpts, function (success_result) {
       var newData = this.spliceResults(this.state.eventTasks, [id]);
-      this.setState({eventTasks: newData});
+      this.setState({tasks: newData});
     }.bind(this)).fail(function (error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
-  spliceResults: function(data, ids) {
-    return $.map(data, function(item, index) {
-      if (ids.indexOf(item.id) === -1) {
-        return item;
-      }
-    });
-  },
   sortBy: function (entity, order) {
     $.get('tasks.json', {sort: {entity: entity, order: order}}, function (result) {
-      this.setState({eventTasks: result.tasks});
+      this.setState({tasks: result.tasks});
     }.bind(this));
   },
   search: function (e) {
     var term = e.target.value;
     $.get('search_event_tasks', {search: {text: term || ""}}, function (result) {
-      this.setState({eventTasks: result.tasks});
+      this.setState({tasks: result.tasks});
     }.bind(this));
   },
   filterItems: function () {
@@ -109,35 +98,6 @@ var EventTasksTable = React.createClass({
                     svgClass='createTask'
                     extraPad={false} />
     );
-  },
-  handleCheck: function(checked, task_id) {
-    var status = checked ? 2 : 1;
-    $.ajax({
-      method: "PUT",
-      url: "/tasks/" + task_id + ".json",
-      data: { task: { id: task_id, status: status }}
-    })
-    .success(function(result) {
-      var newData = this.spliceResults(this.state.eventTasks, result.task.id);
-      this.setState({eventTasks: newData});
-    }.bind(this));
-  },
-  getCustomRows: function() {
-    var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-    var rows =  this.state.eventTasks.map(function(task) {
-      return (
-        <TaskRow data={task}
-                 actionItems={this.actionItems()}
-                 key={task.id}
-                 checkChanged={this.handleCheck}
-        />
-      )
-    }.bind(this));
-    return (
-      <ReactCSSTransitionGroup transitionName="TaskTableRow">
-        {rows}
-      </ReactCSSTransitionGroup>
-    )
   },
   render: function() {
     return (
