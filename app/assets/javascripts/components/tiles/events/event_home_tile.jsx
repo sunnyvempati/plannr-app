@@ -3,7 +3,7 @@ var EventHome = React.createClass({
     return (
       <div className="EventHomeTileContainer">
         <div className="EventHome-row">
-          <EventTaskSmallTile />
+          <EventTaskSmallTile eventId={this.props.eventId} />
           <EventContactSmallTile />
         </div>
         <div className="EventHome-row">

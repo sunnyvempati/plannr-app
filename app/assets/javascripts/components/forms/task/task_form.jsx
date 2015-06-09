@@ -11,17 +11,15 @@ var TaskForm = React.createClass({
     disableForm: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string
   },
-  statusOptions: [<option key='1' value='1'>New</option>, <option key='2' value='2'>In Progress</option>, <option key='3' value='3'>Completed</option>],
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
       'task': {
         'name': inputs.name,
-        'description': inputs.description,
         'deadline': inputs.deadline,
         'event_id': inputs.event_id,
         'assigned_to_id': inputs.assigned_to,
-        'status': inputs.status
+        'description': inputs.description
       }
     };
   },
@@ -65,10 +63,12 @@ var TaskForm = React.createClass({
         deadline: model.deadline,
         eventId: model.event_id,
         id: model.id,
-        assigned_to: model.assigned_to_id
+        assigned_to: model.assigned_to_id,
+        description: model.description
       };
     }
     var id = 'task_form';
+    var eventHidden = !task.eventId ? "" : "hidden";
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
@@ -94,30 +94,20 @@ var TaskForm = React.createClass({
           <DatePickerInput
             name="deadline"
             label="Deadline"
-            value={ !!task.deadline ? moment(task.deadline) : task.deadline }
+            value={ !!task.deadline ? moment(task.deadline) : null }
             placeholder="When's' it due?"
             minDate={moment()}
           />
           <FormSelectInput
             id='task_event_id'
             name='event_id'
-            className='SelectInput'
+            type={eventHidden}
             label='Event*'
             options={this.state.eventOptions}
             value={task.eventId || this.getDefaultOptionValue()}
             form={'task_form'}
             disabled={this.props.disableForm}
             required />
-          <FormSelectInput
-            id='task_status'
-            name='status'
-            className='SelectInput'
-            label='Status*'
-            options={this.statusOptions}
-            value={task.status || 1}
-            disabled={this.props.disableForm}
-            required
-          />
           <AssignedToInput
             name='assigned_to'
             value={task.assigned_to}

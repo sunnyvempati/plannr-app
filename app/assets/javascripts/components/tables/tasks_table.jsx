@@ -1,20 +1,19 @@
 var TasksTable = React.createClass({
-  mixins: [TableCheckbox],
-  getInitialState: function() {
-    return {
-      tasks: []
-    };
-  },
+  mixins: [TaskCheckboxRows],
   componentDidMount: function() {
-    this.getAllTasks();
+    this.getAllTasks({status: 1});
   },
-  getAllTasks: function() {
-    $.get("/tasks.json", function(result) {
-      this.setState({tasks: result.tasks});
+  getAllTasks: function(filterParams) {
+    $.get("/tasks.json", {filter: filterParams}, function(result) {
+      if (this.isMounted()) {
+        this.setState({
+          tasks: result.tasks
+        })
+      }
     }.bind(this));
   },
-  getUserTasks: function() {
-    $.get("/user_tasks", function(result) {
+  getUserTasks: function(filterParams) {
+    $.get("/user_tasks", {filter: filterParams}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
@@ -65,10 +64,12 @@ var TasksTable = React.createClass({
       {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
-  filterItems: function() {
+  filterItems: function () {
     return [
-      {name: "All Tasks", handler: this.getAllTasks, default: true},
-      {name: "My Tasks", handler: this.getUserTasks}
+      {name: "All Tasks - To do", handler: this.getAllTasks.bind(this, {status: 1}), default: true},
+      {name: "All Tasks - Completed", handler: this.getAllTasks.bind(this, {status: 2})},
+      {name: "My Tasks - To do", handler: this.getUserTasks.bind(this, {status: 1})},
+      {name: "My Tasks - Completed", handler: this.getUserTasks.bind(this, {status: 2})},
     ]
   },
   handleActionButtonClick: function() {
@@ -85,16 +86,14 @@ var TasksTable = React.createClass({
   render: function() {
     return (
       <Table
-        results={this.state.tasks}
         columns={this.getColumns()}
         showHeaders={true}
-        useCustomRowComponent={false}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
+        useCustomRowComponent={true}
+        customRows={this.getCustomRows()}
         sortItems={this.sortItems()}
         handleSortClick={this.sortBy}
         handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
+        showActions={false}
         actionItems={this.actionItems()}
         extraPadding={true}
         filterable={true}

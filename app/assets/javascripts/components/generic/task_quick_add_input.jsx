@@ -1,4 +1,4 @@
-var CommentInput = React.createClass({
+var TaskQuickAddInput = React.createClass({
   getInitialState: function() {
     return {
       errorState: false
@@ -15,7 +15,7 @@ var CommentInput = React.createClass({
       }
       var text = e.target.value;
       e.target.value = "";
-      this.props.onAdd({body: text});
+      this.props.onAdd({task: {name: text, event_id: this.props.eventId}});
     }
   },
   render: function() {
@@ -24,8 +24,8 @@ var CommentInput = React.createClass({
       "is-invalid": this.state.errorState
     });
     return (
-      <div className="Comments-input">
-        <input placeholder="Add Comment"
+      <div className="TaskQuickAddInput">
+        <input placeholder="Add Task"
                className={inputClasses}
                onKeyPress={this.keyPress} />
       </div>

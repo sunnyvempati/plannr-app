@@ -18,6 +18,9 @@
     background-color: $plannr-green;
     border-color: $plannr-green;
   }
+  &.is-rounded {
+    border-radius: 50%;
+  }
 }
 
 #checkmark {

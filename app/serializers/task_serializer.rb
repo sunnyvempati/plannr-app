@@ -1,5 +1,5 @@
 class TaskSerializer < ActiveModel::Serializer
-  attributes :id, :assigned_to, :deadline, :name, :status
+  attributes :id, :assigned_to, :deadline, :name, :status, :assigned_to_id, :description
 
   def assigned_to
     "#{object.assigned_to.profile.first_name} #{object.assigned_to.profile.last_name}" if object.assigned_to
@@ -7,10 +7,8 @@ class TaskSerializer < ActiveModel::Serializer
 
   def status
     case object.status
-    when TaskStatuses::NEW
-      'New'
-    when TaskStatuses::IN_PROGRESS
-      'In Progress'
+    when TaskStatuses::TODO
+      'To do'
     when TaskStatuses::COMPLETED
       'Completed'
     else

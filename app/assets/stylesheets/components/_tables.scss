@@ -76,6 +76,11 @@
       background-color: $plannr-teal;
       color: $white-three-fourths;
     }
+    &.task-selected {
+      transition: all 0.5s;
+      background-color: $plannr-green;
+      color: $white-three-fourths;
+    }
   }
   &-checkbox {
     padding-left: $size-increment*3;
@@ -100,3 +105,24 @@
 .TableRowAction {
   font-size: 18px;
 }
+
+.TaskTableRow-enter {
+  opacity: 0.01;
+  transition: all .5s ease-in;
+}
+
+.TaskTableRow-enter.TaskTableRow-enter-active {
+  opacity: 1;
+}
+
+.TaskTableRow-leave {
+  opacity: 1;
+  transition: all .5s ease-in;
+}
+
+.TaskTableRow-leave.TaskTableRow-leave-active {
+  opacity: 0.01;
+}
+
+
+

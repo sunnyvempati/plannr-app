@@ -16,7 +16,7 @@ gem 'spring',        group: :development
 
 gem 'bower-rails'
 gem 'authlogic'
-gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
+gem 'react-rails', '~> 1.0'
 
 gem 'acts_as_tenant'
 

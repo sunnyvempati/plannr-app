@@ -8,16 +8,16 @@ class TasksController < ApplicationController
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
-      format.json { render json: Task.includes(:assigned_to).all.order(order), each_serializer: TaskWithEventSerializer }
+      format.json { render json: Task.includes(:assigned_to).all.order(order).where(filter_params), each_serializer: TaskWithEventSerializer }
     end
   end
 
   def for_user
-    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]), each_serializer: TaskWithEventSerializer
+    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]).where(filter_params).order('name asc'), each_serializer: TaskWithEventSerializer
   end
 
   def show
-    @header = "Task"
+    render_success @task
   end
 
   def new
@@ -31,6 +31,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new task_params
+    @task.status = 1 # TODO
     render_entity @task
   end
 
@@ -50,7 +51,10 @@ class TasksController < ApplicationController
 
   def event_tasks
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
-    render json: Task.event_tasks(params[:event_id]).order(order)
+    tasks = Task.event_tasks(params[:event_id])
+              .where(filter_params)
+              .order(order)
+    render json: tasks
   end
 
   def destroy
@@ -67,12 +71,16 @@ class TasksController < ApplicationController
 
   private
 
+  def filter_params
+    params[:filter].permit(:assigned_to, :status) if params[:filter]
+  end
+
   def set_task
     @task = Task.includes(:assigned_to).find(params[:id])
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :deadline, :event_id, :assigned_to_id, :status).merge(owner: current_user)
+    params.require(:task).permit(:name, :deadline, :event_id, :assigned_to_id, :status, :description).merge(owner: current_user)
   end
 
   def search_params

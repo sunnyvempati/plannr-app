@@ -11,10 +11,8 @@ class TaskWithEventSerializer < ActiveModel::Serializer
 
   def status
     case object.status
-    when TaskStatuses::NEW
-      'New'
-    when TaskStatuses::IN_PROGRESS
-      'In Progress'
+    when TaskStatuses::TODO
+      'To do'
     when TaskStatuses::COMPLETED
       'Completed'
     else

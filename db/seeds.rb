@@ -124,7 +124,7 @@ def create_tasks
                       company: Company.find_by_name(t[:company]),
                       assigned_to: User.find_by_email(t[:assigned_to]),
                       deadline: Date.today + 1.days,
-                      status: Random.rand(1..3))
+                      status: Random.rand(1..2))
       puts "Created Task: #{created_task.name}" if created_task
     end
   end
