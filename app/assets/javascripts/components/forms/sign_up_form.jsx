@@ -39,10 +39,10 @@ var SignUpForm = React.createClass({
               secondaryButtonHref='/login'
               showButtonList={true}>
           <FormInput type="hidden" name="invitation_token" value={this.props.invite_token}  />
-          <FormInput name="email" validations="isEmail" validationError="Invalid email" label="Email*" ref="userEmail" required/>
-          <FormInput name="password" type="password" label="Password*" required/>
-          <FormInput name="password_confirmation" type="password" label="Confirm Password*" required/>
-          <FormInput name="company" type="company" placeholder="Where do you work?" label="Company*" ref="userCompany" required/>
+          <FormInput name="email" label="Email*" ref="userEmail" value={null} required/>
+          <FormInput name="password" type="password" label="Password*" value={null} required/>
+          <FormInput name="password_confirmation" type="password" label="Confirm Password*" value={null} required/>
+          <FormInput name="company" type="company" placeholder="Where do you work?" label="Company*" value={null} ref="userCompany" required/>
         </Form>
       </div>
     );
