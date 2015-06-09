@@ -48,9 +48,9 @@ var ContactForm = React.createClass({
     else {
       retHtml = <VendorFormInputAutocomplete
                   name='vendor'
-                  value={contact.vendor_id}
+                  value={contact.vendorId}
                   id='contact_vendor'
-                  label='vendor'
+                  label='Vendor'
                   disabled={propsDisableForm}
                   />;
     }
@@ -73,7 +73,7 @@ var ContactForm = React.createClass({
         organization: model.organization,
         description: model.description,
         id: model.id,
-        vendor_id: model.vendor_id
+        vendorId: model.vendor_id
       };
     }
     return (
