@@ -20,11 +20,33 @@ var EventTaskSmallTile = React.createClass({
       tasks.forEach(function(task) {
         task.status == 'To do' ? toDoTasks++ : completedTasks++;
       });
+      var percentComplete = Number((completedTasks / tasks.length * 100).toFixed(1));
       return (
-        <div>
-          {toDoTasks}
-          {completedTasks}
-          {toDoTasks / tasks.length * 100}
+        <div className="TaskTile-content">
+          <div className="TaskTile-percent">
+            <div className="Task-display">
+              {percentComplete + "%"}
+            </div>
+            <div className="TaskCompletionMeter">
+              <span style={{width: percentComplete+"%"}}></span>
+            </div>
+          </div>
+          <div className="TaskTile-count">
+            <div className="Task-display">
+              {completedTasks}
+            </div>
+            <div className="TileContent-title">
+              Completed
+            </div>
+          </div>
+          <div className="TaskTile-count">
+            <div className="Task-display">
+              {tasks.length}
+            </div>
+            <div className="TileContent-title">
+              Total
+            </div>
+          </div>
         </div>
       )
     }
@@ -49,13 +71,11 @@ var EventTaskSmallTile = React.createClass({
             <div className="Tile-title">Tasks</div>
           </Link>
         </div>
-        <div className="Tile-content">
-          <div className="TileContent-quickAdd">
+        <div className="Task-content">
+          <div className="TaskContent-quickAdd">
             <TaskQuickAddInput onAdd={this.quickCreateTask} eventId={this.props.eventId} />
           </div>
-          <div className="TileContent-count">
-            {this.getTaskContent()}
-          </div>
+          {this.getTaskContent()}
         </div>
       </div>
     );

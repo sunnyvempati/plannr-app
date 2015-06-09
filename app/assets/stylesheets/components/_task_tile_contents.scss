@@ -1,3 +1,44 @@
 .TaskQuickAddInput {
   width: 100%;
+  height: 50px;
+}
+
+.Task-content,
+.TaskTile-percent,
+.TaskTile-count {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.TaskTile-content {
+  padding-top: $size-increment*2;
+  display: flex;
+  align-items: center;
+  >* {
+    padding-right: $size-increment * 8;
+  }
+}
+
+.Task-display {
+  @extend .TileContent-count;
+}
+
+.TaskContent-quickAdd {
+  width: 300px;
+  padding-top: $size-increment*2;
+  height: 50px;
+}
+
+.TaskCompletionMeter {
+  height: 10px;
+  position: relative;
+  border: 2px solid $plannr-green;
+  width: 100px;
+  > span {
+    height: 100%;
+    display: block;
+    background-color: $plannr-green;
+    transition: all 0.2s linear;
+  }
 }
