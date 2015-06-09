@@ -11,7 +11,7 @@ var TaskForm = React.createClass({
     disableForm: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string
   },
-  mapInputs: function(inputs) {
+  mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
       'task': {
@@ -23,7 +23,7 @@ var TaskForm = React.createClass({
       }
     };
   },
-  componentDidMount: function() {
+  componentDidMount: function () {
     this.retrieveEventSelectOptionsAsync();
   },
   retrieveEventSelectOptionsAsync: function () {
@@ -38,17 +38,11 @@ var TaskForm = React.createClass({
       }
       this.setState({eventOptions: options});
     }.bind(this))
-    .fail(function(jqXHR, textStatus, errorThrown){
-      this.setState({eventOptions: <option>Error!!</option>});
-    }.bind(this));
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        this.setState({eventOptions: <option>Error!!</option>});
+      }.bind(this));
   },
-  //getDefaultOptionValue: function() {
-  //  var options = this.state.eventOptions;
-  //  if (options.length > 0) {
-  //    return options[0].props.value;
-  //  }
-  //},
-  render: function() {
+  render: function () {
     var task = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -85,14 +79,13 @@ var TaskForm = React.createClass({
             value={task.name}
             placeholder='What is the name of your task?'
             disabled={this.props.disableForm}
-            required />
+            required/>
           <DatePickerInput
             name="deadline"
             label="Deadline"
             value={ !!task.deadline ? moment(task.deadline) : null }
             placeholder="When's' it due?"
-            minDate={moment()}
-          />
+            minDate={moment()}/>
           <EventFormInputAutocomplete
             name='event_id'
             value={task.eventId}
@@ -104,7 +97,7 @@ var TaskForm = React.createClass({
             name='assigned_to'
             value={task.assigned_to}
             id='task_assigned_to'
-            label='Assign to' />
+            label='Assign to'/>
           <TextAreaInput
             name="description"
             form={id}
@@ -112,7 +105,7 @@ var TaskForm = React.createClass({
             className="TextAreaInput"
             label="Description"
             disabled={this.props.disableForm}
-            placeholder="How would you describe this task?" />
+            placeholder="How would you describe this task?"/>
         </Form>
       </div>
     );
