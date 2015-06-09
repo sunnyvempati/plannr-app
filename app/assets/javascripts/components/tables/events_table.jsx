@@ -64,7 +64,7 @@ var EventsTable = React.createClass({
   deleteEvents: function() {
     var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
     $.post("/destroy_events", destroyOpts, function(result) {
-      this.setState({events: this.spliceResults(this.state.events), checkedItems: []});
+      this.setState({events: this.spliceResults(this.state.events, this.state.checkedItems), checkedItems: []});
     }.bind(this));
   },
   actionItems: function() {

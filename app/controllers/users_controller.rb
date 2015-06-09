@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def mass_delete
-    User.delete_all(id: mass_delete_params[:ids])
+    User.destroy_all(id: mass_delete_params[:ids])
     render_success
   end
 

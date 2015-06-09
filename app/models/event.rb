@@ -2,13 +2,13 @@
 class Event < ActiveRecord::Base
   acts_as_tenant :company
 
-  has_many :event_contacts
+  has_many :event_contacts, dependent: :destroy
   has_many :contacts, through: :event_contacts
-  has_many :event_vendors
+  has_many :event_vendors, dependent: :destroy
   has_many :vendors, through: :event_vendors
-  has_many :tasks
-  has_many :attachments
-  has_many :comments, as: :commentable
+  has_many :tasks, dependent: :destroy
+  has_many :attachments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
 
