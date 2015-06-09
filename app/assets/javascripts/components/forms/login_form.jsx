@@ -14,6 +14,7 @@ var LoginForm = React.createClass({
     location.href = res.redirect_path;
   },
   render: function () {
+    var test = {};
     return (
       <div className="FormContainer">
         <Form url='/login'
@@ -24,18 +25,18 @@ var LoginForm = React.createClass({
               showButtonList={true}
               secondaryButtonText="Reset Password"
               secondaryButtonHref="/reset_password_request"
-              secondaryButtonVisible={true}>
+              secondaryButtonVisible={true}
+              id='login_form'>
           <FormInput name="email"
-                     validations="isEmail"
-                     validationError="Invalid email"
-                     placeholder="email"
+                     type='text'
                      label="Email*"
-                     required/>
+                     value={null}
+                     required />
           <FormInput name="password"
                      type="password"
-                     placeholder="password"
                      label="Password*"
-                     required/>
+                     value={null}
+                     required />
         </Form>
       </div>
     );

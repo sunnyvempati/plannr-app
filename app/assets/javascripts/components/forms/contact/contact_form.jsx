@@ -76,7 +76,6 @@ var ContactForm = React.createClass({
         vendor_id: model.vendor_id
       };
     }
-
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}

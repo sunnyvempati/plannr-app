@@ -11,7 +11,7 @@ var ContactFormEdit = React.createClass({
       routeVerb = "PUT",
       primaryButtonText = "Update",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = "/contacts";
+      secondaryButtonHref = "/contacts/";
 
     return (
       <ContactForm
