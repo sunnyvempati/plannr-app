@@ -1,5 +1,5 @@
 var EventContactsTable = React.createClass({
-  mixins: [TableCheckbox, Router.Navigation],
+  mixins: [TableCheckbox, Router.Navigation, ToastMessages],
   getInitialState: function() {
     return {
       eventContacts: []
@@ -39,6 +39,7 @@ var EventContactsTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("contacts/mass_delete", destroyOpts, function(success_result) {
+      this.toast(deletionIds.length + " contact(s) removed from event.");
       var newData = this.spliceResults(this.state.eventContacts, deletionIds);
       this.setState({eventContacts: newData, checkedItems: []});
     }.bind(this)).fail(function(error_result) {

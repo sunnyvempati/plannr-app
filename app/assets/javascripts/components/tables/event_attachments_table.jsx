@@ -1,5 +1,5 @@
 var EventAttachmentsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [TableCheckbox, ToastMessages],
   propTypes: {
     setServerMessage: React.PropTypes.func
   },
@@ -39,6 +39,7 @@ var EventAttachmentsTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     $.post("attachments/mass_delete", destroyOpts, function () {
+      this.toast(deletionIds.length + " attachment(s) removed from event.");
       var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
       this.setState({eventAttachments: newData});
     }.bind(this)).fail(function (error_result) {
