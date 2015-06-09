@@ -1,6 +1,7 @@
 var LoginForm = React.createClass({
   propTypes: {
-    authToken: React.PropTypes.string.isRequired
+    authToken: React.PropTypes.string.isRequired,
+    disableForm: React.PropTypes.bool
   },
   mapInputs: function (inputs) {
     return {
