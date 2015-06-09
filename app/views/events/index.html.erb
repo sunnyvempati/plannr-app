@@ -1,1 +1,4 @@
+<% content_for(:title) { "#{current_user.company.name}'s Events" } %>
+<% content_for(:header) { "Events" } %>
+
 <%= react_component('EventsTable', prerender:true) %>

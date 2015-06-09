@@ -4,7 +4,6 @@ class VendorsController < ApplicationController
   before_action :set_vendor, only: [:show, :edit, :update, :destroy, :contacts]
 
   def index
-    @header = "Vendors"
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
@@ -13,7 +12,6 @@ class VendorsController < ApplicationController
   end
 
   def show
-    @header = "Vendor"
     respond_to do |format|
       format.html
       format.json { render json: @vendor }
@@ -26,11 +24,9 @@ class VendorsController < ApplicationController
 
   def new
     @vendor = Vendor.new
-    @header = "Create Vendor"
   end
 
   def edit
-    @header = "Edit Vendor"
   end
 
   def create

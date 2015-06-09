@@ -5,7 +5,6 @@ class ContactsController < ApplicationController
   before_action :set_event, only: [:contacts_not_in_event]
 
   def index
-    @header = 'Contacts'
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
@@ -19,11 +18,9 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
-    @header = 'Create Contact'
   end
 
   def edit
-    @header = 'Edit Contact'
   end
 
   def create

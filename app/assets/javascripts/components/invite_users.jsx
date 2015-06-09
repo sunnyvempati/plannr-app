@@ -1,7 +1,5 @@
 var InviteUsers = React.createClass({
-  getInitialState: function() {
-    return { serverMessage: "" };
-  },
+  mixins: [ToastMessages],
   mapInputs: function(inputs) {
     return {
       'invitation': {
@@ -10,12 +8,9 @@ var InviteUsers = React.createClass({
       'authenticity_token': inputs.authenticity_token
     };
   },
-  setServerMessage: function(message) {
-    this.setState({serverMessage: message});
-  },
   onSuccess: function(res) {
     this.refs.inviteEmail.resetValue();
-    this.setServerMessage("Invite sent successfully");
+    this.toast("Invite sent successfully.");
   },
   render: function() {
     return (
@@ -30,7 +25,6 @@ var InviteUsers = React.createClass({
             <FormInput name="email" validations="isEmail" validationError="Invalid email" label="Email*"  ref="inviteEmail" />
           </Form>
         </div>
-        <span>{this.state.serverMessage}</span>
       </div>
     );
   }

@@ -3,6 +3,5 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user
 
   def show
-    @header = current_user.company.name
   end
 end

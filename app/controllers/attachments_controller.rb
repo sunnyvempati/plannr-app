@@ -3,7 +3,6 @@ class AttachmentsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @header = 'Attachments'
     @attachments = Attachment.all
     respond_to do |format|
       format.html

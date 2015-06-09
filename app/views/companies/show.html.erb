@@ -1,3 +1,6 @@
+<% content_for(:title) { @event.name } %>
+<% content_for(:header) { current_user.company.name } %>
+
 <%= react_component("InviteUsers",
             authToken: form_authenticity_token) %>
 

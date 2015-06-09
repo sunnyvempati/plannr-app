@@ -1,3 +1,5 @@
+<% content_for(:header) { "Tell us about your event" } %>
+
 <%= react_component("EventFormNew",
                     model: @event,
                     authToken: form_authenticity_token

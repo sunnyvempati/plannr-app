@@ -1,3 +1,6 @@
+<% content_for(:title) { @event.name } %>
+<% content_for(:header) { @event.name } %>
+
 <%= react_component("EventDashboardRouter",
                     event: @event,
                     client: @event.client,

@@ -5,7 +5,6 @@ class EventsController < ApplicationController
 
   def index
     @events = sort_params ? Event.order("#{sort_params[:entity]} #{sort_params[:order]}") : Event.order("name asc")
-    @header = 'Events'
     respond_to do |format|
       format.html
       format.json { render json: @events, each_serializer: EventSerializer }
@@ -14,7 +13,6 @@ class EventsController < ApplicationController
 
   def show
     if @event
-      @header = @event.name
       # fixed header at top of view
       @disable_skrollable_header = true
       render :show
@@ -30,11 +28,9 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @header = 'Tell us about your event';
   end
 
   def edit
-    @header = 'Edit Event'
   end
 
   def create

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Plannr - Welcome</title>
+  <title>Plannr - <%= yield(:title).presence || "Event Management Platform" %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -36,7 +36,7 @@
 
   <div class="MainContainer">
     <%= react_component('PageHeader',
-              header: @header,
+              header: yield(:header).presence || "Plannr",
               disableSkrollableHeader: (@disable_skrollable_header || false),
               profile: current_user.profile,
               email: current_user.email,

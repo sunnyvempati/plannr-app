@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @header = "Tasks"
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
     respond_to do |format|
       format.html
@@ -21,12 +20,10 @@ class TasksController < ApplicationController
   end
 
   def new
-    @header = "Create Task"
     @task = Task.new
   end
 
   def edit
-    @header = "Edit Task"
   end
 
   def create
