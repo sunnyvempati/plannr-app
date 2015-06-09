@@ -3,7 +3,7 @@ var ContactForm = React.createClass({
     action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
     primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET'], ['PUT']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
 
