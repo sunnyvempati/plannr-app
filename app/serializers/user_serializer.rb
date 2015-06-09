@@ -4,6 +4,6 @@ class UserSerializer < ActiveModel::Serializer
   has_one :company
 
   def name
-    object.profile.full_name
+    object.profile.full_name if object.profile
   end
 end
