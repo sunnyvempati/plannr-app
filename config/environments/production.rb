@@ -82,4 +82,8 @@ Rails.application.configure do
     user_name: ENV['MANDRILL_USERNAME'],
     password: ENV['MANDRILL_API_KEY']
   }
+
+  config.action_mailer.default_url_options = {
+    :host => 'stagingapp.yourplannr.com'
+  }
 end
