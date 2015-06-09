@@ -11,7 +11,7 @@ var VendorFormEdit = React.createClass({
       routeVerb = "PUT",
       primaryButtonText = "Update",
       secondaryButtonText = "Cancel",
-      secondaryButtonHref = action;
+      secondaryButtonHref = "/vendors";
 
     return (
       <VendorForm
