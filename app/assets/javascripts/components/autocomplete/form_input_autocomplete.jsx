@@ -1,9 +1,11 @@
-var VendorFormInputAutocomplete = React.createClass({
+var FormInputAutocomplete = React.createClass({
   mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
   propTypes: {
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired
+    name: React.PropTypes.string.isRequired,
+    retrieveItemAndSetItem: React.PropTypes.func.isRequired,
+
   },
   getInitialState: function () {
     return {

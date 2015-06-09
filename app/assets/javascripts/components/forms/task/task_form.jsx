@@ -23,11 +23,6 @@ var TaskForm = React.createClass({
       }
     };
   },
-  getInitialState: function() {
-    return {
-      eventOptions: <option>Loading..</option>
-    };
-  },
   componentDidMount: function() {
     this.retrieveEventSelectOptionsAsync();
   },
@@ -47,12 +42,12 @@ var TaskForm = React.createClass({
       this.setState({eventOptions: <option>Error!!</option>});
     }.bind(this));
   },
-  getDefaultOptionValue: function() {
-    var options = this.state.eventOptions;
-    if (options.length > 0) {
-      return options[0].props.value;
-    }
-  },
+  //getDefaultOptionValue: function() {
+  //  var options = this.state.eventOptions;
+  //  if (options.length > 0) {
+  //    return options[0].props.value;
+  //  }
+  //},
   render: function() {
     var task = {};
     if (this.props.model) {
@@ -98,16 +93,13 @@ var TaskForm = React.createClass({
             placeholder="When's' it due?"
             minDate={moment()}
           />
-          <FormSelectInput
-            id='task_event_id'
+          <EventFormInputAutocomplete
             name='event_id'
-            type={eventHidden}
+            value={task.eventId}
+            id='task_event_id'
             label='Event*'
-            options={this.state.eventOptions}
-            value={task.eventId || this.getDefaultOptionValue()}
-            form={'task_form'}
             disabled={this.props.disableForm}
-            required />
+            required/>
           <AssignedToInput
             name='assigned_to'
             value={task.assigned_to}
