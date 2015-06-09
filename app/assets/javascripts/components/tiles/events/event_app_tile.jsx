@@ -50,7 +50,6 @@ var EventAppTile = React.createClass({
     }
   },
   render: function() {
-    console.log();
     return (
       <div className="EventAppTile">
         <div className="EventAppTitle">
