@@ -83,7 +83,6 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       }.bind(this)
     );
   },
-
   quickCreateItemAndSetItem: function (term) {
     //quick create not allowed for this control
   },
