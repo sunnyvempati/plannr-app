@@ -2,8 +2,6 @@
 $fa-font-path: "components-font-awesome/fonts/";
 @import "normalize.css/normalize";
 @import "components-font-awesome/scss/font-awesome";
-@import url(http://fonts.googleapis.com/css?family=Roboto);
-// @import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
 
 // custom
 @import "variables/_variables";
@@ -12,10 +10,11 @@ $fa-font-path: "components-font-awesome/fonts/";
 @import "molecules/_molecules";
 @import "containers/_containers";
 @import "utils";
+@import "fonts";
 
 body {
   background-color: $body-bg;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Volte-Regular', sans-serif;
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
