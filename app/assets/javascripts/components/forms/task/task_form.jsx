@@ -3,7 +3,7 @@ var TaskForm = React.createClass({
     action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
     primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET'], ['PUT']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST', 'GET', 'PUT']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
     model: React.PropTypes.object.isRequired,
@@ -50,10 +50,9 @@ var TaskForm = React.createClass({
         name: model.name,
         description: model.description,
         deadline: model.deadline,
-        eventId: model.event_id,
+        event_id: model.event_id,
         id: model.id,
-        assigned_to: model.assigned_to_id,
-        description: model.description
+        assigned_to: model.assigned_to_id
       };
     }
     var id = 'task_form';
@@ -87,6 +86,7 @@ var TaskForm = React.createClass({
             placeholder="When's' it due?"
             minDate={moment()}/>
           <EventFormInputAutocomplete
+            type={eventHidden}
             name='event_id'
             value={task.eventId}
             id='task_event_id'
