@@ -78,9 +78,7 @@ var EventFormInputAutocomplete = React.createClass({
       this.setItem(item.id, item.name);
     }.bind(this))
   },
-
   /* unique for event END */
-
 
   renderAutocomplete: function () {
     return (

@@ -79,9 +79,7 @@ var VendorFormInputAutocomplete = React.createClass({
       this.setItem(item.id, item.name);
     }.bind(this))
   },
-
   /* unique for vendor END */
-
 
   renderAutocomplete: function () {
     return (
