@@ -1,24 +1,28 @@
 var EventTasksTable = React.createClass({
-  mixins: [TaskCheckboxRows, ToastMessages],
+  mixins: [TaskCheckboxRows, ToastMessages, LoadingToast],
   componentDidMount: function() {
     // filter and get all to do items
     this.getEventTasks({status: 1});
   },
   getEventTasks: function (filterParams) {
+    this.showLoading();
     $.get("tasks.json", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
-        })
+        });
+        this.closeLoading();
       }
     }.bind(this))
   },
   getUserTasks: function (filterParams) {
-    $.get("/user_tasks", {filter: filterParams}, function (results) {
+    this.showLoading();
+    $.get("user_tasks", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
-        })
+        });
+        this.closeLoading();
       }
     }.bind(this))
   },
