@@ -23,7 +23,7 @@ var ContactForm = React.createClass({
         'phone': inputs.phone,
         'organization': inputs.organization,
         'description': inputs.description,
-        'vendor_id': inputs.vendor
+        'vendor': inputs.vendor
       }
     };
   },
