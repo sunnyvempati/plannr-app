@@ -17,7 +17,7 @@ var EventTasksTable = React.createClass({
   },
   getUserTasks: function (filterParams) {
     this.showLoading();
-    $.get("user_tasks", {filter: filterParams}, function (results) {
+    $.get("/user_tasks", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks

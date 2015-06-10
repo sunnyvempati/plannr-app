@@ -70,7 +70,6 @@ Rails.application.routes.draw do
 
   # tasks
   get 'user_tasks', to: 'tasks#for_user'
-  get 'events/:event_id/user_tasks', to: 'tasks#for_user'
 
   resources :tasks, :events, :invitations, :users, :profiles, :vendors, :contacts
 
