@@ -15,7 +15,7 @@ var ContactForm = React.createClass({
   typeOptions: [<option key='1' value='1'>Client</option>,
     <option key='2' value='2'>Vendor</option>],
   mapInputs: function (inputs) {
-    return {
+    var retVal = {
       'authenticity_token': inputs.authenticity_token,
       'contact': {
         'name': inputs.name,
@@ -27,6 +27,14 @@ var ContactForm = React.createClass({
         'vendor_id': inputs.vendor_id
       }
     };
+    if (retVal.contact.category === 1) {
+      //client; vendor not needed
+      retVal.contact.vendor_id = null;
+    } else {
+      //vendor; org not needed
+      retVal.contact.organization = null;
+    }
+    return retVal;
   },
   contactTypeOnChange: function (value) {
     this.setState({category: value});
