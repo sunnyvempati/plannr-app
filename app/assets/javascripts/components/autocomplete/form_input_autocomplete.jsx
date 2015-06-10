@@ -60,9 +60,7 @@ var FormInputAutocomplete = React.createClass({
   },
   searchVendorsAsync: function (term) {
     $.post("/vendors/search", {search: {text: term || ""}}, function (result) {
-      console.log(result);
       var itemDataArray = result.vendors || [];
-      console.log(itemDataArray);
       if (itemDataArray.length == 0) {
         //TODO: what is getNewItem ??
         itemDataArray.push(this.getNewItem("vendor"));

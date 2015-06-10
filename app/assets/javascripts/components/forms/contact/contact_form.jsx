@@ -23,7 +23,7 @@ var ContactForm = React.createClass({
         'phone': inputs.phone,
         'organization': inputs.organization,
         'description': inputs.description,
-        'vendor': inputs.vendor
+        'vendor_id': inputs.vendor_id
       }
     };
   },
@@ -47,9 +47,9 @@ var ContactForm = React.createClass({
     }
     else {
       retHtml = <VendorFormInputAutocomplete
-                  name='vendor'
+                  name='vendor_id'
                   value={contact.vendorId}
-                  id='contact_vendor'
+                  id='contact_vendor_id'
                   label='Vendor'
                   disabled={propsDisableForm}
                   />;

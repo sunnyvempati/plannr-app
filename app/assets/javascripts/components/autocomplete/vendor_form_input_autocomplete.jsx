@@ -19,12 +19,9 @@ var VendorFormInputAutocomplete = React.createClass({
       this.retrieveItemAndSetItem(itemId);
     }
   },
-  searchForAutocompleteData: function (term) {
-    this.searchVendorsAsync(term);
-  },
   onItemSelected: function (item, term) {
     if (item.id == -1) {
-      this.quickCreateItemAndSetItem({vendor: {name: term}});
+      this.quickCreateItemAndSetItem(term);
     }
     else {
       this.setItem(item.id, item.name);
@@ -41,28 +38,26 @@ var VendorFormInputAutocomplete = React.createClass({
       }
     }
   },
+  onAutocompleteEditButtonClick: function () {
+    var newState = this.getInitialState();
+    newState.focus = true;
+    if (this.isMounted()) {
+      this.setState(newState);
+    }
+  },
 
-
-
-
-
+  /* unique for vendor START */
   retrieveItemAndSetItem: function (itemId) {
     this.retrieveVendorAsyncAndSetItem(itemId);
   },
-
-  retrieveVendorAsyncAndSetItem: function (id) {
-    $.get("/vendors/" + id + ".json", function (result) {
-      var item = result.vendor;
-      this.setItem(item.id, item.name);
-    }.bind(this));
+  searchForAutocompleteData: function (term) {
+    this.searchVendorsAsync(term);
   },
+
   searchVendorsAsync: function (term) {
     $.post("/vendors/search", {search: {text: term || ""}}, function (result) {
-      console.log(result);
       var itemDataArray = result.vendors || [];
-      console.log(itemDataArray);
       if (itemDataArray.length == 0) {
-        //TODO: what is getNewItem ??
         itemDataArray.push(this.getNewItem("vendor"));
       }
       if (this.isMounted()) {
@@ -70,27 +65,28 @@ var VendorFormInputAutocomplete = React.createClass({
       }
     }.bind(this));
   },
-  quickCreateItemAndSetItem: function (payload) {
+  retrieveVendorAsyncAndSetItem: function (id) {
+    $.get("/vendors/" + id + ".json", function (result) {
+      var item = result.vendor;
+      this.setItem(item.id, item.name);
+    }.bind(this));
+  },
+
+  quickCreateItemAndSetItem: function (term) {
+    var payload = {vendor: {name: term}};
     $.post("/vendors.json", payload, function (result) {
       var item = result.vendor;
       this.setItem(item.id, item.name);
     }.bind(this))
   },
 
+  /* unique for vendor END */
 
 
-
-
-  onAutocompleteEditButtonClick: function () {
-    var newState = this.getInitialState();
-    newState.focus = true;
-    if (this.isMounted()){
-      this.setState(newState);
-    }
-  },
   renderAutocomplete: function () {
     return (
-      <Autocomplete name={this.props.name}
+      <Autocomplete id={this.props.id}
+                    name={this.props.name}
                     retrieveData={this.searchForAutocompleteData}
                     itemSelected={this.onItemSelected}
                     data={this.state.itemDataArray}
@@ -98,7 +94,7 @@ var VendorFormInputAutocomplete = React.createClass({
                     renderItem={this.renderItem}/>
     );
   },
-  renderSelectedVendor: function () {
+  renderSelectedItem: function () {
     return (
       <div className="Autocomplete-picked" onClick={this.onAutocompleteEditButtonClick}>
         <div className="Autocomplete-pickedName">
@@ -110,8 +106,9 @@ var VendorFormInputAutocomplete = React.createClass({
       </div>
     );
   },
+
   render: function () {
-    var inputRender = this.state.isItemSelected ? this.renderSelectedVendor() : this.renderAutocomplete();
+    var inputRender = this.state.isItemSelected ? this.renderSelectedItem() : this.renderAutocomplete();
     return (
       <div className="FormInput">
         <label for={this.props.id}>{this.props.label}</label>

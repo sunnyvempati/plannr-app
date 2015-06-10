@@ -50,7 +50,7 @@ var TaskForm = React.createClass({
         name: model.name,
         description: model.description,
         deadline: model.deadline,
-        event_id: model.event_id,
+        eventId: model.event_id,
         id: model.id,
         assigned_to: model.assigned_to_id
       };
@@ -86,7 +86,6 @@ var TaskForm = React.createClass({
             placeholder="When's' it due?"
             minDate={moment()}/>
           <EventFormInputAutocomplete
-            type={eventHidden}
             name='event_id'
             value={task.eventId}
             id='task_event_id'
