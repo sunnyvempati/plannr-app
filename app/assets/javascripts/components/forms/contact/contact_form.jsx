@@ -30,7 +30,7 @@ var ContactForm = React.createClass({
   contactTypeOnChange: function(value) {
     this.setState({category: value});
   },
-  vendorOrganizationField: function (category, contact, propsDisableForm) {
+  renderVendorOrganizationField: function (category, contact, propsDisableForm) {
     // conditionally display either contact_organization field or contact_vendor
     // based on category (client or vendor)
     var retHtml;
@@ -111,7 +111,7 @@ var ContactForm = React.createClass({
             onChangeCallback={this.contactTypeOnChange}
             required
           />
-          { this.vendorOrganizationField(this.state.category, contact, this.props.disableForm) }
+          { this.renderVendorOrganizationField(this.state.category, contact, this.props.disableForm) }
           <FormInput
             id='contact_email'
             name='email'
