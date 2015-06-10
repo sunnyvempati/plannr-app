@@ -2,7 +2,7 @@ var LoadingToast = {
   getLoadingMessage: function(){
     return (
       <div>
-        Loading&nbsp;&nbsp;<i className="fa fa-circle-o-notch fa-spin"></i>
+        <i className="fa fa-circle-o-notch fa-spin"></i>&nbsp;&nbsp;Loading...
       </div>
     )
   },
