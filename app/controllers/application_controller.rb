@@ -37,7 +37,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
       redirect_to login_path
       return false
     else
