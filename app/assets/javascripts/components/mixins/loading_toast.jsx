@@ -2,7 +2,7 @@ var LoadingToast = {
   getLoadingMessage: function(){
     return (
       <div>
-        <i className="fa fa-circle-o-notch fa-spin"></i>&nbsp;&nbsp;Loading...
+        <i className="fa fa-circle-o-notch fa-spin"></i>&nbsp;&nbsp;Working...
       </div>
     )
   },
@@ -11,9 +11,6 @@ var LoadingToast = {
     React.render(loadingToast, document.getElementById('toast'));
   },
   closeLoading: function() {
-    setTimeout(this.fireClose, 500);
-  },
-  fireClose: function() {
     React.unmountComponentAtNode(document.getElementById('toast'));
   }
 }

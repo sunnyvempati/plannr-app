@@ -6,7 +6,6 @@ class Task < ActiveRecord::Base
   belongs_to :assigned_to, class_name: 'User'
 
   validates :name, :event, presence: true
-  validate :deadline_in_future
 
   include TaskStatuses
   validates :status, inclusion: { in: [TODO, COMPLETED] }
@@ -37,11 +36,5 @@ class Task < ActiveRecord::Base
 
   def self.header
     "Tasks"
-  end
-
-  def deadline_in_future
-    if deadline && deadline < Date.today
-      errors.add(:deadline, "must be in the future");
-    end
   end
 end

@@ -1,23 +1,27 @@
 var CompanyUserTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [
+    TableCheckbox,
+    ToastMessages,
+    LoadingToast,
+    HttpHelpers
+  ],
   getInitialState: function() {
     return {
       users: []
     };
   },
   componentDidMount: function() {
-    $.get("/users", function(result) {
+    this.getFromServer("/users", {}, function(result) {
       this.setState({users: result.users});
     }.bind(this));
   },
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post('/users/mass_delete', destroyOpts, function(success_result) {
+    this.postToServer('/users/mass_delete', destroyOpts, function(success_result) {
+      this.toast(deletionIds.length + " user(s) deleted successfully.");
       var newData = this.spliceResults(this.state.users, deletionIds);
       this.setState({users: newData, checkedItems: []});
-    }.bind(this)).fail(function(error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   getCustomRows: function() {
@@ -36,12 +40,12 @@ var CompanyUserTable = React.createClass({
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_users', {search: {text: term || ""}}, function(result) {
+    this.getFromServer('search_users', {search: {text: term || ""}}, function(result) {
       this.setState({users: result.users});
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('users.json', {sort: {entity: entity, order: order}}, function(result) {
+    this.getFromServer('users.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({users: result.users});
     }.bind(this));
   },

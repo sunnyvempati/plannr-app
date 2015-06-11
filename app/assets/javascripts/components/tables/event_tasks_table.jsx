@@ -3,7 +3,8 @@ var EventTasksTable = React.createClass({
     TaskCheckboxRows,
     ToastMessages,
     LoadingToast,
-    HttpHelpers],
+    HttpHelpers
+  ],
   componentDidMount: function() {
     // filter and get all to do items
     this.getEventTasks({status: 1});
@@ -18,7 +19,7 @@ var EventTasksTable = React.createClass({
     }.bind(this))
   },
   getUserTasks: function (filterParams) {
-    this.getFromServer("/user_tasks", {filter: filterParams}, function (results) {
+    this.getFromServer("user_tasks", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
@@ -85,7 +86,7 @@ var EventTasksTable = React.createClass({
   },
   openEditModal: function(task_id) {
     var url = '/tasks/' + task_id + '.json';
-    this.getFromServer(url, function(result) {
+    this.getFromServer(url, {}, function(result) {
       var props = {
         model: $.extend({event_id: this.props.eventId}, result.task),
         authToken: this.props.authToken,

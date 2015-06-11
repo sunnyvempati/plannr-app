@@ -53,7 +53,10 @@ var Form = React.createClass({
     this.setState({loading: true});
   },
   removeLoading: function() {
-    setTimeout(this.setState({loading: false}), 1000);
+    setTimeout(this.loadingComplete, 1000);
+  },
+  loadingComplete: function() {
+    this.setState({loading: false});
   },
   render: function() {
     var form_props = this.props;
@@ -63,8 +66,7 @@ var Form = React.createClass({
                    onSubmit={this.onSubmit}
                    onValid={this.enableButton}
                    onInvalid={this.disableButton}
-                   onValidSubmit={this.removeLoading}
-                   onInvalidSubmit={this.removeLoading}
+                   onSubmitted={this.removeLoading}
                    mapping={form_props.mapping}
                    method={form_props.routeVerb}
                    id={form_props.id}>
