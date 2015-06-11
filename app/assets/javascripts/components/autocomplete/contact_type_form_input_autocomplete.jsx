@@ -57,7 +57,6 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     this.searchVendorsAsync(term);
   },
 
-  //TODO: rename vendors
   searchVendorsAsync: function (term) {
     if (term == null) {
       term = '';
