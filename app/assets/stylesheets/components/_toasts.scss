@@ -16,6 +16,9 @@
   z-index: $toast-z-index;
   animation-name: Toast-enter;
   animation-duration: 0.3s;
+  &.loading {
+    min-width: 30px;
+  }
 }
 
 @keyframes Toast-enter {

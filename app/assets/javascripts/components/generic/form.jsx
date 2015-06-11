@@ -34,7 +34,10 @@ var Form = React.createClass({
     };
   },
   getInitialState: function() {
-    return {canSubmit: false};
+    return {
+      canSubmit: false,
+      loading: false
+    };
   },
   enableButton: function () {
     this.setState({
@@ -46,14 +49,24 @@ var Form = React.createClass({
       canSubmit: false
     });
   },
+  onSubmit: function(data, resetForm, invalidateForm) {
+    this.setState({loading: true});
+  },
+  removeLoading: function() {
+    setTimeout(this.loadingComplete, 1000);
+  },
+  loadingComplete: function() {
+    this.setState({loading: false});
+  },
   render: function() {
     var form_props = this.props;
     return (
       <Formsy.Form url={form_props.url}
                    onSuccess={form_props.onSuccess}
-                   onSubmit={form_props.onSubmit}
+                   onSubmit={this.onSubmit}
                    onValid={this.enableButton}
                    onInvalid={this.disableButton}
+                   onSubmitted={this.removeLoading}
                    mapping={form_props.mapping}
                    method={form_props.routeVerb}
                    id={form_props.id}>
@@ -62,6 +75,7 @@ var Form = React.createClass({
         <ButtonList showButtonList={form_props.showButtonList}
                     primaryButtonText={form_props.primaryButtonText}
                     primaryDisabled={!this.state.canSubmit}
+                    primaryLoading={this.state.loading}
                     secondaryButtonText={form_props.secondaryButtonText}
                     secondaryButtonHref={form_props.secondaryButtonHref}
                     secondaryButtonVisible={form_props.secondaryButtonVisible} />

@@ -1,15 +1,14 @@
 var CompanyUserRow = React.createClass({
+  mixins: [ToastMessages, LoadingToast, HttpHelpers],
   getInitialState: function() {
     return {
       "isAdmin": this.props.data["company_admin"]
     };
   },
   toggleAdmin: function() {
-    $.post("/toggle_admin",{id: this.props.data["id"]}, function(success_result) {
+    this.postToServer("/toggle_admin",{id: this.props.data["id"]}, function(success_result) {
       this.setState({isAdmin: success_result.admin});
-    }.bind(this)).fail(function(error_result) {
-      // todo
-      // this.props.setServerMessage(error_result.responseJSON.message);
+      console.log(success_result);
     }.bind(this));
   },
   handleActionClick: function(item) {

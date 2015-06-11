@@ -1,10 +1,15 @@
 var TasksTable = React.createClass({
-  mixins: [TaskCheckboxRows, ToastMessages],
+  mixins: [
+    TaskCheckboxRows,
+    ToastMessages,
+    LoadingToast,
+    HttpHelpers
+  ],
   componentDidMount: function() {
     this.getAllTasks({status: 1});
   },
   getAllTasks: function(filterParams) {
-    $.get("/tasks.json", {filter: filterParams}, function(result) {
+    this.getFromServer("/tasks.json", {filter: filterParams}, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
@@ -13,7 +18,7 @@ var TasksTable = React.createClass({
     }.bind(this));
   },
   getUserTasks: function(filterParams) {
-    $.get("/user_tasks", {filter: filterParams}, function(result) {
+    this.getFromServer("/user_tasks", {filter: filterParams}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
@@ -36,25 +41,23 @@ var TasksTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post('tasks/mass_delete', destroyOpts, function(success_result) {
+    this.postToServer('/tasks/mass_delete', destroyOpts, function(success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, deletionIds);
-      this.setState({tasks: newData, checkedItems: []});
-    }.bind(this)).fail(function(error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
+      this.setState({tasks: newData});
     }.bind(this));
   },
   handleEdit: function(id) {
     location.href = "/tasks/"+id+"/edit";
   },
   sortBy: function(entity, order) {
-    $.get('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
+    this.getFromServer('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('/search_tasks', {search: {text: term || ""}}, function(result) {
+    this.getFromServer('/search_tasks', {search: {text: term || ""}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },

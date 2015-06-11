@@ -1,5 +1,10 @@
 var EventVendorsTable = React.createClass({
-  mixins: [TableCheckbox, ToastMessages],
+  mixins: [
+    TableCheckbox,
+    ToastMessages,
+    LoadingToast,
+    HttpHelpers
+  ],
   getInitialState: function() {
     return {
       eventVendors: []
@@ -9,7 +14,7 @@ var EventVendorsTable = React.createClass({
     this.getEventVendors();
   },
   getEventVendors: function() {
-    $.get("vendors", function(results) {
+    this.getFromServer("vendors", {}, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventVendors: results.event_vendors
@@ -37,22 +42,20 @@ var EventVendorsTable = React.createClass({
   removeAssociation: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post("vendors/mass_delete",destroyOpts, function(success_result) {
+    this.postToServer("vendors/mass_delete",destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) removed from event.");
       var newData = this.spliceResults(this.state.eventVendors, deletionIds);
       this.setState({eventVendors: newData, checkedItems: []});
-    }.bind(this)).fail(function(error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('vendors.json', {sort: {entity: entity, order: order}}, function(result) {
+    this.getFromServer('vendors.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({eventVendors: result.event_vendors});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_event_vendors', {search: {text: term || ""}}, function(result) {
+    this.getFromServer('search_event_vendors', {search: {text: term || ""}}, function(result) {
       this.setState({eventVendors: result.event_vendors});
     }.bind(this));
   },

@@ -1,8 +1,8 @@
 class Vendor < ActiveRecord::Base
   acts_as_tenant :company
 
-  has_many :comments, as: :commentable
-  has_many :event_vendors
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :event_vendors, dependent: :destroy
   has_many :events, through: :event_vendors
   has_many :contacts
   belongs_to :owner, class_name: 'User'

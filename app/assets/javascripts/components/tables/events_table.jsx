@@ -1,5 +1,10 @@
 var EventsTable = React.createClass({
-  mixins: [TableCheckbox],
+  mixins: [
+    TableCheckbox,
+    ToastMessages,
+    LoadingToast,
+    HttpHelpers
+  ],
   getInitialState: function() {
     return {
       events: []
@@ -9,7 +14,7 @@ var EventsTable = React.createClass({
     this.getEvents();
   },
   getEvents: function() {
-    $.get("events.json", function(result) {
+    this.getFromServer("events.json", {}, function(result) {
       this.setState({events: result.events});
     }.bind(this));
   },
@@ -44,14 +49,14 @@ var EventsTable = React.createClass({
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_events', {search: {text: term || ""}}, function(result) {
+    this.getFromServer('search_events', {search: {text: term || ""}}, function(result) {
       this.setState({events: result.events});
     }.bind(this));
   },
   // entity to sort by
   // asc is a boolean value giving us the order
   sortBy: function(entity, order) {
-    $.get('events.json', {sort: {entity: entity, order: order}}, function(result) {
+    this.getFromServer('events.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({events: result.events});
     }.bind(this));
   },
@@ -61,15 +66,17 @@ var EventsTable = React.createClass({
       {entity: "start_date", display: "Start Date"}
     ]
   },
-  deleteEvents: function() {
-    var destroyOpts = {destroy_opts: {ids: this.state.checkedItems}};
-    $.post("/destroy_events", destroyOpts, function(result) {
-      this.setState({events: this.spliceResults(this.state.events), checkedItems: []});
+  handleDelete: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    var destroyOpts = {destroy_opts: {ids: deletionIds}};
+    this.postToServer("/destroy_events", destroyOpts, function(result) {
+      this.setState({events: this.spliceResults(this.state.events, this.state.checkedItems), checkedItems: []});
+      this.toast(deletionIds.length + " events deleted successfully.");
     }.bind(this));
   },
   actionItems: function() {
     return [
-      {name: "Delete", handler: this.deleteEvents, massAction: true}
+      {name: "Delete", handler: this.handleDelete, massAction: true}
     ]
   },
   handleActionButtonClick: function() {

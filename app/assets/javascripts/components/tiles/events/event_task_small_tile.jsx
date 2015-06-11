@@ -21,7 +21,7 @@ var EventTaskSmallTile = React.createClass({
       tasks.forEach(function(task) {
         task.status == 'To do' ? toDoTasks++ : completedTasks++;
       });
-      var percentComplete = Number((completedTasks / tasks.length * 100).toFixed(1));
+      var percentComplete = tasks.length == 0 ? 0 : Number((completedTasks / tasks.length * 100).toFixed(1));
       return (
         <div className="TaskTile-content">
           <div className="TaskTile-percent">

@@ -5,6 +5,6 @@ task :invite_user, [:email] => [:environment] do |t, args|
     UserMailer.plannr_invitation(invite).deliver_now
     puts "Successfully sent invitation to " + invite.email
   else
-    puts invite.errors
+    puts invite.errors.messages
   end
 end

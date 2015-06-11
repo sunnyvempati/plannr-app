@@ -60,7 +60,7 @@ class EventsController < ApplicationController
 
   def mass_delete
     ids = mass_delete_params[:ids]
-    Event.delete_all(id: ids) if ids
+    Event.destroy_all(id: ids) if ids
     render_success
   end
 

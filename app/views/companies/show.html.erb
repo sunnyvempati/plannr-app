@@ -1,4 +1,4 @@
-<% content_for(:title) { @event.name } %>
+<% content_for(:title) { current_user.company.name } %>
 <% content_for(:header) { current_user.company.name } %>
 
 <%= react_component("InviteUsers",

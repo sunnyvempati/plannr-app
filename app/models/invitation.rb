@@ -7,8 +7,6 @@ class Invitation < ActiveRecord::Base
 
   validate :user_cannot_exist, on: :create
 
-  validates :email, uniqueness: true
-
   # invite hasn't been accepted yet
   scope :active_invites, -> { where(recipient: nil) }
 

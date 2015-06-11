@@ -1,5 +1,10 @@
 var EventContactsTable = React.createClass({
-  mixins: [TableCheckbox, Router.Navigation, ToastMessages],
+  mixins: [
+    TableCheckbox,
+    ToastMessages,
+    LoadingToast,
+    HttpHelpers
+  ],
   getInitialState: function() {
     return {
       eventContacts: []
@@ -9,7 +14,7 @@ var EventContactsTable = React.createClass({
     this.getEventContacts()
   },
   getEventContacts: function() {
-    $.get("contacts", function(results) {
+    this.getFromServer("contacts", {}, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventContacts: results.event_contacts
@@ -38,22 +43,20 @@ var EventContactsTable = React.createClass({
   removeAssociation: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post("contacts/mass_delete", destroyOpts, function(success_result) {
+    this.postToServer("contacts/mass_delete", destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) removed from event.");
       var newData = this.spliceResults(this.state.eventContacts, deletionIds);
       this.setState({eventContacts: newData, checkedItems: []});
-    }.bind(this)).fail(function(error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
+    this.getFromServer('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_event_contacts', {search: {text: term || ""}}, function(result) {
+    this.getFromServer('search_event_contacts', {search: {text: term || ""}}, function(result) {
       this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },

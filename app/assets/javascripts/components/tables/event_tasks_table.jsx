@@ -1,24 +1,29 @@
 var EventTasksTable = React.createClass({
-  mixins: [TaskCheckboxRows, ToastMessages],
+  mixins: [
+    TaskCheckboxRows,
+    ToastMessages,
+    LoadingToast,
+    HttpHelpers
+  ],
   componentDidMount: function() {
     // filter and get all to do items
     this.getEventTasks({status: 1});
   },
   getEventTasks: function (filterParams) {
-    $.get("tasks.json", {filter: filterParams}, function (results) {
+    this.getFromServer("tasks.json", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
-        })
+        });
       }
     }.bind(this))
   },
   getUserTasks: function (filterParams) {
-    $.get("/user_tasks", {filter: filterParams}, function (results) {
+    this.getFromServer("user_tasks", {filter: filterParams}, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
-        })
+        });
       }
     }.bind(this))
   },
@@ -45,22 +50,20 @@ var EventTasksTable = React.createClass({
   },
   handleDelete: function (id) {
     var destroyOpts = {destroy_opts: {ids: [id]}};
-    $.post('/tasks/mass_delete', destroyOpts, function (success_result) {
+    this.postToServer('/tasks/mass_delete', destroyOpts, function (success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, [id]);
       this.setState({tasks: newData});
-    }.bind(this)).fail(function (error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function (entity, order) {
-    $.get('tasks.json', {sort: {entity: entity, order: order}}, function (result) {
+    this.getFromServer('tasks.json', {sort: {entity: entity, order: order}}, function (result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
   search: function (e) {
     var term = e.target.value;
-    $.get('search_event_tasks', {search: {text: term || ""}}, function (result) {
+    this.getFromServer('search_event_tasks', {search: {text: term || ""}}, function (result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
@@ -83,7 +86,7 @@ var EventTasksTable = React.createClass({
   },
   openEditModal: function(task_id) {
     var url = '/tasks/' + task_id + '.json';
-    $.get(url, function(result) {
+    this.getFromServer(url, {}, function(result) {
       var props = {
         model: $.extend({event_id: this.props.eventId}, result.task),
         authToken: this.props.authToken,
