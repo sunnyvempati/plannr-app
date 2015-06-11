@@ -22,7 +22,12 @@ var InviteUsers = React.createClass({
                 onSuccess={this.onSuccess}
                 primaryButtonText="Invite"
                 id="InviteUserForm">
-            <FormInput name="email" validations="isEmail" validationError="Invalid email" label="Email*"  ref="inviteEmail" />
+            <FormInput name="email"
+                       validations="isEmail"
+                       validationError="Invalid email"
+                       label="Email*"
+                       ref="inviteEmail"
+            />
           </Form>
         </div>
       </div>

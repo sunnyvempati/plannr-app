@@ -1,12 +1,18 @@
 var ContactsTable = React.createClass({
-  mixins: [TableCheckbox, ToastMessages, Router.Navigation],
+  mixins: [
+    TableCheckbox,
+    ToastMessages,
+    Router.Navigation,
+    LoadingToast,
+    HttpHelpers
+  ],
   getInitialState: function() {
     return {
       contacts: []
     };
   },
   componentDidMount: function() {
-    $.get("/contacts.json", function(result) {
+    this.getFromServer("/contacts.json", {}, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -37,22 +43,20 @@ var ContactsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    $.post('/contacts/mass_delete', destroyOpts, function(success_result) {
+    this.postToServer('/contacts/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) deleted.");
       var newData = this.spliceResults(this.state.contacts, deletionIds);
       this.setState({contacts: newData, checkedItems: []});
-    }.bind(this)).fail(function(error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    $.get('/contacts.json', {sort: {entity: entity, order: order}}, function(result) {
+    this.getFromServer('/contacts.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    $.get('search_contacts', {search: {text: term || ""}}, function(result) {
+    this.getFromServer('/search_contacts', {search: {text: term || ""}}, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
