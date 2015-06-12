@@ -4,12 +4,14 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func
+    value: React.PropTypes.number,
+    onChange: React.PropTypes.func //gets called onChange
   },
   getInitialState: function () {
     return {
       isItemSelected: false,
       itemName: null,
+      itemId: null,
       itemDataArray: [],
       focus: false // this is used when you click editAssignedTo
     };
@@ -20,44 +22,34 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       this.retrieveItemAndSetItem(itemId);
     }
   },
-  onItemSelected: function (item, term) {
-    if (item.id == -1) {
-      this.quickCreateItemAndSetItem(term);
-    }
-    else {
-      this.setItem(item.id, item.name);
-    }
-  },
   setItem: function (id, name) {
     if (this.isMounted()) {
       if (!!id && !!name) {
         this.setValue(id);
-        this.setState({isItemSelected: true, itemName: name});
+        this.setState({isItemSelected: true, itemName: name, itemId: id});
+        this.props.onChange(id);
       } else {
         this.setValue(null);
-        this.setState({isItemSelected: false, itemName: null});
+        this.setState({isItemSelected: false, itemName: null, itemId: null});
       }
-      this.props.onChange(id);
     }
   },
-  onAutocompleteEditButtonClick: function () {
-    var newState = this.getInitialState();
-    newState.focus = true;
-    if (this.isMounted()) {
-      this.setState(newState);
+  clearItem: function () {
+    this.setItem(null, null);
+  },
+  onAutocompleteItemSelected: function (e, item, term) {
+    if (id === -1) {
+      //quick create is not allowed for this control
+      //this.quickCreateItem(term);
+    }else {
+      this.setItem(item.id, item.name);
     }
   },
 
   /* unique for contact_type START */
   contactTypesData: [{id: 1, name: 'Client'}, {id: 2, name: 'Vendor'}],
-  retrieveItemAndSetItem: function (itemId) {
-    this.retrieveVendorAsyncAndSetItem(itemId);
-  },
-  searchForAutocompleteData: function (term) {
-    this.searchVendorsAsync(term);
-  },
 
-  searchVendorsAsync: function (term) {
+  searchByTerm: function (term) {
     if (term == null) {
       term = '';
     }
@@ -73,7 +65,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       this.setState({itemDataArray: newItemDataArray});
     }
   },
-  retrieveVendorAsyncAndSetItem: function (id) {
+  retrieveItemAndSetItem: function (id) {
     this.contactTypesData.forEach(
       function (currentValue, index, array) {
         if (currentValue.id === id) {
@@ -82,42 +74,25 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       }.bind(this)
     );
   },
-  quickCreateItemAndSetItem: function (term) {
+  quickCreateItem: function (term) {
     //quick create not allowed for this control
   },
   /* unique for contact_type END */
 
-  renderAutocomplete: function () {
-    return (
-      <Autocomplete id={this.props.id}
-                    name={this.props.name}
-                    retrieveData={this.searchForAutocompleteData}
-                    itemSelected={this.onItemSelected}
-                    data={this.state.itemDataArray}
-                    focus={this.state.focus}
-                    renderItem={this.renderItem}/>
-    );
-  },
-  renderSelectedItem: function () {
-    return (
-      <div className="Autocomplete-picked" onClick={this.onAutocompleteEditButtonClick}>
-        <div className="Autocomplete-pickedName">
-          {this.state.itemName}
-        </div>
-        <div className="Autocomplete-edit">
-          <i className="fa fa-pencil"></i>
-        </div>
-      </div>
-    );
-  },
-
   render: function () {
-    var inputRender = this.state.isItemSelected ? this.renderSelectedItem() : this.renderAutocomplete();
     return (
-      <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
-        {inputRender}
-      </div>
+      <FormInputAutocomplete id={this.props.id}
+                             name={this.props.name}
+                             label={this.props.label}
+                             onSearchTermChangeCallback={this.searchByTerm}
+                             retrieveItemAsyncAndSetItem={this.retrieveItemAndSetItem}
+                             itemId={this.state.itemId}
+                             itemName={this.state.itemName}
+                             isItemSelected={this.state.isItemSelected}
+                             autocompleteDataArray={this.state.itemDataArray}
+                             itemSelectedCallback={this.onAutocompleteItemSelected}
+                             clearItemCallback={this.clearItem}
+        />
     );
   }
 });

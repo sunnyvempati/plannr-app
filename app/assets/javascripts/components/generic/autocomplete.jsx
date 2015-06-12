@@ -1,10 +1,11 @@
 var Autocomplete = React.createClass({
   propTypes: {
-    itemSelected: React.PropTypes.func,
     focus: React.PropTypes.bool,
     retrieveData: React.PropTypes.func,
     renderItem: React.PropTypes.func,
-    data: React.PropTypes.array
+    data: React.PropTypes.array,
+    name: React.PropTypes.string,
+    itemSelectedCallback: React.PropTypes.func
   },
   getDefaultProps: function() {
     return {
@@ -35,11 +36,7 @@ var Autocomplete = React.createClass({
     this.props.retrieveData(e.target.value);
   },
   itemSelected: function(e, item, term) {
-    var input = React.findDOMNode(this.refs.autocompleteInput);
-    input.value = "";
-    input.blur();
-    this.props.itemSelected(item, term);
-    this.setState({term: "", open: false});
+    this.props.itemSelectedCallback(e, item, term);
   },
   // this is used so onBlur isn't called right
   // before onclick which hides the entire
@@ -81,7 +78,8 @@ var Autocomplete = React.createClass({
   render: function() {
     return (
       <div className="Autocomplete">
-        <input placeholder={this.props.placeholder}
+        <input name={this.props.name}
+               placeholder={this.props.placeholder}
                onFocus={this.onFocus}
                onChange={this.onChange}
                className="Autocomplete-input"

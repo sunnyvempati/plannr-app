@@ -17,6 +17,19 @@ var EventVendorAutocomplete = React.createClass({
       this.setState({vendors: vendors})
     }.bind(this));
   },
+  onAutocompleteItemSelected: function (e, item, term) {
+    if (id === -1) {
+      this.quickCreateItem(term);
+    }else {
+      this.setItem(item.id, item.name);
+    }
+  },
+  quickCreateEventVendor: function (term) {
+
+  },
+  //TODO: fix this using
+  // quickCreateItemCallback={this.quickCreateItemAndSetItem}
+//setItemCallback={this.setItem}
   addVendorToEvent: function(vendor, term) {
     var eventVendorPayload = vendor.id == -1 ? {name: term} : {vendor_id: vendor.id};
     var payload = {event_vendor: eventVendorPayload};
@@ -29,9 +42,10 @@ var EventVendorAutocomplete = React.createClass({
       <Autocomplete name="vendor"
                     retrieveData={this.retrieveVendors}
                     data={this.state.vendors}
-                    itemSelected={this.addVendorToEvent}
+                    itemSelectedCallback={this.addVendorToEvent}
                     placeholder="Add vendor to event..."
-                    renderItem={this.renderItem} />
+                    renderItem={this.renderItem}
+                    itemSelectedCallback={this.onAutocompleteItemSelected}/>
     );
   }
 });

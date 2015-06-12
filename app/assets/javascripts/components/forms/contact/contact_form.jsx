@@ -49,7 +49,7 @@ var ContactForm = React.createClass({
         name='organization'
         placeholder='What is the company of your contact?'
         type='text'
-        label='organization'
+        label='Organization'
         value={contact.organization}
         disabled={propsDisableForm}/>;
     }
