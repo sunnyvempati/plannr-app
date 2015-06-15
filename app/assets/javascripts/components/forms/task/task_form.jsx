@@ -11,7 +11,7 @@ var TaskForm = React.createClass({
     disableForm: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string
   },
-  mapInputs: function (inputs) {
+  mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
       'task': {
@@ -23,14 +23,14 @@ var TaskForm = React.createClass({
       }
     };
   },
-  componentDidMount: function () {
+  componentDidMount: function() {
     this.retrieveEventSelectOptionsAsync();
   },
-  retrieveEventSelectOptionsAsync: function () {
-    $.get('/events.json', function (result) {
+  retrieveEventSelectOptionsAsync: function() {
+    $.get('/events.json', function(result) {
       var options = [];
       if (!!result.events) {
-        options = $.map(result.events, function (value, index) {
+        options = $.map(result.events, function(value, index) {
           return (<option key={index} value={value.id}>{value.name}</option>);
         });
       } else {
@@ -38,11 +38,11 @@ var TaskForm = React.createClass({
       }
       this.setState({eventOptions: options});
     }.bind(this))
-      .fail(function (jqXHR, textStatus, errorThrown) {
+      .fail(function(jqXHR, textStatus, errorThrown) {
         this.setState({eventOptions: <option>Error!!</option>});
       }.bind(this));
   },
-  render: function () {
+  render: function() {
     var task = {};
     if (this.props.model) {
       var model = this.props.model;

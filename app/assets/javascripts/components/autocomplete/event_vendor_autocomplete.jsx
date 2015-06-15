@@ -9,7 +9,7 @@ var EventVendorAutocomplete = React.createClass({
     };
   },
   retrieveVendors: function(term) {
-    $.get("search_other_vendors", {search: {text: term}},  function(result) {
+    $.get("search_other_vendors", {search: {text: term}}, function(result) {
       var vendors = result.vendors;
       if (vendors.length == 0) {
         vendors.push(this.getNewItem("vendor"));
@@ -31,7 +31,7 @@ var EventVendorAutocomplete = React.createClass({
                     data={this.state.vendors}
                     itemSelected={this.addVendorToEvent}
                     placeholder="Add vendor to event..."
-                    renderItem={this.renderItem} />
+                    renderItem={this.renderItem}/>
     );
   }
 });

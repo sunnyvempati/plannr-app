@@ -4,9 +4,9 @@ var VendorFormEdit = React.createClass({
     model: React.PropTypes.object
   },
   goToVendor: function(result) {
-    location.href = "/vendors/#/view/"+result.vendor.id;
+    location.href = "/vendors/#/view/" + result.vendor.id;
   },
-  render: function () {
+  render: function() {
     var action = "/vendors/" + this.props.model.id,
       routeVerb = "PUT",
       primaryButtonText = "Update",
@@ -15,7 +15,7 @@ var VendorFormEdit = React.createClass({
 
     return (
       <VendorForm
-        action= {action}
+        action={action}
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
@@ -25,8 +25,7 @@ var VendorFormEdit = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
-        onSuccess={this.goToVendor}
-      />
+        onSuccess={this.goToVendor}/>
     );
   }
 });

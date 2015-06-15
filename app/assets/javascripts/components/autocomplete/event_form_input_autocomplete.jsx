@@ -5,7 +5,7 @@ var EventFormInputAutocomplete = React.createClass({
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired
   },
-  getInitialState: function () {
+  getInitialState: function() {
     return {
       isItemSelected: false,
       itemName: null,
@@ -13,13 +13,13 @@ var EventFormInputAutocomplete = React.createClass({
       focus: false // this is used when you click editAssignedTo
     };
   },
-  componentDidMount: function () {
+  componentDidMount: function() {
     var itemId = this.props.value || null;
     if (itemId) {
       this.retrieveItemAndSetItem(itemId);
     }
   },
-  onItemSelected: function (item, term) {
+  onItemSelected: function(item, term) {
     if (item.id == -1) {
       this.quickCreateItemAndSetItem(term);
     }
@@ -27,7 +27,7 @@ var EventFormInputAutocomplete = React.createClass({
       this.setItem(item.id, item.name);
     }
   },
-  setItem: function (id, name) {
+  setItem: function(id, name) {
     if (this.isMounted()) {
       if (!!id && !!name) {
         this.setValue(id);
@@ -38,7 +38,7 @@ var EventFormInputAutocomplete = React.createClass({
       }
     }
   },
-  onAutocompleteEditButtonClick: function () {
+  onAutocompleteEditButtonClick: function() {
     var newState = this.getInitialState();
     newState.focus = true;
     if (this.isMounted()) {
@@ -47,15 +47,15 @@ var EventFormInputAutocomplete = React.createClass({
   },
 
   /* unique for event START */
-  retrieveItemAndSetItem: function (itemId) {
+  retrieveItemAndSetItem: function(itemId) {
     this.retrieveEventAsyncAndSetItem(itemId);
   },
-  searchForAutocompleteData: function (term) {
+  searchForAutocompleteData: function(term) {
     this.searchEventsAsync(term);
   },
 
-  searchEventsAsync: function (term) {
-    $.get("/search_events", {search: {text: term || ""}}, function (result) {
+  searchEventsAsync: function(term) {
+    $.get("/search_events", {search: {text: term || ""}}, function(result) {
       var itemDataArray = result.events || [];
       if (itemDataArray.length == 0) {
         itemDataArray.push(this.getNewItem("event"));
@@ -65,22 +65,22 @@ var EventFormInputAutocomplete = React.createClass({
       }
     }.bind(this));
   },
-  retrieveEventAsyncAndSetItem: function (id) {
-    $.get("/events/" + id + ".json", function (result) {
+  retrieveEventAsyncAndSetItem: function(id) {
+    $.get("/events/" + id + ".json", function(result) {
       var item = result.event;
       this.setItem(item.id, item.name);
     }.bind(this));
   },
-  quickCreateItemAndSetItem: function (term) {
+  quickCreateItemAndSetItem: function(term) {
     var payload = {event: {name: term}};
-    $.post("/events.json", payload, function (result) {
+    $.post("/events.json", payload, function(result) {
       var item = result.event;
       this.setItem(item.id, item.name);
     }.bind(this))
   },
   /* unique for event END */
 
-  renderAutocomplete: function () {
+  renderAutocomplete: function() {
     return (
       <Autocomplete id={this.props.id}
                     name={this.props.name}
@@ -91,7 +91,7 @@ var EventFormInputAutocomplete = React.createClass({
                     renderItem={this.renderItem}/>
     );
   },
-  renderSelectedItem: function () {
+  renderSelectedItem: function() {
     return (
       <div className="Autocomplete-picked" onClick={this.onAutocompleteEditButtonClick}>
         <div className="Autocomplete-pickedName">
@@ -104,7 +104,7 @@ var EventFormInputAutocomplete = React.createClass({
     );
   },
 
-  render: function () {
+  render: function() {
     var inputRender = this.state.isItemSelected ? this.renderSelectedItem() : this.renderAutocomplete();
     return (
       <div className="FormInput">

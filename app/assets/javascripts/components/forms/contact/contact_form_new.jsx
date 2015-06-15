@@ -19,10 +19,10 @@ var ContactFormNew = React.createClass({
       this.context.router.transitionTo('tileContactsList');
     }
     else {
-      location.href = '/contacts/#/view/'+result.contact.id;
+      location.href = '/contacts/#/view/' + result.contact.id;
     }
   },
-  render: function () {
+  render: function() {
     var action = "/contacts",
       routeVerb = "POST",
       primaryButtonText = "Create",
@@ -31,7 +31,7 @@ var ContactFormNew = React.createClass({
 
     return (
       <ContactForm
-        action= {action}
+        action={action}
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
@@ -41,8 +41,7 @@ var ContactFormNew = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
-        onSuccess={this.onSuccess}
-      />
+        onSuccess={this.onSuccess}/>
     );
   }
 });

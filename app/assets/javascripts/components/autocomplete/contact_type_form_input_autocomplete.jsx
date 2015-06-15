@@ -6,7 +6,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     name: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func
   },
-  getInitialState: function () {
+  getInitialState: function() {
     return {
       isItemSelected: false,
       itemName: null,
@@ -14,13 +14,13 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       focus: false // this is used when you click editAssignedTo
     };
   },
-  componentDidMount: function () {
+  componentDidMount: function() {
     var itemId = this.props.value || null;
     if (itemId) {
       this.retrieveItemAndSetItem(itemId);
     }
   },
-  onItemSelected: function (item, term) {
+  onItemSelected: function(item, term) {
     if (item.id == -1) {
       this.quickCreateItemAndSetItem(term);
     }
@@ -28,7 +28,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       this.setItem(item.id, item.name);
     }
   },
-  setItem: function (id, name) {
+  setItem: function(id, name) {
     if (this.isMounted()) {
       if (!!id && !!name) {
         this.setValue(id);
@@ -40,7 +40,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       this.props.onChange(id);
     }
   },
-  onAutocompleteEditButtonClick: function () {
+  onAutocompleteEditButtonClick: function() {
     var newState = this.getInitialState();
     newState.focus = true;
     if (this.isMounted()) {
@@ -50,20 +50,20 @@ var ContactTypeFormInputAutocomplete = React.createClass({
 
   /* unique for contact_type START */
   contactTypesData: [{id: 1, name: 'Client'}, {id: 2, name: 'Vendor'}],
-  retrieveItemAndSetItem: function (itemId) {
+  retrieveItemAndSetItem: function(itemId) {
     this.retrieveVendorAsyncAndSetItem(itemId);
   },
-  searchForAutocompleteData: function (term) {
+  searchForAutocompleteData: function(term) {
     this.searchVendorsAsync(term);
   },
 
-  searchVendorsAsync: function (term) {
+  searchVendorsAsync: function(term) {
     if (term == null) {
       term = '';
     }
     var newItemDataArray = [];
     this.contactTypesData.forEach(
-      function (currentValue, index, array) {
+      function(currentValue, index, array) {
         if (currentValue.name.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
           newItemDataArray.push(currentValue);
         }
@@ -73,21 +73,21 @@ var ContactTypeFormInputAutocomplete = React.createClass({
       this.setState({itemDataArray: newItemDataArray});
     }
   },
-  retrieveVendorAsyncAndSetItem: function (id) {
+  retrieveVendorAsyncAndSetItem: function(id) {
     this.contactTypesData.forEach(
-      function (currentValue, index, array) {
+      function(currentValue, index, array) {
         if (currentValue.id === id) {
           this.setItem(currentValue.id, currentValue.name);
         }
       }.bind(this)
     );
   },
-  quickCreateItemAndSetItem: function (term) {
+  quickCreateItemAndSetItem: function(term) {
     //quick create not allowed for this control
   },
   /* unique for contact_type END */
 
-  renderAutocomplete: function () {
+  renderAutocomplete: function() {
     return (
       <Autocomplete id={this.props.id}
                     name={this.props.name}
@@ -98,7 +98,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
                     renderItem={this.renderItem}/>
     );
   },
-  renderSelectedItem: function () {
+  renderSelectedItem: function() {
     return (
       <div className="Autocomplete-picked" onClick={this.onAutocompleteEditButtonClick}>
         <div className="Autocomplete-pickedName">
@@ -111,7 +111,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     );
   },
 
-  render: function () {
+  render: function() {
     var inputRender = this.state.isItemSelected ? this.renderSelectedItem() : this.renderAutocomplete();
     return (
       <div className="FormInput">

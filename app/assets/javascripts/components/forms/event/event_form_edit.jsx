@@ -3,7 +3,7 @@ var EventFormEdit = React.createClass({
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
   },
-  render: function () {
+  render: function() {
     var action = "/events/" + this.props.model.id,
       routeVerb = "PUT",
       primaryButtonText = "Update",
@@ -12,7 +12,7 @@ var EventFormEdit = React.createClass({
 
     return (
       <EventForm
-        action= {action}
+        action={action}
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
@@ -21,8 +21,7 @@ var EventFormEdit = React.createClass({
         secondaryButtonText={secondaryButtonText}
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
-        authToken={this.props.authToken}
-      />
+        authToken={this.props.authToken}/>
     );
   }
 });

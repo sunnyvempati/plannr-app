@@ -5,7 +5,7 @@ var VendorFormInputAutocomplete = React.createClass({
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired
   },
-  getInitialState: function () {
+  getInitialState: function() {
     return {
       isItemSelected: false,
       itemName: null,
@@ -13,13 +13,13 @@ var VendorFormInputAutocomplete = React.createClass({
       focus: false // this is used when you click editAssignedTo
     };
   },
-  componentDidMount: function () {
+  componentDidMount: function() {
     var itemId = this.props.value || null;
     if (itemId) {
       this.retrieveItemAndSetItem(itemId);
     }
   },
-  onItemSelected: function (item, term) {
+  onItemSelected: function(item, term) {
     if (item.id == -1) {
       this.quickCreateItemAndSetItem(term);
     }
@@ -27,7 +27,7 @@ var VendorFormInputAutocomplete = React.createClass({
       this.setItem(item.id, item.name);
     }
   },
-  setItem: function (id, name) {
+  setItem: function(id, name) {
     if (this.isMounted()) {
       if (!!id && !!name) {
         this.setValue(id);
@@ -38,7 +38,7 @@ var VendorFormInputAutocomplete = React.createClass({
       }
     }
   },
-  onAutocompleteEditButtonClick: function () {
+  onAutocompleteEditButtonClick: function() {
     var newState = this.getInitialState();
     newState.focus = true;
     if (this.isMounted()) {
@@ -47,15 +47,15 @@ var VendorFormInputAutocomplete = React.createClass({
   },
 
   /* unique for vendor START */
-  retrieveItemAndSetItem: function (itemId) {
+  retrieveItemAndSetItem: function(itemId) {
     this.retrieveVendorAsyncAndSetItem(itemId);
   },
-  searchForAutocompleteData: function (term) {
+  searchForAutocompleteData: function(term) {
     this.searchVendorsAsync(term);
   },
 
-  searchVendorsAsync: function (term) {
-    $.post("/vendors/search", {search: {text: term || ""}}, function (result) {
+  searchVendorsAsync: function(term) {
+    $.post("/vendors/search", {search: {text: term || ""}}, function(result) {
       var itemDataArray = result.vendors || [];
       if (itemDataArray.length == 0) {
         itemDataArray.push(this.getNewItem("vendor"));
@@ -65,23 +65,23 @@ var VendorFormInputAutocomplete = React.createClass({
       }
     }.bind(this));
   },
-  retrieveVendorAsyncAndSetItem: function (id) {
-    $.get("/vendors/" + id + ".json", function (result) {
+  retrieveVendorAsyncAndSetItem: function(id) {
+    $.get("/vendors/" + id + ".json", function(result) {
       var item = result.vendor;
       this.setItem(item.id, item.name);
     }.bind(this));
   },
 
-  quickCreateItemAndSetItem: function (term) {
+  quickCreateItemAndSetItem: function(term) {
     var payload = {vendor: {name: term}};
-    $.post("/vendors.json", payload, function (result) {
+    $.post("/vendors.json", payload, function(result) {
       var item = result.vendor;
       this.setItem(item.id, item.name);
     }.bind(this))
   },
   /* unique for vendor END */
 
-  renderAutocomplete: function () {
+  renderAutocomplete: function() {
     return (
       <Autocomplete id={this.props.id}
                     name={this.props.name}
@@ -92,7 +92,7 @@ var VendorFormInputAutocomplete = React.createClass({
                     renderItem={this.renderItem}/>
     );
   },
-  renderSelectedItem: function () {
+  renderSelectedItem: function() {
     return (
       <div className="Autocomplete-picked" onClick={this.onAutocompleteEditButtonClick}>
         <div className="Autocomplete-pickedName">
@@ -105,7 +105,7 @@ var VendorFormInputAutocomplete = React.createClass({
     );
   },
 
-  render: function () {
+  render: function() {
     var inputRender = this.state.isItemSelected ? this.renderSelectedItem() : this.renderAutocomplete();
     return (
       <div className="FormInput">

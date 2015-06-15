@@ -15,10 +15,10 @@ var EventForm = React.createClass({
       startDate: null
     };
   },
-  mapInputs: function (inputs) {
+  mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
-      'event':{
+      'event': {
         'name': inputs.name,
         'start_date': inputs.start_date,
         'end_date': inputs.end_date,
@@ -29,23 +29,23 @@ var EventForm = React.createClass({
       }
     };
   },
-  changeUrl: function (result) {
+  changeUrl: function(result) {
     location.href = "/events/" + result.event.id + "/";
   },
   setStartDate: function(date) {
     this.setState({startDate: date});
   },
-  componentWillMount: function () {
+  componentWillMount: function() {
     // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
     // this allows spaces and numbers with decimal places
-    Formsy.addValidationRule('ifPresentIsNumeric', function (n) {
+    Formsy.addValidationRule('ifPresentIsNumeric', function(n) {
       if (!!n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
       }
       return true;
     });
   },
-  render: function () {
+  render: function() {
     var id = 'event_form';
     var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
@@ -71,23 +71,20 @@ var EventForm = React.createClass({
             label="Name*"
             value={this.props.model.name}
             disabled={this.props.disableForm}
-            required
-          />
+            required/>
           <DatePickerInput
             name="start_date"
             label="Start Date"
             value={startDate}
             placeholder="When does it start?"
             onValueSet={this.setStartDate}
-            minDate={moment()}
-          />
+            minDate={moment()}/>
           <DatePickerInput
             name="end_date"
             label="End Date"
             value={endDate}
             placeholder="When does it end?"
-            minDate={this.state.startDate}
-          />
+            minDate={this.state.startDate}/>
           <FormInput
             name="location"
             id="event_location"
@@ -95,13 +92,12 @@ var EventForm = React.createClass({
             label="Location"
             value={this.props.model.location}
             disabled={this.props.disableForm}
-            placeholder="Where will it be held?"
-          />
+            placeholder="Where will it be held?"/>
           <ClientInput
             name='client'
             value={this.props.model.client_id}
             id='event_client'
-            label='Client' />
+            label='Client'/>
           <FormInput
             name="budget"
             id="event_budget"
@@ -112,16 +108,14 @@ var EventForm = React.createClass({
             disabled={this.props.disableForm}
             placeholder="How much will it cost?"
             validations="ifPresentIsNumeric"
-            validationError="Must be a number (no commas)"
-          />
+            validationError="Must be a number (no commas)"/>
           <TextAreaInput
             name="description"
             form={id}
             value={this.props.model.description}
             className="TextAreaInput"
             label="Description"
-            placeholder="What else do you need to know?"
-          />
+            placeholder="What else do you need to know?"/>
         </Form>
       </div>
     );

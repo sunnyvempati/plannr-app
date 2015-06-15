@@ -9,7 +9,7 @@ var EventContactAutocomplete = React.createClass({
     };
   },
   retrieveContacts: function(term) {
-    $.get("search_other_contacts", {search: {text: term}},  function(result) {
+    $.get("search_other_contacts", {search: {text: term}}, function(result) {
       var contacts = result.contacts;
       if (contacts.length == 0) {
         contacts.push(this.getNewItem("contact"));
@@ -31,7 +31,7 @@ var EventContactAutocomplete = React.createClass({
                     data={this.state.contacts}
                     itemSelected={this.addContactToEvent}
                     placeholder="Add contact to event..."
-                    renderItem={this.renderItem} />
+                    renderItem={this.renderItem}/>
     );
   }
 });

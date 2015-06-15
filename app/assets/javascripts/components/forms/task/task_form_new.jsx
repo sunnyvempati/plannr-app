@@ -15,7 +15,7 @@ var TaskFormNew = React.createClass({
       location.href = '/tasks';
     }
   },
-  render: function () {
+  render: function() {
     var action = "/tasks",
       routeVerb = "POST",
       primaryButtonText = "Create",
@@ -32,7 +32,7 @@ var TaskFormNew = React.createClass({
                 secondaryButtonVisible={!this.props.useReactRouter}
                 secondaryButtonHref={secondaryButtonHref}
                 authToken={this.props.authToken}
-                onSuccess={this.onSuccess} />
+                onSuccess={this.onSuccess}/>
     );
   }
 });

@@ -14,7 +14,7 @@ var ContactForm = React.createClass({
   hrefRoot: '/contacts',
   typeOptions: [<option key='1' value='1'>Client</option>,
     <option key='2' value='2'>Vendor</option>],
-  mapInputs: function (inputs) {
+  mapInputs: function(inputs) {
     var retVal = {
       'authenticity_token': inputs.authenticity_token,
       'contact': {
@@ -36,10 +36,10 @@ var ContactForm = React.createClass({
     }
     return retVal;
   },
-  contactTypeOnChange: function (value) {
+  contactTypeOnChange: function(value) {
     this.setState({category: value});
   },
-  renderVendorOrganizationField: function (category, contact, propsDisableForm) {
+  renderVendorOrganizationField: function(category, contact, propsDisableForm) {
     // conditionally display either contact_organization field or contact_vendor
     // based on category (client or vendor)
     var retHtml;
@@ -63,12 +63,12 @@ var ContactForm = React.createClass({
     }
     return retHtml;
   },
-  getInitialState: function () {
+  getInitialState: function() {
     return {
       category: this.props.model.category || 1
     };
   },
-  render: function () {
+  render: function() {
     var contact = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -105,8 +105,7 @@ var ContactForm = React.createClass({
             label='Name*'
             value={contact.name}
             disabled={this.props.disableForm}
-            required
-            />
+            required/>
           <ContactTypeFormInputAutocomplete
             id='contact_type'
             name='category'
@@ -121,8 +120,7 @@ var ContactForm = React.createClass({
             type='text'
             label='Email'
             value={contact.email}
-            disabled={this.props.disableForm}
-            />
+            disabled={this.props.disableForm}/>
           <FormInput
             id='contact_phone'
             name='phone'
@@ -130,8 +128,7 @@ var ContactForm = React.createClass({
             type='tel'
             label='Phone'
             value={contact.phone}
-            disabled={this.props.disableForm}
-            />
+            disabled={this.props.disableForm}/>
           <TextAreaInput
             id='contact_description'
             name='description'
@@ -140,8 +137,7 @@ var ContactForm = React.createClass({
             placeholder='What else do you need to know?'
             value={contact.description}
             disabled={this.props.disableForm}
-            formId='contact_form'
-            />
+            formId='contact_form'/>
         </Form>
       </div>
     );
