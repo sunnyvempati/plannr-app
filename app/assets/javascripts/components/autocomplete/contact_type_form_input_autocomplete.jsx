@@ -4,6 +4,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
+
     value: React.PropTypes.string,
     onChange: React.PropTypes.func
   },
@@ -11,6 +12,11 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     return {
       itemName: null,
       itemDataArray: []
+    };
+  },
+  getDefaultProps: function() {
+    return {
+      onChange: function() {}
     };
   },
   setItem: function(id, name) {

@@ -4,6 +4,7 @@ var VendorFormInputAutocomplete = React.createClass({
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
+
     value: React.PropTypes.string
   },
   getInitialState: function() {
