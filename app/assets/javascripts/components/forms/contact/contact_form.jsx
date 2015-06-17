@@ -22,18 +22,11 @@ var ContactForm = React.createClass({
         'email': inputs.email,
         'category': inputs.category,
         'phone': inputs.phone,
-        'organization': inputs.organization,
+        'organization': inputs.organization || null,
         'description': inputs.description,
-        'vendor_id': inputs.vendor_id
+        'vendor_id': inputs.vendor_id || null
       }
     };
-    if (retVal.contact.category === 1) {
-      //client; vendor not needed
-      retVal.contact.vendor_id = null;
-    } else {
-      //vendor; org not needed
-      retVal.contact.organization = null;
-    }
     return retVal;
   },
   contactTypeOnChange: function(value) {
