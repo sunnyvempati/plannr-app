@@ -3,7 +3,6 @@ var Autocomplete = React.createClass({
     itemSelected: React.PropTypes.func,
     focus: React.PropTypes.bool,
     retrieveData: React.PropTypes.func,
-    renderItem: React.PropTypes.func,
     data: React.PropTypes.array
   },
   getDefaultProps: function() {
