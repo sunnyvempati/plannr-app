@@ -34,13 +34,13 @@ var VendorFormInputAutocomplete = React.createClass({
       }
     }.bind(this));
   },
-  retrieveItemAsyncAndSetItem: function(id) {
+  retrieveItemAndSetItemAsync: function(id) {
     $.get("/vendors/" + id + ".json", function(result) {
       var item = result.vendor;
       this.setItem(item.id, item.name);
     }.bind(this));
   },
-  quickCreateItemAndSetItem: function(term) {
+  quickCreateItemAndSetItemAsync: function(term) {
     var payload = {vendor: {name: term}};
     $.post("/vendors.json", payload, function(result) {
       var item = result.vendor;
@@ -56,9 +56,9 @@ var VendorFormInputAutocomplete = React.createClass({
                              itemDataArray={this.state.itemDataArray}
                              itemName={this.state.itemName}
                              setItem={this.setItem}
-                             retrieveItemAndSetItem={this.retrieveItemAsyncAndSetItem}
-                             searchForAutocompleteData={this.searchAsync}
-                             quickCreateItemAndSetItem={this.quickCreateItemAndSetItem}
+                             retrieveItemAndSetItem={this.retrieveItemAndSetItemAsync}
+                             retrieveAutocompleteData={this.searchAsync}
+                             quickCreateItemAndSetItem={this.quickCreateItemAndSetItemAsync}
         />
     );
   }

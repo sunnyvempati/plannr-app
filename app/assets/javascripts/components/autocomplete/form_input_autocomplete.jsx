@@ -4,12 +4,12 @@ var FormInputAutocomplete = React.createClass({
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
-    value: React.PropTypes.string,
-
     retrieveItemAndSetItem: React.PropTypes.func.isRequired,
-    searchForAutocompleteData: React.PropTypes.func.isRequired,
+    retrieveAutocompleteData: React.PropTypes.func.isRequired,
     quickCreateItemAndSetItem: React.PropTypes.func.isRequired,
-    itemDataArray: React.PropTypes.array.isRequired
+    itemDataArray: React.PropTypes.array.isRequired,
+
+    value: React.PropTypes.string
   },
   getInitialState: function() {
     return {
@@ -41,7 +41,7 @@ var FormInputAutocomplete = React.createClass({
     return (
       <Autocomplete id={this.props.id}
                     name={this.props.name}
-                    retrieveData={this.props.searchForAutocompleteData}
+                    retrieveData={this.props.retrieveAutocompleteData}
                     itemSelected={this.onItemSelected}
                     data={this.props.itemDataArray}
                     focus={this.state.focus}/>

@@ -34,13 +34,13 @@ var EventFormInputAutocomplete = React.createClass({
       }
     }.bind(this));
   },
-  retrieveItemAsyncAndSetItem: function(id) {
+  retrieveItemAndSetItemAsync: function(id) {
     $.get("/events/" + id + ".json", function(result) {
       var item = result.event;
       this.setItem(item.id, item.name);
     }.bind(this));
   },
-  quickCreateItemAndSetItem: function(term) {
+  quickCreateItemAndSetItemAsync: function(term) {
     var payload = {event: {name: term}};
     $.post("/events.json", payload, function(result) {
       var item = result.event;
@@ -55,11 +55,10 @@ var EventFormInputAutocomplete = React.createClass({
                              value={this.props.value}
                              itemDataArray={this.state.itemDataArray}
                              itemName={this.state.itemName}
-                             isItemSelected={this.state.itemName != null}
                              setItem={this.setItem}
-                             retrieveItemAndSetItem={this.retrieveItemAsyncAndSetItem}
-                             searchForAutocompleteData={this.searchAsync}
-                             quickCreateItemAndSetItem={this.quickCreateItemAndSetItem}
+                             retrieveItemAndSetItem={this.retrieveItemAndSetItemAsync}
+                             retrieveAutocompleteData={this.searchAsync}
+                             quickCreateItemAndSetItem={this.quickCreateItemAndSetItemAsync}
         />
     );
   }
