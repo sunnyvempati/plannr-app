@@ -36,24 +36,30 @@ var ContactForm = React.createClass({
     // conditionally display either contact_organization field or contact_vendor
     // based on category (client or vendor)
     var retHtml;
-    if (this.state.category == 1) {
-      retHtml = <FormInput
-        id='contact_organization'
-        name='organization'
-        placeholder='What is the company of your contact?'
-        type='text'
-        label='organization'
-        value={contact.organization}
-        disabled={propsDisableForm}/>;
+    switch (this.state.category) {
+      case 1:
+        retHtml = <FormInput
+          id='contact_organization'
+          name='organization'
+          placeholder='What is the organization of your contact?'
+          type='text'
+          label='organization'
+          value={contact.organization}
+          disabled={propsDisableForm}/>;
+        break;
+      case 2:
+        retHtml = <VendorFormInputAutocomplete
+          name='vendor_id'
+          value={contact.vendorId}
+          id='contact_vendor_id'
+          label='Vendor'
+          disabled={propsDisableForm}/>;
+        break;
+      default:
+        retHtml = "";
+        break;
     }
-    else {
-      retHtml = <VendorFormInputAutocomplete
-        name='vendor_id'
-        value={contact.vendorId}
-        id='contact_vendor_id'
-        label='Vendor'
-        disabled={propsDisableForm}/>;
-    }
+
     return retHtml;
   },
   getInitialState: function() {
