@@ -32,7 +32,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     }
     var newItemDataArray = [];
     this.contactTypesData.forEach(
-      function(currentValue, index, array) {
+      function(currentValue) {
         if (currentValue.name.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
           newItemDataArray.push(currentValue);
         }
@@ -44,7 +44,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
   },
   retrieveItemAndSetItem: function(id) {
     this.contactTypesData.forEach(
-      function(currentValue, index, array) {
+      function(currentValue) {
         if (currentValue.id === id) {
           this.setItem(currentValue.id, currentValue.name);
         }
