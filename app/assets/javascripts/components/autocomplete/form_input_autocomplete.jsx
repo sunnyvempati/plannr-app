@@ -1,5 +1,4 @@
 var FormInputAutocomplete = React.createClass({
-  mixins: [AutocompleteBoldItem, AutocompleteRenderNew],
   propTypes: {
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,

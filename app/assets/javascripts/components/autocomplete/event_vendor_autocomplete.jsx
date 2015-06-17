@@ -1,5 +1,4 @@
 var EventVendorAutocomplete = React.createClass({
-  mixins: [AutocompleteBoldItem, AutocompleteRenderNew],
   propTypes: {
     onAssociation: React.PropTypes.func.isRequired
   },
@@ -12,7 +11,7 @@ var EventVendorAutocomplete = React.createClass({
     $.get("search_other_vendors", {search: {text: term}}, function(result) {
       var vendors = result.vendors;
       if (vendors.length == 0) {
-        vendors.push(this.getNewItem("vendor"));
+        vendors.push(AutocompleteRenderNew.getNewItem("vendor"));
       }
       this.setState({vendors: vendors})
     }.bind(this));
@@ -31,7 +30,7 @@ var EventVendorAutocomplete = React.createClass({
                     data={this.state.vendors}
                     itemSelected={this.addVendorToEvent}
                     placeholder="Add vendor to event..."
-                    renderItem={this.renderItem}/>
+                    renderItem={AutocompleteRenderNew.renderItem}/>
     );
   }
 });

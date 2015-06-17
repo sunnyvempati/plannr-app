@@ -1,5 +1,4 @@
 var EventContactAutocomplete = React.createClass({
-  mixins: [AutocompleteBoldItem, AutocompleteRenderNew],
   propTypes: {
     onAssociation: React.PropTypes.func.isRequired
   },
@@ -12,7 +11,7 @@ var EventContactAutocomplete = React.createClass({
     $.get("search_other_contacts", {search: {text: term}}, function(result) {
       var contacts = result.contacts;
       if (contacts.length == 0) {
-        contacts.push(this.getNewItem("contact"));
+        contacts.push(AutocompleteRenderNew.getNewItem("contact"));
       }
       this.setState({contacts: contacts});
     }.bind(this));
@@ -31,7 +30,7 @@ var EventContactAutocomplete = React.createClass({
                     data={this.state.contacts}
                     itemSelected={this.addContactToEvent}
                     placeholder="Add contact to event..."
-                    renderItem={this.renderItem}/>
+                    renderItem={AutocompleteRenderNew.renderItem}/>
     );
   }
 });

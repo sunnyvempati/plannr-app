@@ -1,5 +1,5 @@
 var EventFormInputAutocomplete = React.createClass({
-  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [Formsy.Mixin],
   propTypes: {
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
@@ -27,7 +27,7 @@ var EventFormInputAutocomplete = React.createClass({
     $.get("/search_events", {search: {text: term || ""}}, function(result) {
       var itemDataArray = result.events || [];
       if (itemDataArray.length == 0) {
-        itemDataArray.push(this.getNewItem("event"));
+        itemDataArray.push(AutocompleteRenderNew.getNewItem("event"));
       }
       if (this.isMounted()) {
         this.setState({itemDataArray: itemDataArray});

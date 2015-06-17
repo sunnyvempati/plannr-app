@@ -1,5 +1,5 @@
 var ContactTypeFormInputAutocomplete = React.createClass({
-  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [Formsy.Mixin],
   propTypes: {
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,

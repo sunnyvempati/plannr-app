@@ -1,5 +1,5 @@
 var VendorFormInputAutocomplete = React.createClass({
-  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [Formsy.Mixin],
   propTypes: {
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
@@ -28,7 +28,7 @@ var VendorFormInputAutocomplete = React.createClass({
     $.post("/vendors/search", {search: {text: term || ""}}, function(result) {
       var itemDataArray = result.vendors || [];
       if (itemDataArray.length == 0) {
-        itemDataArray.push(this.getNewItem("vendor"));
+        itemDataArray.push(AutocompleteRenderNew.getNewItem("vendor"));
       }
       if (this.isMounted()) {
         this.setState({itemDataArray: itemDataArray});

@@ -8,7 +8,7 @@ var AutocompleteRenderNew = {
   renderItem: function(item, term) {
     var itemName = item.name;
     if (item.id != -1) {
-      itemName = this.formatMatchedCharacters(itemName, term);
+      itemName = AutocompleteBoldItem.formatMatchedCharacters(itemName, term);
     }
     var itemClasses = classNames({
       'Autocomplete-resultsItem': true,
