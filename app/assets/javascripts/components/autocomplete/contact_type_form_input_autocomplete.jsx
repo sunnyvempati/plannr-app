@@ -43,6 +43,7 @@ var ContactTypeFormInputAutocomplete = React.createClass({
     }
   },
   retrieveItemAndSetItem: function(id) {
+    //TODO: there's a way to do this without iterating, but there's only two items so I don't care
     this.contactTypesData.forEach(
       function(currentValue) {
         if (currentValue.id === id) {

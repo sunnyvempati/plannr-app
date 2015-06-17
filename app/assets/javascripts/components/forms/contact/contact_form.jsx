@@ -59,7 +59,6 @@ var ContactForm = React.createClass({
         retHtml = "";
         break;
     }
-
     return retHtml;
   },
   getInitialState: function() {
