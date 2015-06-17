@@ -21,7 +21,7 @@ var VendorFormInputAutocomplete = React.createClass({
   },
   onItemSelected: function(item, term) {
     if (item.id == -1) {
-      this.quickCreateItemAndSetItem(term);
+      this.quickCreateItemAndSetItem(term, this.setItem);
     }
     else {
       this.setItem(item.id, item.name);
@@ -45,38 +45,40 @@ var VendorFormInputAutocomplete = React.createClass({
       this.setState(newState);
     }
   },
+  setItemDataArray: function(itemDataArray) {
+    if (this.isMounted()) {
+      this.setState({itemDataArray: itemDataArray});
+    }
+  },
 
   /* unique for vendor START */
   retrieveItemAndSetItem: function(itemId) {
     this.retrieveVendorAsyncAndSetItem(itemId);
   },
   searchForAutocompleteData: function(term) {
-    this.searchVendorsAsync(term);
+    this.searchVendorsAsync(term, this.setItemDataArray);
   },
 
-  searchVendorsAsync: function(term) {
+  searchVendorsAsync: function(term, onSuccessCallback) {
     $.post("/vendors/search", {search: {text: term || ""}}, function(result) {
       var itemDataArray = result.vendors || [];
       if (itemDataArray.length == 0) {
         itemDataArray.push(this.getNewItem("vendor"));
       }
-      if (this.isMounted()) {
-        this.setState({itemDataArray: itemDataArray});
-      }
+      onSuccessCallback(itemDataArray);
     }.bind(this));
   },
-  retrieveVendorAsyncAndSetItem: function(id) {
+  retrieveVendorAsyncAndSetItem: function(id, onSuccessCallback) {
     $.get("/vendors/" + id + ".json", function(result) {
       var item = result.vendor;
-      this.setItem(item.id, item.name);
+      onSuccessCallback(item.id, item.name);
     }.bind(this));
   },
-
-  quickCreateItemAndSetItem: function(term) {
+  quickCreateItemAndSetItem: function(term, onSuccessCallback) {
     var payload = {vendor: {name: term}};
     $.post("/vendors.json", payload, function(result) {
       var item = result.vendor;
-      this.setItem(item.id, item.name);
+      onSuccessCallback(item.id, item.name);
     }.bind(this))
   },
   /* unique for vendor END */

@@ -45,37 +45,40 @@ var EventFormInputAutocomplete = React.createClass({
       this.setState(newState);
     }
   },
+  setItemDataArray: function(itemDataArray) {
+    if (this.isMounted()) {
+      this.setState({itemDataArray: itemDataArray});
+    }
+  },
 
   /* unique for event START */
   retrieveItemAndSetItem: function(itemId) {
     this.retrieveEventAsyncAndSetItem(itemId);
   },
   searchForAutocompleteData: function(term) {
-    this.searchEventsAsync(term);
+    this.searchEventsAsync(term, this.setItemDataArray);
   },
 
-  searchEventsAsync: function(term) {
+  searchEventsAsync: function(term, onSuccessCallback) {
     $.get("/search_events", {search: {text: term || ""}}, function(result) {
       var itemDataArray = result.events || [];
       if (itemDataArray.length == 0) {
         itemDataArray.push(this.getNewItem("event"));
       }
-      if (this.isMounted()) {
-        this.setState({itemDataArray: itemDataArray});
-      }
+      onSuccessCallback(itemDataArray);
     }.bind(this));
   },
-  retrieveEventAsyncAndSetItem: function(id) {
+  retrieveEventAsyncAndSetItem: function(id, onSuccessCallback) {
     $.get("/events/" + id + ".json", function(result) {
       var item = result.event;
-      this.setItem(item.id, item.name);
+      onSuccessCallback(item.id, item.name);
     }.bind(this));
   },
-  quickCreateItemAndSetItem: function(term) {
+  quickCreateItemAndSetItem: function(term, onSuccessCallback) {
     var payload = {event: {name: term}};
     $.post("/events.json", payload, function(result) {
       var item = result.event;
-      this.setItem(item.id, item.name);
+      onSuccessCallback(item.id, item.name);
     }.bind(this))
   },
   /* unique for event END */
