@@ -8,12 +8,17 @@ var CommentList = React.createClass({
     return this.props.data.map(function(comment) {
       return (
         <div className="Comments-listItem">
-          <div className="ListItem-title">
-            <div className="ListItem-commenter">
-              {comment.user_name}
+          <div className="ListItem-header">
+            <div className="ListItem-title">
+              <div className="ListItem-commenter">
+                {comment.user_name}
+              </div>
+              <div className="ListItem-time">
+                {comment.time}
+              </div>
             </div>
-            <div className="ListItem-time">
-              {comment.time}
+            <div className="ListItem-headerMenu">
+              <div className="CommentClose"></div>
             </div>
           </div>
           <div className="ListItem-text">

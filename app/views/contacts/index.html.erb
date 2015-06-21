@@ -1,4 +1,4 @@
 <% content_for(:title) { "#{current_user.company.name}'s Contacts" } %>
 <% content_for(:header) { "Contacts" } %>
 
-<%= react_component("ContactsRouter", prerender: true) %>
+<%= react_component("ContactsRouter", currentUser: current_user, prerender: true) %>

@@ -33,7 +33,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.ListItem-title {
+.ListItem-header {
   display: flex;
   align-items: center;
   >* {
@@ -41,17 +41,40 @@
   }
 }
 
+.ListItem-title {
+  display: flex;
+  align-items: center;
+  >* {
+    padding-right: $size-increment*2;
+  }
+}
+
 .ListItem-commenter {
   @include font($title-font, normal, 20);
   color: $black-half;
-  padding-bottom: $size-increment;
 }
 
 .ListItem-time {
-  display: flex;
-  justify-content: flex-end;
   @include font($body-1-font, normal, 0);
   color: $black-quarter;
+}
+
+.ListItem-time,
+.ListItem-commenter {
+  padding-bottom: $size-increment;
+}
+
+.ListItem-headerMenu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: $size-increment*2;
+}
+
+.CommentClose {
+  @include svg($close-url, 12px);
+  opacity: 0.25;
+  cursor: pointer;
 }
 
 .ListItem-text {

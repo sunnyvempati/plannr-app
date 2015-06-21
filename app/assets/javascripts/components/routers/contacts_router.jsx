@@ -1,7 +1,7 @@
 var ContactsRouter = React.createClass({
   componentDidMount: function() {
     Router.run(this.routes(), function (Handler) {
-      React.render(<Handler />, React.findDOMNode(this.refs.contacts));
+      React.render(<Handler currentUser={this.props.currentUser} />, React.findDOMNode(this.refs.contacts));
     }.bind(this));
   },
   routes: function() {
