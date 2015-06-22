@@ -6,6 +6,11 @@ var CommentList = React.createClass({
       )
     }
     return this.props.data.map(function(comment) {
+      var canDelete = this.props.currentUser.id == comment.commenter.id;
+      var deleteClasses = classNames({
+        "ListItem-headerMenu": true,
+        "u-hidden": !canDelete
+      })
       return (
         <div className="Comments-listItem">
           <div className="ListItem-header">
@@ -17,8 +22,8 @@ var CommentList = React.createClass({
                 {comment.time}
               </div>
             </div>
-            <div className="ListItem-headerMenu">
-              <div className="CommentClose"></div>
+            <div className={deleteClasses}>
+              <div className="CommentClose" onClick={this.props.deleteComment.bind(this, comment.id)}></div>
             </div>
           </div>
           <div className="ListItem-text">
@@ -26,7 +31,7 @@ var CommentList = React.createClass({
           </div>
         </div>
       )
-    });
+    }.bind(this));
   },
   render: function() {
     return (

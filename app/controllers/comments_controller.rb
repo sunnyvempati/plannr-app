@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :find_commentable
+  before_action :find_commentable, except: :destroy
   before_action :find_comment, only: :destroy
 
   def index

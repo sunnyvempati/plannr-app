@@ -1,4 +1,5 @@
 var Comments = React.createClass({
+  mixins: [Utils],
   getInitialState: function() {
     return {
       comments: []
@@ -26,11 +27,25 @@ var Comments = React.createClass({
       this.setState({comments: comments});
     }.bind(this));
   },
+  deleteComment: function(id) {
+    var url = "/comments/" + id + ".json";
+    var _this = this;
+    $.ajax({
+      url: url,
+      type: 'DELETE',
+      success: function(result) {
+        var newData = _this.spliceResults(_this.state.comments, [id]);
+        _this.setState({comments: newData});
+      }
+    });
+  },
   render: function() {
     return (
       <div className="Comments">
         <CommentInput onAdd={this.addComment} />
-        <CommentList data={this.state.comments} />
+        <CommentList data={this.state.comments}
+                     currentUser={this.props.currentUser}
+                     deleteComment={this.deleteComment} />
       </div>
     );
   }

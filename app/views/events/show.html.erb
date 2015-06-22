@@ -4,4 +4,5 @@
 <%= react_component("EventDashboardRouter",
                     event: @event,
                     client: @event.client,
-                    authToken: form_authenticity_token )%>
+                    authToken: form_authenticity_token,
+                    currentUser: current_user )%>

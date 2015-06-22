@@ -85,5 +85,6 @@ Rails.application.routes.draw do
   # comments
   get '/comments', to: 'comments#index'
   post '/comments', to: 'comments#create'
+  delete '/comments/:id', to: 'comments#destroy'
 
 end
