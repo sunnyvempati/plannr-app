@@ -16,7 +16,7 @@ var EventDashboardRouter = React.createClass({
           <Route name="eventAttachments" path="attachments" handler={EventAttachmentsTable} />
           <Route name="eventVendors" path="vendors" handler={EventVendorsTable} />
         </Route>
-        <DefaultRoute handler={EventHome}  />
+        <DefaultRoute handler={EventHome} />
       </Route>
     );
   },

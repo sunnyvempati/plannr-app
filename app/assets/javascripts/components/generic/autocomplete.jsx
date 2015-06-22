@@ -34,7 +34,7 @@ var Autocomplete = React.createClass({
     this.setState({term: e.target.value, open: true});
     this.props.retrieveData(e.target.value);
   },
-  itemSelected: function(e, item, term) {
+  itemSelected: function(item, term) {
     var input = React.findDOMNode(this.refs.autocompleteInput);
     input.value = "";
     input.blur();
@@ -60,7 +60,7 @@ var Autocomplete = React.createClass({
       return (
         <div className="Button--autocomplete"
                 onMouseDown={this.preventDefault}
-                onClick={this.itemSelected.bind(this, event, item, term)}
+                onClick={this.itemSelected.bind(this, item, term)}
                 key={item.id}>
           {renderItem}
         </div>
