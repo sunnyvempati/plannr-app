@@ -95,7 +95,7 @@ var TaskForm = React.createClass({
             name="deadline"
             label="Deadline"
             value={ !!task.deadline ? moment(task.deadline) : null }
-            placeholder="When's' it due?"
+            placeholder="When's it due?"
             minDate={moment()}
           />
           <FormSelectInput
