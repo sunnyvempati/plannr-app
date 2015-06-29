@@ -2,14 +2,13 @@ var TasksTable = React.createClass({
   mixins: [
     TaskCheckboxRows,
     ToastMessages,
-    LoadingToast,
-    HttpHelpers
+    LoadingToast
   ],
   componentDidMount: function() {
     this.getAllTasks({status: 1});
   },
   getAllTasks: function(filterParams) {
-    this.getFromServer("/tasks.json", {filter: filterParams}, function(result) {
+    HttpHelpers.getFromServer("/tasks.json", {filter: filterParams}, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
@@ -18,7 +17,7 @@ var TasksTable = React.createClass({
     }.bind(this));
   },
   getUserTasks: function(filterParams) {
-    this.getFromServer("/user_tasks", {filter: filterParams}, function(result) {
+    HttpHelpers.getFromServer("/user_tasks", {filter: filterParams}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
@@ -41,7 +40,7 @@ var TasksTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer('/tasks/mass_delete', destroyOpts, function(success_result) {
+    HttpHelpers.postToServer('/tasks/mass_delete', destroyOpts, function(success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, deletionIds);
       this.setState({tasks: newData});
@@ -51,13 +50,13 @@ var TasksTable = React.createClass({
     location.href = "/tasks/"+id+"/edit";
   },
   sortBy: function(entity, order) {
-    this.getFromServer('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
+    HttpHelpers.getFromServer('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    this.getFromServer('/search_tasks', {search: {text: term || ""}}, function(result) {
+    HttpHelpers.getFromServer('/search_tasks', {search: {text: term || ""}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },
