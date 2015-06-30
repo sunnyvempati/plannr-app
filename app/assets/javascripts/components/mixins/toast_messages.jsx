@@ -6,9 +6,9 @@ var ToastMessages = {
     setTimeout(this.closeToast, 3000);
   },
   toastError: function(message) {
-    var toast = React.createElement(Toast, {message: message});
+    var toast = React.createElement(Toast, {message: message, isError: true});
     React.render(toast, document.getElementById('toast'));
-    setTimeout(this.closeToast, 3000);
+    setTimeout(this.closeToast, 5000);
   },
   closeToast: function() {
     React.unmountComponentAtNode(document.getElementById('toast'));
