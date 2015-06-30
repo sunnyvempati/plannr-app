@@ -3,7 +3,8 @@ var HttpHelpers = {
   genericFail: function(jqXHR, textStatus, errorThrown) {
     ToastMessages.toast("Aw man, something went wrong on get. Let Plannr know about this!");
     console.log('Error: ' + errorThrown);
-    console.log('jqXHR: ' + jqXHR);
+    console.log('jqXHR:');
+    console.log(jqXHR);
   },
   postToServer: function(url, params, successCallback, failCallback, alwaysCallback) {
     LoadingToast.showLoading();
