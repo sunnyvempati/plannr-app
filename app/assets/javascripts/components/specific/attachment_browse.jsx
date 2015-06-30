@@ -31,7 +31,7 @@ var AttachmentBrowse = React.createClass({
       this.setState({loading: true});
       reader.readAsDataURL(file);
     } else {
-      ToastMessages.toastError('Error - File is too big.  Size=' + parseFloat(file.size/1000000.0).toFixed(2) + ', MaxSize=' + parseFloat(7500000/1000000.0).toFixed(2));
+      ToastMessages.toastError("The file you're trying to upload is too large.  Files may be up to 7.5MB.");
     }
   },
   reset: function () {
