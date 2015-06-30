@@ -11,18 +11,22 @@ var AttachmentBrowse = React.createClass({
     var file = event.target.files[0];
     reader.onload = function (upload) {
       var params = this.getParams(upload.target.result, file.name);
-      this.postToServer(params);
+      var doneCallback = function(data, textStatus, jqXHR) {
+        //TODO: use data in result to update our table
+        //I currently refresh all the data in the table
+        this.props.onAssociation(data.attachment);
+        ToastMessages.toast('File uploaded - ' + data);
+      }.bind(this);
+      var failCallback = function(jqXHR, textStatus, errorThrown) {
+        ToastMessages.toastError('Error: upload failed: ' + errorThrown);
+      }.bind(this);
+      var alwaysCallback = function() {
+        this.reset();
+      }.bind(this);
+      HttpHelpers.postToServer('attachments.json', params, doneCallback, failCallback, alwaysCallback);
     }.bind(this);
     this.setState({loading: true});
     reader.readAsDataURL(file);
-  },
-  postToServer: function (params) {
-    $.post("attachments.json", params, function (result) {
-      //TODO: use data in result to update our table
-      //I currently refresh all the data in the table
-      this.props.onAssociation(result.attachment);
-      this.reset();
-    }.bind(this));
   },
   reset: function () {
     //TODO: do without jQuery; find a replacement for replaceWith without jQuery
