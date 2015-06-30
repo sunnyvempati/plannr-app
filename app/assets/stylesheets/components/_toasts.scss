@@ -19,6 +19,9 @@
   &.loading {
     min-width: 30px;
   }
+  &.error {
+    background: #BB2222;
+  }
 }
 
 @keyframes Toast-enter {
