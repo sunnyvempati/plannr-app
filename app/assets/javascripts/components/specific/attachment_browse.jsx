@@ -9,24 +9,30 @@ var AttachmentBrowse = React.createClass({
   changeValue: function () {
     var reader = new FileReader();
     var file = event.target.files[0];
-    reader.onload = function (upload) {
-      var params = this.getParams(upload.target.result, file.name);
-      var doneCallback = function(data, textStatus, jqXHR) {
-        //TODO: use data in result to update our table
-        //I currently refresh all the data in the table
-        this.props.onAssociation(data.attachment);
-        ToastMessages.toast('File uploaded - ' + data);
+    console.log('filesize:' + file.size);
+
+    if (file.size <= 7500000) { //the size of the largest file I tested that would work
+      reader.onload = function(upload) {
+        var params = this.getParams(upload.target.result, file.name);
+        var doneCallback = function(data, textStatus, jqXHR) {
+          //TODO: use data in result to update our table
+          //I currently refresh all the data in the table
+          this.props.onAssociation(data.attachment);
+          ToastMessages.toast('File uploaded - ' + data);
+        }.bind(this);
+        var failCallback = function(jqXHR, textStatus, errorThrown) {
+          ToastMessages.toastError('Error: upload failed: ' + errorThrown);
+        }.bind(this);
+        var alwaysCallback = function() {
+          this.reset();
+        }.bind(this);
+        HttpHelpers.postToServer('attachments.json', params, doneCallback, failCallback, alwaysCallback);
       }.bind(this);
-      var failCallback = function(jqXHR, textStatus, errorThrown) {
-        ToastMessages.toastError('Error: upload failed: ' + errorThrown);
-      }.bind(this);
-      var alwaysCallback = function() {
-        this.reset();
-      }.bind(this);
-      HttpHelpers.postToServer('attachments.json', params, doneCallback, failCallback, alwaysCallback);
-    }.bind(this);
-    this.setState({loading: true});
-    reader.readAsDataURL(file);
+      this.setState({loading: true});
+      reader.readAsDataURL(file);
+    } else {
+      ToastMessages.toastError('Error - File is too big.  Size=' + parseFloat(file.size/1000000.0).toFixed(2) + ', MaxSize=' + parseFloat(7500000/1000000.0).toFixed(2));
+    }
   },
   reset: function () {
     //TODO: do without jQuery; find a replacement for replaceWith without jQuery
