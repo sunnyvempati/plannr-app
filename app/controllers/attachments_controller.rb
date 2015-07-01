@@ -3,11 +3,8 @@ class AttachmentsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @attachments = Attachment.all
-    respond_to do |format|
-      format.html
-      format.json { render :json => @attachments.collect { |p| p.to_jq_upload }.to_json }
-    end
+    @attachments = Attachment.find(event_id: params[:event_id])
+    render_success @attachments
   end
 
   def new
@@ -35,7 +32,7 @@ class AttachmentsController < ApplicationController
 
   def event_attachments
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'file_name asc'
-    render json: Event.find_by_id(params[:event_id]).attachments.order(order)
+    render json: Attachment.where(event_id: params[:event_id]).order(order)
   end
 
   def search_in_events
