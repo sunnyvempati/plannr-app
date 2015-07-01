@@ -6,47 +6,42 @@ var AttachmentBrowse = React.createClass({
   getInitialState: function () {
     return {loading: false};
   },
-  componentDidMount: function() {
-    this.configureFileAttachmentField();
+  changeValue: function () {
+    var reader = new FileReader();
+    var file = event.target.files[0];
+    reader.onload = function (upload) {
+      var params = this.getParams(upload.target.result, file.name);
+      this.postToServer(params);
+    }.bind(this);
+    this.setState({loading: true});
+    reader.readAsDataURL(file);
   },
-  configureFileAttachmentField: function() {
-    var _this = this;
-    $(this.refs.fileAttachment.getDOMNode()).fileupload({
-      url: 'attachments.json',
-      singleFileUploads: true,
-      paramName: "file_attachment",
-      add: function(e, data) {
-        if (data.files[0].size <= 52428800) {
-          _this.setState({loading: true});
-          data.submit();
-        }
-        else
-        {
-          ToastMessages.toastError("File upload limit: 50MB");
-        }
-      },
-      done: function(e, data) {
-        _this.props.onAssociation(data.result);
-      },
-      fail: function(e, data) {
-        ToastMessages.toastError('Error: upload failed');
-      },
-      always: function(e, data) {
-        _this.setState({loading: false}, _this.configureFileAttachmentField);
+  postToServer: function (params) {
+    $.post("attachments.json", params, function (result) {
+      //TODO: use data in result to update our table
+      //I currently refresh all the data in the table
+      this.props.onAssociation(result.attachment);
+      this.reset();
+    }.bind(this));
+  },
+  reset: function () {
+    //TODO: do without jQuery; find a replacement for replaceWith without jQuery
+    //clear file name from browse - file inputs don't like being touched
+    // so I replace the control with a clone
+    var control = $(this.refs.filePicker.getDOMNode());
+    control.replaceWith(control.clone(true));
+    this.setState({loading: false, fileName: ''});
+  },
+  getParams: function (fileContents, fileName) {
+    return {
+      'attachment': {
+        'file_name': fileName,
+        'file_link': fileContents
       }
-    });
-  },
-  clickFileAttachment: function() {
-    this.refs.fileAttachment.getDOMNode().click();
-  },
-  renderInput: function() {
-    if (!this.state.loading) {
-      return ( <input name='file_attachment'
-                      type='file'
-                      id='fileAttachment'
-                      ref='fileAttachment'
-                      className='upload'/>);
     }
+  },
+  clickFilePicker: function () {
+    this.refs.filePicker.getDOMNode().click();
   },
   render: function () {
     var spinnerClasses = classNames({
@@ -61,9 +56,14 @@ var AttachmentBrowse = React.createClass({
         <div>
           <i className={spinnerClasses}></i>
 
-          <div className={inputClasses} onClick={this.clickFileAttachment}>
+          <div className={inputClasses} onClick={this.clickFilePicker}>
             {this.props.clickableElement}
-            {this.renderInput()}
+            <input name='file_picker'
+                   onChange={this.changeValue}
+                   type='file'
+                   id='file_picker'
+                   ref='filePicker'
+                   className='upload'/>
           </div>
         </div>
     );

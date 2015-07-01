@@ -1,19 +1,13 @@
 var Toast = React.createClass({
-  propTypes: {
-    loading: React.PropTypes.bool,
-    isError: React.PropTypes.bool
-  },
   getDefaultProps: function() {
     return {
-      loading: false,
-      isError: false
+      loading: false
     };
   },
   render: function() {
     var toastClasses = classNames({
       'Toast': true,
-      'loading': this.props.loading,
-      'error': this.props.isError
+      'loading': this.props.loading
     })
     return (
       <div className={toastClasses}>
