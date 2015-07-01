@@ -16,8 +16,14 @@ var AttachmentBrowse = React.createClass({
       singleFileUploads: true,
       paramName: "file_attachment",
       add: function(e, data) {
-        _this.setState({loading: true});
-        data.submit();
+        if (data.files[0].size <= 52428800) {
+          _this.setState({loading: true});
+          data.submit();
+        }
+        else
+        {
+          ToastMessages.toastError("File upload limit: 50MB");
+        }
       },
       done: function(e, data) {
         _this.props.onAssociation(data.result);
