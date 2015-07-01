@@ -6,9 +6,18 @@ var AttachmentBrowse = React.createClass({
   getInitialState: function () {
     return {loading: false};
   },
+  componentDidMount: function() {
+
+    var control = $(this.refs.fileupload.getDOMNode());
+    debugger;
+    control[0].fileupload();
+
+  },
   changeValue: function () {
+    //TODO: don't upload; add to queue
     var reader = new FileReader();
     var file = event.target.files[0];
+    console.log('filesize:' + file.size);
     reader.onload = function (upload) {
       var params = this.getParams(upload.target.result, file.name);
       var doneCallback = function(data, textStatus, jqXHR) {
@@ -25,7 +34,17 @@ var AttachmentBrowse = React.createClass({
       }.bind(this);
       HttpHelpers.postToServer('attachments.json', params, doneCallback, failCallback, alwaysCallback);
     }.bind(this);
+    reader.onerror = function(a, b, c, d, e) {
+      console.log('onerror');
+      console.log(a);
+      console.log(b);
+      console.log(c);
+      console.log(d);
+      console.log(e);
+
+    };
     this.setState({loading: true});
+    //debugger;
     reader.readAsDataURL(file);
   },
   reset: function () {
@@ -58,6 +77,13 @@ var AttachmentBrowse = React.createClass({
     });
     return (
         <div>
+
+          <input id="fileupload" type="file" name="files[]" multiple
+                 ref='fileupload'
+                 data-url="/path/to/upload/handler.json"
+                 data-sequential-uploads="true"
+                 data-form-data='{"script": "true"}' />
+
           <i className={spinnerClasses}></i>
 
           <div className={inputClasses} onClick={this.clickFilePicker}>

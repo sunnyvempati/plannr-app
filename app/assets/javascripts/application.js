@@ -11,4 +11,5 @@
 //= require react-date-picker/dist/react-datepicker
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
+//= require jquery-fileupload
 //= require components

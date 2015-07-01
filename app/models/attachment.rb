@@ -1,5 +1,6 @@
 class Attachment < ActiveRecord::Base
-  mount_base64_uploader :file_link, AttachmentFileUploader
+  # include Rails.application.routes.url_helpers
+  mount_uploader :file_link, AttachmentFileUploader
   belongs_to :event
   acts_as_tenant :company
 
@@ -11,6 +12,17 @@ class Attachment < ActiveRecord::Base
     wildcard_text = "'%#{term}%'"
     event_attachments(event_id).where("lower(attachments.description) LIKE #{wildcard_text} OR lower(attachments.file_name) LIKE #{wildcard_text}")
   }
+
+  def to_jq_upload
+    {
+      'name' => read_attribute(:file_attachment),
+      'size' => file_attachment.size,
+      'url' => file_attachment.url,
+      'thumbnail_url' => file_attachment.thumb.url,
+      'delete_url' => picture_path(:id => id),
+      'delete_type' => 'DELETE'
+    }
+  end
 
   def company_not_over_limits
     if self.company != nil
