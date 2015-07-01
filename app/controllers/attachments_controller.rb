@@ -15,38 +15,18 @@ class AttachmentsController < ApplicationController
   end
 
   def create
+    @attachment = Attachment.new(attachment_params)
+    @attachment.event_id = params[:event_id]
+    attachment_with_status = AttachmentWithStatus.new(@attachment)
 
-    p_attr = params[:file_attachment]
-    p_attr[:file] = params[:file_attachment][:file].first if params[:file_attachment][:file].class == Array
-    binding.pry
-
-    @attachment = AttachmentWithStatus.new(Attachment.new(p_attr))
-    if @attachment.save
-      respond_to do |format|
-        format.html {
-          render :json => [@attachment.to_jq_upload].to_json,
-                 :content_type => 'text/html',
-                 :layout => false
-        }
-        format.json {
-          render :json => { :files => [@attachment.to_jq_upload] }
-        }
-      end
+    if attachment_with_status.save
+      render json: attachment_with_status.attachment
     else
-      render :json => [{:error => "custom_failure"}], :status => 304
+      render_error
     end
-
-    # @attachment = AttachmentWithStatus.new(Attachment.new(attachment_params))
-    # render_entity @attachment
   end
 
   def destroy
-
-    # @picture = Picture.find(params[:id])
-    # @picture.destroy
-    # render :json => true
-
-
     @attachment = AttachmentWithStatus.new(Attachment.find(params[:id]))
     if @attachment.destroy
       redirect_to attachments_path, notice: "The attachment #{@attachment.name} has been deleted."
@@ -68,10 +48,15 @@ class AttachmentsController < ApplicationController
   end
 
   private
+
   def attachment_params
-    params.require(:attachment)
-      .permit(:file_name, :file_link)
-      .merge(event_id: params[:event_id])
+    file_attachment = params[:file_attachment]
+    return {
+      file_link: file_attachment,
+      file_name: file_attachment.original_filename,
+      event_id: params[:event_id],
+      owner: current_user
+    }
   end
 
   # TODO: sort mixin
