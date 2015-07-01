@@ -2,7 +2,8 @@ var EventAttachmentsTable = React.createClass({
   mixins: [
     TableCheckbox,
     ToastMessages,
-    LoadingToast
+    LoadingToast,
+    HttpHelpers
   ],
   propTypes: {
     setServerMessage: React.PropTypes.func
@@ -16,17 +17,13 @@ var EventAttachmentsTable = React.createClass({
     this.retrieveData();
   },
   retrieveData: function () {
-    HttpHelpers.getFromServer("attachments", {}, function (results) {
+    this.getFromServer("attachments", {}, function (results) {
       if (this.isMounted()) {
         this.setState({
           eventAttachments: results.attachments
         })
       }
     }.bind(this))
-  },
-  handleAssociation: function (attachment) {
-    this.retrieveData();
-    ToastMessages.toast(attachment.file_name + " has been added to this event.");
   },
   columns: function () {
     return [
@@ -46,7 +43,7 @@ var EventAttachmentsTable = React.createClass({
   handleDelete: function (id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer("attachments/mass_delete", destroyOpts, function () {
+    this.postToServer("attachments/mass_delete", destroyOpts, function () {
       this.toast(deletionIds.length + " attachment(s) removed from event.");
       var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
       this.setState({eventAttachments: newData});
@@ -55,13 +52,13 @@ var EventAttachmentsTable = React.createClass({
     }.bind(this));
   },
   sortBy: function (entity, order) {
-    HttpHelpers.getFromServer('attachments.json', {sort: {entity: entity, order: order}}, function (result) {
+    this.getFromServer('attachments.json', {sort: {entity: entity, order: order}}, function (result) {
       this.setState({eventAttachments: result.attachments});
     }.bind(this));
   },
   search: function (e) {
     var term = e.target.value;
-    HttpHelpers.getFromServer('search_event_attachments', {search: {text: term || ""}}, function (result) {
+    this.getFromServer('search_event_attachments', {search: {text: term || ""}}, function (result) {
       this.setState({eventAttachments: result.attachments});
     }.bind(this));
   },
@@ -127,7 +124,7 @@ var EventAttachmentsTable = React.createClass({
   getActionButton: function () {
     return (
         <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
-                          onAssociation={this.handleAssociation} />
+                          onAssociation={this.retrieveData} />
     );
   },
   render: function () {

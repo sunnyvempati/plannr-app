@@ -14,7 +14,7 @@ var EventAppTile = React.createClass({
   renderNavItems: function() {
     var renderedItems = this.navItems().map(function(navItem) {
       return (
-        <Link key={navItem.to} to={navItem.to} className="EventApp-headerIcon">
+        <Link to={navItem.to} className="EventApp-headerIcon">
           <i className={navItem.iconClass}></i>
         </Link>
       )

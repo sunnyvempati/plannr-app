@@ -7,7 +7,7 @@ var CommentList = React.createClass({
     }
     return this.props.data.map(function(comment) {
       return (
-        <div key={comment.id} className="Comments-listItem">
+        <div className="Comments-listItem">
           <div className="ListItem-title">
             <div className="ListItem-commenter">
               {comment.user_name}
