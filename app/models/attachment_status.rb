@@ -16,8 +16,9 @@ class AttachmentStatus < ActiveRecord::Base
     attachment_status.save
   end
 
-  MEGABYTE = 1024.0 * 1024.0
-  def self.convert_bytes_to_megabytes(bytes)
+  private
+
+  def convert_bytes_to_megabytes(bytes)
     (bytes / MEGABYTE)
   end
 end

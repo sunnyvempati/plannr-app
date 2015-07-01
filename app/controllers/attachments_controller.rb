@@ -1,4 +1,3 @@
-require 'attachment_with_status'
 class AttachmentsController < ApplicationController
   before_action :authenticate_user
 
@@ -12,22 +11,20 @@ class AttachmentsController < ApplicationController
   end
 
   def create
+    # get company attachment status (size)
+    # get file size of the to-be created attachment
+    # do a check
+    # if all good - create
+    # once you create, update company attachment status
+    # if not - error
     @attachment = Attachment.new(attachment_params)
     @attachment.event_id = params[:event_id]
-    attachment_with_status = AttachmentWithStatus.new(@attachment)
 
-    if attachment_with_status.save
-      render json: attachment_with_status.attachment
-    else
-      render_error
-    end
+    render_entity @attachment
   end
 
   def destroy
-    @attachment = AttachmentWithStatus.new(Attachment.find(params[:id]))
-    if @attachment.destroy
-      redirect_to attachments_path, notice: "The attachment #{@attachment.name} has been deleted."
-    end
+    render_success if @attachment.destroy
   end
 
   def event_attachments
