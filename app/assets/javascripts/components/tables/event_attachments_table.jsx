@@ -24,6 +24,10 @@ var EventAttachmentsTable = React.createClass({
       }
     }.bind(this))
   },
+  handleAssociation: function (attachment) {
+    this.retrieveData();
+    ToastMessages.toast(attachment.file_name + " has been added to this event.");
+  },
   columns: function () {
     return [
       {name: "file_name", grow: 10, header: "File Name"}
@@ -123,7 +127,7 @@ var EventAttachmentsTable = React.createClass({
   getActionButton: function () {
     return (
         <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
-                          onAssociation={this.retrieveData} />
+                          onAssociation={this.handleAssociation} />
     );
   },
   render: function () {
