@@ -43,7 +43,6 @@ var AttachmentBrowse = React.createClass({
     }
   },
   render: function () {
-    console.log('render');
     var spinnerClasses = classNames({
       'fa fa-spinner fa-pulse fa-2x': this.state.loading,
       'u-hidden': !this.state.loading
