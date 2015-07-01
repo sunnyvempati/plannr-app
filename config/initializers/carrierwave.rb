@@ -9,7 +9,7 @@ CarrierWave.configure do |config|
 
   config.fog_credentials = {:provider => 'AWS'}
   # TODO: get to work with dev/test/prod
-  config.fog_directory =  'plannr-testing-temp'
+  config.fog_directory =  'plannr-development'
   #config.fog_directory  = "plannr-#{Rails.env}"
 
   config.fog_public     = false                                   # optional, defaults to true
