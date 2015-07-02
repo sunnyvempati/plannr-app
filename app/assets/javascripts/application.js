@@ -11,4 +11,7 @@
 //= require react-date-picker/dist/react-datepicker
 //= require bower-skrollr/skrollr.min
 //= require formsy-react/build/formsy-react
+//= require blueimp-file-upload/js/vendor/jquery.ui.widget
+//= require blueimp-file-upload/js/jquery.iframe-transport
+//= require blueimp-file-upload/js/jquery.fileupload
 //= require components
