@@ -1,19 +1,19 @@
 var HttpHelpers = {
   // TODO: When error, toast.
   postToServer: function(url, params, success) {
-    LoadingToast.showLoading();
+    this.showLoading();
     $.post(url, params, function(result) {
-      LoadingToast.closeLoading();
+      this.closeLoading();
       success(result);
     }.bind(this));
   },
   getFromServer: function(url, params, success) {
-    LoadingToast.showLoading();
+    this.showLoading();
     $.get(url, params, function(result) {
       success(result);
-      LoadingToast.closeLoading();
+      this.closeLoading();
     }.bind(this)).fail(function(error) {
-      ToastMessages.toast("Aw man, something went wrong. Let Plannr know about this!");
+      this.toast("Aw man, something went wrong. Let Plannr know about this!");
     }.bind(this));
   }
 }
