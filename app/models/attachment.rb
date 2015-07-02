@@ -1,9 +1,14 @@
 class Attachment < ActiveRecord::Base
-  mount_base64_uploader :file_link, AttachmentFileUploader
-  belongs_to :event
-  acts_as_tenant :company
+  after_save :update_for_uploaded_file
+  after_destroy :update_for_destroyed_file
 
-  validate :company_not_over_limits, :on => :create
+  acts_as_tenant :company
+  mount_uploader :file_link, AttachmentFileUploader
+
+  belongs_to :event
+  belongs_to :owner, class_name: "User"
+
+  validate :company_limit, :on => :create
 
   scope :event_attachments, ->(event_id) { where(event_id: event_id)}
 
@@ -12,25 +17,40 @@ class Attachment < ActiveRecord::Base
     event_attachments(event_id).where("lower(attachments.description) LIKE #{wildcard_text} OR lower(attachments.file_name) LIKE #{wildcard_text}")
   }
 
-  def company_not_over_limits
-    if self.company != nil
-      attachment_status =  self.company.attachment_status
-      attachment_limit = self.company.attachment_limit
+  def company_limit
+    # TODO: need to make sure to check company limit against status
+    attachment_status = company.attachment_status
+    attachment_limit = company.attachment_limit
 
-      if attachment_status != nil
-        if attachment_status.put_count > attachment_limit.put_count
-          errors.add(:file_attachment, 'company is over upload count limit')
-        end
+    # if attachment_status != nil
+    #   if attachment_status.put_count > attachment_limit.put_count
+    #     errors.add(:file_attachment, 'company is over upload count limit')
+    #   end
 
-        if attachment_status.space_count > attachment_limit.space_count
-          errors.add(:file_attachment, 'company is over upload space limit')
-        end
-      end
-    end
+    #   if attachment_status.space_count > attachment_limit.space_count
+    #     errors.add(:file_attachment, 'company is over upload space limit')
+    #   end
+    # end
   end
 
-  # def self.quick_create(name, file_attachment, event_id)
-  #   new(name: name, email: file_attachment, event_id: event_id)
-  # end
+  private
 
+  def attachment_status
+    AttachmentStatus.where(company: company).first
+  end
+
+  MEGABYTE = 1024.0 * 1024.0
+
+  def update_for_uploaded_file
+    status = attachment_status
+    status.space_count += (file_link.file.size / MEGABYTE).round(4)
+    status.put_count += 1
+    status.save!
+  end
+
+  def update_for_destroyed_file
+    status = attachment_status
+    status.space_count -= (file_link.file.size / MEGABYTE).round(4)
+    status.save!
+  end
 end
