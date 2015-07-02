@@ -72,25 +72,25 @@ var EventAttachmentsTable = React.createClass({
     var ai = this.actionItems();
     var globalItems = ai.map(function (item) {
       return (
-          <div className="DropdownMenu-item"
-               onClick={this.handleActionClick.bind(this, item, attachmentId)}
-               key={item.name}>
-            {item.name}
-          </div>
+        <div className="DropdownMenu-item"
+             onClick={this.handleActionClick.bind(this, item, attachmentId)}
+             key={item.name}>
+          {item.name}
+        </div>
       )
     }.bind(this));
     return (
-        <div className="TableRow-actions">
-          {globalItems}
-        </div>
+      <div className="TableRow-actions">
+        {globalItems}
+      </div>
     )
   },
   getActionTrigger: function () {
     //just the "thing" that is clickable?
     return (
-        <div className="Table-actionTrigger">
-          <i className="fa fa-ellipsis-v TableRowAction"></i>
-        </div>
+      <div className="Table-actionTrigger">
+        <i className="fa fa-ellipsis-v TableRowAction"></i>
+      </div>
     )
   },
   getCustomRows: function () {
@@ -98,57 +98,57 @@ var EventAttachmentsTable = React.createClass({
     return this.state.eventAttachments.map(function (attachment) {
       var checked = this.state.checkedItems.indexOf(attachment.id) > -1;
       return (
-          <div className="Table-row" key={attachment.id}>
-            <div className="Table-checkbox u-flexGrow-1">
-              <CheckboxInput onChange={this.rowChanged}
-                             value={attachment.id}
-                             checked={checked}
-                             hideCheckbox={hideCheckbox}/>
-            </div>
-            <div className="Table-rowItem u-flexGrow-10">
-              <a href={attachment.file_link.url} target='_blank'>{attachment.file_name}</a>
-            </div>
-            <DropdownMenu
-                trigger={this.getActionTrigger()}
-                customOptions={this.getRowActionMenu(attachment.id)}
-                align="right"/>
+        <div className="Table-row" key={attachment.id}>
+          <div className="Table-checkbox u-flexGrow-1">
+            <CheckboxInput onChange={this.rowChanged}
+                           value={attachment.id}
+                           checked={checked}
+                           hideCheckbox={hideCheckbox}/>
           </div>
+          <div className="Table-rowItem u-flexGrow-10">
+            <a href={attachment.file_link.url} target='_blank'>{attachment.file_name}</a>
+          </div>
+          <DropdownMenu
+            trigger={this.getActionTrigger()}
+            customOptions={this.getRowActionMenu(attachment.id)}
+            align="right"/>
+        </div>
 
       );
     }, this);
   },
   getAttachmentButtonClickableElement: function () {
     return (
-        <ActionButton handleClick={this.openAddModal}
-                      svgClass='createAttachment'
-                      extraPad={false}/>
+      <ActionButton handleClick={this.openAddModal}
+                    svgClass='createAttachment'
+                    extraPad={false}/>
     );
   },
   getActionButton: function () {
     return (
-        <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
-                          onAssociation={this.handleAssociation} />
+      <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
+                        onAssociation={this.handleAssociation}/>
     );
   },
   render: function () {
     return (
-        <Table
-            results={this.state.eventAttachments}
-            columns={this.columns()}
-            useCustomRowComponent={true}
-            showHeaders={true}
-            customRows={this.getCustomRows()}
-            checkedItems={this.state.checkedItems}
-            rowChanged={this.rowChanged}
-            sortItems={this.sortItems()}
-            handleSortClick={this.sortBy}
-            handleSearch={this.search}
-            showActions={this.state.checkedItems.length > 0}
-            actionItems={this.actionItems()}
-            extraPadding={false}
-            tableDataClassName="scrollable"
-            searchPlaceholder="Search Attachments..."
-            actionButton={this.getActionButton()}
+      <Table
+        results={this.state.eventAttachments}
+        columns={this.columns()}
+        useCustomRowComponent={true}
+        showHeaders={true}
+        customRows={this.getCustomRows()}
+        checkedItems={this.state.checkedItems}
+        rowChanged={this.rowChanged}
+        sortItems={this.sortItems()}
+        handleSortClick={this.sortBy}
+        handleSearch={this.search}
+        showActions={this.state.checkedItems.length > 0}
+        actionItems={this.actionItems()}
+        extraPadding={false}
+        tableDataClassName="scrollable"
+        searchPlaceholder="Search Attachments..."
+        actionButton={this.getActionButton()}
         />
     );
   }
