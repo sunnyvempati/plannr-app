@@ -1,5 +1,4 @@
 var EventAttachmentsSmallTile = React.createClass({
-  mixins: [ToastMessages],
   getInitialState: function () {
     return {
       count: null
@@ -15,7 +14,7 @@ var EventAttachmentsSmallTile = React.createClass({
     }.bind(this))
   },
   incrementCount: function (attachment) {
-    this.toast(attachment.file_name + " has been added to this event.");
+    ToastMessages.toast(attachment.file_name + " has been added to this event.");
     var count = this.state.count;
     this.setState({count: count + 1});
   },

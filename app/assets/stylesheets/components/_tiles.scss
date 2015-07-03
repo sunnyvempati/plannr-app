@@ -56,7 +56,6 @@
     @include svg($arrow-tile-hover-url, 56px);
   }
   >* {
-    flex: 1;
     align-self: center;
   }
 }

@@ -23,7 +23,8 @@ var CommentList = React.createClass({
               </div>
             </div>
             <div className={deleteClasses}>
-              <div className="CommentClose" onClick={this.props.deleteComment.bind(this, comment.id)}></div>
+              <div className="CommentClose" onClick={this.props.deleteComment.bind(this, comment.id)}>
+              </div>
             </div>
           </div>
           <div className="ListItem-text">
