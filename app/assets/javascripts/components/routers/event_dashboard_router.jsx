@@ -4,7 +4,12 @@ var EventDashboardRouter = React.createClass({
   },
   componentDidMount: function() {
     Router.run(this.routes(), function (Handler) {
-      React.render(<Handler event={this.props.event} client={this.props.client} authToken={this.props.authToken}/>, React.findDOMNode(this.refs.eventDashboard));
+      React.render(
+        <Handler event={this.props.event}
+                 client={this.props.client}
+                 authToken={this.props.authToken}
+        />
+      , React.findDOMNode(this.refs.eventDashboard));
     }.bind(this));
   },
   routes: function() {
@@ -29,7 +34,10 @@ var EventDashboardRouter = React.createClass({
           Comments
         </div>
         <div className="EventComments">
-          <Comments entity="Event" entity_id={this.props.event.id} authToken={this.props.authToken} />
+          <Comments entity="Event"
+                    entity_id={this.props.event.id}
+                    authToken={this.props.authToken}
+                    currentUser={this.props.currentUser} />
         </div>
       </div>
     );

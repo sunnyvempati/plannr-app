@@ -1,14 +1,21 @@
 class CommentsController < ApplicationController
-  before_action :find_commentable
-  before_action :find_comment, only: :destroy
+  before_action :find_commentable, except: [:destroy, :edit]
+  before_action :find_comment, only: [:destroy, :edit]
 
   def index
-    render_success @commentable.comments.includes(:commenter).order("created_at desc")
+    comments = @commentable.filtered_comments(current_user.id)
+                           .includes(:commenter)
+                           .order("created_at desc")
+    render_success comments
   end
 
   def create
     created_comment = @commentable.comments.create!(comment_params)
     render_success created_comment
+  end
+
+  def edit
+    render_success @comment if @comment.update_attributes!(comment_params)
   end
 
   def destroy
@@ -18,7 +25,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body).merge(commenter: current_user)
+    params.require(:comment).permit(:body, :locked).merge(commenter: current_user)
   end
 
   def find_commentable

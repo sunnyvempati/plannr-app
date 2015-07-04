@@ -11,9 +11,7 @@ var DropdownMenu = React.createClass({
   },
   componentDidMount: function() {
     $(document).on('click', function(event) {
-      if (!$(event.target).closest('#ddmenu').length) {
-        this.closeMenu();
-      }
+      this.closeMenu();
     }.bind(this));
   },
   closeMenu: function() {
@@ -53,7 +51,7 @@ var DropdownMenu = React.createClass({
     });
     var dropdownOptions = !!this.props.customOptions ? this.props.customOptions : this.dropdownMenuItems();
     return (
-      <div className="DropdownMenu" id="ddmenu">
+      <div className="DropdownMenu" id="ddmenu" ref="ddmenu">
         <div className="DropdownMenu-trigger u-clickable" onClick={this.toggleMenu}>
           {this.props.trigger}
         </div>

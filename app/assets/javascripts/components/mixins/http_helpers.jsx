@@ -43,9 +43,26 @@ var HttpHelpers = {
       }.bind(this))
       .always(function() {
         LoadingToast.closeLoading();
-        if ($.isFunction(alwaysCallback)){
+        if ($.isFunction(alwaysCallback)) {
           alwaysCallback();
         }
       });
-  }
+  },
+  putToServer: function(url, params, successCallback, failCallback, alwaysCallback) {
+    LoadingToast.showLoading();
+    $.ajax({
+      url: '/comments',
+      type: 'PUT',
+      data: params,
+      success: function(result) {
+        successCallback(result);
+      },
+      complete: function() {
+        LoadingToast.closeLoading();
+        if ($.isFunction(alwaysCallback)) {
+          alwaysCallback();
+        }
+      },
+    });
+  },
 }

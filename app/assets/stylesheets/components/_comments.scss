@@ -9,11 +9,6 @@
   padding-left: $size-increment*10;
 }
 
-.CommentIcon {
-  padding: $size-increment*2;
-  font-size: 24px;
-}
-
 .Comments-input {
   padding: 24px 0 24px 24px;
   width: 70%;
@@ -33,25 +28,66 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+.ListItem-header {
+  display: flex;
+  align-items: center;
+  flex: 4;
+}
+
 .ListItem-title {
   display: flex;
   align-items: center;
   >* {
-    flex: 1;
+    padding-right: $size-increment*2;
   }
 }
 
 .ListItem-commenter {
   @include font($title-font, normal, 20);
   color: $black-half;
-  padding-bottom: $size-increment;
 }
 
 .ListItem-time {
-  display: flex;
-  justify-content: flex-end;
   @include font($body-1-font, normal, 0);
   color: $black-quarter;
+}
+
+.ListItem-time,
+.ListItem-commenter {
+  padding-bottom: $size-increment;
+}
+
+.ListItem-headerMenu {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: $size-increment*2;
+}
+
+.CommentClose {
+  @include svg($close-url, 12px);
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+.CommentIcon {
+  padding: $size-increment*2;
+  font-size: 24px;
+}
+
+.CommentMenuIcon {
+  padding-right: $size-increment*2;
+  font-size: 16px;
+  &.locked {
+    color: red;
+  }
+}
+
+.CommentClose,
+.CommentMenuIcon {
+  opacity: 0.25;
+  cursor: pointer;
 }
 
 .ListItem-text {

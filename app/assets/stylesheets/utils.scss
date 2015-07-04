@@ -52,3 +52,11 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.u-noBorder {
+  border: none;
+  &:focus {
+    border: none;
+  }
+}
+

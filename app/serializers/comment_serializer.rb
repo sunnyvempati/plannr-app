@@ -1,6 +1,6 @@
 class CommentSerializer < ActiveModel::Serializer
   include ActionView::Helpers::DateHelper
-  attributes :id, :body, :user_name, :time
+  attributes :id, :body, :user_name, :time, :commenter, :locked
 
   def user_name
     object.commenter.profile.full_name
