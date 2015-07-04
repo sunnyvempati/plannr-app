@@ -15,3 +15,11 @@ CarrierWave.configure do |config|
   config.fog_public     = false                                   # optional, defaults to true
   config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}
 end
+
+# fix to allow deleting of Attachment records when the underlying file_link doesn't exist on AWS
+# from here - https://github.com/carrierwaveuploader/carrierwave/pull/1561
+class CarrierWave::Storage::Fog::File
+  def size
+    file.nil? ? 0 : file.content_length
+  end
+end
