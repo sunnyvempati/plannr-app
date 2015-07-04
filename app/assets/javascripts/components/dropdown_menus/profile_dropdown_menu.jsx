@@ -1,4 +1,8 @@
 var ProfileDropdownMenu = React.createClass({
+  propTypes: {
+    profile: React.PropTypes.object,
+    email: React.PropTypes.string
+  },
   getInitialState: function() {
     return {
       open: false

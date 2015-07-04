@@ -1,11 +1,14 @@
 var PageHeader = React.createClass({
+  propTypes: {
+    disableSkrollableHeader: React.PropTypes.bool,
+    header: React.PropTypes.string,
+    profile: React.PropTypes.object,
+    email: React.PropTypes.string
+  },
   getDefaultProps: function() {
     return {
       disableSkrollableHeader: false
     };
-  },
-  propTypes: {
-    disableSkrollableHeader: React.PropTypes.bool
   },
   componentDidMount: function() {
     if (!this.props.disableSkrollableHeader) {
