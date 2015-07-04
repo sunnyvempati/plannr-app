@@ -97,6 +97,7 @@ var EventVendorsTable = React.createClass({
         searchPlaceholder="Search Vendors..."
         onClick={this.openVendorModal}
         actionButton={this.getActionButton()}
+        handleCheckAllChanged={this.toggleCheckAll}
       />
     );
   }

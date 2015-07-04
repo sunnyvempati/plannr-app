@@ -81,6 +81,7 @@ var CompanyUserTable = React.createClass({
           showHeaders={true}
           columns={this.getColumns()}
           searchPlaceholder="Search Users..."
+          handleCheckAllChanged={this.toggleCheckAll}
         />
       </div>
     );
