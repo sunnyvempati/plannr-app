@@ -1,7 +1,7 @@
 var Contacts = React.createClass({
   render: function() {
     return (
-      <RouteHandler />
+      <RouteHandler currentUser={this.props.currentUser} />
     );
   }
 });

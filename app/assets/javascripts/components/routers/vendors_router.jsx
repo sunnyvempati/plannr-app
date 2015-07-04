@@ -1,7 +1,7 @@
 var VendorsRouter = React.createClass({
   componentDidMount: function() {
     Router.run(this.routes(), function (Handler) {
-      React.render(<Handler />, React.findDOMNode(this.refs.vendors));
+      React.render(<Handler currentUser={this.props.currentUser} />, React.findDOMNode(this.refs.vendors));
     }.bind(this));
   },
   routes: function() {

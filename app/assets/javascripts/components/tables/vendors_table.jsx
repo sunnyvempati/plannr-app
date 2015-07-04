@@ -59,7 +59,7 @@ var VendorsTable = React.createClass({
     }.bind(this));
   },
   goToVendor: function(data) {
-    this.transitionTo('vendor', {id: data.id});
+    this.transitionTo('vendor', {id: data.id, currentUser: this.props.currentUser});
   },
   handleActionButtonClick: function() {
     location.href = "/vendors/new";

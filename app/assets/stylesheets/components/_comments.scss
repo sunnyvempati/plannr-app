@@ -31,9 +31,7 @@
 .ListItem-header {
   display: flex;
   align-items: center;
-  >* {
-    flex: 1;
-  }
+  flex: 4;
 }
 
 .ListItem-title {
@@ -60,6 +58,7 @@
 }
 
 .ListItem-headerMenu {
+  flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;

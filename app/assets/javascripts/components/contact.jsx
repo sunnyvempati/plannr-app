@@ -18,7 +18,8 @@ var Contact = React.createClass({
         <div className="Card-title">Comments</div>
         <div className="Card-content">
           <Comments entity="Contact"
-                    entity_id={this.props.params.id} />
+                    entity_id={this.props.params.id}
+                    currentUser={this.props.currentUser} />
         </div>
       </div>
     )

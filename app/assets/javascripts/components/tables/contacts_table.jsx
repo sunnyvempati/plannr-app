@@ -61,7 +61,7 @@ var ContactsTable = React.createClass({
     }.bind(this));
   },
   goToContact: function(data) {
-    this.transitionTo('contact', {id: data.id});
+    this.transitionTo('contact', {id: data.id, currentUser: this.props.currentUser});
   },
   handleActionButtonClick: function() {
     location.href = "/contacts/new";
