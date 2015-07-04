@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    render_success if @comment.update_attribute(comment_params)
+    render_success @comment if @comment.update_attributes!(comment_params)
   end
 
   def destroy

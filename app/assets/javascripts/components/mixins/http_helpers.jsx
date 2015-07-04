@@ -57,7 +57,7 @@ var HttpHelpers = {
       success: function(result) {
         successCallback(result);
       },
-      always: function() {
+      complete: function() {
         LoadingToast.closeLoading();
         if ($.isFunction(alwaysCallback)) {
           alwaysCallback();

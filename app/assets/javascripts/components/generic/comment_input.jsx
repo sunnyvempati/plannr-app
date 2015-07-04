@@ -1,7 +1,6 @@
 var CommentInput = React.createClass({
   getInitialState: function() {
     var value = !!this.props.data ? this.props.data.body : "";
-    console.log(this.props.data);
     return {
       errorState: false,
       inputValue: value

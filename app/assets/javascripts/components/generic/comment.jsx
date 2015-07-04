@@ -2,11 +2,11 @@ var Comment = React.createClass({
   getInitialState: function() {
     return {
       editMode: false,
-      locked: false
+      locked: false,
+      comment: this.props.data
     };
   },
-  renderComment: function() {
-    var comment = this.props.data;
+  renderComment: function(comment) {
     var currentUserComment = this.props.currentUser.id == comment.commenter.id;
     var actionClasses = classNames({
       "ListItem-headerMenu": true,
@@ -40,12 +40,18 @@ var Comment = React.createClass({
     this.setState({editMode: !this.state.editMode});
   },
   updateComment: function(comment) {
-    HttpHelpers.putToServer("/comments", comment, function(result) {
-      console.log(result);
-    })
+    var params = {
+      id: comment.id,
+      comment: {
+        body: comment.body
+      }
+    };
+    HttpHelpers.putToServer("/comments", params, function(result) {
+      this.toggleEditMode();
+      this.setState({comment: result.comment});
+    }.bind(this))
   },
-  renderEditableComment: function() {
-    var comment = this.props.data;
+  renderEditableComment: function(comment) {
     return (
       <div className="Comments-listItem">
         <div className="ListItem-header">
@@ -66,6 +72,7 @@ var Comment = React.createClass({
     );
   },
   render: function() {
-    return this.state.editMode ? this.renderEditableComment() : this.renderComment();
+    var comment = this.state.comment;
+    return this.state.editMode ? this.renderEditableComment(comment) : this.renderComment(comment);
   }
 });
