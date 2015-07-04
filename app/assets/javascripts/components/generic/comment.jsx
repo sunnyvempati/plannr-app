@@ -1,8 +1,8 @@
 var Comment = React.createClass({
+  mixins: [ToastMessages],
   getInitialState: function() {
     return {
       editMode: false,
-      locked: false,
       comment: this.props.data
     };
   },
@@ -12,6 +12,12 @@ var Comment = React.createClass({
       "ListItem-headerMenu": true,
       "u-hidden": !currentUserComment
     });
+    var lockClasses = classNames({
+      'CommentMenuIcon': true,
+      'fa fa-lock locked': this.state.comment.locked,
+      'fa fa-unlock': !this.state.comment.locked,
+    });
+    var lockClass = this.state.comment.locked ? "fa fa-lock" : "fa fa-unlock";
     return (
       <div className="Comments-listItem">
         <div className="ListItem-header">
@@ -24,7 +30,9 @@ var Comment = React.createClass({
             </div>
           </div>
           <div className={actionClasses}>
-            <i className="fa fa-unlock-alt CommentMenuIcon"></i>
+            <div title="If locked, comment only viewable by you.">
+              <i className={lockClasses} onClick={this.toggleLocked.bind(this, comment)}></i>
+            </div>
             <i className="fa fa-pencil CommentMenuIcon" onClick={this.toggleEditMode}></i>
             <div className="CommentClose" onClick={this.props.handleDeleteComment}>
             </div>
@@ -35,6 +43,17 @@ var Comment = React.createClass({
         </div>
       </div>
     );
+  },
+  toggleLocked: function(comment) {
+    var params = {
+      id: comment.id,
+      comment: {
+        locked: !comment.locked
+      }
+    };
+    HttpHelpers.putToServer("/comments", params, function(result) {
+      this.setState({comment: result.comment});
+    }.bind(this));
   },
   toggleEditMode: function() {
     this.setState({editMode: !this.state.editMode});
@@ -49,7 +68,7 @@ var Comment = React.createClass({
     HttpHelpers.putToServer("/comments", params, function(result) {
       this.toggleEditMode();
       this.setState({comment: result.comment});
-    }.bind(this))
+    }.bind(this));
   },
   renderEditableComment: function(comment) {
     return (

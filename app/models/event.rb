@@ -1,5 +1,6 @@
 # An event
 class Event < ActiveRecord::Base
+  include Commentable
   acts_as_tenant :company
 
   has_many :event_contacts, dependent: :destroy
@@ -8,7 +9,6 @@ class Event < ActiveRecord::Base
   has_many :vendors, through: :event_vendors
   has_many :tasks, dependent: :destroy
   has_many :attachments, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
 
@@ -20,12 +20,12 @@ class Event < ActiveRecord::Base
     where("lower(events.name) LIKE lower(#{wildcard_text})")
   }
 
-  def self.header
-    'Events'
-  end
-
   def other_contacts
     Contact.other_contacts(id)
+  end
+
+  def self.header
+    'Events'
   end
 
   protected

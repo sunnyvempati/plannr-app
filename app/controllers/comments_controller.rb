@@ -3,7 +3,10 @@ class CommentsController < ApplicationController
   before_action :find_comment, only: [:destroy, :edit]
 
   def index
-    render_success @commentable.comments.includes(:commenter).order("created_at desc")
+    comments = @commentable.filtered_comments(current_user.id)
+                           .includes(:commenter)
+                           .order("created_at desc")
+    render_success comments
   end
 
   def create
@@ -22,7 +25,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body).merge(commenter: current_user)
+    params.require(:comment).permit(:body, :locked).merge(commenter: current_user)
   end
 
   def find_commentable

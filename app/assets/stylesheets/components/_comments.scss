@@ -80,6 +80,9 @@
 .CommentMenuIcon {
   padding-right: $size-increment*2;
   font-size: 16px;
+  &.locked {
+    color: red;
+  }
 }
 
 .CommentClose,
