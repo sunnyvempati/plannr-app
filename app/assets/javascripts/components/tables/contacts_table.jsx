@@ -91,7 +91,9 @@ var ContactsTable = React.createClass({
         showHeaders={true}
         searchPlaceholder="Search Contacts..."
         onClick={this.goToContact}
-        actionButton={this.getActionButton()}/>
+        actionButton={this.getActionButton()}
+        handleCheckAllChanged={this.toggleCheckAll}
+      />
     );
   }
 });

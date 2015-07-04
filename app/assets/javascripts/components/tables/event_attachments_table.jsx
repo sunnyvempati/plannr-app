@@ -149,6 +149,7 @@ var EventAttachmentsTable = React.createClass({
             tableDataClassName="scrollable"
             searchPlaceholder="Search Attachments..."
             actionButton={this.getActionButton()}
+            handleCheckAllChanged={this.toggleCheckAll}
         />
     );
   }
