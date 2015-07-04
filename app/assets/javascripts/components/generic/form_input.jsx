@@ -4,7 +4,7 @@ var FormInput = React.createClass({
     type: React.PropTypes.string,
     id: React.PropTypes.string,
     name: React.PropTypes.string,
-    autofocus: React.PropTypes.bool,
+    autofocus: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     disabled: React.PropTypes.bool
   },

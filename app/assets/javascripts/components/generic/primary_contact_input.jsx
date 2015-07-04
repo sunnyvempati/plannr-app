@@ -1,5 +1,5 @@
 var PrimaryContactInput = React.createClass({
-  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [Formsy.Mixin],
   getInitialState: function() {
     return {
       contactSelected: false,
@@ -25,7 +25,7 @@ var PrimaryContactInput = React.createClass({
         // uses autocomplete render new mixin
         // to create a row item "Create new contact"
         // the argument is the entity to create
-        contacts.push(this.getNewItem("contact"));
+        contacts.push(AutocompleteRenderNew.getNewItem("contact"));
       }
       this.setState({contacts: contacts});
     }.bind(this));
@@ -56,7 +56,7 @@ var PrimaryContactInput = React.createClass({
                     itemSelected={this.addToForm}
                     data={this.state.contacts}
                     focus={this.state.focus}
-                    renderItem={this.renderItem} />
+                    renderItem={AutocompleteRenderNew.renderItem} />
     );
   },
   renderSelectedContact: function() {

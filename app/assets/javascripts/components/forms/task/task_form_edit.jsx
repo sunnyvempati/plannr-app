@@ -14,7 +14,7 @@ var TaskFormEdit = React.createClass({
       location.href = '/tasks';
     }
   },
-  render: function () {
+  render: function() {
     var action = "/tasks/" + this.props.model.id,
       routeVerb = "PUT",
       primaryButtonText = "Update",
@@ -23,7 +23,7 @@ var TaskFormEdit = React.createClass({
 
     return (
       <TaskForm
-        action= {action}
+        action={action}
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
@@ -34,7 +34,7 @@ var TaskFormEdit = React.createClass({
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
         onSuccess={this.onSuccess}
-      />
+        />
     );
   }
 });

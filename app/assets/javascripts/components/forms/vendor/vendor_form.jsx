@@ -3,7 +3,7 @@ var VendorForm = React.createClass({
     action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
     primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST', 'GET']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
 
@@ -39,15 +39,15 @@ var VendorForm = React.createClass({
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
-          mapping={this.mapInputs}
-          onSuccess={this.props.onSuccess}
-          routeVerb={this.props.routeVerb}
-          authToken={this.props.authToken}
-          primaryButtonText={this.props.primaryButtonText}
-          secondaryButtonVisible={this.props.secondaryButtonVisible}
-          secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}
-          id='vendor_form'>
+              mapping={this.mapInputs}
+              onSuccess={this.props.onSuccess}
+              routeVerb={this.props.routeVerb}
+              authToken={this.props.authToken}
+              primaryButtonText={this.props.primaryButtonText}
+              secondaryButtonVisible={this.props.secondaryButtonVisible}
+              secondaryButtonHref={this.props.secondaryButtonHref}
+              showButtonList={this.props.showButtonList}
+              id='vendor_form'>
 
           <FormInput
             id='vendor_name'
@@ -58,8 +58,7 @@ var VendorForm = React.createClass({
             label='Name*'
             value={vendor.name}
             disabled={this.props.disableForm}
-            required
-          />
+            required/>
           <FormInput
             id='vendor_location'
             name='location'
@@ -67,8 +66,7 @@ var VendorForm = React.createClass({
             type='text'
             label='Location'
             value={vendor.location}
-            disabled={this.props.disableForm}
-          />
+            disabled={this.props.disableForm}/>
           <FormInput
             id='vendor_phone'
             name='phone'
@@ -76,13 +74,12 @@ var VendorForm = React.createClass({
             type='text'
             label='Phone'
             value={vendor.phone}
-            disabled={this.props.disableForm}
-          />
+            disabled={this.props.disableForm}/>
           <PrimaryContactInput
             name='primary_contact_id'
             value={vendor.primary_contact_id}
             id='vendor_primary_contact'
-            label='Primary Contact' />
+            label='Primary Contact'/>
           <TextAreaInput
             id='vendor_description'
             name='description'
@@ -91,8 +88,7 @@ var VendorForm = React.createClass({
             placeholder='What else do you need to know?'
             value={vendor.description}
             disabled={this.props.disableForm}
-            formId='contact_form'
-          />
+            formId='contact_form'/>
         </Form>
       </div>
     );

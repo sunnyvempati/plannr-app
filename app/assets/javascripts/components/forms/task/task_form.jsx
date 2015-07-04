@@ -3,7 +3,7 @@ var TaskForm = React.createClass({
     action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
     primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST', 'GET', 'PUT']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
     model: React.PropTypes.object.isRequired,
@@ -23,19 +23,14 @@ var TaskForm = React.createClass({
       }
     };
   },
-  getInitialState: function() {
-    return {
-      eventOptions: <option>Loading..</option>
-    };
-  },
   componentDidMount: function() {
     this.retrieveEventSelectOptionsAsync();
   },
-  retrieveEventSelectOptionsAsync: function () {
-    $.get('/events.json', function (result) {
+  retrieveEventSelectOptionsAsync: function() {
+    $.get('/events.json', function(result) {
       var options = [];
       if (!!result.events) {
-        options = $.map(result.events, function (value, index) {
+        options = $.map(result.events, function(value, index) {
           return (<option key={index} value={value.id}>{value.name}</option>);
         });
       } else {
@@ -43,15 +38,9 @@ var TaskForm = React.createClass({
       }
       this.setState({eventOptions: options});
     }.bind(this))
-    .fail(function(jqXHR, textStatus, errorThrown){
-      this.setState({eventOptions: <option>Error!!</option>});
-    }.bind(this));
-  },
-  getDefaultOptionValue: function() {
-    var options = this.state.eventOptions;
-    if (options.length > 0) {
-      return options[0].props.value;
-    }
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        this.setState({eventOptions: <option>Error!!</option>});
+      }.bind(this));
   },
   render: function() {
     var task = {};
@@ -63,8 +52,7 @@ var TaskForm = React.createClass({
         deadline: model.deadline,
         eventId: model.event_id,
         id: model.id,
-        assigned_to: model.assigned_to_id,
-        description: model.description
+        assigned_to: model.assigned_to_id
       };
     }
     var id = 'task_form';
@@ -90,29 +78,25 @@ var TaskForm = React.createClass({
             value={task.name}
             placeholder='What is the name of your task?'
             disabled={this.props.disableForm}
-            required />
+            required/>
           <DatePickerInput
             name="deadline"
             label="Deadline"
             value={ !!task.deadline ? moment(task.deadline) : null }
-            placeholder="When's' it due?"
-            minDate={moment()}
-          />
-          <FormSelectInput
-            id='task_event_id'
+            placeholder="When's it due?"
+            minDate={moment()}/>
+          <EventFormInputAutocomplete
             name='event_id'
-            type={eventHidden}
+            value={task.eventId}
+            id='task_event_id'
             label='Event*'
-            options={this.state.eventOptions}
-            value={task.eventId || this.getDefaultOptionValue()}
-            form={'task_form'}
             disabled={this.props.disableForm}
-            required />
+            required/>
           <AssignedToInput
             name='assigned_to'
             value={task.assigned_to}
             id='task_assigned_to'
-            label='Assign to' />
+            label='Assign to'/>
           <TextAreaInput
             name="description"
             form={id}
@@ -120,7 +104,7 @@ var TaskForm = React.createClass({
             className="TextAreaInput"
             label="Description"
             disabled={this.props.disableForm}
-            placeholder="How would you describe this task?" />
+            placeholder="How would you describe this task?"/>
         </Form>
       </div>
     );

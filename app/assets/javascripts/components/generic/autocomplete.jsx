@@ -3,7 +3,6 @@ var Autocomplete = React.createClass({
     itemSelected: React.PropTypes.func,
     focus: React.PropTypes.bool,
     retrieveData: React.PropTypes.func,
-    renderItem: React.PropTypes.func,
     data: React.PropTypes.array
   },
   getDefaultProps: function() {
@@ -11,7 +10,6 @@ var Autocomplete = React.createClass({
       placeholder: "Start typing..."
     };
   },
-  mixins: [AutocompleteBoldItem],
   getInitialState: function() {
     return {
       open: false,
@@ -54,7 +52,7 @@ var Autocomplete = React.createClass({
       'hidden': !this.state.open
     });
     var results = this.props.data.map(function(item) {
-      var itemName = this.formatMatchedCharacters(item.name, term);
+      var itemName = AutocompleteBoldItem.formatMatchedCharacters(item.name, term);
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (

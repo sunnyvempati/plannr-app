@@ -18,11 +18,11 @@ var VendorFormNew = React.createClass({
       this.context.router.transitionTo('tileVendorsList');
     }
     else {
-      location.href = '/vendors/#/view/'+result.vendor.id;
+      location.href = '/vendors/#/view/' + result.vendor.id;
     }
   },
-  render: function () {
-    var action = "/vendors" ,
+  render: function() {
+    var action = "/vendors",
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
@@ -30,7 +30,7 @@ var VendorFormNew = React.createClass({
 
     return (
       <VendorForm
-        action= {action}
+        action={action}
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
@@ -40,8 +40,7 @@ var VendorFormNew = React.createClass({
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
         authToken={this.props.authToken}
-        onSuccess={this.onSuccess}
-      />
+        onSuccess={this.onSuccess}/>
     );
   }
 });

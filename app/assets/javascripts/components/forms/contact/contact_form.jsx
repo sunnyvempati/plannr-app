@@ -3,7 +3,7 @@ var ContactForm = React.createClass({
     action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
     primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST', 'GET', 'PUT']).isRequired,
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     showButtonList: React.PropTypes.bool.isRequired,
 
@@ -12,47 +12,52 @@ var ContactForm = React.createClass({
     secondaryButtonHref: React.PropTypes.string
   },
   hrefRoot: '/contacts',
-  typeOptions: [<option key='1' value='1'>Client</option>, <option key='2' value='2'>Vendor</option>],
-  mapInputs: function (inputs) {
-    return {
+  typeOptions: [<option key='1' value='1'>Client</option>,
+    <option key='2' value='2'>Vendor</option>],
+  mapInputs: function(inputs) {
+    var retVal = {
       'authenticity_token': inputs.authenticity_token,
       'contact': {
         'name': inputs.name,
         'email': inputs.email,
         'category': inputs.category,
         'phone': inputs.phone,
-        'organization': inputs.organization,
+        'organization': inputs.organization || null,
         'description': inputs.description,
-        'vendor_id': inputs.vendor
+        'vendor_id': inputs.vendor_id || null
       }
     };
+    return retVal;
   },
   contactTypeOnChange: function(value) {
     this.setState({category: value});
   },
-  vendorOrganizationField: function (category, contact, propsDisableForm) {
+  renderVendorOrganizationField: function(category, contact, propsDisableForm) {
     // conditionally display either contact_organization field or contact_vendor
     // based on category (client or vendor)
     var retHtml;
-    if (this.state.category == 1) {
-      retHtml = <FormInput
-                  id='contact_organization'
-                  name='organization'
-                  placeholder='What is the company of your contact?'
-                  type='text'
-                  label='organization'
-                  value={contact.organization}
-                  disabled={propsDisableForm}
-                  />;
-    }
-    else {
-      retHtml = <VendorFormInputAutocomplete
-                  name='vendor'
-                  value={contact.vendor_id}
-                  id='contact_vendor'
-                  label='vendor'
-                  disabled={propsDisableForm}
-                  />;
+    switch (this.state.category) {
+      case 1:
+        retHtml = <FormInput
+          id='contact_organization'
+          name='organization'
+          placeholder='What is the organization of your contact?'
+          type='text'
+          label='organization'
+          value={contact.organization}
+          disabled={propsDisableForm}/>;
+        break;
+      case 2:
+        retHtml = <VendorFormInputAutocomplete
+          name='vendor_id'
+          value={contact.vendorId}
+          id='contact_vendor_id'
+          label='Vendor'
+          disabled={propsDisableForm}/>;
+        break;
+      default:
+        retHtml = "";
+        break;
     }
     return retHtml;
   },
@@ -61,7 +66,7 @@ var ContactForm = React.createClass({
       category: this.props.model.category || 1
     };
   },
-  render: function () {
+  render: function() {
     var contact = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -73,21 +78,21 @@ var ContactForm = React.createClass({
         organization: model.organization,
         description: model.description,
         id: model.id,
-        vendor_id: model.vendor_id
+        vendorId: model.vendor_id
       };
     }
     return (
       <div className='FormContainer--leftAligned'>
         <Form url={this.props.action}
-          mapping={this.mapInputs}
-          onSuccess={this.props.onSuccess}
-          routeVerb={this.props.routeVerb}
-          authToken={this.props.authToken}
-          primaryButtonText={this.props.primaryButtonText}
-          secondaryButtonVisible={this.props.secondaryButtonVisible}
-          secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}
-          id='contact_form'>
+              mapping={this.mapInputs}
+              onSuccess={this.props.onSuccess}
+              routeVerb={this.props.routeVerb}
+              authToken={this.props.authToken}
+              primaryButtonText={this.props.primaryButtonText}
+              secondaryButtonVisible={this.props.secondaryButtonVisible}
+              secondaryButtonHref={this.props.secondaryButtonHref}
+              showButtonList={this.props.showButtonList}
+              id='contact_form'>
 
           <FormInput
             id='contact_name'
@@ -98,20 +103,14 @@ var ContactForm = React.createClass({
             label='Name*'
             value={contact.name}
             disabled={this.props.disableForm}
-            required
-          />
-          <FormSelectInput
+            required/>
+          <ContactTypeFormInputAutocomplete
             id='contact_type'
             name='category'
-            className='SelectInput'
             label='Type*'
-            options={this.typeOptions}
             value={contact.category || 1}
-            disabled={this.props.disableForm}
-            onChangeCallback={this.contactTypeOnChange}
-            required
-          />
-          { this.vendorOrganizationField(this.state.category, contact, this.props.disableForm) }
+            onChange={this.contactTypeOnChange}/>
+          { this.renderVendorOrganizationField(this.state.category, contact, this.props.disableForm) }
           <FormInput
             id='contact_email'
             name='email'
@@ -119,8 +118,7 @@ var ContactForm = React.createClass({
             type='text'
             label='Email'
             value={contact.email}
-            disabled={this.props.disableForm}
-          />
+            disabled={this.props.disableForm}/>
           <FormInput
             id='contact_phone'
             name='phone'
@@ -128,8 +126,7 @@ var ContactForm = React.createClass({
             type='tel'
             label='Phone'
             value={contact.phone}
-            disabled={this.props.disableForm}
-          />
+            disabled={this.props.disableForm}/>
           <TextAreaInput
             id='contact_description'
             name='description'
@@ -138,8 +135,7 @@ var ContactForm = React.createClass({
             placeholder='What else do you need to know?'
             value={contact.description}
             disabled={this.props.disableForm}
-            formId='contact_form'
-          />
+            formId='contact_form'/>
         </Form>
       </div>
     );

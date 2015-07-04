@@ -3,8 +3,8 @@ var EventFormNew = React.createClass({
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
   },
-  render: function () {
-    var action = "/events" ,
+  render: function() {
+    var action = "/events",
       routeVerb = "POST",
       primaryButtonText = "Create",
       secondaryButtonText = "Cancel",
@@ -12,7 +12,7 @@ var EventFormNew = React.createClass({
 
     return (
       <EventForm
-        action= {action}
+        action={action}
         model={this.props.model}
         disableForm={false}
         showButtonList={true}
@@ -21,8 +21,7 @@ var EventFormNew = React.createClass({
         secondaryButtonText={secondaryButtonText}
         secondaryButtonVisible={true}
         secondaryButtonHref={secondaryButtonHref}
-        authToken={this.props.authToken}
-      />
+        authToken={this.props.authToken}/>
     );
   }
 });
