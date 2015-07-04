@@ -104,6 +104,7 @@ var EventsTable = React.createClass({
           extraPadding={true}
           searchPlaceholder="Search Events..."
           actionButton={this.getActionButton()}
+          handleCheckAllChanged={this.toggleCheckAll}
         />
       </div>
     );

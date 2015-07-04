@@ -20,6 +20,13 @@ var TableCheckbox = {
       checkedItems: checkedItems
     });
   },
+  toggleCheckAll: function(checked, data) {
+    var checkedItems = [];
+    if (checked) {
+      checkedItems = $.map(data, function(obj) { return obj.id });
+    }
+    this.setState({checkedItems: checkedItems});
+  },
   spliceResults: function(data, ids) {
     return $.map(data, function(item, index) {
       if (ids.indexOf(item.id) === -1) {

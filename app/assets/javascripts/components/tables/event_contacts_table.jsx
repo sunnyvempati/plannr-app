@@ -98,6 +98,7 @@ var EventContactsTable = React.createClass({
         searchPlaceholder="Search Contacts..."
         onClick={this.openContactModal}
         actionButton={this.getActionButton()}
+        handleCheckAllChanged={this.toggleCheckAll}
       />
     );
   }

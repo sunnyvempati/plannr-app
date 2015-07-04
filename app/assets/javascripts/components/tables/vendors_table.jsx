@@ -89,7 +89,9 @@ var VendorsTable = React.createClass({
         extraPadding={true}
         searchPlaceholder="Search Vendors..."
         onClick={this.goToVendor}
-        actionButton={this.getActionButton()}/>
+        actionButton={this.getActionButton()}
+        handleCheckAllChanged={this.toggleCheckAll}
+      />
     );
   }
 });

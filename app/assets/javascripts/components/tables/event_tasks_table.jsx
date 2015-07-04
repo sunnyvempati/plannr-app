@@ -120,6 +120,7 @@ var EventTasksTable = React.createClass({
         tableDataClassName="scrollable"
         searchPlaceholder="Search Tasks..."
         actionButton={this.getActionButton()}
+        handleCheckAllChanged={this.toggleCheckAll}
       />
     );
   }

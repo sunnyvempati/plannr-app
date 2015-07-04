@@ -18,7 +18,8 @@ var Table = React.createClass({
     showToolbar: React.PropTypes.bool,
     useCustomRowComponent: React.PropTypes.bool,
     customRows: React.PropTypes.array,
-    tableDataClassName: React.PropTypes.string
+    tableDataClassName: React.PropTypes.string,
+    handleCheckAllChanged: React.PropTypes.func
   },
   getDefaultProps: function() {
     return {
@@ -101,6 +102,9 @@ var Table = React.createClass({
       </div>
     );
   },
+  handleCheckAllChanged: function(checked) {
+    this.props.handleCheckAllChanged(checked, this.props.results);
+  },
   getHeaders: function() {
     var headers = this.props.columns.map(function(column) {
       var rowClass = "Table-rowItem " + "u-flexGrow-" + column.grow;
@@ -110,7 +114,11 @@ var Table = React.createClass({
     });
     return (
       <div className="Table-header">
-        <div className="Table-checkbox u-flexGrow-1"></div>
+        <div className="Table-checkbox u-flexGrow-1">
+          <CheckboxInput
+            onChange={this.handleCheckAllChanged}
+            checked={this.props.checkedItems.length == this.props.results.length && this.props.results.length > 0} />
+        </div>
         {headers}
         <div className="Table-action"></div>
       </div>
