@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
   config.ignore_processing_errors = false
   config.ignore_download_errors = false
 
-  config.fog_credentials = {:provider => 'AWS'}
+  config.fog_credentials = {provider: 'AWS', region: 'us-west-2'}
   # TODO: get to work with dev/test/prod
   config.fog_directory =  'plannr-development'
   #config.fog_directory  = "plannr-#{Rails.env}"
