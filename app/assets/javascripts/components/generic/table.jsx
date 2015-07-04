@@ -17,7 +17,7 @@ var Table = React.createClass({
     showHeaders: React.PropTypes.bool,
     showToolbar: React.PropTypes.bool,
     useCustomRowComponent: React.PropTypes.bool,
-    customRows: React.PropTypes.array,
+    customRows: React.PropTypes.object,
     tableDataClassName: React.PropTypes.string
   },
   getDefaultProps: function() {
