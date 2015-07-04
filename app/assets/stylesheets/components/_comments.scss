@@ -9,11 +9,6 @@
   padding-left: $size-increment*10;
 }
 
-.CommentIcon {
-  padding: $size-increment*2;
-  font-size: 24px;
-}
-
 .Comments-input {
   padding: 24px 0 24px 24px;
   width: 70%;
@@ -73,6 +68,22 @@
 
 .CommentClose {
   @include svg($close-url, 12px);
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+.CommentIcon {
+  padding: $size-increment*2;
+  font-size: 24px;
+}
+
+.CommentMenuIcon {
+  padding-right: $size-increment*2;
+  font-size: 16px;
+}
+
+.CommentClose,
+.CommentMenuIcon {
   opacity: 0.25;
   cursor: pointer;
 }

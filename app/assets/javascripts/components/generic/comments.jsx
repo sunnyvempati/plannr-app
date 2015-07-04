@@ -42,10 +42,14 @@ var Comments = React.createClass({
   render: function() {
     return (
       <div className="Comments">
-        <CommentInput onAdd={this.addComment} />
-        <CommentList data={this.state.comments}
-                     currentUser={this.props.currentUser}
-                     deleteComment={this.deleteComment} />
+        <div className="Comments-input">
+          <CommentInput onAdd={this.addComment} />
+        </div>
+        <div className="Comments-list">
+          <CommentList data={this.state.comments}
+                       currentUser={this.props.currentUser}
+                       deleteComment={this.deleteComment} />
+        </div>
       </div>
     );
   }

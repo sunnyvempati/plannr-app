@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :find_commentable, except: :destroy
-  before_action :find_comment, only: :destroy
+  before_action :find_commentable, except: [:destroy, :edit]
+  before_action :find_comment, only: [:destroy, :edit]
 
   def index
     render_success @commentable.comments.includes(:commenter).order("created_at desc")
@@ -9,6 +9,10 @@ class CommentsController < ApplicationController
   def create
     created_comment = @commentable.comments.create!(comment_params)
     render_success created_comment
+  end
+
+  def edit
+    render_success if @comment.update_attribute(comment_params)
   end
 
   def destroy
