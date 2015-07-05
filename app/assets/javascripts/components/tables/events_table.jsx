@@ -25,6 +25,7 @@ var EventsTable = React.createClass({
     var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
     return this.state.events.map(function(event) {
       var checked = this.state.checkedItems.indexOf(event.id) > -1;
+      var daysTill = !!event.days_till ? event.days_till + " days left" : "";
       return(
         <div className="EventsTable-row" key={event.id}>
           <div className="EventsTable-rowHeader">
@@ -37,7 +38,7 @@ var EventsTable = React.createClass({
               </div>
             </div>
             <div className="EventsTable-rowDaysTill">
-              {event.days_till + " days left"}
+              {daysTill}
             </div>
           </div>
           <div className="EventsTable-rowContent">

@@ -11,5 +11,5 @@ class EventSerializer < ActiveModel::Serializer
       # round to ceiling
       rational_date.ceil
     end
-end
+  end
 end
