@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ContactsController, type: :controller do
-
   setup :activate_authlogic
 
   let(:user) { FactoryGirl.create(:user) }
@@ -16,16 +15,15 @@ RSpec.describe ContactsController, type: :controller do
     let(:number_of_contacts) { 2 }
 
     before do
-      get :index
       number_of_contacts.times do
         FactoryGirl.create(:contact)
       end
+      get :index, format: :json
     end
 
-    it "the correct number of contacts were created" do
-      #response object has all the returned values from action
-      expect(response.status).to eq(200)
-      expect(assigns(:contacts).count).to eq number_of_contacts
+    it 'the correct number of contacts were created' do
+      expect(response).to be_success
+      expect(json_response['contacts'].count).to eq number_of_contacts
     end
   end
 

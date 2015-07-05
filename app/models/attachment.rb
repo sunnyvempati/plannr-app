@@ -19,8 +19,8 @@ class Attachment < ActiveRecord::Base
 
   def company_limit
     # TODO: need to make sure to check company limit against status
-    attachment_status = company.attachment_status
-    attachment_limit = company.attachment_limit
+    # attachment_status = company.attachment_status
+    # attachment_limit = company.attachment_limit
 
     # if attachment_status != nil
     #   if attachment_status.put_count > attachment_limit.put_count

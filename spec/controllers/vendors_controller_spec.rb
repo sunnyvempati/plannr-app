@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe VendorsController, type: :controller do
-
   setup :activate_authlogic
 
   let(:user) { FactoryGirl.create(:user) }
@@ -34,7 +33,5 @@ RSpec.describe VendorsController, type: :controller do
       parsed_body = JSON.parse(response.body)
       expect(parsed_body["vendors"].count).to eq 2
     end
-
   end
-
 end

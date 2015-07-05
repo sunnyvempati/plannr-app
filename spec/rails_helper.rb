@@ -9,6 +9,7 @@ require 'capybara/rspec'
 require 'support/helpers/features/session_helpers'
 require 'support/helpers/session_helpers'
 require 'support/helpers/event_helpers'
+require 'support/helpers/request_helpers'
 require "authlogic/test_case"
 
 require 'pry'
@@ -42,6 +43,7 @@ RSpec.configure do |config|
   config.include EventHelpers
   config.include SessionHelpers
   config.include Authlogic::TestCase
+  config.include Requests::JsonHelpers, type: :controller
 
   config.after(:each) do
     ActsAsTenant.current_tenant = nil
