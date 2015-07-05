@@ -1,4 +1,4 @@
-//TODO: rename to inform that this is to handle the LoadingToast messages
+//TODO: rename to inform that this is to handle the ajax calls by adding wrapping toast message (LoadingToast messages)
 var HttpHelpers = {
   genericFail: function(jqXHR, textStatus, errorThrown) {
     ToastMessages.toast("Aw man, something went wrong on get. Let Plannr know about this!");
