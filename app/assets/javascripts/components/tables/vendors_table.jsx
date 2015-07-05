@@ -7,7 +7,7 @@ var VendorsTable = React.createClass({
     HttpHelpers
   ],
   propTypes: {
-    currentUser: React.React.PropTypes.object
+    currentUser: React.PropTypes.object
   },
   getInitialState: function() {
     return {
