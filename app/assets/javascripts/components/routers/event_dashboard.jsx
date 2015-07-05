@@ -1,6 +1,8 @@
 var EventDashboard = React.createClass({
   propTypes: {
-    authToken: React.PropTypes.string.isRequired
+    authToken: React.PropTypes.string.isRequired,
+    event: React.PropTypes.object.isRequired,
+    client: React.PropTypes.object.isRequired
   },
   render: function () {
     return (
