@@ -6,6 +6,9 @@ var VendorsTable = React.createClass({
     LoadingToast,
     HttpHelpers
   ],
+  propTypes: {
+    currentUser: React.React.PropTypes.object
+  },
   getInitialState: function() {
     return {
       vendors: []
