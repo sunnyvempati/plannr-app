@@ -34,9 +34,9 @@ var TaskRow = React.createClass({
       </div>
     )
   },
-  eventRow: function() {
+  renderEventColumn: function() {
     return (
-      <div className="Table-rowItem u-flexGrow-10">
+      <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-10">
         {this.props.data.event}
       </div>
     )
@@ -48,7 +48,7 @@ var TaskRow = React.createClass({
       'Table-row': true,
       'task-selected': completed
     });
-    var eventRow = this.props.global ? this.eventRow() : null;
+    var eventColumn = this.props.global ? this.renderEventColumn() : null;
     return (
       <div className={rowClasses}>
         <div className="Table-checkbox u-flexGrow-1">
@@ -57,13 +57,11 @@ var TaskRow = React.createClass({
                          checked={completed}
                          rounded={true} />
         </div>
-        <div className="Table-rowItem u-flexGrow-10">{data.name}</div>
-        <div className="Table-rowItem u-flexGrow-4">{data.deadline}</div>
-        <div className="Table-rowItem u-flexGrow-4">{data.status}
-        </div>
-        <div className="Table-rowItem u-flexGrow-4">{data.assigned_to}
-        </div>
-        {eventRow}
+        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-10">{data.name}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.deadline}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.status}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.assigned_to}</div>
+        {eventColumn}
         <DropdownMenu trigger={this.getActionTrigger()}
                       customOptions={this.getRowActionMenu()}
                       align="right" />

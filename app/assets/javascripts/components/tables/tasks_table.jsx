@@ -76,6 +76,9 @@ var TasksTable = React.createClass({
       {name: "My Tasks - Completed", handler: this.getUserTasks.bind(this, {status: 2})},
     ]
   },
+  goToTask: function(data) {
+    location.href =  "/tasks/" + data.id + "/edit";
+  },
   handleActionButtonClick: function() {
     location.href = "/tasks/new";
   },
@@ -93,7 +96,7 @@ var TasksTable = React.createClass({
         columns={this.getColumns()}
         showHeaders={true}
         useCustomRowComponent={true}
-        customRows={this.getCustomRows(true)}
+        customRows={this.getCustomRows(true, this.goToTask)}
         sortItems={this.sortItems()}
         handleSortClick={this.sortBy}
         handleSearch={this.search}
@@ -103,6 +106,7 @@ var TasksTable = React.createClass({
         filterable={true}
         filterItems={this.filterItems()}
         searchPlaceholder="Search Tasks..."
+        onClick={this.goToTask}
         actionButton={this.getActionButton()}
       />
     );

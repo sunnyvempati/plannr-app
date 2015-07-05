@@ -18,8 +18,8 @@ var TaskCheckboxRows = {
       this.setState({tasks: newData});
     }.bind(this));
   },
-  // global shows event
-  getCustomRows: function(global) {
+  // global shows event column
+  getCustomRows: function(global, handleRowClick) {
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
     var rows =  this.state.tasks.map(function(task) {
       return (
@@ -28,6 +28,7 @@ var TaskCheckboxRows = {
                  key={task.id}
                  checkChanged={this.handleCheck}
                  global={global}
+                 onClick={handleRowClick.bind(this, task)}
         />
       )
     }.bind(this));
