@@ -6,9 +6,10 @@ class ContactsController < ApplicationController
 
   def index
     order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
+    @contacts = Contact.includes(:vendor).all.order(order)
     respond_to do |format|
       format.html
-      format.json { render json: Contact.includes(:vendor).all.order(order) }
+      format.json { render json: @contacts }
     end
   end
 
