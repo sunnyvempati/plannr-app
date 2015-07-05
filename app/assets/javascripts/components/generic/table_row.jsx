@@ -1,4 +1,14 @@
 var TableRow = React.createClass({
+  propTypes: {
+    data: React.PropTypes.object,
+    actionItems: React.PropTypes.array,
+    columns: React.PropTypes.array,
+    onClick: React.PropTypes.func,
+    extraPad: React.PropTypes.bool,
+    checked: React.PropTypes.bool,
+    hideCheckbox: React.PropTypes.bool,
+    rowChanged: React.PropTypes.func
+  },
   handleActionClick: function(item) {
     item.handler(this.props.data.id);
   },
