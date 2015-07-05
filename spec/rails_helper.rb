@@ -1,18 +1,16 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+require 'pry'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'require_all'
 
-require 'support/helpers/features/session_helpers'
-require 'support/helpers/session_helpers'
-require 'support/helpers/event_helpers'
-require 'support/helpers/request_helpers'
-require "authlogic/test_case"
+require_rel 'support/**/*.rb'
+require 'authlogic/test_case'
 
-require 'pry'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|

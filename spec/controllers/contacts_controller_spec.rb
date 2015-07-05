@@ -1,15 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContactsController, type: :controller do
-  setup :activate_authlogic
-
-  let(:user) { FactoryGirl.create(:user) }
-
-  before do
-    ActsAsTenant.current_tenant = user.company
-    login user
-  end
-
+  include_context 'controller_init'
 
   describe "GET #index" do
     let(:number_of_contacts) { 2 }

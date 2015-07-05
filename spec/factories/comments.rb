@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :comment do
-    text "MyString"
-commentable_id 1
-commentable_type "MyString"
+    body Faker::Lorem.sentence
+    locked false
+    commenter
   end
-
 end
