@@ -1,4 +1,13 @@
 var TaskRow = React.createClass({
+  //TODO: figure out and add isRequired for these props
+  propTypes: {
+    data: React.PropTypes.object,
+    actionItems: React.PropTypes.array,
+    columns: React.PropTypes.array,
+    onClick: React.PropTypes.func,
+    global: React.PropTypes.bool,
+    checkChanged: React.PropTypes.func
+  },
   handleActionClick: function(item) {
     item.handler(this.props.data.id);
   },
