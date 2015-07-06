@@ -4,10 +4,17 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
+    @filterrific = initialize_filterrific(
+      Task,
+      params[:filterrific]
+    ) || return
+
+    binding.pry
+
+    @tasks = @filterrific.find
     respond_to do |format|
       format.html
-      format.json { render json: Task.includes(:assigned_to).all.order(order).where(filter_params), each_serializer: TaskWithEventSerializer }
+      format.json { render_success @tasks }
     end
   end
 
@@ -68,10 +75,6 @@ class TasksController < ApplicationController
 
   private
 
-  def filter_params
-    params[:filter].permit(:assigned_to, :status) if params[:filter]
-  end
-
   def set_task
     @task = Task.includes(:assigned_to).find(params[:id])
   end
@@ -82,10 +85,6 @@ class TasksController < ApplicationController
 
   def search_params
     params.require(:search).permit(:text)
-  end
-
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
   end
 
   def mass_destroy_params

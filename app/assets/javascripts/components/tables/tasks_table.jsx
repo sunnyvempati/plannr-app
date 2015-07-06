@@ -5,10 +5,10 @@ var TasksTable = React.createClass({
     LoadingToast
   ],
   componentDidMount: function() {
-    this.getAllTasks({status: 1});
+    this.getAllTasks({with_status: 1});
   },
   getAllTasks: function(filterParams) {
-    HttpHelpers.getFromServer("/tasks.json", {filter: filterParams}, function(result) {
+    HttpHelpers.getFromServer("/tasks.json", {filterrific: filterParams}, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
@@ -32,8 +32,8 @@ var TasksTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "name", display: "Name", default: true},
-      {entity: "deadline", display: "Due Date"},
+      {entity: "deadline", display: "Due Date", default: true},
+      {entity: "name", display: "Name"},
       {entity: "status", display: "Status"}
     ]
   },
@@ -50,7 +50,7 @@ var TasksTable = React.createClass({
     location.href = "/tasks/"+id+"/edit";
   },
   sortBy: function(entity, order) {
-    HttpHelpers.getFromServer('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
+    HttpHelpers.getFromServer('/tasks.json', {filterrific: {sorted_by: entity + "_" + order}}, function(result) {
       this.setState({tasks: result.tasks});
     }.bind(this));
   },

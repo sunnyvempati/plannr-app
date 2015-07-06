@@ -33,6 +33,8 @@ gem 'fog', '~> 1.24.0'
 
 gem 'require_all'
 
+gem 'filterrific'
+
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'
