@@ -19,12 +19,9 @@ RSpec.describe EventsController, type: :controller do
         post :create, event_params
       end
 
-      it "is successful" do
+      it "is successful and creates event" do
         expect(response).to be_success
         expect(json_response['event']['id']).to eq Event.first.id
-      end
-
-      it "creates new event" do
         expect(Event.all.count).to eq 1
       end
 
@@ -33,6 +30,20 @@ RSpec.describe EventsController, type: :controller do
         created_event = Event.first
         expect(created_event_contact.event_id).to eq created_event.id
         expect(created_event_contact.contact_id).to eq created_event.client_id
+      end
+    end
+
+    describe "without client" do
+      before { post :create, event_params }
+
+      it "is successful and creates event" do
+        expect(response).to be_success
+        expect(json_response['event']['id']).to eq Event.first.id
+        expect(Event.all.count).to eq 1
+      end
+
+      it "does not create event contact" do
+        expect(EventContact.all.count).to eq 0
       end
     end
   end
