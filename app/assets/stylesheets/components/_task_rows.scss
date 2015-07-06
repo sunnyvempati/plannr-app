@@ -1,0 +1,9 @@
+.deadline-icon {
+  color: rgba(0, 0, 0, 0.0);
+  &.is-overdue {
+    color: rgba(244, 67, 54, 1.0);
+  }
+  &.is-approaching {
+    color: rgba(255, 215, 64, 1.0);
+  }
+}
