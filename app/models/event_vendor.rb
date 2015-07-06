@@ -4,6 +4,8 @@ class EventVendor < ActiveRecord::Base
 
   validates :event, uniqueness: { scope: :vendor }
 
+  validates :vendor, :event, presence: true
+
   scope :vendors, ->(event_id) {
     includes(:vendor)
     .joins('INNER JOIN vendors ON vendors.id = event_vendors.vendor_id')

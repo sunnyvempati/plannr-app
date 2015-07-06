@@ -4,6 +4,8 @@ class EventContact < ActiveRecord::Base
 
   validates :event, uniqueness: { scope: :contact }
 
+  validates :contact, :event, presence: true
+
   scope :contacts, ->(event_id) {
     includes(:contact)
     .joins('INNER JOIN contacts ON contacts.id = event_contacts.contact_id')
