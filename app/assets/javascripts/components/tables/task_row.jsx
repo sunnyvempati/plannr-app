@@ -59,7 +59,7 @@ var TaskRow = React.createClass({
     var isApproaching = (this.taskDuedateNotification.overdue < daysUntilDue  && daysUntilDue  <= this.taskDuedateNotification.approaching);
 
     var deadlineIconClasses = classNames({
-      'deadline-icon': true,
+      'DeadlineIcon': true,
       'fa': true,
       'fa-clock-o': true,
       'fa-lg': true,
