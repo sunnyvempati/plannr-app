@@ -37,14 +37,10 @@
                                 prerender: true) %>
   </div>
 
-
   <div class="MainContainer">
     <%=
-      header = yield(:header).presence || "Plannr"
-      header = CGI.unescape_html(header.to_str)
-
       react_component('PageHeader',
-              header: header,
+              header: CGI.unescape_html((yield(:header).presence || "Plannr").to_str),
               disableSkrollableHeader: (@disable_skrollable_header || false),
               profile: current_user.profile,
               email: current_user.email,
