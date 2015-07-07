@@ -79,7 +79,8 @@ var Form = React.createClass({
         <ButtonList className='ButtonListContainer'>
           <ButtonSecondary isVisible={this.props.secondaryButtonVisible}
                            href={this.props.secondaryButtonHref}
-                           buttonText={this.props.secondaryButtonText} />
+                           buttonText={this.props.secondaryButtonText}
+                           disabled={this.state.loading}/>
           <ButtonPrimary type="submit" disabled={!this.state.canSubmit || this.state.loading}>
            {buttonHtml}
           </ButtonPrimary>
