@@ -4,6 +4,9 @@ var ButtonSecondary = React.createClass({
     href: React.PropTypes.string,
     buttonText: React.PropTypes.string
   },
+  handleOnClick: function() {
+    window.location.href = this.props.href;
+  },
   render: function() {
     var ButtonSecondaryClasses = classNames({
       'Button': true,
@@ -12,12 +15,9 @@ var ButtonSecondary = React.createClass({
       'is-visible': this.props.isVisible
     });
     return (
-      <a href={this.props.href}>
-        <input type="button"
-               className={ButtonSecondaryClasses}
-               value={this.props.buttonText}>
-        </input>
-      </a>
+      <button type='button' onClick={this.handleOnClick} className={ButtonSecondaryClasses}>
+        {this.props.buttonText}
+      </button>
     );
   }
 });
