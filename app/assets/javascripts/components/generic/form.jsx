@@ -58,8 +58,12 @@ var Form = React.createClass({
   loadingComplete: function() {
     this.setState({loading: false});
   },
+  renderLoadingIcon: function() {
+    return <i className="fa fa-circle-o-notch fa-spin"></i>;
+  },
   render: function() {
     var form_props = this.props;
+    var buttonHtml = this.state.loading ? this.renderLoadingIcon() : this.props.primaryButtonText;
     return (
       <Formsy.Form url={form_props.url}
                    onSuccess={form_props.onSuccess}
@@ -72,13 +76,14 @@ var Form = React.createClass({
                    id={form_props.id}>
         <FormInput type="hidden" name="authenticity_token" value={form_props.authToken}  />
         {form_props.children}
-        <ButtonList showButtonList={form_props.showButtonList}
-                    primaryButtonText={form_props.primaryButtonText}
-                    primaryDisabled={!this.state.canSubmit}
-                    primaryLoading={this.state.loading}
-                    secondaryButtonText={form_props.secondaryButtonText}
-                    secondaryButtonHref={form_props.secondaryButtonHref}
-                    secondaryButtonVisible={form_props.secondaryButtonVisible} />
+        <ButtonList className='ButtonListContainer'>
+          <ButtonSecondary isVisible={this.props.secondaryButtonVisible}
+                           href={this.props.secondaryButtonHref}
+                           buttonText={this.props.secondaryButtonText} />
+          <ButtonPrimary type="submit" disabled={!this.state.canSubmit || this.state.loading}>
+           {buttonHtml}
+          </ButtonPrimary>
+        </ButtonList>
       </Formsy.Form>
     );
   }

@@ -8,14 +8,14 @@ var ButtonSecondary = React.createClass({
     window.location.href = this.props.href;
   },
   render: function() {
-    var ButtonSecondaryClasses = classNames({
+    var classes = classNames({
       'Button': true,
       'Button--raised': true,
       'Button--secondary': true,
       'is-visible': this.props.isVisible
     });
     return (
-      <button type='button' onClick={this.handleOnClick} className={ButtonSecondaryClasses}>
+      <button type='button' onClick={this.handleOnClick} className={classes}>
         {this.props.buttonText}
       </button>
     );
