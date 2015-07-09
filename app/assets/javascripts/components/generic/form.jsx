@@ -22,7 +22,9 @@ var Form = React.createClass({
     primaryButtonText: React.PropTypes.string.isRequired,
     secondaryButtonVisible: React.PropTypes.bool,
     secondaryButtonHref: React.PropTypes.string,
-    secondaryButtonText: React.PropTypes.string
+    secondaryButtonText: React.PropTypes.string,
+    tertiaryButtonText: React.PropTypes.string,
+    onTertiaryButtonClick: React.PropTypes.func
   },
   getDefaultProps: function() {
     return {
@@ -30,7 +32,9 @@ var Form = React.createClass({
       routeVerb: 'post',
       showButtonList: true,
       secondaryButtonVisible: false,
-      secondaryButtonText: 'Cancel'
+      secondaryButtonText: 'Cancel',
+      tertiaryButtonText: null,
+      onTertiaryButtonClick: function() {}
     };
   },
   getInitialState: function() {
@@ -78,7 +82,9 @@ var Form = React.createClass({
                     primaryLoading={this.state.loading}
                     secondaryButtonText={form_props.secondaryButtonText}
                     secondaryButtonHref={form_props.secondaryButtonHref}
-                    secondaryButtonVisible={form_props.secondaryButtonVisible} />
+                    secondaryButtonVisible={form_props.secondaryButtonVisible}
+                    tertiaryButtonText={form_props.tertiaryButtonText}
+                    onTertiaryButtonClick={form_props.onTertiaryButtonClick} />
       </Formsy.Form>
     );
   }
