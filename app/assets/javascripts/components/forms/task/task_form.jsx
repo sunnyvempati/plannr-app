@@ -80,6 +80,8 @@ var TaskForm = React.createClass({
               secondaryButtonVisible={this.props.secondaryButtonVisible}
               secondaryButtonHref={this.props.secondaryButtonHref}
               showButtonList={this.props.showButtonList}
+              tertiaryButtonText={this.props.tertiaryButtonText}
+              onTertiaryButtonClick={this.props.onTertiaryButtonClick}
               id={id}>
           <FormInput
             id='task_name'
@@ -121,6 +123,7 @@ var TaskForm = React.createClass({
             label="Description"
             disabled={this.props.disableForm}
             placeholder="How would you describe this task?" />
+          {this.props.children}
         </Form>
       </div>
     );

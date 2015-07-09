@@ -13,7 +13,13 @@ var ButtonList = React.createClass({
     secondaryButtonVisible: React.PropTypes.bool.isRequired,
     secondaryButtonHref: React.PropTypes.string.isRequired,
     secondaryButtonText: React.PropTypes.string.isRequired,
-    primaryLoading: React.PropTypes.bool
+    primaryLoading: React.PropTypes.bool,
+    tertiaryButtonText: React.PropTypes.string
+  },
+  getDefaultProps: function(){
+    return {
+      tertiaryButtonText: null
+    }
   },
   loadingIcon: function() {
     return <i className="fa fa-circle-o-notch fa-spin"></i>;
@@ -24,13 +30,17 @@ var ButtonList = React.createClass({
       'u-hidden': !this.props.showButtonList
     });
     var buttonChild = this.props.primaryLoading ? this.loadingIcon() : this.props.primaryButtonText;
+    var buttonChild2 = this.props.primaryLoading ? this.loadingIcon() : this.props.tertiaryButtonText;
     return (
       <div className={containerClasses}>
         <ButtonSecondary isVisible={this.props.secondaryButtonVisible}
                          href={this.props.secondaryButtonHref}
                          buttonText={this.props.secondaryButtonText} />
-        <Button type="submit" disabled={this.props.primaryDisabled || this.props.primaryLoading}>
+        <Button type="submit" disabled={this.props.primaryDisabled || this.props.primaryLoading} onClick={this.handleClick}>
           {buttonChild}
+        </Button>
+        <Button type="submit" disabled={this.props.primaryDisabled || this.props.primaryLoading} isInvisible={this.props.tertiaryButtonText === null} onClick={this.props.onTertiaryButtonClick}>
+          {buttonChild2}
         </Button>
       </div>
     );

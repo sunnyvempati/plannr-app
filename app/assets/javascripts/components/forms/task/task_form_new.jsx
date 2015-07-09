@@ -7,13 +7,24 @@ var TaskFormNew = React.createClass({
     secondaryButtonHref: React.PropTypes.string
   },
   onSuccess: function() {
-    // react router keeps things in context without redirecting
-    if (this.props.useReactRouter) {
-      this.props.onSuccess();
+    if (this.state.tertiaryButtonClicked) {
+      //Create & New
+      this.setState({tertiaryButtonClicked: false});
+      this.refs.resetButton.getDOMNode().click();
+    } else {
+      //Create
+      // react router keeps things in context without redirecting
+      if (this.props.useReactRouter) {
+        this.props.onSuccess();
+      }
+      else {
+        //create
+        location.href = '/tasks';
+      }
     }
-    else {
-      location.href = '/tasks';
-    }
+  },
+  onTertiaryButtonClick: function() {
+    this.setState({tertiaryButtonClicked: true});
   },
   render: function () {
     var action = "/tasks",
@@ -32,7 +43,11 @@ var TaskFormNew = React.createClass({
                 secondaryButtonVisible={!this.props.useReactRouter}
                 secondaryButtonHref={secondaryButtonHref}
                 authToken={this.props.authToken}
-                onSuccess={this.onSuccess} />
+                onSuccess={this.onSuccess}
+                tertiaryButtonText='Create & New'
+                onTertiaryButtonClick={this.onTertiaryButtonClick}  >
+        <button type='reset' className='u-invisible' ref='resetButton' id='resetButton' />
+      </TaskForm>
     );
   }
 });
