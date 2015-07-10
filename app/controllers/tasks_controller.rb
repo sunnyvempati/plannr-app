@@ -32,6 +32,7 @@ class TasksController < ApplicationController
   end
 
   def create
+    binding.pry
     @task = Task.new task_params
     @task.status = 1 # TODO
     render_entity @task

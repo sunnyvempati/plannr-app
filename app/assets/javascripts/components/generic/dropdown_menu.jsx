@@ -15,7 +15,9 @@ var DropdownMenu = React.createClass({
     }.bind(this));
   },
   closeMenu: function() {
-    this.setState({active: false});
+    if (this.isMounted()) {
+      this.setState({active: false});
+    }
   },
   toggleMenu: function() {
     this.setState({active: !this.state.active}, this.setFocus);

@@ -8,22 +8,16 @@ var TasksTable = React.createClass({
     with_status: 1, // To do
     sorted_by: 'deadline_desc'
   },
-  getInitialState: function() {
-    return {
-      filterSortParams: this.defaultFilterSort
-    };
-  },
   setSortFilterParams: function(params) {
-    $.extend(this.currentParams, params);
+    $.extend(this.filterSortParams, params);
     this.getTasks();
   },
   componentDidMount: function() {
-    this.currentParams = this.defaultFilterSort;
+    this.filterSortParams = this.defaultFilterSort;
     this.getTasks();
   },
   getTasks: function(filterSortParams) {
-    console.log(this.currentParams);
-    HttpHelpers.getFromServer("/tasks.json", {filter_sort: this.currentParams}, function(result) {
+    HttpHelpers.getFromServer("/tasks.json", {filter_sort: this.filterSortParams}, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
