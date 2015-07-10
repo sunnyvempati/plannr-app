@@ -1,15 +1,18 @@
 class Task < ActiveRecord::Base
-  # include Filterable
   acts_as_tenant :company
 
+  def self.filter_sort_scopes
+    %w(
+      sorted_by
+      search_query
+      with_event_id
+      with_status
+      with_assigned_to
+    )
+  end
+
   filterrific default_filter_params: { sorted_by: 'deadline_desc' },
-              available_filters: %w(
-                sorted_by
-                search_query
-                with_event_id
-                with_status
-                with_assigned_to
-              )
+              available_filters: self.filter_sort_scopes
 
   belongs_to :event
   belongs_to :owner, class_name: 'User'
@@ -37,11 +40,9 @@ class Task < ActiveRecord::Base
     return nil  if query.blank?
     # condition query, parse into individual keywords
     terms = query.downcase.split(/\s+/)
-    # replace "*" with "%" for wildcard searches,
-    # append '%', remove duplicate '%'s
-    # configure number of OR conditions for provision
-    # of interpolation arguments. Adjust this if you
-    # change the number of OR conditions.
+    terms = terms.map do |e|
+      '%' + e + '%'
+    end
     num_or_conditions = 1
     where(
       terms.map do

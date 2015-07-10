@@ -4,21 +4,31 @@ var TasksTable = React.createClass({
     ToastMessages,
     LoadingToast
   ],
-  componentDidMount: function() {
-    this.getAllTasks({with_status: 1});
+  defaultFilterSort: {
+    with_status: 1, // To do
+    sorted_by: 'deadline_desc'
   },
-  getAllTasks: function(filterParams) {
-    HttpHelpers.getFromServer("/tasks.json", {filterrific: filterParams}, function(result) {
+  getInitialState: function() {
+    return {
+      filterSortParams: this.defaultFilterSort
+    };
+  },
+  setSortFilterParams: function(params) {
+    $.extend(this.currentParams, params);
+    this.getTasks();
+  },
+  componentDidMount: function() {
+    this.currentParams = this.defaultFilterSort;
+    this.getTasks();
+  },
+  getTasks: function(filterSortParams) {
+    console.log(this.currentParams);
+    HttpHelpers.getFromServer("/tasks.json", {filter_sort: this.currentParams}, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
         })
       }
-    }.bind(this));
-  },
-  getUserTasks: function(filterParams) {
-    HttpHelpers.getFromServer("/user_tasks", {filter: filterParams}, function(result) {
-      this.setState({tasks: result.tasks});
     }.bind(this));
   },
   getColumns: function() {
@@ -50,15 +60,11 @@ var TasksTable = React.createClass({
     location.href = "/tasks/"+id+"/edit";
   },
   sortBy: function(entity, order) {
-    HttpHelpers.getFromServer('/tasks.json', {filterrific: {sorted_by: entity + "_" + order}}, function(result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
+    this.setSortFilterParams({sorted_by: entity + "_" + order});
   },
   search: function(e) {
     var term = e.target.value;
-    HttpHelpers.getFromServer('/search_tasks', {search: {text: term || ""}}, function(result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
+    this.setSortFilterParams({search_query: term});
   },
   actionItems: function() {
     return [
@@ -69,10 +75,10 @@ var TasksTable = React.createClass({
   },
   filterItems: function () {
     return [
-      {name: "All Tasks - To do", handler: this.getAllTasks.bind(this, {status: 1}), default: true},
-      {name: "All Tasks - Completed", handler: this.getAllTasks.bind(this, {status: 2})},
-      {name: "My Tasks - To do", handler: this.getUserTasks.bind(this, {status: 1})},
-      {name: "My Tasks - Completed", handler: this.getUserTasks.bind(this, {status: 2})},
+      {name: "All Tasks - To do", handler: this.setSortFilterParams.bind(this, {with_status: 1}), default: true},
+      {name: "All Tasks - Completed", handler: this.setSortFilterParams.bind(this, {with_status: 2})},
+      {name: "My Tasks - To do", handler: this.setSortFilterParams.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 1})},
+      {name: "My Tasks - Completed", handler: this.setSortFilterParams.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
     ]
   },
   handleActionButtonClick: function() {

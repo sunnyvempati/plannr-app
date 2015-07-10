@@ -4,14 +4,12 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @filterrific = initialize_filterrific(
+    @filter_sort = initialize_filterrific(
       Task,
-      params[:filterrific]
+      filter_sort_params
     ) || return
 
-    binding.pry
-
-    @tasks = @filterrific.find
+    @tasks = @filter_sort.find
     respond_to do |format|
       format.html
       format.json { render_success @tasks }
@@ -77,6 +75,10 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.includes(:assigned_to).find(params[:id])
+  end
+
+  def filter_sort_params
+    params.require(:filter_sort).permit(Task.filter_sort_scopes) if params[:filter_sort]
   end
 
   def task_params

@@ -39,6 +39,7 @@ group 'development' do
 	gem 'pry'
   gem 'pry-rails'
 	gem 'pry-byebug'
+  gem 'pry-remote'
 	gem 'guard-livereload', require: false
   gem 'capistrano'
   gem 'capistrano-secrets-yml'
