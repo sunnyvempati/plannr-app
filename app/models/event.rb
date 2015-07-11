@@ -15,18 +15,60 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validate :dates
 
-  scope :search, ->(term) {
-    wildcard_text = "'%#{term.downcase}%'"
-    where("lower(events.name) LIKE lower(#{wildcard_text})")
+  include EventStatuses
+  validates :status, inclusion: { in: [ACTIVE, ARCHIVED] }
+
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    terms = query.downcase.split(/\s+/)
+    terms = terms.map do |e|
+      '%' + e + '%'
+    end
+    num_or_conditions = 1
+    where(
+      terms.map do
+        or_clauses = [
+          'LOWER(events.name) LIKE ?'
+        ].join(' OR ')
+        "(#{ or_clauses })"
+      end.join(' AND '),
+      *terms.map { |e| [e] * num_or_conditions }.flatten
+    )
   }
 
-  def other_contacts
-    Contact.other_contacts(id)
+  scope :sorted_by, lambda { |sort_option|
+    # extract the sort direction from the param value.
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^name_/
+      order("LOWER(events.name) #{ direction }")
+    when /^start_date_/
+      order("events.start_date #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
+
+  scope :with_status, lambda { |status|
+    where(status: status)
+  }
+
+  def self.default_filter_options
+    {
+      sorted_by: 'name_asc'
+    }
   end
 
-  def self.header
-    'Events'
+  def self.filter_sort_scopes
+    %w(
+      sorted_by
+      search_query
+      with_status
+    )
   end
+
+  filterrific default_filter_params: default_filter_options,
+              available_filters: filter_sort_scopes
 
   protected
 

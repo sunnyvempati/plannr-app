@@ -31,10 +31,15 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-base64'
 gem 'fog', '~> 1.24.0'
 
+gem 'require_all'
+
+gem 'filterrific'
+
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'
 	gem 'pry-byebug'
+  gem 'pry-remote'
 	gem 'guard-livereload', require: false
   gem 'capistrano'
   gem 'capistrano-secrets-yml'

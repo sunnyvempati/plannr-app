@@ -19,7 +19,13 @@ var ClientInput = React.createClass({
     }
   },
   retrieveClients: function(term) {
-    $.get("/search_clients", {search: {text: term || ""}}, function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        with_category: 1 // Search only clients
+      }
+    };
+    $.get("/contacts.json", params, function(result) {
       var contacts = result.contacts;
       if(contacts.length == 0) {
         // uses autocomplete render new mixin

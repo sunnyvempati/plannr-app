@@ -3,23 +3,22 @@ var TasksTable = React.createClass({
     TaskCheckboxRows,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
-  componentDidMount: function() {
-    this.getAllTasks({status: 1});
+  defaultFilterSortParams: {
+    sort: {sorted_by: 'deadline_asc'},
+    filter: {with_status: 1}
   },
-  getAllTasks: function(filterParams) {
-    this.getFromServer("/tasks.json", {filter: filterParams}, function(result) {
+  componentDidMount: function() {
+    this.initializeFilterSort(this.defaultFilterSortParams);
+  },
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/tasks.json", params, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
         })
       }
-    }.bind(this));
-  },
-  getUserTasks: function(filterParams) {
-    this.getFromServer("/user_tasks", {filter: filterParams}, function(result) {
-      this.setState({tasks: result.tasks});
     }.bind(this));
   },
   getColumns: function() {
@@ -34,15 +33,15 @@ var TasksTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "name", display: "Name", default: true},
-      {entity: "deadline", display: "Due Date"},
+      {entity: "deadline", display: "Due Date", default: true},
+      {entity: "name", display: "Name"},
       {entity: "status", display: "Status"}
     ]
   },
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer('/tasks/mass_delete', destroyOpts, function(success_result) {
+    HttpHelpers.postToServer('/tasks/mass_delete', destroyOpts, function(success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, deletionIds);
       this.setState({tasks: newData});
@@ -50,17 +49,6 @@ var TasksTable = React.createClass({
   },
   handleEdit: function(id) {
     location.href = "/tasks/"+id+"/edit";
-  },
-  sortBy: function(entity, order) {
-    this.getFromServer('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('/search_tasks', {search: {text: term || ""}}, function(result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
   },
   actionItems: function() {
     return [
@@ -71,10 +59,10 @@ var TasksTable = React.createClass({
   },
   filterItems: function () {
     return [
-      {name: "All Tasks - To do", handler: this.getAllTasks.bind(this, {status: 1}), default: true},
-      {name: "All Tasks - Completed", handler: this.getAllTasks.bind(this, {status: 2})},
-      {name: "My Tasks - To do", handler: this.getUserTasks.bind(this, {status: 1})},
-      {name: "My Tasks - Completed", handler: this.getUserTasks.bind(this, {status: 2})},
+      {name: "All Tasks - To do", handler: this.filter.bind(this, {with_status: 1}), default: true},
+      {name: "All Tasks - Completed", handler: this.filter.bind(this, {with_status: 2})},
+      {name: "My Tasks - To do", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 1})},
+      {name: "My Tasks - Completed", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
     ]
   },
   goToTask: function(data) {
@@ -99,7 +87,7 @@ var TasksTable = React.createClass({
         useCustomRowComponent={true}
         customRows={this.getCustomRows(true, this.goToTask)}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={false}
         actionItems={this.actionItems()}

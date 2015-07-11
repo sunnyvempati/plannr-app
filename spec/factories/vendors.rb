@@ -3,6 +3,6 @@ FactoryGirl.define do
     name Faker::Company.name
     location Faker::Address.city
     phone "343-323-2322"
-    primary_contact Faker::Name.name
+    primary_contact
   end
 end

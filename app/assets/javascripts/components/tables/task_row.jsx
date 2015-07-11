@@ -76,6 +76,7 @@ var TaskRow = React.createClass({
       'Table-row': true,
       'task-selected': completed
     });
+    var clickable = this.props.global ? "" : "u-clickable";
     var eventColumn = this.props.global ? this.renderEventColumn() : null;
     return (
       <div className={rowClasses}>
@@ -85,7 +86,7 @@ var TaskRow = React.createClass({
                          checked={completed}
                          rounded={true} />
         </div>
-        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-10">{data.name}</div>
+        <div onClick={this.props.onClick} className={"Table-rowItem u-flexGrow-10 " + clickable}>{data.name}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-1">{this.renderDeadlineIcon(data.deadline)}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.deadline}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.status}</div>

@@ -5,7 +5,12 @@ var Contact = React.createClass({
     this.getEvents();
   },
   getEvents: function() {
-    $.get("/contacts/events", {contact_id: this.props.params.id},  function(result) {
+    var params = {
+      filter_sort: {
+        with_contact_id: this.props.params.id
+      }
+    };
+    $.get("/contact_events.json", params, function(result) {
       this.setState({events: result.event_contacts});
     }.bind(this));
   },
