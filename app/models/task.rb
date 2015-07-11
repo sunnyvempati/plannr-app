@@ -25,7 +25,6 @@ class Task < ActiveRecord::Base
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?
-    # condition query, parse into individual keywords
     terms = query.downcase.split(/\s+/)
     terms = terms.map do |e|
       '%' + e + '%'

@@ -37,14 +37,14 @@ var EventTasksTable = React.createClass({
   },
   sortItems: function () {
     return [
-      {entity: "name", display: "Name", default: true},
-      {entity: "deadline", display: "Due Date"},
+      {entity: "deadline", display: "Due Date", default: true},
+      {entity: "name", display: "Name"},
       {entity: "status", display: "Status"}
     ]
   },
   handleDelete: function (id) {
     var destroyOpts = {destroy_opts: {ids: [id]}};
-    this.postToServer('/tasks/mass_delete', destroyOpts, function (success_result) {
+    HttpHelpers.postToServer('/tasks/mass_delete', destroyOpts, function (success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, [id]);
       this.setState({tasks: newData});
