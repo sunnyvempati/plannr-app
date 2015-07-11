@@ -9,7 +9,13 @@ var EventVendorAutocomplete = React.createClass({
     };
   },
   retrieveVendors: function(term) {
-    $.get("search_other_vendors", {search: {text: term}},  function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        not_in_event_id: this.props.eventId
+      }
+    };
+    $.get("/vendors.json", params, function(result) {
       var vendors = result.vendors;
       if (vendors.length == 0) {
         vendors.push(this.getNewItem("vendor"));

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory 'contact' do
+  factory 'contact', aliases: [:primary_contact] do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     phone "815-968-2311"

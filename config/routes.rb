@@ -41,8 +41,8 @@ Rails.application.routes.draw do
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
   post 'events/:event_id/contacts/mass_delete', to:'event_contacts#mass_delete'
-  get 'events/:event_id/contacts', to:'event_contacts#contacts'
-  get 'contacts/events', to:'event_contacts#events'
+  get '/event_contacts', to:'event_contacts#index'
+  get '/contact_events', to:'event_contacts#index'
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'
@@ -50,9 +50,9 @@ Rails.application.routes.draw do
 
   # event_vendors
   post 'events/:event_id/vendors', to:'event_vendors#create'
-  get 'events/:event_id/vendors', to:'event_vendors#vendors'
   post 'events/:event_id/vendors/mass_delete', to:'event_vendors#mass_delete'
-  get 'vendors/events', to:'event_vendors#events'
+  get '/event_vendors', to:'event_vendors#index'
+  get '/vendor_events', to:'event_vendors#index'
 
   # event attachments
   get 'events/:event_id/attachments/new', to:'attachments#quick_create'

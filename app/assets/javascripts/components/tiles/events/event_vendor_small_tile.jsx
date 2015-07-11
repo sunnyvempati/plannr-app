@@ -6,7 +6,12 @@ var EventVendorSmallTile = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("vendors.json", function(results) {
+    var params = {
+      filter_sort: {
+        with_event_id: this.props.eventId
+      }
+    };
+    $.get("/event_vendors.json", params, function(results) {
       if (this.isMounted()) {
         this.setState({
           count: results.event_vendors.length
@@ -30,7 +35,9 @@ var EventVendorSmallTile = React.createClass({
         </div>
         <div className="Tile-content">
           <div className="TileContent-quickAdd">
-            <EventVendorAutocomplete onAssociation={this.incrementCount} />
+            <EventVendorAutocomplete
+              onAssociation={this.incrementCount}
+              eventId={this.props.eventId} />
           </div>
           <div className="TileContent-count">
             {this.state.count}

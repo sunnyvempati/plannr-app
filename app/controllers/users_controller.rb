@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include FilterSort
   before_action :authenticate_user, :only => [:show, :edit, :update]
   before_action :check_invitation!, :require_no_user, only: [:new, :create]
 
@@ -6,13 +7,11 @@ class UsersController < ApplicationController
   before_action :check_admin, only: [:toggle_admin]
 
   def index
-    order = sort_params ? "profiles.#{sort_params[:entity]} #{sort_params[:order]}" : 'profiles.first_name asc'
-    render json: User.includes(:profile).order(order), each_serializer: CompanyUserSerializer
-  end
-
-  def search
-    search_results = User.search_with(search_params[:text])
-    render json: search_results, each_serializer: CompanyUserSerializer
+    @users = @filter_sort.find
+    respond_to do |format|
+      format.html
+      format.json { render json: @users, each_serializer: CompanyUserSerializer }
+    end
   end
 
   def show
@@ -67,16 +66,8 @@ class UsersController < ApplicationController
     params.require(:company).permit(:name)
   end
 
-  def search_params
-    params.require(:search).permit(:text)
-  end
-
   def mass_delete_params
     params.require(:destroy_opts).permit(ids: [])
-  end
-
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
   end
 
   def check_invitation!
@@ -91,5 +82,9 @@ class UsersController < ApplicationController
       flash[:error] = "Invitation has expired or been used already. Request new invitation"
       redirect_to login_path
     end
+  end
+
+  def model
+    User
   end
 end

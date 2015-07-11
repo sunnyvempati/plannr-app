@@ -1,13 +1,14 @@
 class EventsController < ApplicationController
+  include FilterSort
   layout 'main'
   before_action :authenticate_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = sort_params ? Event.order("#{sort_params[:entity]} #{sort_params[:order]}") : Event.order("name asc")
+    @events = @filter_sort.find
     respond_to do |format|
       format.html
-      format.json { render json: @events, each_serializer: EventSerializer }
+      format.json { render_success @events }
     end
   end
 
@@ -22,10 +23,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def search
-    render json: Event.search(search_params[:text]), each_serializer: EventSerializer
-  end
-
   def new
     @event = Event.new
   end
@@ -36,14 +33,14 @@ class EventsController < ApplicationController
   def create
     @event = Event.new event_params
     render_entity @event do
-      EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id)
+      EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
   end
 
   def update
     @event.assign_attributes event_params
     render_entity @event do
-      EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id)
+      EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
   end
 
@@ -68,18 +65,14 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description).merge(owner: current_user)
-  end
-
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
-  end
-
-  def search_params
-    params.require(:search).permit(:text)
+    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status).merge(owner: current_user)
   end
 
   def mass_delete_params
     params.require(:destroy_opts).permit(ids: [])
+  end
+
+  def model
+    Event
   end
 end

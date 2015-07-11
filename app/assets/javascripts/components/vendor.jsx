@@ -5,7 +5,12 @@ var Vendor = React.createClass({
     this.getEvents();
   },
   getEvents: function() {
-    $.get("/vendors/events", {vendor_id: this.props.params.id},  function(result) {
+    var params = {
+      filter_sort: {
+        with_vendor_id: this.props.params.id
+      }
+    };
+    $.get("/vendor_events.json", params,  function(result) {
       this.setState({events: result.event_vendors});
     }.bind(this));
   },

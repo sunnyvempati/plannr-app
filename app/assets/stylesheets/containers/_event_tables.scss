@@ -21,12 +21,10 @@
 .EventsTable-rowHeader {
   display: flex;
   align-items: center;
-  >* {
-    flex: 1;
-  }
 }
 
 .EventsTable-rowName {
+  flex: 4;
   display: flex;
   align-items: center;
   >* {
@@ -44,9 +42,15 @@
 }
 
 .EventsTable-rowDaysTill {
+  flex: 1;
   color: $black-quarter;
   @include font($title-font, normal, 0);
   display: flex;
   justify-content: flex-end;
   padding-right: $size-increment * 4;
+}
+
+.EventTableIcon {
+  font-size: 24px;
+  opacity: 0.2;
 }

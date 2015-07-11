@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  let(:event) { FactoryGirl.build(:event) }
-
   describe "validations" do
+    let(:event) { FactoryGirl.build(:event) }
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:start_date) }
 
     it 'creates a valid event' do
       expect(event).to be_valid

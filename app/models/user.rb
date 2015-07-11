@@ -6,14 +6,43 @@ class User < ActiveRecord::Base
   has_many :events
 
   # scopes
-  scope :search_with, ->(term) {
-    wildcard_text = "'%#{term.downcase}%'"
-    joins(
-      'INNER JOIN profiles p ON p.user_id = users.id')
-      .where("lower(p.first_name || ' ' || p.last_name) LIKE lower(#{wildcard_text})")
-      .select('users.*, p.first_name, p.last_name')
-      .limit(5)
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    wildcard_text = "'%#{query.downcase}%'"
+    includes(:profile)
+      .joins(
+        'INNER JOIN profiles p ON p.user_id = users.id')
+        .where("lower(p.first_name || ' ' || p.last_name) LIKE lower(#{wildcard_text})")
+        .select('users.*, p.first_name, p.last_name')
+        .limit(5)
   }
+
+  scope :sorted_by, lambda { |sort_option|
+    # extract the sort direction from the param value.
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^first_name_/
+      joins(:profile).order("LOWER(profiles.first_name) #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
+
+  def self.default_filter_options
+    {
+      sorted_by: 'first_name_desc'
+    }
+  end
+
+  def self.filter_sort_scopes
+    %w(
+      sorted_by
+      search_query
+    )
+  end
+
+  filterrific default_filter_params: default_filter_options,
+              available_filters: filter_sort_scopes
 
   def deliver_password_reset_instructions!
     reset_perishable_token!

@@ -3,7 +3,7 @@ var CompanyUserTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   getInitialState: function() {
     return {
@@ -11,14 +11,18 @@ var CompanyUserTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getFromServer("/users", {}, function(result) {
+    this.initializeFilterSort({sort: {sorted_by: 'first_name_asc'}});
+
+  },
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/users.json", params, function(result) {
       this.setState({users: result.users});
     }.bind(this));
   },
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer('/users/mass_delete', destroyOpts, function(success_result) {
+    HttpHelpers.postToServer('/users/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " user(s) deleted successfully.");
       var newData = this.spliceResults(this.state.users, deletionIds);
       this.setState({users: newData, checkedItems: []});
@@ -36,17 +40,6 @@ var CompanyUserTable = React.createClass({
                         actionItems={this.actionItems()}
                         key={user.id} />
       );
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('search_users', {search: {text: term || ""}}, function(result) {
-      this.setState({users: result.users});
-    }.bind(this));
-  },
-  sortBy: function(entity, order) {
-    this.getFromServer('users.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({users: result.users});
     }.bind(this));
   },
   actionItems: function() {
@@ -73,7 +66,7 @@ var CompanyUserTable = React.createClass({
           useCustomRowComponent={true}
           customRows={this.getCustomRows()}
           sortItems={this.sortItems()}
-          handleSortClick={this.sortBy}
+          handleSortClick={this.sort}
           handleSearch={this.search}
           showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}
@@ -81,6 +74,7 @@ var CompanyUserTable = React.createClass({
           showHeaders={true}
           columns={this.getColumns()}
           searchPlaceholder="Search Users..."
+          handleCheckAllChanged={this.toggleCheckAll}
         />
       </div>
     );

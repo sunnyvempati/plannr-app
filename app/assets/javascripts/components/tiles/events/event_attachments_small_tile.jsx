@@ -5,7 +5,12 @@ var EventAttachmentsSmallTile = React.createClass({
     };
   },
   componentDidMount: function () {
-    $.get("attachments", function (results) {
+    var params = {
+      filter_sort: {
+        with_event_id: this.props.eventId
+      }
+    };
+    $.get("/attachments.json", params, function (results) {
       if (this.isMounted()) {
         this.setState({
           count: results.attachments.length

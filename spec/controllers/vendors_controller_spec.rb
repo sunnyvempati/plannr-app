@@ -1,15 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe VendorsController, type: :controller do
-
-  setup :activate_authlogic
-
-  let(:user) { FactoryGirl.create(:user) }
-
-  before do
-    ActsAsTenant.current_tenant = user.company
-    login user
-  end
+  include_context 'controller_init'
 
   describe 'search_vendors_not_in_event with no search text' do
     let!(:event1) { FactoryGirl.create(:event) }
@@ -34,7 +26,5 @@ RSpec.describe VendorsController, type: :controller do
       parsed_body = JSON.parse(response.body)
       expect(parsed_body["vendors"].count).to eq 2
     end
-
   end
-
 end

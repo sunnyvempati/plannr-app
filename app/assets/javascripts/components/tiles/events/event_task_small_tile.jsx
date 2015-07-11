@@ -6,7 +6,7 @@ var EventTaskSmallTile = React.createClass({
     };
   },
   componentDidMount: function () {
-    $.get("tasks.json", function (results) {
+    $.get("/tasks.json", function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
