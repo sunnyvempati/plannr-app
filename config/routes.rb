@@ -50,9 +50,9 @@ Rails.application.routes.draw do
 
   # event_vendors
   post 'events/:event_id/vendors', to:'event_vendors#create'
-  get 'events/:event_id/vendors', to:'event_vendors#vendors'
   post 'events/:event_id/vendors/mass_delete', to:'event_vendors#mass_delete'
-  get 'vendors/events', to:'event_vendors#events'
+  get '/event_vendors', to:'event_vendors#index'
+  get '/vendor_events', to:'event_vendors#index'
 
   # event attachments
   get 'events/:event_id/attachments/new', to:'attachments#quick_create'

@@ -4,7 +4,7 @@ var VendorsTable = React.createClass({
     ToastMessages,
     Router.Navigation,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   getInitialState: function() {
     return {
@@ -12,7 +12,10 @@ var VendorsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getFromServer("/vendors.json", {}, function(result) {
+    this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
+  },
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/vendors.json", params, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
@@ -41,21 +44,10 @@ var VendorsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer('/vendors/mass_delete', destroyOpts, function(success_result) {
+    HttpHelpers.postToServer('/vendors/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) deleted.");
       var newData = this.spliceResults(this.state.vendors, deletionIds);
       this.setState({vendors: newData, checkedItems: []});
-    }.bind(this));
-  },
-  sortBy: function(entity, order) {
-    this.getFromServer('/vendors.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({vendors: result.vendors});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('/search_vendors', {search: {text: term || ""}}, function(result) {
-      this.setState({vendors: result.vendors});
     }.bind(this));
   },
   goToVendor: function(data) {
@@ -82,7 +74,7 @@ var VendorsTable = React.createClass({
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}

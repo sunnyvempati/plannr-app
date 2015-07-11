@@ -14,7 +14,7 @@ var EventContactsTable = React.createClass({
     var defaultParams = {
       sort: {sorted_by: 'contact_name_asc'},
       filter: {with_event_id: this.props.eventId}
-    }
+    };
     this.initializeFilterSort(defaultParams);
   },
   getTableData: function(params) {
@@ -62,7 +62,11 @@ var EventContactsTable = React.createClass({
     React.render(modal, document.getElementById('modal'));
   },
   openAddModal: function() {
-    var modal = React.createElement(AddContactModal, {refreshData: this.getEventContacts});
+    var params = {
+      refreshData: this.reloadData,
+      eventId: this.props.eventId
+    };
+    var modal = React.createElement(AddContactModal, params);
     React.render(modal, document.getElementById('modal'));
   },
   getActionButton: function () {

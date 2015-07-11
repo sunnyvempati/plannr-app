@@ -3,7 +3,7 @@ class EventContactsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    serializer = filter_sort_params[:with_event_id] ? EventContactWithContactSerializer : EventContactWithEventSerializer
+    serializer = filter_sort_params && filter_sort_params[:with_event_id] ? EventContactWithContactSerializer : EventContactWithEventSerializer
     @event_contacts = @filter_sort.find
     respond_to do |format|
       format.html

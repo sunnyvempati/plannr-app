@@ -8,26 +8,61 @@ class Vendor < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
   belongs_to :primary_contact, class_name: 'Contact'
 
-  scope :not_in, ->(event_id) {
-    where("id not in (select vendor_id from event_vendors where event_id = '#{event_id}')")
-  }
-
-  scope :search_not_in, ->(event_id, term) {
-    wildcard_text = "'%#{term}%'"
-    Vendor.not_in(event_id)
-    .where("lower(vendors.name) LIKE lower(#{wildcard_text})")
-    .limit(5)
-  }
-
-  scope :search, ->(term) {
-    wildcard_text = "'%#{term}%'"
-    Vendor.where("lower(vendors.name) LIKE lower(#{wildcard_text})")
-  }
-
   validates :name, presence: true
   validates_format_of :phone,
                       :with => %r{\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z},
                       :message => 'must be a phone number in [1-]999-999-9999 [x9999] format',
                       :allow_blank => true
+
+
+  scope :not_in_event_id, lambda { |event_id|
+    includes(:primary_contact).where("id not in (select vendor_id from event_vendors where event_id = '#{event_id}')").limit(5)
+  }
+
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    terms = query.downcase.split(/\s+/)
+    terms = terms.map do |e|
+      '%' + e + '%'
+    end
+    num_or_conditions = 1
+    where(
+      terms.map do
+        or_clauses = [
+          'LOWER(vendors.name) LIKE ?'
+        ].join(' OR ')
+        "(#{ or_clauses })"
+      end.join(' AND '),
+      *terms.map { |e| [e] * num_or_conditions }.flatten
+    ).includes(:primary_contact)
+  }
+
+  scope :sorted_by, lambda { |sort_option|
+    # extract the sort direction from the param value.
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^name_/
+      order("LOWER(vendors.name) #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
+
+  def self.default_filter_options
+    {
+      sorted_by: 'name_desc'
+    }
+  end
+
+  def self.filter_sort_scopes
+    %w(
+      sorted_by
+      search_query
+      not_in_event_id
+    )
+  end
+
+  filterrific default_filter_params: default_filter_options,
+              available_filters: filter_sort_scopes
 
 end

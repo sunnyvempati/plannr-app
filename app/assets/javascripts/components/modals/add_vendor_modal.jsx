@@ -19,7 +19,10 @@ var AddVendorModal = React.createClass({
           </div>
         </div>
         <div className="EntityModal-content">
-          <EventVendorAutocomplete onAssociation={this.closeAndRefreshData} />
+          <EventVendorAutocomplete
+            onAssociation={this.closeAndRefreshData}
+            eventId={this.props.eventId}
+          />
         </div>
       </div>
     )

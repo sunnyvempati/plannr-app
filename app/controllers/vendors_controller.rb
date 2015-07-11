@@ -1,13 +1,14 @@
 class VendorsController < ApplicationController
+  include FilterSort
   layout 'main'
   before_action :authenticate_user
   before_action :set_vendor, only: [:show, :edit, :update, :destroy, :contacts]
 
   def index
-    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
+    @vendors = @filter_sort.find
     respond_to do |format|
       format.html
-      format.json { render json: Vendor.includes(:primary_contact).all.order(order) }
+      format.json { render json: @vendors }
     end
   end
 
@@ -39,15 +40,6 @@ class VendorsController < ApplicationController
     render_entity @vendor
   end
 
-  def search_vendors_not_in_event
-    render json: Vendor.search_not_in(params[:event_id], search_params[:text])
-  end
-
-  def search
-    search_results = Vendor.search(search_params[:text])
-    render_success search_results
-  end
-
   def destroy
     @vendor.destroy
     respond_to do |format|
@@ -66,19 +58,15 @@ class VendorsController < ApplicationController
     @vendor = Vendor.find(params[:id])
   end
 
-  def search_params
-    params.require(:search).permit(:text)
-  end
-
   def vendor_params
     params.require(:vendor).permit(:name, :location, :phone, :primary_contact_id, :description).merge(owner: current_user)
   end
 
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
-  end
-
   def mass_destroy_params
     params.require(:destroy_opts).permit(ids: [])
+  end
+
+  def model
+    Vendor
   end
 end

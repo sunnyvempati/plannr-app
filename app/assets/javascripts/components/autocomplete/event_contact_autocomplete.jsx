@@ -15,7 +15,7 @@ var EventContactAutocomplete = React.createClass({
         not_in_event_id: this.props.eventId
       }
     };
-    $.get("/contacts.json", params,  function(result) {
+    $.get("/contacts.json", params, function(result) {
       var contacts = result.contacts;
       if (contacts.length == 0) {
         contacts.push(this.getNewItem("contact"));
