@@ -58,7 +58,7 @@ class Task < ActiveRecord::Base
 
   def self.default_filter_options
     {
-      sorted_by: 'deadline_desc'
+      sorted_by: 'deadline_asc'
     }
   end
 

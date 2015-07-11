@@ -6,7 +6,7 @@ var TasksTable = React.createClass({
     FilterSort
   ],
   defaultFilterSortParams: {
-    sort: {sorted_by: 'deadline_desc'},
+    sort: {sorted_by: 'deadline_asc'},
     filter: {with_status: 1}
   },
   componentDidMount: function() {
@@ -24,6 +24,7 @@ var TasksTable = React.createClass({
   getColumns: function() {
     return [
       {name: "name", grow: 10, header: "Name"},
+      {name: "deadline_icon", grow: 1, header: ""},
       {name: "deadline", grow: 4, header: "Due Date"},
       {name: "status", grow: 4, header: "Status"},
       {name: "assigned_to", grow: 4, header: "Assigned to"},

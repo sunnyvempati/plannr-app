@@ -11,7 +11,7 @@ var EventTasksTable = React.createClass({
   },
   componentDidMount: function() {
     var defaultParams = {
-      sort: {sorted_by: 'deadline_desc'},
+      sort: {sorted_by: 'deadline_asc'},
       filter: {with_status: 1, with_event_id: this.props.eventId}
     }
     this.initializeFilterSort(defaultParams);
@@ -28,6 +28,7 @@ var EventTasksTable = React.createClass({
   getColumns: function () {
     return [
       {name: "name", grow: 10, header: "Name"},
+      {name: "deadline_icon", grow: 1, header: ""},
       {name: "deadline", grow: 4, header: "Due Date"},
       {name: "status", grow: 4, header: "Status"},
       {name: "assigned_to", grow: 4, header: "Assigned to"}
