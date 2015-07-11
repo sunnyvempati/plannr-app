@@ -1,12 +1,12 @@
 class ContactsController < ApplicationController
+  include FilterSort
   layout 'main'
   before_action :authenticate_user
   before_action :set_contact,  only: [:show, :edit, :update, :destroy]
   before_action :set_event, only: [:contacts_not_in_event]
 
   def index
-    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
-    @contacts = Contact.includes(:vendor).all.order(order)
+    @contacts = @filter_sort.find
     respond_to do |format|
       format.html
       format.json { render json: @contacts }
@@ -39,18 +39,6 @@ class ContactsController < ApplicationController
     render_success search_results
   end
 
-  def search
-    render_success Contact.search(search_params[:text])
-  end
-
-  def quick_create
-    @contact = Contact.quick_create(quick_create_params[:text])
-
-    render_entity @contact do
-      EventContact.create(contact_id: @contact.id, event_id: quick_create_params[:event_id])
-    end
-  end
-
   def search_contacts_not_in_event
     render json: Contact.search_not_in(params[:event_id], search_params[:text]), each_serializer: ContactSerializer
   end
@@ -73,14 +61,6 @@ class ContactsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  def quick_create_params
-    params.require(:quick_contact).permit(:event_id, :text)
-  end
-
-  def search_params
-    params.require(:search).permit(:text)
-  end
-
   def set_contact
     @contact = Contact.find(params[:id])
   end
@@ -97,5 +77,9 @@ class ContactsController < ApplicationController
     params.require(:contact)
           .permit(:name, :email, :category, :phone, :organization, :description, :vendor_id)
           .merge(owner: current_user)
+  end
+
+  def model
+    Contact
   end
 end

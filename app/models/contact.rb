@@ -11,6 +11,21 @@ class Contact < ActiveRecord::Base
   belongs_to :vendor
   belongs_to :owner, class_name: "User"
 
+  validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
+  validates :name, presence: true
+  validates_format_of :email,
+                      with: EMAIL_REGEX,
+                      message: 'must be an email address',
+                      allow_blank: true
+  validates_format_of :phone,
+                      with: US_PHONE_REGEX,
+                      message: 'must be a phone number in [1-]999-999-9999 [x9999] format',
+                      allow_blank: true
+  validates_uniqueness_to_tenant :email,
+                                 allow_blank: true,
+                                 allow_nil: true,
+                                 message: 'this email already exists in your company'
+
   scope :not_in, ->(event_id) {
       where("id not in (select contact_id from event_contacts where event_id = '#{event_id}')")
   }
@@ -29,27 +44,48 @@ class Contact < ActiveRecord::Base
     .limit(5)
   }
 
-  scope :search, ->(term) {
-    wildcard_text = "'%#{term.downcase}%'"
-    where("lower(contacts.name) LIKE lower(#{wildcard_text})")
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    terms = query.downcase.split(/\s+/)
+    terms = terms.map do |e|
+      '%' + e + '%'
+    end
+    num_or_conditions = 1
+    where(
+      terms.map do
+        or_clauses = [
+          'LOWER(contacts.name) LIKE ?'
+        ].join(' OR ')
+        "(#{ or_clauses })"
+      end.join(' AND '),
+      *terms.map { |e| [e] * num_or_conditions }.flatten
+    ).includes(:vendor)
   }
 
-  validates :category, inclusion: { in: [CLIENT, VENDOR] }, allow_nil: true
-  validates :name, :presence => true
-  validates_format_of :email,
-                      :with => EMAIL_REGEX,
-                      :message => 'must be an email address',
-                      :allow_blank => true
-  validates_format_of :phone,
-                      :with => US_PHONE_REGEX,
-                      :message => 'must be a phone number in [1-]999-999-9999 [x9999] format',
-                      :allow_blank => true
-  validates_uniqueness_to_tenant :email, allow_blank: true, allow_nil: true,   message: 'this email already exists in your company'
+  scope :sorted_by, lambda { |sort_option|
+    # extract the sort direction from the param value.
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^name_/
+      order("LOWER(contacts.name) #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
 
-  # validates_presence_of :vendor, :if => "category==#{VENDOR}"
-  # validates :vendor, absence: true, :if => "category==#{CLIENT}"
-
-  def self.quick_create(text)
-    text.index(EMAIL_REGEX) ? new(name: text, email:text) : new(name:text)
+  def self.default_filter_options
+    {
+      sorted_by: 'name_asc'
+    }
   end
+
+  def self.filter_sort_scopes
+    %w(
+      sorted_by
+      search_query
+    )
+  end
+  filterrific default_filter_params: default_filter_options,
+              available_filters: filter_sort_scopes
+
 end
