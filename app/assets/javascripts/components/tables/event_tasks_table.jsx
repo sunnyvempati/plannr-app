@@ -5,6 +5,10 @@ var EventTasksTable = React.createClass({
     LoadingToast,
     FilterSort
   ],
+  propTypes: {
+    eventId: React.PropTypes.string.isRequired,
+    authToken: React.PropTypes.string.isRequired
+  },
   componentDidMount: function() {
     var defaultParams = {
       sort: {sorted_by: 'deadline_desc'},
@@ -83,6 +87,9 @@ var EventTasksTable = React.createClass({
       React.render(modal, document.getElementById('modal'));
     }.bind(this));
   },
+  goToTask: function(data) {
+    this.openEditModal(data.id);
+  },
   getActionButton: function () {
     return (
       <ActionButton handleClick={this.openCreateTaskModal}
@@ -96,7 +103,7 @@ var EventTasksTable = React.createClass({
         showHeaders={true}
         columns={this.getColumns()}
         useCustomRowComponent={true}
-        customRows={this.getCustomRows(false)}
+        customRows={this.getCustomRows(false, this.goToTask)}
         sortItems={this.sortItems()}
         handleSortClick={this.sort}
         handleSearch={this.search}

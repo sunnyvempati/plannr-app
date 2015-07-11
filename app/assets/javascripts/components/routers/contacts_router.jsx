@@ -1,4 +1,7 @@
 var ContactsRouter = React.createClass({
+  propTypes: {
+    currentUser: React.PropTypes.object
+  },
   componentDidMount: function() {
     Router.run(this.routes(), function (Handler) {
       React.render(<Handler currentUser={this.props.currentUser} />, React.findDOMNode(this.refs.contacts));
