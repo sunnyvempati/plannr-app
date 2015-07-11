@@ -70,18 +70,18 @@ var EventTasksTable = React.createClass({
     var props = {
       model: {event_id: this.props.eventId},
       authToken: this.props.authToken,
-      refreshData: this.getEventTasks.bind(this, {status: 1})
+      refreshData: this.getTableData.bind(this, {status: 1})
     }
     var modal = React.createElement(CreateTaskModal, props);
     React.render(modal, document.getElementById('modal'));
   },
   openEditModal: function(task_id) {
     var url = '/tasks/' + task_id + '.json';
-    this.getFromServer(url, {}, function(result) {
+    HttpHelpers.getFromServer(url, {}, function(result) {
       var props = {
         model: $.extend({event_id: this.props.eventId}, result.task),
         authToken: this.props.authToken,
-        refreshData: this.getEventTasks.bind(this, {status: 1})
+        refreshData: this.getTableData.bind(this, {status: 1})
       }
       var modal = React.createElement(EditTaskModal, props);
       React.render(modal, document.getElementById('modal'));
