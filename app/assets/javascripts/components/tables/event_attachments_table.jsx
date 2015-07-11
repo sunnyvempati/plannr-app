@@ -55,8 +55,6 @@ var EventAttachmentsTable = React.createClass({
       this.toast(deletionIds.length + " attachment(s) removed from event.");
       var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
       this.setState({eventAttachments: newData});
-    }.bind(this)).fail(function (error_result) {
-      this.props.setServerMessage(error_result.responseJSON.message);
     }.bind(this));
   },
   handleActionClick: function (item, attachmentId) {
