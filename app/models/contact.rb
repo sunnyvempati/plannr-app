@@ -65,7 +65,7 @@ class Contact < ActiveRecord::Base
 
   def self.default_filter_options
     {
-      sorted_by: 'deadline_desc'
+      sorted_by: 'name_desc'
     }
   end
 
