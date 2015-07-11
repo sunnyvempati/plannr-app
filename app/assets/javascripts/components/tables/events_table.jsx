@@ -56,10 +56,6 @@ var EventsTable = React.createClass({
       this.toast(deletionIds.length + " events deleted successfully.");
     }.bind(this));
   },
-  // handleArchive: function(id) {
-  //   var archiveIds = !!id ? [id] : this.state.checkedItems;
-  //   var updateOpts = {update_opts: {ids: archiveIds}, event: {archived:}}
-  // },
   actionItems: function() {
     return [
       {name: "Delete", handler: this.handleDelete, massAction: true}
