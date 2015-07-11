@@ -5,7 +5,6 @@ var TasksTable = React.createClass({
     LoadingToast,
     FilterSort
   ],
-  // required with FilterSort Mixin
   defaultFilterSortParams: {
     sort: {sorted_by: 'deadline_desc'},
     filter: {with_status: 1}

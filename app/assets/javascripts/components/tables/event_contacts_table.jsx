@@ -3,7 +3,7 @@ var EventContactsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-
+    FilterSort
   ],
   getInitialState: function() {
     return {
@@ -11,10 +11,14 @@ var EventContactsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getEventContacts()
+    var defaultParams = {
+      sort: {sorted_by: 'contact_name_asc'},
+      filter: {with_event_id: this.props.eventId}
+    }
+    this.initializeFilterSort(defaultParams);
   },
-  getEventContacts: function() {
-    HttpHelpers.getFromServer("contacts", {}, function(results) {
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/event_contacts.json", params, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventContacts: results.event_contacts
@@ -36,7 +40,7 @@ var EventContactsTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "name", display: "Name", default: true},
+      {entity: "contact_name", display: "Name", default: true},
       {entity: "email", display: "Email"}
     ]
   },
@@ -47,17 +51,6 @@ var EventContactsTable = React.createClass({
       this.toast(deletionIds.length + " contact(s) removed from event.");
       var newData = this.spliceResults(this.state.eventContacts, deletionIds);
       this.setState({eventContacts: newData, checkedItems: []});
-    }.bind(this));
-  },
-  sortBy: function(entity, order) {
-    HttpHelpers.getFromServer('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({eventContacts: result.event_contacts});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    HttpHelpers.getFromServer('search_event_contacts', {search: {text: term || ""}}, function(result) {
-      this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
   openContactModal: function(data) {
@@ -89,7 +82,7 @@ var EventContactsTable = React.createClass({
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}

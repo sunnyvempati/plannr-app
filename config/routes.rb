@@ -41,8 +41,8 @@ Rails.application.routes.draw do
   # event_contacts
   post 'events/:event_id/contacts', to:'event_contacts#create'
   post 'events/:event_id/contacts/mass_delete', to:'event_contacts#mass_delete'
-  get 'events/:event_id/contacts', to:'event_contacts#contacts'
-  get 'contacts/events', to:'event_contacts#events'
+  get '/event_contacts', to:'event_contacts#index'
+  get '/contact_events', to:'event_contacts#index'
 
   # event tasks
   get 'events/:event_id/tasks', to:'tasks#event_tasks'

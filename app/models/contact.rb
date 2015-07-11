@@ -65,7 +65,7 @@ class Contact < ActiveRecord::Base
 
   def self.default_filter_options
     {
-      sorted_by: 'name_asc'
+      sorted_by: 'deadline_desc'
     }
   end
 
@@ -73,10 +73,11 @@ class Contact < ActiveRecord::Base
     %w(
       sorted_by
       search_query
-      not_in_event_id
       with_category
+      not_in_event_id
     )
   end
+
   filterrific default_filter_params: default_filter_options,
               available_filters: filter_sort_scopes
 
