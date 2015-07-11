@@ -30,6 +30,7 @@ var EventsTable = React.createClass({
           event={event}
           checkedItems={this.state.checkedItems}
           actionItems={this.actionItems()}
+          key={event.id}
         />
       );
     }, this);
@@ -38,6 +39,13 @@ var EventsTable = React.createClass({
     return [
       {entity: "name", display: "Name", default: true},
       {entity: "start_date", display: "Start Date"}
+    ]
+  },
+  filterItems: function () {
+    return [
+      {name: "All Events", handler: this.filter.bind(this, {}), default: true},
+      {name: "Active Events", handler: this.filter.bind(this, {with_status: 1})},
+      {name: "Archived Events", handler: this.filter.bind(this, {with_status: 2})}
     ]
   },
   handleDelete: function(id) {
@@ -80,6 +88,8 @@ var EventsTable = React.createClass({
           showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}
           extraPadding={true}
+          filterable={true}
+          filterItems={this.filterItems()}
           searchPlaceholder="Search Events..."
           actionButton={this.getActionButton()}
           handleCheckAllChanged={this.toggleCheckAll}

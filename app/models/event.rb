@@ -49,6 +49,10 @@ class Event < ActiveRecord::Base
     end
   }
 
+  scope :with_status, lambda { |status|
+    where(status: status)
+  }
+
   def self.default_filter_options
     {
       sorted_by: 'name_asc'
@@ -59,6 +63,7 @@ class Event < ActiveRecord::Base
     %w(
       sorted_by
       search_query
+      with_status
     )
   end
 
