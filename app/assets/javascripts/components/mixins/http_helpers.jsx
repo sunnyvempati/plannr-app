@@ -51,7 +51,7 @@ var HttpHelpers = {
   putToServer: function(url, params, successCallback, failCallback, alwaysCallback) {
     LoadingToast.showLoading();
     $.ajax({
-      url: '/comments',
+      url: url,
       type: 'PUT',
       data: params,
       success: function(result) {

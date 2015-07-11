@@ -15,6 +15,9 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validate :dates
 
+  include EventStatuses
+  validates :status, inclusion: { in: [ACTIVE, ARCHIVED] }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)

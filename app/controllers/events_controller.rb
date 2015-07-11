@@ -44,6 +44,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def mass_update
+    ids = mass_update_params[:ids]
+    Event.update_all(event_params, id: ids) if ids
+    render_success
+  end
+
   def destroy
     @event.destroy
     respond_to do |format|
@@ -65,11 +71,15 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description).merge(owner: current_user)
+    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status).merge(owner: current_user)
   end
 
   def mass_delete_params
     params.require(:destroy_opts).permit(ids: [])
+  end
+
+  def mass_update_params
+    params.require(:update_opts).permit(ids: [])
   end
 
   def model
