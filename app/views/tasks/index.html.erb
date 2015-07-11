@@ -1,4 +1,4 @@
 <% content_for(:title) { "#{current_user.company.name}'s Tasks" } %>
 <% content_for(:header) { "Tasks" } %>
 
-<%= react_component("TasksTable", prerender: true) %>
+<%= react_component("TasksTable", currentUserId: current_user.id, prerender: true) %>

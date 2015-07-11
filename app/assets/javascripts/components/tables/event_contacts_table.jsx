@@ -3,7 +3,7 @@ var EventContactsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   getInitialState: function() {
     return {
@@ -11,10 +11,14 @@ var EventContactsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getEventContacts()
+    var defaultParams = {
+      sort: {sorted_by: 'contact_name_asc'},
+      filter: {with_event_id: this.props.eventId}
+    };
+    this.initializeFilterSort(defaultParams);
   },
-  getEventContacts: function() {
-    this.getFromServer("contacts", {}, function(results) {
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/event_contacts.json", params, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventContacts: results.event_contacts
@@ -36,28 +40,17 @@ var EventContactsTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "name", display: "Name", default: true},
+      {entity: "contact_name", display: "Name", default: true},
       {entity: "email", display: "Email"}
     ]
   },
   removeAssociation: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer("contacts/mass_delete", destroyOpts, function(success_result) {
+    HttpHelpers.postToServer("contacts/mass_delete", destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) removed from event.");
       var newData = this.spliceResults(this.state.eventContacts, deletionIds);
       this.setState({eventContacts: newData, checkedItems: []});
-    }.bind(this));
-  },
-  sortBy: function(entity, order) {
-    this.getFromServer('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({eventContacts: result.event_contacts});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('search_event_contacts', {search: {text: term || ""}}, function(result) {
-      this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
   openContactModal: function(data) {
@@ -69,7 +62,11 @@ var EventContactsTable = React.createClass({
     React.render(modal, document.getElementById('modal'));
   },
   openAddModal: function() {
-    var modal = React.createElement(AddContactModal, {refreshData: this.getEventContacts});
+    var params = {
+      refreshData: this.reloadData,
+      eventId: this.props.eventId
+    };
+    var modal = React.createElement(AddContactModal, params);
     React.render(modal, document.getElementById('modal'));
   },
   getActionButton: function () {
@@ -89,7 +86,7 @@ var EventContactsTable = React.createClass({
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}

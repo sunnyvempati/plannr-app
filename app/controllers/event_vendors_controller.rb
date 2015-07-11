@@ -1,5 +1,15 @@
 class EventVendorsController < ApplicationController
+  include FilterSort
   before_action :authenticate_user
+
+  def index
+    serializer = filter_sort_params && filter_sort_params[:with_event_id] ? EventVendorWithVendorSerializer : EventVendorWithEventSerializer
+    @event_vendors = @filter_sort.find
+    respond_to do |format|
+      format.html
+      format.json { render json: @event_vendors, each_serializer: serializer }
+    end
+  end
 
   def create
     event_vendor = EventVendor.new event_id: params[:event_id]
@@ -13,23 +23,6 @@ class EventVendorsController < ApplicationController
     else
       render_error
     end
-  end
-
-  def vendors
-    order = sort_params ? "vendors.#{sort_params[:entity]} #{sort_params[:order]}" : 'vendors.name asc'
-    vendors = EventVendor.vendors(params[:event_id]).order(order)
-    render json: vendors, each_serializer: EventVendorWithVendorSerializer
-  end
-
-  def events
-    order = sort_params ? "vendors.#{sort_params[:entity]} #{sort_params[:order]}" : 'events.name asc'
-    events = EventVendor.events(params[:vendor_id]).order(order)
-    render json: events,
-           each_serializer: EventVendorWithEventSerializer
-  end
-
-  def search
-    render json: EventVendor.search(params[:event_id], search_params[:text]), each_serializer: EventVendorWithVendorSerializer
   end
 
   def mass_delete
@@ -48,11 +41,7 @@ class EventVendorsController < ApplicationController
     params.require(:event_vendor).permit(:vendor_id, :name)
   end
 
-  def search_params
-    params.require(:search).permit(:text)
-  end
-
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
+  def model
+    EventVendor
   end
 end

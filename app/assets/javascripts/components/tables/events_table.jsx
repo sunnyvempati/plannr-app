@@ -3,19 +3,24 @@ var EventsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   getInitialState: function() {
     return {
       events: []
     };
   },
-  componentDidMount: function() {
-    this.getEvents();
+  defaultFilterSortParams: {
+    sort: {sorted_by: 'name_asc'}
   },
-  getEvents: function() {
-    this.getFromServer("events.json", {}, function(result) {
-      this.setState({events: result.events});
+  componentDidMount: function() {
+    this.initializeFilterSort(this.defaultFilterSortParams);
+  },
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("events.json", params, function(result) {
+      if (this.isMounted()) {
+        this.setState({events: result.events});
+      }
     }.bind(this));
   },
   goToEvent: function(id) {
@@ -48,19 +53,6 @@ var EventsTable = React.createClass({
       );
     }, this);
   },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('search_events', {search: {text: term || ""}}, function(result) {
-      this.setState({events: result.events});
-    }.bind(this));
-  },
-  // entity to sort by
-  // asc is a boolean value giving us the order
-  sortBy: function(entity, order) {
-    this.getFromServer('events.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({events: result.events});
-    }.bind(this));
-  },
   sortItems: function() {
     return [
       {entity: "name", display: "Name", default: true},
@@ -85,10 +77,10 @@ var EventsTable = React.createClass({
   },
   getActionButton: function () {
     return (
-        <ActionButton handleClick={this.handleActionButtonClick}
-                      label='Create Event'
-                      svgClass='createEvent'
-                      extraPad={true} />
+      <ActionButton handleClick={this.handleActionButtonClick}
+                    label='Create Event'
+                    svgClass='createEvent'
+                    extraPad={true} />
     );
   },
   render: function() {
@@ -98,7 +90,7 @@ var EventsTable = React.createClass({
           useCustomRowComponent={true}
           customRows={this.getCustomRows()}
           sortItems={this.sortItems()}
-          handleSortClick={this.sortBy}
+          handleSortClick={this.sort}
           handleSearch={this.search}
           showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}

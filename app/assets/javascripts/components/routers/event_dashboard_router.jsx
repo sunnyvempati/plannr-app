@@ -8,6 +8,7 @@ var EventDashboardRouter = React.createClass({
         <Handler event={this.props.event}
                  client={this.props.client}
                  authToken={this.props.authToken}
+                 currentUserId={this.props.currentUser.id}
         />
       , React.findDOMNode(this.refs.eventDashboard));
     }.bind(this));

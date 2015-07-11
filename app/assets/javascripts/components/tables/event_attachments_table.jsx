@@ -2,7 +2,8 @@ var EventAttachmentsTable = React.createClass({
   mixins: [
     TableCheckbox,
     ToastMessages,
-    LoadingToast
+    LoadingToast,
+    FilterSort
   ],
   propTypes: {
     setServerMessage: React.PropTypes.func
@@ -13,10 +14,14 @@ var EventAttachmentsTable = React.createClass({
     };
   },
   componentDidMount: function () {
-    this.retrieveData();
+    var defaultParams = {
+      sort: {sorted_by: 'file_name_asc'},
+      filter: {with_event_id: this.props.eventId}
+    };
+    this.initializeFilterSort(defaultParams);
   },
-  retrieveData: function () {
-    HttpHelpers.getFromServer("attachments", {}, function (results) {
+  getTableData: function (params) {
+    HttpHelpers.getFromServer("/attachments.json", params, function (results) {
       if (this.isMounted()) {
         this.setState({
           eventAttachments: results.attachments
@@ -25,7 +30,7 @@ var EventAttachmentsTable = React.createClass({
     }.bind(this))
   },
   handleAssociation: function (attachment) {
-    this.retrieveData();
+    this.reloadData();
     ToastMessages.toast(attachment.file_name + " has been added to this event.");
   },
   columns: function () {
@@ -52,17 +57,6 @@ var EventAttachmentsTable = React.createClass({
       this.setState({eventAttachments: newData});
     }.bind(this)).fail(function (error_result) {
       this.props.setServerMessage(error_result.responseJSON.message);
-    }.bind(this));
-  },
-  sortBy: function (entity, order) {
-    HttpHelpers.getFromServer('attachments.json', {sort: {entity: entity, order: order}}, function (result) {
-      this.setState({eventAttachments: result.attachments});
-    }.bind(this));
-  },
-  search: function (e) {
-    var term = e.target.value;
-    HttpHelpers.getFromServer('search_event_attachments', {search: {text: term || ""}}, function (result) {
-      this.setState({eventAttachments: result.attachments});
     }.bind(this));
   },
   handleActionClick: function (item, attachmentId) {
@@ -141,7 +135,7 @@ var EventAttachmentsTable = React.createClass({
             checkedItems={this.state.checkedItems}
             rowChanged={this.rowChanged}
             sortItems={this.sortItems()}
-            handleSortClick={this.sortBy}
+            handleSortClick={this.sort}
             handleSearch={this.search}
             showActions={this.state.checkedItems.length > 0}
             actionItems={this.actionItems()}

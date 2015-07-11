@@ -2,23 +2,23 @@ var TasksTable = React.createClass({
   mixins: [
     TaskCheckboxRows,
     ToastMessages,
-    LoadingToast
+    LoadingToast,
+    FilterSort
   ],
-  componentDidMount: function() {
-    this.getAllTasks({status: 1});
+  defaultFilterSortParams: {
+    sort: {sorted_by: 'deadline_desc'},
+    filter: {with_status: 1}
   },
-  getAllTasks: function(filterParams) {
-    HttpHelpers.getFromServer("/tasks.json", {filter: filterParams}, function(result) {
+  componentDidMount: function() {
+    this.initializeFilterSort(this.defaultFilterSortParams);
+  },
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/tasks.json", params, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
         })
       }
-    }.bind(this));
-  },
-  getUserTasks: function(filterParams) {
-    HttpHelpers.getFromServer("/user_tasks", {filter: filterParams}, function(result) {
-      this.setState({tasks: result.tasks});
     }.bind(this));
   },
   getColumns: function() {
@@ -32,8 +32,8 @@ var TasksTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "name", display: "Name", default: true},
-      {entity: "deadline", display: "Due Date"},
+      {entity: "deadline", display: "Due Date", default: true},
+      {entity: "name", display: "Name"},
       {entity: "status", display: "Status"}
     ]
   },
@@ -49,17 +49,6 @@ var TasksTable = React.createClass({
   handleEdit: function(id) {
     location.href = "/tasks/"+id+"/edit";
   },
-  sortBy: function(entity, order) {
-    HttpHelpers.getFromServer('/tasks.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    HttpHelpers.getFromServer('/search_tasks', {search: {text: term || ""}}, function(result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
-  },
   actionItems: function() {
     return [
       // global means the action is available as a mass action
@@ -69,10 +58,10 @@ var TasksTable = React.createClass({
   },
   filterItems: function () {
     return [
-      {name: "All Tasks - To do", handler: this.getAllTasks.bind(this, {status: 1}), default: true},
-      {name: "All Tasks - Completed", handler: this.getAllTasks.bind(this, {status: 2})},
-      {name: "My Tasks - To do", handler: this.getUserTasks.bind(this, {status: 1})},
-      {name: "My Tasks - Completed", handler: this.getUserTasks.bind(this, {status: 2})},
+      {name: "All Tasks - To do", handler: this.filter.bind(this, {with_status: 1}), default: true},
+      {name: "All Tasks - Completed", handler: this.filter.bind(this, {with_status: 2})},
+      {name: "My Tasks - To do", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 1})},
+      {name: "My Tasks - Completed", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
     ]
   },
   handleActionButtonClick: function() {
@@ -94,7 +83,7 @@ var TasksTable = React.createClass({
         useCustomRowComponent={true}
         customRows={this.getCustomRows(true)}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={false}
         actionItems={this.actionItems()}

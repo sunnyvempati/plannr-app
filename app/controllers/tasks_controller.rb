@@ -1,18 +1,16 @@
 class TasksController < ApplicationController
+  include FilterSort
   layout 'main'
   before_action :authenticate_user
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
+    serializer = filter_sort_params && filter_sort_params[:with_event_id] ? TaskSerializer : TaskWithEventSerializer
+    @tasks = @filter_sort.find
     respond_to do |format|
       format.html
-      format.json { render json: Task.includes(:assigned_to).all.order(order).where(filter_params), each_serializer: TaskWithEventSerializer }
+      format.json { render json: @tasks, each_serializer: serializer }
     end
-  end
-
-  def for_user
-    render json: Task.includes(:assigned_to).filter(assigned_to: current_user.id, event_id: params[:event_id]).where(filter_params).order('name asc'), each_serializer: TaskWithEventSerializer
   end
 
   def show
@@ -37,23 +35,6 @@ class TasksController < ApplicationController
     render_entity @task
   end
 
-  def search_in_events
-    search_results = Task.search_in_event(params[:event_id], search_params[:text])
-    render_success search_results
-  end
-
-  def search
-    render_success Task.search(search_params[:text])
-  end
-
-  def event_tasks
-    order = sort_params ? "#{sort_params[:entity]} #{sort_params[:order]}" : 'name asc'
-    tasks = Task.event_tasks(params[:event_id])
-              .where(filter_params)
-              .order(order)
-    render json: tasks
-  end
-
   def destroy
     @task.destroy
     respond_to do |format|
@@ -68,10 +49,6 @@ class TasksController < ApplicationController
 
   private
 
-  def filter_params
-    params[:filter].permit(:assigned_to, :status) if params[:filter]
-  end
-
   def set_task
     @task = Task.includes(:assigned_to).find(params[:id])
   end
@@ -80,15 +57,12 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name, :deadline, :event_id, :assigned_to_id, :status, :description).merge(owner: current_user)
   end
 
-  def search_params
-    params.require(:search).permit(:text)
-  end
-
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
-  end
-
   def mass_destroy_params
     params.require(:destroy_opts).permit(ids: [])
+  end
+
+  # required for FilterSort
+  def model
+    Task
   end
 end

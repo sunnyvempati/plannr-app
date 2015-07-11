@@ -3,7 +3,7 @@ var EventVendorsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   getInitialState: function() {
     return {
@@ -11,10 +11,14 @@ var EventVendorsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getEventVendors();
+    var defaultParams = {
+      sort: {sorted_by: 'vendor_name_asc'},
+      filter: {with_event_id: this.props.eventId}
+    }
+    this.initializeFilterSort(defaultParams);
   },
-  getEventVendors: function() {
-    this.getFromServer("vendors", {}, function(results) {
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/event_vendors.json", params, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventVendors: results.event_vendors
@@ -36,27 +40,16 @@ var EventVendorsTable = React.createClass({
   },
   sortItems: function() {
     return [
-      {entity: "name", display: "Name", default: true}
+      {entity: "vendor_name", display: "Name", default: true}
     ]
   },
   removeAssociation: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer("vendors/mass_delete",destroyOpts, function(success_result) {
+    HttpHelpers.postToServer("vendors/mass_delete",destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) removed from event.");
       var newData = this.spliceResults(this.state.eventVendors, deletionIds);
       this.setState({eventVendors: newData, checkedItems: []});
-    }.bind(this));
-  },
-  sortBy: function(entity, order) {
-    this.getFromServer('vendors.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({eventVendors: result.event_vendors});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('search_event_vendors', {search: {text: term || ""}}, function(result) {
-      this.setState({eventVendors: result.event_vendors});
     }.bind(this));
   },
   openVendorModal: function(data) {
@@ -68,7 +61,11 @@ var EventVendorsTable = React.createClass({
     React.render(modal, document.getElementById('modal'));
   },
   openAddModal: function() {
-    var modal = React.createElement(AddVendorModal, {refreshData: this.getEventVendors});
+    var params = {
+      refreshData: this.reloadData,
+      eventId: this.props.eventId
+    };
+    var modal = React.createElement(AddVendorModal, params);
     React.render(modal, document.getElementById('modal'));
   },
   getActionButton: function () {
@@ -88,7 +85,7 @@ var EventVendorsTable = React.createClass({
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}

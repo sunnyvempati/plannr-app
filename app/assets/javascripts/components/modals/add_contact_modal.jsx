@@ -19,7 +19,10 @@ var AddContactModal = React.createClass({
           </div>
         </div>
         <div className="EntityModal-content">
-          <EventContactAutocomplete onAssociation={this.closeAndRefreshData} />
+          <EventContactAutocomplete
+            onAssociation={this.closeAndRefreshData}
+            eventId={this.props.eventId}
+          />
         </div>
       </div>
     )

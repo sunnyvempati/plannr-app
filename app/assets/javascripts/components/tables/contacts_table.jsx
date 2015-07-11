@@ -4,7 +4,7 @@ var ContactsTable = React.createClass({
     ToastMessages,
     Router.Navigation,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   getInitialState: function() {
     return {
@@ -12,7 +12,10 @@ var ContactsTable = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.getFromServer("/contacts.json", {}, function(result) {
+    this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
+  },
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/contacts.json", params, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -43,21 +46,10 @@ var ContactsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer('/contacts/mass_delete', destroyOpts, function(success_result) {
+    HttpHelpers.postToServer('/contacts/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) deleted.");
       var newData = this.spliceResults(this.state.contacts, deletionIds);
       this.setState({contacts: newData, checkedItems: []});
-    }.bind(this));
-  },
-  sortBy: function(entity, order) {
-    this.getFromServer('/contacts.json', {sort: {entity: entity, order: order}}, function(result) {
-      this.setState({contacts: result.contacts});
-    }.bind(this));
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.getFromServer('/search_contacts', {search: {text: term || ""}}, function(result) {
-      this.setState({contacts: result.contacts});
     }.bind(this));
   },
   goToContact: function(data) {
@@ -83,7 +75,7 @@ var ContactsTable = React.createClass({
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
