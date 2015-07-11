@@ -1,19 +1,6 @@
 class Task < ActiveRecord::Base
   acts_as_tenant :company
 
-  def self.filter_sort_scopes
-    %w(
-      sorted_by
-      search_query
-      with_event_id
-      with_status
-      with_assigned_to
-    )
-  end
-
-  filterrific default_filter_params: { sorted_by: 'deadline_desc' },
-              available_filters: self.filter_sort_scopes
-
   belongs_to :event
   belongs_to :owner, class_name: 'User'
   belongs_to :assigned_to, class_name: 'User'
@@ -25,7 +12,7 @@ class Task < ActiveRecord::Base
 
   # scopes
   scope :with_event_id, lambda { |event_id|
-    where(event_id: [event_id])
+    where(event_id: [event_id]).includes(:event)
   }
 
   scope :with_status, lambda { |status|
@@ -33,7 +20,7 @@ class Task < ActiveRecord::Base
   }
 
   scope :with_assigned_to, lambda { |user|
-    where(assigned_to: user)
+    where(assigned_to: user).includes(:assigned_to)
   }
 
   scope :search_query, lambda { |query|
@@ -70,7 +57,21 @@ class Task < ActiveRecord::Base
     end
   }
 
-  def self.header
-    "Tasks"
+  def self.default_filter_options
+    {
+      sorted_by: 'deadline_desc'
+    }
   end
+
+  def self.filter_sort_scopes
+    %w(
+      sorted_by
+      search_query
+      with_event_id
+      with_status
+      with_assigned_to
+    )
+  end
+  filterrific default_filter_params: default_filter_options,
+              available_filters: filter_sort_scopes
 end

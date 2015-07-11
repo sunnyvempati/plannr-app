@@ -2,22 +2,19 @@ var TasksTable = React.createClass({
   mixins: [
     TaskCheckboxRows,
     ToastMessages,
-    LoadingToast
+    LoadingToast,
+    FilterSort
   ],
-  defaultFilterSort: {
-    with_status: 1, // To do
-    sorted_by: 'deadline_desc'
-  },
-  setSortFilterParams: function(params) {
-    $.extend(this.filterSortParams, params);
-    this.getTasks();
+  // required with FilterSort Mixin
+  defaultFilterSortParams: {
+    sort: {sorted_by: 'deadline_desc'},
+    filter: {with_status: 1}
   },
   componentDidMount: function() {
-    this.filterSortParams = this.defaultFilterSort;
-    this.getTasks();
+    this.initializeFilterSort(this.defaultFilterSortParams);
   },
-  getTasks: function(filterSortParams) {
-    HttpHelpers.getFromServer("/tasks.json", {filter_sort: this.filterSortParams}, function(result) {
+  getTableData: function(params) {
+    HttpHelpers.getFromServer("/tasks.json", params, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
@@ -53,13 +50,6 @@ var TasksTable = React.createClass({
   handleEdit: function(id) {
     location.href = "/tasks/"+id+"/edit";
   },
-  sortBy: function(entity, order) {
-    this.setSortFilterParams({sorted_by: entity + "_" + order});
-  },
-  search: function(e) {
-    var term = e.target.value;
-    this.setSortFilterParams({search_query: term});
-  },
   actionItems: function() {
     return [
       // global means the action is available as a mass action
@@ -69,10 +59,10 @@ var TasksTable = React.createClass({
   },
   filterItems: function () {
     return [
-      {name: "All Tasks - To do", handler: this.setSortFilterParams.bind(this, {with_status: 1}), default: true},
-      {name: "All Tasks - Completed", handler: this.setSortFilterParams.bind(this, {with_status: 2})},
-      {name: "My Tasks - To do", handler: this.setSortFilterParams.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 1})},
-      {name: "My Tasks - Completed", handler: this.setSortFilterParams.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
+      {name: "All Tasks - To do", handler: this.filter.bind(this, {with_status: 1}), default: true},
+      {name: "All Tasks - Completed", handler: this.filter.bind(this, {with_status: 2})},
+      {name: "My Tasks - To do", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 1})},
+      {name: "My Tasks - Completed", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
     ]
   },
   handleActionButtonClick: function() {
@@ -94,7 +84,7 @@ var TasksTable = React.createClass({
         useCustomRowComponent={true}
         customRows={this.getCustomRows(true)}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={false}
         actionItems={this.actionItems()}

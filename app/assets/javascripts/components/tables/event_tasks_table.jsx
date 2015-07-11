@@ -3,23 +3,17 @@ var EventTasksTable = React.createClass({
     TaskCheckboxRows,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+    FilterSort
   ],
   componentDidMount: function() {
-    // filter and get all to do items
-    this.getEventTasks({status: 1});
+    var defaultParams = {
+      sort: {sorted_by: 'deadline_desc'},
+      filter: {with_status: 1, with_event_id: this.props.eventId}
+    }
+    this.initializeFilterSort(defaultParams);
   },
-  getEventTasks: function (filterParams) {
-    this.getFromServer("tasks.json", {filter: filterParams}, function (results) {
-      if (this.isMounted()) {
-        this.setState({
-          tasks: results.tasks
-        });
-      }
-    }.bind(this))
-  },
-  getUserTasks: function (filterParams) {
-    this.getFromServer("user_tasks", {filter: filterParams}, function (results) {
+  getTableData: function (params) {
+    HttpHelpers.getFromServer("/tasks.json", params, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
@@ -56,23 +50,16 @@ var EventTasksTable = React.createClass({
       this.setState({tasks: newData});
     }.bind(this));
   },
-  sortBy: function (entity, order) {
-    this.getFromServer('tasks.json', {sort: {entity: entity, order: order}}, function (result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
-  },
-  search: function (e) {
-    var term = e.target.value;
-    this.getFromServer('search_event_tasks', {search: {text: term || ""}}, function (result) {
-      this.setState({tasks: result.tasks});
-    }.bind(this));
+  filterWithEvent: function(params) {
+    $.extend(params, {with_event_id: this.props.eventId});
+    this.filter(params);
   },
   filterItems: function () {
     return [
-      {name: "All Tasks - To do", handler: this.getEventTasks.bind(this, {status: 1}), default: true},
-      {name: "All Tasks - Completed", handler: this.getEventTasks.bind(this, {status: 2})},
-      {name: "My Tasks - To do", handler: this.getUserTasks.bind(this, {status: 1})},
-      {name: "My Tasks - Completed", handler: this.getUserTasks.bind(this, {status: 2})},
+      {name: "All Tasks - To do", handler: this.filterWithEvent.bind(this, {with_status: 1}), default: true},
+      {name: "All Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2})},
+      {name: "My Tasks - To do", handler: this.filterWithEvent.bind(this, {with_status: 1, with_assigned_to: this.props.currentUserId})},
+      {name: "My Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2, with_assigned_to: this.props.currentUserId})},
     ]
   },
   openCreateTaskModal: function() {
@@ -111,7 +98,7 @@ var EventTasksTable = React.createClass({
         useCustomRowComponent={true}
         customRows={this.getCustomRows(false)}
         sortItems={this.sortItems()}
-        handleSortClick={this.sortBy}
+        handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={false}
         actionItems={this.actionItems()}

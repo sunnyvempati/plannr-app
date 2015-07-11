@@ -8,7 +8,6 @@ var CompanyUserRow = React.createClass({
   toggleAdmin: function() {
     this.postToServer("/toggle_admin",{id: this.props.data["id"]}, function(success_result) {
       this.setState({isAdmin: success_result.admin});
-      console.log(success_result);
     }.bind(this));
   },
   handleActionClick: function(item) {
