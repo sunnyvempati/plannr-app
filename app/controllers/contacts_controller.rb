@@ -34,15 +34,6 @@ class ContactsController < ApplicationController
     render_entity @contact
   end
 
-  def search_clients
-    search_results = Contact.search_clients(search_params[:text])
-    render_success search_results
-  end
-
-  def search_contacts_not_in_event
-    render json: Contact.search_not_in(params[:event_id], search_params[:text]), each_serializer: ContactSerializer
-  end
-
   def destroy
     @contact.destroy
     respond_to do |format|
@@ -63,10 +54,6 @@ class ContactsController < ApplicationController
 
   def set_contact
     @contact = Contact.find(params[:id])
-  end
-
-  def sort_params
-    params.require(:sort).permit(:entity, :order) if params[:sort]
   end
 
   def mass_destroy_params

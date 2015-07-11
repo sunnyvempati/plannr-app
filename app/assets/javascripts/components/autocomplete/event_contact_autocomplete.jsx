@@ -9,7 +9,13 @@ var EventContactAutocomplete = React.createClass({
     };
   },
   retrieveContacts: function(term) {
-    $.get("search_other_contacts", {search: {text: term}},  function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        not_in_event_id: this.props.eventId
+      }
+    };
+    $.get("/contacts.json", params,  function(result) {
       var contacts = result.contacts;
       if (contacts.length == 0) {
         contacts.push(this.getNewItem("contact"));

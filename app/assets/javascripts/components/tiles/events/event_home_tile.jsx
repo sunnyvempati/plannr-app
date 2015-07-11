@@ -4,11 +4,11 @@ var EventHome = React.createClass({
       <div className="EventHomeTileContainer">
         <div className="EventHome-row">
           <EventTaskSmallTile eventId={this.props.eventId} />
-          <EventContactSmallTile />
+          <EventContactSmallTile eventId={this.props.eventId} />
         </div>
         <div className="EventHome-row">
           <EventAttachmentsSmallTile />
-          <EventVendorSmallTile />
+          <EventVendorSmallTile eventId={this.props.eventId} />
         </div>
       </div>
     );

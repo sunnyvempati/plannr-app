@@ -26,22 +26,12 @@ class Contact < ActiveRecord::Base
                                  allow_nil: true,
                                  message: 'this email already exists in your company'
 
-  scope :not_in, ->(event_id) {
-      where("id not in (select contact_id from event_contacts where event_id = '#{event_id}')")
+  scope :not_in_event_id, lambda { |event_id|
+      where("id not in (select contact_id from event_contacts where event_id = '#{event_id}')").limit(5)
   }
 
-  scope :search_not_in, ->(event_id, term) {
-    wildcard_text = "'%#{term}%'"
-    Contact.not_in(event_id)
-      .where("lower(contacts.name) LIKE lower(#{wildcard_text})")
-      .limit(5)
-  }
-
-  scope :search_clients, ->(term) {
-    wildcard_text = "'%#{term.downcase}%'"
-    where("lower(contacts.name) LIKE lower(#{wildcard_text})
-        AND contacts.category = 1")
-    .limit(5)
+  scope :with_category, lambda { |category|
+    where(category: category).limit(5)
   }
 
   scope :search_query, lambda { |query|
@@ -83,6 +73,8 @@ class Contact < ActiveRecord::Base
     %w(
       sorted_by
       search_query
+      not_in_event_id
+      with_category
     )
   end
   filterrific default_filter_params: default_filter_options,

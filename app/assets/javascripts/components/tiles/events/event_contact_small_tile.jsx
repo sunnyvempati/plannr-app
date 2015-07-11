@@ -6,7 +6,7 @@ var EventContactSmallTile = React.createClass({
     };
   },
   componentDidMount: function() {
-    $.get("contacts", function(results) {
+    $.get("contacts.json", function(results) {
       if (this.isMounted()) {
         this.setState({
           count: results.event_contacts.length
@@ -30,7 +30,9 @@ var EventContactSmallTile = React.createClass({
         </div>
         <div className="Tile-content">
           <div className="TileContent-quickAdd">
-            <EventContactAutocomplete onAssociation={this.incrementCount} />
+            <EventContactAutocomplete
+              onAssociation={this.incrementCount}
+              eventId={this.props.eventId} />
           </div>
           <div className="TileContent-count">
             {this.state.count}

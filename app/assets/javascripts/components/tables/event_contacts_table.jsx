@@ -3,7 +3,7 @@ var EventContactsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    HttpHelpers
+
   ],
   getInitialState: function() {
     return {
@@ -14,7 +14,7 @@ var EventContactsTable = React.createClass({
     this.getEventContacts()
   },
   getEventContacts: function() {
-    this.getFromServer("contacts", {}, function(results) {
+    HttpHelpers.getFromServer("contacts", {}, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventContacts: results.event_contacts
@@ -43,20 +43,20 @@ var EventContactsTable = React.createClass({
   removeAssociation: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer("contacts/mass_delete", destroyOpts, function(success_result) {
+    HttpHelpers.postToServer("contacts/mass_delete", destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) removed from event.");
       var newData = this.spliceResults(this.state.eventContacts, deletionIds);
       this.setState({eventContacts: newData, checkedItems: []});
     }.bind(this));
   },
   sortBy: function(entity, order) {
-    this.getFromServer('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
+    HttpHelpers.getFromServer('contacts.json', {sort: {entity: entity, order: order}}, function(result) {
       this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
   search: function(e) {
     var term = e.target.value;
-    this.getFromServer('search_event_contacts', {search: {text: term || ""}}, function(result) {
+    HttpHelpers.getFromServer('search_event_contacts', {search: {text: term || ""}}, function(result) {
       this.setState({eventContacts: result.event_contacts});
     }.bind(this));
   },
