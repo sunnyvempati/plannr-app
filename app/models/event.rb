@@ -15,6 +15,9 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validate :dates
 
+  include EventStatuses
+  validates :status, inclusion: { in: [ACTIVE, ARCHIVED] }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)
@@ -46,6 +49,10 @@ class Event < ActiveRecord::Base
     end
   }
 
+  scope :with_status, lambda { |status|
+    where(status: status)
+  }
+
   def self.default_filter_options
     {
       sorted_by: 'name_asc'
@@ -56,6 +63,7 @@ class Event < ActiveRecord::Base
     %w(
       sorted_by
       search_query
+      with_status
     )
   end
 

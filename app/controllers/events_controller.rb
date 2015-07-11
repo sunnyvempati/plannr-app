@@ -65,7 +65,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description).merge(owner: current_user)
+    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status).merge(owner: current_user)
   end
 
   def mass_delete_params

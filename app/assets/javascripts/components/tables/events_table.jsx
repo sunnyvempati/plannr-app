@@ -23,33 +23,15 @@ var EventsTable = React.createClass({
       }
     }.bind(this));
   },
-  goToEvent: function(id) {
-    location.href = "/events/" + id + "/";
-  },
   getCustomRows: function() {
-    var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
     return this.state.events.map(function(event) {
-      var checked = this.state.checkedItems.indexOf(event.id) > -1;
-      var daysTill = !!event.days_till ? event.days_till + " days left" : "";
       return(
-        <div className="EventsTable-row" key={event.id}>
-          <div className="EventsTable-rowHeader">
-            <div className="EventsTable-rowName">
-              <div className="EventsTable-checkbox">
-                <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
-              </div>
-              <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
-                {event.name}
-              </div>
-            </div>
-            <div className="EventsTable-rowDaysTill">
-              {daysTill}
-            </div>
-          </div>
-          <div className="EventsTable-rowContent">
-            <Event model={event} client={event.client} editable={false} />
-          </div>
-        </div>
+        <EventRow
+          event={event}
+          checkedItems={this.state.checkedItems}
+          actionItems={this.actionItems()}
+          key={event.id}
+        />
       );
     }, this);
   },
@@ -57,6 +39,13 @@ var EventsTable = React.createClass({
     return [
       {entity: "name", display: "Name", default: true},
       {entity: "start_date", display: "Start Date"}
+    ]
+  },
+  filterItems: function () {
+    return [
+      {name: "All Events", handler: this.filter.bind(this, {}), default: true},
+      {name: "Active Events", handler: this.filter.bind(this, {with_status: 1})},
+      {name: "Archived Events", handler: this.filter.bind(this, {with_status: 2})}
     ]
   },
   handleDelete: function(id) {
@@ -95,6 +84,8 @@ var EventsTable = React.createClass({
           showActions={this.state.checkedItems.length > 0}
           actionItems={this.actionItems()}
           extraPadding={true}
+          filterable={true}
+          filterItems={this.filterItems()}
           searchPlaceholder="Search Events..."
           actionButton={this.getActionButton()}
           handleCheckAllChanged={this.toggleCheckAll}

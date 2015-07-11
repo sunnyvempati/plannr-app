@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :client, :location, :start_date, :end_date, :budget, :days_till
+  attributes :id, :name, :client, :location, :start_date, :end_date, :budget, :days_till, :status
 
   def client
     object.client
