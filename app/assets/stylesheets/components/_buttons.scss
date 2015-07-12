@@ -33,9 +33,9 @@
 .Button--secondary {
   color: #000000;
   background-color: $button-secondary-color;
-  display: none;
-  &.is-visible {
-    display: block;
+  &:disabled {
+    @extend .Button--primary:disabled;
+    background-color: white;
   }
 }
 

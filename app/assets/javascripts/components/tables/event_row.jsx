@@ -26,14 +26,14 @@ var EventRow = React.createClass({
       </div>
     )
   },
-  handleActionClick: function(item) {
-    item.handler(item.id);
+  handleActionClick: function(event, action) {
+    action.handler(event.id);
   },
   getRowActionMenu: function() {
     var globalItems = this.props.actionItems.map(function(item) {
       return (
         <div className="DropdownMenu-item"
-             onClick={this.handleActionClick.bind(this, item)}
+             onClick={this.handleActionClick.bind(this, this.props.event, item)}
              key={item.name}>
           {item.name}
         </div>

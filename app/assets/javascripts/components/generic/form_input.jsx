@@ -1,10 +1,10 @@
 var FormInput = React.createClass({
-  mixins: [Formsy.Mixin],
+  mixins: [Formsy.Mixin, React.addons.PureRenderMixin],
   propTypes: {
     type: React.PropTypes.string,
     id: React.PropTypes.string,
     name: React.PropTypes.string,
-    autofocus: React.PropTypes.bool,
+    autofocus: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     disabled: React.PropTypes.bool
   },

@@ -51,8 +51,8 @@ var EventsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer("/destroy_events", destroyOpts, function(result) {
-      this.setState({events: this.spliceResults(this.state.events, this.state.checkedItems), checkedItems: []});
+    HttpHelpers.postToServer("/destroy_events", destroyOpts, function(result) {
+      this.setState({events: this.spliceResults(this.state.events, deletionIds), checkedItems: []});
       this.toast(deletionIds.length + " events deleted successfully.");
     }.bind(this));
   },

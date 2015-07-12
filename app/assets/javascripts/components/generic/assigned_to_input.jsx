@@ -58,7 +58,7 @@ var AssignedToInput = React.createClass({
     var inputRender = this.state.userAssigned ? this.renderAssigned() : this.renderAutocomplete();
     return (
       <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>
     );

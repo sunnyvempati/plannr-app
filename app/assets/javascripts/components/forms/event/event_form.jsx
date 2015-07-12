@@ -1,15 +1,10 @@
 var EventForm = React.createClass({
+  mixins: [FormMixin, ButtonListMixin],
   propTypes: {
-    action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
-    primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
-    secondaryButtonVisible: React.PropTypes.bool.isRequired,
-    showButtonList: React.PropTypes.bool.isRequired,
-    disableForm: React.PropTypes.bool,
-    model: React.PropTypes.object,
-    secondaryButtonHref: React.PropTypes.string
+    model: React.PropTypes.object
   },
+  url: '/events.json',
   getInitialState: function() {
     return {
       startDate: null
@@ -18,7 +13,7 @@ var EventForm = React.createClass({
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
-      'event':{
+      'event': {
         'name': inputs.name,
         'start_date': inputs.start_date,
         'end_date': inputs.end_date,
@@ -29,39 +24,37 @@ var EventForm = React.createClass({
       }
     };
   },
-  changeUrl: function (result) {
+  onSuccess: function (result) {
     location.href = "/events/" + result.event.id + "/";
   },
   setStartDate: function(date) {
     this.setState({startDate: date});
   },
-  componentWillMount: function () {
-    // Formsy isNumeric required a number to be true (blank, null, and spaces would return false)
-    // this allows spaces and numbers with decimal places
-    Formsy.addValidationRule('ifPresentIsNumeric', function (n) {
-      if (!!n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-      }
-      return true;
-    });
+  onSecondaryClick: function() {
+    location.href = "/events";
+  },
+  formatDateAndSubmit: function(data, reset, invalidate) {
+    var formatted_data = data;
+    var formatted_start_date = formatted_data.event.start_date.format();
+    var formatted_end_date = formatted_data.event.end_date.format();
+    formatted_data.event.start_date = formatted_start_date;
+    formatted_data.event.end_date = formatted_end_date;
+    this.submitForm(formatted_data, reset, invalidate);
   },
   render: function () {
+    // console.log(location.pathname.split('/')[1]);
+    var primaryButtonText = location.pathname.split('/')[1] == 'new' ? "Create Event" : "Update";
     var id = 'event_form';
     var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
     return (
       <div className="FormContainer--leftAligned">
-        <Form
-          url={this.props.action}
-          mapping={this.mapInputs}
-          onSuccess={this.changeUrl}
-          authToken={this.props.authToken}
-          routeVerb={this.props.routeVerb}
-          primaryButtonText={this.props.primaryButtonText}
-          secondaryButtonVisible={this.props.secondaryButtonVisible}
-          secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}
-          id={id}>
+        <Form mapping={this.mapInputs}
+              onSubmit={this.formatDateAndSubmit}
+              onValid={this.enableButton}
+              onInvalid={this.disabledButton}
+              authToken={this.props.authToken}
+              id={id}>
           <FormInput
             name="name"
             id="event_name"
@@ -111,7 +104,6 @@ var EventForm = React.createClass({
             value={this.props.model.budget}
             disabled={this.props.disableForm}
             placeholder="How much will it cost?"
-            validations="ifPresentIsNumeric"
             validationError="Must be a number (no commas)"
           />
           <TextAreaInput
@@ -122,6 +114,7 @@ var EventForm = React.createClass({
             label="Description"
             placeholder="What else do you need to know?"
           />
+          {this.renderFormTwoButtons('Create Event', 'Cancel')}
         </Form>
       </div>
     );

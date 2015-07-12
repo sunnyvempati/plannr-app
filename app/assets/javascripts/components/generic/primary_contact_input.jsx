@@ -75,7 +75,7 @@ var PrimaryContactInput = React.createClass({
     var inputRender = this.state.contactSelected ? this.renderSelectedContact() : this.renderAutocomplete();
     return (
       <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>
     );

@@ -25,7 +25,7 @@ var FormSelectInput = React.createClass({
     });
     return (
       <div className={form_input_classes}>
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         <select id={this.props.id}
                 value={this.getValue()}
                 onChange={this.changeValue}
