@@ -1,4 +1,4 @@
-var ButtonList = React.createClass({
+var FormButtonList = React.createClass({
   render: function() {
     var buttonChild = this.props.primaryLoading ? this.loadingIcon() : this.props.primaryButtonText;
     return (

@@ -1,5 +1,5 @@
 var EventForm = React.createClass({
-  mixins: [FormMixin, ButtonListMixin],
+  mixins: [FormMixin, ButtonListMixin, React.addons.PureRenderMixin],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
@@ -42,8 +42,7 @@ var EventForm = React.createClass({
     this.submitForm(formatted_data, reset, invalidate);
   },
   render: function () {
-    // console.log(location.pathname.split('/')[1]);
-    var primaryButtonText = location.pathname.split('/')[1] == 'new' ? "Create Event" : "Update";
+    var primaryButtonText = location.pathname.split('/')[2] == 'new' ? "Create Event" : "Update";
     var id = 'event_form';
     var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
@@ -114,7 +113,7 @@ var EventForm = React.createClass({
             label="Description"
             placeholder="What else do you need to know?"
           />
-          {this.renderFormTwoButtons('Create Event', 'Cancel')}
+          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>
       </div>
     );

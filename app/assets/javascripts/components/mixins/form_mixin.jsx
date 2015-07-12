@@ -9,14 +9,12 @@ var FormMixin = {
     this.setState({canSubmit: true});
   },
   disableButton: function() {
-    console.log("disable");
     this.setState({canSubmit: false});
   },
   removeLoading: function() {
     setTimeout(this.loadingComplete, 1000);
   },
   loadingComplete: function() {
-    console.log("loading");
     this.setState({loading: false});
   },
   loadingIcon: function() {

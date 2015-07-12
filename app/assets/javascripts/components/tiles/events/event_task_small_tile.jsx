@@ -6,7 +6,12 @@ var EventTaskSmallTile = React.createClass({
     };
   },
   componentDidMount: function () {
-    $.get("/tasks.json", function (results) {
+    var params = {
+      filter_sort: {
+        with_event_id: this.props.eventId
+      }
+    };
+    $.get("/tasks.json", params, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
