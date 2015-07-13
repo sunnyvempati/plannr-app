@@ -52,12 +52,13 @@ var EventForm = React.createClass({
     var id = 'event_form';
     var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
       <div className="FormContainer--leftAligned">
         <Form mapping={this.mapInputs}
               onSubmit={this.formatDateAndSubmit}
               onValid={this.enableButton}
-              onInvalid={this.disabledButton}
+              onInvalid={this.disableButton}
               authToken={this.props.authToken}
               id={id}>
           <FormInput
@@ -116,7 +117,7 @@ var EventForm = React.createClass({
             label="Description"
             placeholder="What else do you need to know?"
           />
-          {this.renderFormTwoButtons()}
+          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>
       </div>
     );

@@ -84,12 +84,13 @@ var TaskForm = React.createClass({
     this.putUrl = this.props.model && this.props.model.id && "/tasks/" + this.props.model.id + ".json";
     var id = 'task_form';
     var eventHidden = !task.eventId ? "" : "hidden";
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
       <div className='FormContainer--leftAligned'>
         <Form mapping={this.mapInputs}
               onSubmit={this.formatDateAndSubmit}
               onValid={this.enableButton}
-              onInvalid={this.disabledButton}
+              onInvalid={this.disableButton}
               authToken={this.props.authToken}
               id={id}>
           <FormInput
@@ -132,7 +133,7 @@ var TaskForm = React.createClass({
             disabled={this.props.disableForm}
             placeholder="How would you describe this task?"
           />
-          {this.renderFormTwoButtons()}
+          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>
       </div>
     );

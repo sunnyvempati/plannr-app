@@ -1,3 +1,5 @@
+<% content_for(:title) { "Sign up" } %>
+
 <%= react_component("SignUpForm", authToken: form_authenticity_token,
                                   email: @user.email,
                                   company: @user.company,

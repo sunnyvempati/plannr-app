@@ -43,13 +43,14 @@ var VendorForm = React.createClass({
     }
     this.putUrl = this.props.model && this.props.model.id && "/vendors/" + this.props.model.id + ".json";
     var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
       <div className='FormContainer--leftAligned'>
         <Form mapping={this.mapInputs}
               authToken={this.props.authToken}
               onSubmit={submitCallback}
               onValid={this.enableButton}
-              onInvalid={this.disabledButton}
+              onInvalid={this.disableButton}
               id='vendor_form'>
           <FormInput
             id='vendor_name'
@@ -91,7 +92,7 @@ var VendorForm = React.createClass({
             value={vendor.description}
             formId='contact_form'
           />
-          {this.renderFormTwoButtons()}
+          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>
       </div>
     );

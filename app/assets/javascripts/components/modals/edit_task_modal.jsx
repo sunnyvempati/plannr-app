@@ -1,8 +1,11 @@
 var EditTaskModal = React.createClass({
   mixins: [Modal],
   closeAndRefreshData: function() {
-    this.closeModal();
+    this.close();
     this.props.refreshData();
+  },
+  close: function() {
+    this.closeModal();
   },
   renderModalContent: function() {
     return (
@@ -21,8 +24,9 @@ var EditTaskModal = React.createClass({
             <div className="Card-content">
               <TaskForm
                 routeVerb='PUT'
-                onSuccess={this.closeAndRefreshData}
+                onSuccess={this.close}
                 authToken={this.props.authToken}
+                onSecondaryClick={this.closeAndRefreshData}
                 model={this.props.model}
               />
             </div>

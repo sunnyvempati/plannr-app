@@ -86,13 +86,14 @@ var ContactForm = React.createClass({
     }
     this.putUrl = this.props.model && this.props.model.id && "/contacts/" + this.props.model.id + ".json";
     var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
       <div className='FormContainer--leftAligned'>
         <Form mapping={this.mapInputs}
               authToken={this.props.authToken}
               onSubmit={submitCallback}
               onValid={this.enableButton}
-              onInvalid={this.disabledButton}
+              onInvalid={this.disableButton}
               id='contact_form'>
           <FormInput
             id='contact_name'
@@ -111,7 +112,6 @@ var ContactForm = React.createClass({
             label='Type*'
             options={this.typeOptions}
             value={contact.category || 1}
-            disabled={this.props.disableForm}
             onChangeCallback={this.contactTypeOnChange}
             required
           />
@@ -123,7 +123,6 @@ var ContactForm = React.createClass({
             type='text'
             label='Email'
             value={contact.email}
-            disabled={this.props.disableForm}
           />
           <FormInput
             id='contact_phone'
@@ -132,7 +131,6 @@ var ContactForm = React.createClass({
             type='tel'
             label='Phone'
             value={contact.phone}
-            disabled={this.props.disableForm}
           />
           <TextAreaInput
             id='contact_description'
@@ -141,10 +139,9 @@ var ContactForm = React.createClass({
             label='Description'
             placeholder='What else do you need to know?'
             value={contact.description}
-            disabled={this.props.disableForm}
             formId='contact_form'
           />
-          {this.renderFormTwoButtons()}
+          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>
       </div>
     );

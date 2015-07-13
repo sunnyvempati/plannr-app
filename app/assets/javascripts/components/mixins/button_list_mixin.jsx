@@ -3,15 +3,23 @@ var ButtonListMixin = {
     e.preventDefault();
     this.onSecondaryClick();
   },
-  renderFormTwoButtons: function() {
-    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
+  renderFormTwoButtons: function(primaryText, secondaryText) {
     return (
       <FormButtonList>
         <Button onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
-          Cancel
+          {secondaryText}
         </Button>
         <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
-          {primaryButtonText}
+          {primaryText}
+        </Button>
+      </FormButtonList>
+    );
+  },
+  renderFormButton: function(primaryText) {
+    return (
+      <FormButtonList>
+        <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+          {primaryText}
         </Button>
       </FormButtonList>
     );

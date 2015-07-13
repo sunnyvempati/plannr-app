@@ -26,11 +26,13 @@ var LoginForm = React.createClass({
         <Form mapping={this.mapInputs}
               onSubmit={this.postForm}
               onValid={this.enableButton}
-              onInvalid={this.disabledButton}
+              onInvalid={this.disableButton}
               authToken={this.props.authToken}
               id='login_form'>
           <FormInput name="email"
                      type='text'
+                     validationError="Invalid Email"
+                     validations="isEmail"
                      label="Email*"
                      value={null}
                      required />

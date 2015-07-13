@@ -1,15 +1,3 @@
-// Props
-// url = URL to post/put to
-// mapping = field mappings
-// routeVerb = PUT/POST
-// onSuccessUrl = Where to navigate on success
-// authToken = CSRF token
-// showButtonList = true/false
-// primaryButtonText = text for primary button
-// secondaryButtonVisible = Cancel button visibility
-// secondaryButtonHref = Where to navigate on cancel
-// secondaryButtonText = 'Cancel'
-
 var Form = React.createClass({
   propTypes: {
     id: React.PropTypes.string,
@@ -18,27 +6,8 @@ var Form = React.createClass({
   },
   getDefaultProps: function() {
     return {
-      mapping: {},
-      routeVerb: 'post',
-      showButtonList: true,
-      secondaryButtonVisible: false,
-      secondaryButtonText: 'Cancel'
+      mapping: {}
     };
-  },
-  getInitialState: function() {
-    return {
-      canSubmit: false
-    };
-  },
-  enableButton: function () {
-    this.setState({
-      canSubmit: true
-    });
-  },
-  disableButton: function () {
-    this.setState({
-      canSubmit: false
-    });
   },
   render: function() {
     var form_props = this.props;
