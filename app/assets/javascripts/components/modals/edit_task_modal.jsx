@@ -19,8 +19,8 @@ var EditTaskModal = React.createClass({
         <div className="EntityModal-content">
           <div className="Card">
             <div className="Card-content">
-              <TaskFormEdit
-                useReactRouter={true}
+              <TaskForm
+                routeVerb='PUT'
                 onSuccess={this.closeAndRefreshData}
                 authToken={this.props.authToken}
                 model={this.props.model}

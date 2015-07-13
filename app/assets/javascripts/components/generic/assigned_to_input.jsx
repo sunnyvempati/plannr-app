@@ -17,7 +17,13 @@ var AssignedToInput = React.createClass({
     }
   },
   retrieveAllUsers: function(term) {
-    $.get("/search_users", {search: {text: term || ""}}, function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        with_search_limit: 5
+      }
+    };
+    $.get("/users.json", params, function(result) {
       this.setState({users: result.users});
     }.bind(this));
   },

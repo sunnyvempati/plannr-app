@@ -6,7 +6,8 @@ var ContactForm = React.createClass({
   ],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
-    model: React.PropTypes.object
+    model: React.PropTypes.object,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired
   },
   url: '/contacts.json',
   typeOptions:
@@ -84,7 +85,7 @@ var ContactForm = React.createClass({
       };
     }
     this.putUrl = this.props.model && this.props.model.id && "/contacts/" + this.props.model.id + ".json";
-    var submitCallback = this.props.actionVerb == "POST" ? this.postForm : this.putForm;
+    var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
     return (
       <div className='FormContainer--leftAligned'>
         <Form mapping={this.mapInputs}

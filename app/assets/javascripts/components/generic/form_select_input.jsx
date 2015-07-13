@@ -1,14 +1,4 @@
 var FormSelectInput = React.createClass({
-  propTypes: {
-    options: React.PropTypes.array.isRequired, // option tags
-
-    onChangeCallback: React.PropTypes.func,
-    name: React.PropTypes.string,
-    label: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    formId: React.PropTypes.string,
-    id: React.PropTypes.string
-  },
   mixins: [Formsy.Mixin],
   changeValue: function (event) {
     this.setValue(event.currentTarget.value);

@@ -1,16 +1,15 @@
 var TaskForm = React.createClass({
+  mixins: [
+    FormMixin,
+    ButtonListMixin,
+    React.addons.PureRenderMixin
+  ],
   propTypes: {
-    action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
-    primaryButtonText: React.PropTypes.string.isRequired,
     routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
-    secondaryButtonVisible: React.PropTypes.bool.isRequired,
-    showButtonList: React.PropTypes.bool.isRequired,
     model: React.PropTypes.object.isRequired,
-
-    disableForm: React.PropTypes.bool,
-    secondaryButtonHref: React.PropTypes.string
   },
+  url: '/tasks.json',
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -53,6 +52,21 @@ var TaskForm = React.createClass({
       return options[0].props.value;
     }
   },
+  navigateToTasks: function() {
+    location.href = '/tasks';
+  },
+  onSuccess: function (result) {
+    !!this.props.onSuccess ? this.props.onSuccess(result) : this.navigateToTasks();
+  },
+  onSecondaryClick: function() {
+    !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToTasks();
+  },
+  formatDateAndSubmit: function(data, reset, invalidate) {
+    var formatted_data = data;
+    var formatted_deadline = formatted_data.task.deadline && formatted_data.task.deadline.format();
+    formatted_data.task.deadline = formatted_deadline;
+    this.props.routeVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
+  },
   render: function() {
     var task = {};
     if (this.props.model) {
@@ -67,19 +81,16 @@ var TaskForm = React.createClass({
         description: model.description
       };
     }
+    this.putUrl = this.props.model && this.props.model.id && "/tasks/" + this.props.model.id + ".json";
     var id = 'task_form';
     var eventHidden = !task.eventId ? "" : "hidden";
     return (
       <div className='FormContainer--leftAligned'>
-        <Form url={this.props.action}
-              mapping={this.mapInputs}
-              onSuccess={this.props.onSuccess}
-              routeVerb={this.props.routeVerb}
+        <Form mapping={this.mapInputs}
+              onSubmit={this.formatDateAndSubmit}
+              onValid={this.enableButton}
+              onInvalid={this.disabledButton}
               authToken={this.props.authToken}
-              primaryButtonText={this.props.primaryButtonText}
-              secondaryButtonVisible={this.props.secondaryButtonVisible}
-              secondaryButtonHref={this.props.secondaryButtonHref}
-              showButtonList={this.props.showButtonList}
               id={id}>
           <FormInput
             id='task_name'
@@ -89,7 +100,6 @@ var TaskForm = React.createClass({
             label='Name*'
             value={task.name}
             placeholder='What is the name of your task?'
-            disabled={this.props.disableForm}
             required />
           <DatePickerInput
             name="deadline"
@@ -120,7 +130,9 @@ var TaskForm = React.createClass({
             className="TextAreaInput"
             label="Description"
             disabled={this.props.disableForm}
-            placeholder="How would you describe this task?" />
+            placeholder="How would you describe this task?"
+          />
+          {this.renderFormTwoButtons()}
         </Form>
       </div>
     );

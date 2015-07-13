@@ -6,7 +6,8 @@ var EventForm = React.createClass({
   ],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
-    model: React.PropTypes.object
+    model: React.PropTypes.object,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired
   },
   url: '/events.json',
   getInitialState: function() {
@@ -43,7 +44,7 @@ var EventForm = React.createClass({
     var formatted_end_date = formatted_data.event.end_date && formatted_data.event.end_date.format();
     formatted_data.event.start_date = formatted_start_date;
     formatted_data.event.end_date = formatted_end_date;
-    this.props.actionVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
+    this.props.routeVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
   },
   render: function () {
     this.putUrl = this.props.model && this.props.model.id && "/events/" + this.props.model.id + ".json";

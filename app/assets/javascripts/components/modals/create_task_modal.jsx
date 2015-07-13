@@ -19,10 +19,10 @@ var CreateTaskModal = React.createClass({
         <div className="EntityModal-content">
           <div className="Card">
             <div className="Card-content">
-              <TaskFormNew
-                useReactRouter={true}
+              <TaskForm
                 onSuccess={this.closeAndRefreshData}
                 authToken={this.props.authToken}
+                routeVerb='POST'
                 model={this.props.model} />
             </div>
           </div>

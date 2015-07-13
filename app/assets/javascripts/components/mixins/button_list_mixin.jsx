@@ -4,7 +4,7 @@ var ButtonListMixin = {
     this.onSecondaryClick();
   },
   renderFormTwoButtons: function() {
-    var primaryButtonText = this.props.actionVerb == "POST" ? "Create" : "Update";
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
       <FormButtonList>
         <Button onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>

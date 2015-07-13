@@ -23,9 +23,9 @@ var FormMixin = {
   putForm: function(data, reset, invalidate) {
     this.submitForm(data, reset, invalidate, 'put', this.putUrl);
   },
-  submitForm: function(data, resetModel, invalidateForm, actionVerb, url) {
+  submitForm: function(data, resetModel, invalidateForm, routeVerb, url) {
     this.setState({loading: true});
-    Utils[actionVerb](url, data, function(result) {
+    Utils[routeVerb](url, data, function(result) {
       this.onSuccess(result);
     }.bind(this), function(error) {
       invalidateForm(error.responseJSON);
