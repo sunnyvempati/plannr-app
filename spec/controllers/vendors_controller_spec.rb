@@ -14,17 +14,15 @@ RSpec.describe VendorsController, type: :controller do
     let!(:vendor5) { FactoryGirl.create(:vendor) }
 
     it "returns the count of vendors not in event1 " do
-      get :search_vendors_not_in_event, { event_id: event1.id, search: {text: ''} }
-      expect(response.status).to eq 200
-      parsed_body = JSON.parse(response.body)
-      expect(parsed_body["vendors"].count).to eq 3
+      get :index, { format: :json, filter_sort: { not_in_event_id: event1.id, search_query: '' } }
+      expect(response).to be_success
+      expect(json_response["vendors"].count).to eq 3
     end
 
     it "returns the count of vendors not in event2" do
-      get :search_vendors_not_in_event, { event_id: event2.id, search: {text: ''} }
-      expect(response.status).to eq 200
-      parsed_body = JSON.parse(response.body)
-      expect(parsed_body["vendors"].count).to eq 2
+      get :index, { format: :json, filter_sort: { not_in_event_id: event2.id, search_query: '' } }
+      expect(response).to be_success
+      expect(json_response["vendors"].count).to eq 2
     end
   end
 end

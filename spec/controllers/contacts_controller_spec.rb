@@ -56,15 +56,13 @@ RSpec.describe ContactsController, type: :controller do
     it "returns the count of contacts not in event1 " do
       get :index, { format: :json, filter_sort: { not_in_event_id: event1.id, search_query: '' } }
       expect(response).to be_success
-      parsed_body = JSON.parse(response.body)
-      expect(parsed_body["contacts"].count).to eq 3
+      expect(json_response["contacts"].count).to eq 3
     end
 
      it "returns the count of contacts not in event2" do
       get :index, { format: :json, filter_sort: { not_in_event_id: event2.id, search_query: '' } }
       expect(response).to be_success
-      parsed_body = JSON.parse(response.body)
-      expect(parsed_body["contacts"].count).to eq 2
+      expect(json_response["contacts"].count).to eq 2
     end
 
   end
