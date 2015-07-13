@@ -24,7 +24,7 @@ var LoginForm = React.createClass({
     return (
       <div className="FormContainer">
         <Form mapping={this.mapInputs}
-              onSubmit={this.submitForm}
+              onSubmit={this.postForm}
               onValid={this.enableButton}
               onInvalid={this.disabledButton}
               authToken={this.props.authToken}

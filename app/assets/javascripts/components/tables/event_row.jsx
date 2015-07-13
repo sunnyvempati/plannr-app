@@ -12,7 +12,7 @@ var EventRow = React.createClass({
         status: archived ? 2 : 1
       }
     };
-    HttpHelpers.putToServer(url, params, function(result) {
+    Utils.put(url, params, function(result) {
       this.setState({archived: archived});
     }.bind(this));
   },

@@ -2,5 +2,6 @@
 
 <%= react_component("EventForm",
                     model: @event,
+                    actionVerb: "PUT",
                     authToken: form_authenticity_token
 ) %>

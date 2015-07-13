@@ -43,10 +43,12 @@ var EventForm = React.createClass({
     var formatted_end_date = formatted_data.event.end_date && formatted_data.event.end_date.format();
     formatted_data.event.start_date = formatted_start_date;
     formatted_data.event.end_date = formatted_end_date;
-    this.submitForm(formatted_data, reset, invalidate);
+    this.props.actionVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
   },
   render: function () {
-    var primaryButtonText = location.pathname.split('/')[2] == 'new' ? "Create Event" : "Update";
+    var primaryButtonText = this.props.actionVerb == "POST" ? "Create" : "Update";
+    this.putUrl = this.props.model && this.props.model.id && "/events/" + this.props.model.id + ".json";
+
     var id = 'event_form';
     var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;

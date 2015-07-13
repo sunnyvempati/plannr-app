@@ -2,4 +2,5 @@
 
 <%= react_component("EventForm",
                     model: @event,
+                    actionVerb: "POST",
                     authToken: form_authenticity_token) %>

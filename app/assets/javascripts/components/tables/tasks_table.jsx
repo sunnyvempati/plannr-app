@@ -13,7 +13,7 @@ var TasksTable = React.createClass({
     this.initializeFilterSort(this.defaultFilterSortParams);
   },
   getTableData: function(params) {
-    HttpHelpers.getFromServer("/tasks.json", params, function(result) {
+    Utils.get("/tasks.json", params, function(result) {
       if (this.isMounted()) {
         this.setState({
           tasks: result.tasks
@@ -41,7 +41,7 @@ var TasksTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer('/tasks/mass_delete', destroyOpts, function(success_result) {
+    Utils.post('/tasks/mass_delete', destroyOpts, function(success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, deletionIds);
       this.setState({tasks: newData});

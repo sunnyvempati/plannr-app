@@ -17,7 +17,7 @@ var EventTasksTable = React.createClass({
     this.initializeFilterSort(defaultParams);
   },
   getTableData: function (params) {
-    HttpHelpers.getFromServer("/tasks.json", params, function (results) {
+    Utils.get("/tasks.json", params, function (results) {
       if (this.isMounted()) {
         this.setState({
           tasks: results.tasks
@@ -49,7 +49,7 @@ var EventTasksTable = React.createClass({
   },
   handleDelete: function (id) {
     var destroyOpts = {destroy_opts: {ids: [id]}};
-    HttpHelpers.postToServer('/tasks/mass_delete', destroyOpts, function (success_result) {
+    Utils.post('/tasks/mass_delete', destroyOpts, function (success_result) {
       this.toast('Task deleted successfully.');
       var newData = this.spliceResults(this.state.tasks, [id]);
       this.setState({tasks: newData});
@@ -78,7 +78,7 @@ var EventTasksTable = React.createClass({
   },
   openEditModal: function(task_id) {
     var url = '/tasks/' + task_id + '.json';
-    HttpHelpers.getFromServer(url, {}, function(result) {
+    Utils.get(url, {}, function(result) {
       var props = {
         model: $.extend({event_id: this.props.eventId}, result.task),
         authToken: this.props.authToken,

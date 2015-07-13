@@ -17,16 +17,19 @@ var FormMixin = {
   loadingComplete: function() {
     this.setState({loading: false});
   },
-  loadingIcon: function() {
-    return <i className="fa fa-circle-o-notch fa-spin"></i>;
+  postForm: function(data, reset, invalidate) {
+    this.submitForm(data, reset, invalidate, 'post', this.url);
   },
-  submitForm: function(data, resetModel, invalidateForm) {
+  putForm: function(data, reset, invalidate) {
+    this.submitForm(data, reset, invalidate, 'put', this.putUrl);
+  },
+  submitForm: function(data, resetModel, invalidateForm, actionVerb, url) {
     this.setState({loading: true});
-    $.post(this.url, data, function(result){
+    Utils[actionVerb](url, data, function(result) {
       this.onSuccess(result);
-    }.bind(this)).fail(function(error) {
+    }.bind(this), function(error) {
       invalidateForm(JSON.parse(error.responseText));
-    }).always(function() {
+    }, function() {
       this.removeLoading();
     }.bind(this));
   }

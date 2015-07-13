@@ -51,7 +51,7 @@ var Comment = React.createClass({
         locked: !comment.locked
       }
     };
-    HttpHelpers.putToServer("/comments", params, function(result) {
+    Utils.put("/comments", params, function(result) {
       this.setState({comment: result.comment});
     }.bind(this));
   },
@@ -65,7 +65,7 @@ var Comment = React.createClass({
         body: comment.body
       }
     };
-    HttpHelpers.putToServer("/comments", params, function(result) {
+    Utils.put("/comments", params, function(result) {
       this.toggleEditMode();
       this.setState({comment: result.comment});
     }.bind(this));

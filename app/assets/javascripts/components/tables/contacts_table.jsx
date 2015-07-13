@@ -15,7 +15,7 @@ var ContactsTable = React.createClass({
     this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
   },
   getTableData: function(params) {
-    HttpHelpers.getFromServer("/contacts.json", params, function(result) {
+    Utils.get("/contacts.json", params, function(result) {
       this.setState({contacts: result.contacts});
     }.bind(this));
   },
@@ -46,7 +46,7 @@ var ContactsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer('/contacts/mass_delete', destroyOpts, function(success_result) {
+    Utils.post('/contacts/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) deleted.");
       var newData = this.spliceResults(this.state.contacts, deletionIds);
       this.setState({contacts: newData, checkedItems: []});

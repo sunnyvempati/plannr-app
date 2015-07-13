@@ -15,14 +15,14 @@ var CompanyUserTable = React.createClass({
 
   },
   getTableData: function(params) {
-    HttpHelpers.getFromServer("/users.json", params, function(result) {
+    Utils.get("/users.json", params, function(result) {
       this.setState({users: result.users});
     }.bind(this));
   },
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer('/users/mass_delete', destroyOpts, function(success_result) {
+    Utils.post('/users/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " user(s) deleted successfully.");
       var newData = this.spliceResults(this.state.users, deletionIds);
       this.setState({users: newData, checkedItems: []});
