@@ -24,9 +24,10 @@
     background-color: $button-hover-color;
   }
   &:disabled {
-    background-color: #000000;
-    opacity: 0.2;
-    box-shadow: none;
+    background: #eaeaea;
+    color: #a8a8a8;
+    cursor: auto;
+    pointer-events: none;
   }
 }
 
@@ -35,7 +36,6 @@
   background-color: $button-secondary-color;
   &:disabled {
     @extend .Button--primary:disabled;
-    background-color: white;
   }
 }
 

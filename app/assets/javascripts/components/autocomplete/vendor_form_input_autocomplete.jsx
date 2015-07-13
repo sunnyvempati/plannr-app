@@ -24,7 +24,13 @@ var VendorFormInputAutocomplete = React.createClass({
     }
   },
   retrieveVendors: function(term) {
-    $.post("/vendors/search", {search: {text: term || ""}}, function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        with_search_limit: 5
+      }
+    };
+    $.get("/vendors.json", params, function(result) {
       var vendors = result.vendors;
       if(vendors.length == 0) {
         vendors.push(this.getNewItem("vendor"));

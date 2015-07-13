@@ -1,5 +1,9 @@
 var EventForm = React.createClass({
-  mixins: [FormMixin, ButtonListMixin, React.addons.PureRenderMixin],
+  mixins: [
+    FormMixin,
+    ButtonListMixin,
+    React.addons.PureRenderMixin
+  ],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object
@@ -35,8 +39,8 @@ var EventForm = React.createClass({
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
     var formatted_data = data;
-    var formatted_start_date = formatted_data.event.start_date.format();
-    var formatted_end_date = formatted_data.event.end_date.format();
+    var formatted_start_date = formatted_data.event.start_date && formatted_data.event.start_date.format();
+    var formatted_end_date = formatted_data.event.end_date && formatted_data.event.end_date.format();
     formatted_data.event.start_date = formatted_start_date;
     formatted_data.event.end_date = formatted_end_date;
     this.submitForm(formatted_data, reset, invalidate);
@@ -62,7 +66,6 @@ var EventForm = React.createClass({
             type="text"
             label="Name*"
             value={this.props.model.name}
-            disabled={this.props.disableForm}
             required
           />
           <DatePickerInput
@@ -86,7 +89,6 @@ var EventForm = React.createClass({
             type="text"
             label="Location"
             value={this.props.model.location}
-            disabled={this.props.disableForm}
             placeholder="Where will it be held?"
           />
           <ClientInput
@@ -101,7 +103,6 @@ var EventForm = React.createClass({
             type="text"
             label="Budget"
             value={this.props.model.budget}
-            disabled={this.props.disableForm}
             placeholder="How much will it cost?"
             validationError="Must be a number (no commas)"
           />

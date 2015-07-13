@@ -19,6 +19,10 @@ class Vendor < ActiveRecord::Base
     includes(:primary_contact).where("id not in (select vendor_id from event_vendors where event_id = '#{event_id}')").limit(5)
   }
 
+  scope :with_search_limit, lambda { |num|
+    limit(num)
+  }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)
@@ -26,7 +30,7 @@ class Vendor < ActiveRecord::Base
       '%' + e + '%'
     end
     num_or_conditions = 1
-    where(
+    includes(:primary_contact).where(
       terms.map do
         or_clauses = [
           'LOWER(vendors.name) LIKE ?'
@@ -34,7 +38,7 @@ class Vendor < ActiveRecord::Base
         "(#{ or_clauses })"
       end.join(' AND '),
       *terms.map { |e| [e] * num_or_conditions }.flatten
-    ).includes(:primary_contact)
+    )
   }
 
   scope :sorted_by, lambda { |sort_option|
@@ -59,6 +63,7 @@ class Vendor < ActiveRecord::Base
       sorted_by
       search_query
       not_in_event_id
+      with_search_limit
     )
   end
 
