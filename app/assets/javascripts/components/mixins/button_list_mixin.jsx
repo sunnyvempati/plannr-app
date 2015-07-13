@@ -1,12 +1,17 @@
 var ButtonListMixin = {
-  renderFormTwoButtons: function(primaryText, secondaryText) {
+  handleSecondaryClick: function(e) {
+    e.preventDefault();
+    this.onSecondaryClick();
+  },
+  renderFormTwoButtons: function() {
+    var primaryButtonText = this.props.actionVerb == "POST" ? "Create" : "Update";
     return (
       <FormButtonList>
-        <Button onClick={this.onSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
-          {secondaryText}
+        <Button onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
+          Cancel
         </Button>
         <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
-          {primaryText}
+          {primaryButtonText}
         </Button>
       </FormButtonList>
     );

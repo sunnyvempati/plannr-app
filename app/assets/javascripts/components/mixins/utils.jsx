@@ -7,7 +7,9 @@ var Utils = {
     });
   },
   genericFail: function(jqXHR, textStatus, errorThrown) {
-    ToastMessages.toast("Aw man, something went wrong on get. Let Plannr know about this!");
+    if (!jqXHR.responseJSON) {
+      ToastMessages.toastError("Aw man, something went wrong. Let Plannr know about this!");
+    }
     console.log('Error: ' + errorThrown);
     console.log('jqXHR:');
     console.log(jqXHR);
@@ -20,18 +22,18 @@ var Utils = {
           successCallback(result);
         }
       }.bind(this))
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        this.genericFail(jqXHR, textStatus, errorThrown);
-        if ($.isFunction(failCallback)) {
-          failCallback(jqXHR, textStatus, errorThrown);
-        }
-      }.bind(this))
       .always(function() {
         LoadingToast.closeLoading();
         if ($.isFunction(alwaysCallback)) {
           alwaysCallback();
         }
-      });
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        this.genericFail(jqXHR, textStatus, errorThrown);
+        if ($.isFunction(failCallback)) {
+          failCallback(jqXHR, textStatus, errorThrown);
+        }
+      }.bind(this));
   },
   get: function(url, params, successCallback, failCallback, alwaysCallback) {
     LoadingToast.showLoading();
@@ -41,18 +43,19 @@ var Utils = {
           successCallback(result);
         }
       }.bind(this))
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        this.genericFail(jqXHR, textStatus, errorThrown);
-        if ($.isFunction(failCallback)) {
-          failCallback(jqXHR, textStatus, errorThrown);
-        }
-      }.bind(this))
       .always(function() {
         LoadingToast.closeLoading();
         if ($.isFunction(alwaysCallback)) {
           alwaysCallback();
         }
-      });
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        this.genericFail(jqXHR, textStatus, errorThrown);
+        if ($.isFunction(failCallback)) {
+          failCallback(jqXHR, textStatus, errorThrown);
+        }
+      }.bind(this));
+
   },
   put: function(url, params, successCallback, failCallback, alwaysCallback) {
     LoadingToast.showLoading();
@@ -69,8 +72,11 @@ var Utils = {
         alwaysCallback();
       }
     })
-    .fail(function(error) {
-      failCallback(error);
-    });
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      this.genericFail(jqXHR, textStatus, errorThrown);
+      if ($.isFunction(failCallback)) {
+        failCallback(jqXHR, textStatus, errorThrown);
+      }
+    }.bind(this));
   }
 }

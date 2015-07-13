@@ -28,7 +28,7 @@ var FormMixin = {
     Utils[actionVerb](url, data, function(result) {
       this.onSuccess(result);
     }.bind(this), function(error) {
-      invalidateForm(JSON.parse(error.responseText));
+      invalidateForm(error.responseJSON);
     }, function() {
       this.removeLoading();
     }.bind(this));

@@ -46,7 +46,6 @@ var EventForm = React.createClass({
     this.props.actionVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
   },
   render: function () {
-    var primaryButtonText = this.props.actionVerb == "POST" ? "Create" : "Update";
     this.putUrl = this.props.model && this.props.model.id && "/events/" + this.props.model.id + ".json";
 
     var id = 'event_form';
@@ -116,7 +115,7 @@ var EventForm = React.createClass({
             label="Description"
             placeholder="What else do you need to know?"
           />
-          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
+          {this.renderFormTwoButtons()}
         </Form>
       </div>
     );

@@ -52,8 +52,6 @@ var EventRow = React.createClass({
   },
   render: function() {
     var hideCheckbox = this.props.checkedItems.length > 0 ? false : true;
-    console.log(this.props.checkedItems);
-    console.log(hideCheckbox);
     var event = this.props.event;
     var checked = this.props.checkedItems.indexOf(event.id) > -1;
     var daysTill = !!event.days_till ? event.days_till + " days left" : "";

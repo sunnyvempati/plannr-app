@@ -83,11 +83,13 @@ var ContactForm = React.createClass({
         vendor_id: model.vendor_id
       };
     }
+    this.putUrl = this.props.model && this.props.model.id && "/contacts/" + this.props.model.id + ".json";
+    var submitCallback = this.props.actionVerb == "POST" ? this.postForm : this.putForm;
     return (
       <div className='FormContainer--leftAligned'>
         <Form mapping={this.mapInputs}
               authToken={this.props.authToken}
-              onSubmit={this.submitForm}
+              onSubmit={submitCallback}
               onValid={this.enableButton}
               onInvalid={this.disabledButton}
               id='contact_form'>
@@ -141,7 +143,7 @@ var ContactForm = React.createClass({
             disabled={this.props.disableForm}
             formId='contact_form'
           />
-          {this.renderFormTwoButtons('Create Contact', 'Cancel')}
+          {this.renderFormTwoButtons()}
         </Form>
       </div>
     );
