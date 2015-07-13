@@ -24,9 +24,9 @@ var EditTaskModal = React.createClass({
             <div className="Card-content">
               <TaskForm
                 routeVerb='PUT'
-                onSuccess={this.close}
+                onSuccess={this.closeAndRefreshData}
                 authToken={this.props.authToken}
-                onSecondaryClick={this.closeAndRefreshData}
+                onSecondaryClick={this.close}
                 model={this.props.model}
               />
             </div>
