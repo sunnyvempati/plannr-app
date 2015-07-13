@@ -1,6 +1,6 @@
 <% content_for(:header) { "New Vendor" } %>
 
-<%= react_component("VendorFormNew",
+<%= react_component("VendorForm",
                     model: @vendor,
                     routeVerb: 'POST',
                     authToken: form_authenticity_token

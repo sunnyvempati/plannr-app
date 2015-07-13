@@ -62,10 +62,8 @@ var TaskForm = React.createClass({
     !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToTasks();
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
-    var formatted_data = data;
-    var formatted_deadline = formatted_data.task.deadline && formatted_data.task.deadline.format();
-    formatted_data.task.deadline = formatted_deadline;
-    this.props.routeVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
+    data.task.deadline = data.task.deadline.format();
+    this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
   },
   render: function() {
     var task = {};

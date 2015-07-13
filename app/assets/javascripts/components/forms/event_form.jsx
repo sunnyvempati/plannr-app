@@ -12,7 +12,7 @@ var EventForm = React.createClass({
   url: '/events.json',
   getInitialState: function() {
     return {
-      startDate: null
+      startDate: this.props.model.start_date ? moment(this.props.model.start_date) : null
     };
   },
   mapInputs: function (inputs) {
@@ -39,18 +39,14 @@ var EventForm = React.createClass({
     location.href = "/events";
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
-    var formatted_data = data;
-    var formatted_start_date = formatted_data.event.start_date && formatted_data.event.start_date.format();
-    var formatted_end_date = formatted_data.event.end_date && formatted_data.event.end_date.format();
-    formatted_data.event.start_date = formatted_start_date;
-    formatted_data.event.end_date = formatted_end_date;
-    this.props.routeVerb == "POST" ? this.postForm(formatted_data, reset, invalidate) : this.putForm(formatted_data, reset, invalidate);
+    data.event.start_date = data.event.start_date.format();
+    data.event.end_date = data.event.end_date.format();
+    this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
   },
   render: function () {
     this.putUrl = this.props.model && this.props.model.id && "/events/" + this.props.model.id + ".json";
 
     var id = 'event_form';
-    var startDate = this.props.model.start_date ? moment(this.props.model.start_date) : null;
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
     var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
@@ -74,7 +70,7 @@ var EventForm = React.createClass({
           <DatePickerInput
             name="start_date"
             label="Start Date"
-            value={startDate}
+            value={this.state.startDate}
             placeholder="When does it start?"
             onValueSet={this.setStartDate}
             minDate={moment()}
