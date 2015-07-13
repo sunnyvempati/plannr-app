@@ -19,7 +19,13 @@ var PrimaryContactInput = React.createClass({
     }
   },
   retrieveContacts: function(term) {
-    $.get("/search_contacts", {search: {text: term || ""}}, function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        with_search_limit: 5
+      }
+    };
+    $.get("/contacts.json", params, function(result) {
       var contacts = result.contacts;
       if(contacts.length == 0) {
         // uses autocomplete render new mixin

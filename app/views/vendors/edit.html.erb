@@ -2,6 +2,6 @@
 
 <%= react_component("VendorFormEdit",
                     model: @vendor,
-                    notice: notice,
+                    routeVerb: 'PUT',
                     authToken: form_authenticity_token
-    ) %>
+) %>

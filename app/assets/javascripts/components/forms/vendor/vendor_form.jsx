@@ -1,16 +1,15 @@
 var VendorForm = React.createClass({
+  mixins: [
+    FormMixin,
+    ButtonListMixin,
+    React.addons.PureRenderMixin
+  ],
   propTypes: {
-    action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
-    primaryButtonText: React.PropTypes.string.isRequired,
     routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
-    secondaryButtonVisible: React.PropTypes.bool.isRequired,
-    showButtonList: React.PropTypes.bool.isRequired,
-
-    disableForm: React.PropTypes.bool,
-    model: React.PropTypes.object,
-    secondaryButtonHref: React.PropTypes.string
+    model: React.PropTypes.object
   },
+  url: '/vendors.json',
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -22,6 +21,12 @@ var VendorForm = React.createClass({
         'description': inputs.description
       }
     };
+  },
+  onSuccess: function (result) {
+    location.href = '/vendors/#/view/'+result.vendor.id;
+  },
+  onSecondaryClick: function() {
+    location.href = "/vendors";
   },
   render: function() {
     var vendor = {};
@@ -36,19 +41,16 @@ var VendorForm = React.createClass({
         description: model.description
       };
     }
+    this.putUrl = this.props.model && this.props.model.id && "/vendors/" + this.props.model.id + ".json";
+    var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
     return (
       <div className='FormContainer--leftAligned'>
-        <Form url={this.props.action}
-          mapping={this.mapInputs}
-          onSuccess={this.props.onSuccess}
-          routeVerb={this.props.routeVerb}
-          authToken={this.props.authToken}
-          primaryButtonText={this.props.primaryButtonText}
-          secondaryButtonVisible={this.props.secondaryButtonVisible}
-          secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}
-          id='vendor_form'>
-
+        <Form mapping={this.mapInputs}
+              authToken={this.props.authToken}
+              onSubmit={submitCallback}
+              onValid={this.enableButton}
+              onInvalid={this.disabledButton}
+              id='vendor_form'>
           <FormInput
             id='vendor_name'
             name='name'
@@ -57,7 +59,6 @@ var VendorForm = React.createClass({
             type='text'
             label='Name*'
             value={vendor.name}
-            disabled={this.props.disableForm}
             required
           />
           <FormInput
@@ -67,7 +68,6 @@ var VendorForm = React.createClass({
             type='text'
             label='Location'
             value={vendor.location}
-            disabled={this.props.disableForm}
           />
           <FormInput
             id='vendor_phone'
@@ -76,7 +76,6 @@ var VendorForm = React.createClass({
             type='text'
             label='Phone'
             value={vendor.phone}
-            disabled={this.props.disableForm}
           />
           <PrimaryContactInput
             name='primary_contact_id'
@@ -90,9 +89,9 @@ var VendorForm = React.createClass({
             label='Description'
             placeholder='What else do you need to know?'
             value={vendor.description}
-            disabled={this.props.disableForm}
             formId='contact_form'
           />
+          {this.renderFormTwoButtons()}
         </Form>
       </div>
     );
