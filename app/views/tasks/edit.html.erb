@@ -1,6 +1,7 @@
 <% content_for(:header) { "Edit Task" } %>
 
-<%= react_component("TaskFormEdit",
+<%= react_component("TaskForm",
                     model: @task,
+                    routeVerb: 'PUT',
                     authToken: form_authenticity_token
-    ) %>
+) %>

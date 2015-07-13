@@ -54,6 +54,7 @@ var Autocomplete = React.createClass({
       'hidden': !this.state.open
     });
     var results = this.props.data.map(function(item) {
+      if (!item.name) return true;
       var itemName = this.formatMatchedCharacters(item.name, term);
       var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;

@@ -17,7 +17,14 @@ var AssignedToInput = React.createClass({
     }
   },
   retrieveAllUsers: function(term) {
-    $.get("/search_users", {search: {text: term || ""}}, function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        with_search_limit: 5
+      }
+    };
+    $.get("/users.json", params, function(result) {
+      console.log(result.users);
       this.setState({users: result.users});
     }.bind(this));
   },
@@ -58,7 +65,7 @@ var AssignedToInput = React.createClass({
     var inputRender = this.state.userAssigned ? this.renderAssigned() : this.renderAutocomplete();
     return (
       <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>
     );

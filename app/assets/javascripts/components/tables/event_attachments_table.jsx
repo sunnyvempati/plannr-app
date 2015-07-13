@@ -21,7 +21,7 @@ var EventAttachmentsTable = React.createClass({
     this.initializeFilterSort(defaultParams);
   },
   getTableData: function (params) {
-    HttpHelpers.getFromServer("/attachments.json", params, function (results) {
+    Utils.get("/attachments.json", params, function (results) {
       if (this.isMounted()) {
         this.setState({
           eventAttachments: results.attachments
@@ -51,7 +51,7 @@ var EventAttachmentsTable = React.createClass({
   handleDelete: function (id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer("attachments/mass_delete", destroyOpts, function () {
+    Utils.post("attachments/mass_delete", destroyOpts, function () {
       this.toast(deletionIds.length + " attachment(s) removed from event.");
       var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
       this.setState({eventAttachments: newData});

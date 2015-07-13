@@ -17,7 +17,7 @@ var EventsTable = React.createClass({
     this.initializeFilterSort(this.defaultFilterSortParams);
   },
   getTableData: function(params) {
-    HttpHelpers.getFromServer("events.json", params, function(result) {
+    Utils.get("events.json", params, function(result) {
       if (this.isMounted()) {
         this.setState({events: result.events});
       }
@@ -30,6 +30,7 @@ var EventsTable = React.createClass({
           event={event}
           checkedItems={this.state.checkedItems}
           actionItems={this.actionItems()}
+          rowChanged={this.rowChanged}
           key={event.id}
         />
       );
@@ -51,8 +52,8 @@ var EventsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    this.postToServer("/destroy_events", destroyOpts, function(result) {
-      this.setState({events: this.spliceResults(this.state.events, this.state.checkedItems), checkedItems: []});
+    Utils.post("/destroy_events", destroyOpts, function(result) {
+      this.setState({events: this.spliceResults(this.state.events, deletionIds), checkedItems: []});
       this.toast(deletionIds.length + " events deleted successfully.");
     }.bind(this));
   },

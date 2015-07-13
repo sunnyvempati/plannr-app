@@ -1,6 +1,7 @@
 <% content_for(:header) { "Edit Event" } %>
 
-<%= react_component("EventFormEdit",
+<%= react_component("EventForm",
                     model: @event,
+                    routeVerb: 'PUT',
                     authToken: form_authenticity_token
-    ) %>
+) %>

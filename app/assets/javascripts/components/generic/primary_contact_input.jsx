@@ -19,7 +19,13 @@ var PrimaryContactInput = React.createClass({
     }
   },
   retrieveContacts: function(term) {
-    $.get("/search_contacts", {search: {text: term || ""}}, function(result) {
+    var params = {
+      filter_sort: {
+        search_query: term,
+        with_search_limit: 5
+      }
+    };
+    $.get("/contacts.json", params, function(result) {
       var contacts = result.contacts;
       if(contacts.length == 0) {
         // uses autocomplete render new mixin
@@ -75,7 +81,7 @@ var PrimaryContactInput = React.createClass({
     var inputRender = this.state.contactSelected ? this.renderSelectedContact() : this.renderAutocomplete();
     return (
       <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>
     );

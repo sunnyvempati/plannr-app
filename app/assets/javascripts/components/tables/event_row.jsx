@@ -12,7 +12,7 @@ var EventRow = React.createClass({
         status: archived ? 2 : 1
       }
     };
-    HttpHelpers.putToServer(url, params, function(result) {
+    Utils.put(url, params, function(result) {
       this.setState({archived: archived});
     }.bind(this));
   },
@@ -26,14 +26,14 @@ var EventRow = React.createClass({
       </div>
     )
   },
-  handleActionClick: function(item) {
-    item.handler(item.id);
+  handleActionClick: function(event, action) {
+    action.handler(event.id);
   },
   getRowActionMenu: function() {
     var globalItems = this.props.actionItems.map(function(item) {
       return (
         <div className="DropdownMenu-item"
-             onClick={this.handleActionClick.bind(this, item)}
+             onClick={this.handleActionClick.bind(this, this.props.event, item)}
              key={item.name}>
           {item.name}
         </div>
@@ -66,7 +66,7 @@ var EventRow = React.createClass({
         <div className="EventsTable-rowHeader">
           <div className="EventsTable-rowName">
             <div className="EventsTable-checkbox">
-              <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
+              <CheckboxInput onChange={this.props.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
             </div>
             <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
               {event.name}

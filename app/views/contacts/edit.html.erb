@@ -1,7 +1,7 @@
 <% content_for(:header) { "Edit Contact" } %>
 
-<%= react_component("ContactFormEdit",
+<%= react_component("ContactForm",
                     model: @contact,
+                    routeVerb: 'PUT',
                     authToken: form_authenticity_token
-    ) %>
-
+) %>

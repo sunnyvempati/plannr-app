@@ -3,7 +3,7 @@ var Button = React.createClass({
     var classes = {
       'Button': true,
       'Button--raised': true,
-      'Button--primary': true
+      'disabled': this.props.disabled
     };
     classes[this.props.className] = true;
     var btn_classes = classNames(classes);

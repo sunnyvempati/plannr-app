@@ -18,7 +18,7 @@ var VendorsTable = React.createClass({
     this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
   },
   getTableData: function(params) {
-    HttpHelpers.getFromServer("/vendors.json", params, function(result) {
+    Utils.get("/vendors.json", params, function(result) {
       this.setState({vendors: result.vendors});
     }.bind(this));
   },
@@ -47,7 +47,7 @@ var VendorsTable = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer('/vendors/mass_delete', destroyOpts, function(success_result) {
+    Utils.post('/vendors/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) deleted.");
       var newData = this.spliceResults(this.state.vendors, deletionIds);
       this.setState({vendors: newData, checkedItems: []});

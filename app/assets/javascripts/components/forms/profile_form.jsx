@@ -1,4 +1,6 @@
 var ProfileForm = React.createClass({
+  mixins: [FormMixin, ButtonListMixin],
+  url: '/profiles.json',
   mapInputs: function(inputs) {
     return {
       'profile': {
@@ -8,17 +10,17 @@ var ProfileForm = React.createClass({
       'authenticity_token': inputs.authenticity_token
     };
   },
-  changeUrl: function() {
+  onSuccess: function() {
     location.href = '/events';
   },
   render: function() {
     return (
       <div className="FormContainer">
-        <Form url='/profiles'
-              mapping={this.mapInputs}
-              onSuccess={this.changeUrl}
-              authToken={this.props.authToken}
-              primaryButtonText="Save Profile">
+        <Form mapping={this.mapInputs}
+              onSubmit={this.postForm}
+              onValid={this.enableButton}
+              onInvalid={this.disableButton}
+              authToken={this.props.authToken}>
           <FormInput name="first_name"
                      type="text"
                      label="First Name*"
@@ -31,6 +33,7 @@ var ProfileForm = React.createClass({
                      value={null}
                      required
           />
+          {this.renderFormButton('Save')}
         </Form>
       </div>
     );

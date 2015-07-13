@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   has_many :events
 
   # scopes
+  scope :with_search_limit, lambda { |num|
+    limit(num)
+  }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     wildcard_text = "'%#{query.downcase}%'"
@@ -38,6 +42,7 @@ class User < ActiveRecord::Base
     %w(
       sorted_by
       search_query
+      with_search_limit
     )
   end
 

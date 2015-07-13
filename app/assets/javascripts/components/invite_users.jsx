@@ -1,5 +1,6 @@
 var InviteUsers = React.createClass({
-  mixins: [ToastMessages],
+  mixins: [FormMixin, ButtonListMixin],
+  url: '/invitations',
   mapInputs: function(inputs) {
     return {
       'invitation': {
@@ -10,26 +11,25 @@ var InviteUsers = React.createClass({
   },
   onSuccess: function(res) {
     this.refs.inviteEmail.resetValue();
-    this.toast("Invite sent successfully.");
+    this.setTimeout(500, ToastMessages.toast("Invite sent successfully."));
   },
   render: function() {
     return (
       <div className="InviteUsersContainer">
-        <div>
-          <Form url='/invitations'
-                mapping={this.mapInputs}
-                authToken={this.props.authToken}
-                onSuccess={this.onSuccess}
-                primaryButtonText="Invite"
-                id="InviteUserForm">
-            <FormInput name="email"
-                       validations="isEmail"
-                       validationError="Invalid email"
-                       label="Email*"
-                       ref="inviteEmail"
-            />
-          </Form>
-        </div>
+        <Form mapping={this.mapInputs}
+              authToken={this.props.authToken}
+              onSubmit={this.postForm}
+              onValid={this.enableButton}
+              onInvalid={this.disableButton}
+              id="InviteUserForm">
+          <FormInput name="email"
+                     validationError="Invalid Email"
+                     validations="isEmail"
+                     label="Email*"
+                     ref="inviteEmail"
+                     value={null} />
+          {this.renderFormButton('Invite')}
+        </Form>
       </div>
     );
   }

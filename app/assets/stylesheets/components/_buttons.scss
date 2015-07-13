@@ -24,8 +24,11 @@
     background-color: $button-hover-color;
   }
   &:disabled {
-    background-color: #000000;
-    opacity: 0.2;
+    background: #eaeaea;
+    color: #a8a8a8;
+    cursor: auto;
+    pointer-events: none;
+    transition: none;
     box-shadow: none;
   }
 }
@@ -33,9 +36,8 @@
 .Button--secondary {
   color: #000000;
   background-color: $button-secondary-color;
-  display: none;
-  &.is-visible {
-    display: block;
+  &:disabled {
+    @extend .Button--primary:disabled;
   }
 }
 
@@ -76,7 +78,6 @@
   height: inherit;
   position: relative;
 }
-
 
 .action {
   color: white;

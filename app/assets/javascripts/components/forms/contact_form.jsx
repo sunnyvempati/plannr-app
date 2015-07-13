@@ -1,18 +1,20 @@
 var ContactForm = React.createClass({
+  mixins: [
+    FormMixin,
+    ButtonListMixin,
+    React.addons.PureRenderMixin
+  ],
   propTypes: {
-    action: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired,
-    primaryButtonText: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
-    secondaryButtonVisible: React.PropTypes.bool.isRequired,
-    showButtonList: React.PropTypes.bool.isRequired,
-
-    disableForm: React.PropTypes.bool,
     model: React.PropTypes.object,
-    secondaryButtonHref: React.PropTypes.string
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired
   },
-  hrefRoot: '/contacts',
-  typeOptions: [<option key='1' value='1'>Client</option>, <option key='2' value='2'>Vendor</option>],
+  url: '/contacts.json',
+  typeOptions:
+  [
+    <option key='1' value='1'>Client</option>,
+    <option key='2' value='2'>Vendor</option>
+  ],
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -40,7 +42,7 @@ var ContactForm = React.createClass({
                   name='organization'
                   placeholder='What is the company of your contact?'
                   type='text'
-                  label='organization'
+                  label='Organization'
                   value={contact.organization}
                   disabled={propsDisableForm}
                   />;
@@ -50,7 +52,7 @@ var ContactForm = React.createClass({
                   name='vendor'
                   value={contact.vendor_id}
                   id='contact_vendor'
-                  label='vendor'
+                  label='Vendor'
                   disabled={propsDisableForm}
                   />;
     }
@@ -60,6 +62,12 @@ var ContactForm = React.createClass({
     return {
       category: this.props.model.category || 1
     };
+  },
+  onSecondaryClick: function() {
+    location.href = "/contacts";
+  },
+  onSuccess: function (result) {
+    location.href = '/contacts/#/view/'+result.contact.id;
   },
   render: function () {
     var contact = {};
@@ -76,19 +84,17 @@ var ContactForm = React.createClass({
         vendor_id: model.vendor_id
       };
     }
+    this.putUrl = this.props.model && this.props.model.id && "/contacts/" + this.props.model.id + ".json";
+    var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     return (
       <div className='FormContainer--leftAligned'>
-        <Form url={this.props.action}
-          mapping={this.mapInputs}
-          onSuccess={this.props.onSuccess}
-          routeVerb={this.props.routeVerb}
-          authToken={this.props.authToken}
-          primaryButtonText={this.props.primaryButtonText}
-          secondaryButtonVisible={this.props.secondaryButtonVisible}
-          secondaryButtonHref={this.props.secondaryButtonHref}
-          showButtonList={this.props.showButtonList}
-          id='contact_form'>
-
+        <Form mapping={this.mapInputs}
+              authToken={this.props.authToken}
+              onSubmit={submitCallback}
+              onValid={this.enableButton}
+              onInvalid={this.disableButton}
+              id='contact_form'>
           <FormInput
             id='contact_name'
             name='name'
@@ -97,7 +103,6 @@ var ContactForm = React.createClass({
             type='text'
             label='Name*'
             value={contact.name}
-            disabled={this.props.disableForm}
             required
           />
           <FormSelectInput
@@ -107,7 +112,6 @@ var ContactForm = React.createClass({
             label='Type*'
             options={this.typeOptions}
             value={contact.category || 1}
-            disabled={this.props.disableForm}
             onChangeCallback={this.contactTypeOnChange}
             required
           />
@@ -119,7 +123,6 @@ var ContactForm = React.createClass({
             type='text'
             label='Email'
             value={contact.email}
-            disabled={this.props.disableForm}
           />
           <FormInput
             id='contact_phone'
@@ -128,7 +131,6 @@ var ContactForm = React.createClass({
             type='tel'
             label='Phone'
             value={contact.phone}
-            disabled={this.props.disableForm}
           />
           <TextAreaInput
             id='contact_description'
@@ -137,9 +139,9 @@ var ContactForm = React.createClass({
             label='Description'
             placeholder='What else do you need to know?'
             value={contact.description}
-            disabled={this.props.disableForm}
             formId='contact_form'
           />
+          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>
       </div>
     );

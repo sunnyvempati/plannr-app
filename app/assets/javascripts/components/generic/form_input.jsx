@@ -1,10 +1,10 @@
 var FormInput = React.createClass({
-  mixins: [Formsy.Mixin],
+  mixins: [Formsy.Mixin, React.addons.PureRenderMixin],
   propTypes: {
     type: React.PropTypes.string,
     id: React.PropTypes.string,
     name: React.PropTypes.string,
-    autofocus: React.PropTypes.bool,
+    autofocus: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     disabled: React.PropTypes.bool
   },
@@ -14,7 +14,7 @@ var FormInput = React.createClass({
   render: function() {
     var input_classes = classNames({
       'FormInput-field': true,
-      'is-invalid': !this.isValid()
+      'is-invalid': !this.isValid() && !this.isPristine()
     });
     var form_input_classes = classNames({
       'FormInput': true,
@@ -32,7 +32,7 @@ var FormInput = React.createClass({
                type={this.props.type}
                disabled={this.props.disabled}
                id={this.props.id} />
-        <span className="FormInput-fieldErrorMessage">{this.getErrorMessage()}</span>
+        <span className="FormInput-fieldErrorMessage">{!this.isPristine() && this.getErrorMessage()}</span>
       </div>
     );
   }

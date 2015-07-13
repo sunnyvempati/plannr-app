@@ -34,6 +34,10 @@ class Contact < ActiveRecord::Base
     where(category: category).limit(5)
   }
 
+  scope :with_search_limit, lambda { |num|
+    limit(num)
+  }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)
@@ -75,6 +79,7 @@ class Contact < ActiveRecord::Base
       search_query
       with_category
       not_in_event_id
+      with_search_limit
     )
   end
 

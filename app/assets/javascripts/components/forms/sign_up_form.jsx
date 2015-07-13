@@ -1,4 +1,6 @@
 var SignUpForm = React.createClass({
+  mixins: [FormMixin, ButtonListMixin],
+  url: '/sign_up.json',
   mapInputs: function(inputs) {
     return {
       'company': {
@@ -28,21 +30,17 @@ var SignUpForm = React.createClass({
     var invited = this.props.company ? true : false;
     return (
       <div className="FormContainer">
-        <Form url='/sign_up'
-              mapping={this.mapInputs}
-              onSuccess={this.onSuccess}
-              onError={this.onError}
-              authToken={this.props.authToken}
-              primaryButtonText="Sign Up"
-              secondaryButtonVisible={true}
-              secondaryButtonText='Log in'
-              secondaryButtonHref='/login'
-              showButtonList={true}>
+        <Form mapping={this.mapInputs}
+              onSubmit={this.postForm}
+              onValid={this.enableButton}
+              onInvalid={this.disableButton}
+              authToken={this.props.authToken}>
           <FormInput type="hidden" name="invitation_token" value={this.props.invite_token}  />
           <FormInput name="email" label="Email*" ref="userEmail" value={null} required/>
           <FormInput name="password" type="password" label="Password*" value={null} required/>
           <FormInput name="password_confirmation" type="password" label="Confirm Password*" value={null} required/>
           <FormInput name="company" type="company" placeholder="Where do you work?" label="Company*" value={null} ref="userCompany" required/>
+          {this.renderFormButton('Sign up')}
         </Form>
       </div>
     );

@@ -81,7 +81,7 @@ var ClientInput = React.createClass({
     var inputRender = this.state.clientSelected ? this.renderSelectedClient() : this.renderAutocomplete();
     return (
       <div className="FormInput">
-        <label for={this.props.id}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>
     );

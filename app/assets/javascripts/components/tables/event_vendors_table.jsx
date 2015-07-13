@@ -18,7 +18,7 @@ var EventVendorsTable = React.createClass({
     this.initializeFilterSort(defaultParams);
   },
   getTableData: function(params) {
-    HttpHelpers.getFromServer("/event_vendors.json", params, function(results) {
+    Utils.get("/event_vendors.json", params, function(results) {
       if (this.isMounted()) {
         this.setState({
           eventVendors: results.event_vendors
@@ -46,7 +46,7 @@ var EventVendorsTable = React.createClass({
   removeAssociation: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
-    HttpHelpers.postToServer("vendors/mass_delete",destroyOpts, function(success_result) {
+    Utils.post("vendors/mass_delete",destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) removed from event.");
       var newData = this.spliceResults(this.state.eventVendors, deletionIds);
       this.setState({eventVendors: newData, checkedItems: []});
