@@ -52,6 +52,8 @@ var EventRow = React.createClass({
   },
   render: function() {
     var hideCheckbox = this.props.checkedItems.length > 0 ? false : true;
+    console.log(this.props.checkedItems);
+    console.log(hideCheckbox);
     var event = this.props.event;
     var checked = this.props.checkedItems.indexOf(event.id) > -1;
     var daysTill = !!event.days_till ? event.days_till + " days left" : "";
@@ -66,7 +68,7 @@ var EventRow = React.createClass({
         <div className="EventsTable-rowHeader">
           <div className="EventsTable-rowName">
             <div className="EventsTable-checkbox">
-              <CheckboxInput onChange={this.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
+              <CheckboxInput onChange={this.props.rowChanged} value={event.id} checked={checked} hideCheckbox={hideCheckbox} />
             </div>
             <div className="EventsTable-name u-clickable" onClick={this.goToEvent.bind(this, event.id)}>
               {event.name}

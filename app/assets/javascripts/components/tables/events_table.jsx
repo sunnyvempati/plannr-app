@@ -30,6 +30,7 @@ var EventsTable = React.createClass({
           event={event}
           checkedItems={this.state.checkedItems}
           actionItems={this.actionItems()}
+          rowChanged={this.rowChanged}
           key={event.id}
         />
       );
