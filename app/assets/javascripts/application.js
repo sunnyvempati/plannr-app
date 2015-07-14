@@ -9,7 +9,7 @@
 //= require tether
 //= require react-onclickoutside
 //= require react-date-picker/dist/react-datepicker.min
-//= require bower-skrollr/skrollr.min
+//= require skrollr
 //= require formsy-react/release/formsy-react.min
 //= require blueimp-file-upload/js/vendor/jquery.ui.widget
 //= require blueimp-file-upload/js/jquery.iframe-transport

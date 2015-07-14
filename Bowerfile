@@ -1,6 +1,6 @@
 asset 'normalize.css'
 asset 'components-font-awesome'
-asset 'bower-skrollr'
+asset 'skrollr'
 asset 'formsy-react'
 asset 'react-router'
 asset 'classnames'
