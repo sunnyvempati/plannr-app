@@ -1,13 +1,13 @@
-{
-  "name": "dsl-generated dependencies",
-  "dependencies": {
-    "normalize.css": "latest",
-    "components-font-awesome": "latest",
-    "bower-skrollr": "latest",
-    "formsy-react": "latest",
-    "react-router": "latest",
-    "classnames": "latest",
-    "react-date-picker": "0.8.0",
-    "blueimp-file-upload": "latest"
-  }
-}
+// {
+//   "name": "dsl-generated dependencies",
+//   "dependencies": {
+//     "normalize.css": "latest",
+//     "components-font-awesome": "latest",
+//     "bower-skrollr": "latest",
+//     "formsy-react": "latest",
+//     "react-router": "latest",
+//     "classnames": "latest",
+//     "react-date-picker": "0.8.0",
+//     "blueimp-file-upload": "latest"
+//   }
+// }
