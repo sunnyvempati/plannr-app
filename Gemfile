@@ -45,6 +45,7 @@ group 'development' do
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
   gem 'capistrano-linked-files'
+  gem 'capistrano-bower'
   gem 'rack-mini-profiler'
 end
 

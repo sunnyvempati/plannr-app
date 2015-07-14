@@ -9,6 +9,7 @@ require 'capistrano/rbenv'
 require 'capistrano/bundler'
 require 'capistrano/rails/migrations'
 require 'capistrano/linked_files'
+require 'capistrano/bower'
 
 # Include tasks from other gems included in your Gemfile
 #

@@ -58,6 +58,8 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
+    capistrano-bower (1.1.0)
+      capistrano (~> 3.0)
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
@@ -351,6 +353,7 @@ DEPENDENCIES
   autoprefixer-rails
   bower-rails
   capistrano
+  capistrano-bower
   capistrano-linked-files
   capistrano-rails
   capistrano-rbenv
