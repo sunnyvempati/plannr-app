@@ -24,7 +24,6 @@ var AssignedToInput = React.createClass({
       }
     };
     $.get("/users.json", params, function(result) {
-      console.log(result.users);
       this.setState({users: result.users});
     }.bind(this));
   },

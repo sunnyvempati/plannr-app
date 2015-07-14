@@ -67,11 +67,13 @@ var EventTasksTable = React.createClass({
       {name: "My Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2, with_assigned_to: this.props.currentUserId})},
     ]
   },
+
   openCreateTaskModal: function() {
     var props = {
       model: {event_id: this.props.eventId},
       authToken: this.props.authToken,
-      refreshData: this.getTableData.bind(this, {status: 1})
+      refreshData: this.getTableData.bind(this, {status: 1}),
+      reopenCreateTaskModal: this.openCreateTaskModal
     }
     var modal = React.createElement(CreateTaskModal, props);
     React.render(modal, document.getElementById('modal'));

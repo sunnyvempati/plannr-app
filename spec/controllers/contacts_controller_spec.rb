@@ -43,50 +43,6 @@ RSpec.describe ContactsController, type: :controller do
     end
   end
 
-  # TODO: check out the 'by state' section for organization
-  # http://stackoverflow.com/questions/9228282/rspec-large-spec-files-organisation
-
-
-  describe 'quick_create' do
-
-    let(:event) { FactoryGirl.create(:event) }
-    let(:this_guy_name)  { "Mr. Testing Guy" }
-    let(:this_guy_email)  { "guy@testing.com" }
-    let(:quick_create_params) do
-      {
-        format: "json",
-        quick_contact: { event_id: event.id , text: "" }
-      }
-    end
-
-
-    it "doesn't create a contact with the provided text (blank) and returns a 403 error" do
-      post :quick_create, quick_create_params
-
-      expect(Contact.all.count).to eq 0
-      expect(response.status).to eq (403)
-    end
-
-    it "creates a contact with the provided text (not a valid email address) as name and is associated to the specified event" do
-      quick_create_params[:quick_contact][:text] = this_guy_name
-      post :quick_create, quick_create_params
-
-      expect(Contact.first.name).to eq this_guy_name
-      expect(Contact.first.email).to_not eq this_guy_name
-      expect(Contact.first.events.first.id).to eq event.id
-    end
-
-    it "creates a contact with the provided text (valid email address) as name and email and is assocuated to the specified event" do
-      quick_create_params[:quick_contact][:text] = this_guy_email
-      post :quick_create, quick_create_params
-
-      expect(Contact.first.name).to eq this_guy_email
-      expect(Contact.first.email).to eq this_guy_email
-      expect(Contact.first.events.first.id).to eq event.id
-    end
-
-  end
-
   describe 'search_contacts_not_in_event with no search text' do
     let!(:event1) { FactoryGirl.create(:event) }
     let!(:event2) { FactoryGirl.create(:event) }
@@ -98,17 +54,15 @@ RSpec.describe ContactsController, type: :controller do
     let!(:contact5) { FactoryGirl.create(:contact) }
 
     it "returns the count of contacts not in event1 " do
-      get :search_contacts_not_in_event, { event_id: event1.id, search: {text: ''} }
-      expect(response.status).to eq 200
-      parsed_body = JSON.parse(response.body)
-      expect(parsed_body["contacts"].count).to eq 3
+      get :index, { format: :json, filter_sort: { not_in_event_id: event1.id, search_query: '' } }
+      expect(response).to be_success
+      expect(json_response["contacts"].count).to eq 3
     end
 
      it "returns the count of contacts not in event2" do
-      get :search_contacts_not_in_event, { event_id: event2.id, search: {text: ''} }
-      expect(response.status).to eq 200
-      parsed_body = JSON.parse(response.body)
-      expect(parsed_body["contacts"].count).to eq 2
+      get :index, { format: :json, filter_sort: { not_in_event_id: event2.id, search_query: '' } }
+      expect(response).to be_success
+      expect(json_response["contacts"].count).to eq 2
     end
 
   end

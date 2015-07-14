@@ -56,14 +56,43 @@ var TaskForm = React.createClass({
     location.href = '/tasks';
   },
   onSuccess: function (result) {
-    !!this.props.onSuccess ? this.props.onSuccess(result) : this.navigateToTasks();
+    if (this.createAndNewClicked) {
+      !!this.props.onSuccess ? this.props.onSuccess(result, true) : location.reload();
+    }
+    else {
+      !!this.props.onSuccess ? this.props.onSuccess(result, false) : this.navigateToTasks();
+    }
   },
   onSecondaryClick: function() {
     !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToTasks();
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
-    data.task.deadline = data.task.deadline.format();
+    data.task.deadline = data.task.deadline && data.task.deadline.format();
     this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
+  },
+  handleCreateAndNewClick: function() {
+    this.createAndNewClicked = true;
+  },
+  renderButtonList: function() {
+    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
+    if (this.props.routeVerb == "POST") {
+      return (
+        <FormButtonList>
+          <Button onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
+            Cancel
+          </Button>
+          <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+            Create
+          </Button>
+          <Button onClick={this.handleCreateAndNewClick} type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+            Create and New
+          </Button>
+        </FormButtonList>
+      )
+    }
+    else {
+      return this.renderFormTwoButtons('Edit', 'Cancel');
+    }
   },
   render: function() {
     var task = {};
@@ -82,7 +111,7 @@ var TaskForm = React.createClass({
     this.putUrl = this.props.model && this.props.model.id && "/tasks/" + this.props.model.id + ".json";
     var id = 'task_form';
     var eventHidden = !task.eventId ? "" : "hidden";
-    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
+
     return (
       <div className='FormContainer--leftAligned'>
         <Form mapping={this.mapInputs}
@@ -131,7 +160,7 @@ var TaskForm = React.createClass({
             disabled={this.props.disableForm}
             placeholder="How would you describe this task?"
           />
-          {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
+          {this.renderButtonList()}
         </Form>
       </div>
     );
