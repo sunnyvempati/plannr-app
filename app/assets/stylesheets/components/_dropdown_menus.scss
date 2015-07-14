@@ -19,6 +19,10 @@
   &.is-rightAligned {
     right: 0;
   }
+  &.is-fullWidth {
+    position: relative;
+    width: 100%;
+  }
 }
 
 .DropdownMenu-item {
@@ -27,8 +31,11 @@
   align-items: center;
   padding: 8px 8px 8px 24px;
   &:hover {
-    background-color: $black-quarter;
+    background-color: #cccccc;
     cursor: pointer;
+  }
+  &.active {
+    opacity: 0.5;
   }
   >* {
     flex: 1;

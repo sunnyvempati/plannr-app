@@ -12,8 +12,8 @@ var ContactForm = React.createClass({
   url: '/contacts.json',
   typeOptions:
   [
-    <option key='1' value='1'>Client</option>,
-    <option key='2' value='2'>Vendor</option>
+    {value: 1, display: 'Client'},
+    {value: 2, display: 'Vendor'}
   ],
   mapInputs: function (inputs) {
     return {
@@ -23,7 +23,7 @@ var ContactForm = React.createClass({
         'email': inputs.email,
         'category': inputs.category,
         'phone': inputs.phone,
-        'organization': inputs.organization,
+        'organization': this.state.category == 1 ? inputs.organization : null,
         'description': inputs.description,
         'vendor_id': inputs.vendor
       }
@@ -105,14 +105,13 @@ var ContactForm = React.createClass({
             value={contact.name}
             required
           />
-          <FormSelectInput
-            id='contact_type'
-            name='category'
-            className='SelectInput'
-            label='Type*'
+          <DropdownInput
             options={this.typeOptions}
             value={contact.category || 1}
-            onChangeCallback={this.contactTypeOnChange}
+            id='contact_type'
+            name='category'
+            label='Type*'
+            handleContactChange={this.contactTypeOnChange}
             required
           />
           { this.vendorOrganizationField(this.state.category, contact, this.props.disableForm) }
