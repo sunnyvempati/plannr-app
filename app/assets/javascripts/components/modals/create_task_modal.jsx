@@ -1,8 +1,9 @@
 var CreateTaskModal = React.createClass({
   mixins: [Modal],
-  closeAndRefreshData: function() {
+  onSuccess: function(result, createNew) {
     this.closeModal();
     this.props.refreshData();
+    if (createNew) this.props.reopenCreateTaskModal();
   },
   renderModalContent: function() {
     return (
@@ -20,7 +21,7 @@ var CreateTaskModal = React.createClass({
           <div className="Card">
             <div className="Card-content">
               <TaskForm
-                onSuccess={this.closeAndRefreshData}
+                onSuccess={this.onSuccess}
                 authToken={this.props.authToken}
                 routeVerb='POST'
                 model={this.props.model} />

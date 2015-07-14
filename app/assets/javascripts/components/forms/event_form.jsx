@@ -39,8 +39,8 @@ var EventForm = React.createClass({
     location.href = "/events";
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
-    data.event.start_date = data.event.start_date.format();
-    data.event.end_date = data.event.end_date.format();
+    data.event.start_date = data.event.start_date && data.event.start_date.format();
+    data.event.end_date = data.event.end_date && data.event.end_date.format();
     this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
   },
   render: function () {
