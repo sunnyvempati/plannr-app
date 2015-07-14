@@ -72,4 +72,3 @@ namespace :bower do
     end
   end
 end
-before 'deploy:compile_assets', 'bower:install'
