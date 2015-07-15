@@ -1,9 +1,16 @@
 var VendorFormInputAutocomplete = React.createClass({
-  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [
+    Formsy.Mixin,
+    AutocompleteBoldItem,
+    AutocompleteRenderNew,
+    FormInputClassesMixin,
+    React.addons.PureRenderMixin
+  ],
   propTypes: {
     id: React.PropTypes.string.isRequired,
     label: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired
+    name: React.PropTypes.string.isRequired,
+    className: React.PropTypes.string
   },
   getInitialState: function () {
     return {
@@ -62,25 +69,29 @@ var VendorFormInputAutocomplete = React.createClass({
                     itemSelected={this.addToForm}
                     data={this.state.vendors}
                     focus={this.state.focus}
+                    className={this.props.autocompleteClassName}
                     renderItem={this.renderItem} />
     );
   },
-  renderSelectedVendor: function() {
+  renderSelectedVendor: function(className) {
     return (
-      <div className="Autocomplete-picked" onClick={this.editVendor}>
-        <div className="Autocomplete-pickedName">
-          {this.state.vendorName}
-        </div>
-        <div className="Autocomplete-edit">
-          <i className="fa fa-pencil"></i>
+      <div className={classNames(className)}>
+        <div className="Autocomplete-picked" onClick={this.editVendor}>
+          <div className="Autocomplete-pickedName">
+            {this.state.vendorName}
+          </div>
+          <div className="Autocomplete-edit">
+            <i className="fa fa-pencil"></i>
+          </div>
         </div>
       </div>
     );
   },
   render: function() {
-    var inputRender = this.state.vendorSelected ? this.renderSelectedVendor() : this.renderAutocomplete();
+    var classes = this.getClassNames();
+    var inputRender = this.state.vendorSelected ? this.renderSelectedVendor(classes.inputField) : this.renderAutocomplete();
     return (
-      <div className="FormInput">
+      <div className={classNames(classes.inputContainer)}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>

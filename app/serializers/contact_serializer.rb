@@ -10,7 +10,7 @@ class ContactSerializer < ActiveModel::Serializer
   end
 
   def company
-    return object.organization if object.organization
+    return object.organization if object.organization && !object.organization.empty?
     return object.vendor.name if object.vendor
   end
 end

@@ -7,7 +7,8 @@ var VendorForm = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
-    model: React.PropTypes.object
+    model: React.PropTypes.object,
+    compact: React.PropTypes.bool
   },
   url: '/vendors.json',
   mapInputs: function(inputs) {
@@ -22,13 +23,20 @@ var VendorForm = React.createClass({
       }
     };
   },
+  navigateToVendor: function(id) {
+    location.href = '/vendors/#/view/'+id;
+  },
+  navigateToVendors: function() {
+    location.href = '/vendors';
+  },
   onSuccess: function (result) {
-    location.href = '/vendors/#/view/'+result.vendor.id;
+    !!this.props.onSuccess ? this.props.onSuccess(result) : this.navigateToVendor(result.vendor.id);
   },
   onSecondaryClick: function() {
-    location.href = "/vendors";
+    !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToVendors();
   },
   render: function() {
+    var compact = this.props.compact;
     var vendor = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -44,8 +52,13 @@ var VendorForm = React.createClass({
     this.putUrl = this.props.model && this.props.model.id && "/vendors/" + this.props.model.id + ".json";
     var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
     var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
+    var className = compact ? 'CompactFormInput' : 'FormInput';
+    var formClasses = classNames({
+      'FormContainer--leftAligned': true,
+      'compact': this.props.compact
+    });
     return (
-      <div className='FormContainer--leftAligned'>
+      <div className={formClasses}>
         <Form mapping={this.mapInputs}
               authToken={this.props.authToken}
               onSubmit={submitCallback}
@@ -60,6 +73,7 @@ var VendorForm = React.createClass({
             type='text'
             label='Name*'
             value={vendor.name}
+            className={className}
             required
           />
           <FormInput
@@ -69,6 +83,7 @@ var VendorForm = React.createClass({
             type='text'
             label='Location'
             value={vendor.location}
+            className={className}
           />
           <FormInput
             id='vendor_phone'
@@ -77,12 +92,16 @@ var VendorForm = React.createClass({
             type='text'
             label='Phone'
             value={vendor.phone}
+            className={className}
           />
           <PrimaryContactInput
             name='primary_contact_id'
             value={vendor.primary_contact_id}
             id='vendor_primary_contact'
-            label='Primary Contact' />
+            label='Primary Contact'
+            className={className}
+            autocompleteClassName={this.props.compact ? 'CompactAutocomplete' : 'Autocomplete'}
+          />
           <TextAreaInput
             id='vendor_description'
             name='description'
@@ -91,6 +110,7 @@ var VendorForm = React.createClass({
             placeholder='What else do you need to know?'
             value={vendor.description}
             formId='contact_form'
+            className={className}
           />
           {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>

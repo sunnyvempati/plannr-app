@@ -19,7 +19,7 @@ var PageHeader = React.createClass({
     this.setSkrollr($('#mainHeader'), [[0, 'height:128px'], [56, 'height:64px']]);
     this.setSkrollr($('#mainTitle'), [[56, 'padding-top:6px;font-size:34px'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
     $('.MainContainer-content').css('padding-top', '128px');
-    skrollr.init({forceHeight: false});
+    var s = skrollr.init({forceHeight: false});
   },
   setSkrollr: function($element, data) {
     for(var i = 0, l = data.length; i < l; i++) {

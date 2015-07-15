@@ -7,14 +7,25 @@ var ContactForm = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired
+    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    compact: React.PropTypes.bool
   },
   url: '/contacts.json',
   typeOptions:
   [
-    <option key='1' value='1'>Client</option>,
-    <option key='2' value='2'>Vendor</option>
+    {value: 1, display: 'Client'},
+    {value: 2, display: 'Vendor'}
   ],
+  getDefaultProps: function() {
+    return {
+      compact: false
+    };
+  },
+  getInitialState: function() {
+    return {
+      category: this.props.model.category || 1
+    };
+  },
   mapInputs: function (inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -23,7 +34,7 @@ var ContactForm = React.createClass({
         'email': inputs.email,
         'category': inputs.category,
         'phone': inputs.phone,
-        'organization': inputs.organization,
+        'organization': this.state.category == 1 ? inputs.organization : null,
         'description': inputs.description,
         'vendor_id': inputs.vendor
       }
@@ -32,44 +43,49 @@ var ContactForm = React.createClass({
   contactTypeOnChange: function(value) {
     this.setState({category: value});
   },
-  vendorOrganizationField: function (category, contact, propsDisableForm) {
+  vendorOrganizationField: function (contact, className) {
     // conditionally display either contact_organization field or contact_vendor
     // based on category (client or vendor)
-    var retHtml;
     if (this.state.category == 1) {
-      retHtml = <FormInput
-                  id='contact_organization'
-                  name='organization'
-                  placeholder='What is the company of your contact?'
-                  type='text'
-                  label='Organization'
-                  value={contact.organization}
-                  disabled={propsDisableForm}
-                  />;
+      return (
+        <FormInput
+          id='contact_organization'
+          name='organization'
+          placeholder='What is the company of your contact?'
+          type='text'
+          label='Organization'
+          className={className}
+          value={contact.organization}
+        />
+      );
     }
     else {
-      retHtml = <VendorFormInputAutocomplete
-                  name='vendor'
-                  value={contact.vendor_id}
-                  id='contact_vendor'
-                  label='Vendor'
-                  disabled={propsDisableForm}
-                  />;
+      return (
+        <VendorFormInputAutocomplete
+          name='vendor'
+          value={contact.vendor_id}
+          id='contact_vendor'
+          label='Vendor'
+          className={className}
+          autocompleteClassName={this.props.compact ? 'CompactAutocomplete' : 'Autocomplete'}
+        />
+      );
     }
-    return retHtml;
-  },
-  getInitialState: function() {
-    return {
-      category: this.props.model.category || 1
-    };
   },
   onSecondaryClick: function() {
-    location.href = "/contacts";
+    !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToContacts();
+  },
+  navigateToContact: function(id) {
+    location.href = '/contacts/#/view/'+id;
+  },
+  navigateToContacts: function() {
+    location.href = '/contacts';
   },
   onSuccess: function (result) {
-    location.href = '/contacts/#/view/'+result.contact.id;
+    !!this.props.onSuccess ? this.props.onSuccess(result, false) : this.navigateToContact(result.contact.id);
   },
   render: function () {
+    var compact = this.props.compact;
     var contact = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -87,8 +103,13 @@ var ContactForm = React.createClass({
     this.putUrl = this.props.model && this.props.model.id && "/contacts/" + this.props.model.id + ".json";
     var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
     var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
+    var className = compact ? 'CompactFormInput' : 'FormInput';
+    var formClasses = classNames({
+      'FormContainer--leftAligned': true,
+      'compact': this.props.compact
+    });
     return (
-      <div className='FormContainer--leftAligned'>
+      <div className={formClasses}>
         <Form mapping={this.mapInputs}
               authToken={this.props.authToken}
               onSubmit={submitCallback}
@@ -103,19 +124,22 @@ var ContactForm = React.createClass({
             type='text'
             label='Name*'
             value={contact.name}
+            className={className}
             required
           />
-          <FormSelectInput
+          <DropdownInput
+            options={this.typeOptions}
+            value={this.state.category}
             id='contact_type'
             name='category'
-            className='SelectInput'
             label='Type*'
-            options={this.typeOptions}
-            value={contact.category || 1}
-            onChangeCallback={this.contactTypeOnChange}
+            handleContactChange={this.contactTypeOnChange}
+            className={className}
+            dropdownOptionsClass={compact ? 'DropdownMenu-options compact' : 'DropdownMenu-options'}
+            dropdownItemClass={compact ? 'DropdownMenu-item compact' : 'DropdownMenu-item'}
             required
           />
-          { this.vendorOrganizationField(this.state.category, contact, this.props.disableForm) }
+          {this.vendorOrganizationField(contact, className)}
           <FormInput
             id='contact_email'
             name='email'
@@ -123,6 +147,7 @@ var ContactForm = React.createClass({
             type='text'
             label='Email'
             value={contact.email}
+            className={className}
           />
           <FormInput
             id='contact_phone'
@@ -131,6 +156,7 @@ var ContactForm = React.createClass({
             type='tel'
             label='Phone'
             value={contact.phone}
+            className={className}
           />
           <TextAreaInput
             id='contact_description'
@@ -140,6 +166,7 @@ var ContactForm = React.createClass({
             placeholder='What else do you need to know?'
             value={contact.description}
             formId='contact_form'
+            className={className}
           />
           {this.renderFormTwoButtons(primaryButtonText, 'Cancel')}
         </Form>

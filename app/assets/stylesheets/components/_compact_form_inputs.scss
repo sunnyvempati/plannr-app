@@ -1,0 +1,42 @@
+.CompactFormInput {
+  width: 100%;
+  height: $size-increment*3;
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: $size-increment*3;
+  padding-top: $size-increment*3;
+  &-textarea {
+    height: 100%;
+  }
+  & label {
+    padding-right: $size-increment*4;
+    width: 100%;
+    color: $black-three-fourths;
+    @include font($caption-font, normal, 20);
+  }
+  & textarea {
+    @include font($body-1-font, normal, 0);
+    width: 100%;
+    background-color: transparent;
+    border: 1px none transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    resize: none;
+  }
+}
+
+.CompactFormInput-field {
+  @include font($body-1-font, normal, 10);
+  width: 100%;
+  background-color: transparent;
+  color: #000000;
+  border: 1px none transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  padding-bottom: $size-increment / 2;
+  &.is-invalid {
+    border-bottom: 1px solid red;
+  }
+}
+
+.CompactFormInput-fieldErrorMessage {
+  display: none;
+}
