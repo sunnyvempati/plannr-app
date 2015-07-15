@@ -21,41 +21,11 @@ var TaskForm = React.createClass({
       'task': {
         'name': inputs.name,
         'deadline': inputs.deadline,
-        'event_id': inputs.event_id,
+        'event_id': (this.props.model && this.props.model.event_id) || inputs.event_id,
         'assigned_to_id': inputs.assigned_to,
         'description': inputs.description
       }
     };
-  },
-  getInitialState: function() {
-    return {
-      eventOptions: <option>Loading..</option>
-    };
-  },
-  componentDidMount: function() {
-    this.retrieveEventSelectOptionsAsync();
-  },
-  retrieveEventSelectOptionsAsync: function () {
-    $.get('/events.json', function (result) {
-      var options = [];
-      if (!!result.events) {
-        options = $.map(result.events, function (value, index) {
-          return (<option key={index} value={value.id}>{value.name}</option>);
-        });
-      } else {
-        options = <option>No Events</option>;
-      }
-      this.setState({eventOptions: options});
-    }.bind(this))
-    .fail(function(jqXHR, textStatus, errorThrown){
-      this.setState({eventOptions: <option>Error!!</option>});
-    }.bind(this));
-  },
-  getDefaultOptionValue: function() {
-    var options = this.state.eventOptions;
-    if (options.length > 0) {
-      return options[0].props.value;
-    }
   },
   navigateToTasks: function() {
     location.href = '/tasks';
@@ -99,7 +69,21 @@ var TaskForm = React.createClass({
       return this.renderFormTwoButtons('Edit', 'Cancel');
     }
   },
+  renderEventInput: function(val, className) {
+    if (!val) {
+      return (
+        <TaskEventInput
+          name='event_id'
+          value={val}
+          id='task_event_id'
+          label='Event'
+          className={className}
+          autocompleteClassName={this.props.compact ? 'CompactAutocomplete' : 'Autocomplete'} />
+      );
+    }
+  },
   render: function() {
+    var compact = this.props.compact;
     var task = {};
     if (this.props.model) {
       var model = this.props.model;
@@ -109,7 +93,7 @@ var TaskForm = React.createClass({
         deadline: model.deadline,
         eventId: model.event_id,
         id: model.id,
-        assigned_to: model.assigned_to_id,
+        assignedTo: model.assigned_to_id,
         description: model.description
       };
     }
@@ -146,22 +130,15 @@ var TaskForm = React.createClass({
             value={ !!task.deadline ? moment(task.deadline) : null }
             placeholder="When's it due?"
             minDate={moment()}
+            className={className}
           />
-          <FormSelectInput
-            id='task_event_id'
-            name='event_id'
-            type={eventHidden}
-            label='Event*'
-            options={this.state.eventOptions}
-            value={task.eventId || this.getDefaultOptionValue()}
-            form={'task_form'}
-            disabled={this.props.disableForm}
-            required />
-          <AssignedToInput
-            name='assigned_to'
+          {this.renderEventInput(task.eventId, className)}
+          <TaskAssignedToInput
+            name='assignedTo'
             value={task.assigned_to}
             id='task_assigned_to'
             label='Assign to'
+            className={className}
             autocompleteClassName={this.props.compact ? 'CompactAutocomplete' : 'Autocomplete'} />
           <TextAreaInput
             name="description"
@@ -170,6 +147,7 @@ var TaskForm = React.createClass({
             label="Description"
             disabled={this.props.disableForm}
             placeholder="How would you describe this task?"
+            className={className}
           />
           {this.renderButtonList()}
         </Form>

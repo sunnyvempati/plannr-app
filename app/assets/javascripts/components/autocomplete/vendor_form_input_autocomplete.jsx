@@ -1,7 +1,6 @@
 var VendorFormInputAutocomplete = React.createClass({
   mixins: [
     Formsy.Mixin,
-    AutocompleteBoldItem,
     AutocompleteRenderNew,
     FormInputClassesMixin,
     React.addons.PureRenderMixin
