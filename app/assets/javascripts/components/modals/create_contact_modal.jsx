@@ -4,7 +4,7 @@ var CreateContactModal = React.createClass({
     var payload = {event_contact: {contact_id: result.contact.id}};
     Utils.post("contacts", payload, function(result) {
       this.closeModal();
-      this.setTimeout(this.props.onAssociation(result.event_contact_with_contact, 100));
+      this.props.onAssociation(result.event_contact_with_contact);
     }.bind(this))
   },
   renderModalContent: function() {
