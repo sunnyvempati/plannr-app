@@ -67,12 +67,14 @@ var ClientInput = React.createClass({
   },
   renderSelectedClient: function() {
     return (
-      <div className="Autocomplete-picked" onClick={this.editClient}>
-        <div className="Autocomplete-pickedName">
-          {this.state.clientName}
-        </div>
-        <div className="Autocomplete-edit">
-          <i className="fa fa-pencil"></i>
+      <div className="FormInput-field">
+        <div className="Autocomplete-picked" onClick={this.editClient}>
+          <div className="Autocomplete-pickedName">
+            {this.state.clientName}
+          </div>
+          <div className="Autocomplete-edit">
+            <i className="fa fa-pencil"></i>
+          </div>
         </div>
       </div>
     );

@@ -50,12 +50,14 @@ var AssignedToInput = React.createClass({
   },
   renderAssigned: function() {
     return (
-      <div className="Autocomplete-picked" onClick={this.editAssignedTo}>
-        <div className="Autocomplete-pickedName">
-          {this.state.assignedToName}
-        </div>
-        <div className="Autocomplete-edit">
-          <i className="fa fa-pencil"></i>
+      <div className="FormInput-field">
+        <div className="Autocomplete-picked" onClick={this.editAssignedTo}>
+          <div className="Autocomplete-pickedName">
+            {this.state.assignedToName}
+          </div>
+          <div className="Autocomplete-edit">
+            <i className="fa fa-pencil"></i>
+          </div>
         </div>
       </div>
     );

@@ -167,7 +167,6 @@ var TaskForm = React.createClass({
             name="description"
             form={id}
             value={task.description}
-            className="TextAreaInput"
             label="Description"
             disabled={this.props.disableForm}
             placeholder="How would you describe this task?"
