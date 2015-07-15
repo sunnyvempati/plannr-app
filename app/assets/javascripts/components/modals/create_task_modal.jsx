@@ -24,6 +24,8 @@ var CreateTaskModal = React.createClass({
                 onSuccess={this.onSuccess}
                 authToken={this.props.authToken}
                 routeVerb='POST'
+                compact={true}
+                onSecondaryClick={this.closeModal}
                 model={this.props.model} />
             </div>
           </div>

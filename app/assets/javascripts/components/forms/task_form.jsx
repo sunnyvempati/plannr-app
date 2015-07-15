@@ -10,6 +10,11 @@ var TaskForm = React.createClass({
     model: React.PropTypes.object.isRequired,
   },
   url: '/tasks.json',
+  getDefaultProps: function() {
+    return {
+      compact: false
+    };
+  },
   mapInputs: function(inputs) {
     return {
       'authenticity_token': inputs.authenticity_token,
@@ -112,8 +117,13 @@ var TaskForm = React.createClass({
     var id = 'task_form';
     var eventHidden = !task.eventId ? "" : "hidden";
 
+    var className = compact ? 'CompactFormInput' : 'FormInput';
+    var formClasses = classNames({
+      'FormContainer--leftAligned': true,
+      'compact': this.props.compact
+    });
     return (
-      <div className='FormContainer--leftAligned'>
+      <div className={formClasses}>
         <Form mapping={this.mapInputs}
               onSubmit={this.formatDateAndSubmit}
               onValid={this.enableButton}
@@ -128,6 +138,7 @@ var TaskForm = React.createClass({
             label='Name*'
             value={task.name}
             placeholder='What is the name of your task?'
+            className={className}
             required />
           <DatePickerInput
             name="deadline"
@@ -150,7 +161,8 @@ var TaskForm = React.createClass({
             name='assigned_to'
             value={task.assigned_to}
             id='task_assigned_to'
-            label='Assign to' />
+            label='Assign to'
+            autocompleteClassName={this.props.compact ? 'CompactAutocomplete' : 'Autocomplete'} />
           <TextAreaInput
             name="description"
             form={id}
