@@ -3,12 +3,24 @@
   height: $input-height-with-label;
   padding-top: $input-ptop;
   padding-bottom: $input-pbottom;
-  &.is-hidden {
-    display: none;
-  }
   &-textarea {
-    @extend .FormInput;
     height: $grid-increment * 2;
+  }
+  & label {
+    display: block;
+    padding-bottom: $size-increment;
+    color: $black-half;
+    @include font($caption-font, normal, 20);
+  }
+
+  & textarea {
+    @include font($subheader-font, normal, 10);
+    width: 100%;
+    background-color: transparent;
+    border: 1px none transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    resize: none;
+    height: $grid-increment;
   }
 }
 
@@ -34,7 +46,7 @@
 
 .FormInput-fieldErrorMessage {
   color: red;
-  font-size: 12px;
+  @include font($caption-font, normal, 0);
 }
 
 .SearchInput {
@@ -42,19 +54,3 @@
   width: 400px;
 }
 
-form label {
-  display: block;
-  padding-bottom: $size-increment;
-  color: $black-half;
-  @include font($caption-font, normal, 20);
-}
-
-form textarea {
-  @include font($subheader-font, normal, 10);
-  width: 100%;
-  background-color: transparent;
-  border: 1px none transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  resize: none;
-  height: $grid-increment;
-}

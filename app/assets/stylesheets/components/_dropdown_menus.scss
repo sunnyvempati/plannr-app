@@ -11,7 +11,7 @@
   display: flex;
   flex-flow: column nowrap;
   &.default {
-    width: 300px;
+    // width: 300px;
   }
   &.is-leftAligned {
     left: 0;
@@ -30,6 +30,10 @@
   display: flex;
   align-items: center;
   padding: 8px 8px 8px 24px;
+  &.compact {
+    padding: 8px;
+    @include font($body-1-font, normal, 0);
+  }
   &:hover {
     background-color: #cccccc;
     cursor: pointer;

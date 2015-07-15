@@ -23,19 +23,30 @@ var EventContactAutocomplete = React.createClass({
       this.setState({contacts: contacts});
     }.bind(this));
   },
-  addContactToEvent: function(contact, term) {
-    var eventContactPayload = contact.id == -1 ? {name: term} : {contact_id: contact.id};
-    var payload = {event_contact: eventContactPayload};
-    $.post("contacts", payload, function(result) {
-      this.props.onAssociation(result.event_contact_with_contact);
-    }.bind(this))
+  itemSelected: function(contact, term) {
+    if (contact.id == -1) {
+      var payload = {name: term};
+      var props = {
+        model: payload,
+        onAssociation: this.props.onAssociation,
+        authToken: this.props.authToken
+      }
+      var modal = React.createElement(CreateContactModal, props);
+      React.render(modal, document.getElementById('modal'));
+    }
+    else {
+      var payload = {event_contact: {contact_id: contact.id}};
+      Utils.post("contacts", payload, function(result) {
+        this.props.onAssociation(result.event_contact_with_contact);
+      }.bind(this))
+    }
   },
   render: function() {
     return (
       <Autocomplete name="contact"
                     retrieveData={this.retrieveContacts}
                     data={this.state.contacts}
-                    itemSelected={this.addContactToEvent}
+                    itemSelected={this.itemSelected}
                     placeholder="Add contact to event..."
                     renderItem={this.renderItem} />
     );

@@ -8,7 +8,8 @@ var Autocomplete = React.createClass({
   },
   getDefaultProps: function() {
     return {
-      placeholder: "Start typing..."
+      placeholder: "Start typing...",
+      className: "Autocomplete"
     };
   },
   mixins: [AutocompleteBoldItem],
@@ -81,11 +82,11 @@ var Autocomplete = React.createClass({
   },
   render: function() {
     return (
-      <div className="Autocomplete">
+      <div className={this.props.className}>
         <input placeholder={this.props.placeholder}
                onFocus={this.onFocus}
                onChange={this.onChange}
-               className="Autocomplete-input"
+               className={this.props.className + "-input"}
                onKeyDown={this.keyDown}
                onBlur={this.onBlur}
                ref="autocompleteInput">

@@ -15,7 +15,6 @@ var ContactCards = {
   renderContactInfo: function(contact) {
     var emailHref = "mailto:" + contact.email;
     var telHref = "tel:+1" + contact.phone;
-    console.log(contact.company);
     return (
       <div className="Card">
         <div className="Card-title">

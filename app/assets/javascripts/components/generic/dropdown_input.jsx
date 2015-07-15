@@ -1,5 +1,15 @@
 var DropdownInput = React.createClass({
-  mixins: [Formsy.Mixin, React.addons.PureRenderMixin],
+  mixins: [
+    Formsy.Mixin,
+    React.addons.PureRenderMixin,
+    FormInputClassesMixin
+  ],
+  getDefaultProps: function() {
+    return {
+      dropdownOptionsClass: 'DropdownMenu-options',
+      dropdownItemClass: 'DropdownMenu-item'
+    };
+  },
   getInitialState: function() {
     return {
       open: false
@@ -9,37 +19,40 @@ var DropdownInput = React.createClass({
     this.setState({open: true});
   },
   changeValue: function(o) {
-    this.setValue(o.value);
     this.setState({open: false});
     this.props.handleContactChange(o.value);
   },
-  renderInput: function() {
+  renderInput: function(className) {
     var activeItem = this.getActiveItem();
     return (
-      <div className="Autocomplete-picked" onClick={this.openDropdown}>
-        <div className="Autocomplete-pickedName">
-          {activeItem.display}
-        </div>
-        <div className="Autocomplete-edit">
-          <i className="fa fa-caret-down"></i>
+      <div className={classNames(className)}>
+        <div className="Autocomplete-picked" onClick={this.openDropdown}>
+          <div className="Autocomplete-pickedName">
+            {activeItem.display}
+          </div>
+          <div className="Autocomplete-edit">
+            <i className="fa fa-caret-down"></i>
+          </div>
         </div>
       </div>
     );
   },
   renderDropdown: function() {
     var options = this.props.options.map(function(o) {
-      var itemClasses = classNames({
-        'DropdownMenu-item': true,
-        'active': true
-      })
+      var itemClasses = {};
+      itemClasses[this.props.dropdownItemClass] = true;
       return (
-        <div className="DropdownMenu-item" onClick={this.changeValue.bind(this, o)} key={o.value}>
+        <div className={classNames(itemClasses)} onClick={this.changeValue.bind(this, o)} key={o.value}>
           {o.display}
         </div>
       )
     }.bind(this));
+    var ddContainerClasses = {
+      'is-fullWidth': true,
+    };
+    ddContainerClasses[this.props.dropdownOptionsClass] = true;
     return (
-      <div className="DropdownMenu-options is-fullWidth">
+      <div className={classNames(ddContainerClasses)}>
         {options}
       </div>
     );
@@ -55,9 +68,10 @@ var DropdownInput = React.createClass({
     return activeItem;
   },
   render: function() {
-    var inputRender = this.state.open ? this.renderDropdown() : this.renderInput()
+    var classes = this.getClassNames();
+    var inputRender = this.state.open ? this.renderDropdown() : this.renderInput(classes.inputField);
     return (
-      <div className="FormInput">
+      <div className={classNames(classes.inputContainer)}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>

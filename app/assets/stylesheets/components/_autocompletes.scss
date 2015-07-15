@@ -1,13 +1,23 @@
 .Autocomplete {
   width: 100%;
+  position: relative;
+}
+
+.CompactAutocomplete {
+  @extend .Autocomplete;
 }
 
 .Autocomplete-input {
   @extend .FormInput-field;
 }
 
+.CompactAutocomplete-input {
+  @extend .CompactFormInput-field
+}
+
 .Autocomplete-results {
-  position: relative;
+  position: absolute;
+  width: 100%;
   z-index: $autocomplete-results-z-index;
   &.hidden {
     display: none;
@@ -25,8 +35,12 @@
   }
 }
 
+.CompactAutocomplete-resultsItem {
+  @extend .Autocomplete-resultsItem;
+  @include font($body-1-font, normal, 0);
+}
+
 .Autocomplete-picked {
-  @extend .FormInput-field;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
