@@ -10,7 +10,7 @@
   }
   & label {
     padding-right: $size-increment*4;
-    width: 25%;
+    width: 100%;
     color: $black-three-fourths;
     @include font($caption-font, normal, 20);
   }

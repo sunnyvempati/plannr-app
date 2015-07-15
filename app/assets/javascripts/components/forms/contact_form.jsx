@@ -103,11 +103,11 @@ var ContactForm = React.createClass({
     this.putUrl = this.props.model && this.props.model.id && "/contacts/" + this.props.model.id + ".json";
     var submitCallback = this.props.routeVerb == "POST" ? this.postForm : this.putForm;
     var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
-    var className = compact ? 'CompactFormInput' : undefined;
+    var className = compact ? 'CompactFormInput' : 'FormInput';
     var formClasses = classNames({
       'FormContainer--leftAligned': true,
       'compact': this.props.compact
-    })
+    });
     return (
       <div className={formClasses}>
         <Form mapping={this.mapInputs}

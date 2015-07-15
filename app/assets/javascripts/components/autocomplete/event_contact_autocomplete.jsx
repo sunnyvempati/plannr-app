@@ -38,7 +38,7 @@ var EventContactAutocomplete = React.createClass({
       var payload = {event_contact: {contact_id: contact.id}};
       Utils.post("contacts", payload, function(result) {
         this.props.onAssociation(result.event_contact_with_contact);
-      }.bind(this))
+      }.bind(this));
     }
   },
   render: function() {

@@ -1,5 +1,11 @@
 var PrimaryContactInput = React.createClass({
-  mixins: [Formsy.Mixin, AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [
+    Formsy.Mixin,
+    AutocompleteBoldItem,
+    AutocompleteRenderNew,
+    FormInputClassesMixin,
+    React.addons.PureRenderMixin
+  ],
   getInitialState: function() {
     return {
       contactSelected: false,
@@ -62,25 +68,29 @@ var PrimaryContactInput = React.createClass({
                     itemSelected={this.addToForm}
                     data={this.state.contacts}
                     focus={this.state.focus}
-                    renderItem={this.renderItem} />
+                    renderItem={this.renderItem}
+                    className={this.props.autocompleteClassName} />
     );
   },
-  renderSelectedContact: function() {
+  renderSelectedContact: function(className) {
     return (
-      <div className="Autocomplete-picked" onClick={this.editContact}>
-        <div className="Autocomplete-pickedName">
-          {this.state.contactName}
-        </div>
-        <div className="Autocomplete-edit">
-          <i className="fa fa-pencil"></i>
+      <div className={classNames(className)}>
+        <div className="Autocomplete-picked" onClick={this.editContact}>
+          <div className="Autocomplete-pickedName">
+            {this.state.contactName}
+          </div>
+          <div className="Autocomplete-edit">
+            <i className="fa fa-pencil"></i>
+          </div>
         </div>
       </div>
     );
   },
   render: function() {
-    var inputRender = this.state.contactSelected ? this.renderSelectedContact() : this.renderAutocomplete();
+    var classes = this.getClassNames();
+    var inputRender = this.state.contactSelected ? this.renderSelectedContact(classes.inputField) : this.renderAutocomplete();
     return (
-      <div className="FormInput">
+      <div className={classNames(classes.inputContainer)}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
         {inputRender}
       </div>
