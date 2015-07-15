@@ -109,7 +109,6 @@ var EventForm = React.createClass({
             name="description"
             form={id}
             value={this.props.model.description}
-            className="TextAreaInput"
             label="Description"
             placeholder="What else do you need to know?"
           />
