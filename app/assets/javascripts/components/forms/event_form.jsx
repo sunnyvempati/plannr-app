@@ -90,7 +90,7 @@ var EventForm = React.createClass({
             value={this.props.model.location}
             placeholder="Where will it be held?"
           />
-          <ClientInput
+          <EventClientInput
             name='client'
             value={this.props.model.client_id}
             id='event_client'

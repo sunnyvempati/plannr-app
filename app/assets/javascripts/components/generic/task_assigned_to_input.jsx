@@ -5,7 +5,9 @@ var TaskAssignedToInput = React.createClass({
   ],
   retrieveItem: function(id) {
     Utils.get('/users/' + id + '.json', {}, function(result) {
-      this.setState({itemSet: true, itemDisplay: result.user.name});
+      if (this.isMounted()) {
+        this.setState({itemSet: true, itemDisplay: result.user.name});
+      }
     }.bind(this));
   },
   retrieveData: function(term) {

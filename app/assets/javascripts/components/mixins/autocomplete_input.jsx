@@ -28,7 +28,7 @@ var AutocompleteInput = {
                     className={this.props.autocompleteClassName} />
     );
   },
-  renderItem: function(className) {
+  renderSelectedItem: function(className) {
     return (
       <div className={classNames(className)}>
         <div className="Autocomplete-picked" onClick={this.editField}>
@@ -44,7 +44,7 @@ var AutocompleteInput = {
   },
   render: function() {
     var classes = this.getClassNames();
-    var inputRender = this.state.itemSet ? this.renderItem(classes.inputField) : this.renderAutocomplete();
+    var inputRender = this.state.itemSet ? this.renderSelectedItem(classes.inputField) : this.renderAutocomplete();
     return (
       <div className={classNames(classes.inputContainer)}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
