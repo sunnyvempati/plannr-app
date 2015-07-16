@@ -1,5 +1,5 @@
 var EventContactAutocomplete = React.createClass({
-  mixins: [AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [AutocompleteBoldItem],
   propTypes: {
     onAssociation: React.PropTypes.func.isRequired
   },
@@ -18,7 +18,8 @@ var EventContactAutocomplete = React.createClass({
     $.get("/contacts.json", params, function(result) {
       var contacts = result.contacts;
       if (contacts.length == 0) {
-        contacts.push(this.getNewItem("contact"));
+        var newContact = {name: "Create new contact",id: -1};
+        contacts = [newContact];
       }
       this.setState({contacts: contacts});
     }.bind(this));

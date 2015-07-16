@@ -1,5 +1,5 @@
 var EventVendorAutocomplete = React.createClass({
-  mixins: [AutocompleteBoldItem, AutocompleteRenderNew],
+  mixins: [AutocompleteBoldItem],
   propTypes: {
     onAssociation: React.PropTypes.func.isRequired
   },
@@ -18,7 +18,8 @@ var EventVendorAutocomplete = React.createClass({
     $.get("/vendors.json", params, function(result) {
       var vendors = result.vendors;
       if (vendors.length == 0) {
-        vendors.push(this.getNewItem("vendor"));
+        var newVendor = {name: "Create new vendor",id: -1};
+        vendors = [newVendor];
       }
       this.setState({vendors: vendors})
     }.bind(this));
