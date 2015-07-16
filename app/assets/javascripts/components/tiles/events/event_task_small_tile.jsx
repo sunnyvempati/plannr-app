@@ -1,11 +1,13 @@
 var EventTaskSmallTile = React.createClass({
-  mixins: [ToastMessages],
   getInitialState: function () {
     return {
       tasks: null
     };
   },
   componentDidMount: function () {
+    this.getTasks();
+  },
+  getTasks: function() {
     var params = {
       filter_sort: {
         with_event_id: this.props.eventId
@@ -57,13 +59,11 @@ var EventTaskSmallTile = React.createClass({
       )
     }
   },
-  quickCreateTask: function(params) {
-    $.post("/tasks.json", params, function(result) {
-      this.toast("Successfully created task.");
-      var oldTasks = this.state.tasks;
-      oldTasks.push(result.task);
-      this.setState({tasks: oldTasks});
-    }.bind(this));
+  onAdd: function(task) {
+    ToastMessages.toast("Successfully created task for event.");
+    var oldTasks = this.state.tasks;
+    oldTasks.push(task);
+    this.setState({tasks: oldTasks});
   },
   render: function () {
     var inputClasses = classNames({
@@ -80,7 +80,7 @@ var EventTaskSmallTile = React.createClass({
         </div>
         <div className="Task-content">
           <div className="TaskContent-quickAdd">
-            <TaskQuickAddInput onAdd={this.quickCreateTask} eventId={this.props.eventId} />
+            <TaskQuickAddInput onAdd={this.onAdd} eventId={this.props.eventId} />
           </div>
           {this.getTaskContent()}
         </div>

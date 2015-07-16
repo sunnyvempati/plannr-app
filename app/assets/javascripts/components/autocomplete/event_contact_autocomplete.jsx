@@ -31,7 +31,7 @@ var EventContactAutocomplete = React.createClass({
         onAssociation: this.props.onAssociation,
         authToken: this.props.authToken
       }
-      var modal = React.createElement(CreateContactModal, props);
+      var modal = React.createElement(EditContactModal, props);
       React.render(modal, document.getElementById('modal'));
     }
     else {

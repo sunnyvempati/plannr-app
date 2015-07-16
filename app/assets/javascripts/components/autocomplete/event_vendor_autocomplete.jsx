@@ -31,7 +31,7 @@ var EventVendorAutocomplete = React.createClass({
         onAssociation: this.props.onAssociation,
         authToken: this.props.authToken
       }
-      var modal = React.createElement(CreateVendorModal, props);
+      var modal = React.createElement(EditVendorModal, props);
       React.render(modal, document.getElementById('modal'));
     }
     else {

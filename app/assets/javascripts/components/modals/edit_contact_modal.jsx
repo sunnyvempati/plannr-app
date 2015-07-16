@@ -1,10 +1,10 @@
-var CreateVendorModal = React.createClass({
+var EditContactModal = React.createClass({
   mixins: [Modal],
   onSuccess: function(result) {
-    var payload = {event_vendor: {vendor_id: result.vendor.id}};
-    Utils.post("vendors", payload, function(result) {
+    var payload = {event_contact: {contact_id: result.contact.id}};
+    Utils.post("contacts", payload, function(result) {
       this.closeModal();
-      this.props.onAssociation(result.event_vendor_with_vendor);
+      this.props.onAssociation(result.event_contact_with_contact);
     }.bind(this))
   },
   renderModalContent: function() {
@@ -13,16 +13,16 @@ var CreateVendorModal = React.createClass({
         {this.renderCloseModal()}
         <div className="EntityModal-header">
           <div className="EntityModal-headerIcon">
-            <i className="fa fa-truck"></i>
+            <i className="fa fa-user"></i>
           </div>
           <div className="EntityModal-title">
-            <h1>Create Vendor</h1>
+            <h1>Edit Contact</h1>
           </div>
         </div>
         <div className="EntityModal-content">
           <div className="Card">
             <div className="Card-content">
-              <VendorForm
+              <ContactForm
                 onSuccess={this.onSuccess}
                 authToken={this.props.authToken}
                 routeVerb='POST'

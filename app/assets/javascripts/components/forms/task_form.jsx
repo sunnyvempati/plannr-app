@@ -22,7 +22,7 @@ var TaskForm = React.createClass({
         'name': inputs.name,
         'deadline': inputs.deadline,
         'event_id': (this.props.model && this.props.model.event_id) || inputs.event_id,
-        'assigned_to_id': inputs.assigned_to,
+        'assigned_to_id': inputs.assignedTo,
         'description': inputs.description
       }
     };
