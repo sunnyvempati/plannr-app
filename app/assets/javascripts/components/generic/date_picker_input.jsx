@@ -1,5 +1,9 @@
 var DatePickerInput = React.createClass({
-  mixins: [Formsy.Mixin],
+  mixins: [
+    Formsy.Mixin,
+    React.addons.PureRenderMixin,
+    FormInputClassesMixin
+  ],
   changeValue: function(date) {
     this.setValue(date);
     if (this.props.onValueSet) {
@@ -7,19 +11,18 @@ var DatePickerInput = React.createClass({
     }
   },
   render: function() {
-    var inputClasses = classNames({
-      'FormInput-field': true,
-      'is-invalid': !this.isValid()
-    });
+    var classes = this.getClassNames();
     return (
-      <div className='FormInput'>
+      <div className={classNames(classes.inputContainer)}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
-        <DatePicker selected={this.getValue()}
-                    placeholderText={this.props.placeholder}
-                    dateFormat="MM/DD/YYYY"
-                    onChange={this.changeValue}
-                    minDate={this.props.minDate}
-        />
+        <div className={classNames(classes.inputField)}>
+          <DatePicker selected={this.getValue()}
+                      placeholderText={this.props.placeholder}
+                      dateFormat="MM/DD/YYYY"
+                      onChange={this.changeValue}
+                      minDate={this.props.minDate}
+          />
+        </div>
         <span className="FormInput-fieldErrorMessage">{this.getErrorMessage()}</span>
       </div>
     );

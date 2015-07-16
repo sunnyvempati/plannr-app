@@ -1,4 +1,4 @@
-var CreateContactModal = React.createClass({
+var EditContactModal = React.createClass({
   mixins: [Modal],
   onSuccess: function(result) {
     var payload = {event_contact: {contact_id: result.contact.id}};
@@ -16,7 +16,7 @@ var CreateContactModal = React.createClass({
             <i className="fa fa-user"></i>
           </div>
           <div className="EntityModal-title">
-            <h1>Create Contact</h1>
+            <h1>Edit Contact</h1>
           </div>
         </div>
         <div className="EntityModal-content">

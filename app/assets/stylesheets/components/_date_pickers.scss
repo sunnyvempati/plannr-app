@@ -124,5 +124,6 @@
 }
 
 .datepicker__input {
-  @extend .FormInput-field;
+  background-color: transparent;
+  border: none;
 }

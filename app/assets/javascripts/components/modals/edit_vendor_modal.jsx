@@ -1,9 +1,11 @@
-var CreateTaskModal = React.createClass({
+var EditVendorModal = React.createClass({
   mixins: [Modal],
-  onSuccess: function(result, createNew) {
-    this.closeModal();
-    this.props.refreshData();
-    if (createNew) this.props.reopenCreateTaskModal();
+  onSuccess: function(result) {
+    var payload = {event_vendor: {vendor_id: result.vendor.id}};
+    Utils.post("vendors", payload, function(result) {
+      this.closeModal();
+      this.props.onAssociation(result.event_vendor_with_vendor);
+    }.bind(this))
   },
   renderModalContent: function() {
     return (
@@ -11,19 +13,21 @@ var CreateTaskModal = React.createClass({
         {this.renderCloseModal()}
         <div className="EntityModal-header">
           <div className="EntityModal-headerIcon">
-            <i className="fa fa-user"></i>
+            <i className="fa fa-truck"></i>
           </div>
           <div className="EntityModal-title">
-            <h1>Create Task</h1>
+            <h1>Create Vendor</h1>
           </div>
         </div>
         <div className="EntityModal-content">
           <div className="Card">
             <div className="Card-content">
-              <TaskForm
+              <VendorForm
                 onSuccess={this.onSuccess}
                 authToken={this.props.authToken}
                 routeVerb='POST'
+                compact={true}
+                onSecondaryClick={this.closeModal}
                 model={this.props.model} />
             </div>
           </div>

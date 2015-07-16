@@ -61,7 +61,7 @@ var ContactForm = React.createClass({
     }
     else {
       return (
-        <VendorFormInputAutocomplete
+        <ContactVendorInput
           name='vendor'
           value={contact.vendor_id}
           id='contact_vendor'

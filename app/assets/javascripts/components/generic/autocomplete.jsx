@@ -56,8 +56,15 @@ var Autocomplete = React.createClass({
     });
     var results = this.props.data.map(function(item) {
       if (!item.name) return true;
-      var itemName = this.formatMatchedCharacters(item.name, term);
-      var defaultRenderItem = <div className="Autocomplete-resultsItem" dangerouslySetInnerHTML={{__html: itemName}}></div>;
+      var itemName = item.name;
+      if (item.id != -1) {
+        itemName = this.formatMatchedCharacters(itemName, term);
+      }
+      var itemClasses = classNames({
+        'Autocomplete-resultsItem': true,
+        'u-italics': item.id == -1
+      });
+      var defaultRenderItem = <div className={itemClasses} dangerouslySetInnerHTML={{__html: itemName}}></div>;
       var renderItem = !!this.props.renderItem ? this.props.renderItem(item, term) : defaultRenderItem;
       return (
         <div className="Button--autocomplete"

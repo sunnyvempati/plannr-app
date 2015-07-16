@@ -67,15 +67,15 @@ var EventTasksTable = React.createClass({
       {name: "My Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2, with_assigned_to: this.props.currentUserId})},
     ]
   },
-
   openCreateTaskModal: function() {
     var props = {
       model: {event_id: this.props.eventId},
       authToken: this.props.authToken,
-      refreshData: this.getTableData.bind(this, {status: 1}),
-      reopenCreateTaskModal: this.openCreateTaskModal
+      onSuccess: this.onTaskSuccess,
+      reopenCreateTaskModal: this.openCreateTaskModal,
+      routeVerb: 'POST'
     }
-    var modal = React.createElement(CreateTaskModal, props);
+    var modal = React.createElement(EditTaskModal, props);
     React.render(modal, document.getElementById('modal'));
   },
   openEditModal: function(task_id) {
@@ -84,11 +84,15 @@ var EventTasksTable = React.createClass({
       var props = {
         model: $.extend({event_id: this.props.eventId}, result.task),
         authToken: this.props.authToken,
-        refreshData: this.getTableData.bind(this, {status: 1})
-      }
+        onSuccess: this.onTaskSuccess,
+        routeVerb: 'PUT'
+      };
       var modal = React.createElement(EditTaskModal, props);
       React.render(modal, document.getElementById('modal'));
     }.bind(this));
+  },
+  onTaskSuccess: function(result) {
+    this.getTableData({status: 1});
   },
   goToTask: function(data) {
     this.openEditModal(data.id);
