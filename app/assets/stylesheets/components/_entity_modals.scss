@@ -15,6 +15,7 @@
 .EntityModal-header {
   display: flex;
   align-items: center;
+  padding-right: $size-increment*4;
 }
 
 .EntityModal-headerIcon {

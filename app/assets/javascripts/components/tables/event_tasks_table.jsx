@@ -25,6 +25,10 @@ var EventTasksTable = React.createClass({
       }
     }.bind(this))
   },
+  renderModal: function(props, modalName) {
+    var modal = React.createElement(modalName, props);
+    React.render(modal, document.getElementById('modal'));
+  },
   getColumns: function () {
     return [
       {name: "name", grow: 10, header: "Name"},
@@ -75,27 +79,29 @@ var EventTasksTable = React.createClass({
       reopenCreateTaskModal: this.openCreateTaskModal,
       routeVerb: 'POST'
     }
-    var modal = React.createElement(EditTaskModal, props);
-    React.render(modal, document.getElementById('modal'));
+    this.renderModal(props, EditTaskModal);
   },
-  openEditModal: function(task_id) {
-    var url = '/tasks/' + task_id + '.json';
-    Utils.get(url, {}, function(result) {
-      var props = {
-        model: $.extend({event_id: this.props.eventId}, result.task),
-        authToken: this.props.authToken,
-        onSuccess: this.onTaskSuccess,
-        routeVerb: 'PUT'
-      };
-      var modal = React.createElement(EditTaskModal, props);
-      React.render(modal, document.getElementById('modal'));
-    }.bind(this));
+  openTaskModal: function(taskId) {
+    var props = {
+      model: {id: taskId},
+      authToken: this.props.authToken
+    };
+    this.renderModal(props, ShowTaskModal);
+  },
+  openEditModal: function(taskId) {
+    var props = {
+      model: {id: taskId},
+      authToken: this.props.authToken,
+      onSuccess: this.onTaskSuccess,
+      routeVerb: 'PUT'
+    };
+    this.renderModal(props, EditTaskModal);
   },
   onTaskSuccess: function(result) {
     this.getTableData({status: 1});
   },
   goToTask: function(data) {
-    this.openEditModal(data.id);
+    this.openTaskModal(data.id);
   },
   getActionButton: function () {
     return (

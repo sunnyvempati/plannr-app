@@ -1,0 +1,43 @@
+.TaskModal {
+  @extend .EntityModal;
+}
+.TaskModal-header {
+  @extend .EntityModal-header;
+}
+
+.TaskModal-title {
+  @extend .EntityModal-title;
+  padding: 0;
+  letter-spacing: 0;
+  font-size: $title-font;
+}
+
+.TaskModal-contentContainer {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.TaskModal-content {
+  flex: 3;
+  margin: $size-increment*2 $size-increment*2 0 0;
+}
+
+.TaskModal-contentButtonList {
+  margin-top: $size-increment*2;
+  flex: 1;
+}
+
+.TaskModal-descriptionContainer {
+  padding: $size-increment*2 0;
+}
+
+.TaskModal-descriptionTitle {
+  @include font($body-1-font, bold, 20);
+  color: $black-half;
+  padding-bottom: $size-increment*2;
+}
+
+.TaskModal-description {
+  @include font($body-1-font, normal, 0);
+}
+

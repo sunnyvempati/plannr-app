@@ -6,7 +6,7 @@ var TaskForm = React.createClass({
   ],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['PUT']).isRequired,
     model: React.PropTypes.object.isRequired,
   },
   url: '/tasks.json',
@@ -135,7 +135,7 @@ var TaskForm = React.createClass({
           {this.renderEventInput(task.eventId, className)}
           <TaskAssignedToInput
             name='assignedTo'
-            value={task.assigned_to}
+            value={task.assignedTo}
             id='task_assigned_to'
             label='Assign to'
             className={className}

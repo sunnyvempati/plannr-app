@@ -50,6 +50,16 @@
   }
 }
 
+.Button--critical {
+  color: #FFFFFF;
+  background-color: $button-critical-color;
+}
+
+.Button--affirmative {
+  color: #FFFFFF;
+  background-color: $plannr-teal;
+}
+
 .Button--autocomplete {
   padding: 0;
   margin: 0;
@@ -102,3 +112,9 @@
   filter: alpha(opacity=0);
   pointer-events: none;
 }
+
+.TaskActionButton {
+  margin-bottom: $size-increment*2;
+  width: 150px;
+}
+
