@@ -29,6 +29,14 @@ var ShowTaskModal = React.createClass({
     }
     Modal.mount(props, ShowTaskModal);
   },
+  handleDelete: function (id) {
+    var destroyOpts = {destroy_opts: {ids: [id]}};
+    Utils.post('/tasks/mass_delete', destroyOpts, function (success_result) {
+      this.props.onTaskChange();
+      this.closeModal();
+      ToastMessages.toast('Task deleted successfully.');
+    }.bind(this));
+  },
   renderStatusText: function(status) {
     var completed = status == 2;
     var display = completed ? "Completed" : "To do";
@@ -65,13 +73,16 @@ var ShowTaskModal = React.createClass({
       </div>
     )
   },
-  renderActionButtons: function(status) {
+  renderActionButtons: function(task) {
+    var status = task.status;
     return (
       <div className="TaskModal-contentButtonList">
         <Button type="button" className="Button--primary TaskActionButton" onClick={this.openEditModal}>
           Edit
         </Button>
-        <Button type="button" className="Button--critical TaskActionButton">
+        <Button type="button"
+                className="Button--critical TaskActionButton"
+                onClick={this.handleDelete.bind(this, task.id)}>
           Delete
         </Button>
       </div>
@@ -113,7 +124,7 @@ var ShowTaskModal = React.createClass({
               {this.renderTaskInfo(task)}
             </div>
           </div>
-          {this.renderActionButtons(task.status)}
+          {this.renderActionButtons(task)}
         </div>
         <div className="EntityModal-card">
           <div className="Card">
