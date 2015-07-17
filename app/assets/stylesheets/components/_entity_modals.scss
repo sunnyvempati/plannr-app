@@ -38,5 +38,11 @@
 }
 
 .IconWithText {
+  display: flex;
+  align-items: center;
   color: $black-half;
+}
+
+.EntityModal-card {
+  margin-bottom: $size-increment*2;
 }

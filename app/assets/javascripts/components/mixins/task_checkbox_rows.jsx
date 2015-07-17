@@ -6,14 +6,16 @@ var TaskCheckboxRows = {
   },
   handleCheck: function(checked, task_id) {
     var status = checked ? 2 : 1;
-    $.ajax({
-      method: "PUT",
-      url: "/tasks/" + task_id + ".json",
-      data: { task: { id: task_id, status: status }}
-    })
-    .success(function(result) {
+    var url = "/tasks/" + task_id + ".json";
+    var params = {
+      task: {
+        id: task_id,
+        status: status
+      }
+    };
+    Utils.put(url, params, function(result) {
       var statusDisplay = status == 1 ? "To do" : "Completed";
-      this.toast("Task status changed: " + statusDisplay);
+      ToastMessages.toast("Task status changed: " + statusDisplay);
       var newData = this.spliceResults(this.state.tasks, result.task.id);
       this.setState({tasks: newData});
     }.bind(this));

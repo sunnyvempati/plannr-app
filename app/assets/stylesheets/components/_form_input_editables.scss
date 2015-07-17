@@ -1,0 +1,15 @@
+.FormInputEditable {
+  display: flex;
+}
+
+.FormInputEditable-display {
+
+}
+
+.FormInputEditableIcon {
+  padding-left: $size-increment;
+}
+
+.FormInputEditable-input {
+  @extend .Autocomplete-input;
+}

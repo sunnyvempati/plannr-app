@@ -50,6 +50,7 @@ var TaskRow = React.createClass({
     });
     var clickable = this.props.global ? "" : "u-clickable";
     var eventColumn = this.props.global ? this.renderEventColumn() : null;
+    var deadlineIcon = completed ? "" : TaskDeadline.renderDeadlineIcon(data.deadline);
     return (
       <div className={rowClasses}>
         <div className="Table-checkbox u-flexGrow-1">
@@ -59,7 +60,7 @@ var TaskRow = React.createClass({
                          rounded={true} />
         </div>
         <div onClick={this.props.onClick} className={"Table-rowItem u-flexGrow-10 " + clickable}>{data.name}</div>
-        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-1">{TaskDeadline.renderDeadlineIcon(data.deadline)}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-1">{deadlineIcon}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.deadline}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.status}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.assigned_to}</div>

@@ -16,8 +16,7 @@ var EditTaskModal = React.createClass({
   },
   onSuccess: function(result, createNew) {
     this.closeModal();
-    this.props.onSuccess(result.task);
-    if (createNew) this.props.reopenCreateTaskModal();
+    this.props.onSuccess(result.task, createNew);
   },
   renderModalContent: function() {
     var verb = this.props.routeVerb;

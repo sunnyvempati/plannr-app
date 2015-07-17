@@ -25,10 +25,6 @@ var EventTasksTable = React.createClass({
       }
     }.bind(this))
   },
-  renderModal: function(props, modalName) {
-    var modal = React.createElement(modalName, props);
-    React.render(modal, document.getElementById('modal'));
-  },
   getColumns: function () {
     return [
       {name: "name", grow: 10, header: "Name"},
@@ -76,17 +72,17 @@ var EventTasksTable = React.createClass({
       model: {event_id: this.props.eventId},
       authToken: this.props.authToken,
       onSuccess: this.onTaskSuccess,
-      reopenCreateTaskModal: this.openCreateTaskModal,
       routeVerb: 'POST'
     }
-    this.renderModal(props, EditTaskModal);
+    Modal.mount(props, EditTaskModal);
   },
   openTaskModal: function(taskId) {
     var props = {
       model: {id: taskId},
-      authToken: this.props.authToken
+      authToken: this.props.authToken,
+      onTaskChange: this.getTableData.bind(this, {status: 1})
     };
-    this.renderModal(props, ShowTaskModal);
+    Modal.mount(props, ShowTaskModal);
   },
   openEditModal: function(taskId) {
     var props = {
@@ -95,10 +91,11 @@ var EventTasksTable = React.createClass({
       onSuccess: this.onTaskSuccess,
       routeVerb: 'PUT'
     };
-    this.renderModal(props, EditTaskModal);
+    Modal.mount(props, EditTaskModal);
   },
-  onTaskSuccess: function(result) {
+  onTaskSuccess: function(task, createNew) {
     this.getTableData({status: 1});
+    createNew ? this.props.reopenCreateTaskModal() : this.openTaskModal(task.id);
   },
   goToTask: function(data) {
     this.openTaskModal(data.id);
