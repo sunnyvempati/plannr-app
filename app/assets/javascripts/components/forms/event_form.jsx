@@ -95,7 +95,7 @@ var EventForm = React.createClass({
             value={this.props.model.client_id}
             id='event_client'
             label='Client' />
-          <FormInput
+          <CurrencyInput
             name="budget"
             id="event_budget"
             currencyField={true}
