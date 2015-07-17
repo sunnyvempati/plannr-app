@@ -32,6 +32,7 @@
 .EntityModal-content {
   display: flex;
   flex-flow: column nowrap;
+  margin: $size-increment*2 $size-increment*2 0 0;
   >* {
     flex: 1;
   }
@@ -41,8 +42,4 @@
   display: flex;
   align-items: center;
   color: $black-half;
-}
-
-.EntityModal-card {
-  margin-bottom: $size-increment*2;
 }

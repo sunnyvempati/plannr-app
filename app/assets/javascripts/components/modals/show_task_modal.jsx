@@ -120,17 +120,15 @@ var ShowTaskModal = React.createClass({
         </div>
         <div className="TaskModal-contentContainer">
           <div className="TaskModal-content">
-            <div className="EntityModal-card">
-              {this.renderTaskInfo(task)}
-            </div>
+            {this.renderTaskInfo(task)}
           </div>
           {this.renderActionButtons(task)}
         </div>
-        <div className="EntityModal-card">
-          <div className="Card">
-            <div className="Card-content">
-              Comments
-            </div>
+        <div className="Card">
+          <div className="Card-content">
+            <Comments entity="Task"
+                      entity_id={this.state.task.id}
+                      currentUser={this.props.currentUserId} />
           </div>
         </div>
       </div>

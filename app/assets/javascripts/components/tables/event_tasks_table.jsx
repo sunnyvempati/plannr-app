@@ -80,7 +80,8 @@ var EventTasksTable = React.createClass({
     var props = {
       model: {id: taskId},
       authToken: this.props.authToken,
-      onTaskChange: this.getTableData.bind(this, {status: 1})
+      onTaskChange: this.getTableData.bind(this, {status: 1}),
+      currentUserId: this.props.currentUserId
     };
     Modal.mount(props, ShowTaskModal);
   },
