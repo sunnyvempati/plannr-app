@@ -7,7 +7,7 @@ var ContactForm = React.createClass({
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     model: React.PropTypes.object,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['PUT']).isRequired,
     compact: React.PropTypes.bool
   },
   url: '/contacts.json',
