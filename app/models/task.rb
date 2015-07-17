@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  include Commentable
   acts_as_tenant :company
 
   belongs_to :event

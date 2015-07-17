@@ -6,7 +6,7 @@ var VendorForm = React.createClass({
   ],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['GET']).isRequired,
+    routeVerb: React.PropTypes.oneOf(['POST'], ['PUT']).isRequired,
     model: React.PropTypes.object,
     compact: React.PropTypes.bool
   },

@@ -17,9 +17,7 @@
 .Comments-list {
   padding: 24px 0 0 24px;
   margin-right: 104px;
-  margin-bottom: $size-increment*5;
-  height: 300px;
-  overflow-y: auto;
+  margin-bottom: $size-increment;
 }
 
 .Comments-listItem {
@@ -43,7 +41,7 @@
 }
 
 .ListItem-commenter {
-  @include font($title-font, normal, 20);
+  @include font($subheader-font, normal, 20);
   color: $black-half;
 }
 
@@ -91,6 +89,7 @@
 }
 
 .ListItem-text {
+  @include font($body-1-font, normal, 0);
   color: $black-quarter;
   padding-bottom: $size-increment*2;
 }

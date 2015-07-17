@@ -23,8 +23,12 @@ var ShowContactModal = React.createClass({
             </div>
           </div>
           <div className="EntityModal-content">
-            {this.renderContactInfo(contact)}
-            {this.renderDescription(contact.description)}
+            <div className="EntityModal-card">
+              {this.renderContactInfo(contact)}
+            </div>
+            <div className="EntityModal-card">
+              {this.renderDescription(contact.description)}
+            </div>
           </div>
         </div>
       )

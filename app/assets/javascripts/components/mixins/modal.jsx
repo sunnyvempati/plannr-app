@@ -20,6 +20,10 @@ var Modal = {
       </div>
     );
   },
+  mount: function(props, modalName) {
+    var modal = React.createElement(modalName, props);
+    React.render(modal, document.getElementById('modal'));
+  },
   render: function() {
     return (
       <div className="ModalContainer">

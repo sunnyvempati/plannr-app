@@ -15,6 +15,7 @@
 .EntityModal-header {
   display: flex;
   align-items: center;
+  padding-right: $size-increment*4;
 }
 
 .EntityModal-headerIcon {
@@ -31,11 +32,14 @@
 .EntityModal-content {
   display: flex;
   flex-flow: column nowrap;
+  margin: $size-increment*2 $size-increment*2 0 0;
   >* {
     flex: 1;
   }
 }
 
 .IconWithText {
+  display: flex;
+  align-items: center;
   color: $black-half;
 }
