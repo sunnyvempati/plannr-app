@@ -67,40 +67,6 @@ var EventTasksTable = React.createClass({
       {name: "My Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2, with_assigned_to: this.props.currentUserId})},
     ]
   },
-  openCreateTaskModal: function() {
-    var props = {
-      model: {event_id: this.props.eventId},
-      authToken: this.props.authToken,
-      onSuccess: this.onTaskSuccess,
-      routeVerb: 'POST'
-    }
-    Modal.mount(props, EditTaskModal);
-  },
-  openTaskModal: function(taskId) {
-    var props = {
-      model: {id: taskId},
-      authToken: this.props.authToken,
-      onTaskChange: this.getTableData.bind(this, {status: 1}),
-      currentUserId: this.props.currentUserId
-    };
-    Modal.mount(props, ShowTaskModal);
-  },
-  openEditModal: function(taskId) {
-    var props = {
-      model: {id: taskId},
-      authToken: this.props.authToken,
-      onSuccess: this.onTaskSuccess,
-      routeVerb: 'PUT'
-    };
-    Modal.mount(props, EditTaskModal);
-  },
-  onTaskSuccess: function(task, createNew) {
-    this.getTableData({status: 1});
-    createNew ? this.props.reopenCreateTaskModal() : this.openTaskModal(task.id);
-  },
-  goToTask: function(data) {
-    this.openTaskModal(data.id);
-  },
   getActionButton: function () {
     return (
       <ActionButton handleClick={this.openCreateTaskModal}

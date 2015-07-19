@@ -65,18 +65,12 @@ var TasksTable = React.createClass({
       {name: "My Tasks - Completed", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
     ]
   },
-  goToTask: function(data) {
-    location.href =  "/tasks/" + data.id + "/edit";
-  },
-  handleActionButtonClick: function() {
-    location.href = "/tasks/new";
-  },
   getActionButton: function () {
     return (
-        <ActionButton handleClick={this.handleActionButtonClick}
-                      label='Create Task'
-                      svgClass='createContact'
-                      extraPad={true} />
+      <ActionButton handleClick={this.openCreateTaskModal}
+                    label='Create Task'
+                    svgClass='createTask'
+                    extraPad={true} />
     );
   },
   render: function() {

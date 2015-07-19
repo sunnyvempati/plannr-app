@@ -59,7 +59,7 @@ var TaskRow = React.createClass({
                          checked={completed}
                          rounded={true} />
         </div>
-        <div onClick={this.props.onClick} className={"Table-rowItem u-flexGrow-10 " + clickable}>{data.name}</div>
+        <div onClick={this.props.onClick} className={"Table-rowItem u-flexGrow-10 u-clickable"}>{data.name}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-1">{deadlineIcon}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.deadline}</div>
         <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.status}</div>
