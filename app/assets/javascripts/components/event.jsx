@@ -10,6 +10,19 @@ var Event = React.createClass({
   editEvent: function(id) {
     location.href = "/events/" + id + "/edit/";
   },
+  renderDate: function(date) {
+    if (date) {
+      return (
+        <ReactIntl.FormattedDate
+          day="numeric"
+          month="long"
+          year="numeric"
+          value={date} />
+      );
+    } else {
+      return "Not specified";
+    }
+  },
   render: function () {
     var event = this.props.model;
     var editClasses = classNames({
@@ -43,7 +56,7 @@ var Event = React.createClass({
             Location
           </div>
           <div className="Info-content u-bold">
-            {event.location}
+            {event.location || "Not specified"}
           </div>
         </div>
         <div className="Event-info u-flexGrow-1">
@@ -51,7 +64,7 @@ var Event = React.createClass({
             Start Date
           </div>
           <div className="Info-content u-bold">
-            {event.start_date}
+            {this.renderDate(event.start_date)}
           </div>
         </div>
         <div className="Event-info u-flexGrow-1">
@@ -59,7 +72,7 @@ var Event = React.createClass({
             End Date
           </div>
           <div className="Info-content u-bold">
-            {event.end_date}
+            {this.renderDate(event.end_date)}
           </div>
         </div>
         <div className="Event-info u-flexGrow-1">
@@ -67,7 +80,7 @@ var Event = React.createClass({
             Budget
           </div>
           <div className="Info-content u-bold">
-            {event.budget}
+            <ReactIntl.FormattedNumber value={event.budget} style="currency" currency="USD" />
           </div>
         </div>
         <div className={editClasses}>

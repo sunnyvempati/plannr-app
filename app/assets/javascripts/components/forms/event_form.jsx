@@ -38,9 +38,12 @@ var EventForm = React.createClass({
   onSecondaryClick: function() {
     location.href = "/events";
   },
-  formatDateAndSubmit: function(data, reset, invalidate) {
+  massageDataAndSubmit: function(data, reset, invalidate) {
     data.event.start_date = data.event.start_date && data.event.start_date.format();
     data.event.end_date = data.event.end_date && data.event.end_date.format();
+    var budget = data.event.budget;
+    budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
+    data.event.budget = budget;
     this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
   },
   render: function () {
@@ -52,7 +55,7 @@ var EventForm = React.createClass({
     return (
       <div className="FormContainer--leftAligned">
         <Form mapping={this.mapInputs}
-              onSubmit={this.formatDateAndSubmit}
+              onSubmit={this.massageDataAndSubmit}
               onValid={this.enableButton}
               onInvalid={this.disableButton}
               authToken={this.props.authToken}
@@ -98,12 +101,11 @@ var EventForm = React.createClass({
           <FormInput
             name="budget"
             id="event_budget"
-            currencyField={true}
             type="text"
             label="Budget"
             value={this.props.model.budget}
             placeholder="How much will it cost?"
-            validationError="Must be a number (no commas)"
+            validations="isCurrency"
           />
           <TextAreaInput
             name="description"
