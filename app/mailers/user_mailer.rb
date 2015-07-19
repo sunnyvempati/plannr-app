@@ -16,4 +16,9 @@ class UserMailer < ApplicationMailer
     @url = reset_password_url(id: user.perishable_token)
     mail(to: user.email, subject: "Plannr password reset instructions")
   end
+
+  def verification_instructions(user)
+    @url = verify_url(id: user.perishable_token)
+    mail(to: user.email, subject: "Plannr email verification instructions")
+  end
 end

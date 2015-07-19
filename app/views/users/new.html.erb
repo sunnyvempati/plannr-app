@@ -3,4 +3,4 @@
 <%= react_component("SignUpForm", authToken: form_authenticity_token,
                                   email: @user.email,
                                   company: @user.company,
-                                  invite_token: @invitation.token) %>
+                                  invite_token: @invitation && @invitation.token) %>
