@@ -88,7 +88,7 @@ var VendorForm = React.createClass({
           <FormInput
             id='vendor_phone'
             name='phone'
-            placeholder='What is the phone of your vendor?'
+            placeholder='xxx-xxx-xxxx'
             type='text'
             label='Phone'
             value={vendor.phone}
