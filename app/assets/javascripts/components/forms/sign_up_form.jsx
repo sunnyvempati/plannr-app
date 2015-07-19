@@ -24,7 +24,7 @@ var SignUpForm = React.createClass({
     }
   },
   onSuccess: function(response) {
-    location.href = "/profiles/new";
+    location.href = "/login";
   },
   render: function() {
     var invited = this.props.company ? true : false;

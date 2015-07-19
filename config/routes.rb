@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get 'reset_password', to: 'password_resets#edit'
   post 'reset_password', to: 'password_resets#update'
 
+  # email verification
+  get 'verify', to: 'user_verifications#show'
+
   # invitation
   post 'resend_invitation', to: 'invitations#resend'
 

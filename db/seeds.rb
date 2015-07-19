@@ -30,6 +30,7 @@ def create_users
       user.password_confirmation = 'plannr12'
       user.company = Company.find_by_name(u[:company])
       user.company_admin = u[:company_admin]
+      user.verified = true
     end
     Profile.create(first_name: u[:first_name], last_name: u[:last_name], user: created_user) unless created_user.profile
 

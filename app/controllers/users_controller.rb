@@ -47,6 +47,8 @@ class UsersController < ApplicationController
         invite_args.merge!({ company: @user.company }) unless @invitation.company
         @invitation.update_attributes!(invite_args)
       end
+      flash[:notice] = "Thanks for signing up.  Check email to verify your account!"
+      @user.deliver_verification_instructions!
     end
   end
 

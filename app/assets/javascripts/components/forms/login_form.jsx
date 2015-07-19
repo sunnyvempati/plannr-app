@@ -5,6 +5,16 @@ var LoginForm = React.createClass({
     disableForm: React.PropTypes.bool
   },
   url: '/login',
+  componentDidMount: function() {
+    if (this.props.error) {
+      ToastMessages.toastError(this.props.error);
+      return;
+    }
+    if (this.props.notice) {
+      ToastMessages.toast(this.props.notice);
+      return;
+    }
+  },
   mapInputs: function (inputs) {
     return {
       'user_session': {
@@ -17,8 +27,28 @@ var LoginForm = React.createClass({
   onSuccess: function(result) {
     location.href = result.redirect_path;
   },
-  onSecondaryClick: function() {
+  onResetPassword: function(e) {
+    e.preventDefault();
     location.href = "/reset_password_request";
+  },
+  onSignUp: function(e) {
+    e.preventDefault();
+    location.href = "/sign_up";
+  },
+  renderButtonList: function() {
+    return (
+      <FormButtonList>
+        <Button type="button" onClick={this.onSignUp} className="Button--simple" disabled={this.state.loading}>
+          Sign up
+        </Button>
+        <Button type="button" onClick={this.onResetPassword} className="Button--simple" disabled={this.state.loading}>
+          Reset Password
+        </Button>
+        <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+          Sign in
+        </Button>
+      </FormButtonList>
+    );
   },
   render: function () {
     return (
@@ -41,7 +71,7 @@ var LoginForm = React.createClass({
                      label="Password*"
                      value={null}
                      required />
-          {this.renderFormTwoButtons('Login', 'Reset Password')}
+          {this.renderButtonList()}
         </Form>
       </div>
     );
