@@ -15,6 +15,10 @@ module ResponseHelpers
     end
   end
 
+  def render_entity_error(entity)
+    render json: errors_hash(entity.errors), status: 403
+  end
+
   def render_error(json={})
     render json: json, status: 403
   end

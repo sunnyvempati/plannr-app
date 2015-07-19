@@ -19,29 +19,35 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new(email: @invitation.email, company: @invitation.company)
+    @user = @invitation ? User.new(email: @invitation.email, company: @invitation.company) : User.new
   end
 
-  # this endpoint is used if Plannr invited user.
   def create
-    # if company exists and Plannr invited user, return error
-    if !@invitation.company && Company.find_by_lowercase_name(company_params[:name])
-      render_error({company: "already exists. Request invite."})
+    @user = User.new user_params
+    unless @user.valid?
+      render_entity_error(@user)
       return
     end
-
-    @user = User.new user_params
-    @user.company = @invitation.company || Company.create(company_params)
-    # in case we created it on the above line, set the tenant
-    set_current_tenant(@user.company)
-
-    # if company was set, then by default make them non-admin
-    @user.company_admin = @invitation.company ? false : true
+    if @invitation
+      @user.company = @invitation.company
+    else
+      if Company.find_by_lowercase_name(company_params[:name])
+        render_error({ company: 'already exists. Request invite.' })
+        return
+      end
+      if @user.valid?
+        @user.company = Company.create(company_params)
+        set_current_tenant(@user.company)
+        @user.company_admin = true
+      end
+    end
 
     render_entity(@user) do
-      invite_args = {recipient: @user}
-      invite_args.merge!({company: @user.company}) if !@invitation.company
-      @invitation.update_attributes!(invite_args)
+      if @invitation
+        invite_args = { recipient: @user }
+        invite_args.merge!({ company: @user.company }) unless @invitation.company
+        @invitation.update_attributes!(invite_args)
+      end
     end
   end
 
@@ -72,11 +78,6 @@ class UsersController < ApplicationController
 
   def check_invitation!
     @invitation = Invitation.find_by_token(params[:invite_token])
-    # if invitation doesn't exist, error
-    if !@invitation
-      flash[:error] = "Must be invited to sign up for Plannr"
-      redirect_to login_path
-    end
     # if invitation is used, recipient gets set, which means invitation has expired.
     if @invitation && @invitation.recipient
       flash[:error] = "Invitation has expired or been used already. Request new invitation"
