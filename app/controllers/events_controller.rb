@@ -16,7 +16,10 @@ class EventsController < ApplicationController
     if @event
       # fixed header at top of view
       @disable_skrollable_header = true
-      render :show
+      respond_to do |format|
+        format.html
+        format.json { render_success @event }
+      end
     else
       # TOOD: message for user notifying of missing @event and redirect
       redirect_to :action =>"index"

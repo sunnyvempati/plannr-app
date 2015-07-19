@@ -44,9 +44,6 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  >* {
-    flex: 1;
-  }
 }
 
 .Autocomplete-edit {

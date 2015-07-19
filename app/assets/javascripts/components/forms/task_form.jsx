@@ -70,7 +70,7 @@ var TaskForm = React.createClass({
     }
   },
   renderEventInput: function(val, className) {
-    if (!val) {
+    if (!val || this.props.routeVerb == "PUT") {
       return (
         <TaskEventInput
           name='event_id'
