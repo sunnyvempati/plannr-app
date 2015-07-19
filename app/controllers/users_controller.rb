@@ -35,11 +35,10 @@ class UsersController < ApplicationController
         render_error({ company: 'already exists. Request invite.' })
         return
       end
-      if @user.valid?
-        @user.company = Company.create(company_params)
-        set_current_tenant(@user.company)
-        @user.company_admin = true
-      end
+
+      @user.company = Company.create(company_params)
+      set_current_tenant(@user.company)
+      @user.company_admin = true
     end
 
     render_entity(@user) do
