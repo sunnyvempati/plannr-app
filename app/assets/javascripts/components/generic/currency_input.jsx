@@ -1,14 +1,10 @@
 var CurrencyInput = React.createClass({
   mixins: [
     Formsy.Mixin,
-    React.addons.PureRenderMixin,
-    ReactIntl.IntlMixin
+    React.addons.PureRenderMixin
   ],
   changeValue: function(e) {
     var value = e.currentTarget.value;
-    if (isNaN(value)) {
-      return;
-    }
     value = value.replace('$','');
     value = value.replace(',','');
     this.setValue(value);
@@ -19,18 +15,22 @@ var CurrencyInput = React.createClass({
   },
   render: function() {
     return (
-      <div className="FormInput">
+      <div className="CurrencyInput">
         <label htmlFor={this.props.id}>{this.props.label}</label>
-        <input name={this.props.name}
-               className="FormInput-field"
-               onChange={this.changeValue}
-               value={this.getFormattedValue()}
-               autofocus={this.props.autofocus}
-               placeholder={this.props.placeholder}
-               type={this.props.type}
-               disabled={this.props.disabled}
-               id={this.props.id} />
-        <span className={this.props.className + "-fieldErrorMessage"}>{!this.isPristine() && this.getErrorMessage()}</span>
+        <div className="CurrencyInput-field">
+          <div className="CurrencyInput-icon">
+            <i className="fa fa-usd"></i>
+          </div>
+          <input name={this.props.name}
+                 className="FormInput-field"
+                 onChange={this.changeValue}
+                 value={this.getValue()}
+                 autofocus={this.props.autofocus}
+                 placeholder={this.props.placeholder}
+                 type={this.props.type}
+                 disabled={this.props.disabled}
+                 id={this.props.id} />
+        </div>
       </div>
     );
   }
