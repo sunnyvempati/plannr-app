@@ -29,6 +29,7 @@ RSpec.describe UsersController, type: :controller do
           created_user = User.first
           expect(created_user).to be
           expect(created_user.company).to eq company
+          expect(created_user).to_not be_company_admin
         end
       end
     end
@@ -56,6 +57,10 @@ RSpec.describe UsersController, type: :controller do
           created_company = Company.first
           expect(created_company).to be
           expect(created_company.name).to eq company_name
+        end
+
+        it 'makes user admin' do
+          expect(User.first).to be_company_admin
         end
       end
 
