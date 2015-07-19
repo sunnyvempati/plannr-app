@@ -152,7 +152,7 @@ var ContactForm = React.createClass({
           <FormInput
             id='contact_phone'
             name='phone'
-            placeholder='What is the phone of your contact?'
+            placeholder='xxx-xxx-xxxx'
             type='tel'
             label='Phone'
             value={contact.phone}

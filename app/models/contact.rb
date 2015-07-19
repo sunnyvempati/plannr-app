@@ -19,7 +19,7 @@ class Contact < ActiveRecord::Base
                       allow_blank: true
   validates_format_of :phone,
                       with: US_PHONE_REGEX,
-                      message: 'must be a phone number in [1-]999-999-9999 [x9999] format',
+                      message: 'must be a phone number in xxx-xxx-xxxx format',
                       allow_blank: true
   validates_uniqueness_to_tenant :email,
                                  allow_blank: true,

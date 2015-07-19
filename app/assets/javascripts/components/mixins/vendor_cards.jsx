@@ -28,7 +28,7 @@ var VendorCards = {
         </div>
         <div className="Card-content">
           <div className={this.iconTextClasses(vendor.phone)}>
-            <i className="fa fa-envelope CardIcon"></i>
+            <i className="fa fa-phone CardIcon"></i>
             <a href={telHref}>{vendor.phone}</a>
           </div>
           <div className={this.iconTextClasses(vendor.location)}>
