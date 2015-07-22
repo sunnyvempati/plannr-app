@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%">
 <head>
   <title>Plannr - <%= yield(:title).presence || "Event Management Platform" %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -16,13 +16,13 @@
 <div id="toast"></div>
 
 <div class="AppContainer">
-  <div class="AppContainer-header">
-    <%= react_component("LoginLogo") %>
-  </div>
+  <%= react_component("TopMenu", webPath: Rails.configuration.web_path) %>
 
   <div class="AppContainer-content">
     <%= yield %>
   </div>
+
+  <%= react_component("Footer", year: Date.today.year) %>
 </div>
 
 </body>

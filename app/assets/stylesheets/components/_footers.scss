@@ -1,0 +1,59 @@
+.Footer {
+  height: 300px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-flow: column nowrap;
+  font-family: Volte-regular;
+}
+
+.Footer-content {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+  background-color: #D8D8D8;
+}
+
+.Footer-socialMedia {
+  display: flex;
+}
+
+.Footer-links {
+  color: #5b8caa;
+  font-size: 18px;
+}
+
+.Facebook,
+.Twitter,
+.Linkedin {
+  margin: 32px;
+}
+
+.Facebook {
+  @include svg(url(facebook_icon.svg), 2em);
+}
+.Twitter {
+  @include svg(url(twitter_icon.svg), 2em);
+}
+.Linkedin {
+  @include svg(url(linkedin_icon.svg), 2em);
+}
+.Heart {
+  @include svg(url(heart.svg), 0.8em);
+}
+
+.Footer-footnote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  padding: 16px;
+  line-height: 80%;
+  font-size: 16px;
+  background-color: #3A4042;
+  color: white;
+}

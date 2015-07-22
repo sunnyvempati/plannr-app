@@ -29,19 +29,29 @@ var SignUpForm = React.createClass({
   render: function() {
     var invited = this.props.company ? true : false;
     return (
-      <div className="FormContainer">
-        <Form mapping={this.mapInputs}
-              onSubmit={this.postForm}
-              onValid={this.enableButton}
-              onInvalid={this.disableButton}
-              authToken={this.props.authToken}>
-          <FormInput type="hidden" name="invitation_token" value={this.props.invite_token}  />
-          <FormInput name="email" label="Email*" ref="userEmail" value={null} required/>
-          <FormInput name="password" type="password" label="Password*" value={null} required/>
-          <FormInput name="password_confirmation" type="password" label="Confirm Password*" value={null} required/>
-          <FormInput name="company" type="company" placeholder="Where do you work?" label="Company*" value={null} ref="userCompany" required/>
-          {this.renderFormButton('Sign up')}
-        </Form>
+      <div className="SignUpContainer">
+        <div className="TrialBadge"></div>
+        <div className="Trial-title">
+          Start your free trial and get planning today!
+        </div>
+        <div className="Trial-subtitle">
+          We’re really excited to see how you use Plannr!
+          Please don’t hesitate to contact us with any questions or comments. Let’s plan better together.
+        </div>
+        <div className="FormContainer">
+          <Form mapping={this.mapInputs}
+                onSubmit={this.postForm}
+                onValid={this.enableButton}
+                onInvalid={this.disableButton}
+                authToken={this.props.authToken}>
+            <FormInput type="hidden" name="invitation_token" value={this.props.invite_token}  />
+            <FormInput name="email" label="Email*" ref="userEmail" value={null} required/>
+            <FormInput name="password" type="password" label="Password*" value={null} required/>
+            <FormInput name="password_confirmation" type="password" label="Confirm Password*" value={null} required/>
+            <FormInput name="company" type="company" placeholder="Where do you work?" label="Company*" value={null} ref="userCompany" required/>
+            {this.renderFormButton('Sign up')}
+          </Form>
+        </div>
       </div>
     );
   }

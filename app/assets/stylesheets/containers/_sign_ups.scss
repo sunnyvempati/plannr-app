@@ -1,0 +1,33 @@
+.SignUpContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
+.TrialBadge {
+  background: url(trial_badge-01.svg) no-repeat;
+  background-size: 25em 10em;
+  height: 10em;
+  width: 25em;
+  padding-bottom: $size-increment*4;
+}
+
+.Trial-title {
+  font-family: Volte-semibold;
+  font-size: 28px;
+  letter-spacing: (0.001 * -20) * 1em;
+  padding: 24px;
+
+}
+
+.Trial-subtitle {
+  text-align: center;
+  width: 800px;
+  font-family: Volte-regular;
+  font-size: 18px;
+  &.larger {
+    font-size: 21px;
+    letter-spacing: (0.001 * 10) * 1em;
+  }
+}
