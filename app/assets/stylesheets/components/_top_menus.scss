@@ -1,4 +1,4 @@
-.Menu {
+.TopMenu {
   height: 72px;
   width: 100%;
   background-color: #f9f9f9;
@@ -9,19 +9,19 @@
   align-items: center;
 }
 
-.Menu-logo {
+.TopMenu-logo {
   flex: 1;
   margin-left: 16px;
   cursor: pointer;
 }
 
-.Menu-itemContainer {
+.TopMenu-itemContainer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-.Menu-item {
+.TopMenu-item {
   font-family: Volte-semibold;
   padding-right: 24px;
   font-size: 18px;
@@ -34,13 +34,13 @@
 }
 
 @media (min-width: 701px) {
-  .Menu-logo {
+  .TopMenu-logo {
     @include svg(url(plannr_logo.svg), 10em);
   }
 }
 
 @media (max-width: 700px) {
-  .Menu-logo {
+  .TopMenu-logo {
     @include svg(url(plannr_logo.svg), 5em);
   }
 }

@@ -19,7 +19,8 @@ var TextAreaInput = React.createClass({
                   form={this.props.formId}
                   placeholder={this.props.placeholder}
                   onChange={this.changeValue}
-                  value={this.getValue()} />
+                  value={this.getValue()}
+                  rows="4" />
       </div>
     );
   }

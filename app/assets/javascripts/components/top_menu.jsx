@@ -4,17 +4,17 @@ var TopMenu = React.createClass({
   },
   render: function() {
     return (
-      <div className="Menu">
-        <div className="Menu-logo" onClick={this.goToMain}>
+      <div className="TopMenu">
+        <div className="TopMenu-logo" onClick={this.goToMain}>
         </div>
-        <div className="Menu-itemContainer">
-          <div className="Menu-item">
+        <div className="TopMenu-itemContainer">
+          <div className="TopMenu-item">
             <a href="http://plannr.wordpress.com">Blog</a>
           </div>
-          <div className="Menu-item">
+          <div className="TopMenu-item">
             <a href='/sign_up'>Free Trial</a>
           </div>
-          <div className="Menu-item">
+          <div className="TopMenu-item">
             <a href="/login">Sign In</a>
           </div>
         </div>

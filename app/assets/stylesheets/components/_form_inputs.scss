@@ -4,7 +4,7 @@
   padding-top: $input-ptop;
   padding-bottom: $input-pbottom;
   &-textarea {
-    height: $grid-increment * 2;
+    height: $grid-increment * 2 + 24px;
   }
   & label {
     display: block;
@@ -20,7 +20,6 @@
     border: 1px none transparent;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     resize: none;
-    height: $grid-increment;
   }
 }
 
