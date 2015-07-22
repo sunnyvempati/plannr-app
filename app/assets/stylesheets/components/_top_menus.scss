@@ -1,0 +1,46 @@
+.Menu {
+  height: 72px;
+  width: 100%;
+  background-color: #f9f9f9;
+  position: fixed;
+  z-index: 10000;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+  display: flex;
+  align-items: center;
+}
+
+.Menu-logo {
+  flex: 1;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.Menu-itemContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Menu-item {
+  font-family: Volte-semibold;
+  padding-right: 24px;
+  font-size: 18px;
+}
+
+.TopBar {
+  height: 100px;
+  width: 100%;
+  background: linear-gradient(to right, #00BFA5, #7E57C2);
+}
+
+@media (min-width: 701px) {
+  .Menu-logo {
+    @include svg(url(plannr_logo.svg), 10em);
+  }
+}
+
+@media (max-width: 700px) {
+  .Menu-logo {
+    @include svg(url(plannr_logo.svg), 5em);
+  }
+}

@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.web_path = "http://staging.yourplannr.com/"
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :user_name => '3225465a8db58135e',

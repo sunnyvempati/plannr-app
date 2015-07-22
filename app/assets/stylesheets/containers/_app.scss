@@ -1,16 +1,9 @@
 .AppContainer {
-  display: flex;
-  flex-flow: row wrap;
-  >* {
-    flex: 1 100%;
-    padding: 20px;
-  }
-}
-
-.AppContainer-header {
-  background: linear-gradient(to right, #00BFA5, #7E57C2);
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 300px;
 }
 
 .AppContainer-content {
-  padding-top: 50px;
+  padding: 72px 0;
 }
