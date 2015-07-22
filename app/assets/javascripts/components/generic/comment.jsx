@@ -38,7 +38,7 @@ var Comment = React.createClass({
             </div>
           </div>
         </div>
-        <div className="ListItem-text">
+        <div className="ListItem-text u-wrapWithEllipsis">
           {comment.body}
         </div>
       </div>

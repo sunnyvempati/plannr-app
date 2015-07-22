@@ -36,7 +36,7 @@ var TaskRow = React.createClass({
   },
   renderEventColumn: function() {
     return (
-      <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-10">
+      <div onClick={this.props.onClick} className="Table-rowItem u-wrapWithEllipsis u-flexGrow-10">
         {this.props.data.event}
       </div>
     )
@@ -59,11 +59,11 @@ var TaskRow = React.createClass({
                          checked={completed}
                          rounded={true} />
         </div>
-        <div onClick={this.props.onClick} className={"Table-rowItem u-flexGrow-10 u-clickable"}>{data.name}</div>
-        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-1">{deadlineIcon}</div>
-        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.deadline}</div>
-        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.status}</div>
-        <div onClick={this.props.onClick} className="Table-rowItem u-flexGrow-4">{data.assigned_to}</div>
+        <div onClick={this.props.onClick} className={"Table-rowItem u-wrapWithEllipsis u-flexGrow-10 u-clickable"}>{data.name}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-wrapWithEllipsis u-flexGrow-1">{deadlineIcon}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-wrapWithEllipsis u-flexGrow-4">{data.deadline}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-wrapWithEllipsis u-flexGrow-4">{data.status}</div>
+        <div onClick={this.props.onClick} className="Table-rowItem u-wrapWithEllipsis u-flexGrow-4">{data.assigned_to}</div>
         {eventColumn}
         <DropdownMenu trigger={this.getActionTrigger()}
                       customOptions={this.getRowActionMenu()}

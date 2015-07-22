@@ -116,7 +116,7 @@ var Table = React.createClass({
   },
   getHeaders: function() {
     var headers = this.props.columns.map(function(column) {
-      var rowClass = "Table-rowItem " + "u-flexGrow-" + column.grow;
+      var rowClass = "Table-rowItem u-wrapWithEllipsis " + "u-flexGrow-" + column.grow;
       return (
         <div className={rowClass} key={column.header}>{column.header}</div>
       )

@@ -66,7 +66,7 @@ var ShowTaskModal = React.createClass({
             <div className="TaskModal-descriptionTitle">
               Description
             </div>
-            <div className="TaskModal-description">
+            <div className="TaskModal-description u-wrapWithEllipsis">
               {task.description}
             </div>
           </div>
@@ -108,7 +108,7 @@ var ShowTaskModal = React.createClass({
   },
   renderModalContent: function() {
     var task = this.state.task;
-    var checkboxDisplay = <div className="TaskModal-title">{task.name}</div>;
+    var checkboxDisplay = <div className="TaskModal-title u-wrapWithEllipsis">{task.name}</div>;
     return (
       <div className="TaskModal">
         {this.renderCloseModal()}

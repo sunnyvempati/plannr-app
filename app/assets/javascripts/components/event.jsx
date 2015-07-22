@@ -46,8 +46,8 @@ var Event = React.createClass({
               Client
             </div>
             <div className="Info-content">
-              <div className="u-bold">{clientName}</div>
-              {clientOrg}<br />
+              <div className="u-bold u-wrapWithEllipsis">{clientName}</div>
+              <div className="u-wrapWithEllipsis">{clientOrg}</div>
               {clientEmail}<br />
               {clientPhone}
             </div>
@@ -56,7 +56,7 @@ var Event = React.createClass({
             <div className="Info-header">
               Location
             </div>
-            <div className="Info-content u-bold">
+            <div className="Info-content u-wrapWithEllipsis u-bold">
               {event.location || "Not specified"}
             </div>
           </div>
@@ -64,7 +64,7 @@ var Event = React.createClass({
             <div className="Info-header">
               Start Date
             </div>
-            <div className="Info-content u-bold">
+            <div className="Info-content u-wrapWithEllipsis u-bold">
               {this.renderDate(event.start_date)}
             </div>
           </div>
@@ -72,7 +72,7 @@ var Event = React.createClass({
             <div className="Info-header">
               End Date
             </div>
-            <div className="Info-content u-bold">
+            <div className="Info-content u-wrapWithEllipsis u-bold">
               {this.renderDate(event.end_date)}
             </div>
           </div>
@@ -80,7 +80,7 @@ var Event = React.createClass({
             <div className="Info-header">
               Budget
             </div>
-            <div className="Info-content u-bold">
+            <div className="Info-content u-wrapWithEllipsis u-bold">
               <ReactIntl.FormattedNumber value={event.budget} style="currency" currency="USD" />
             </div>
           </div>

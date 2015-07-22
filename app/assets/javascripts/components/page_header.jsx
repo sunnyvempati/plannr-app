@@ -34,7 +34,7 @@ var PageHeader = React.createClass({
       <div id="mainHeader"
            className="PageHeader">
         <div id="mainTitle"
-             className="PageHeader-title">
+             className="PageHeader-title u-wrapWithEllipsis">
           {this.props.header}
         </div>
         <div className="PageHeader-profile">

@@ -40,7 +40,7 @@ var Vendor = React.createClass({
               <div onClick={this.backToList} className="u-clickable">
                 <div className="BackIcon"></div>
               </div>
-              <div className="Show-name">
+              <div className="Show-name u-wrapWithEllipsis">
                 {vendor.name}
               </div>
             </div>

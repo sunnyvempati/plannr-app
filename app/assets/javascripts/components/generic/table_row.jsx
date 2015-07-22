@@ -37,7 +37,7 @@ var TableRow = React.createClass({
   },
   render: function() {
     var rowColumns = this.props.columns.map(function(columnData) {
-      var rowClass = "Table-rowItem " + "u-flexGrow-" + columnData.grow;
+      var rowClass = "Table-rowItem u-wrapWithEllipsis " + "u-flexGrow-" + columnData.grow;
       return(
         <div className={rowClass} onClick={this.props.onClick} key={columnData.name}>{this.props.data[columnData.name]}</div>
       );

@@ -97,7 +97,7 @@ var EventAttachmentsTable = React.createClass({
                              checked={checked}
                              hideCheckbox={hideCheckbox}/>
             </div>
-            <div className="Table-rowItem u-flexGrow-10">
+            <div className="Table-rowItem u-wrapWithEllipsis u-flexGrow-10">
               <a href={attachment.file_link.url} target='_blank'>{attachment.file_name}</a>
             </div>
             <DropdownMenu

@@ -50,9 +50,9 @@ var CompanyUserRow = React.createClass({
                          checked={this.props.checked}
                          hideCheckbox={this.props.hideCheckbox} />
         </div>
-        <div className="Table-rowItem u-flexGrow-10">{data.name}</div>
-        <div className="Table-rowItem u-flexGrow-6">{data.email}</div>
-        <div className="Table-rowItem u-flexGrow-4">
+        <div className="Table-rowItem u-wrapWithEllipsis u-flexGrow-10">{data.name}</div>
+        <div className="Table-rowItem u-wrapWithEllipsis u-flexGrow-6">{data.email}</div>
+        <div className="Table-rowItem u-wrapWithEllipsis u-flexGrow-4">
           <ToggleButton checked={this.state.isAdmin} handleClick={this.toggleAdmin} />
         </div>
         <DropdownMenu trigger={this.getActionTrigger()}

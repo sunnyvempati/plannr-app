@@ -40,7 +40,7 @@ var Contact = React.createClass({
               <div onClick={this.backToList} className="u-clickable">
                 <div className="BackIcon"></div>
               </div>
-              <div className="Show-name">
+              <div className="Show-name u-wrapWithEllipsis">
                 {contact.name}
               </div>
             </div>
