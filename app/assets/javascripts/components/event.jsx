@@ -23,6 +23,20 @@ var Event = React.createClass({
       return "Not specified";
     }
   },
+  renderDescription: function(desc) {
+    if (this.props.editable) {
+      return (
+        <div className="Event-descriptionContainer">
+          <div className="Event-descTitle">
+            Description
+          </div>
+          <div className="Event-desc u-wrapWithEllipsis">
+            {desc}
+          </div>
+        </div>
+      );
+    }
+  },
   render: function () {
     var event = this.props.model;
     var editClasses = classNames({
@@ -38,6 +52,10 @@ var Event = React.createClass({
       clientEmail = client.email;
       clientPhone = client.phone;
     }
+    var containerClasses = classNames({
+      'Event-infoContainer': true,
+      'is-described': this.props.editable
+    });
     return (
       <div className="EventContainer">
         <div className="Event-infoContainer">
@@ -92,14 +110,7 @@ var Event = React.createClass({
             </div>
           </div>
         </div>
-        <div className="Event-descriptionContainer">
-          <div className="Event-descTitle">
-            Description
-          </div>
-          <div className="Event-desc">
-            {event.description}
-          </div>
-        </div>
+        {this.renderDescription(event.description)}
       </div>
     );
   }

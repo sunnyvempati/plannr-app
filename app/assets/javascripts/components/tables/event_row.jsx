@@ -1,4 +1,5 @@
 var EventRow = React.createClass({
+  mixins: [TableCheckbox],
   getInitialState: function() {
     return {
       archived: this.props.event.status == 2
