@@ -80,7 +80,7 @@ class Attachment < ActiveRecord::Base
   private
 
   def attachment_status
-    AttachmentStatus.where(company: company).first
+    AttachmentStatus.find_or_create_by(company: company)
   end
 
   MEGABYTE = 1024.0 * 1024.0
