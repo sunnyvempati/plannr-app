@@ -16,7 +16,6 @@ var EditTaskModal = React.createClass({
   },
   onSuccess: function(result, createNew) {
     this.closeModal();
-    console.log(createNew);
     this.props.onSuccess(result.task, createNew);
   },
   renderModalContent: function() {
