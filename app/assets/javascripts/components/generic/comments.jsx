@@ -16,7 +16,6 @@ var Comments = React.createClass({
     }
   },
   getComments: function() {
-    var params = this.getParams();
     $.get("/comments", this.getParams(),  function(result) {
       this.setState({comments: result.comments});
     }.bind(this));
