@@ -22,12 +22,15 @@ var TaskQuickAddInput = React.createClass({
     var props = {
       model: {name: text, event_id: this.props.eventId},
       authToken: this.props.authToken,
-      onSuccess: this.props.onAdd,
-      reopenCreateTaskModal: this.openCreateTaskModal,
+      onSuccess: this.onSuccess,
       routeVerb: 'POST'
     };
     var modal = React.createElement(EditTaskModal, props);
     React.render(modal, document.getElementById('modal'));
+  },
+  onSuccess: function(task, createNew) {
+    this.props.onAdd(task);
+    if(createNew) this.openCreateTaskModal();
   },
   render: function() {
     var inputClasses = classNames({

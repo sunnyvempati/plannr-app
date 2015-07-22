@@ -76,7 +76,7 @@ var TaskCheckboxRows = {
   },
   onTaskSuccess: function(task, createNew) {
     this.getTableData({status: 1});
-    createNew ? this.props.reopenCreateTaskModal() : this.openTaskModal(task.id);
+    createNew ? this.openCreateTaskModal() : this.openTaskModal(task.id);
   },
   goToTask: function(data) {
     this.openTaskModal(data.id);
