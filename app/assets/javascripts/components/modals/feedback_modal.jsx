@@ -27,6 +27,7 @@ var FeedbackModal = React.createClass({
   renderModalContent: function() {
     return (
       <div className="FeedbackModal">
+        {this.renderCloseModal()}
         {this.renderFeedback()}
       </div>
     );
