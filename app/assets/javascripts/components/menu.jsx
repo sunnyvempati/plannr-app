@@ -6,6 +6,7 @@ var Menu = React.createClass({
         <MenuContent activePath={this.props.path}
                      company={this.props.company}
                      admin={this.props.admin} />
+        <MenuFooter />
       </div>
     );
   }

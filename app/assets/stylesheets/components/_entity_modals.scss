@@ -1,15 +1,18 @@
 .EntityModal {
-  width: 700px;
   padding: $size-increment*4;
   position: relative;
   background-color: $modal-bg;
+  width: 700px;
 }
 
 .AddEntityModal {
   @extend .EntityModal;
-  height: 400px;
+  height: 200px;
   width: 500px;
   transition: height 0.2s linear;
+  .Modal-dialog & {
+    overflow: visible;
+  }
 }
 
 .EntityModal-header {

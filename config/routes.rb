@@ -91,4 +91,6 @@ Rails.application.routes.draw do
   put '/comments', to: 'comments#edit'
   delete '/comments/:id', to: 'comments#destroy'
 
+  post '/feedback', to: 'feedback#create'
+
 end

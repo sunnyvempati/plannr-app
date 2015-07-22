@@ -1,0 +1,10 @@
+.MenuFooter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  @include font($button-font, normal, 10);
+  opacity: 0.8;
+  padding: 32px 16px;
+  text-align: center;
+  cursor: pointer;
+}

@@ -49,7 +49,6 @@ var TaskForm = React.createClass({
     this.createAndNewClicked = true;
   },
   renderButtonList: function() {
-    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
     if (this.props.routeVerb == "POST") {
       return (
         <FormButtonList>
@@ -66,7 +65,7 @@ var TaskForm = React.createClass({
       )
     }
     else {
-      return this.renderFormTwoButtons('Edit', 'Cancel');
+      return this.renderFormTwoButtons("Update", 'Cancel');
     }
   },
   renderEventInput: function(val, className) {

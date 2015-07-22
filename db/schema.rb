@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719211208) do
+ActiveRecord::Schema.define(version: 20150722064718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,13 @@ ActiveRecord::Schema.define(version: 20150719211208) do
     t.datetime "updated_at"
     t.uuid     "client_id"
     t.integer  "status",      default: 1
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.uuid     "sender_id",  null: false
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "invitations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
