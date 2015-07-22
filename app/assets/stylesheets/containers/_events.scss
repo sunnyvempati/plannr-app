@@ -1,7 +1,9 @@
-.EventContainer {
+.Event-infoContainer {
   display: flex;
   position: relative;
   height: 100%;
+  padding: $size-increment*3 $size-increment*8 $size-increment*4 $size-increment*11;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .Edit-btn {
@@ -21,3 +23,18 @@
 .Info-content {
   @include font($body-1-font, normal, 0);
 }
+
+.Event-descriptionContainer {
+  padding: $size-increment*2 $size-increment*8 $size-increment*4 $size-increment*11;
+}
+
+.Event-descTitle {
+  @extend .Info-header;
+  padding-bottom: $size-increment;
+}
+
+.Event-desc {
+  @include font($body-1-font, normal, 0);
+}
+
+
