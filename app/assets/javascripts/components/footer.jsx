@@ -1,5 +1,6 @@
 var Footer = React.createClass({
   render: function() {
+    var termsOfServiceUrl = this.props.webPath + "terms_of_service";
     return (
       <div className="Footer">
         <div className="Footer-content">
@@ -9,7 +10,7 @@ var Footer = React.createClass({
             <a href="https://www.facebook.com/yourplannr" target="_blank"><div className="Facebook"></div></a>
           </div>
           <div className="Footer-links">
-            <a href="mailto:support@yourplannr.com">Support</a> | <a href="/terms_of_service">Terms of Service</a>
+            <a href="mailto:support@yourplannr.com">Support</a> | <a href={termsOfServiceUrl}>Terms of Service</a>
           </div>
         </div>
         <div className="Footer-footnote">

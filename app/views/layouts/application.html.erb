@@ -22,7 +22,7 @@
     <%= yield %>
   </div>
 
-  <%= react_component("Footer", year: Date.today.year) %>
+  <%= react_component("Footer", webPath: Rails.configuration.web_path, year: Date.today.year) %>
 </div>
 
 </body>
