@@ -4,6 +4,7 @@ FactoryGirl.define do
     password "plannr12"
     password_confirmation "plannr12"
     company
+    verified true
 
     after(:create) do |user|
       create(:profile, user: user)

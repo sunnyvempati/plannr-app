@@ -16,6 +16,10 @@ RSpec.describe UsersController, type: :controller do
       }
     end
 
+    before do
+      allow_any_instance_of(User).to receive(:deliver_verification_instructions!).and_return(true)
+    end
+
     context 'user invited with company' do
       before do
         allow_any_instance_of(UsersController).to receive(:check_invitation!).and_return(true)

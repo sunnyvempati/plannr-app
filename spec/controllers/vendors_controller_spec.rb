@@ -14,7 +14,7 @@ RSpec.describe VendorsController, type: :controller do
     let!(:vendor5) { FactoryGirl.create(:vendor) }
 
     it "returns the count of vendors not in event1 " do
-      get :index, { format: :json, filter_sort: { not_in_event_id: event1.id, search_query: '' } }
+      get :index, { format: "json", filter_sort: { not_in_event_id: event1.id, search_query: '' } }
       expect(response).to be_success
       expect(json_response["vendors"].count).to eq 3
     end
