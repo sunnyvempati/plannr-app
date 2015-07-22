@@ -1,7 +1,21 @@
-<h1>You've been invited to join <%= @company.name %>!</h1>
-
-<p> To sign up, <a href="<%= @url %>">click here</a>. </p>
-
-<p> Stay weird, </p>
-
-<p> Sunny </p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Plannr Invitation</title>
+  <style type="text/css">
+  body, td { color:#000000; font-size:14px; font-family:Verdana,Helvetica,Arial; }
+  .divider { background-color:#555555; height:2px; }
+  #footer { font-size:11px; color:#555555; }
+  #footer a { color:#555555;}
+  </style>
+</head>
+<body>
+  <h1>You've been invited to join <%= @company.name %>!</h1>
+  <div class="divider"></div>
+  <p> To sign up, <a href="<%= @url %>">click here</a>. </p>
+  <p> We're really pumped for you to start using the platform.  If you have any questions please email us at <a href="mailto:support@yourplannr.com">support@yourplannr.com</a>. </p>
+  <p> Cheers </p>
+  <p> The Plannr Gang </p>
+</body>
+</html>

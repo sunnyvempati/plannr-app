@@ -1,7 +1,22 @@
-<h1>Verification Instructions</h1>
-
-<p>
-  Thanks for signing up!  Here's a link to verify your email.
-</p>
-
-<%= link_to "Click here to verify email", @url %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Plannr Email Verification</title>
+  <style type="text/css">
+  body, td { color:#000000; font-size:14px; font-family:Verdana,Helvetica,Arial; }
+  .divider { background-color:#555555; height:2px; }
+  #footer { font-size:11px; color:#555555; }
+  #footer a { color:#555555;}
+  </style>
+</head>
+<body>
+  <h1>Verification Instructions</h1>
+  <div class="divider"></div>
+  <p>We want to verify that this is your email.  Verifying this address will let you access Plannr and reset your password if necessary. Please click the following link to continue:</p>
+  <p> <%= link_to "Click here to verify email", @url %> </p>
+  <p> If you feel you've gotten this email as a mistake, you can ignore this email. </p>
+  <p> Cheers </p>
+  <p> The Plannr Gang </p>
+</body>
+</html>

@@ -4,12 +4,12 @@ class UserMailer < ApplicationMailer
   def user_invitation(invite)
     @company = invite.company
     @url = sign_up_url(invite_token: invite.token)
-    mail(to: invite.email, subject: "Plannr invitation")
+    mail(to: invite.email, subject: "Invitation to Plannr")
   end
 
   def plannr_invitation(invite)
     @url = sign_up_url(invite_token: invite.token)
-    mail(to: invite.email, subject: "Plannr invitation")
+    mail(to: invite.email, subject: "Invitation to Plannr")
   end
 
   def reset_password_instructions(user)
