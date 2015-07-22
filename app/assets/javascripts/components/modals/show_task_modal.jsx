@@ -25,7 +25,8 @@ var ShowTaskModal = React.createClass({
   onTaskSuccess: function(task) {
     var props = {
       model: {id: task.id},
-      authToken: this.props.authToken
+      authToken: this.props.authToken,
+      currentUserId: this.props.currentUserId
     }
     Modal.mount(props, ShowTaskModal);
   },
@@ -127,8 +128,8 @@ var ShowTaskModal = React.createClass({
         <div className="Card">
           <div className="Card-content">
             <Comments entity="Task"
-                      entity_id={this.state.task.id}
-                      currentUser={this.props.currentUserId} />
+                      entity_id={task.id}
+                      currentUser={{id: this.props.currentUserId}} />
           </div>
         </div>
       </div>
