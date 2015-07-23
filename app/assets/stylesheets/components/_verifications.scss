@@ -6,7 +6,8 @@
 }
 
 .Verification-text {
-  padding: 24px;
+  @include font($title-font, normal, 0);
+  padding: 64px 0 24px 0;
 }
 
 .Verification-btn {
