@@ -11,7 +11,7 @@ var LoginForm = React.createClass({
       return;
     }
     if (this.props.notice) {
-      ToastMessages.toast(this.props.notice);
+      ToastMessages.toastNotice(this.props.notice);
       return;
     }
   },
@@ -38,7 +38,7 @@ var LoginForm = React.createClass({
   renderButtonList: function() {
     return (
       <FormButtonList>
-        <Button type="button" onClick={this.onSignUp} className="Button--simple" disabled={this.state.loading}>
+        <Button type="button" onClick={this.onSignUp} className="Button--affirmative" disabled={this.state.loading}>
           Sign up
         </Button>
         <Button type="button" onClick={this.onResetPassword} className="Button--simple" disabled={this.state.loading}>

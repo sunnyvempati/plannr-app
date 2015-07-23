@@ -22,6 +22,9 @@
   &.error {
     background: #CC0000;
   }
+  &.notice {
+    background: $plannr-blue;
+  }
 }
 
 @keyframes Toast-enter {

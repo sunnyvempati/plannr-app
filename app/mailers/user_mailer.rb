@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'sunny@yourplannr.com'
+  default from: 'hello@yourplannr.com'
 
   def user_invitation(invite)
     @company = invite.company
@@ -20,5 +20,10 @@ class UserMailer < ApplicationMailer
   def verification_instructions(user)
     @url = verify_url(id: user.perishable_token)
     mail(to: user.email, subject: "Plannr email verification instructions")
+  end
+
+  def notify_plannr(user)
+    @user = user
+    mail(to: 'support@yourplannr.com', subject: "New User Sign up")
   end
 end

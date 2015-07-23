@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   def verify!
     self.verified = true
     self.save!
+    UserMailer.notify_plannr(self).deliver_later
   end
 
   def company_admin?

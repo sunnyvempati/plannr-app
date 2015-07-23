@@ -13,7 +13,8 @@ var Toast = React.createClass({
     var toastClasses = classNames({
       'Toast': true,
       'loading': this.props.loading,
-      'error': this.props.isError
+      'error': this.props.isError,
+      'notice': this.props.isNotice
     })
     return (
       <div className={toastClasses}>
