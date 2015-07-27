@@ -12,6 +12,7 @@ Run these commands once you pull down code:
 ```
 bundle
 bundle exec rake bower:install
+bundle exec rake db:create db:migrate db:seed
 powder link
 ```
 
