@@ -3,6 +3,7 @@
   position: relative;
   background-color: $modal-bg;
   width: 700px;
+  height: 100%;
 }
 
 .AddEntityModal {
@@ -27,18 +28,13 @@
 }
 
 .EntityModal-title {
-  @include font(16px, normal, 50);
+  @include font($headline-font, bold, 50);
   padding-left: $size-increment*4;
   color: $black-half;
 }
 
 .EntityModal-content {
-  display: flex;
-  flex-flow: column nowrap;
   margin: $size-increment*2 $size-increment*2 0 0;
-  >* {
-    flex: 1;
-  }
 }
 
 .IconWithText {

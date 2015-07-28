@@ -28,9 +28,7 @@ var Modal = {
     return (
       <div className="ModalContainer">
         <div className="Modal-dialog" id="dialog">
-          <div className="Modal-content">
-            {this.renderModalContent()}
-          </div>
+          {this.renderModalContent()}
         </div>
       </div>
     );

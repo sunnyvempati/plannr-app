@@ -14,12 +14,10 @@ var ShowContactModal = React.createClass({
             <div className="EntityModal-headerIcon">
               <i className="fa fa-user"></i>
             </div>
-            <div className="EntityModal-title">
-              <h1>
-                <a href={contactHref} target="_blank">
-                  {this.props.data.name}
-                </a>
-              </h1>
+            <div className="EntityModal-title u-wrapWithEllipsis">
+              <a href={contactHref} target="_blank">
+                {this.props.data.name}
+              </a>
             </div>
           </div>
           <div className="EntityModal-content">
