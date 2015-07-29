@@ -2,6 +2,7 @@ var FilterSort = {
   initializeFilterSort: function(defaultParams) {
     this.filterParams = defaultParams.filter;
     this.sortParams = defaultParams.sort;
+    this.page = defaultParams.page;
     this.reloadData();
   },
   sort: function(entity, order) {
@@ -17,9 +18,11 @@ var FilterSort = {
     this.filterParams = params;
     this.reloadData();
   },
-  reloadData: function() {
+  mergeParams: function() {
     var mergedParams = $.extend({}, this.filterParams, this.sortParams, this.searchParams);
-    var params = {filter_sort: mergedParams};
-    this.getTableData(params);
+    return {filter_sort: mergedParams, page: this.page};
+  },
+  reloadData: function() {
+    this.getTableData(this.mergeParams());
   }
 }

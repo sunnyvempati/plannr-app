@@ -8,11 +8,16 @@ var ContactsTable = React.createClass({
   ],
   getInitialState: function() {
     return {
-      contacts: []
+      contacts: [],
+      hasMore: true,
+      page: 0
     };
   },
   componentDidMount: function() {
-    this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
+    this.initializeFilterSort({
+      sort: {sorted_by: 'name_asc'},
+      page: 1
+    });
   },
   getTableData: function(params) {
     Utils.get("/contacts.json", params, function(result) {
@@ -66,26 +71,47 @@ var ContactsTable = React.createClass({
                     extraPad={false} />
     );
   },
+  loadMore: function() {
+    this.page = this.state.page + 1;
+    var params = this.mergeParams();
+    Utils.get("/contacts.json", params, function(result) {
+      if (result.contacts.length == 0) {
+        this.setState({hasMore: false});
+        return;
+      }
+      this.setState({
+        contacts: this.state.contacts.concat(result.contacts),
+        page: this.page
+      });
+    });
+  },
   render: function() {
+    var InfiniteScroll = React.addons.InfiniteScroll;
     return (
-      <Table
-        results={this.state.contacts}
-        columns={this.getColumns()}
-        useCustomRowComponent={false}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sort}
-        handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
-        actionItems={this.actionItems()}
-        extraPadding={true}
-        showHeaders={true}
-        searchPlaceholder="Search Contacts..."
-        onClick={this.goToContact}
-        actionButton={this.getActionButton()}
-        handleCheckAllChanged={this.toggleCheckAll}
-      />
+      <InfiniteScroll
+        pageStart={this.state.page}
+        loadMore={this.loadMore}
+        hasMore={this.state.hasMore}
+        loader={<div className="loader">Loading...</div>}>
+        <Table
+          results={this.state.contacts}
+          columns={this.getColumns()}
+          useCustomRowComponent={false}
+          checkedItems={this.state.checkedItems}
+          rowChanged={this.rowChanged}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sort}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={true}
+          showHeaders={true}
+          searchPlaceholder="Search Contacts..."
+          onClick={this.goToContact}
+          actionButton={this.getActionButton()}
+          handleCheckAllChanged={this.toggleCheckAll}
+        />
+      </InfiniteScroll>
     );
   }
 });

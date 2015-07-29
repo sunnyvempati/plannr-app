@@ -131,6 +131,9 @@ var Table = React.createClass({
       </div>
     );
   },
+  elementInfiniteLoad: function() {
+    return null;
+  },
   render: function() {
     var tableRows = this.props.useCustomRowComponent ? this.props.customRows : this.getRows();
     var message = tableRows.length == 0 ? "No items" : "";

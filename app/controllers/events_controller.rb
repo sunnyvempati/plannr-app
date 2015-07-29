@@ -36,6 +36,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new event_params
     render_entity @event do
+      # copying from template
       EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
   end
