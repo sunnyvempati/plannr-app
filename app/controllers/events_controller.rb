@@ -34,7 +34,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new event_params
+    @event = Event.new
+    template_event = template_params[:parent_event_id]
+    if template_event
+      template = Event.find(template_event)
+      @event = template.copy(template_params)
+    end
+    @event.assign_attributes(event_params)
     render_entity @event do
       EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
@@ -68,11 +74,20 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status).merge(owner: current_user)
+    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status, :parent_id).merge(owner: current_user)
   end
 
   def mass_delete_params
     params.require(:destroy_opts).permit(ids: [])
+  end
+
+  def template_params
+    # event_id: uuid
+    # contacts: bool (if they should be copied or not)
+    # vendors: bool
+    # tasks: bool
+    # comments: bool
+    params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments) if params[:template]
   end
 
   def model

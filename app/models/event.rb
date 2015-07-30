@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   has_many :attachments, dependent: :destroy
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
+  belongs_to :parent, class_name: "Event"
 
   validates :name, presence: true
   validate :dates
@@ -52,6 +53,18 @@ class Event < ActiveRecord::Base
   scope :with_status, lambda { |status|
     where(status: status)
   }
+
+  def copy(template_params)
+    self.class.amoeba do
+      set parent_id: template_params[:parent_event_id]
+      include_association :event_contacts if template_params[:contacts] == 'true' # is there a better way to do this? params comes in as string
+      include_association :event_vendors if template_params[:vendors] == 'true'
+      include_association :tasks if template_params[:tasks] == 'true'
+      include_association :comments if template_params[:comments] == 'true'
+    end
+    # this will create a duplicate of the instance with the above config
+    amoeba_dup
+  end
 
   def self.default_filter_options
     {

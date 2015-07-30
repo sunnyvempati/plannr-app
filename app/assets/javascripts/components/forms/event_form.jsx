@@ -26,7 +26,8 @@ var EventForm = React.createClass({
         'location': inputs.location,
         'client_id': inputs.client,
         'budget': inputs.budget
-      }
+      },
+      'template': inputs.template
     };
   },
   onSuccess: function (result) {
@@ -44,7 +45,15 @@ var EventForm = React.createClass({
     var budget = data.event.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
+    console.log(data);
     this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
+  },
+  renderTemplateFields: function() {
+    if (this.props.routeVerb == "POST") {
+      return (
+        <EventTemplateInput name="template" value={{}} />
+      );
+    }
   },
   render: function () {
     this.putUrl = this.props.model && this.props.model.id && "/events/" + this.props.model.id + ".json";
@@ -60,6 +69,7 @@ var EventForm = React.createClass({
               onInvalid={this.disableButton}
               authToken={this.props.authToken}
               id={id}>
+          {this.renderTemplateFields()}
           <FormInput
             name="name"
             id="event_name"

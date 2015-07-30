@@ -11,6 +11,11 @@ var AutocompleteInput = {
       focus: false // this is used when you click editAssignedTo
     };
   },
+  getDefaultProps: function() {
+    return {
+      autocompleteClassName: "Autocomplete"
+    };
+  },
   componentDidMount: function() {
     var assignedToValue = this.getValue();
     if (assignedToValue) this.retrieveItem(assignedToValue);

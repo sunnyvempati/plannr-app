@@ -11,6 +11,13 @@ class Task < ActiveRecord::Base
   include TaskStatuses
   validates :status, inclusion: { in: [TODO, COMPLETED] }
 
+  amoeba do
+    enable
+    set status: TODO
+    nullify :assigned_to_id
+    nullify :deadline
+  end
+
   # scopes
   scope :with_event_id, lambda { |event_id|
     where(event_id: [event_id]).includes(:event)

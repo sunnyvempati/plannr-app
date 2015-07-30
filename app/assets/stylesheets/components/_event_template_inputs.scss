@@ -1,0 +1,24 @@
+.EventTemplateInputContainer {
+  padding: $size-increment*2 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  height: 52px;
+  overflow: hidden;
+  transition: height 500ms;
+  &.show {
+    height: 306px;
+  }
+}
+
+.TemplateText {
+  @include font($button-font, normal, 0);
+  color: rgba(0,0,0,0.5);
+  &.pad {
+    padding: $size-increment*2 0;
+  }
+}
+
+.TemplateCheckboxes {
+  >* {
+    padding: 4px 0;
+  }
+}
