@@ -2,9 +2,11 @@
   padding: $size-increment*2 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   height: 52px;
-  overflow: hidden;
   transition: height 500ms;
-  &.show {
+  &.showEvent {
+    height: 150px;
+  }
+  &.showAll {
     height: 306px;
   }
 }

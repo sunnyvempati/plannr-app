@@ -46,14 +46,13 @@ var EventForm = React.createClass({
     var budget = data.event.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
-    console.log(data);
     this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
   },
   setEventState: function(item) {
     var eventTemplate = {
       name: "Copy of " + item.name,
       location: item.location,
-      client: item.client.id,
+      client_id: item.client.id,
       budget: item.budget,
       description: item.description
     };

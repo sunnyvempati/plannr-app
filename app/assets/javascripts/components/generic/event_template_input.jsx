@@ -5,13 +5,15 @@ var EventTemplateInput = React.createClass({
   ],
   getInitialState: function() {
     return {
-      useTemplate: false
+      useTemplate: false,
+      eventSelected: false,
     };
   },
   eventSelected: function(item) {
     var value = this.getValue();
     value.parent_event_id = item.id;
     this.setValue(value);
+    this.setState({eventSelected: true});
     this.props.eventTemplateSelected(item);
   },
   activateTemplate: function(checked) {
@@ -33,37 +35,44 @@ var EventTemplateInput = React.createClass({
     var value = this.getValue();
     var containerClasses = classNames({
       'EventTemplateInputContainer': true,
-      'show': this.state.useTemplate
+      'showEvent': this.state.useTemplate,
+      'showAll': this.state.eventSelected
     });
+    var eventInputClass = this.state.useTemplate ? "" : "u-hidden";
+    var checkboxClass = this.state.eventSelected ? "" : "u-hidden";
     return (
       <div className={containerClasses}>
         <CheckboxInput checked={this.state.useTemplate}
                        checkboxDisplay={<div className="TemplateText">Use previous event as a template</div>}
                        onChange={this.activateTemplate} />
-        <TaskEventInput
-          name='parent_id'
-          id='task_parent_id'
-          label='Event to use as template'
-          value={value.parent_event_id}
-          handleItemSelected={this.eventSelected} />
-        <div className="TemplateText pad"> What should be copied over? </div>
-        <div className="TemplateCheckboxes">
-          <CheckboxInput checked={!!value.contacts}
-                         checkboxDisplay={<div className="TemplateText">Contacts</div>}
-                         value="contacts"
-                         onChange={this.handleTemplateItemsCheckChange} />
-          <CheckboxInput checked={!!value.vendors}
-                         value="vendors"
-                         checkboxDisplay={<div className="TemplateText">Vendors</div>}
-                         onChange={this.handleTemplateItemsCheckChange} />
-          <CheckboxInput checked={!!value.tasks}
-                         value="tasks"
-                         checkboxDisplay={<div className="TemplateText">Tasks</div>}
-                         onChange={this.handleTemplateItemsCheckChange} />
-          <CheckboxInput checked={!!value.comments}
-                         value="comments"
-                         checkboxDisplay={<div className="TemplateText">Comments</div>}
-                         onChange={this.handleTemplateItemsCheckChange} />
+        <div className={eventInputClass}>
+          <TaskEventInput
+            name='parent_id'
+            id='task_parent_id'
+            label='Event to use as template'
+            value={value.parent_event_id}
+            handleItemSelected={this.eventSelected} />
+        </div>
+        <div className={checkboxClass}>
+          <div className="TemplateText pad"> What should be copied over? </div>
+          <div className="TemplateCheckboxes">
+            <CheckboxInput checked={!!value.contacts}
+                           checkboxDisplay={<div className="TemplateText">Contacts</div>}
+                           value="contacts"
+                           onChange={this.handleTemplateItemsCheckChange} />
+            <CheckboxInput checked={!!value.vendors}
+                           value="vendors"
+                           checkboxDisplay={<div className="TemplateText">Vendors</div>}
+                           onChange={this.handleTemplateItemsCheckChange} />
+            <CheckboxInput checked={!!value.tasks}
+                           value="tasks"
+                           checkboxDisplay={<div className="TemplateText">Tasks</div>}
+                           onChange={this.handleTemplateItemsCheckChange} />
+            <CheckboxInput checked={!!value.comments}
+                           value="comments"
+                           checkboxDisplay={<div className="TemplateText">Comments</div>}
+                           onChange={this.handleTemplateItemsCheckChange} />
+          </div>
         </div>
       </div>
     );

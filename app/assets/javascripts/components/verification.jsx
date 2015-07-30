@@ -13,7 +13,6 @@ var Verification = React.createClass({
     location.href = "/login";
   },
   render: function() {
-    console.log(this.props.userEmail);
     return (
       <div className="Verification">
         <div className="Verification-text">

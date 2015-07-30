@@ -20,6 +20,10 @@ var AutocompleteInput = {
     var assignedToValue = this.getValue();
     if (assignedToValue) this.retrieveItem(assignedToValue);
   },
+  componentWillReceiveProps: function(nextProps) {
+    var assignedToValue = nextProps.value;
+    if (assignedToValue) this.retrieveItem(assignedToValue);
+  },
   editField: function() {
     this.setState({itemSet: false, itemDisplay: null, items: [], focus: true});
   },
