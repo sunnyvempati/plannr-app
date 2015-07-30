@@ -12,6 +12,7 @@ var EventTemplateInput = React.createClass({
     var value = this.getValue();
     value.parent_event_id = item.id;
     this.setValue(value);
+    this.props.eventTemplateSelected(item);
   },
   activateTemplate: function(checked) {
     this.setValue({
