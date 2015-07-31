@@ -30,6 +30,7 @@ gem 'fog'
 gem 'require_all'
 
 gem 'filterrific'
+gem 'deep_cloneable'
 
 group 'development' do
 	gem 'pry'

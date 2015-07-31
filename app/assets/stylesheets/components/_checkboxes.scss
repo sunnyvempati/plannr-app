@@ -4,7 +4,6 @@
   height: 18px;
   cursor: pointer;
   transform: translateZ(0);
-
 }
 
 .Checkbox {
@@ -15,9 +14,9 @@
 .Checkbox-check {
   position: relative;
   box-sizing: border-box;
-  height: 100%;
   border: solid 2px #5a5a5a;
   border-radius: 2px;
+  height: 18px; width: 18px;
   pointer-events: none;
   transition: background-color 140ms, border-color 140ms;
   &.is-checked {

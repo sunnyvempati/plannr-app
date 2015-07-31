@@ -22,5 +22,6 @@ var TaskEventInput = React.createClass({
   itemSelected: function(item) {
     this.setValue(item.id);
     this.setState({itemSet: true, itemDisplay: item.name});
+    if (this.props.handleItemSelected) this.props.handleItemSelected(item);
   }
 });
