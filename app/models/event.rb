@@ -54,13 +54,13 @@ class Event < ActiveRecord::Base
     where(status: status)
   }
 
-  def copy(template_params)
+  def copy(options)
     self.class.amoeba do
-      set parent_id: template_params[:parent_event_id]
-      include_association :event_contacts if template_params[:contacts] == 'true' # is there a better way to do this? params comes in as string
-      include_association :event_vendors if template_params[:vendors] == 'true'
-      include_association :tasks if template_params[:tasks] == 'true'
-      include_association :comments if template_params[:comments] == 'true'
+      set parent_id: options[:parent_event_id]
+      include_association :event_contacts if options[:contacts] == 'true'
+      include_association :event_vendors if options[:vendors] == 'true'
+      include_association :tasks if options[:tasks] == 'true'
+      include_association :comments if options[:comments] == 'true'
     end
     # this will create a duplicate of the instance with the above config
     amoeba_dup

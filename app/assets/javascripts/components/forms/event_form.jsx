@@ -52,7 +52,7 @@ var EventForm = React.createClass({
     var eventTemplate = {
       name: "Copy of " + item.name,
       location: item.location,
-      client_id: item.client.id,
+      client_id: item.client && item.client.id,
       budget: item.budget,
       description: item.description
     };
