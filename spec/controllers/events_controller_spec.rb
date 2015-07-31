@@ -51,11 +51,12 @@ RSpec.describe EventsController, type: :controller do
       let(:template_event) { FactoryGirl.create(:event) }
       let(:template_params) do
         {
+          # booleans need to strings to mimic serialized json
           parent_event_id: template_event.id,
-          contacts: true,
-          vendors: true,
-          comments: true,
-          tasks: true
+          contacts: 'true',
+          vendors: 'false',
+          comments: 'true',
+          tasks: 'true'
         }
       end
       context 'all entities' do
