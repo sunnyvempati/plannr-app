@@ -15,5 +15,5 @@
 //= require blueimp-file-upload/js/jquery.iframe-transport
 //= require blueimp-file-upload/js/jquery.fileupload
 //= require react-intl
-//= require react_infinite_scroll.min
+//= require infinite_scroll
 //= require components

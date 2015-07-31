@@ -3,7 +3,7 @@ class AttachmentsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @attachments = @filter_sort.find
+    @attachments = @filter_sort.find.page(params[:page])
     respond_to do |format|
       format.html
       format.json { render json: @attachments }

@@ -4,7 +4,8 @@ var VendorsTable = React.createClass({
     ToastMessages,
     Router.Navigation,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
   propTypes: {
     currentUser: React.PropTypes.object
@@ -66,6 +67,21 @@ var VendorsTable = React.createClass({
                     svgClass='createVendor'
                     extraPad={false} />
     );
+  },
+  fetchNextPage: function(nextPage) {
+    if (!this.state.hasMore) return;
+    this.page = nextPage;
+    var params = this.mergeParams();
+    Utils.get("/vendors.json", params, function(result) {
+      if (result.vendors.length == 0) {
+        this.setState({hasMore: false});
+        return;
+      }
+      this.setState({
+        vendors: this.state.vendors.concat(result.vendors),
+        page: this.page
+      });
+    }.bind(this));
   },
   render: function() {
     return (

@@ -4,13 +4,12 @@ var ContactsTable = React.createClass({
     ToastMessages,
     Router.Navigation,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
   getInitialState: function() {
     return {
-      contacts: [],
-      hasMore: true,
-      page: 0
+      contacts: []
     };
   },
   componentDidMount: function() {
@@ -71,8 +70,9 @@ var ContactsTable = React.createClass({
                     extraPad={false} />
     );
   },
-  loadMore: function() {
-    this.page = this.state.page + 1;
+  fetchNextPage: function(nextPage) {
+    if (!this.state.hasMore) return;
+    this.page = nextPage;
     var params = this.mergeParams();
     Utils.get("/contacts.json", params, function(result) {
       if (result.contacts.length == 0) {
@@ -83,35 +83,28 @@ var ContactsTable = React.createClass({
         contacts: this.state.contacts.concat(result.contacts),
         page: this.page
       });
-    });
+    }.bind(this));
   },
   render: function() {
-    var InfiniteScroll = React.addons.InfiniteScroll;
     return (
-      <InfiniteScroll
-        pageStart={this.state.page}
-        loadMore={this.loadMore}
-        hasMore={this.state.hasMore}
-        loader={<div className="loader">Loading...</div>}>
-        <Table
-          results={this.state.contacts}
-          columns={this.getColumns()}
-          useCustomRowComponent={false}
-          checkedItems={this.state.checkedItems}
-          rowChanged={this.rowChanged}
-          sortItems={this.sortItems()}
-          handleSortClick={this.sort}
-          handleSearch={this.search}
-          showActions={this.state.checkedItems.length > 0}
-          actionItems={this.actionItems()}
-          extraPadding={true}
-          showHeaders={true}
-          searchPlaceholder="Search Contacts..."
-          onClick={this.goToContact}
-          actionButton={this.getActionButton()}
-          handleCheckAllChanged={this.toggleCheckAll}
-        />
-      </InfiniteScroll>
+      <Table
+        results={this.state.contacts}
+        columns={this.getColumns()}
+        useCustomRowComponent={false}
+        checkedItems={this.state.checkedItems}
+        rowChanged={this.rowChanged}
+        sortItems={this.sortItems()}
+        handleSortClick={this.sort}
+        handleSearch={this.search}
+        showActions={this.state.checkedItems.length > 0}
+        actionItems={this.actionItems()}
+        extraPadding={true}
+        showHeaders={true}
+        searchPlaceholder="Search Contacts..."
+        onClick={this.goToContact}
+        actionButton={this.getActionButton()}
+        handleCheckAllChanged={this.toggleCheckAll}
+      />
     );
   }
 });

@@ -1,4 +1,9 @@
 var FilterSort = {
+  getInitialState: function() {
+    return {
+      hasMore: true
+    };
+  },
   initializeFilterSort: function(defaultParams) {
     this.filterParams = defaultParams.filter;
     this.sortParams = defaultParams.sort;

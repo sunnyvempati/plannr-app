@@ -4,7 +4,7 @@ class EventVendorsController < ApplicationController
 
   def index
     serializer = filter_sort_params && filter_sort_params[:with_event_id] ? EventVendorWithVendorSerializer : EventVendorWithEventSerializer
-    @event_vendors = @filter_sort.find
+    @event_vendors = @filter_sort.find.page(params[:page])
     respond_to do |format|
       format.html
       format.json { render json: @event_vendors, each_serializer: serializer }

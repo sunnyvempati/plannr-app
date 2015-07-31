@@ -3,7 +3,8 @@ var TasksTable = React.createClass({
     TaskCheckboxRows,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
   defaultFilterSortParams: {
     sort: {sorted_by: 'deadline_asc'},
@@ -72,6 +73,21 @@ var TasksTable = React.createClass({
                     svgClass='createTask'
                     extraPad={true} />
     );
+  },
+  fetchNextPage: function(nextPage) {
+    if (!this.state.hasMore) return;
+    this.page = nextPage;
+    var params = this.mergeParams();
+    Utils.get("/tasks.json", params, function(result) {
+      if (result.tasks.length == 0) {
+        this.setState({hasMore: false});
+        return;
+      }
+      this.setState({
+        tasks: this.state.tasks.concat(result.tasks),
+        page: this.page
+      });
+    }.bind(this));
   },
   render: function() {
     return (

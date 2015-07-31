@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = @filter_sort.find
+    @events = @filter_sort.find.page(params[:page])
     respond_to do |format|
       format.html
       format.json { render_success @events }

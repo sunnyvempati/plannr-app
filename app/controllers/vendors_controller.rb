@@ -5,7 +5,7 @@ class VendorsController < ApplicationController
   before_action :set_vendor, only: [:show, :edit, :update, :destroy, :contacts]
 
   def index
-    @vendors = @filter_sort.find
+    @vendors = @filter_sort.find.page(params[:page])
     respond_to do |format|
       format.html
       format.json { render json: @vendors }

@@ -19,6 +19,8 @@ module PlannrApp
     config.react.addons = true
     config.action_controller.default_url_options = { :trailing_slash => true }
     config.active_record.raise_in_transactional_callbacks = true
+
+    WillPaginate.per_page = 10
   end
 
 end
