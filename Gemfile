@@ -31,6 +31,8 @@ gem 'require_all'
 
 gem 'filterrific'
 
+gem 'log4r'
+
 group 'development' do
 	gem 'pry'
   gem 'pry-rails'
