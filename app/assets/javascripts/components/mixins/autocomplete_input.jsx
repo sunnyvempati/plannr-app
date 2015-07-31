@@ -11,9 +11,21 @@ var AutocompleteInput = {
       focus: false // this is used when you click editAssignedTo
     };
   },
+  getDefaultProps: function() {
+    return {
+      autocompleteClassName: "Autocomplete"
+    };
+  },
   componentDidMount: function() {
     var assignedToValue = this.getValue();
-    if (assignedToValue) this.retrieveItem(assignedToValue);
+    !!assignedToValue ? this.retrieveItem(assignedToValue) : this.resetState();
+  },
+  componentWillReceiveProps: function(nextProps) {
+    var assignedToValue = nextProps.value;
+    !!assignedToValue ? this.retrieveItem(assignedToValue) : this.resetState();
+  },
+  resetState: function() {
+    this.setState({itemSet: false, itemDisplay: null});
   },
   editField: function() {
     this.setState({itemSet: false, itemDisplay: null, items: [], focus: true});

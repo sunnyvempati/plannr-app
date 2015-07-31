@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   has_many :attachments, dependent: :destroy
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
+  belongs_to :parent, class_name: "Event"
 
   validates :name, presence: true
   validate :dates
@@ -52,6 +53,24 @@ class Event < ActiveRecord::Base
   scope :with_status, lambda { |status|
     where(status: status)
   }
+
+  def copy(options)
+    included_options = []
+    included_options << :event_contacts if options[:contacts]
+    included_options << :event_vendors if options[:vendors]
+    included_options << :tasks if options[:tasks]
+    included_options << :comments if options[:comments]
+    cloned_event = deep_clone include: included_options
+    cloned_event.parent_id = options[:parent_event_id]
+    cloned_event.status = ACTIVE
+    cloned_event.tasks.each do |task|
+      task.deadline = nil
+      task.status = TaskStatuses::TODO
+      task.assigned_to_id = nil
+    end
+    cloned_event
+    # this will create a duplicate of the instance with the above config
+  end
 
   def self.default_filter_options
     {

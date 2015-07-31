@@ -31,6 +31,7 @@ gem 'require_all'
 
 gem 'filterrific'
 gem 'will_paginate'
+gem 'deep_cloneable'
 
 group 'development' do
 	gem 'pry'
