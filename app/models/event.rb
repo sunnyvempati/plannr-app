@@ -55,15 +55,21 @@ class Event < ActiveRecord::Base
   }
 
   def copy(options)
-    self.class.amoeba do
-      set parent_id: options[:parent_event_id]
-      include_association :event_contacts if options[:contacts]
-      include_association :event_vendors if options[:vendors]
-      include_association :tasks if options[:tasks]
-      include_association :comments if options[:comments]
+    included_options = []
+    included_options << :event_contacts if options[:contacts]
+    included_options << :event_vendors if options[:vendors]
+    included_options << :tasks if options[:tasks]
+    included_options << :comments if options[:comments]
+    cloned_event = deep_clone include: included_options
+    cloned_event.parent_id = options[:parent_event_id]
+    cloned_event.status = ACTIVE
+    cloned_event.tasks.each do |task|
+      task.deadline = nil
+      task.status = TaskStatuses::TODO
+      task.assigned_to_id = nil
     end
+    cloned_event
     # this will create a duplicate of the instance with the above config
-    amoeba_dup
   end
 
   def self.default_filter_options

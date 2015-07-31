@@ -54,23 +54,64 @@ RSpec.describe EventsController, type: :controller do
           # booleans need to strings to mimic serialized json
           parent_event_id: template_event.id,
           contacts: 'true',
-          vendors: 'false',
+          vendors: 'true',
           comments: 'true',
           tasks: 'true'
         }
+      end
+      before do
+        2.times do
+          FactoryGirl.create(:event_contact, event: template_event)
+          FactoryGirl.create(:event_vendor, event: template_event)
+          FactoryGirl.create(:task, event: template_event)
+          FactoryGirl.create(:comment,
+                             commentable_type: 'Event',
+                             commentable_id: template_event.id)
+        end
       end
       context 'all entities' do
         before do
           event_params.merge!(template: template_params)
           post :create, event_params
         end
-
-        let(:created_event) { json_response['event'] }
-
-        it 'successfully creates event using template' do
+        let(:created_event) { Event.find(json_response['event']['id']) }
+        it 'successfully create event' do
+          binding.pry
           expect(response).to be_success
-          expect(created_event['parent_id']).to eq template_event.id
-          expect(created_event['name']).to eq event_params[:event][:name]
+          expect(created_event.parent_id).to eq template_event.id
+          expect(created_event.name).to eq event_params[:event][:name]
+          expect(created_event.contacts).to eq template_event.contacts
+          expect(created_event.vendors).to eq template_event.vendors
+          expect(created_event.tasks.count).to eq 2
+          expect(created_event.tasks.first.deadline).to_not be
+          expect(created_event.comments.count).to eq 2
+        end
+      end
+      context 'without contacts' do
+        before do
+          template_params[:contacts] = 'false'
+          event_params.merge!(template: template_params)
+          post :create, event_params
+        end
+        let(:created_event) { Event.find(json_response['event']['id']) }
+        it 'successfully creates event' do
+          expect(response).to be_success
+          expect(created_event.contacts).to be_empty
+        end
+      end
+      context 'without vendors and tasks' do
+        before do
+          template_params[:vendors] = 'false'
+          template_params[:tasks] = 'false'
+          event_params.merge!(template: template_params)
+          post :create, event_params
+        end
+        let(:created_event) { Event.find(json_response['event']['id']) }
+        it 'successfully creates event' do
+          expect(response).to be_success
+          expect(created_event.contacts).to eq template_event.contacts
+          expect(created_event.vendors).to be_empty
+          expect(created_event.tasks).to be_empty
         end
       end
     end

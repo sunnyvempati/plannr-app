@@ -30,7 +30,7 @@ gem 'fog'
 gem 'require_all'
 
 gem 'filterrific'
-gem 'amoeba'
+gem 'deep_cloneable'
 
 group 'development' do
 	gem 'pry'
