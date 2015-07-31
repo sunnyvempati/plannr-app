@@ -35,7 +35,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new
-    template_event = template_params[:parent_event_id]
+    template_event = template_params && template_params[:parent_event_id]
     if template_event
       template = Event.find(template_event)
       @event = template.copy(template_params)
@@ -74,7 +74,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status, :parent_id).merge(owner: current_user)
+    params.require(:event).permit(:name, :start_date, :end_date, :location, :client_id, :budget, :description, :status).merge(owner: current_user)
   end
 
   def mass_delete_params
@@ -87,7 +87,12 @@ class EventsController < ApplicationController
     # vendors: bool
     # tasks: bool
     # comments: bool
-    params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments) if params[:template]
+    t_params = params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments) if params[:template]
+    t_params[:contacts] = t_params[:contacts] == 'true'
+    t_params[:vendors] = t_params[:vendors] == 'true'
+    t_params[:tasks] = t_params[:tasks] == 'true'
+    t_params[:comments] = t_params[:comments] == 'true'
+    t_params
   end
 
   def model

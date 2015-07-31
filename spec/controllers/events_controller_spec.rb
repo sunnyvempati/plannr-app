@@ -47,26 +47,29 @@ RSpec.describe EventsController, type: :controller do
       end
     end
 
-    describe "with template" do
-      let(:event_to_copy_from) { FactoryGirl.create(:event) }
+    describe 'with template' do
+      let(:template_event) { FactoryGirl.create(:event) }
       let(:template_params) do
         {
+          parent_event_id: template_event.id,
           contacts: true,
           vendors: true,
           comments: true,
           tasks: true
         }
       end
-      context "all entities" do
+      context 'all entities' do
         before do
           event_params.merge!(template: template_params)
-          event_params[:event][:parent_id] = event_to_copy_from.id
           post :create, event_params
         end
 
-        it "successfully creates event using template" do
+        let(:created_event) { json_response['event'] }
+
+        it 'successfully creates event using template' do
           expect(response).to be_success
-          binding.pry
+          expect(created_event['parent_id']).to eq template_event.id
+          expect(created_event['name']).to eq event_params[:event][:name]
         end
       end
     end

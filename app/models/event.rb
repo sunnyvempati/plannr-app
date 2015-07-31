@@ -57,10 +57,10 @@ class Event < ActiveRecord::Base
   def copy(options)
     self.class.amoeba do
       set parent_id: options[:parent_event_id]
-      include_association :event_contacts if options[:contacts] == 'true'
-      include_association :event_vendors if options[:vendors] == 'true'
-      include_association :tasks if options[:tasks] == 'true'
-      include_association :comments if options[:comments] == 'true'
+      include_association :event_contacts if options[:contacts]
+      include_association :event_vendors if options[:vendors]
+      include_association :tasks if options[:tasks]
+      include_association :comments if options[:comments]
     end
     # this will create a duplicate of the instance with the above config
     amoeba_dup
