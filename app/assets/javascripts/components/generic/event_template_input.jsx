@@ -24,7 +24,7 @@ var EventTemplateInput = React.createClass({
       comments: checked,
       tasks: checked
     });
-    this.setState({useTemplate: checked});
+    this.setState({useTemplate: checked, eventSelected: false});
   },
   handleTemplateItemsCheckChange: function(checked, entity) {
     var value = this.getValue();
@@ -35,17 +35,18 @@ var EventTemplateInput = React.createClass({
     var value = this.getValue();
     var containerClasses = classNames({
       'EventTemplateInputContainer': true,
-      'showEvent': this.state.useTemplate,
-      'showAll': this.state.eventSelected
+      'is-inactive': !this.state.useTemplate && !this.state.eventSelected,
+      'is-active': this.state.useTemplate,
+      'is-eventSelected': this.state.eventSelected
     });
-    var eventInputClass = this.state.useTemplate ? "" : "u-hidden";
-    var checkboxClass = this.state.eventSelected ? "" : "u-hidden";
+    var eventInputClass = this.state.useTemplate ? "" : "hide";
+    var checkboxClass = this.state.eventSelected ? "" : "hide";
     return (
       <div className={containerClasses}>
         <CheckboxInput checked={this.state.useTemplate}
                        checkboxDisplay={<div className="TemplateText">Use previous event as a template</div>}
                        onChange={this.activateTemplate} />
-        <div className={eventInputClass}>
+        <div className={"TemplateDisplay " + eventInputClass}>
           <TaskEventInput
             name='parent_id'
             id='task_parent_id'
@@ -53,7 +54,7 @@ var EventTemplateInput = React.createClass({
             value={value.parent_event_id}
             handleItemSelected={this.eventSelected} />
         </div>
-        <div className={checkboxClass}>
+        <div className={"TemplateDisplay " + checkboxClass}>
           <div className="TemplateText pad"> What should be copied over? </div>
           <div className="TemplateCheckboxes">
             <CheckboxInput checked={!!value.contacts}

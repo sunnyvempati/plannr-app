@@ -1,13 +1,23 @@
 .EventTemplateInputContainer {
   padding: $size-increment*2 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  height: 52px;
   transition: height 500ms;
-  &.showEvent {
+  &.is-inactive {
+    height: 52px;
+  }
+  &.is-active {
     height: 150px;
   }
-  &.showAll {
+  &.is-eventSelected {
     height: 306px;
+  }
+}
+
+.TemplateDisplay {
+  transition: opacity 500ms;
+  opacity: 1;
+  &.hide {
+    opacity: 0;
   }
 }
 
