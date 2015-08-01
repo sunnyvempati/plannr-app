@@ -28,10 +28,6 @@ var InfiniteScrollMixin = {
     this.detachScrollListener();
   },
 
-  componentDidMount: function() {
-    this.attachScrollListener();
-  },
-
   componentDidUpdate: function() {
     this.attachScrollListener();
   },

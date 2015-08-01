@@ -3,34 +3,35 @@ var EventAttachmentsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
   propTypes: {
     setServerMessage: React.PropTypes.func
   },
-  getInitialState: function () {
+  defaultFilterSortParams: function() {
     return {
-      eventAttachments: []
-    };
-  },
-  componentDidMount: function () {
-    var defaultParams = {
       sort: {sorted_by: 'file_name_asc'},
       filter: {with_event_id: this.props.eventId}
     };
-    this.initializeFilterSort(defaultParams);
   },
-  getTableData: function (params) {
-    Utils.get("/attachments.json", params, function (results) {
-      if (this.isMounted()) {
-        this.setState({
-          eventAttachments: results.attachments
-        })
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
+    Utils.get("/attachments.json", params, function(result) {
+      if (result.attachments.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
       }
-    }.bind(this))
+      this.setState({
+        data: this.state.data.concat(result.attachments),
+        page: this.page
+      });
+    }.bind(this));
   },
   handleAssociation: function (attachment) {
-    this.reloadData();
+    this.resetPage();
     ToastMessages.toast(attachment.file_name + " has been added to this event.");
   },
   columns: function () {
@@ -53,8 +54,8 @@ var EventAttachmentsTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post("attachments/mass_delete", destroyOpts, function () {
       this.toast(deletionIds.length + " attachment(s) removed from event.");
-      var newData = this.spliceResults(this.state.eventAttachments, deletionIds);
-      this.setState({eventAttachments: newData});
+      var newData = this.spliceResults(this.state.data, deletionIds);
+      this.setState({data: newData});
     }.bind(this));
   },
   handleActionClick: function (item, attachmentId) {
@@ -87,7 +88,7 @@ var EventAttachmentsTable = React.createClass({
   },
   getCustomRows: function () {
     var hideCheckbox = this.state.checkedItems.length <= 0;
-    return this.state.eventAttachments.map(function (attachment) {
+    return this.state.data.map(function (attachment) {
       var checked = this.state.checkedItems.indexOf(attachment.id) > -1;
       return (
           <div className="Table-row" key={attachment.id}>
@@ -125,7 +126,7 @@ var EventAttachmentsTable = React.createClass({
   render: function () {
     return (
         <Table
-            results={this.state.eventAttachments}
+            results={this.state.data}
             columns={this.columns()}
             useCustomRowComponent={true}
             showHeaders={true}

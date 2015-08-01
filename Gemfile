@@ -30,7 +30,7 @@ gem 'fog'
 gem 'require_all'
 
 gem 'filterrific'
-gem 'will_paginate'
+gem 'kaminari'
 gem 'deep_cloneable'
 
 group 'development' do

@@ -3,27 +3,32 @@ var EventTasksTable = React.createClass({
     TaskCheckboxRows,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    FixedInfiniteScrollMixin
   ],
   propTypes: {
     eventId: React.PropTypes.string.isRequired,
     authToken: React.PropTypes.string.isRequired
   },
-  componentDidMount: function() {
-    var defaultParams = {
+  defaultFilterSortParams: function() {
+    return {
       sort: {sorted_by: 'deadline_asc'},
       filter: {with_status: 1, with_event_id: this.props.eventId}
-    }
-    this.initializeFilterSort(defaultParams);
+    };
   },
-  getTableData: function (params) {
-    Utils.get("/tasks.json", params, function (results) {
-      if (this.isMounted()) {
-        this.setState({
-          tasks: results.tasks
-        });
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
+    Utils.get("/tasks.json", params, function(result) {
+      if (result.tasks.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
       }
-    }.bind(this))
+      this.setState({
+        data: this.state.data.concat(result.tasks)
+      });
+    }.bind(this));
   },
   getColumns: function () {
     return [
@@ -51,8 +56,8 @@ var EventTasksTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: [id]}};
     Utils.post('/tasks/mass_delete', destroyOpts, function (success_result) {
       this.toast('Task deleted successfully.');
-      var newData = this.spliceResults(this.state.tasks, [id]);
-      this.setState({tasks: newData});
+      var newData = this.spliceResults(this.state.data, [id]);
+      this.setState({data: newData});
     }.bind(this));
   },
   filterWithEvent: function(params) {

@@ -12,7 +12,8 @@ var EventContactAutocomplete = React.createClass({
     var params = {
       filter_sort: {
         search_query: term,
-        not_in_event_id: this.props.eventId
+        not_in_event_id: this.props.eventId,
+        with_search_limit: 5
       }
     };
     $.get("/contacts.json", params, function(result) {

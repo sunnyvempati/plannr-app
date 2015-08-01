@@ -10,17 +10,24 @@ var VendorsTable = React.createClass({
   propTypes: {
     currentUser: React.PropTypes.object
   },
-  getInitialState: function() {
+  defaultFilterSortParams: function() {
     return {
-      vendors: []
+      sort: {sorted_by: 'name_asc'}
     };
   },
-  componentDidMount: function() {
-    this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
-  },
-  getTableData: function(params) {
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
     Utils.get("/vendors.json", params, function(result) {
-      this.setState({vendors: result.vendors});
+      if (result.vendors.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
+      }
+      this.setState({
+        data: this.state.data.concat(result.vendors),
+        page: this.page
+      });
     }.bind(this));
   },
   getColumns: function() {
@@ -50,8 +57,8 @@ var VendorsTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post('/vendors/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) deleted.");
-      var newData = this.spliceResults(this.state.vendors, deletionIds);
-      this.setState({vendors: newData, checkedItems: []});
+      var newData = this.spliceResults(this.state.data, deletionIds);
+      this.setState({data: newData, checkedItems: []});
     }.bind(this));
   },
   goToVendor: function(data) {
@@ -68,25 +75,10 @@ var VendorsTable = React.createClass({
                     extraPad={false} />
     );
   },
-  fetchNextPage: function(nextPage) {
-    if (!this.state.hasMore) return;
-    this.page = nextPage;
-    var params = this.mergeParams();
-    Utils.get("/vendors.json", params, function(result) {
-      if (result.vendors.length == 0) {
-        this.setState({hasMore: false});
-        return;
-      }
-      this.setState({
-        vendors: this.state.vendors.concat(result.vendors),
-        page: this.page
-      });
-    }.bind(this));
-  },
   render: function() {
     return (
       <Table
-        results={this.state.vendors}
+        results={this.state.data}
         columns={this.getColumns()}
         useCustomRowComponent={false}
         showHeaders={true}

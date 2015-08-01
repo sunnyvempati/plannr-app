@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
   before_action :set_event, only: [:contacts_not_in_event]
 
   def index
-    @contacts = @filter_sort.find.page(params[:page])
+    @contacts = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
     respond_to do |format|
       format.html
       format.json { render json: @contacts }

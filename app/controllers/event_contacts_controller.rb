@@ -4,7 +4,7 @@ class EventContactsController < ApplicationController
 
   def index
     serializer = filter_sort_params && filter_sort_params[:with_event_id] ? EventContactWithContactSerializer : EventContactWithEventSerializer
-    @event_contacts = @filter_sort.find.page(params[:page])
+    @event_contacts = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
     respond_to do |format|
       format.html
       format.json { render json: @event_contacts, each_serializer: serializer }
