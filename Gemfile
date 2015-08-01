@@ -33,12 +33,15 @@ gem 'filterrific'
 gem 'kaminari'
 gem 'deep_cloneable'
 
+gem 'statsd-ruby'
+gem 'hallmonitor'
+
 group 'development' do
-	gem 'pry'
+  gem 'pry'
   gem 'pry-rails'
-	gem 'pry-byebug'
+  gem 'pry-byebug'
   gem 'pry-remote'
-	gem 'guard-livereload', require: false
+  gem 'guard-livereload', require: false
   gem 'capistrano'
   gem 'capistrano-secrets-yml'
   gem 'capistrano-rbenv'
@@ -50,10 +53,10 @@ group 'development' do
 end
 
 group 'development', 'test' do
-	gem 'capybara'
-	gem 'selenium-webdriver'
-	gem 'rspec-rails', '~> 3.0'
-	gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
   gem 'shoulda'
   gem 'shoulda-matchers'
   # formats rspec output. Read more: http://jeffkreeftmeijer.com/2010/fuubar-the-instafailing-rspec-progress-bar-formatter/
