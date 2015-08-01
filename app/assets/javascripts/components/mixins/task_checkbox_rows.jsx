@@ -1,9 +1,4 @@
 var TaskCheckboxRows = {
-  getInitialState: function() {
-    return {
-      tasks: []
-    };
-  },
   handleCheck: function(checked, task_id) {
     var status = checked ? 2 : 1;
     var url = "/tasks/" + task_id + ".json";
@@ -16,14 +11,14 @@ var TaskCheckboxRows = {
     Utils.put(url, params, function(result) {
       var statusDisplay = status == 1 ? "To do" : "Completed";
       ToastMessages.toast("Task status changed: " + statusDisplay);
-      var newData = this.spliceResults(this.state.tasks, result.task.id);
-      this.setState({tasks: newData});
+      var newData = this.spliceResults(this.state.data, result.task.id);
+      this.setState({data: newData});
     }.bind(this));
   },
   // global shows event column
   getCustomRows: function(global, handleRowClick) {
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-    var rows =  this.state.tasks.map(function(task) {
+    var rows =  this.state.data.map(function(task) {
       return (
         <TaskRow data={task}
                  actionItems={this.actionItems()}
@@ -35,9 +30,7 @@ var TaskCheckboxRows = {
       )
     }.bind(this));
     return (
-      <ReactCSSTransitionGroup transitionName="TaskTableRow">
-        {rows}
-      </ReactCSSTransitionGroup>
+      <div>{rows}</div>
     )
   },
   spliceResults: function(data, ids) {
@@ -60,7 +53,7 @@ var TaskCheckboxRows = {
     var props = {
       model: {id: taskId},
       authToken: this.props.authToken,
-      onTaskChange: this.getTableData.bind(this, {status: 1}),
+      onTaskChange: this.resetPage,
       currentUserId: this.props.currentUserId
     };
     Modal.mount(props, ShowTaskModal);
@@ -75,7 +68,7 @@ var TaskCheckboxRows = {
     Modal.mount(props, EditTaskModal);
   },
   onTaskSuccess: function(task, createNew) {
-    this.getTableData({status: 1});
+    this.resetPage();
     createNew ? this.openCreateTaskModal() : this.openTaskModal(task.id);
   },
   goToTask: function(data) {

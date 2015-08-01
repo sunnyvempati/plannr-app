@@ -30,6 +30,8 @@ gem 'fog'
 gem 'require_all'
 
 gem 'filterrific'
+gem 'kaminari'
+gem 'deep_cloneable'
 
 gem 'log4r'
 

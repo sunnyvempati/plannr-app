@@ -62,6 +62,7 @@
     align-items: center;
     @include font($body-1-font, normal, 0);
     color: $black-half;
+    height: 60px;
 
     &Item {
       text-align: left;
@@ -123,6 +124,3 @@
 .TaskTableRow-leave.TaskTableRow-leave-active {
   opacity: 0.01;
 }
-
-
-

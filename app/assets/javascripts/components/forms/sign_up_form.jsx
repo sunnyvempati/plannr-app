@@ -24,7 +24,6 @@ var SignUpForm = React.createClass({
     }
   },
   onSuccess: function(response) {
-    console.log(response);
     location.href = "/need_verification?id=" + response.user.id;
   },
   render: function() {

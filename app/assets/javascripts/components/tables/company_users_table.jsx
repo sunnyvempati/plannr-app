@@ -3,20 +3,27 @@ var CompanyUserTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    FixedInfiniteScrollMixin
   ],
-  getInitialState: function() {
+  defaultFilterSortParams: function() {
     return {
-      users: []
+      sort: {sorted_by: 'first_name_asc'}
     };
   },
-  componentDidMount: function() {
-    this.initializeFilterSort({sort: {sorted_by: 'first_name_asc'}});
-
-  },
-  getTableData: function(params) {
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
     Utils.get("/users.json", params, function(result) {
-      this.setState({users: result.users});
+      if (result.users.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
+      }
+      this.setState({
+        data: this.state.data.concat(result.users),
+        page: this.page
+      });
     }.bind(this));
   },
   handleDelete: function(id) {
@@ -24,13 +31,13 @@ var CompanyUserTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post('/users/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " user(s) deleted successfully.");
-      var newData = this.spliceResults(this.state.users, deletionIds);
-      this.setState({users: newData, checkedItems: []});
+      var newData = this.spliceResults(this.state.data, deletionIds);
+      this.setState({data: newData, checkedItems: []});
     }.bind(this));
   },
   getCustomRows: function() {
     var hideCheckbox = this.state.checkedItems.length > 0 ? false : true;
-    return this.state.users.map(function(user) {
+    return this.state.data.map(function(user) {
       var checked = this.state.checkedItems.indexOf(user.id) > -1;
       return (
         <CompanyUserRow checked={checked}
