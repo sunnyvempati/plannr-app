@@ -10,9 +10,15 @@ class ApplicationController < ActionController::Base
   # sets current user as the tenant
   set_current_tenant_through_filter
   before_filter :set_company_tenant
+  before_filter :setup_logging_mdc
 
   def set_company_tenant
     set_current_tenant(current_user.company) if current_user
+  end
+
+  def setup_logging_mdc
+    Log4r::MDC.put('session', session.id)
+    Log4r::MDC.put('user_id', current_user.id) unless current_user.nil?
   end
 
   private
