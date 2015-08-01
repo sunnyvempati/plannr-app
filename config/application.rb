@@ -27,9 +27,13 @@ module PlannrApp
     path = File.expand_path("#{Rails.root}/log/#{Rails.env}.log")
     outputter = Log4r::FileOutputter.new('env_file_outputter', filename: path, trunc: false)
     outputter.formatter =formatter
-
-
     main_logger.outputters = [outputter]
+
+    # INFO or higher only for production
+    if Rails.env.production?
+      main_logger.level = Log4r::INFO
+      config.log_level = :info
+    end
 
     config.logger = Log4r::Logger.get('plannr_logger')
   end
