@@ -3,28 +3,28 @@ var EventVendorsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    FixedInfiniteScrollMixin
   ],
-  getInitialState: function() {
+  defaultFilterSortParams: function() {
     return {
-      eventVendors: []
-    };
-  },
-  componentDidMount: function() {
-    var defaultParams = {
       sort: {sorted_by: 'vendor_name_asc'},
       filter: {with_event_id: this.props.eventId}
     }
-    this.initializeFilterSort(defaultParams);
   },
-  getTableData: function(params) {
-    Utils.get("/event_vendors.json", params, function(results) {
-      if (this.isMounted()) {
-        this.setState({
-          eventVendors: results.event_vendors
-        })
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
+    Utils.get("/event_vendors.json", params, function(result) {
+      if (result.event_vendors.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
       }
-    }.bind(this))
+      this.setState({
+        data: this.state.data.concat(result.event_vendors)
+      });
+    }.bind(this));
   },
   getColumns: function() {
     return [
@@ -48,8 +48,8 @@ var EventVendorsTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post("vendors/mass_delete",destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " vendor(s) removed from event.");
-      var newData = this.spliceResults(this.state.eventVendors, deletionIds);
-      this.setState({eventVendors: newData, checkedItems: []});
+      var newData = this.spliceResults(this.state.data, deletionIds);
+      this.setState({data: newData, checkedItems: []});
     }.bind(this));
   },
   openVendorModal: function(data) {
@@ -62,7 +62,7 @@ var EventVendorsTable = React.createClass({
   },
   openAddModal: function() {
     var params = {
-      refreshData: this.reloadData,
+      refreshData: this.resetPage,
       eventId: this.props.eventId
     };
     var modal = React.createElement(AddVendorModal, params);
@@ -78,7 +78,7 @@ var EventVendorsTable = React.createClass({
   render: function() {
     return (
       <Table
-        results={this.state.eventVendors}
+        results={this.state.data}
         columns={this.getColumns()}
         useCustomRowComponent={false}
         showHeaders={true}

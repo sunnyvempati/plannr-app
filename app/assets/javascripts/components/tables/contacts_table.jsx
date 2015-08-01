@@ -4,19 +4,27 @@ var ContactsTable = React.createClass({
     ToastMessages,
     Router.Navigation,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
-  getInitialState: function() {
+  defaultFilterSortParams: function() {
     return {
-      contacts: []
+      sort: {sorted_by: 'name_asc'}
     };
   },
-  componentDidMount: function() {
-    this.initializeFilterSort({sort: {sorted_by: 'name_asc'}});
-  },
-  getTableData: function(params) {
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
     Utils.get("/contacts.json", params, function(result) {
-      this.setState({contacts: result.contacts});
+      if (result.contacts.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
+      }
+      this.setState({
+        data: this.state.data.concat(result.contacts),
+        page: this.page
+      });
     }.bind(this));
   },
   getColumns: function() {
@@ -48,8 +56,8 @@ var ContactsTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post('/contacts/mass_delete', destroyOpts, function(success_result) {
       this.toast(deletionIds.length + " contact(s) deleted.");
-      var newData = this.spliceResults(this.state.contacts, deletionIds);
-      this.setState({contacts: newData, checkedItems: []});
+      var newData = this.spliceResults(this.state.data, deletionIds);
+      this.setState({data: newData, checkedItems: []});
     }.bind(this));
   },
   goToContact: function(data) {
@@ -69,7 +77,7 @@ var ContactsTable = React.createClass({
   render: function() {
     return (
       <Table
-        results={this.state.contacts}
+        results={this.state.data}
         columns={this.getColumns()}
         useCustomRowComponent={false}
         checkedItems={this.state.checkedItems}

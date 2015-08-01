@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = @filter_sort.find
+    @events = @filter_sort.find.page(params[:page])
     respond_to do |format|
       format.html
       format.json { render_success @events }
@@ -42,6 +42,7 @@ class EventsController < ApplicationController
     end
     @event.assign_attributes(event_params)
     render_entity @event do
+      # copying from template
       EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
   end

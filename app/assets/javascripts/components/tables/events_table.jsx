@@ -3,28 +3,36 @@ var EventsTable = React.createClass({
     TableCheckbox,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
   getInitialState: function() {
     return {
       events: []
     };
   },
-  defaultFilterSortParams: {
-    sort: {sorted_by: 'name_asc'}
+  defaultFilterSortParams: function() {
+    return {
+      sort: {sorted_by: 'name_asc'}
+    };
   },
-  componentDidMount: function() {
-    this.initializeFilterSort(this.defaultFilterSortParams);
-  },
-  getTableData: function(params) {
-    Utils.get("events.json", params, function(result) {
-      if (this.isMounted()) {
-        this.setState({events: result.events});
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
+    Utils.get("/events.json", params, function(result) {
+      if (result.events.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
       }
+      this.setState({
+        data: this.state.data.concat(result.events),
+        page: this.page
+      });
     }.bind(this));
   },
   getCustomRows: function() {
-    return this.state.events.map(function(event) {
+    return this.state.data.map(function(event) {
       return(
         <EventRow
           event={event}
@@ -53,7 +61,7 @@ var EventsTable = React.createClass({
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post("/destroy_events", destroyOpts, function(result) {
-      this.setState({events: this.spliceResults(this.state.events, deletionIds), checkedItems: []});
+      this.setState({data: this.spliceResults(this.state.data, deletionIds), checkedItems: []});
       this.toast(deletionIds.length + " events deleted successfully.");
     }.bind(this));
   },

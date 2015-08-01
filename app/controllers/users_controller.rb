@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_action :check_admin, only: [:toggle_admin]
 
   def index
-    @users = @filter_sort.find
+    @users = @filter_sort.find.page(params[:page])
     respond_to do |format|
       format.html
       format.json { render json: @users, each_serializer: CompanyUserSerializer }

@@ -17,7 +17,6 @@ var Table = React.createClass({
     showHeaders: React.PropTypes.bool,
     showToolbar: React.PropTypes.bool,
     useCustomRowComponent: React.PropTypes.bool,
-    customRows: React.PropTypes.object,
     tableDataClassName: React.PropTypes.string,
     handleCheckAllChanged: React.PropTypes.func
   },
@@ -144,7 +143,7 @@ var Table = React.createClass({
     return (
       <div className="TableContainer">
         {renderedToolbar}
-        <div className={classNames(dataClasses)}>
+        <div id="tableData" className={classNames(dataClasses)}>
           {tableHeaders}
           {tableRows}
         </div>

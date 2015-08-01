@@ -3,22 +3,28 @@ var TasksTable = React.createClass({
     TaskCheckboxRows,
     ToastMessages,
     LoadingToast,
-    FilterSort
+    FilterSort,
+    InfiniteScrollMixin
   ],
-  defaultFilterSortParams: {
-    sort: {sorted_by: 'deadline_asc'},
-    filter: {with_status: 1}
+  defaultFilterSortParams: function() {
+    return {
+      sort: {sorted_by: 'deadline_asc'},
+      filter: {with_status: 1}
+    };
   },
-  componentDidMount: function() {
-    this.initializeFilterSort(this.defaultFilterSortParams);
-  },
-  getTableData: function(params) {
+  fetchNextPage: function(nextPage) {
+    this.page = nextPage;
+    var params = this.mergeParams();
     Utils.get("/tasks.json", params, function(result) {
-      if (this.isMounted()) {
-        this.setState({
-          tasks: result.tasks
-        })
+      if (result.tasks.length == 0) {
+        // stop infinite scroll
+        this.detachScrollListener();
+        return;
       }
+      this.setState({
+        data: this.state.data.concat(result.tasks),
+        page: this.page
+      });
     }.bind(this));
   },
   getColumns: function() {
@@ -43,8 +49,8 @@ var TasksTable = React.createClass({
     var destroyOpts = {destroy_opts: {ids: deletionIds}};
     Utils.post('/tasks/mass_delete', destroyOpts, function(success_result) {
       this.toast('Task deleted successfully.');
-      var newData = this.spliceResults(this.state.tasks, deletionIds);
-      this.setState({tasks: newData});
+      var newData = this.spliceResults(this.state.data, deletionIds);
+      this.setState({data: newData});
     }.bind(this));
   },
   handleEdit: function(id) {
