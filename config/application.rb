@@ -19,6 +19,22 @@ module PlannrApp
     config.react.addons = true
     config.action_controller.default_url_options = { :trailing_slash => true }
     config.active_record.raise_in_transactional_callbacks = true
-  end
 
+    main_logger = Log4r::Logger.new "plannr_logger"
+    formatter = Log4r::PatternFormatter.new(
+      pattern: "%d|%X{session}|%X{user_id}|%l|%M", date_pattern: '%FT%T.%L%z')
+    # Regular file output
+    path = File.expand_path("#{Rails.root}/log/#{Rails.env}.log")
+    outputter = Log4r::FileOutputter.new('env_file_outputter', filename: path, trunc: false)
+    outputter.formatter =formatter
+    main_logger.outputters = [outputter]
+
+    # INFO or higher only for production
+    if Rails.env.production?
+      main_logger.level = Log4r::INFO
+      config.log_level = :info
+    end
+
+    config.logger = Log4r::Logger.get('plannr_logger')
+  end
 end

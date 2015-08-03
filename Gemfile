@@ -33,6 +33,7 @@ gem 'filterrific'
 gem 'kaminari'
 gem 'deep_cloneable'
 
+gem 'log4r'
 gem 'statsd-ruby'
 gem 'hallmonitor'
 
