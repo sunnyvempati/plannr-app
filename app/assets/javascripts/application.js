@@ -8,7 +8,8 @@
 //= require moment
 //= require tether
 //= require react-onclickoutside
-//= require react-date-picker/dist/react-datepicker.min
+//= require lodash
+//= require react-date-picker/dist/react-datepicker
 //= require skrollr
 //= require formsy-react/release/formsy-react.min
 //= require blueimp-file-upload/js/vendor/jquery.ui.widget

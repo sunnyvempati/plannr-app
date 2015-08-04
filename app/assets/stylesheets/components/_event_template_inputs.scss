@@ -16,7 +16,9 @@
 .TemplateDisplay {
   transition: opacity 500ms;
   opacity: 1;
+  display: block;
   &.hide {
+    display: none;
     opacity: 0;
   }
 }
