@@ -1,0 +1,24 @@
+{
+  "name": "plannr-app",
+  "version": "1.0.0",
+  "description": "Plannr app webpack npm integration",
+  "main": "server.js",
+  "scripts": {
+    "postinstall": "cd ./client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sunnyvempati/plannr-app.git"
+  },
+  "keywords": [
+    "react",
+    "npm",
+    "scss"
+  ],
+  "author": "Sunny Vempati",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunnyvempati/plannr-app/issues"
+  },
+  "homepage": "https://github.com/sunnyvempati/plannr-app"
+}

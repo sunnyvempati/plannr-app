@@ -14,6 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+npm-debug.log
+/public/assets
+client-bundle.js
+client-bundle.js.map
+.env
 
 # Ignore all vendor assets
 /vendor
@@ -29,3 +34,6 @@ output.html
 /public/uploads
 
 config/fog_credentials.yml
+
+# webpack stuff
+client/node_modules
