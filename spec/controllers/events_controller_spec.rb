@@ -76,7 +76,6 @@ RSpec.describe EventsController, type: :controller do
         end
         let(:created_event) { Event.find(json_response['event']['id']) }
         it 'successfully create event' do
-          binding.pry
           expect(response).to be_success
           expect(created_event.parent_id).to eq template_event.id
           expect(created_event.name).to eq event_params[:event][:name]
