@@ -87,4 +87,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {
     :host => 'app.yourplannr.com'
   }
+
+  config.react.variant = :production
 end
