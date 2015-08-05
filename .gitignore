@@ -29,3 +29,5 @@ output.html
 /public/uploads
 
 config/fog_credentials.yml
+
+node_modules

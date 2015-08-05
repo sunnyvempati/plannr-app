@@ -37,6 +37,8 @@ gem 'log4r'
 gem 'statsd-ruby'
 gem 'hallmonitor'
 
+gem 'browserify-rails'
+
 group 'development' do
   gem 'pry'
   gem 'pry-rails'

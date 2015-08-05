@@ -1,0 +1,20 @@
+{
+  "name": "plannr-app",
+  "version": "1.0.0",
+  "description": "Plannr Dashboard ================ # Get Started Things to install: - rails - postgres - rbenv - node/npm/bower - pow/powder",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sunnyvempati/plannr-app.git"
+  },
+  "author": "Sunny Vempati",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunnyvempati/plannr-app/issues"
+  },
+  "homepage": "https://github.com/sunnyvempati/plannr-app",
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "browserify-incremental": "^3.0.1",
+    "babelify": "^6.1.3"
+  }
+}
