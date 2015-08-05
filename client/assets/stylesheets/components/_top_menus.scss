@@ -35,12 +35,12 @@
 
 @media (min-width: 701px) {
   .TopMenu-logo {
-    @include svg(url(plannr_logo.svg), 10em);
+    @include svg(img-url('plannr_logo.svg'), 10em);
   }
 }
 
 @media (max-width: 700px) {
   .TopMenu-logo {
-    @include svg(url(plannr_logo.svg), 5em);
+    @include svg(img-url('plannr_logo.svg'), 5em);
   }
 }

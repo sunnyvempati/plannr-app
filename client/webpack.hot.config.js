@@ -26,10 +26,6 @@ config.module.loaders.push(
     loader: 'style!css!sass?outputStyle=expanded&imagePath=/assets/images&includePaths[]=' +
     path.resolve(__dirname, './assets/stylesheets')
   },
-  {
-    test: /\.svg$/,
-    loader: 'file-loader'
-  },
 
   // The url-loader uses DataUrls. The file-loader emits files.
   {test: /\.woff$/, loader: 'url-loader?limit=10000&minetype=application/font-woff'},

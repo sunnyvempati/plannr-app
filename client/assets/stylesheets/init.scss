@@ -1,0 +1,23 @@
+// defaults to false (e.g. webpack environment)
+$rails: false !default;
+
+// This is used for font asset urls
+@function af-url($url) {
+  @if $rails {
+    @return asset-url($url);
+  } @else {
+    @return url('/assets/fonts/#{$url}');
+  }
+}
+
+// Sass 3 removes image-url helper
+// https://github.com/sass/libsass/issues/489
+$image-url-path: '/assets/images/' !default;
+
+@function img-url($image) {
+  @if $rails {
+    @return image-url($image);
+  } @else {
+    @return url('#{$image-url-path}#{$image}');
+  }
+}

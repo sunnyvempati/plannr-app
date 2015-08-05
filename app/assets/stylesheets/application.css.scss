@@ -1,0 +1,6 @@
+// This variable $rails is used by bootstrap-custom so that fonts are loaded slightly differently
+// with Rails vs. the Webpack Dev Server
+$rails: true;
+
+@import 'init';
+@import 'main';

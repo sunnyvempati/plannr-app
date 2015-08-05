@@ -34,16 +34,16 @@
 }
 
 .Facebook {
-  @include svg(url(facebook_icon.svg), 2em);
+  @include svg(img-url('facebook_icon.svg'), 2em);
 }
 .Twitter {
-  @include svg(url(twitter_icon.svg), 2em);
+  @include svg(img-url('twitter_icon.svg'), 2em);
 }
 .Linkedin {
-  @include svg(url(linkedin_icon.svg), 2em);
+  @include svg(img-url('linkedin_icon.svg'), 2em);
 }
 .Heart {
-  @include svg(url(heart.svg), 0.8em);
+  @include svg(img-url('heart.svg'), 0.8em);
 }
 
 .Footer-footnote {

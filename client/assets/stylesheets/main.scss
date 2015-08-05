@@ -1,14 +1,13 @@
-// this is used for font-awesome
-$fa-font-path: "components-font-awesome/fonts/";
-@import "normalize.css/normalize";
-@import "components-font-awesome/scss/font-awesome";
+@import "~normalize.css";
+@import 'font-awesome/css/font-awesome.css';
 
 // custom
-@import "variables/_variables";
-@import "mixins/_mixins";
-@import "components/_components";
-@import "molecules/_molecules";
-@import "containers/_containers";
+@import "init"; // asset/image helpers
+@import "variables/__variables";
+@import "mixins/__mixins";
+@import "components/__components";
+@import "molecules/__molecules";
+@import "containers/__containers";
 @import "utils";
 @import "fonts";
 
