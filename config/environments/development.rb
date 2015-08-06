@@ -48,8 +48,6 @@ Rails.application.configure do
     :port => 3000
   }
 
-  Rack::MiniProfiler.config.position = 'right'
-
   config.react.variant = :development
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

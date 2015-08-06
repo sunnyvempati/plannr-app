@@ -15,6 +15,7 @@ Bundler.require(*Rails.groups)
 
 module PlannrApp
   class Application < Rails::Application
+    config.assets.paths << Rails.root.join("node_modules")
     config.react.addons = true
     config.action_controller.default_url_options = { :trailing_slash => true }
     config.active_record.raise_in_transactional_callbacks = true

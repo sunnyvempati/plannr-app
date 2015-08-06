@@ -3,6 +3,7 @@ var TopMenu = React.createClass({
     location.href = this.props.webPath;
   },
   render: function() {
+    alert("HOORAY");
     return (
       <div className="TopMenu">
         <div className="TopMenu-logo" onClick={this.goToMain}>

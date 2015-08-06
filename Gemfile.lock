@@ -54,7 +54,6 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    bower-rails (0.10.0)
     browserify-rails (1.2.0)
       railties (>= 4.0.0, < 5.0)
       sprockets (> 3.0.2)
@@ -241,8 +240,6 @@ GEM
       pry (~> 0.9)
       slop (~> 3.0)
     rack (1.6.4)
-    rack-mini-profiler (0.9.3)
-      rack (>= 1.1.3)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -366,7 +363,6 @@ DEPENDENCIES
   acts_as_tenant
   authlogic
   autoprefixer-rails
-  bower-rails
   browserify-rails
   capistrano
   capistrano-bower
@@ -393,7 +389,6 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   pry-remote
-  rack-mini-profiler
   rails (= 4.2.0)
   react-rails (~> 1.0)
   require_all

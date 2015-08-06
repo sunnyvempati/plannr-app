@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+//= require react
 //= require react_ujs
 //= require react-router
 //= require react_router_init
@@ -12,7 +13,7 @@
 //= require skrollr
 //= require formsy-react/release/formsy-react.min
 //= require blueimp-file-upload/js/vendor/jquery.ui.widget
-//= require blueimp-file-upload/js/jquery.iframe-transport
+//= require blueimp-file-upload/js/j query.iframe-transport
 //= require blueimp-file-upload/js/jquery.fileupload
 //= require react-intl
 //= require infinite_scroll
