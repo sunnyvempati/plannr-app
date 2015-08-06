@@ -14,7 +14,7 @@ ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |na
   action = data[:action].parameterize
 
   event_prefix = "controllers.#{controller}.#{action}"
-  status_part = data[:exception] || data[:status] >= 400 ? "error" : "success"
+  status_part = (200..399) === data[:status] ? "success" : "error"
 
   # Two types of responses, success and error
   status_name = "#{event_prefix}.#{status_part}"
