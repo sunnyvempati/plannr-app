@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require react-rails-1.1.0/lib/assets/javascripts/react
 //= require react_ujs
 //= require react-router
 //= require react_router_init
