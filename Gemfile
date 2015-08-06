@@ -37,6 +37,8 @@ gem 'statsd-ruby'
 gem 'hallmonitor'
 
 gem 'browserify-rails'
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
 
 group 'development' do
   gem 'pry'

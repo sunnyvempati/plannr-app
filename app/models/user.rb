@@ -2,6 +2,20 @@ class User < ActiveRecord::Base
   acts_as_authentic  # authlogic
   acts_as_tenant :company
 
+  include Elasticsearch::Model
+
+  # Set up Elastic Search
+  mapping do
+    indexes :name, type: 'string', index: 'analyzed'
+    indexes :email, type: 'string', index: 'analyzed'
+    # Company ID here to allow for tenanted filtering of search
+    indexes :company_id, type: 'string', index: 'not_analyzed'
+  end
+
+  def as_indexed_json(options={})
+    self.as_json(methods: :name)
+  end
+
   has_one :profile
   has_many :events
 
@@ -48,6 +62,10 @@ class User < ActiveRecord::Base
 
   filterrific default_filter_params: default_filter_options,
               available_filters: filter_sort_scopes
+
+  def name
+    profile.full_name
+  end
 
   def deliver_password_reset_instructions!
     reset_perishable_token!

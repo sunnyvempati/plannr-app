@@ -1,7 +1,17 @@
 class Contact < ActiveRecord::Base
   include ContactTypes
   include Commentable
+
   acts_as_tenant :company
+
+  include Elasticsearch::Model
+
+  # Set up Elastic Search
+  mapping do
+    indexes :name, type: 'string', index: 'analyzed'
+    # Company ID here to allow for tenanted filtering of search
+    indexes :company_id, type: 'string', index: 'not_analyzed'
+  end
 
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   US_PHONE_REGEX = %r{\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z}

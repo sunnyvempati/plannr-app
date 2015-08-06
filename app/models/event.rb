@@ -3,6 +3,15 @@ class Event < ActiveRecord::Base
   include Commentable
   acts_as_tenant :company
 
+  include Elasticsearch::Model
+
+  # Set up Elastic Search
+  mapping do
+    indexes :name, type: 'string', index: 'analyzed'
+    # Company ID here to allow for tenanted filtering of search
+    indexes :company_id, type: 'string', index: 'not_analyzed'
+  end
+
   has_many :event_contacts, dependent: :destroy
   has_many :contacts, through: :event_contacts
   has_many :event_vendors, dependent: :destroy

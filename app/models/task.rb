@@ -2,6 +2,15 @@ class Task < ActiveRecord::Base
   include Commentable
   acts_as_tenant :company
 
+  include Elasticsearch::Model
+
+  # Set up Elastic Search
+  mapping do
+    indexes :name, type: 'string', index: 'analyzed'
+    # Company ID here to allow for tenanted filtering of search
+    indexes :company_id, type: 'string', index: 'not_analyzed'
+  end
+
   belongs_to :event
   belongs_to :owner, class_name: 'User'
   belongs_to :assigned_to, class_name: 'User'
