@@ -37,6 +37,7 @@ module PlannrApp
 
     config.logger = Log4r::Logger.get('plannr_logger')
 
-    config.browserify_rails.commandline_options = "-t babelify --extension=\".js.jsx\""
+    config.browserify_rails.commandline_options = "-t babelify --extension=\".jsx\""
+    config.browserify_rails.source_map_environments << "development"
   end
 end

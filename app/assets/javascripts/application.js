@@ -1,20 +1,18 @@
+// will fix these later
+// require classnames
+// require react-datepicker
+// require skrollr
+// require formsy-react/release/formsy-react
+// require blueimp-file-upload/js/vendor/jquery.ui.widget
+// require blueimp-file-upload/js/jquery.iframe-transport
+// require blueimp-file-upload/js/jquery.fileupload
+// require react-intl
+// require infinite_scroll
+
 //= require jquery
 //= require jquery_ujs
-//= require react
 //= require react_ujs
-//= require react-router
-//= require react_router_init
-//= require classnames
-//= require moment
-//= require tether
-//= require react-onclickoutside
-//= require lodash
-//= require react-date-picker/dist/react-datepicker
-//= require skrollr
-//= require formsy-react/release/formsy-react.min
-//= require blueimp-file-upload/js/vendor/jquery.ui.widget
-//= require blueimp-file-upload/js/j query.iframe-transport
-//= require blueimp-file-upload/js/jquery.fileupload
-//= require react-intl
-//= require infinite_scroll
-//= require components
+global.React = require('react');
+
+// this will allow react server side rendering to pick it up
+window.Run = require('Run.jsx');

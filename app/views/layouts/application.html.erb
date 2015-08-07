@@ -14,16 +14,7 @@
 <body>
 
 <div id="toast"></div>
-
-<div class="AppContainer">
-  <%= react_component("TopMenu", webPath: Rails.configuration.web_path) %>
-
-  <div class="AppContainer-content">
-    <%= yield %>
-  </div>
-
-  <%= react_component("Footer", webPath: Rails.configuration.web_path, year: Date.today.year) %>
-</div>
+<%= react_component("Run", prerender: true) %>
 
 </body>
 </html>
