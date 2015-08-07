@@ -7,9 +7,12 @@ class Event < ActiveRecord::Base
 
   # Set up Elastic Search
   mapping do
-    indexes :name, type: 'string', index: 'analyzed'
     # Company ID here to allow for tenanted filtering of search
+    # set these ids not not_analyzed so that they're exact matches
     indexes :company_id, type: 'string', index: 'not_analyzed'
+    indexes :client_id, type: 'string', index: 'not_analyzed'
+    indexes :id, type: 'string', index: 'not_analyzed'
+    indexes :owner_id, type: 'string', index: 'not_analyzed'
   end
 
   has_many :event_contacts, dependent: :destroy

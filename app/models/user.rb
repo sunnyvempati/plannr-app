@@ -7,13 +7,20 @@ class User < ActiveRecord::Base
   # Set up Elastic Search
   mapping do
     indexes :name, type: 'string', index: 'analyzed'
-    indexes :email, type: 'string', index: 'analyzed'
+    indexes :email, type: 'string', index: 'not_analyzed'
     # Company ID here to allow for tenanted filtering of search
     indexes :company_id, type: 'string', index: 'not_analyzed'
+    indexes :id, type: 'string', index: 'not_analyzed'
   end
 
   def as_indexed_json(options={})
-    self.as_json(methods: :name)
+    self.as_json(methods: :name,
+                 except: [
+                   :crypted_password,
+                   :password_salt,
+                   :perishable_token,
+                   :persistence_token,
+                   :single_access_token])
   end
 
   has_one :profile

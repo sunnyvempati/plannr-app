@@ -6,9 +6,12 @@ class Task < ActiveRecord::Base
 
   # Set up Elastic Search
   mapping do
-    indexes :name, type: 'string', index: 'analyzed'
     # Company ID here to allow for tenanted filtering of search
     indexes :company_id, type: 'string', index: 'not_analyzed'
+    indexes :assigned_to_id, type: 'string', index: 'not_analyzed'
+    indexes :event_id, type: 'string', index: 'not_analyzed'
+    indexes :id, type: 'string', index: 'not_analyzed'
+    indexes :owner_id, type: 'string', index: 'not_analyzed'
   end
 
   belongs_to :event

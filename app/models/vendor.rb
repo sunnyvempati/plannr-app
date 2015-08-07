@@ -9,6 +9,9 @@ class Vendor < ActiveRecord::Base
     indexes :name, type: 'string', index: 'analyzed'
     # Company ID here to allow for tenanted filtering of search
     indexes :company_id, type: 'string', index: 'not_analyzed'
+    indexes :id, type: 'string', index: 'not_analyzed'
+    indexes :owner_id, type: 'string', index: 'not_analyzed'
+    indexes :primary_contact_id, type: 'string', index: 'not_analyzed'
   end
 
   has_many :event_vendors, dependent: :destroy
