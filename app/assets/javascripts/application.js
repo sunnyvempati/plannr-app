@@ -12,7 +12,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require react_ujs
-global.React = require('react');
 
 // this will allow react server side rendering to pick it up
-window.Run = require('Run.jsx');
+global.React = require('react/addons');
+global.Run = require('Run.jsx');

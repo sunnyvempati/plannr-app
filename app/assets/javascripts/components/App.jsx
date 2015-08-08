@@ -1,11 +1,17 @@
-const RouteHandler = require('react-router').RouteHandler;
+import {RouteHandler} from 'react-router';
+import TopMenu from './session/TopMenu.jsx';
+import Footer from './session/Footer.jsx';
+
 
 class App extends React.Component {
   render() {
     return (
-      <div className="Test">
-        Testing
-        <RouteHandler />
+      <div>
+        <TopMenu webPath={this.props.webPath} />
+        <div className="AppContainer-content">
+          <RouteHandler />
+        </div>
+        <Footer webPath={this.props.webPath} />
       </div>
     );
   }
