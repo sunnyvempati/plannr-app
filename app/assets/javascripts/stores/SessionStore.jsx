@@ -2,41 +2,50 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
 
-let _sessionToken = sessionStorage.getItem('sessionToken');
-let _email = sessionStorage.getItem('email');
-
 class SessionStore extends BaseStore {
   constructor() {
     super();
+    this._sessionToken = sessionStorage.getItem('sessionToken');
+    this._email = sessionStorage.getItem('email');
+    this._errors = [];
   }
 
   isLoggedIn() {
-    return !!this._user;
+    return !!this._sessionToken;
+  }
+
+  getErrors() {
+    return this._errors;
   }
 }
 
-let sessionStoreInstance = new SessionStore();
+let _sessionStoreInstance = new SessionStore();
 
-sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
+_sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   let action = payload.action;
   switch (action.type) {
     case ActionTypes.LOGIN_RESPONSE:
       if (action.json &&
           action.json.user_session &&
           action.json.user_session.token) {
-        _sessionToken = action.json.user_session.token;
-        _email = action.json.email;
-        sessionStorage.setItem('sessionToken', _sessionToken);
-        sessionStorage.setItem('email', _email);
+        let token = action.json.user_session.token;
+        let email = action.json.user_session.user_email;
+        _sessionStoreInstance._sessionToken = token;
+        _sessionStoreInstance._email = email;
+        sessionStorage.setItem('sessionToken', token);
+        sessionStorage.setItem('email', email);
       }
-      sessionStoreInstance.emitChange();
+      if (action.errors) {
+        _sessionStoreInstance._errors = action.errors;
+      }
+      _sessionStoreInstance.emitChange();
       break;
     case ActionTypes.LOGOUT:
-      _sessionToken = null;
-      _email = null;
+      _sessionStoreInstance._sessionToken = null;
+      _sessionStoreInstance._email = null;
       sessionStorage.removeItem('sessionToken');
       sessionStorage.removeItem('email');
-      sessionStoreInstance.emitChange();
+      _sessionStoreInstance.emitChange();
       break;
     default:
   }
@@ -44,4 +53,4 @@ sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   return true;
 })
 
-export default sessionStoreInstance;
+export default _sessionStoreInstance;

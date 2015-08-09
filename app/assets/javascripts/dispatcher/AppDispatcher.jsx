@@ -20,6 +20,6 @@ class AppDispatcher extends Dispatcher {
   }
 }
 
-var appDispatcherInstance = new AppDispatcher();
+var _appDispatcherInstance = new AppDispatcher();
 
-export default appDispatcherInstance;
+export default _appDispatcherInstance;

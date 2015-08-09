@@ -1,26 +1,29 @@
-import ButtonListMixin from '../mixins/ButtonListMixin.jsx';
-import FormButtonList from '../generic/FormButtonList.jsx';
-import Button from '../generic/Button.jsx';
-import Form from '../generic/Form.jsx';
-import FormInput from '../generic/FormInput.jsx';
+import ButtonListMixin from '../mixins/ButtonListMixin';
+import FormButtonList from '../generic/FormButtonList';
+import Button from '../generic/Button';
+import Form from '../generic/Form';
+import FormInput from '../generic/FormInput';
 import {Link} from 'react-router';
-import SessionActions from '../../actions/SessionActions.jsx';
-import SessionStore from '../../stores/SessionStore.jsx';
+import SessionActions from '../../actions/SessionActions';
+import SessionStore from '../../stores/SessionStore';
+import RouteActions from '../../actions/RouteActions';
+import FormMixin from '../mixins/FormMixin';
 
 var LoginForm = React.createClass({
-  mixins: [ButtonListMixin],
+  mixins: [FormMixin, ButtonListMixin],
   propTypes: {
     authToken: React.PropTypes.string.isRequired,
     disableForm: React.PropTypes.bool
   },
-  componentDidMount: function() {
-    SessionStore.addChangeListener(this._onChange);
+  getInitialState: function() {
+    return {
+      errors: null
+    };
   },
-  componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
-  },
-  _onChange: function() {
-    this.setState({ errors: SessionStore.getErrors() });
+  componentWillMount: function() {
+    if (SessionStore.isLoggedIn()) {
+      RouteActions.redirect('app');
+    }
   },
   mapInputs: function (inputs) {
     return {
@@ -29,22 +32,23 @@ var LoginForm = React.createClass({
     };
   },
   postForm(data, resetModel, invalidateForm) {
+    this.setState({disabled: true});
     SessionActions.login(data.email, data.password);
   },
   renderButtonList: function() {
     return (
       <FormButtonList>
         <Link to="signup">
-          <Button type="button" className="Button--affirmative">
+          <Button type="button" className="Button--affirmative" disabled={this.state.disabled}>
             Sign up
           </Button>
         </Link>
         <Link to="reset">
-          <Button type="button" className="Button--simple">
+          <Button type="button" className="Button--simple" disabled={this.state.disabled}>
             Reset Password
           </Button>
         </Link>
-        <Button type="submit" className="Button--primary">
+        <Button type="submit" className="Button--primary" disabled={this.state.disabled}>
           Sign in
         </Button>
       </FormButtonList>
@@ -58,6 +62,8 @@ var LoginForm = React.createClass({
               onValid={this.enableButton}
               onInvalid={this.disableButton}
               authToken={this.props.authToken}
+              validationErrors={this.state.errors}
+              resetErrors={this.resetErrors}
               id='login_form'>
           <FormInput name="email"
                      type='text'
@@ -79,4 +85,3 @@ var LoginForm = React.createClass({
 });
 
 export default LoginForm;
-

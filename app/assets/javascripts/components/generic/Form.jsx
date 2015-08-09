@@ -15,12 +15,14 @@ var Form = React.createClass({
   render: function() {
     var form_props = this.props;
     return (
-      <Formsy.Form url={form_props.url}
-                   onSubmit={this.props.onSubmit}
-                   onValid={this.props.onValid}
-                   onInvalid={this.props.onInvalid}
+      <Formsy.Form onSubmit={form_props.onSubmit}
+                   onValid={form_props.onValid}
+                   onInvalid={form_props.onInvalid}
                    mapping={form_props.mapping}
-                   id={form_props.id}>
+                   validationErrors={form_props.validationErrors}
+                   onChange={this.props.resetErrors}
+                   id={form_props.id}
+                   ref='form'>
         {form_props.children}
       </Formsy.Form>
     );
