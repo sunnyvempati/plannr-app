@@ -7,11 +7,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <TopMenu webPath={this.props.webPath} />
+        <TopMenu />
         <div className="AppContainer-content">
           <RouteHandler />
         </div>
-        <Footer webPath={this.props.webPath} />
+        <Footer />
       </div>
     );
   }

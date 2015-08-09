@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include FilterSort
-  before_action :authenticate_user, :only => [:show, :edit, :update]
-  before_action :check_invitation!, :require_no_user, only: [:new, :create]
+  before_action :authenticate_user, only: [:show, :edit, :update]
+  before_action :check_invitation!, only: [:new, :create]
 
   # only admins can toggle admin abilities
   before_action :check_admin, only: [:toggle_admin]

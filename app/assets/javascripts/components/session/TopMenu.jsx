@@ -1,6 +1,8 @@
+import GlobalStore from '../../stores/GlobalStore.jsx';
+
 var TopMenu = React.createClass({
   goToMain: function() {
-    location.href = this.props.webPath;
+    location.href = GlobalStore.WebPath;
   },
   render: function() {
     return (

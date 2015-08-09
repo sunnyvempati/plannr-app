@@ -4,6 +4,8 @@ import Button from '../generic/Button.jsx';
 import Form from '../generic/Form.jsx';
 import FormInput from '../generic/FormInput.jsx';
 import {Link} from 'react-router';
+import SessionActions from '../../actions/SessionActions.jsx';
+import SessionStore from '../../stores/SessionStore.jsx';
 
 var LoginForm = React.createClass({
   mixins: [ButtonListMixin],
@@ -11,25 +13,23 @@ var LoginForm = React.createClass({
     authToken: React.PropTypes.string.isRequired,
     disableForm: React.PropTypes.bool
   },
-  url: '/login',
   componentDidMount: function() {
-    if (this.props.error) {
-      ToastMessages.toastError(this.props.error);
-      return;
-    }
-    if (this.props.notice) {
-      ToastMessages.toastNotice(this.props.notice);
-      return;
-    }
+    SessionStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    SessionStore.removeChangeListener(this._onChange);
+  },
+  _onChange: function() {
+    this.setState({ errors: SessionStore.getErrors() });
   },
   mapInputs: function (inputs) {
     return {
-      'user_session': {
-        'email': inputs.email,
-        'password': inputs.password,
-      },
-      'authenticity_token': inputs.authenticity_token
+      'email': inputs.email,
+      'password': inputs.password
     };
+  },
+  postForm(data, resetModel, invalidateForm) {
+    SessionActions.login(data.email, data.password);
   },
   renderButtonList: function() {
     return (

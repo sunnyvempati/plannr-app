@@ -39,5 +39,7 @@ module PlannrApp
 
     config.browserify_rails.commandline_options = "-t babelify --extension=\".jsx\""
     config.browserify_rails.source_map_environments << "development"
+
+    ActiveModel::Serializer.config.adapter = :json
   end
 end

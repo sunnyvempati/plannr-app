@@ -19,7 +19,7 @@ gem 'acts_as_tenant'
 
 gem 'responders', '~> 2.0'
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.10.0.rc1'
 gem 'faker'
 gem 'autoprefixer-rails'
 

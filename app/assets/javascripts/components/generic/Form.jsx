@@ -21,7 +21,6 @@ var Form = React.createClass({
                    onInvalid={this.props.onInvalid}
                    mapping={form_props.mapping}
                    id={form_props.id}>
-        <FormInput type="hidden" name="authenticity_token" value={form_props.authToken}  />
         {form_props.children}
       </Formsy.Form>
     );

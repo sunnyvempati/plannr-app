@@ -1,6 +1,6 @@
 import keyMirror from 'keymirror';
 
-export default = {
+const AppConstants = {
   APIEndpoints: {
     LOGIN:           '/login',
     REGISTER:        '/sign_up'
@@ -15,9 +15,11 @@ export default = {
     LOGIN_REQUEST: null,
     LOGIN_RESPONSE: null,
     SIGNUP_REQUEST: null,
-    SIGNUP_RESPONSE: null
+    SIGNUP_RESPONSE: null,
 
     // Routes
     REDIRECT: null
   })
 };
+
+export default AppConstants;

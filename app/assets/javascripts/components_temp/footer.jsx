@@ -1,6 +1,8 @@
+import GlobalStore from '../../stores/GlobalStore.jsx';
+
 var Footer = React.createClass({
   render: function() {
-    var termsOfServiceUrl = this.props.webPath + "terms_of_service";
+    var termsOfServiceUrl = GlobalStore.WebPath + "terms_of_service";
     return (
       <div className="Footer">
         <div className="Footer-content">

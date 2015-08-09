@@ -1,5 +1,6 @@
 import ServerActions from '../actions/ServerActions.jsx';
 import AppConstants from '../constants/AppConstants.jsx';
+import GlobalStore from '../stores/GlobalStore.jsx';
 import request from 'superagent';
 
 const endpoints = AppConstants.APIEndpoints;
@@ -17,21 +18,22 @@ function _getErrors(res) {
 }
 
 class Utils {
-  login(email, password) {
+  static login(email, password) {
     request
       .post(endpoints.LOGIN)
-      .send({user_session: {email: email, password: password}})
-      .end((error, res) {
+      .send({user_session: {email: email, password: password}, authenticity_token: GlobalStore.AuthToken})
+      .end((error, res) => {
         if (res) {
           if (res.error) {
             var errorMsgs = _getErrors(res);
             ServerActions.receiveLogin(null, errorMsgs);
           } else {
-            json = JSON.parse(res.text);
+            let json = JSON.parse(res.text);
             ServerActions.receiveLogin(json, null);
           }
         }
       });
   }
-
 }
+
+export default Utils;

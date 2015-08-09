@@ -3,14 +3,14 @@ import { Dispatcher } from 'flux';
 
 const PayloadSources = AppConstants.PayloadSources;
 
-const AppDispatcher = Object.assign(new Dispatcher(), {
+class AppDispatcher extends Dispatcher {
   handleServerAction(action) {
     const payload = {
       source: PayloadSources.SERVER_ACTION,
       action: action
     };
     this.dispatch(payload);
-  },
+  }
   handleViewAction(action) {
     const payload = {
       source: PayloadSources.VIEW_ACTION,
@@ -18,6 +18,8 @@ const AppDispatcher = Object.assign(new Dispatcher(), {
     };
     this.dispatch(payload);
   }
-});
+}
 
-export default AppDispatcher;
+var appDispatcherInstance = new AppDispatcher();
+
+export default appDispatcherInstance;

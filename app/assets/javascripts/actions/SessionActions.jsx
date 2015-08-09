@@ -1,10 +1,10 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
-import AppConstants from '../constants/AppConstants.jsx';
+import {ActionTypes} from '../constants/AppConstants.jsx';
+import WebAPIUtils from '../utils/WebAPIUtils.jsx';
 
-var ActionTypes = AppConstants.ActionTypes;
 
 class SessionActions {
-  signup(email, password, passwordConfirmation) {
+  static signup(email, password, passwordConfirmation) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.SIGNUP_REQUEST,
       email: email,
@@ -14,8 +14,8 @@ class SessionActions {
     WebAPIUtils.signup(email, password, passwordConfirmation);
   }
 
-  login(email, password) {
-    SmallAppDispatcher.handleViewAction({
+  static login(email, password) {
+    AppDispatcher.handleViewAction({
       type: ActionTypes.LOGIN_REQUEST,
       email: email,
       password: password
@@ -23,8 +23,8 @@ class SessionActions {
     WebAPIUtils.login(email, password);
   }
 
-  logout() {
-    SmallAppDispatcher.handleViewAction({
+  static logout() {
+    AppDispatcher.handleViewAction({
       type: ActionTypes.LOGOUT
     });
   }

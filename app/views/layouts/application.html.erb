@@ -15,7 +15,7 @@
 
 <div id="toast"></div>
 <div class="AppContainer">
-  <%= react_component("Run", webPath: Rails.configuration.web_path, prerender: true) %>
+  <%= react_component("Run", authToken: form_authenticity_token, webPath: Rails.configuration.web_path, prerender: true) %>
 </div>
 
 </body>
