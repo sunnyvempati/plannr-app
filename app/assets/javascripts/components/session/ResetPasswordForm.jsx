@@ -18,11 +18,6 @@ var ResetPasswordForm = React.createClass({
       'id': token
     };
   },
-  componentWillMount: function() {
-    if (SessionStore.isLoggedIn()) {
-      RouteActions.redirect('app');
-    }
-  },
   onSecondaryClick: function() {
     RouteActions.redirect('login');
   },

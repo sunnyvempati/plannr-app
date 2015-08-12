@@ -8,11 +8,6 @@ import SessionStore from '../../stores/SessionStore';
 
 var ResetPasswordRequestForm = React.createClass({
   mixins: [FormMixin, ButtonListMixin],
-  componentWillMount: function() {
-    if (SessionStore.isLoggedIn()) {
-      RouteActions.redirect('app');
-    }
-  },
   mapInputs: function(inputs) {
     return {
       'email': inputs.email

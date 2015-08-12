@@ -5,11 +5,6 @@ import AuthenticatedComponent from '../mixins/AuthenticatedComponent'
 
 export default AuthenticatedComponent(
   class EventsList extends React.Component {
-    componentDidMount() {
-      if (!SessionStore.isLoggedIn()) {
-        RouteActions.redirect('login');
-      }
-    }
     _logout() {
       SessionActions.logout();
     }

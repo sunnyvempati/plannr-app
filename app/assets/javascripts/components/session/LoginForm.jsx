@@ -11,11 +11,6 @@ import FormMixin from '../mixins/FormMixin';
 
 var LoginForm = React.createClass({
   mixins: [FormMixin, ButtonListMixin],
-  componentWillMount: function() {
-    if (SessionStore.isLoggedIn()) {
-      RouteActions.redirect('app');
-    }
-  },
   mapInputs: function (inputs) {
     return {
       'email': inputs.email,

@@ -32,11 +32,6 @@ var SignUpForm = React.createClass({
     //   this.refs.userCompany.props.disabled = true;
     // }
   },
-  componentWillMount: function() {
-    if (SessionStore.isLoggedIn()) {
-      RouteActions.redirect('app');
-    }
-  },
   postForm(data, resetModel, invalidateForm) {
     this.setState({disabled: true});
     SessionActions.signup(data);

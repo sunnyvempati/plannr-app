@@ -3,11 +3,6 @@ import SessionActions from '../../actions/SessionActions';
 import SessionStore from '../../stores/SessionStore';
 
 var Verify = React.createClass({
-  componentWillMount: function() {
-    if (SessionStore.isLoggedIn()) {
-      RouteActions.redirect('app');
-    }
-  },
   componentDidMount: function() {
     var token = this.props.query.id;
     SessionActions.verify(token);

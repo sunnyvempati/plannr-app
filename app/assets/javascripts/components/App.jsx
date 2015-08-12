@@ -9,13 +9,7 @@ import ToastMessage from '../components/generic/ToastMessage';
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <TopMenu />
-        <div className="AppContainer-content">
-          <RouteHandler />
-        </div>
-        <Footer />
-      </div>
+      <RouteHandler />
     );
   }
 }
