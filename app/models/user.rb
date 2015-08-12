@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   acts_as_tenant :company
 
   include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  include Searchable
 
   # Set up Elastic Search
   mapping do

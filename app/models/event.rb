@@ -33,15 +33,6 @@ class Event < ActiveRecord::Base
   include EventStatuses
   validates :status, inclusion: { in: [ACTIVE, ARCHIVED] }
 
-  class << self
-    # Searches for 'term' inside event names, scoped by current tenant
-    def search(term)
-      query = match_field(:name, term)
-      filter = {company_id: ActsAsTenant.current_tenant.id}
-      self.__elasticsearch__.search filter_query(query, filter)
-    end
-  end
-
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)

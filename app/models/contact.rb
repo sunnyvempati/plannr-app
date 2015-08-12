@@ -1,10 +1,12 @@
 class Contact < ActiveRecord::Base
   include ContactTypes
   include Commentable
+  include Searchable
 
   acts_as_tenant :company
 
   include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   # Set up Elastic Search
   mapping do

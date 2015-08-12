@@ -4,6 +4,13 @@ module Searchable
 
   class_methods do
 
+    # Simple match field search, filtered by current tenant company
+    def search(field, term)
+      query = match_field(field, term)
+      filter = {company_id: ActsAsTenant.current_tenant.id}
+      self.__elasticsearch__.search filter_query(query, filter)
+    end
+
     private
 
     # Builds a ES query for matching
