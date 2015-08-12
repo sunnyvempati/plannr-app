@@ -6,7 +6,7 @@ var ButtonListMixin = {
   renderFormTwoButtons: function(primaryText, secondaryText) {
     return (
       <FormButtonList>
-        <Button type="button" onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
+        <Button type="button" onClick={this.handleSecondaryClick} className="Button--secondary">
           {secondaryText}
         </Button>
         <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
@@ -18,7 +18,7 @@ var ButtonListMixin = {
   renderFormButton: function(primaryText) {
     return (
       <FormButtonList>
-        <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+        <Button type="submit" className="Button--primary" disabled={this.state.disabled}>
           {primaryText}
         </Button>
       </FormButtonList>

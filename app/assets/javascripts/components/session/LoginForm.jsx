@@ -11,15 +11,6 @@ import FormMixin from '../mixins/FormMixin';
 
 var LoginForm = React.createClass({
   mixins: [FormMixin, ButtonListMixin],
-  propTypes: {
-    authToken: React.PropTypes.string.isRequired,
-    disableForm: React.PropTypes.bool
-  },
-  getInitialState: function() {
-    return {
-      errors: null
-    };
-  },
   componentWillMount: function() {
     if (SessionStore.isLoggedIn()) {
       RouteActions.redirect('app');
@@ -35,20 +26,19 @@ var LoginForm = React.createClass({
     this.setState({disabled: true});
     SessionActions.login(data.email, data.password);
   },
+  redirectTo(path) {
+    RouteActions.redirect(path);
+  },
   renderButtonList: function() {
     return (
       <FormButtonList>
-        <Link to="signup">
-          <Button type="button" className="Button--affirmative" disabled={this.state.disabled}>
-            Sign up
-          </Button>
-        </Link>
-        <Link to="reset">
-          <Button type="button" className="Button--simple" disabled={this.state.disabled}>
-            Reset Password
-          </Button>
-        </Link>
-        <Button type="submit" className="Button--primary" disabled={this.state.disabled}>
+        <Button type="button" className="Button--affirmative" disabled={this.state.disabled} onClick={this.redirectTo.bind(this, 'signup')}>
+          Sign up
+        </Button>
+        <Button type="button" className="Button--simple" onClick={this.redirectTo.bind(this, 'reset_request')}>
+          Reset Password
+        </Button>
+        <Button type="submit" className="Button--primary">
           Sign in
         </Button>
       </FormButtonList>
@@ -61,7 +51,6 @@ var LoginForm = React.createClass({
               onSubmit={this.postForm}
               onValid={this.enableButton}
               onInvalid={this.disableButton}
-              authToken={this.props.authToken}
               validationErrors={this.state.errors}
               resetErrors={this.resetErrors}
               id='login_form'>

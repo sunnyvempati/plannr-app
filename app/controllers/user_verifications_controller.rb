@@ -8,11 +8,10 @@ class UserVerificationsController < ApplicationController
   def verify
     if @user
       @user.verify!
-      flash[:notice] = "Thank you for verifying your account. You may now login."
+      render_success message: "Thank you for verifying your account. You may now login."
     else
-      flash[:notice] = "Already verified.  Try logging in."
+      render_error message: "Already verified.  Try logging in."
     end
-    redirect_to login_url
   end
 
 

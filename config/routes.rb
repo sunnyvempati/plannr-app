@@ -4,22 +4,22 @@ Rails.application.routes.draw do
   # login/logout
   # get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
-  # delete 'logout', to: 'user_sessions#destroy'
+  delete 'logout', to: 'user_sessions#destroy'
+  post 'profile', to: 'profiles#create'
 
-  # # sign up
-  # get 'sign_up', to: 'users#new'
-  # post 'sign_up', to: 'users#create'
+  # sign up
+  post 'sign_up', to: 'users#create'
+  get 'sign_up', to: 'users#new'
+
   # post 'toggle_admin', to: 'users#toggle_admin'
   # post '/users/mass_delete', to: 'users#mass_delete'
 
   # # password reset
-  # get 'reset_password_request', to: 'password_resets#new'
-  # post 'reset_password_request', to: 'password_resets#create'
-  # get 'reset_password', to: 'password_resets#edit'
-  # post 'reset_password', to: 'password_resets#update'
+  post 'reset_password_request', to: 'password_resets#create'
+  post 'reset_password', to: 'password_resets#update'
 
   # # email verification
-  # get 'verify', to: 'user_verifications#verify'
+  post 'verify', to: 'user_verifications#verify'
   # get 'need_verification', to: 'user_verifications#show'
 
   # # invitation

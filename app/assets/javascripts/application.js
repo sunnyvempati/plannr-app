@@ -16,3 +16,5 @@
 // this will allow react server side rendering to pick it up
 global.React = require('react/addons');
 global.Run = require('Run.jsx');
+global.ToastMessage = require('./components/generic/ToastMessage');
+global.Loading = require('./components/generic/Loading');

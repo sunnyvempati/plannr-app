@@ -3,7 +3,8 @@ import SessionStore from '../../stores/SessionStore';
 var FormMixin = {
   getInitialState: function() {
     return {
-      disabled: false
+      disabled: false,
+      errors: null
     };
   },
   componentDidMount: function() {
@@ -14,7 +15,7 @@ var FormMixin = {
   },
   _onChange: function() {
     this.setState({
-      errors: SessionStore.getErrors(),
+      errors: SessionStore.errors,
       disbled: false
     });
   },

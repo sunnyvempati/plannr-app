@@ -1,6 +1,9 @@
-var Verification = React.createClass({
+import Button from '../generic/Button';
+import RouteActions from '../../actions/RouteActions';
+
+var CheckEmail = React.createClass({
   getText: function() {
-    var email = this.props.userEmail;
+    var email = this.props.query.email;
     if (email) {
       return "Thanks for signing up!  We have sent an email to "+email+".  Please verify that this is you and proceed to login!"
       ;
@@ -25,3 +28,5 @@ var Verification = React.createClass({
     );
   }
 });
+
+export default CheckEmail;

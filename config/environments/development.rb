@@ -44,7 +44,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = {
-    :host => '127.0.0.1',
+    :host => 'plannr-app.dev',
     :port => 3000
   }
 

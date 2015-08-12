@@ -4,8 +4,7 @@ import FormInput from './FormInput.jsx';
 var Form = React.createClass({
   propTypes: {
     id: React.PropTypes.string,
-    mapping: React.PropTypes.any,
-    authToken: React.PropTypes.string.isRequired
+    mapping: React.PropTypes.any
   },
   getDefaultProps: function() {
     return {
