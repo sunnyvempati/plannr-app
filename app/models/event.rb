@@ -1,9 +1,11 @@
 # An event
 class Event < ActiveRecord::Base
   include Commentable
+  include Searchable
   acts_as_tenant :company
 
   include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   # Set up Elastic Search
   mapping do
@@ -30,6 +32,15 @@ class Event < ActiveRecord::Base
 
   include EventStatuses
   validates :status, inclusion: { in: [ACTIVE, ARCHIVED] }
+
+  class << self
+    # Searches for 'term' inside event names, scoped by current tenant
+    def search(term)
+      query = match_field(:name, term)
+      filter = {company_id: ActsAsTenant.current_tenant.id}
+      self.__elasticsearch__.search filter_query(query, filter)
+    end
+  end
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?

@@ -25,3 +25,10 @@ nicholas:
   first_name: Nicholas
   last_name: Matejcak
   company: Event'd
+
+chris:
+  email: chris@yourplannr.com
+  company_admin: true
+  first_name: Chris
+  last_name: TenHarmsel
+  company: Plannr
