@@ -1,5 +1,5 @@
 import request from 'superagent';
-import Utils from './Utils';
+import {Utils} from './Utils';
 import ServerActions from '../actions/ServerActions';
 import ToastActions from '../actions/ToastActions';
 import {APIEndpoints} from '../constants/AppConstants';
@@ -85,7 +85,6 @@ class SessionService {
       .send(data)
       .use(Utils.addAuthToken)
       .end((error, res) => {
-        console.log(error, res);
         if (res) {
           if (res.error) {
             var errorMsgs = Utils.getErrors(res);

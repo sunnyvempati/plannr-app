@@ -22,7 +22,6 @@ const ToastMessage = React.createClass({
 
   _onChange() {
     let message = ToastStore.message;
-    console.log(message);
     if (message && !message.loading) {
       let toastProps = {
         message: message.text,
