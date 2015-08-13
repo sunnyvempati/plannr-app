@@ -1,4 +1,5 @@
 import RouteActions from '../../actions/RouteActions';
+import UserActions from '../../actions/UserActions';
 import SessionStore from '../../stores/SessionStore';
 import UserStore from '../../stores/UserStore';
 
@@ -30,6 +31,7 @@ export default (PrivateComponent) => {
       this.changeListener = this._onChange.bind(this);
       SessionStore.addChangeListener(this.changeListener);
       UserStore.addChangeListener(this.changeListener);
+      if (SessionStore.userId) UserActions.get(SessionStore.userId);
     }
 
     _onChange() {
