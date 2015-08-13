@@ -14,13 +14,13 @@ import Verify from './components/session/Verify';
 
 export default (
   <Route name="app" path="/" handler={App}>
+    <Route name="profile" path="/profile" handler={ProfileForm} />
     <Route handler={Authenticated}>
       <Route name="events" path="/" handler={EventsList} />
       <Route name="events_list" path="/events" handler={EventsList} />
     </Route>
     <Route handler={Public}>
       <Route name="login" path="/login" handler={LoginForm} />
-      <Route name="profile" path="/profile" handler={ProfileForm} />
       <Route name="signup" path="/sign_up" handler={SignUpForm} />
       <Route name="check_email" path="/check_email" handler={CheckEmail} />
       <Route name="verify" path="/verify" handler={Verify} />

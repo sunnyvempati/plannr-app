@@ -1,9 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :company_admin, :name
+  attributes :id, :email, :company_admin
 
   has_one :company
-
-  def name
-    object.profile.full_name if object.profile
-  end
+  has_one :profile
 end

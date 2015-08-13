@@ -55,6 +55,14 @@ class ServerActions {
       errors: errors
     })
   }
+
+  static receiveUser(json, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.GET_USER_RESPONSE,
+      json: json,
+      errors: errors
+    })
+  }
 };
 
 export default ServerActions;

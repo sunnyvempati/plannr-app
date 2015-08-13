@@ -1,17 +1,11 @@
 class UserSessionSerializer < ActiveModel::Serializer
-  attributes :user, :token
+  attributes :user_id, :token
 
   def token
     object.attempted_record.persistence_token
   end
 
-  def user
-    session_user = object.user
-    {
-      id: session_user.id,
-      email: session_user.email,
-      first_name: session_user.profile && session_user.profile.first_name,
-      last_name: session_user.profile && session_user.profile.last_name
-    }
+  def user_id
+    object.user.id
   end
 end

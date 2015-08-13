@@ -20,7 +20,10 @@ Rails.application.routes.draw do
 
   # # email verification
   post 'verify', to: 'user_verifications#verify'
-  # get 'need_verification', to: 'user_verifications#show'
+
+  # users
+  resource :users, only: [:index, :create]
+  get 'users/:id', to: 'users#show'
 
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'

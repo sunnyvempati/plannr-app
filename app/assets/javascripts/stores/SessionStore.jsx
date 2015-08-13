@@ -6,7 +6,7 @@ class SessionStore extends BaseStore {
   constructor() {
     super();
     this._sessionToken = null;
-    this._user = {};
+    this._userId = null;
     this._errors = [];
 
     this._autoLogin();
@@ -16,14 +16,14 @@ class SessionStore extends BaseStore {
     let token = localStorage.getItem("sessionToken");
 
     if (token) {
-      let user = JSON.parse(localStorage.getItem("user"));
-      this._user = user;
+      let id = localStorage.getItem("userId");
+      this._userId = id;
       this._sessionToken = token;
     }
   }
 
-  get user() {
-    return this._user;
+  get userId() {
+    return this._userId;
   }
 
   get errors() {
@@ -45,11 +45,11 @@ _sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
           action.json.user_session &&
           action.json.user_session.token) {
         let token = action.json.user_session.token;
-        let user = action.json.user_session.user;
+        let userId = action.json.user_session.user_id;
         _sessionStoreInstance._sessionToken = token;
-        _sessionStoreInstance._user = user;
+        _sessionStoreInstance._userId = userId;
         localStorage.setItem('sessionToken', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('userId', userId);
       }
       if (action.errors) {
         _sessionStoreInstance._errors = action.errors;
@@ -57,12 +57,6 @@ _sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       _sessionStoreInstance.emitChange();
       break;
     case ActionTypes.PROFILE_RESPONSE:
-      let profile = action.json && action.json.profile;
-      if (profile) {
-        _sessionStoreInstance._user.first_name = profile.first_name;
-        _sessionStoreInstance._user.last_name = profile.last_name;
-        localStorage.setItem('user', JSON.stringify(_sessionStoreInstance._user));
-      }
       if (action.errors) {
         _sessionStoreInstance._errors = action.errors;
       }
@@ -77,9 +71,9 @@ _sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.LOGOUT_RESPONSE:
       if (!action.errors) {
         _sessionStoreInstance._sessionToken = null;
-        _sessionStoreInstance._user = null;
+        _sessionStoreInstance._userId = null;
         localStorage.removeItem('sessionToken');
-        localStorage.removeItem('user');
+        localStorage.removeItem('userId');
         _sessionStoreInstance.emitChange();
       }
       break;

@@ -9,6 +9,8 @@ const AppConstants = {
     VERIFY:                     '/verify',
     RESET_PASSWORD_REQUEST:     '/reset_password_request',
     RESET_PASSWORD:             '/reset_password',
+    GET_USER:                   '/users/',
+    GET_USERS:                  '/users'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -31,6 +33,15 @@ const AppConstants = {
     RESET_PASSWORD_REQUEST_RESPONSE: null,
     RESET_PASSWORD: null,
     RESET_PASSWORD_RESPONSE: null,
+
+    // User
+    GET_LOGGED_IN_USER_REQUEST: null,
+    GET_LOGGED_IN_USER_RESPONSE: null,
+    GET_USER_REQUEST: null,
+    GET_USERS_REQUEST: null,
+    GET_USER_RESPONSE: null,
+    GET_USERS_RESPONSE: null,
+
 
     // Toast
     TOAST_MESSAGE: null,

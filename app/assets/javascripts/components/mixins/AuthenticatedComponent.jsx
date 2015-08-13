@@ -1,5 +1,6 @@
 import RouteActions from '../../actions/RouteActions';
 import SessionStore from '../../stores/SessionStore';
+import UserStore from '../../stores/UserStore';
 
 export default (PrivateComponent) => {
   return class AuthenticatedComponent extends React.Component {
@@ -21,13 +22,14 @@ export default (PrivateComponent) => {
     _getSessionState() {
       return {
         userLoggedIn: SessionStore.isLoggedIn(),
-        user: SessionStore.user
+        user: UserStore.currentUser
       }
     }
 
     componentDidMount() {
       this.changeListener = this._onChange.bind(this);
       SessionStore.addChangeListener(this.changeListener);
+      UserStore.addChangeListener(this.changeListener);
     }
 
     _onChange() {
@@ -36,13 +38,14 @@ export default (PrivateComponent) => {
 
     componentWillUnmount() {
       SessionStore.removeChangeListener(this.changeListener);
+      UserStore.addChangeListener(this.changeListener);
     }
 
     render() {
       return (
       <PrivateComponent
         {...this.props}
-        user={this.state.user}
+        currentUser={this.state.user}
         userLoggedIn={this.state.userLoggedIn} />
       );
     }

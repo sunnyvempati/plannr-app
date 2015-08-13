@@ -4,6 +4,7 @@ import BaseStore from './BaseStore';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import {ActionTypes} from '../constants/AppConstants';
 import SessionStore from './SessionStore';
+import UserStore from './UserStore';
 
 const router = Router.create({
   routes: routes,
@@ -28,7 +29,8 @@ let _routeStoreInstance = new RouteStore();
 
 _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
-    SessionStore.dispatchToken
+    SessionStore.dispatchToken,
+    UserStore.dispatchToken
   ]);
 
   let action = payload.action;
@@ -39,16 +41,14 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
-      let user = SessionStore.user;
       // no profile
       if (SessionStore.isLoggedIn()) {
-        let path = !!user.first_name ? 'app' : 'profile';
-        router.transitionTo(path);
+        router.transitionTo('app');
       }
       break;
 
     case ActionTypes.PROFILE_RESPONSE:
-      if (SessionStore.user.first_name) {
+      if (!action.errors) {
         router.transitionTo('app');
       }
       break;
@@ -65,6 +65,12 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.SIGNUP_RESPONSE:
       if (!action.errors) {
         router.transitionTo('check_email', {}, {email: action.json.user.email});
+      }
+      break;
+
+    case ActionTypes.GET_USER_RESPONSE:
+      if (!action.errors && !UserStore.currentUser.profile) {
+        router.transitionTo('profile');
       }
       break;
 
