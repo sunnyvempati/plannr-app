@@ -10,7 +10,9 @@ const AppConstants = {
     RESET_PASSWORD_REQUEST:     '/reset_password_request',
     RESET_PASSWORD:             '/reset_password',
     GET_USER:                   '/users/',
-    GET_USERS:                  '/users'
+    GET_USERS:                  '/users',
+    GET_EVENTS:                 '/events',
+    DELETE_EVENTS:              '/destroy_events'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -41,6 +43,13 @@ const AppConstants = {
     GET_USERS_REQUEST: null,
     GET_USER_RESPONSE: null,
     GET_USERS_RESPONSE: null,
+
+    // Events
+    GET_EVENTS_REQUEST: null,
+    GET_EVENTS_RESPONSE: null,
+    GET_CACHED_EVENTS_RESPONSE: null,
+    DELETE_EVENT_REQUEST: null,
+    DELETE_EVENT_RESPONSE: null,
 
 
     // Toast

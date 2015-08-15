@@ -6,10 +6,7 @@ class EventsController < ApplicationController
 
   def index
     @events = @filter_sort.find.page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render_success @events }
-    end
+    render_success @events
   end
 
   def show

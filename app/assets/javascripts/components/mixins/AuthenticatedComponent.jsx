@@ -5,11 +5,11 @@ import UserStore from '../../stores/UserStore';
 
 export default (PrivateComponent) => {
   return class AuthenticatedComponent extends React.Component {
-    static willTransition(transition) {
+    componentWillMount() {
       if (!SessionStore.isLoggedIn()) {
-        let transitionPath = transition.path;
+        // let transitionPath = transition.path;
 
-        RouteActions.storeTransitionPath(transitionPath);
+        // RouteActions.storeTransitionPath(transitionPath);
 
         RouteActions.redirect('login');
       }

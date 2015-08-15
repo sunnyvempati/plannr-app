@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   resource :users, only: [:index, :create]
   get 'users/:id', to: 'users#show'
 
+  # events
+  resources :events, only: [:index, :create]
+  post 'destroy_events', to: 'events#mass_delete'
+
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'
 

@@ -3,7 +3,6 @@ import FormButtonList from '../generic/FormButtonList';
 import Button from '../generic/Button';
 import Form from '../generic/Form';
 import FormInput from '../generic/FormInput';
-import {Link} from 'react-router';
 import SessionActions from '../../actions/SessionActions';
 import SessionStore from '../../stores/SessionStore';
 import RouteActions from '../../actions/RouteActions';

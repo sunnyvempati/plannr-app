@@ -12,7 +12,7 @@ var Public = React.createClass({
   },
   render: function() {
     return (
-      <div>
+      <div className='AppContainer-public'>
         <TopMenu />
         <div className="AppContainer-content">
           <RouteHandler />

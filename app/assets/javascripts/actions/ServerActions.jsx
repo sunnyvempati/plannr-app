@@ -63,6 +63,15 @@ class ServerActions {
       errors: errors
     })
   }
+
+  static receiveEvents(events, params, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.GET_EVENTS_RESPONSE,
+      events: events,
+      params: params,
+      errors: errors
+    })
+  }
 };
 
 export default ServerActions;

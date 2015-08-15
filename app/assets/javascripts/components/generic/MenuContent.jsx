@@ -1,28 +1,28 @@
 import MenuItem from './MenuItem';
 
 var MenuContent = React.createClass({
-  mainMenuItems: function() {
+  _mainMenuItems() {
     return [
       { name: "Events",
         icon_class: "fa fa-ticket",
-        href: "/",
+        path: "/",
         key: '1'
       },
-      { name: "Tasks",
-        icon_class: "fa fa-check",
-        href: "/tasks/",
-        key: '2'
-      },
+      // { name: "Tasks",
+      //   icon_class: "fa fa-check",
+      //   path: "tasks",
+      //   key: '2'
+      // },
       { name: "Contacts",
         icon_class: "fa fa-book",
-        href: "/contacts/",
+        path: "contacts",
         key: '3'
       },
-      { name: "Vendors",
-        icon_class: "fa fa-truck",
-        href: "/vendors/",
-        key: '4'
-      }
+      // { name: "Vendors",
+      //   icon_class: "fa fa-truck",
+      //   path: "vendors",
+      //   key: '4'
+      // }
     ];
   },
   goToCompanyPage: function() {
@@ -46,11 +46,11 @@ var MenuContent = React.createClass({
     }
   },
   render: function() {
-    var mainMenuItems = this.mainMenuItems();
-    var activePath = this.props.activePath;
-    var mainMenuItems = mainMenuItems.map(function(menu_item) {
+    var mainMenuItems = this._mainMenuItems();
+    var mainMenuItems = mainMenuItems.map(function(menuItem) {
       return (
-        <MenuItem key={menu_item.key} item={menu_item} isSelected={menu_item.href == activePath + "/"} />
+        <MenuItem key={menuItem.key}
+                  item={menuItem} />
       );
     });
     return (

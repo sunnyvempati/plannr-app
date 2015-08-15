@@ -16,6 +16,6 @@ module FilterSort
   private
 
   def filter_sort_params
-    params.require(:filter_sort).permit(model.filter_sort_scopes) if params[:filter_sort]
+    Hash[model.filter_sort_scopes.map { |s| [s, params[s]] }]
   end
 end

@@ -5,13 +5,24 @@ import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
 import PageHeader from './generic/PageHeader';
 import Menu from './generic/Menu';
+import BaseComponent from './BaseComponent';
 import AuthenticatedComponent from './mixins/AuthenticatedComponent';
 
 export default AuthenticatedComponent(
-  class Authenticated extends React.Component {
+  class Authenticated extends BaseComponent {
+    constructor() {
+      super();
+      this.state = {header: null, skrollable: false};
+      // uses BaseComponent bind helper
+      this._bind('_handleSetLayoutParams');
+    }
 
     _closeMenu() {
       document.getElementById('menu-trigger').checked = false;
+    }
+
+    _handleSetLayoutParams(params) {
+      this.setState(params);
     }
 
     _renderPageDecoration() {
@@ -33,9 +44,12 @@ export default AuthenticatedComponent(
                     admin={currentUser.company_admin} />
             </div>
             <div className="MainContainer">
-              <PageHeader header="Events" />
+              <PageHeader header={this.state.header || "Plannr"}
+                          profile={currentUser.profile}
+                          email={currentUser.email}
+                          skrollable={this.state.skrollable} />
               <div className="MainContainer-content">
-                <RouteHandler />
+                <RouteHandler setLayoutParams={this._handleSetLayoutParams} />
               </div>
             </div>
           </div>
