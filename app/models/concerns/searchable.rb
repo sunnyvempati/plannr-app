@@ -14,7 +14,7 @@ module Searchable
     private
 
     # Builds a ES query for matching
-    def match_field(field, query, match_percent='75%')
+    def match_field(field, query, match_percent='80%')
       raise "Must specify search field" unless field
       base = { match: {} }
       base[:match][field] = {query: query, minimum_should_match: match_percent}

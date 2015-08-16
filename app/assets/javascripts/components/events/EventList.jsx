@@ -60,6 +60,7 @@ const EventList = React.createClass({
   },
   sortItems: function() {
     return [
+      {entity: null, display: "Relevance"},
       {entity: "name", display: "Name", default: true},
       {entity: "start_date", display: "Start Date"}
     ]

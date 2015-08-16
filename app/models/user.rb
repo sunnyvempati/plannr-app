@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
               available_filters: filter_sort_scopes
 
   def name
-    profile.full_name
+    profile.try(:full_name)
   end
 
   def deliver_password_reset_instructions!
