@@ -11,6 +11,15 @@ class EventStore extends BaseStore {
     this._cache = new EventStoreCache();
     this._events = [];
     this._currentParams = {};
+    this._searchResults = [];
+  }
+
+  get searchResults() {
+    return this._searchResults;
+  }
+
+  setSearchResults(results) {
+    this._searchResults = results;
   }
 
   addEvents(events, params) {
@@ -59,6 +68,13 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.GET_CACHED_EVENTS_RESPONSE:
       _eventStoreInstance._currentParams = action.params;
       _eventStoreInstance.emitChange();
+      break;
+    case ActionTypes.SEARCH_EVENTS_RESPONSE:
+      if (!action.errors) {
+        _eventStoreInstance.setSearchResults(action.events);
+        _eventStoreInstance.emitChange();
+      }
+      break;
     default:
   }
 

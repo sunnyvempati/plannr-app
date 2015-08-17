@@ -5,6 +5,7 @@ import EventStore from '../stores/EventStore';
 
 class EventActions {
   static getEvents(params) {
+    console.log("GET EVENTS", params);
     if (EventStore.isCached(params)) {
       AppDispatcher.handleServerAction({
         type: ActionTypes.GET_CACHED_EVENTS_RESPONSE,
@@ -21,6 +22,14 @@ class EventActions {
       ids: ids
     })
     EventService.delete(ids);
+  }
+
+  static search(params) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.SEARCH_EVENTS_REQUEST,
+      params: params
+    })
+    EventService.search(params);
   }
 }
 

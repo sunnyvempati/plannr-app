@@ -35,6 +35,24 @@ class EventService {
         ServerActions.receiveDeleteEvents(null);
       });
   }
+
+  static search(params) {
+    request
+      .get(APIEndpoints.GET_EVENTS)
+      .query(params)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveSearch(json.events);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveSearch(null, errors);
+          }
+        }
+      });
+  }
 }
 
 export default EventService

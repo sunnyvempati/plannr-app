@@ -5,7 +5,12 @@ import RouteActions from '../../actions/RouteActions';
 import FormMixin from '../mixins/FormMixin';
 import EventActions from '../../actions/EventActions';
 import EventStore from '../../stores/EventStore';
-import moment from 'react-datepicker/moment';
+import moment from 'moment';
+import EventTemplateInput from './EventTemplateInput';
+import DatePickerInput from '../generic/DatePickerInput';
+import EventClientInput from './EventClientInput';
+import TextAreaInput from '../generic/TextAreaInput';
+import CurrencyValidator from '../validators/currency';
 
 var EventForm = React.createClass({
   mixins: [
@@ -34,14 +39,11 @@ var EventForm = React.createClass({
       'template': inputs.template
     };
   },
-  onSuccess: function (result) {
-    location.href = "/events/" + result.event.id + "/";
-  },
   setStartDate: function(date) {
     this.setState({startDate: date});
   },
   onSecondaryClick: function() {
-    location.href = "/events";
+    RouteActions.redirect('events');
   },
   massageDataAndSubmit: function(data, reset, invalidate) {
     data.event.start_date = data.event.start_date && data.event.start_date.format();
@@ -49,7 +51,9 @@ var EventForm = React.createClass({
     var budget = data.event.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
-    this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
+    // this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
+    // to do
+    console.log(data);
   },
   setEventState: function(item) {
     var eventTemplate = {
@@ -62,7 +66,7 @@ var EventForm = React.createClass({
     this.setState({model: eventTemplate});
   },
   renderTemplateFields: function() {
-    if (this.props.routeVerb == "POST") {
+    if (this.props.type == "NEW") {
       return (
         <EventTemplateInput
           name="template"
@@ -72,18 +76,15 @@ var EventForm = React.createClass({
     }
   },
   render: function () {
-    this.putUrl = this.props.model && this.props.model.id && "/events/" + this.props.model.id + ".json";
-
     var id = 'event_form';
     var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
-    var primaryButtonText = this.props.routeVerb == "POST" ? "Create" : "Update";
+    var primaryButtonText = this.props.type == "NEW" ? "Create" : "Update";
     return (
       <div className="FormContainer--leftAligned">
         <Form mapping={this.mapInputs}
               onSubmit={this.massageDataAndSubmit}
               onValid={this.enableButton}
               onInvalid={this.disableButton}
-              authToken={this.props.authToken}
               id={id}>
           {this.renderTemplateFields()}
           <FormInput
@@ -146,3 +147,5 @@ var EventForm = React.createClass({
     );
   }
 });
+
+export default EventForm;

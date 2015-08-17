@@ -40,7 +40,7 @@ export default (PrivateComponent) => {
 
     componentWillUnmount() {
       SessionStore.removeChangeListener(this.changeListener);
-      UserStore.addChangeListener(this.changeListener);
+      UserStore.removeChangeListener(this.changeListener);
     }
 
     render() {

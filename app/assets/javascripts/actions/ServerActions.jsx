@@ -72,6 +72,14 @@ class ServerActions {
       errors: errors
     })
   }
+
+  static receiveSearch(events, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.SEARCH_EVENTS_RESPONSE,
+      events: events,
+      errors: errors
+    })
+  }
 };
 
 export default ServerActions;

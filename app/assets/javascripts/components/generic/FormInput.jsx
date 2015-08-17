@@ -1,5 +1,5 @@
 import Formsy from 'formsy-react';
-import FormInputClassesMixin from '../mixins/FormInputClassesMixin.jsx';
+import FormInputClassesMixin from '../mixins/FormInputClassesMixin';
 import Classnames from 'classnames';
 
 var FormInput = React.createClass({
