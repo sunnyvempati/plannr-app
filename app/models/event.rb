@@ -35,7 +35,6 @@ class Event < ActiveRecord::Base
 
   def self.search_query(query)
     results = search(:name, query)
-    Rails.logger.debug("Results: #{results.map { |r| r._source.name }.join(',')}") if Rails.logger.debug?
     results.records
   end
 

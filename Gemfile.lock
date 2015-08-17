@@ -223,6 +223,7 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     log4r (1.1.10)
+    logstash-event (1.2.02)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
@@ -403,6 +404,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   log4r
+  logstash-event
   pg
   pry
   pry-byebug

@@ -33,6 +33,7 @@ gem 'kaminari'
 gem 'deep_cloneable'
 
 gem 'log4r'
+gem 'logstash-event'
 gem 'statsd-ruby'
 gem 'hallmonitor'
 

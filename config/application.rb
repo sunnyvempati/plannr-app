@@ -7,6 +7,8 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require "log4r/outputter/udpoutputter"
+require File.expand_path('../../lib/logstash_formatter', __FILE__)
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -26,8 +28,17 @@ module PlannrApp
     # Regular file output
     path = File.expand_path("#{Rails.root}/log/#{Rails.env}.log")
     outputter = Log4r::FileOutputter.new('env_file_outputter', filename: path, trunc: false)
-    outputter.formatter =formatter
+    outputter.formatter = formatter
     main_logger.outputters = [outputter]
+
+    # Logstash outputter
+    logstash_host = ENV['LOGSTASH_PORT_9999_UDP_ADDR'] || ENV['LOGSTASH_HOST']
+    logstash_port = ENV['LOGSTASH_PORT_9999_UDP_PORT'] || ENV['LOGSTASH_PORT']
+    if logstash_host && logstash_port
+      ls_outputter = Log4r::UDPOutputter.new('logstash', hostname: logstash_host, port: logstash_port)
+      ls_outputter.formatter = LogstashFormatter.new
+      main_logger.outputters << ls_outputter
+    end
 
     # INFO or higher only for production
     if Rails.env.production?
