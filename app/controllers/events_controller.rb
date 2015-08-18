@@ -89,7 +89,7 @@ class EventsController < ApplicationController
     # tasks: bool
     # comments: bool
     t_params = {}
-    if params[:template]
+    if params[:template] && !params[:template].empty?
       t_params = params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments)
       [:contacts, :vendors, :tasks, :comments].each do |entity|
         t_params[entity] = t_params[entity] == 'true'

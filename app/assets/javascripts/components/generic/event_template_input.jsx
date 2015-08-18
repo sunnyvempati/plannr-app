@@ -17,13 +17,17 @@ var EventTemplateInput = React.createClass({
     this.props.eventTemplateSelected(item);
   },
   activateTemplate: function(checked) {
-    this.setValue({
-      parent_event_id: null,
-      contacts: checked,
-      vendors: checked,
-      comments: checked,
-      tasks: checked
-    });
+    var value = {};
+    if (checked) {
+      value = {
+        parent_event_id: null,
+        contacts: checked,
+        vendors: checked,
+        comments: checked,
+        tasks: checked
+      };
+    }
+    this.setValue(value);
     this.setState({useTemplate: checked, eventSelected: false});
   },
   handleTemplateItemsCheckChange: function(checked, entity) {

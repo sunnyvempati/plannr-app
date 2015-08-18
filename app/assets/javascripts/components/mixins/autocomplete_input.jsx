@@ -5,6 +5,7 @@ var AutocompleteInput = {
   ],
   getInitialState: function() {
     return {
+      originalValue: null,
       itemSet: false,
       itemDisplay: null,
       items: [],
@@ -22,7 +23,11 @@ var AutocompleteInput = {
   },
   componentWillReceiveProps: function(nextProps) {
     var assignedToValue = nextProps.value;
-    if (assignedToValue) this.retrieveItem(assignedToValue);
+    if (!assignedToValue) { this.resetState(); return; }
+    if (!this.state.itemSet || assignedToValue != this.state.originalValue) {
+      this.retrieveItem(assignedToValue);
+      this.setState({originalValue: assignedToValue});
+    }
   },
   resetState: function() {
     this.setState({itemSet: false, itemDisplay: null});
