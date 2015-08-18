@@ -22,7 +22,7 @@ var AutocompleteInput = {
   },
   componentWillReceiveProps: function(nextProps) {
     var assignedToValue = nextProps.value;
-    !!assignedToValue ? this.retrieveItem(assignedToValue) : this.resetState();
+    if (assignedToValue) this.retrieveItem(assignedToValue);
   },
   resetState: function() {
     this.setState({itemSet: false, itemDisplay: null});
