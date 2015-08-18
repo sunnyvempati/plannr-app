@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :create]
   post 'destroy_events', to: 'events#mass_delete'
 
+  # contacts
+  resources :contacts, only: [:index, :create, :show]
+
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'
 

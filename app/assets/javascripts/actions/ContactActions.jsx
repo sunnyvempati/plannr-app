@@ -9,6 +9,22 @@ export default class ContactActions {
       type: ActionTypes.SEARCH_CONTACTS_REQUEST,
       params: params
     })
-    EventService.search(params);
+    ContactService.search(params);
+  }
+
+  static create(params) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.CREATE_EVENT_CLIENT_REQUEST,
+      params: params
+    });
+    ContactService.create(params);
+  }
+
+  static getEventClient(id) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.GET_EVENT_CLIENT_REQUEST,
+      id: id
+    });
+    ContactService.getEventClient(id);
   }
 }

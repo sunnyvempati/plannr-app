@@ -32,7 +32,7 @@ class EventService {
       .end((error, res) => {
         let errors = null;
         if (res && error) errors = Utils.getErrors(res);
-        ServerActions.receiveDeleteEvents(null);
+        ServerActions.receiveDeleteEvents(ids, errors);
       });
   }
 
@@ -45,10 +45,28 @@ class EventService {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveSearch(json.events);
+            ServerActions.receiveEventSearch(json.events);
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveSearch(null, errors);
+            ServerActions.receiveEventSearch(null, errors);
+          }
+        }
+      });
+  }
+
+  static create(params) {
+    request
+      .post(APIEndpoints.CREATE_EVENT)
+      .send(params)
+      .use(Utils.addAuthToken)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveCreateEvent(json);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveCreateEvent(null, errors);
           }
         }
       });

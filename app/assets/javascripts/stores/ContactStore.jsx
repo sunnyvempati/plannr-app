@@ -8,10 +8,19 @@ class ContactStore extends BaseStore {
   constructor() {
     super();
     this._searchResults = [];
+    this._contacts = [];
   }
 
   get searchResults() { return this._searchResults; }
   setSearchResults(results) { this._searchResults = results; }
+
+  addContact(contact) {
+    this._contacts[contact.id] = contact;
+  }
+
+  getContact(id) {
+    return this._contacts[id];
+  }
 }
 
 let _contactStoreInstance = new ContactStore();
@@ -35,10 +44,18 @@ _contactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     //   _eventStoreInstance._currentParams = action.params;
     //   _eventStoreInstance.emitChange();
     //   break;
+    case ActionTypes.GET_EVENT_CLIENT_RESPONSE:
+    case ActionTypes.CREATE_EVENT_CLIENT_RESPONSE:
+      let contact = action.json && action.json.contact;
+      if (contact) {
+        _contactStoreInstance.addContact(contact);
+      }
+      _contactStoreInstance.emitChange();
+      break;
     case ActionTypes.SEARCH_CONTACTS_RESPONSE:
       if (!action.errors) {
-        _eventStoreInstance.setSearchResults(action.events);
-        _eventStoreInstance.emitChange();
+        _contactStoreInstance.setSearchResults(action.contacts);
+        _contactStoreInstance.emitChange();
       }
       break;
     default:

@@ -5,8 +5,8 @@ import EventStore from '../stores/EventStore';
 
 class EventActions {
   static getEvents(params) {
-    console.log("GET EVENTS", params);
     if (EventStore.isCached(params)) {
+      console.log("EVENT ACTIONS", params);
       AppDispatcher.handleServerAction({
         type: ActionTypes.GET_CACHED_EVENTS_RESPONSE,
         params: params
@@ -30,6 +30,14 @@ class EventActions {
       params: params
     })
     EventService.search(params);
+  }
+
+  static create(params) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.CREATE_EVENT_REQUEST,
+      params: params
+    })
+    EventService.create(params);
   }
 }
 

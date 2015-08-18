@@ -1,5 +1,5 @@
 // this is used to cache filter sort pagination requests
-class EventStoreCache {
+class CacheStore {
   constructor() {
     this._contexts = {};
   }
@@ -20,18 +20,17 @@ class EventStoreCache {
     return this._contexts[JSON.stringify(params)];
   }
 
-  clearWithParams(params) {
-    // to do
-    this._contexts = {}
+  spliceAndClear(params) {
+    let contextIds = this._contexts[JSON.stringify(params)];
+    ids.map((id) => {
+      contextIds.splice(id, 1);
+    });
+    this.clear();
   }
 
   clear() {
     this._contexts = {};
   }
-
-  _stringParams(params) {
-    return JSON.stringify(params);
-  }
 }
 
-export default EventStoreCache;
+export default CacheStore;

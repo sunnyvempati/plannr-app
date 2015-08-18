@@ -73,12 +73,52 @@ class ServerActions {
     })
   }
 
-  static receiveSearch(events, errors) {
+  static receiveEventSearch(events, errors) {
     AppDispatcher.handleServerAction({
       type: ActionTypes.SEARCH_EVENTS_RESPONSE,
       events: events,
       errors: errors
     })
+  }
+
+  static receiveContactSearch(contacts, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.SEARCH_CONTACTS_RESPONSE,
+      contacts: contacts,
+      errors: errors
+    });
+  }
+
+  static receiveCreateContact(json, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.CREATE_EVENT_CLIENT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveEventClient(json, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.GET_EVENT_CLIENT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveCreateEvent(json, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.CREATE_EVENT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteEvents(ids, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.DELETE_EVENT_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
   }
 };
 

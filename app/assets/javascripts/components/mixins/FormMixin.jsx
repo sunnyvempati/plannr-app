@@ -1,4 +1,4 @@
-import SessionStore from '../../stores/SessionStore';
+import ErrorStore from '../../stores/ErrorStore';
 
 var FormMixin = {
   getInitialState: function() {
@@ -8,14 +8,14 @@ var FormMixin = {
     };
   },
   componentDidMount: function() {
-    SessionStore.addChangeListener(this._onChange);
+    ErrorStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    SessionStore.removeChangeListener(this._onChange);
+    ErrorStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
     this.setState({
-      errors: SessionStore.errors,
+      errors: ErrorStore.errors,
       disbled: false
     });
   },

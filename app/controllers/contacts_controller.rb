@@ -7,10 +7,7 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
-    respond_to do |format|
-      format.html
-      format.json { render json: @contacts }
-    end
+    render_success @contacts
   end
 
   def show

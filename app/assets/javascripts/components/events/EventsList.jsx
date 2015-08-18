@@ -20,6 +20,7 @@ const EventsList = React.createClass({
     };
   },
   componentDidMount() {
+    this.props.setLayoutParams({header: "Events", skrollable: true});
     EventStore.addChangeListener(this._onChange);
   },
   componentWillUnmount() {
@@ -27,10 +28,11 @@ const EventsList = React.createClass({
   },
   _onChange() {
     let events = EventStore.getEvents();
-    if (events.length == 0) { this.detachScrollListener(); return; }
-    this.setState({data: events});
+    if (events.length == 0) { this.detachScrollListener(); }
+    else this.setState({data: events});
   },
   fetchNextPage: function(nextPage) {
+    if (nextPage == 2) nextPage = 1;
     this.page = nextPage;
     var params = this.mergeParams();
     EventActions.getEvents(params);

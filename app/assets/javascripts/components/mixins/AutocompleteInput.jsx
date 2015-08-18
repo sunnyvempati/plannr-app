@@ -26,7 +26,7 @@ var AutocompleteInput = {
   },
   componentWillReceiveProps: function(nextProps) {
     var assignedToValue = nextProps.value;
-    !!assignedToValue ? this.retrieveItem(assignedToValue) : this.resetState();
+    if (assignedToValue) this.retrieveItem(assignedToValue);
   },
   resetState: function() {
     this.setState({itemSet: false, itemDisplay: null});
@@ -48,7 +48,7 @@ var AutocompleteInput = {
     return (
       <div className={classNames(className)}>
         <div className="Autocomplete-picked" onClick={this.editField}>
-          <div className="Autocomplete-pickedName">
+          <div className="Autocomplete-pickedName u-wrapWithEllipsis">
             {this.state.itemDisplay}
           </div>
           <div className="Autocomplete-edit">

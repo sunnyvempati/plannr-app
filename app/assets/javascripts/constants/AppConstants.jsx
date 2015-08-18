@@ -12,8 +12,11 @@ const AppConstants = {
     GET_USER:                   '/users/',
     GET_USERS:                  '/users',
     GET_EVENTS:                 '/events',
+    CREATE_EVENT:               '/events',
     DELETE_EVENTS:              '/destroy_events',
-    GET_CONTACTS:               '/contacts'
+    GET_CONTACTS:               '/contacts',
+    CREATE_CONTACT:             '/contacts',
+    GET_CONTACT:                '/contacts/',
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -53,10 +56,18 @@ const AppConstants = {
     DELETE_EVENT_RESPONSE: null,
     SEARCH_EVENTS_REQUEST: null,
     SEARCH_EVENTS_RESPONSE: null,
+    CREATE_EVENT_REQUEST: null,
+    CREATE_EVENT_RESPONSE: null,
 
     // Contacts
     SEARCH_CONTACTS_REQUEST: null,
     SEARCH_CONTACTS_RESPONSE: null,
+    CREATE_CONTACT_REQUEST: null,
+    CREATE_CONTACT_RESPONSE: null,
+    CREATE_EVENT_CLIENT_REQUEST: null,
+    CREATE_EVENT_CLIENT_RESPONSE: null,
+    GET_EVENT_CLIENT_REQUEST: null,
+    GET_EVENT_CLIENT_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,

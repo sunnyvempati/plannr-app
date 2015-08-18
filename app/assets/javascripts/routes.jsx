@@ -5,6 +5,7 @@ import Public from './components/Public';
 import Authenticated from './components/Authenticated';
 import EventsList from './components/events/EventsList';
 import EventFormNew from './components/events/EventFormNew';
+import EventRouter from './components/events/EventRouter';
 import ContactsList from './components/contacts/ContactsList';
 import LoginForm from './components/session/LoginForm';
 import SignUpForm from './components/session/SignUpForm';
@@ -21,6 +22,7 @@ export default (
       <Route name="events" path="/" handler={EventsList} />
       <Route name="events_list" path="/events" handler={EventsList} />
       <Route name="events_new" path="/events/new" handler={EventFormNew} />
+      <Route name="event" path="/events/:id" handler={EventRouter} />
       <Route name="contacts" path="/contacts" handler={ContactsList} />
     </Route>
     <Route handler={Public}>

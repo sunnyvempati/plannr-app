@@ -5,6 +5,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import {ActionTypes} from '../constants/AppConstants';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
+import EventStore from './EventStore';
 
 const router = Router.create({
   routes: routes,
@@ -30,7 +31,8 @@ let _routeStoreInstance = new RouteStore();
 _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
     SessionStore.dispatchToken,
-    UserStore.dispatchToken
+    UserStore.dispatchToken,
+    EventStore.dispatchToken
   ]);
 
   let action = payload.action;
@@ -72,6 +74,11 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (!action.errors && !UserStore.currentUser.profile) {
         router.transitionTo('profile');
       }
+      break;
+
+    case ActionTypes.CREATE_EVENT_RESPONSE:
+      let event = action.json && action.json.event;
+      if (!action.errors && event) router.transitionTo('event', {id: event.id});
       break;
 
     case ActionTypes.LOGOUT_RESPONSE:

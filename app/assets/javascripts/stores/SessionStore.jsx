@@ -7,7 +7,6 @@ class SessionStore extends BaseStore {
     super();
     this._sessionToken = null;
     this._userId = null;
-    this._errors = [];
 
     this._autoLogin();
   }
@@ -24,10 +23,6 @@ class SessionStore extends BaseStore {
 
   get userId() {
     return this._userId;
-  }
-
-  get errors() {
-    return this._errors;
   }
 
   isLoggedIn() {
@@ -51,21 +46,6 @@ _sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         localStorage.setItem('sessionToken', token);
         localStorage.setItem('userId', userId);
       }
-      if (action.errors) {
-        _sessionStoreInstance._errors = action.errors;
-      }
-      _sessionStoreInstance.emitChange();
-      break;
-    case ActionTypes.PROFILE_RESPONSE:
-      if (action.errors) {
-        _sessionStoreInstance._errors = action.errors;
-      }
-      _sessionStoreInstance.emitChange();
-      break;
-    case ActionTypes.RESET_PASSWORD_REQUEST_RESPONSE:
-    case ActionTypes.RESET_PASSWORD_RESPONSE:
-    case ActionTypes.SIGNUP_RESPONSE:
-      _sessionStoreInstance._errors = action.errors;
       _sessionStoreInstance.emitChange();
       break;
     case ActionTypes.LOGOUT_RESPONSE:
