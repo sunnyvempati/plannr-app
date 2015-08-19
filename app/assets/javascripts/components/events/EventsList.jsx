@@ -32,7 +32,6 @@ const EventsList = React.createClass({
     else this.setState({data: events});
   },
   fetchNextPage: function(nextPage) {
-    if (nextPage == 2) nextPage = 1;
     this.page = nextPage;
     var params = this.mergeParams();
     EventActions.getEvents(params);
