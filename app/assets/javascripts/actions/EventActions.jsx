@@ -6,7 +6,6 @@ import EventStore from '../stores/EventStore';
 class EventActions {
   static getEvents(params) {
     if (EventStore.isCached(params)) {
-      console.log("EVENT ACTIONS", params);
       AppDispatcher.handleServerAction({
         type: ActionTypes.GET_CACHED_EVENTS_RESPONSE,
         params: params

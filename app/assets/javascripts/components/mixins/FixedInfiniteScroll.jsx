@@ -1,6 +1,6 @@
 'use strict';
 
-var FixedInfiniteScrollMixin = {
+export default {
   getDefaultProps: function() {
     return {
       initialPage: 1,

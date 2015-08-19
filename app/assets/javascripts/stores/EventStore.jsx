@@ -10,17 +10,16 @@ class EventStore extends BaseStore {
     super();
     this._cache = new CacheStore();
     this._events = [];
-    this._currentParams = {};
     this._searchResults = [];
+    // used for pagination/sort/filter
+    this._viewEvents = [];
+    this._allEventsloaded = false;
   }
 
-  get searchResults() {
-    return this._searchResults;
-  }
-
-  setSearchResults(results) {
-    this._searchResults = results;
-  }
+  get viewEvents() { return this._viewEvents; }
+  get searchResults() { return this._searchResults; }
+  get eventsLoaded() { return this._allEventsLoaded; }
+  setSearchResults(results) { this._searchResults = results; }
 
   addEvents(events, params) {
     this._cache.createContext(params);
@@ -28,11 +27,21 @@ class EventStore extends BaseStore {
       events.forEach((event) => {
         // add to global
         this._events[event.id] = event;
+        this._viewEvents.push(event);
         // then add to cache
         this._cache.add(event.id, params);
       });
-    }
-    this._currentParams = params;
+
+    } else this._allEventsLoaded = true;
+  }
+
+  addCachedEvents(params) {
+    let eventIds = this._cache.getEvents(params);
+    if (eventIds) {
+      eventIds.map((id) => {
+        this._viewEvents.push(this._events[id]);
+      });
+    } else this._allEventsLoaded = true;
   }
 
   addEvent(event) {
@@ -41,14 +50,13 @@ class EventStore extends BaseStore {
     this._events[event.id] = event;
   }
 
-  getEvents() {
-    console.log("GET EVENTS", this._currentParams, this._cache);
-    let eventIds = this._cache.getEvents(this._currentParams);
-    if (eventIds) {
-      return eventIds.map((id) => {
-        return this._events[id];
-      });
-    } else return [];
+  getEvent(id) {
+    return this._events[id];
+  }
+
+  resetView() {
+    this._viewEvents = [];
+    this._allEventsLoaded = false;
   }
 
   isCached(params) {
@@ -80,8 +88,7 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       _eventStoreInstance.emitChange();
       break;
     case ActionTypes.GET_CACHED_EVENTS_RESPONSE:
-      console.log("STORE", action.params);
-      _eventStoreInstance._currentParams = action.params;
+      _eventStoreInstance.addCachedEvents(action.params);
       _eventStoreInstance.emitChange();
       break;
     case ActionTypes.SEARCH_EVENTS_RESPONSE:
