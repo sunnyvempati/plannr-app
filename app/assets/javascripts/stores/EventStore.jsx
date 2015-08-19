@@ -4,6 +4,8 @@ import BaseStore from './BaseStore';
 import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
+import extend from 'extend';
+
 
 class EventStore extends BaseStore {
   constructor() {
@@ -22,14 +24,15 @@ class EventStore extends BaseStore {
   setSearchResults(results) { this._searchResults = results; }
 
   addEvents(events, params) {
-    this._cache.createContext(params);
+    let isSearchQuery = !!params.search_query;
+    if (!isSearchQuery) this._cache.createContext(params);
     if (events.length > 0) {
       events.forEach((event) => {
         // add to global
         this._events[event.id] = event;
         this._viewEvents.push(event);
         // then add to cache
-        this._cache.add(event.id, params);
+        if (!isSearchQuery) this._cache.add(event.id, params);
       });
 
     } else this._allEventsLoaded = true;
@@ -48,6 +51,13 @@ class EventStore extends BaseStore {
     // clear cache since we have a new event
     this._cache.clear();
     this._events[event.id] = event;
+    if (this._viewEvents.length) {
+      this._viewEvents.forEach((ve) => {
+        if (ve.id == event.id) {
+          extend(ve, event);
+        }
+      })
+    }
   }
 
   getEvent(id) {
@@ -102,6 +112,7 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventStoreInstance.emitChange();
       }
       break;
+    case ActionTypes.UPDATE_EVENT_RESPONSE:
     case ActionTypes.CREATE_EVENT_RESPONSE:
       let event = action.json && action.json.event;
       if (event) _eventStoreInstance.addEvent(event);

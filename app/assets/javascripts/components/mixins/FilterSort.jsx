@@ -1,3 +1,5 @@
+import EventStore from '../../stores/EventStore';
+
 export default {
   getInitialState: function() {
     return {
@@ -26,6 +28,7 @@ export default {
     this.filterParams = params;
   },
   resetPage: function() {
+    EventStore.resetView();
     this.nextPage = 1;
     this.setState({data: []});
   },

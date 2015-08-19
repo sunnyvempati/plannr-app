@@ -44,6 +44,8 @@ _errorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.RESET_PASSWORD_RESPONSE:
     case ActionTypes.SIGNUP_RESPONSE:
     case ActionTypes.CREATE_EVENT_CLIENT_RESPONSE:
+    case ActionTypes.UPDATE_EVENT_RESPONSE:
+    case ActionTypes.CREATE_EVENT_RESPONSE:
       let errors = action.errors;
       if (errors) { _errorStoreInstance.setErrors(errors) }
         else _errorStoreInstance.clear();

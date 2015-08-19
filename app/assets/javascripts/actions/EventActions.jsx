@@ -15,6 +15,15 @@ class EventActions {
     }
   }
 
+  static update(id, params) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.GET_EVENT_CLIENT_REQUEST,
+      id: id,
+      params: params
+    });
+    EventService.update(id, params);
+  }
+
   static deleteEvents(ids) {
     AppDispatcher.handleViewAction({
       type: ActionTypes.DELETE_EVENT_REQUEST,

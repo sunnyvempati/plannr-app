@@ -3,8 +3,9 @@ module ResponseHelpers
     render entity, status: 200
   end
 
-  def render_entity(entity)
-    if entity.save
+  def render_entity(entity, skip_validation=false)
+    binding.pry
+    if entity.save(validate: !skip_validation)
       yield if block_given?
       render_success entity
     else

@@ -46,7 +46,10 @@ class EventsController < ApplicationController
 
   def update
     @event.assign_attributes event_params
-    render_entity @event do
+    # need to skip validation on archive update
+    # so it doesn't validate if past start_date
+    skip_validation = event_params[:status] == 2;
+    render_entity @event, skip_validation do
       EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
   end

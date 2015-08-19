@@ -2,24 +2,18 @@ import Event from './Event';
 import classNames from 'classnames';
 import CheckboxInput from '../generic/CheckboxInput';
 import DropdownMenu from '../generic/DropdownMenu';
+import EventActions from '../../actions/EventActions';
 
 var EventRow = React.createClass({
-  getInitialState: function() {
-    return {
-      archived: this.props.event.status == 2
-    };
-  },
   toggleArchive: function() {
-    var archived = !this.state.archived;
-    var url = "/events/" + this.props.event.id + ".json";
+    var archived = !(this.props.event.status == 2);
     var params = {
       event: {
         status: archived ? 2 : 1
       }
     };
-    Utils.put(url, params, function(result) {
-      this.setState({archived: archived});
-    }.bind(this));
+
+    EventActions.update(this.props.event.id, params);
   },
   goToEvent: function(id) {
     location.href = "/events/" + id + "/";
@@ -44,7 +38,8 @@ var EventRow = React.createClass({
         </div>
       )
     }.bind(this));
-    var archiveDisplay = this.state.archived ? "Restore" : "Archive";
+    var archived = this.props.event.status == 2;
+    var archiveDisplay = archived ? "Restore" : "Archive";
     return (
       <div className="TableRow-actions">
         <div className="DropdownMenu-item"
@@ -56,15 +51,16 @@ var EventRow = React.createClass({
     )
   },
   render: function() {
+    var archived = this.props.event.status == 2;
     var hideCheckbox = this.props.checkedItems.length > 0 ? false : true;
     var event = this.props.event;
     var checked = this.props.checkedItems.indexOf(event.id) > -1;
     var daysTill = !!event.days_till ? event.days_till + " days left" : "";
-    var daysTill = this.state.archived ? "ARCHIVED" : daysTill;
+    var daysTill = archived ? "ARCHIVED" : daysTill;
     var daysTillClasses = classNames({
       'EventsTable-rowDaysTill': true,
-      'u-dim': this.state.archived,
-      'u-italics': this.state.archived
+      'u-dim': archived,
+      'u-italics': archived
     });
     return (
       <div className="EventsTable-row" key={event.id}>

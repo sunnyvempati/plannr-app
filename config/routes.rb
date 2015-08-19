@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show'
 
   # events
-  resources :events, only: [:index, :create]
+  resources :events, only: [:index, :create, :update]
   post 'destroy_events', to: 'events#mass_delete'
 
   # contacts

@@ -13,6 +13,7 @@ const AppConstants = {
     GET_USERS:                  '/users',
     GET_EVENTS:                 '/events',
     CREATE_EVENT:               '/events',
+    UPDATE_EVENT:               '/events/',
     DELETE_EVENTS:              '/destroy_events',
     GET_CONTACTS:               '/contacts',
     CREATE_CONTACT:             '/contacts',
@@ -58,6 +59,8 @@ const AppConstants = {
     SEARCH_EVENTS_RESPONSE: null,
     CREATE_EVENT_REQUEST: null,
     CREATE_EVENT_RESPONSE: null,
+    UPDATE_EVENT_REQUEST: null,
+    UPDATE_EVENT_RESPONSE: null,
 
     // Contacts
     SEARCH_CONTACTS_REQUEST: null,

@@ -23,6 +23,25 @@ class EventService {
       });
   }
 
+  static update(id, params) {
+    request
+      .put(APIEndpoints.UPDATE_EVENT + id)
+      .send(params)
+      .use(Utils.addAuthToken)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveUpdateEvent(json);
+            ToastActions.toast(json.event.name + " updated!");
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveUpdateEvent(null, errors);
+          }
+        }
+      });
+  }
+
   static delete(ids) {
     request
       .post(APIEndpoints.DELETE_EVENTS)
@@ -32,7 +51,7 @@ class EventService {
       .end((error, res) => {
         let errors = null;
         if (res && error) errors = Utils.getErrors(res);
-        if (!error) { ToastActions.toast(ids.length + " events successfully deleted!") }
+        if (!error) { ToastActions.toast(ids.length + " event(s) successfully deleted!") }
         ServerActions.receiveDeleteEvents(ids, errors);
       });
   }

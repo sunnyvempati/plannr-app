@@ -120,6 +120,14 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveUpdateEvent(json, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.UPDATE_EVENT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;
