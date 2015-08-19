@@ -5,6 +5,7 @@ import EventActions from '../../actions/EventActions';
 var EventFormInput = React.createClass({
   getInitialState: function() {
     return {
+      originalValue: null,
       itemSet: false,
       itemDisplay: null,
       items: [],
@@ -24,6 +25,13 @@ var EventFormInput = React.createClass({
   },
   componentWillUnmount() {
     EventStore.removeChangeListener(this._onChange);
+  },
+  componentWillReceiveProps: function(nextProps) {
+    var inputVal = nextProps.value;
+    if (!inputVal) { this.resetState(); return; }
+  },
+  resetState: function() {
+    this.setState({itemSet: false, itemDisplay: null});
   },
   _onChange() {
     this.setState({items: EventStore.searchResults});

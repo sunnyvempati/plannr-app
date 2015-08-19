@@ -9,6 +9,7 @@ var AutocompleteInput = {
   ],
   getInitialState: function() {
     return {
+      originalValue: null,
       itemSet: false,
       itemDisplay: null,
       items: [],
@@ -21,12 +22,16 @@ var AutocompleteInput = {
     };
   },
   componentDidMount: function() {
-    var assignedToValue = this.getValue();
-    !!assignedToValue ? this.retrieveItem(assignedToValue) : this.resetState();
+    var inputVal = this.getValue();
+    !!inputVal ? this.retrieveItem(inputVal) : this.resetState();
   },
   componentWillReceiveProps: function(nextProps) {
-    var assignedToValue = nextProps.value;
-    if (assignedToValue) this.retrieveItem(assignedToValue);
+    var inputVal = nextProps.value;
+    if (!inputVal) { this.resetState(); return; }
+    if (!this.state.itemSet || inputVal != this.state.originalValue) {
+      this.retrieveItem(inputVal);
+      this.setState({originalValue: inputVal});
+    }
   },
   resetState: function() {
     this.setState({itemSet: false, itemDisplay: null});
