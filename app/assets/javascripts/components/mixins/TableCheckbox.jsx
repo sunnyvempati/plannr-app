@@ -13,7 +13,7 @@ export default {
       checkedItems.push(value);
     }
     else {
-      index = checkedItems.indexOf(value);
+      let index = checkedItems.indexOf(value);
       checkedItems.splice(index, 1);
     }
     this.setState({

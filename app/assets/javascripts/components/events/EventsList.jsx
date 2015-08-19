@@ -66,6 +66,7 @@ const EventsList = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     EventActions.deleteEvents(deletionIds);
+    this.setState({checkedItems: []});
   },
   actionItems: function() {
     return [
@@ -84,6 +85,7 @@ const EventsList = React.createClass({
     );
   },
   render: function() {
+    console.log(this.state.checkedItems);
     return (
       <div className="EventsTableContainer">
         <Table

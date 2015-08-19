@@ -4,7 +4,6 @@ module ResponseHelpers
   end
 
   def render_entity(entity, skip_validation=false)
-    binding.pry
     if entity.save(validate: !skip_validation)
       yield if block_given?
       render_success entity
