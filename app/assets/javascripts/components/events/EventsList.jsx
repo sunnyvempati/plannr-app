@@ -22,18 +22,17 @@ const EventsList = React.createClass({
   componentDidMount() {
     this.props.setLayoutParams({header: "Events", skrollable: true});
     EventStore.addChangeListener(this._onViewEventsChange);
-    EventStore.resetView();
   },
   componentWillUnmount() {
     EventStore.resetView();
     EventStore.removeChangeListener(this._onViewEventsChange);
   },
   _onViewEventsChange() {
-    this.setState({data: EventStore.viewEvents});
     if (EventStore.eventsLoaded) { this.detachScrollListener(); }
+    this.setState({data: EventStore.viewEvents});
   },
   fetchNextPage: function(nextPage) {
-    console.log(nextPage);
+    if (EventStore.eventsLoaded) { this.detachScrollListener(); return; }
     this.page = nextPage;
     var params = this.mergeParams();
     EventActions.getEvents(params);

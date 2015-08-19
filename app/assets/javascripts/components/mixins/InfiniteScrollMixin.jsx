@@ -23,10 +23,9 @@ export default {
     this.detachScrollListener();
   },
 
-  // componentDidUpdate: function() {
-  //   console.log("UPDATE");
-  //   this.attachScrollListener();
-  // },
+  componentDidUpdate: function() {
+    this.attachScrollListener();
+  },
 
   scrollListener: function () {
     var el = this.getDOMNode();

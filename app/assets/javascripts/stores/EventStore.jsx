@@ -38,7 +38,7 @@ class EventStore extends BaseStore {
   addCachedEvents(params) {
     let eventIds = this._cache.getEvents(params);
     if (eventIds) {
-      eventIds.map((id) => {
+      eventIds.forEach((id) => {
         this._viewEvents.push(this._events[id]);
       });
     } else this._allEventsLoaded = true;
