@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import CheckboxInput from '../generic/CheckboxInput';
 import DropdownMenu from '../generic/DropdownMenu';
 import EventActions from '../../actions/EventActions';
+import RouteActions from '../../actions/RouteActions';
 
 var EventRow = React.createClass({
   toggleArchive: function() {
@@ -16,7 +17,7 @@ var EventRow = React.createClass({
     EventActions.update(this.props.event.id, params);
   },
   goToEvent: function(id) {
-    location.href = "/events/" + id + "/";
+    RouteActions.redirect('event', {id: id});
   },
   getActionTrigger: function() {
     return (

@@ -85,7 +85,6 @@ const EventsList = React.createClass({
     );
   },
   render: function() {
-    console.log(this.state.checkedItems);
     return (
       <div className="EventsTableContainer">
         <Table

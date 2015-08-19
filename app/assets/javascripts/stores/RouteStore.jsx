@@ -39,7 +39,7 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
 
   switch(action.type) {
     case ActionTypes.REDIRECT:
-      router.transitionTo(action.route);
+      router.transitionTo(action.route, action.params);
       break;
 
     case ActionTypes.LOGIN_RESPONSE:
