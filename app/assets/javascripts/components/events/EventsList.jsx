@@ -66,13 +66,6 @@ const EventsList = React.createClass({
   handleDelete: function(id) {
     var deletionIds = !!id ? [id] : this.state.checkedItems;
     EventActions.deleteEvents(deletionIds);
-
-    // Utils.post("/destroy_events", destroyOpts, function(result) {
-    //   this.setState({data: this.spliceResults(this.state.data, deletionIds), checkedItems: []});
-    //   this.toast(deletionIds.length + " events deleted successfully.");
-    // }.bind(this));
-
-    // to do delete
   },
   actionItems: function() {
     return [

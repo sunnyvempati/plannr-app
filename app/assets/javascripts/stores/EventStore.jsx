@@ -64,9 +64,14 @@ class EventStore extends BaseStore {
   }
 
   removeEvents(ids) {
-    this._cache._spliceAndClear(ids);
+    this._cache.clear();
+    // remove from global event map
     ids.map((id) => {
       this._events.splice(id, 1);
+    });
+    // remove from view
+    this._viewEvents = this._viewEvents.filter((event) => {
+      return ids.indexOf(event.id) == -1;
     });
   }
 }
@@ -105,6 +110,7 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.DELETE_EVENT_RESPONSE:
       if (!action.errors) {
         _eventStoreInstance.removeEvents(action.ids);
+        _eventStoreInstance.emitChange();
       }
       break;
     default:

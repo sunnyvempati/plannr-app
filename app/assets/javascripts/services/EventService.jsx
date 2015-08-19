@@ -32,6 +32,7 @@ class EventService {
       .end((error, res) => {
         let errors = null;
         if (res && error) errors = Utils.getErrors(res);
+        if (!error) { ToastActions.toast(ids.length + " events successfully deleted!") }
         ServerActions.receiveDeleteEvents(ids, errors);
       });
   }
