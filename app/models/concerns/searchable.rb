@@ -3,6 +3,26 @@ module Searchable
   extend ActiveSupport::Concern
 
   class_methods do
+    def default_settings
+      {
+        analysis: {
+          analyzer: {
+            autocomplete: {
+              type: 'custom',
+              tokenizer: 'standard',
+              filter: ['standard', 'lowercase', 'stop', 'kstem', 'ngram']
+            }
+          },
+          filter: {
+            ngram: {
+              type: 'ngram',
+              min_gram: 2,
+              max_gram: 5
+            }
+          }
+        }
+      }
+    end
 
     # Simple match field search, filtered by current tenant company
     def search(field, term)
@@ -17,7 +37,10 @@ module Searchable
     def match_field(field, query, match_percent='80%')
       raise "Must specify search field" unless field
       base = { match: {} }
-      base[:match][field] = {query: query, minimum_should_match: match_percent}
+      base[:match][field] = {
+        query: query,
+        minimum_should_match: match_percent
+      }
       base
     end
 

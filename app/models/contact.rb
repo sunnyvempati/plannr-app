@@ -9,14 +9,18 @@ class Contact < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   # Set up Elastic Search
-  mapping do
-    # Company ID here to allow for tenanted filtering of search
-    # set these ids not not_analyzed so that they're exact matches
-    indexes :company_id, type: 'string', index: 'not_analyzed'
-    indexes :email, type: 'string', index: 'not_analyzed'
-    indexes :id, type: 'string', index: 'not_analyzed'
-    indexes :owner_id, type: 'string', index: 'not_analyzed'
+  settings(default_settings) do
+    mapping do
+      # Company ID here to allow for tenanted filtering of search
+      # set these ids not not_analyzed so that they're exact matches
+      indexes :name, type: 'string', analyzer: 'autocomplete'
+      indexes :company_id, type: 'string', index: 'not_analyzed'
+      indexes :email, type: 'string', index: 'not_analyzed'
+      indexes :id, type: 'string', index: 'not_analyzed'
+      indexes :owner_id, type: 'string', index: 'not_analyzed'
+    end
   end
+
 
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   US_PHONE_REGEX = %r{\A(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?\z}

@@ -7,13 +7,15 @@ class Vendor < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   # Set up Elastic Search
-  mapping do
-    indexes :name, type: 'string', index: 'analyzed'
-    # Company ID here to allow for tenanted filtering of search
-    indexes :company_id, type: 'string', index: 'not_analyzed'
-    indexes :id, type: 'string', index: 'not_analyzed'
-    indexes :owner_id, type: 'string', index: 'not_analyzed'
-    indexes :primary_contact_id, type: 'string', index: 'not_analyzed'
+  settings(default_settings) do
+    mapping do
+      indexes :name, type: 'string', analyzer: 'autocomplete'
+      # Company ID here to allow for tenanted filtering of search
+      indexes :company_id, type: 'string', index: 'not_analyzed'
+      indexes :id, type: 'string', index: 'not_analyzed'
+      indexes :owner_id, type: 'string', index: 'not_analyzed'
+      indexes :primary_contact_id, type: 'string', index: 'not_analyzed'
+    end
   end
 
   has_many :event_vendors, dependent: :destroy
