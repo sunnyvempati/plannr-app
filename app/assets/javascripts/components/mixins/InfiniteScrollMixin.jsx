@@ -11,7 +11,7 @@ export default {
   getDefaultProps: function() {
     return {
       initialPage: 1,
-      offset: 250
+      offset: 0
     };
   },
 
@@ -21,10 +21,6 @@ export default {
 
   componentWillUnmount: function() {
     this.detachScrollListener();
-  },
-
-  componentDidUpdate: function() {
-    this.attachScrollListener();
   },
 
   scrollListener: function () {

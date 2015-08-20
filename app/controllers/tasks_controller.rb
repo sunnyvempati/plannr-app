@@ -5,12 +5,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    serializer = filter_sort_params && filter_sort_params[:with_event_id] ? TaskSerializer : TaskWithEventSerializer
     @tasks = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
-    respond_to do |format|
-      format.html
-      format.json { render json: @tasks, each_serializer: serializer }
-    end
+    render_success @tasks
   end
 
   def show

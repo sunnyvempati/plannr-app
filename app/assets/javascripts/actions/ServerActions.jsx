@@ -128,6 +128,15 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveTasks(tasks, params, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.GET_TASKS_RESPONSE,
+      tasks: tasks,
+      params: params,
+      errors: errors
+    })
+  }
 };
 
 export default ServerActions;

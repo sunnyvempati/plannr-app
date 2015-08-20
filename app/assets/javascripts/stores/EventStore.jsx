@@ -15,22 +15,31 @@ class EventStore extends BaseStore {
     this._searchResults = [];
     // used for pagination/sort/filter
     this._viewEvents = [];
-    this._allEventsloaded = false;
+    this._allEventsLoaded = false;
   }
 
-  get viewEvents() { return this._viewEvents; }
   get searchResults() { return this._searchResults; }
   get eventsLoaded() { return this._allEventsLoaded; }
   setSearchResults(results) { this._searchResults = results; }
 
+  get viewEvents() {
+    // this flattens array and sorts keys by page so
+    // page 1 is displayed in order
+    let eventKeys = Object.keys(this._viewEvents);
+    let allItemIds = eventKeys.map((key) => this._viewEvents[key]);
+    return [].concat.apply([], allItemIds).map((id) => this._events[id]);
+  }
+
   addEvents(events, params) {
     let isSearchQuery = !!params.search_query;
+    let page = params.page;
     if (!isSearchQuery) this._cache.createContext(params);
     if (events.length > 0) {
+      this._viewEvents[page] = [];
       events.forEach((event) => {
         // add to global
         this._events[event.id] = event;
-        this._viewEvents.push(event);
+        this._viewEvents[page].push(event.id);
         // then add to cache
         if (!isSearchQuery) this._cache.add(event.id, params);
       });
@@ -39,11 +48,10 @@ class EventStore extends BaseStore {
   }
 
   addCachedEvents(params) {
-    let eventIds = this._cache.getEvents(params);
-    if (eventIds) {
-      eventIds.forEach((id) => {
-        this._viewEvents.push(this._events[id]);
-      });
+    let eventIds = this._cache.getItems(params);
+    let page = params.page;
+    if (eventIds && eventIds.length) {
+      this._viewEvents[page] = eventIds;
     } else this._allEventsLoaded = true;
   }
 
@@ -51,13 +59,6 @@ class EventStore extends BaseStore {
     // clear cache since we have a new event
     this._cache.clear();
     this._events[event.id] = event;
-    if (this._viewEvents.length) {
-      this._viewEvents.forEach((ve) => {
-        if (ve.id == event.id) {
-          extend(ve, event);
-        }
-      })
-    }
   }
 
   getEvent(id) {

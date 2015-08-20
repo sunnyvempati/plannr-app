@@ -3,10 +3,12 @@ import {Route, DefaultRoute} from 'react-router';
 import App from './components/App';
 import Public from './components/Public';
 import Authenticated from './components/Authenticated';
-import EventsList from './components/events/EventsList';
+import EventList from './components/events/EventList';
 import EventFormNew from './components/events/EventFormNew';
 import EventRouter from './components/events/EventRouter';
-import ContactsList from './components/contacts/ContactsList';
+import ContactList from './components/contacts/ContactsList';
+import VendorList from './components/vendors/VendorList';
+import TaskList from './components/tasks/TaskList';
 import LoginForm from './components/session/LoginForm';
 import SignUpForm from './components/session/SignUpForm';
 import ResetPasswordForm from './components/session/ResetPasswordForm';
@@ -19,11 +21,13 @@ export default (
   <Route name="app" path="/" handler={App}>
     <Route name="profile" path="/profile" handler={ProfileForm} />
     <Route handler={Authenticated}>
-      <Route name="events" path="/" handler={EventsList} />
-      <Route name="events_list" path="/events" handler={EventsList} />
+      <Route name="events" path="/" handler={EventList} />
+      <Route name="events_list" path="/events" handler={EventList} />
       <Route name="events_new" path="/events/new" handler={EventFormNew} />
       <Route name="event" path="/events/:id" handler={EventRouter} />
-      <Route name="contacts" path="/contacts" handler={ContactsList} />
+      <Route name="contacts" path="/contacts" handler={ContactList} />
+      <Route name="tasks" path="/tasks" handler={TaskList} />
+      <Route name="vendors" path="/vendors" handler={VendorList} />
     </Route>
     <Route handler={Public}>
       <Route name="login" path="/login" handler={LoginForm} />

@@ -8,21 +8,21 @@ var MenuContent = React.createClass({
         path: "/",
         key: '1'
       },
-      // { name: "Tasks",
-      //   icon_class: "fa fa-check",
-      //   path: "tasks",
-      //   key: '2'
-      // },
+      { name: "Tasks",
+        icon_class: "fa fa-check",
+        path: "tasks",
+        key: '2'
+      },
       { name: "Contacts",
         icon_class: "fa fa-book",
         path: "contacts",
         key: '3'
       },
-      // { name: "Vendors",
-      //   icon_class: "fa fa-truck",
-      //   path: "vendors",
-      //   key: '4'
-      // }
+      { name: "Vendors",
+        icon_class: "fa fa-truck",
+        path: "vendors",
+        key: '4'
+      }
     ];
   },
   goToCompanyPage: function() {

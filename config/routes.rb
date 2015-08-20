@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   # contacts
   resources :contacts, only: [:index, :create, :show]
 
+  # tasks
+  resources :tasks, only: [:index, :create, :update]
+
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'
 

@@ -16,7 +16,7 @@ class CacheStore {
     return !!this._contexts[JSON.stringify(params)]
   }
 
-  getEvents(params) {
+  getItems(params) {
     return this._contexts[JSON.stringify(params)];
   }
 

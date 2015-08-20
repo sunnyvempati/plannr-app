@@ -1,4 +1,4 @@
-import EventStore from '../../stores/EventStore';
+import TaskStore from '../../stores/TaskStore';
 
 export default {
   getInitialState: function() {
@@ -28,7 +28,7 @@ export default {
     this.filterParams = params;
   },
   resetPage: function() {
-    EventStore.resetView();
+    TaskStore.resetView();
     this.nextPage = 1;
     this.setState({data: []});
   },

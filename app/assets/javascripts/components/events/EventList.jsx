@@ -8,7 +8,7 @@ import Table from '../generic/Table';
 import ActionButton from '../generic/ActionButton';
 import EventRow from './EventRow';
 
-const EventsList = React.createClass({
+const EventList = React.createClass({
   mixins: [
     TableCheckbox,
     FilterSort,
@@ -23,19 +23,20 @@ const EventsList = React.createClass({
     this.props.setLayoutParams({header: "Events", skrollable: true});
     EventStore.addChangeListener(this._onViewEventsChange);
   },
+  componentDidUpdate: function() {
+    if (!EventStore.eventsLoaded) this.attachScrollListener();
+  },
   componentWillUnmount() {
     EventStore.resetView();
     EventStore.removeChangeListener(this._onViewEventsChange);
   },
   _onViewEventsChange() {
-    if (EventStore.eventsLoaded) { this.detachScrollListener(); }
     this.setState({data: EventStore.viewEvents});
   },
   fetchNextPage: function(nextPage) {
-    if (EventStore.eventsLoaded) { this.detachScrollListener(); return; }
     this.page = nextPage;
     var params = this.mergeParams();
-    EventActions.getEvents(params);
+    setTimeout(EventActions.getEvents(params), 1000);
   },
   getCustomRows: function() {
     return this.state.data.map(function(event) {
@@ -107,4 +108,4 @@ const EventsList = React.createClass({
   }
 });
 
-export default EventsList;
+export default EventList;
