@@ -22,11 +22,12 @@ var AutocompleteInput = {
     !!assignedToValue ? this.retrieveItem(assignedToValue) : this.resetState();
   },
   componentWillReceiveProps: function(nextProps) {
-    var assignedToValue = nextProps.value;
-    if (!assignedToValue) { this.resetState(); return; }
-    if (!this.state.itemSet || assignedToValue != this.state.originalValue) {
-      this.retrieveItem(assignedToValue);
-      this.setState({originalValue: assignedToValue});
+    var inputVal = nextProps.value;
+    var valueChange = inputVal != this.state.originalValue;
+    if (!inputVal && valueChange) { this.resetState(); return; }
+    if (!this.state.itemSet || valueChange) {
+      this.retrieveItem(inputVal);
+      this.setState({originalValue: inputVal});
     }
   },
   resetState: function() {
@@ -49,7 +50,7 @@ var AutocompleteInput = {
     return (
       <div className={classNames(className)}>
         <div className="Autocomplete-picked" onClick={this.editField}>
-          <div className="Autocomplete-pickedName">
+          <div className="Autocomplete-pickedName u-wrapWithEllipsis">
             {this.state.itemDisplay}
           </div>
           <div className="Autocomplete-edit">
