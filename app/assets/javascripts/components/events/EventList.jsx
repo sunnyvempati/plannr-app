@@ -27,11 +27,14 @@ const EventList = React.createClass({
     if (!EventStore.eventsLoaded) this.attachScrollListener();
   },
   componentWillUnmount() {
-    EventStore.resetView();
+    this.resetStoreView();
     EventStore.removeChangeListener(this._onViewEventsChange);
   },
   _onViewEventsChange() {
     this.setState({data: EventStore.viewEvents});
+  },
+  resetStoreView() {
+    EventStore.resetView();
   },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;

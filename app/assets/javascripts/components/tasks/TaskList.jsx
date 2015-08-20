@@ -7,6 +7,7 @@ import InfiniteScrollMixin from '../mixins/InfiniteScrollMixin';
 import Table from '../generic/Table';
 import ActionButton from '../generic/ActionButton';
 import TaskCheckboxRows from './TaskCheckboxRows';
+import SessionStore from '../../stores/SessionStore';
 
 const TaskList = React.createClass({
   mixins: [
@@ -28,8 +29,11 @@ const TaskList = React.createClass({
     if (!TaskStore.tasksLoaded) this.attachScrollListener();
   },
   componentWillUnmount() {
-    TaskStore.resetView();
+    this.resetStoreView();
     TaskStore.removeChangeListener(this._onViewTasksChange);
+  },
+  resetStoreView() {
+    TaskStore.resetView();
   },
   _onViewTasksChange() {
     this.setState({data: TaskStore.viewTasks});
@@ -75,8 +79,8 @@ const TaskList = React.createClass({
     return [
       {name: "All Tasks - To do", handler: this.filter.bind(this, {with_status: 1}), default: true},
       {name: "All Tasks - Completed", handler: this.filter.bind(this, {with_status: 2})},
-      {name: "My Tasks - To do", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 1})},
-      {name: "My Tasks - Completed", handler: this.filter.bind(this, {with_assigned_to: this.props.currentUserId, with_status: 2})}
+      {name: "My Tasks - To do", handler: this.filter.bind(this, {with_assigned_to: SessionStore.userId, with_status: 1})},
+      {name: "My Tasks - Completed", handler: this.filter.bind(this, {with_assigned_to: SessionStore.userId, with_status: 2})}
     ]
   },
   getActionButton: function () {

@@ -13,10 +13,10 @@ class TaskStore extends BaseStore {
     this._tasks = [];
     // used for pagination/sort/filter
     this._viewTasks = {};
-    this._allTasksloaded = false;
+    this._allTasksLoaded = false;
   }
 
-  get tasksLoaded() { return this._allTasksloaded; }
+  get tasksLoaded() { return this._allTasksLoaded; }
   get viewTasks() {
     // this flattens array and sorts keys by page so
     // page 1 is displayed in order
@@ -38,7 +38,7 @@ class TaskStore extends BaseStore {
         // then add to cache
         if (!isSearchQuery) this._cache.add(task.id, params);
       });
-    } else this._allTasksloaded = true;
+    } else this._allTasksLoaded = true;
   }
 
   addCachedTasks(params) {
@@ -46,7 +46,7 @@ class TaskStore extends BaseStore {
     let page = params.page;
     if (taskIds && taskIds.length) {
       this._viewTasks[page] = taskIds;
-    } else this._allTasksloaded = true;
+    } else this._allTasksLoaded = true;
   }
 
   getTask(id) {
@@ -54,7 +54,7 @@ class TaskStore extends BaseStore {
   }
 
   resetView() {
-    this._viewTasks = [];
+    this._viewTasks = {};
     this._allTasksLoaded = false;
   }
 

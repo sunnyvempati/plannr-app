@@ -27,8 +27,9 @@ var AutocompleteInput = {
   },
   componentWillReceiveProps: function(nextProps) {
     var inputVal = nextProps.value;
-    if (!inputVal) { this.resetState(); return; }
-    if (!this.state.itemSet || inputVal != this.state.originalValue) {
+    var valueChange = inputVal != this.state.originalValue;
+    if (!inputVal && valueChange) { this.resetState(); return; }
+    if (!this.state.itemSet || valueChange) {
       this.retrieveItem(inputVal);
       this.setState({originalValue: inputVal});
     }

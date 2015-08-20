@@ -8,7 +8,6 @@ export default {
   },
   componentDidMount: function() {
     this.initializeFilterSort(this.defaultFilterSortParams());
-    this.attachScrollListener();
   },
   initializeFilterSort: function(defaultParams) {
     this.filterParams = defaultParams.filter;
@@ -28,7 +27,7 @@ export default {
     this.filterParams = params;
   },
   resetPage: function() {
-    TaskStore.resetView();
+    this.resetStoreView();
     this.nextPage = 1;
     this.setState({data: []});
   },

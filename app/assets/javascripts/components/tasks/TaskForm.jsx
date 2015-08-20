@@ -1,3 +1,18 @@
+import ButtonListMixin from '../mixins/ButtonListMixin';
+import Form from '../generic/Form';
+import FormInput from '../generic/FormInput';
+import FormMixin from '../mixins/FormMixin';
+import TaskActions from '../../actions/TaskActions';
+import TaskStore from '../../stores/TaskStore';
+import moment from 'moment';
+import DatePickerInput from '../generic/DatePickerInput';
+import TextAreaInput from '../generic/TextAreaInput';
+import FormButtonList from '../generic/FormButtonList';
+import TaskAssignedToInput from './TaskAssignedToInput';
+import TaskEventInput from './TaskEventInput';
+import Button from '../generic/Button';
+import classNames from 'classnames';
+
 const TaskForm = React.createClass({
   mixins: [
     FormMixin,
@@ -5,8 +20,7 @@ const TaskForm = React.createClass({
     React.addons.PureRenderMixin
   ],
   propTypes: {
-    authToken: React.PropTypes.string.isRequired,
-    routeVerb: React.PropTypes.oneOf(['POST'], ['PUT']).isRequired,
+    type: React.PropTypes.oneOf(['NEW'], ['OLD']).isRequired,
     model: React.PropTypes.object.isRequired,
   },
   getDefaultProps: function() {
@@ -42,13 +56,14 @@ const TaskForm = React.createClass({
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
     data.task.deadline = data.task.deadline && data.task.deadline.format();
-    this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
+    // to do
+    // this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
   },
   handleCreateAndNewClick: function() {
     this.createAndNewClicked = true;
   },
   renderButtonList: function() {
-    if (this.props.routeVerb == "POST") {
+    if (this.props.type == "NEW") {
       return (
         <FormButtonList>
           <Button onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
@@ -68,7 +83,7 @@ const TaskForm = React.createClass({
     }
   },
   renderEventInput: function(val, className) {
-    if (!val || this.props.routeVerb == "PUT") {
+    if (!val || this.props.type == "OLD") {
       return (
         <TaskEventInput
           name='event_id'

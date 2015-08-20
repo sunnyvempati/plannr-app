@@ -1,7 +1,7 @@
 import TaskRow from './TaskRow';
 import EditTaskModal from './EditTaskModal';
 import ShowTaskModal from './ShowTaskModal';
-import Modal from '../mixins/Modal';
+import ModalActions from '../../actions/ModalActions';
 
 export default {
   handleCheck: function(checked, task_id) {
@@ -41,29 +41,23 @@ export default {
   openCreateTaskModal: function() {
     var props = {
       model: {event_id: this.props.eventId},
-      authToken: this.props.authToken,
-      onSuccess: this.onTaskSuccess,
-      routeVerb: 'POST'
+      type: 'NEW'
     }
-    Modal.mount(props, EditTaskModal);
+    ModalActions.openCreateTaskModal(props);
+    // Modal.mount(props, EditTaskModal);
   },
   openTaskModal: function(taskId) {
-    var props = {
-      model: {id: taskId},
-      authToken: this.props.authToken,
-      onTaskChange: this.resetPage,
-      currentUserId: this.props.currentUserId
-    };
-    Modal.mount(props, ShowTaskModal);
+    var props = {id: taskId};
+    ModalActions.openShowTaskModal(props);
   },
   openEditModal: function(taskId) {
-    var props = {
-      model: {id: taskId},
-      authToken: this.props.authToken,
-      onSuccess: this.onTaskSuccess,
-      routeVerb: 'PUT'
-    };
-    Modal.mount(props, EditTaskModal);
+    // var props = {
+    //   model: {id: taskId},
+    //   authToken: this.props.authToken,
+    //   onSuccess: this.onTaskSuccess,
+    //   routeVerb: 'PUT'
+    // };
+    // Modal.mount(props, EditTaskModal);
   },
   onTaskSuccess: function(task, createNew) {
     // to do

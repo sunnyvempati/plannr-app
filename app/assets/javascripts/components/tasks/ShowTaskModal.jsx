@@ -1,14 +1,15 @@
-import Modal from '../mixins/Modal';
+import ModalMixin from '../mixins/ModalMixin';
 import EditTaskModal from './EditTaskModal';
 import TaskDeadline from './TaskDeadline';
 import Button from '../generic/Button';
 import CheckboxInput from '../generic/CheckboxInput';
+import TaskStore from '../../stores/TaskStore';
 
 var ShowTaskModal = React.createClass({
-  mixins: [Modal],
+  mixins: [ModalMixin],
   getInitialState: function() {
     return {
-      task: this.props.model
+      task: TaskStore.getTask(this.props.id)
     };
   },
   componentDidMount: function() {

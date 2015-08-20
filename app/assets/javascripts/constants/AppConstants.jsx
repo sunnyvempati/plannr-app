@@ -83,6 +83,10 @@ const AppConstants = {
     TOAST_ERROR: null,
     CLOSE_TOAST: null,
 
+    // Modal
+    OPEN_MODAL: null,
+    CLOSE_MODAL: null,
+
     // Routes
     REDIRECT: null
   })

@@ -11,7 +11,7 @@ export default {
   getDefaultProps: function() {
     return {
       initialPage: 1,
-      offset: 0
+      offset: 100
     };
   },
 
