@@ -1,4 +1,5 @@
 import ErrorStore from '../../stores/ErrorStore';
+import ErrorActions from '../../actions/ErrorActions';
 
 var FormMixin = {
   getInitialState: function() {
@@ -14,10 +15,7 @@ var FormMixin = {
     ErrorStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
-    this.setState({
-      errors: ErrorStore.errors,
-      disbled: false
-    });
+    ErrorStore.errors ? this.setState({errors: ErrorState.errors}) : this.formSuccess();
   },
   enableButton: function() {
     this.setState({disabled: false});
@@ -26,7 +24,7 @@ var FormMixin = {
     this.setState({disabled: true});
   },
   resetErrors: function() {
-    this.setState({errors: null});
+    ErrorActions.reset();
   }
 }
 

@@ -137,6 +137,22 @@ class ServerActions {
       errors: errors
     })
   }
+
+  static receiveUserSearch(users, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.SEARCH_USERS_RESPONSE,
+      users: users,
+      errors: errors
+    })
+  }
+
+  static receiveCreateTask(json, errors) {
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.CREATE_TASK_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

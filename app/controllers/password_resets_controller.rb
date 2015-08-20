@@ -33,7 +33,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def load_user_using_perishable_token
-    binding.pry
     @user = User.find_using_perishable_token(params[:id])
     unless @user
       render_error(message: "We're sorry, but we could not locate your account")

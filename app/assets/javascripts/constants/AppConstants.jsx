@@ -18,7 +18,8 @@ const AppConstants = {
     GET_CONTACTS:               '/contacts',
     CREATE_CONTACT:             '/contacts',
     GET_CONTACT:                '/contacts/',
-    GET_TASKS:                  '/tasks'
+    GET_TASKS:                  '/tasks',
+    CREATE_TASK:                '/tasks',
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -49,6 +50,8 @@ const AppConstants = {
     GET_USERS_REQUEST: null,
     GET_USER_RESPONSE: null,
     GET_USERS_RESPONSE: null,
+    SEARCH_USERS_REQUEST: null,
+    SEARCH_USERS_RESPONSE: null,
 
     // Events
     GET_EVENTS_REQUEST: null,
@@ -77,6 +80,8 @@ const AppConstants = {
     GET_TASKS_REQUEST: null,
     GET_TASKS_RESPONSE: null,
     GET_CACHED_TASKS_RESPONSE: null,
+    CREATE_TASK_REQUEST: null,
+    CREATE_TASK_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,
@@ -86,6 +91,9 @@ const AppConstants = {
     // Modal
     OPEN_MODAL: null,
     CLOSE_MODAL: null,
+
+    // Error
+    RESET_ERRORS: null,
 
     // Routes
     REDIRECT: null

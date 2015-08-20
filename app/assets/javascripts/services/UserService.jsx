@@ -14,6 +14,24 @@ class UserService {
         ServerActions.receiveUser(json, error);
       });
   }
+
+  static search(params) {
+    request
+      .get(APIEndpoints.GET_USERS)
+      .query(params)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveUserSearch(json.users);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveUserSearch(null, errors);
+          }
+        }
+      });
+  }
 }
 
 export default UserService;

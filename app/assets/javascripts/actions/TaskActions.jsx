@@ -14,6 +14,14 @@ class TaskActions {
       TaskService.getTasks(params);
     }
   }
+
+  static create(params) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.CREATE_TASK_REQUEST,
+      params: params
+    })
+    TaskService.create(params);
+  }
 }
 
 export default TaskActions;

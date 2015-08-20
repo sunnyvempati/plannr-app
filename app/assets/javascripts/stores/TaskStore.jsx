@@ -41,6 +41,11 @@ class TaskStore extends BaseStore {
     } else this._allTasksLoaded = true;
   }
 
+  add(task) {
+    this._tasks[task.id] = task;
+    this._cache.clear();
+  }
+
   addCachedTasks(params) {
     let taskIds = this._cache.getItems(params);
     let page = params.page;
@@ -96,6 +101,10 @@ _taskStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       _taskStoreInstance.addCachedTasks(action.params);
       _taskStoreInstance.emitChange();
       break;
+    case ActionTypes.CREATE_TASK_RESPONSE:
+      let task = action.json && action.json.task;
+      if (task) _taskStoreInstance.add(task);
+      _taskStoreInstance.emitChange();
     default:
   }
 });

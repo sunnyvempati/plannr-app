@@ -10,6 +10,14 @@ class UserActions {
     });
     UserService.get(userId);
   }
+
+  static search(params) {
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.SEARCH_USERS_REQUEST,
+      params: params
+    })
+    UserService.search(params);
+  }
 };
 
 export default UserActions;

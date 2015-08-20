@@ -53,6 +53,9 @@ var EventForm = React.createClass({
     data.event.budget = budget;
     this.props.type == "NEW" ? EventActions.create(data) : EventActions.update(data);
   },
+  formSuccess() {
+    RouteActions.redirect('event', {id: event_id});
+  },
   setEventState: function(item) {
     var eventTemplate = {
       name: "Copy of " + item.name,
@@ -83,6 +86,8 @@ var EventForm = React.createClass({
               onSubmit={this.massageDataAndSubmit}
               onValid={this.enableButton}
               onInvalid={this.disableButton}
+              validationErrors={this.state.errors}
+              resetErrors={this.resetErrors}
               id={id}>
           {this.renderTemplateFields()}
           <FormInput

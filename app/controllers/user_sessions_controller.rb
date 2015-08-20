@@ -7,7 +7,13 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new user_params
-    render_entity @user_session
+    # not using helper because of validate flag
+    # save is hijacked by authlogic
+    if @user_session.save
+      render_success @user_session
+    else
+      render json: errors_hash(@user_session.errors), status: 403
+    end
   end
 
   def destroy

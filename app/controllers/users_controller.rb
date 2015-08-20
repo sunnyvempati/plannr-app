@@ -8,10 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @users = @filter_sort.find.page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render json: @users, each_serializer: CompanyUserSerializer }
-    end
+    render_success @users
   end
 
   def show

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post 'verify', to: 'user_verifications#verify'
 
   # users
-  resource :users, only: [:index, :create]
+  resources :users, only: [:index, :create]
   get 'users/:id', to: 'users#show'
 
   # events

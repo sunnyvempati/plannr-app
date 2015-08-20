@@ -22,6 +22,24 @@ class TaskService {
         }
       });
   }
+
+  static create(params) {
+    request
+      .post(APIEndpoints.CREATE_TASK)
+      .send(params)
+      .use(Utils.addAuthToken)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveCreateTask(json);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveCreateTask(null, errors);
+          }
+        }
+      });
+  }
 }
 
 export default TaskService;

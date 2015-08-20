@@ -7,10 +7,13 @@ class UserStore extends BaseStore {
   constructor() {
     super();
     this._users = {};
+    this._searchResults = [];
   }
 
   // getters
   get users() { return this._users; }
+  get searchResults() { return this._searchResults; }
+  set searchResults(val) { this._searchResults = val }
   getUser(id) {
     return this._users[id];
   }
@@ -47,6 +50,13 @@ _userStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       let user = action.json && action.json.user;
       if (user) _userStoreInstance.addUser(user);
       _userStoreInstance.emitChange();
+      break;
+
+    case ActionTypes.SEARCH_USERS_RESPONSE:
+      if (!action.errors) {
+        _userStoreInstance.searchResults = action.users;
+        _userStoreInstance.emitChange();
+      }
       break;
 
     default:

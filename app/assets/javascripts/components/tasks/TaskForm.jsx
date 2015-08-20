@@ -56,8 +56,7 @@ const TaskForm = React.createClass({
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
     data.task.deadline = data.task.deadline && data.task.deadline.format();
-    // to do
-    // this.props.routeVerb == "POST" ? this.postForm(data, reset, invalidate) : this.putForm(data, reset, invalidate);
+    this.props.type == "NEW" ? TaskActions.create(data) : TaskActions.update(data);
   },
   handleCreateAndNewClick: function() {
     this.createAndNewClicked = true;
@@ -66,13 +65,13 @@ const TaskForm = React.createClass({
     if (this.props.type == "NEW") {
       return (
         <FormButtonList>
-          <Button onClick={this.handleSecondaryClick} className="Button--secondary" disabled={this.state.loading}>
+          <Button onClick={this.handleSecondaryClick} className="Button--secondary">
             Cancel
           </Button>
-          <Button type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+          <Button type="submit" className="Button--primary" disabled={this.state.disabled}>
             Create
           </Button>
-          <Button onClick={this.handleCreateAndNewClick} type="submit" className="Button--primary" disabled={!this.state.canSubmit || this.state.loading}>
+          <Button onClick={this.handleCreateAndNewClick} type="submit" className="Button--primary" disabled={this.state.disabled}>
             Create and New
           </Button>
         </FormButtonList>
@@ -125,7 +124,8 @@ const TaskForm = React.createClass({
               onSubmit={this.formatDateAndSubmit}
               onValid={this.enableButton}
               onInvalid={this.disableButton}
-              authToken={this.props.authToken}
+              validationErrors={this.state.errors}
+              resetErrors={this.resetErrors}
               id={id}>
           <FormInput
             id='task_name'
