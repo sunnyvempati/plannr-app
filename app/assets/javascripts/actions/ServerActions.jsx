@@ -147,9 +147,12 @@ class ServerActions {
   }
 
   static receiveCreateTask(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_TASK_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_TASK_ERROR_RESPONSE;
+    let entity = json && json.task;
     AppDispatcher.handleAction({
-      type: ActionTypes.CREATE_TASK_RESPONSE,
-      json: json,
+      type: type,
+      entity: entity,
       errors: errors
     });
   }

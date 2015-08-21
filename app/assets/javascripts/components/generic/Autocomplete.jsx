@@ -91,12 +91,15 @@ var Autocomplete = React.createClass({
     }
   },
   render: function() {
+    var inputClasses = {};
+    inputClasses[this.props.className + '-input'] = true;
+    inputClasses['is-invalid'] = this.props.invalid;
     return (
       <div className={this.props.className}>
         <input placeholder={this.props.placeholder}
                onFocus={this.onFocus}
                onChange={this.onChange}
-               className={this.props.className + "-input"}
+               className={classNames(inputClasses)}
                onKeyDown={this.keyDown}
                onBlur={this.onBlur}
                ref="autocompleteInput">

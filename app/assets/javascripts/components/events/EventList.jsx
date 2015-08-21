@@ -24,22 +24,18 @@ const EventList = React.createClass({
     EventStore.addChangeListener(this._onViewEventsChange);
   },
   componentDidUpdate: function() {
-    if (!EventStore.eventsLoaded) this.attachScrollListener();
+    if (!EventStore.eventsLoaded || this.nextPage == 1) this.attachScrollListener();
   },
   componentWillUnmount() {
-    this.resetStoreView();
     EventStore.removeChangeListener(this._onViewEventsChange);
   },
   _onViewEventsChange() {
     this.setState({data: EventStore.viewEvents});
   },
-  resetStoreView() {
-    EventStore.resetView();
-  },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;
     var params = this.mergeParams();
-    setTimeout(EventActions.getEvents(params), 1000);
+    EventActions.getEvents(params);
   },
   getCustomRows: function() {
     return this.state.data.map(function(event) {
@@ -49,6 +45,7 @@ const EventList = React.createClass({
           checkedItems={this.state.checkedItems}
           actionItems={this.actionItems()}
           rowChanged={this.rowChanged}
+          refreshData={this.resetPage}
           key={event.id}
         />
       );

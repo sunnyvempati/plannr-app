@@ -47,11 +47,11 @@ class Task < ActiveRecord::Base
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
     case sort_option.to_s
     when /^name_/
-      order("LOWER(tasks.name) #{ direction }")
+      order("LOWER(tasks.name) #{ direction }, tasks.created_at asc")
     when /^deadline_/
-      order("tasks.deadline #{ direction }")
+      order("tasks.deadline #{ direction }, tasks.created_at asc")
     when /^status_/
-      order("tasks.status #{ direction }")
+      order("tasks.status #{ direction }, tasks.created_at asc")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end

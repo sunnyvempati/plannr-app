@@ -58,8 +58,6 @@ class TaskStore extends BaseStore {
     return this._tasks[id];
   }
 
-  resetView() { this._view.reset(); }
-
   isCached(params) {
     return !!this._cache.contextExists(params);
   }

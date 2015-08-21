@@ -1,5 +1,5 @@
-import ErrorStore from '../../stores/ErrorStore';
-import ErrorActions from '../../actions/ErrorActions';
+import FormStore from '../../stores/FormStore';
+import FormActions from '../../actions/FormActions';
 
 var FormMixin = {
   getInitialState: function() {
@@ -9,13 +9,15 @@ var FormMixin = {
     };
   },
   componentDidMount: function() {
-    ErrorStore.addChangeListener(this._onChange);
+    FormStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
-    ErrorStore.removeChangeListener(this._onChange);
+    FormStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
-    this.setState({errors: ErrorStore.errors});
+    let errors = FormStore.errors;
+    this.setState({errors: FormStore.errors});
+    if (!errors && this.onSuccess) this.onSuccess(FormStore.entity);
   },
   enableButton: function() {
     this.setState({disabled: false});

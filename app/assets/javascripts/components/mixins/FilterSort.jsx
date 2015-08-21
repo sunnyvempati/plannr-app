@@ -14,22 +14,24 @@ export default {
     this.sortParams = defaultParams.sort;
   },
   sort: function(entity, order) {
-    this.resetPage();
     this.sortParams = {sorted_by: entity + "_" + order};
+    this.resetPageAndFetch();
   },
   search: function(e) {
-    this.resetPage();
     var term = e.target.value;
     this.searchParams = {search_query: term};
+    this.resetPageAndFetch();
   },
   filter: function(params) {
-    this.resetPage();
     this.filterParams = params;
+    this.resetPageAndFetch();
+  },
+  resetPageAndFetch: function() {
+    this.resetPage();
+    this.fetchNextPage(this.nextPage);
   },
   resetPage: function() {
-    this.resetStoreView();
     this.nextPage = 1;
-    this.setState({data: []});
   },
   mergeParams: function() {
     var mergedParams = $.extend({}, this.filterParams, this.sortParams, this.searchParams, {page: this.page});

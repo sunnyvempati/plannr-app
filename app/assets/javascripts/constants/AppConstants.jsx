@@ -81,7 +81,8 @@ const AppConstants = {
     GET_TASKS_RESPONSE: null,
     GET_CACHED_TASKS_RESPONSE: null,
     CREATE_TASK_REQUEST: null,
-    CREATE_TASK_RESPONSE: null,
+    CREATE_TASK_SUCCESS_RESPONSE: null,
+    CREATE_TASK_ERROR_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,
@@ -93,7 +94,7 @@ const AppConstants = {
     CLOSE_MODAL: null,
 
     // Error
-    RESET_ERRORS: null,
+    RESET: null,
 
     // Routes
     REDIRECT: null

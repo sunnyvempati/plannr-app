@@ -26,14 +26,10 @@ const TaskList = React.createClass({
     TaskStore.addChangeListener(this._onViewTasksChange);
   },
   componentDidUpdate: function() {
-    if (!TaskStore.tasksLoaded) this.attachScrollListener();
+    if (!TaskStore.tasksLoaded || this.nextPage == 1) this.attachScrollListener();
   },
   componentWillUnmount() {
-    this.resetStoreView();
     TaskStore.removeChangeListener(this._onViewTasksChange);
-  },
-  resetStoreView() {
-    TaskStore.resetView();
   },
   _onViewTasksChange() {
     this.setState({data: TaskStore.viewTasks});

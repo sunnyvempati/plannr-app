@@ -3,6 +3,7 @@ import Form from '../generic/Form';
 import FormInput from '../generic/FormInput';
 import FormMixin from '../mixins/FormMixin';
 import TaskActions from '../../actions/TaskActions';
+import ModalActions from '../../actions/ModalActions';
 import TaskStore from '../../stores/TaskStore';
 import moment from 'moment';
 import DatePickerInput from '../generic/DatePickerInput';
@@ -34,22 +35,15 @@ const TaskForm = React.createClass({
       'task': {
         'name': inputs.name,
         'deadline': inputs.deadline,
-        'event_id': (this.props.model && this.props.model.event_id) || inputs.event_id,
+        'event_id': (this.props.model && this.props.model.event_id) || inputs.event,
         'assigned_to_id': inputs.assignedTo,
         'description': inputs.description
       }
     };
   },
-  navigateToTasks: function() {
-    location.href = '/tasks';
-  },
   onSuccess: function (result) {
-    if (this.createAndNewClicked) {
-      !!this.props.onSuccess ? this.props.onSuccess(result, true) : location.reload();
-    }
-    else {
-      !!this.props.onSuccess ? this.props.onSuccess(result, false) : this.navigateToTasks();
-    }
+    let createNew = this.createAndNewClicked;
+    this.props.onSuccess(result, true);
   },
   onSecondaryClick: function() {
     !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToTasks();
@@ -85,7 +79,7 @@ const TaskForm = React.createClass({
     if (!val || this.props.type == "OLD") {
       return (
         <TaskEventInput
-          name='event_id'
+          name='event'
           value={val}
           id='task_event_id'
           label='Event'

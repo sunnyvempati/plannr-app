@@ -15,6 +15,7 @@ var EventRow = React.createClass({
     };
 
     EventActions.update(this.props.event.id, params);
+    this.props.refreshData();
   },
   goToEvent: function(id) {
     RouteActions.redirect('event', {id: id});

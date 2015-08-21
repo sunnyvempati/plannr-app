@@ -38,6 +38,7 @@ var AutocompleteInput = {
     this.setState({itemSet: false, itemDisplay: null});
   },
   editField: function() {
+    this.setValue(null);
     this.setState({itemSet: false, itemDisplay: null, items: [], focus: true});
   },
   renderAutocomplete: function() {
@@ -47,7 +48,8 @@ var AutocompleteInput = {
                     itemSelected={this.itemSelected}
                     data={this.state.items}
                     focus={this.state.focus}
-                    className={this.props.autocompleteClassName} />
+                    className={this.props.autocompleteClassName}
+                    invalid={!this.isValid() && !this.isPristine()} />
     );
   },
   renderSelectedItem: function(className) {

@@ -5,27 +5,32 @@ import SessionStore from './SessionStore';
 import UserStore from './UserStore';
 import EventStore from './EventStore';
 import ContactStore from './ContactStore';
+import TaskStore from './TaskStore';
 
-class ErrorStore extends BaseStore {
+class FormStore extends BaseStore {
   constructor() {
     super();
     this._errors = null;
+    this._entity = null;
   }
 
   get errors() { return this._errors; }
+  get entity() { return this._entity; }
   set errors(val) { this._errors = val; }
+  set entity(val) { this._entity = val; }
 
-  clear() { this._errors = null; }
+  clear() { this._errors = null; this._entity = null; }
 }
 
-let _errorStoreInstance = new ErrorStore();
+let _formStoreInstance = new FormStore();
 
-_errorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
+_formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
     SessionStore.dispatchToken,
     UserStore.dispatchToken,
     EventStore.dispatchToken,
-    ContactStore.dispatchToken
+    ContactStore.dispatchToken,
+    TaskStore.dispatchToken
   ]);
 
   let action = payload.action;
@@ -39,19 +44,25 @@ _errorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.CREATE_EVENT_CLIENT_RESPONSE:
     case ActionTypes.UPDATE_EVENT_RESPONSE:
     case ActionTypes.CREATE_EVENT_RESPONSE:
-    case ActionTypes.CREATE_TASK_RESPONSE:
       let errors = action.errors;
-      if (errors) { _errorStoreInstance.errors = errors }
-        else _errorStoreInstance.clear();
-      _errorStoreInstance.emitChange();
+      if (errors) { _formStoreInstance.errors = errors }
+        else _formStoreInstance.clear();
+      _formStoreInstance.emitChange();
       break;
-
-    case ActionTypes.RESET_ERRORS:
-      _errorStoreInstance.clear();
-      _errorStoreInstance.emitChange();
+    case ActionTypes.CREATE_TASK_SUCCESS_RESPONSE:
+      _formStoreInstance.entity = action.entity;
+      _formStoreInstance.errors = null;
+      _formStoreInstance.emitChange();
+      break;
+    case ActionTypes.CREATE_TASK_ERROR_RESPONSE:
+      _formStoreInstance.entity = null;
+      _formStoreInstance.errors = action.errors;
+      _formStoreInstance.emitChange();
+    case ActionTypes.RESET:
+      _formStoreInstance.clear();
       break;
     default:
   }
 });
 
-export default _errorStoreInstance;
+export default _formStoreInstance;

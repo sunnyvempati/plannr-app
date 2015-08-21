@@ -1,12 +1,12 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 
-class ErrorActions {
+class FormActions {
   static reset() {
     AppDispatcher.handleAction({
-      type: ActionTypes.RESET_ERRORS
+      type: ActionTypes.RESET
     });
   }
 };
 
-export default ErrorActions;
+export default FormActions;

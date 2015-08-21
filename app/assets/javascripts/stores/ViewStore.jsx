@@ -13,14 +13,18 @@ class ViewStore {
     // page 1 is displayed in order
     let keys = Object.keys(this._viewItems);
     let allItemIds = keys.map((key) => this._viewItems[key]);
-    return [].concat.apply([], allItemIds);//.map((id) => this._events[id]);
+    return [].concat.apply([], allItemIds);
   }
 
   addPage(page) {
+    // if it's the first page, then reset the whole thing
+    if (page == 1) this.reset();
     this._viewItems[page] = [];
   }
 
   addItemsToPage(items, page) {
+    // this occurs when retrieving items from cache
+    if (page == 1) this.reset();
     this._viewItems[page] = items;
   }
 
