@@ -5,6 +5,10 @@ import TaskStore from '../stores/TaskStore';
 
 class TaskActions {
   static getTasks(params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_TASKS_REQUEST,
+      params: params
+    });
     if (TaskStore.isCached(params)) {
       AppDispatcher.handleAction({
         type: ActionTypes.GET_CACHED_TASKS_RESPONSE,

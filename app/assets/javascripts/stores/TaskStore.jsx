@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
+import ViewStore from './ViewStore';
 import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
@@ -12,17 +13,16 @@ class TaskStore extends BaseStore {
     this._cache = new CacheStore();
     this._tasks = [];
     // used for pagination/sort/filter
-    this._viewTasks = {};
-    this._allTasksLoaded = false;
+    this._view = new ViewStore();
   }
 
-  get tasksLoaded() { return this._allTasksLoaded; }
+  get tasksLoaded() { return this._view.itemsLoaded; }
+
   get viewTasks() {
     // this flattens array and sorts keys by page so
     // page 1 is displayed in order
-    let taskKeys = Object.keys(this._viewTasks);
-    let allItemIds = taskKeys.map((key) => this._viewTasks[key]);
-    return [].concat.apply([], allItemIds).map((id) => this._tasks[id]);
+    let viewTaskIds = this._view.viewItems;
+    return viewTaskIds.map((id) => this._tasks[id]);
   }
 
   addTasks(tasks, params) {
@@ -30,15 +30,15 @@ class TaskStore extends BaseStore {
     if (!isSearchQuery) this._cache.createContext(params);
     let page = params.page;
     if (tasks.length > 0) {
-      this._viewTasks[page] = [];
+      this._view.addPage(page);
       tasks.forEach((task) => {
         // add to global
         this._tasks[task.id] = task;
-        this._viewTasks[page].push(task.id);
+        this._view.addItemToPage(task.id, page);
         // then add to cache
         if (!isSearchQuery) this._cache.add(task.id, params);
       });
-    } else this._allTasksLoaded = true;
+    } else this._view.itemsLoaded = true;
   }
 
   add(task) {
@@ -50,18 +50,15 @@ class TaskStore extends BaseStore {
     let taskIds = this._cache.getItems(params);
     let page = params.page;
     if (taskIds && taskIds.length) {
-      this._viewTasks[page] = taskIds;
-    } else this._allTasksLoaded = true;
+      this._view.addItemsToPage(taskIds, page);
+    } else this._view.itemsLoaded = true;
   }
 
   getTask(id) {
     return this._tasks[id];
   }
 
-  resetView() {
-    this._viewTasks = {};
-    this._allTasksLoaded = false;
-  }
+  resetView() { this._view.reset(); }
 
   isCached(params) {
     return !!this._cache.contextExists(params);
@@ -74,9 +71,7 @@ class TaskStore extends BaseStore {
       this._tasks.splice(id, 1);
     });
     // remove from view
-    this._viewTasks = this._viewTasks.filter((task) => {
-      return ids.indexOf(task.id) == -1;
-    });
+    this._view.remove(ids);
   }
 }
 

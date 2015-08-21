@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
+import ViewStore from './ViewStore';
 import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
@@ -14,20 +15,18 @@ class EventStore extends BaseStore {
     this._events = [];
     this._searchResults = [];
     // used for pagination/sort/filter
-    this._viewEvents = [];
-    this._allEventsLoaded = false;
+    this._view = new ViewStore();
   }
 
   get searchResults() { return this._searchResults; }
-  get eventsLoaded() { return this._allEventsLoaded; }
+  get eventsLoaded() { return this._view.itemsLoaded; }
   setSearchResults(results) { this._searchResults = results; }
 
   get viewEvents() {
     // this flattens array and sorts keys by page so
     // page 1 is displayed in order
-    let eventKeys = Object.keys(this._viewEvents);
-    let allItemIds = eventKeys.map((key) => this._viewEvents[key]);
-    return [].concat.apply([], allItemIds).map((id) => this._events[id]);
+    let viewEventIds = this._view.viewItems;
+    return viewEventIds.map((id) => this._events[id]);
   }
 
   addEvents(events, params) {
@@ -35,24 +34,23 @@ class EventStore extends BaseStore {
     let page = params.page;
     if (!isSearchQuery) this._cache.createContext(params);
     if (events.length > 0) {
-      this._viewEvents[page] = [];
+      this._view.addPage(page);
       events.forEach((event) => {
         // add to global
         this._events[event.id] = event;
-        this._viewEvents[page].push(event.id);
+        this._view.addItemToPage(event.id, page);
         // then add to cache
         if (!isSearchQuery) this._cache.add(event.id, params);
       });
-
-    } else this._allEventsLoaded = true;
+    } else this._view.itemsLoaded = true;
   }
 
   addCachedEvents(params) {
     let eventIds = this._cache.getItems(params);
     let page = params.page;
     if (eventIds && eventIds.length) {
-      this._viewEvents[page] = eventIds;
-    } else this._allEventsLoaded = true;
+      this._view.addItemsToPage(eventIds, page);
+    } else this._view.itemsLoaded = true;
   }
 
   addEvent(event) {
@@ -65,10 +63,7 @@ class EventStore extends BaseStore {
     return this._events[id];
   }
 
-  resetView() {
-    this._viewEvents = [];
-    this._allEventsLoaded = false;
-  }
+  resetView() { this._view.reset(); }
 
   isCached(params) {
     return !!this._cache.contextExists(params);
@@ -80,10 +75,8 @@ class EventStore extends BaseStore {
     ids.map((id) => {
       this._events.splice(id, 1);
     });
-    // remove from view
-    this._viewEvents = this._viewEvents.filter((event) => {
-      return ids.indexOf(event.id) == -1;
-    });
+
+    this._view.remove(ids);
   }
 }
 

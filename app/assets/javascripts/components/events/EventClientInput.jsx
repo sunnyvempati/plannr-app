@@ -30,10 +30,12 @@ var EventClientInput = React.createClass({
     }
   },
   retrieveItem: function(id) {
-    let client = ContactStore.getContact(id), itemDisplay = "";
-    if (client) {
-      itemDisplay = client.name
-    } else ContactActions.getEventClient(id);
+    if (id) {
+      let client = ContactStore.getContact(id), itemDisplay = "";
+      if (client) {
+        itemDisplay = client.name
+      } else ContactActions.getEventClient(id);
+    }
   },
   retrieveData: function(term) {
     var params = {
