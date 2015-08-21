@@ -3,7 +3,7 @@ import EditTaskModal from './EditTaskModal';
 import ShowTaskModal from './ShowTaskModal';
 import ModalActions from '../../actions/ModalActions';
 
-export default {
+var TaskCheckboxRows = {
   handleCheck: function(checked, task_id) {
     var status = checked ? 2 : 1;
     var url = "/tasks/" + task_id + ".json";
@@ -38,14 +38,6 @@ export default {
       <div>{rows}</div>
     )
   },
-  openCreateTaskModal: function() {
-    var props = {
-      model: {event_id: this.props.eventId},
-      type: 'NEW'
-    }
-    ModalActions.openCreateTaskModal(props);
-    // Modal.mount(props, EditTaskModal);
-  },
   openTaskModal: function(taskId) {
     var props = {id: taskId};
     ModalActions.openShowTaskModal(props);
@@ -59,12 +51,10 @@ export default {
     // };
     // Modal.mount(props, EditTaskModal);
   },
-  onTaskSuccess: function(task, createNew) {
-    // to do
-    // this.resetPage();
-    // createNew ? this.openCreateTaskModal() : this.openTaskModal(task.id);
-  },
+
   goToTask: function(data) {
     this.openTaskModal(data.id);
   }
 }
+
+export default TaskCheckboxRows;

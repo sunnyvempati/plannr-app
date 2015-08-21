@@ -89,6 +89,7 @@ const TaskForm = React.createClass({
     }
   },
   render: function() {
+    console.log("FORM PROPS", this.props);
     var compact = this.props.compact;
     var task = {};
     if (this.props.model) {

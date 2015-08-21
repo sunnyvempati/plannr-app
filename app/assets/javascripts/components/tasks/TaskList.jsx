@@ -39,6 +39,20 @@ const TaskList = React.createClass({
     var params = this.mergeParams();
     TaskActions.getTasks(params);
   },
+  openCreateTaskModal: function() {
+
+    var props = {
+      model: {event_id: this.props.eventId},
+      onSuccess: this.blah,
+      type: 'NEW'
+    }
+    console.log("UHM", props);
+    // ModalActions.openCreateTaskModal(props);
+  },
+  blah: function(task, createNew) {
+    this.resetPageAndFetch();
+    createNew ? this.openCreateTaskModal() : this.openTaskModal(task.id);
+  },
   getColumns: function() {
     return [
       {name: "name", grow: 10, header: "Name"},
