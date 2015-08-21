@@ -5,7 +5,7 @@ import SessionService from '../services/SessionService.jsx';
 
 class SessionActions {
   static signup(data) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SIGNUP_REQUEST,
       data: data
     });
@@ -13,7 +13,7 @@ class SessionActions {
   }
 
   static login(email, password) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.LOGIN_REQUEST,
       email: email,
       password: password
@@ -22,7 +22,7 @@ class SessionActions {
   }
 
   static verify(token) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.VERIFY_REQUEST,
       token: token
     });
@@ -30,7 +30,7 @@ class SessionActions {
   }
 
   static resetPasswordRequest(email) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.RESET_PASSWORD_REQUEST,
       email: email
     });
@@ -38,21 +38,21 @@ class SessionActions {
   }
 
   static resetPassword(data) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.RESET_PASSWORD
     });
     SessionService.resetPassword(data);
   }
 
   static logout() {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.LOGOUT_REQUEST
     });
     SessionService.logout();
   }
 
   static setProfile(first, last) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.PROFILE_REQUEST,
       name: name
     });

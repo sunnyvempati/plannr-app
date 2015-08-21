@@ -3,7 +3,7 @@ import {ActionTypes} from '../constants/AppConstants.jsx';
 
 class ErrorActions {
   static reset() {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.RESET_ERRORS
     });
   }

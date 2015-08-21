@@ -3,7 +3,7 @@ import {ActionTypes} from '../constants/AppConstants.jsx';
 
 class ServerActions {
   static receiveLogin(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.LOGIN_RESPONSE,
       json: json,
       errors: errors
@@ -11,7 +11,7 @@ class ServerActions {
   }
 
   static receiveSignup(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SIGNUP_RESPONSE,
       json: json,
       errors: errors
@@ -19,14 +19,14 @@ class ServerActions {
   }
 
   static receiveVerify(errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.VERIFY_RESPONSE,
       errors: errors
     });
   }
 
   static receiveResetRequest(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.RESET_PASSWORD_REQUEST_RESPONSE,
       json: json,
       errors: errors
@@ -34,7 +34,7 @@ class ServerActions {
   }
 
   static receiveResetPassword(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.RESET_PASSWORD_RESPONSE,
       json: json,
       errors: errors
@@ -42,14 +42,14 @@ class ServerActions {
   }
 
   static receiveLogout(errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.LOGOUT_RESPONSE,
       errors: errors
     })
   }
 
   static receiveProfile(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.PROFILE_RESPONSE,
       json: json,
       errors: errors
@@ -57,7 +57,7 @@ class ServerActions {
   }
 
   static receiveUser(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_USER_RESPONSE,
       json: json,
       errors: errors
@@ -65,7 +65,7 @@ class ServerActions {
   }
 
   static receiveEvents(events, params, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_EVENTS_RESPONSE,
       events: events,
       params: params,
@@ -74,7 +74,7 @@ class ServerActions {
   }
 
   static receiveEventSearch(events, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SEARCH_EVENTS_RESPONSE,
       events: events,
       errors: errors
@@ -82,7 +82,7 @@ class ServerActions {
   }
 
   static receiveContactSearch(contacts, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SEARCH_CONTACTS_RESPONSE,
       contacts: contacts,
       errors: errors
@@ -90,7 +90,7 @@ class ServerActions {
   }
 
   static receiveCreateContact(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CREATE_EVENT_CLIENT_RESPONSE,
       json: json,
       errors: errors
@@ -98,7 +98,7 @@ class ServerActions {
   }
 
   static receiveEventClient(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_EVENT_CLIENT_RESPONSE,
       json: json,
       errors: errors
@@ -106,7 +106,7 @@ class ServerActions {
   }
 
   static receiveCreateEvent(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CREATE_EVENT_RESPONSE,
       json: json,
       errors: errors
@@ -114,7 +114,7 @@ class ServerActions {
   }
 
   static receiveDeleteEvents(ids, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.DELETE_EVENT_RESPONSE,
       ids: ids,
       errors: errors
@@ -122,7 +122,7 @@ class ServerActions {
   }
 
   static receiveUpdateEvent(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.UPDATE_EVENT_RESPONSE,
       json: json,
       errors: errors
@@ -130,7 +130,7 @@ class ServerActions {
   }
 
   static receiveTasks(tasks, params, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_TASKS_RESPONSE,
       tasks: tasks,
       params: params,
@@ -139,7 +139,7 @@ class ServerActions {
   }
 
   static receiveUserSearch(users, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SEARCH_USERS_RESPONSE,
       users: users,
       errors: errors
@@ -147,7 +147,7 @@ class ServerActions {
   }
 
   static receiveCreateTask(json, errors) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CREATE_TASK_RESPONSE,
       json: json,
       errors: errors

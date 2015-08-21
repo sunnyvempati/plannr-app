@@ -3,27 +3,27 @@ import {ActionTypes} from '../constants/AppConstants.jsx';
 
 class ToastActions {
   static toast(message) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.TOAST_MESSAGE,
       message: message
     });
   }
 
   static toastError(message) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.TOAST_ERROR,
       message: message
     });
   }
 
   static loading() {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.TOAST_LOADING
     });
   }
 
   static close() {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CLOSE_TOAST
     })
   }

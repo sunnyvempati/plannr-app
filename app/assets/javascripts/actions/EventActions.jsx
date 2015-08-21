@@ -5,8 +5,12 @@ import EventStore from '../stores/EventStore';
 
 class EventActions {
   static getEvents(params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENTS_REQUEST,
+      params: params
+    })
     if (EventStore.isCached(params)) {
-      AppDispatcher.handleServerAction({
+      AppDispatcher.handleAction({
         type: ActionTypes.GET_CACHED_EVENTS_RESPONSE,
         params: params
       })
@@ -16,7 +20,7 @@ class EventActions {
   }
 
   static update(id, params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_EVENT_CLIENT_REQUEST,
       id: id,
       params: params
@@ -25,7 +29,7 @@ class EventActions {
   }
 
   static deleteEvents(ids) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.DELETE_EVENT_REQUEST,
       ids: ids
     })
@@ -33,7 +37,7 @@ class EventActions {
   }
 
   static search(params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SEARCH_EVENTS_REQUEST,
       params: params
     })
@@ -41,7 +45,7 @@ class EventActions {
   }
 
   static create(params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CREATE_EVENT_REQUEST,
       params: params
     })

@@ -6,7 +6,7 @@ import TaskStore from '../stores/TaskStore';
 class TaskActions {
   static getTasks(params) {
     if (TaskStore.isCached(params)) {
-      AppDispatcher.handleServerAction({
+      AppDispatcher.handleAction({
         type: ActionTypes.GET_CACHED_TASKS_RESPONSE,
         params: params
       })
@@ -16,7 +16,7 @@ class TaskActions {
   }
 
   static create(params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CREATE_TASK_REQUEST,
       params: params
     })

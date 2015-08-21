@@ -5,7 +5,7 @@ import ContactStore from '../stores/ContactStore';
 
 export default class ContactActions {
   static search(params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SEARCH_CONTACTS_REQUEST,
       params: params
     })
@@ -13,7 +13,7 @@ export default class ContactActions {
   }
 
   static create(params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CREATE_EVENT_CLIENT_REQUEST,
       params: params
     });
@@ -21,7 +21,7 @@ export default class ContactActions {
   }
 
   static getEventClient(id) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_EVENT_CLIENT_REQUEST,
       id: id
     });

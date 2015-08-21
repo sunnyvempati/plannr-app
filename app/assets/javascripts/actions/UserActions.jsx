@@ -4,7 +4,7 @@ import UserService from '../services/UserService';
 
 class UserActions {
   static get(userId) {
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.GET_USER_REQUEST,
       id: userId
     });
@@ -12,7 +12,7 @@ class UserActions {
   }
 
   static search(params) {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.SEARCH_USERS_REQUEST,
       params: params
     })

@@ -33,6 +33,7 @@
     "keymirror": "^0.1.1",
     "superagent-intercept": "^0.1.1",
     "moment": "^2.10.6",
-    "extend": "^3.0.0"
+    "extend": "^3.0.0",
+    "sync-queue": "0.0.2"
   }
 }

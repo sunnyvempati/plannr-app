@@ -15,7 +15,7 @@ var FormMixin = {
     ErrorStore.removeChangeListener(this._onChange);
   },
   _onChange: function() {
-    ErrorStore.errors ? this.setState({errors: ErrorState.errors}) : this.formSuccess();
+    this.setState({errors: ErrorStore.errors});
   },
   enableButton: function() {
     this.setState({disabled: false});
@@ -24,7 +24,7 @@ var FormMixin = {
     this.setState({disabled: true});
   },
   resetErrors: function() {
-    ErrorActions.reset();
+    this.setState({errors: null});
   }
 }
 

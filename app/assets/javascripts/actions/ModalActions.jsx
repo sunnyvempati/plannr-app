@@ -6,7 +6,7 @@ import EditTaskModal from '../components/tasks/EditTaskModal';
 class ModalActions {
   static openShowTaskModal(props) {
     let modal = React.createElement(ShowTaskModal, props);
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.OPEN_MODAL,
       modal: modal
     });
@@ -14,14 +14,14 @@ class ModalActions {
 
   static openCreateTaskModal(props) {
     let modal = React.createElement(EditTaskModal, props);
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.OPEN_MODAL,
       modal: modal
     });
   }
 
   static close() {
-    AppDispatcher.handleViewAction({
+    AppDispatcher.handleAction({
       type: ActionTypes.CLOSE_MODAL
     })
   }
