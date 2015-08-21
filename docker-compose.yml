@@ -27,7 +27,7 @@ elasticsearch:
   command: '-Des.http.cors.enabled=true'
 
 logstash:
-  image: plannr-logstash
+  image: logstash-plannr
   ports:
     - "9998:9998"
     - "9999:9999/udp"
