@@ -32,8 +32,8 @@ module PlannrApp
     main_logger.outputters = [outputter]
 
     # Logstash outputter
-    logstash_host = ENV['LOGSTASH_PORT_9999_UDP_ADDR'] || ENV['LOGSTASH_HOST']
-    logstash_port = ENV['LOGSTASH_PORT_9999_UDP_PORT'] || ENV['LOGSTASH_PORT']
+    logstash_host = ENV['LOGSTASH_PORT_9999_UDP_ADDR'] || ENV['PLANNR_LOGSTASH_HOST']
+    logstash_port = ENV['LOGSTASH_PORT_9999_UDP_PORT'] || ENV['PLANNR_LOGSTASH_PORT']
     if logstash_host && logstash_port
       ls_outputter = Log4r::UDPOutputter.new('logstash', hostname: logstash_host, port: logstash_port)
       ls_outputter.formatter = LogstashFormatter.new

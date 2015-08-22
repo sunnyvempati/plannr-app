@@ -12,8 +12,6 @@ postgres:
     - "5432"
   volumes:
     - ./docker_compose/postgres-setup:/docker-entrypoint-initdb.d
-  volumes_from:
-    - postgres_data
   environment:
     POSTGRES_PASSWORD: plannr
 
@@ -27,7 +25,7 @@ elasticsearch:
   command: '-Des.http.cors.enabled=true'
 
 logstash:
-  image: logstash-plannr
+  image: docker.yourplannr.com/logstash-plannr:latest
   ports:
     - "9998:9998"
     - "9999:9999/udp"
@@ -42,23 +40,16 @@ kibana:
     - 5601:5601
 
 nginx:
-  image: nginx-plannr
+  image: docker.yourplannr.com/nginx-plannr:latest
   links:
     - plannr-app:plannr01
   ports:
     - "80:80"
 
-logstash-forwarder-nginx:
-  image: logstash-forwarder-nginx
-  volumes_from:
-    - nginx
-  links:
-    - logstash
-
 plannr-app:
   build: ./
-  volumes:
-    - .:/home/app/plannr
+  # volumes:
+  #   - .:/home/app/plannr
   links:
     - postgres:postgres
     - elasticsearch:elasticsearch
@@ -70,3 +61,4 @@ plannr-app:
     RACK_ENV: development
     RAILS_ENV: development
     BUNDLE_PATH: /home/app/.bundle
+    SECRET_KEY_BASE: 53e47c5e0272188f533e9dfdd46faa69be4a14a126c98863eb55ce131efa01d350b4e3cf363822646ddd959ebafe677b2c8b2815ca5988cd1c0984b414c35ef6

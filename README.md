@@ -29,6 +29,14 @@ Navigate to `http://plannr-app.dev/login` to get started
 - Add component name to `Bowerfile`
 - Run `bundle exec rake bower:install`
 
+# Running the app
+## Environment variables:
+These are **REQUIRED TO BE SET** (unless marked optional) in order for the application to run
 
-
-
+- `AWS_ACCESS_KEY_ID`: AWS key id
+- `AWS_SECRET_ACCESS_KEY`: AWS Secret access key
+- `SECRET_KEY_BASE`: Rails env secret key, used for verifying signed cookies
+- `PLANNR_LOGSTASH_HOST`: **Optional** logstash host to use, system will also use docker-provided ENV vars
+- `PLANNR_LOGSTASH_PORT`: **Optional** logstash port to use, system will also use docker-provided ENV vars
+- `PLANNR_ELASTIC_HOST`: **Optional** Elasticsearch host to use, system will also use docker-provided ENV vars, or default to localhost
+- `PLANNR_ELASTIC_PORT`: **Optional** Elasticsearch port to use, system will also use docker-provided ENV vars, or default to 9200
