@@ -65,22 +65,7 @@ var ShowTaskModal = React.createClass({
     );
   },
   handleCheckChange: function(checked) {
-    var status = checked ? 2 : 1;
-    var task_id = this.props.model.id;
-    var url = "/tasks/" + task_id + ".json";
-    var params = {
-      task: {
-        id: task_id,
-        status: status
-      }
-    };
-    // to do
-    // Utils.put(url, params, function(result) {
-    //   this.props.onTaskChange();
-    //   var statusDisplay = status == 1 ? "To do" : "Completed";
-    //   this.setState({task: result.task});
-    //   ToastMessages.toast("Task status changed: " + statusDisplay);
-    // }.bind(this));
+    this.props.handleCheckChange(checked, this.props.model.id);
   },
   renderModalContent: function() {
     var task = this.props.model;

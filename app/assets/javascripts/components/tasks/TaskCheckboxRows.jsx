@@ -6,22 +6,16 @@ import TaskActions from '../../actions/TaskActions';
 import TaskStore from '../../stores/TaskStore';
 
 var TaskCheckboxRows = {
-  handleCheck: function(checked, task_id) {
+  handleCheck: function(checked, taskId) {
     var status = checked ? 2 : 1;
-    var url = "/tasks/" + task_id + ".json";
     var params = {
       task: {
-        id: task_id,
+        id: taskId,
         status: status
       }
     };
-    // to do
-    // Utils.put(url, params, function(result) {
-    //   var statusDisplay = status == 1 ? "To do" : "Completed";
-    //   ToastMessages.toast("Task status changed: " + statusDisplay);
-    //   var newData = this.spliceResults(this.state.data, result.task.id);
-    //   this.setState({data: newData});
-    // }.bind(this));
+    TaskActions.update(taskId, params);
+    this.resetPage();
   },
   getCustomRows: function(global, handleRowClick) {
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -52,7 +46,8 @@ var TaskCheckboxRows = {
     var props = {
       model: TaskStore.get(taskId),
       handleEditClick: this.openEditModal,
-      handleDeleteClick: this.handleDelete
+      handleDeleteClick: this.handleDelete,
+      handleCheckChange: this.handleCheck
     };
     ModalActions.openShowTaskModal(props);
   },
