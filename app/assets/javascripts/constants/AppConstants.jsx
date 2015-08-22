@@ -12,6 +12,7 @@ const AppConstants = {
     GET_USER:                   '/users/',
     GET_USERS:                  '/users',
     GET_EVENTS:                 '/events',
+    GET_EVENT:                  '/events/',
     CREATE_EVENT:               '/events',
     UPDATE_EVENT:               '/events/',
     DELETE_EVENTS:              '/destroy_events',
@@ -20,6 +21,8 @@ const AppConstants = {
     GET_CONTACT:                '/contacts/',
     GET_TASKS:                  '/tasks',
     CREATE_TASK:                '/tasks',
+    UPDATE_TASK:                '/tasks/',
+    DELETE_TASKS:               '/destroy_tasks',
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -56,6 +59,8 @@ const AppConstants = {
     // Events
     GET_EVENTS_REQUEST: null,
     GET_EVENTS_RESPONSE: null,
+    GET_EVENT_REQUEST: null,
+    GET_EVENT_RESPONSE: null,
     GET_CACHED_EVENTS_RESPONSE: null,
     DELETE_EVENT_REQUEST: null,
     DELETE_EVENT_RESPONSE: null,
@@ -79,10 +84,15 @@ const AppConstants = {
     // Tasks
     GET_TASKS_REQUEST: null,
     GET_TASKS_RESPONSE: null,
+    UPDATE_TASK_REQUEST: null,
+    UPDATE_TASK_SUCCESS_RESPONSE: null,
+    UPDATE_TASK_ERROR_RESPONSE: null,
     GET_CACHED_TASKS_RESPONSE: null,
     CREATE_TASK_REQUEST: null,
     CREATE_TASK_SUCCESS_RESPONSE: null,
     CREATE_TASK_ERROR_RESPONSE: null,
+    DELETE_TASK_REQUEST: null,
+    DELETE_TASK_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,

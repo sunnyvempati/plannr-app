@@ -59,7 +59,7 @@ class EventStore extends BaseStore {
     this._events[event.id] = event;
   }
 
-  getEvent(id) {
+  get(id) {
     return this._events[id];
   }
 
@@ -95,7 +95,6 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventStoreInstance.addEvents(action.events, action.params);
       }
       _eventStoreInstance.emitChange();
-      break;
     case ActionTypes.GET_CACHED_EVENTS_RESPONSE:
       _eventStoreInstance.addCachedEvents(action.params);
       _eventStoreInstance.emitChange();
@@ -106,6 +105,8 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventStoreInstance.emitChange();
       }
       break;
+      break;
+    case ActionTypes.GET_EVENT_RESPONSE:
     case ActionTypes.UPDATE_EVENT_RESPONSE:
     case ActionTypes.CREATE_EVENT_RESPONSE:
       let event = action.json && action.json.event;

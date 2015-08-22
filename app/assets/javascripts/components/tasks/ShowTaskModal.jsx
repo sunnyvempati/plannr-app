@@ -7,48 +7,6 @@ import TaskStore from '../../stores/TaskStore';
 
 var ShowTaskModal = React.createClass({
   mixins: [ModalMixin],
-  getInitialState: function() {
-    return {
-      task: TaskStore.getTask(this.props.id)
-    };
-  },
-  componentDidMount: function() {
-    // to do
-    // if (!!this.state.task.id) {
-    //   var url = '/tasks/' + this.state.task.id + '.json';
-    //   Utils.get(url, {}, function(result) {
-    //     this.setState({task: result.task});
-    //   }.bind(this));
-    // }
-  },
-  openEditModal: function() {
-    console.log("OPEN EDIT MODAL");
-    // to do
-    // var props = {
-    //   model: {id: this.state.task.id},
-    //   authToken: this.props.authToken,
-    //   onSuccess: this.onTaskSuccess,
-    //   routeVerb: 'PUT'
-    // };
-    // Modal.mount(props, EditTaskModal);
-  },
-  // onTaskSuccess: function(task) {
-  //   var props = {
-  //     model: {id: task.id},
-  //     authToken: this.props.authToken,
-  //     currentUserId: this.props.currentUserId
-  //   }
-  //   Modal.mount(props, ShowTaskModal);
-  // },
-  handleDelete: function (id) {
-    var destroyOpts = {destroy_opts: {ids: [id]}};
-    // to do
-    // Utils.post('/tasks/mass_delete', destroyOpts, function (success_result) {
-    //   this.props.onTaskChange();
-    //   this.closeModal();
-    //   ToastMessages.toast('Task deleted successfully.');
-    // }.bind(this));
-  },
   renderStatusText: function(status) {
     var completed = status == 2;
     var display = completed ? "Completed" : "To do";
@@ -85,11 +43,17 @@ var ShowTaskModal = React.createClass({
       </div>
     )
   },
+  handleEdit(id) {
+    this.props.handleEditClick(id);
+  },
+  handleDelete(id) {
+    this.props.handleDeleteClick(id);
+  },
   renderActionButtons: function(task) {
     var status = task.status;
     return (
       <div className="TaskModal-contentButtonList">
-        <Button type="button" className="Button--primary TaskActionButton" onClick={this.openEditModal}>
+        <Button type="button" className="Button--primary TaskActionButton" onClick={this.handleEdit.bind(this, task.id)}>
           Edit
         </Button>
         <Button type="button"
@@ -102,7 +66,7 @@ var ShowTaskModal = React.createClass({
   },
   handleCheckChange: function(checked) {
     var status = checked ? 2 : 1;
-    var task_id = this.state.task.id;
+    var task_id = this.props.model.id;
     var url = "/tasks/" + task_id + ".json";
     var params = {
       task: {
@@ -119,7 +83,7 @@ var ShowTaskModal = React.createClass({
     // }.bind(this));
   },
   renderModalContent: function() {
-    var task = this.state.task;
+    var task = this.props.model;
     var checkboxDisplay = <div className="TaskModal-title u-wrapWithEllipsis">{task.name}</div>;
     return (
       <div className="TaskModal">

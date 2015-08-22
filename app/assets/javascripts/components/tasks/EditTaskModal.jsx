@@ -3,20 +3,6 @@ import TaskForm from './TaskForm';
 
 const EditTaskModal = React.createClass({
   mixins: [ModalMixin],
-  getInitialState: function() {
-    return {
-      task: this.props.model
-    };
-  },
-  componentDidMount: function() {
-    // to do
-    // if (!!this.state.task.id) {
-    //   var url = '/tasks/' + this.state.task.id + '.json';
-    //   Utils.get(url, {}, function(result) {
-    //     this.setState({task: result.task, taskLoaded: true});
-    //   }.bind(this));
-    // }
-  },
   renderModalContent: function() {
     return (
       <div className="EntityModal">
@@ -33,11 +19,11 @@ const EditTaskModal = React.createClass({
           <div className="Card">
             <div className="Card-content">
               <TaskForm
-                onSuccess={this.onSuccess}
+                onSuccess={this.props.onSuccess}
                 type={this.props.type}
                 compact={true}
                 onSecondaryClick={this.closeModal}
-                model={this.state.task} />
+                model={this.props.model} />
             </div>
           </div>
         </div>

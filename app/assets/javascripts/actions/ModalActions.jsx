@@ -12,7 +12,7 @@ class ModalActions {
     });
   }
 
-  static openCreateTaskModal(props) {
+  static openEditTaskModal(props) {
     let modal = React.createElement(EditTaskModal, props);
     AppDispatcher.handleAction({
       type: ActionTypes.OPEN_MODAL,

@@ -156,6 +156,33 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveEvent(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveUpdateTask(json, errors) {
+    let type = !errors ? ActionTypes.UPDATE_TASK_SUCCESS_RESPONSE :
+                         ActionTypes.UPDATE_TASK_ERROR_RESPONSE;
+    let entity = json && json.task;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteTasks(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_TASK_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

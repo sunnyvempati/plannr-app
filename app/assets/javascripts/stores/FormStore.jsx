@@ -49,11 +49,13 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         else _formStoreInstance.clear();
       _formStoreInstance.emitChange();
       break;
+    case ActionTypes.UPDATE_TASK_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_TASK_SUCCESS_RESPONSE:
       _formStoreInstance.entity = action.entity;
       _formStoreInstance.errors = null;
       _formStoreInstance.emitChange();
       break;
+    case ActionTypes.UPDATE_TASK_ERROR_RESPONSE:
     case ActionTypes.CREATE_TASK_ERROR_RESPONSE:
       _formStoreInstance.entity = null;
       _formStoreInstance.errors = action.errors;

@@ -15,15 +15,19 @@ var TaskAssignedToInput = React.createClass({
     UserStore.removeChangeListener(this._onChange);
   },
   _onChange() {
-    this.setState({items: UserStore.searchResults});
+    let id = this.getValue();
+    let itemFound = !!id && UserStore.get(id);
+    this.setState({
+      items: UserStore.searchResults,
+      itemSet: !!itemFound,
+      itemDisplay: itemFound && itemFound.name
+    });
   },
   retrieveItem: function(id) {
-    // to do
-    // Utils.get('/users/' + id + '.json', {}, function(result) {
-    //   if (this.isMounted()) {
-    //     this.setState({itemSet: true, itemDisplay: result.user.name});
-    //   }
-    // }.bind(this));
+    let item = UserStore.get(id);
+    if (item) {
+      this.setState({itemSet: true, itemDisplay: item.name});
+    } else UserActions.get(id);
   },
   retrieveData: function(term) {
     var params = {

@@ -26,14 +26,15 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show'
 
   # events
-  resources :events, only: [:index, :create, :update]
+  resources :events, only: [:index, :create, :update, :show]
   post 'destroy_events', to: 'events#mass_delete'
 
   # contacts
   resources :contacts, only: [:index, :create, :show]
 
   # tasks
-  resources :tasks, only: [:index, :create, :update]
+  resources :tasks, only: [:index, :create, :update, :show]
+  post 'destroy_tasks', to:'tasks#mass_destroy'
 
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'

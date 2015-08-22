@@ -20,6 +20,7 @@ const Modal = React.createClass({
   },
 
   _mount(element) {
+    this._unmount();
     React.render(element, React.findDOMNode(this.refs.modal));
   },
 

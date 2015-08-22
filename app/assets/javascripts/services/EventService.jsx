@@ -23,6 +23,16 @@ class EventService {
       });
   }
 
+  static get(id) {
+    request
+      .get(APIEndpoints.GET_EVENT + id)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        let json = error ? null : JSON.parse(res.text);
+        ServerActions.receiveEvent(json, error);
+      });
+  }
+
   static update(id, params) {
     request
       .put(APIEndpoints.UPDATE_EVENT + id)

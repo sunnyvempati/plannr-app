@@ -9,7 +9,7 @@ var AutocompleteInput = {
   ],
   getInitialState: function() {
     return {
-      originalValue: null,
+      originalValue: null, // this is used to check if value was changed outside the component via props
       itemSet: false,
       itemDisplay: null,
       items: [],
@@ -21,15 +21,14 @@ var AutocompleteInput = {
       autocompleteClassName: "Autocomplete"
     };
   },
-  componentDidMount: function() {
-    var inputVal = this.getValue();
-    !!inputVal ? this.retrieveItem(inputVal) : this.resetState();
-  },
   componentWillReceiveProps: function(nextProps) {
     var inputVal = nextProps.value;
     var valueChange = inputVal != this.state.originalValue;
+    // if nextProp was set to null
     if (!inputVal && valueChange) { this.resetState(); return; }
-    if (!this.state.itemSet || valueChange) {
+    // valueChange here means it got set to something outside the component
+    // item isn't set or value changed AND there's a value
+    if ((!this.state.itemSet || valueChange) && inputVal) {
       this.retrieveItem(inputVal);
       this.setState({originalValue: inputVal});
     }

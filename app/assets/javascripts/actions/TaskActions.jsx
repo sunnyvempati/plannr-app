@@ -26,6 +26,23 @@ class TaskActions {
     })
     TaskService.create(params);
   }
+
+  static update(id, params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_TASK_REQUEST,
+      id: id,
+      params: params
+    });
+    TaskService.update(id, params);
+  }
+
+  static delete(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_TASK_REQUEST,
+      ids: ids
+    });
+    TaskService.delete(ids);
+  }
 }
 
 export default TaskActions;

@@ -14,7 +14,7 @@ class UserStore extends BaseStore {
   get users() { return this._users; }
   get searchResults() { return this._searchResults; }
   set searchResults(val) { this._searchResults = val }
-  getUser(id) {
+  get(id) {
     return this._users[id];
   }
 

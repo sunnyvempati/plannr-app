@@ -21,7 +21,7 @@ const TaskForm = React.createClass({
     React.addons.PureRenderMixin
   ],
   propTypes: {
-    type: React.PropTypes.oneOf(['NEW'], ['OLD']).isRequired,
+    type: React.PropTypes.oneOf(['NEW', 'OLD']).isRequired,
     model: React.PropTypes.object.isRequired,
   },
   getDefaultProps: function() {
@@ -31,26 +31,24 @@ const TaskForm = React.createClass({
   },
   mapInputs: function(inputs) {
     return {
-      'authenticity_token': inputs.authenticity_token,
       'task': {
         'name': inputs.name,
         'deadline': inputs.deadline,
-        'event_id': (this.props.model && this.props.model.event_id) || inputs.event,
+        'event_id': inputs.event,
         'assigned_to_id': inputs.assignedTo,
         'description': inputs.description
       }
     };
   },
   onSuccess: function (result) {
-    let createNew = this.createAndNewClicked;
-    this.props.onSuccess(result, true);
+    this.props.onSuccess(result, this.createAndNewClicked);
   },
   onSecondaryClick: function() {
-    !!this.props.onSecondaryClick ? this.props.onSecondaryClick() : this.navigateToTasks();
+    this.props.onSecondaryClick();
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
     data.task.deadline = data.task.deadline && data.task.deadline.format();
-    this.props.type == "NEW" ? TaskActions.create(data) : TaskActions.update(data);
+    this.props.type == "NEW" ? TaskActions.create(data) : TaskActions.update(this.props.model && this.props.model.id, data);
   },
   handleCreateAndNewClick: function() {
     this.createAndNewClicked = true;
@@ -89,7 +87,6 @@ const TaskForm = React.createClass({
     }
   },
   render: function() {
-    console.log("FORM PROPS", this.props);
     var compact = this.props.compact;
     var task = {};
     if (this.props.model) {

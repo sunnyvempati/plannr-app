@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
+import TaskStore from './TaskStore';
 import keyMirror from 'keymirror';
 
 class ModalStore extends BaseStore {
@@ -31,6 +32,10 @@ class ModalStore extends BaseStore {
 let _modalStoreInstance = new ModalStore();
 
 _modalStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
+  AppDispatcher.waitFor([
+    TaskStore.dispatchToken
+  ]);
+
   let action = payload.action;
 
   switch (action.type) {
@@ -39,6 +44,7 @@ _modalStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       _modalStoreInstance.state = _modalStoreInstance.stateTypes.OPEN;
       _modalStoreInstance.emitChange();
       break;
+    case ActionTypes.DELETE_TASK_RESPONSE:
     case ActionTypes.CLOSE_MODAL:
       _modalStoreInstance.clearAndClose();
       _modalStoreInstance.emitChange();

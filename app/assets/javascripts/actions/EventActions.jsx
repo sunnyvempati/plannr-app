@@ -21,7 +21,7 @@ class EventActions {
 
   static update(id, params) {
     AppDispatcher.handleAction({
-      type: ActionTypes.GET_EVENT_CLIENT_REQUEST,
+      type: ActionTypes.UPDATE_EVENT_REQUEST,
       id: id,
       params: params
     });
@@ -50,6 +50,14 @@ class EventActions {
       params: params
     })
     EventService.create(params);
+  }
+
+  static get(id) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_REQUEST,
+      id: id
+    });
+    EventService.get(id);
   }
 }
 

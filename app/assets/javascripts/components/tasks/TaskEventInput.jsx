@@ -15,13 +15,19 @@ var TaskEventInput = React.createClass({
     EventStore.removeChangeListener(this._onChange);
   },
   retrieveItem: function(id) {
-    // to do
-    // Utils.get('/events/' + id + '.json', {}, function(result) {
-    //   this.setState({itemSet: true, itemDisplay: result.event.name});
-    // }.bind(this));
+    let item = EventStore.get(id);
+    if (item) {
+      this.setState({itemSet: true, itemDisplay: item.name});
+    } else EventActions.get(id);
   },
   _onChange() {
-    this.setState({items: EventStore.searchResults});
+    let id = this.getValue();
+    let itemFound = !!id && EventStore.get(id);
+    this.setState({
+      items: EventStore.searchResults,
+      itemSet: !!itemFound,
+      itemDisplay: itemFound && itemFound.name
+    });
   },
   retrieveData: function(term) {
     var params = {
@@ -33,7 +39,6 @@ var TaskEventInput = React.createClass({
   itemSelected: function(item) {
     this.setValue(item.id);
     this.setState({itemSet: true, itemDisplay: item.name});
-    if (this.props.handleItemSelected) this.props.handleItemSelected(item);
   }
 });
 
