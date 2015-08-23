@@ -108,6 +108,14 @@ class ServerActions {
     });
   }
 
+  static receiveGetVendor(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_VENDOR_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
   static receiveCreateEvent(json, errors) {
     AppDispatcher.handleAction({
       type: ActionTypes.CREATE_EVENT_RESPONSE,
@@ -196,10 +204,28 @@ class ServerActions {
     })
   }
 
+  static receiveGetEventContacts(eventContacts, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_CONTACTS_RESPONSE,
+      eventContacts: eventContacts,
+      params: params,
+      errors: errors
+    })
+  }
+
   static receiveGetVendors(vendors, params, errors) {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_VENDORS_RESPONSE,
       vendors: vendors,
+      params: params,
+      errors: errors
+    })
+  }
+
+  static receiveGetEventVendors(eventVendors, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_VENDORS_RESPONSE,
+      eventVendors: eventVendors,
       params: params,
       errors: errors
     })

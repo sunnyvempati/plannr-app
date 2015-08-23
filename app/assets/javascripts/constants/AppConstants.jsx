@@ -26,6 +26,8 @@ const AppConstants = {
     CREATE_TASK:                '/tasks',
     UPDATE_TASK:                '/tasks/',
     DELETE_TASKS:               '/destroy_tasks',
+    GET_EVENT_CONTACTS:         '/event_contacts',
+    GET_EVENT_VENDORS:          '/event_vendors'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -110,6 +112,14 @@ const AppConstants = {
     CREATE_TASK_ERROR_RESPONSE: null,
     DELETE_TASK_REQUEST: null,
     DELETE_TASK_RESPONSE: null,
+
+    // Event Contacts
+    GET_EVENT_CONTACTS_REQUEST: null,
+    GET_EVENT_CONTACTS_RESPONSE: null,
+
+    // Event Vendors
+    GET_EVENT_VENDORS_REQUEST: null,
+    GET_EVENT_VENDORS_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,

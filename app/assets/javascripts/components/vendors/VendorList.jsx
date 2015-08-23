@@ -2,6 +2,7 @@ import TableCheckbox from '../mixins/TableCheckbox';
 import FilterSort from '../mixins/FilterSort';
 import InfiniteScrollMixin from '../mixins/InfiniteScrollMixin';
 import VendorActions from '../../actions/VendorActions';
+import RouteActions from '../../actions/RouteActions';
 import VendorStore from '../../stores/VendorStore';
 import Table from '../generic/Table';
 import ActionButton from '../generic/ActionButton';
@@ -73,8 +74,7 @@ const VendorList = React.createClass({
     );
   },
   goToVendor: function(data) {
-    // to do
-    // this.transitionTo('vendor', {id: data.id, currentUser: this.props.currentUser});
+    RouteActions.redirect('vendor', {id: data.id});
   },
   render: function() {
     return (

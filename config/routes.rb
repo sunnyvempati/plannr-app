@@ -39,6 +39,12 @@ Rails.application.routes.draw do
   resources :tasks, only: [:index, :create, :update, :show]
   post 'destroy_tasks', to:'tasks#mass_destroy'
 
+  # event contacts
+  resources :event_contacts, only: [:index]
+
+  # event vendors
+  resources :event_vendors, only: [:index]
+
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'
 

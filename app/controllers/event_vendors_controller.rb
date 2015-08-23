@@ -3,12 +3,8 @@ class EventVendorsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    serializer = filter_sort_params && filter_sort_params[:with_event_id] ? EventVendorWithVendorSerializer : EventVendorWithEventSerializer
     @event_vendors = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
-    respond_to do |format|
-      format.html
-      format.json { render json: @event_vendors, each_serializer: serializer }
-    end
+    render json: @event_vendors
   end
 
   def create

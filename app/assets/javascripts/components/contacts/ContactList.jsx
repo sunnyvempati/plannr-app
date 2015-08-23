@@ -77,8 +77,7 @@ const ContactList = React.createClass({
     );
   },
   goToContact: function(data) {
-    // to do
-    // this.transitionTo('contact', {id: data.id, currentUser: this.props.currentUser});
+    RouteActions.redirect('contact', {id: data.id});
   },
   render: function() {
     return (
