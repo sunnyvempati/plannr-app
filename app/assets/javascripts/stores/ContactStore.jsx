@@ -45,7 +45,7 @@ class ContactStore extends BaseStore {
     this._cache.clear();
   }
 
-  addCachedContacts(params) {
+  addCachedContactsToView(params) {
     let contactIds = this._cache.getItems(params);
     let page = params.page;
     if (contactIds && contactIds.length) {
@@ -87,10 +87,6 @@ _contactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (action.contacts) {
         _contactStoreInstance.addContacts(action.contacts, action.params);
       }
-      _contactStoreInstance.emitChange();
-      break;
-    case ActionTypes.GET_CACHED_CONTACTS_RESPONSE:
-      _contactStoreInstance.addCachedContacts(action.params);
       _contactStoreInstance.emitChange();
       break;
     case ActionTypes.GET_CONTACT_RESPONSE:

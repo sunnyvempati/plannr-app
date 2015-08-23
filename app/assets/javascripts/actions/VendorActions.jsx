@@ -8,15 +8,8 @@ export default class VendorActions {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_VENDORS_REQUEST,
       params: params
-    })
-    if (VendorStore.isCached(params)) {
-      AppDispatcher.handleAction({
-        type: ActionTypes.GET_CACHED_VENDORS_RESPONSE,
-        params: params
-      })
-    } else {
-      VendorService.getVendors(params);
-    }
+    });
+    VendorService.getVendors(params);
   }
 
   static search(params) {

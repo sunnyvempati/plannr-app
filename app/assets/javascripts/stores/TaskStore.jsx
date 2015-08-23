@@ -46,7 +46,7 @@ class TaskStore extends BaseStore {
     this._cache.clear();
   }
 
-  addCachedTasks(params) {
+  addCachedTasksToView(params) {
     let taskIds = this._cache.getItems(params);
     let page = params.page;
     if (taskIds && taskIds.length) {
@@ -88,10 +88,6 @@ _taskStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (action.tasks) {
         _taskStoreInstance.addTasks(action.tasks, action.params);
       }
-      _taskStoreInstance.emitChange();
-      break;
-    case ActionTypes.GET_CACHED_TASKS_RESPONSE:
-      _taskStoreInstance.addCachedTasks(action.params);
       _taskStoreInstance.emitChange();
       break;
     case ActionTypes.UPDATE_TASK_SUCCESS_RESPONSE:

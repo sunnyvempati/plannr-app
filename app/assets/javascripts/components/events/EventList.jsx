@@ -34,8 +34,14 @@ const EventList = React.createClass({
   },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;
-    var params = this.mergeParams();
-    EventActions.getEvents(params);
+    let params = this.mergeParams();
+    if (EventStore.isCached(params)) {
+      // This is dangerous because we're manipulating the Store
+      // BUT!
+      // We're using ViewStore as a helper to manage our viewed items.
+      EventStore.addCachedEventsToView(params);
+      this.setState({data: EventStore.viewEvents});
+    } else EventActions.getEvents(params);
   },
   getCustomRows: function() {
     return this.state.data.map(function(event) {

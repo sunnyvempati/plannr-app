@@ -36,8 +36,14 @@ const TaskList = React.createClass({
   },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;
-    var params = this.mergeParams();
-    TaskActions.getTasks(params);
+    let params = this.mergeParams();
+    if (TaskStore.isCached(params)) {
+      // This is dangerous because we're manipulating the Store
+      // BUT!
+      // We're using ViewStore as a helper to manage our viewed items.
+      TaskStore.addCachedTasksToView(params);
+      this.setState({data: TaskStore.viewTasks});
+    } else TaskActions.getTasks(params);
   },
   getColumns: function() {
     return [

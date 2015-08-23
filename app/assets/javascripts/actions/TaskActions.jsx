@@ -9,14 +9,7 @@ class TaskActions {
       type: ActionTypes.GET_TASKS_REQUEST,
       params: params
     });
-    if (TaskStore.isCached(params)) {
-      AppDispatcher.handleAction({
-        type: ActionTypes.GET_CACHED_TASKS_RESPONSE,
-        params: params
-      })
-    } else {
-      TaskService.getTasks(params);
-    }
+    TaskService.getTasks(params);
   }
 
   static create(params) {

@@ -45,7 +45,7 @@ class VendorStore extends BaseStore {
     this._cache.clear();
   }
 
-  addCachedVendors(params) {
+  addCachedVendorsToView(params) {
     let vendorIds = this._cache.getItems(params);
     let page = params.page;
     if (vendorIds && vendorIds.length) {
@@ -87,10 +87,6 @@ _vendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (action.vendors) {
         _vendorStoreInstance.addVendors(action.vendors, action.params);
       }
-      _vendorStoreInstance.emitChange();
-      break;
-    case ActionTypes.GET_CACHED_VENDORS_RESPONSE:
-      _vendorStoreInstance.addCachedVendors(action.params);
       _vendorStoreInstance.emitChange();
       break;
     case ActionTypes.GET_VENDOR_RESPONSE:

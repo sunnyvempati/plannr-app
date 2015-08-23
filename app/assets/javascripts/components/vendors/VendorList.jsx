@@ -32,8 +32,14 @@ const VendorList = React.createClass({
   },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;
-    var params = this.mergeParams();
-    VendorActions.getVendors(params);
+    let params = this.mergeParams();
+    if (VendorStore.isCached(params)) {
+      // This is dangerous because we're manipulating the Store
+      // BUT!
+      // We're using ViewStore as a helper to manage our viewed items.
+      VendorStore.addCachedVendorsToView(params);
+      this.setState({data: VendorStore.viewVendors});
+    } else VendorActions.getVendors(params);
   },
   getColumns: function() {
     return [

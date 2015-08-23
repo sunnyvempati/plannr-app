@@ -8,15 +8,8 @@ export default class ContactActions {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_CONTACTS_REQUEST,
       params: params
-    })
-    if (ContactStore.isCached(params)) {
-      AppDispatcher.handleAction({
-        type: ActionTypes.GET_CACHED_CONTACTS_RESPONSE,
-        params: params
-      })
-    } else {
-      ContactService.getContacts(params);
-    }
+    });
+    ContactService.getContacts(params);
   }
 
   static search(params) {

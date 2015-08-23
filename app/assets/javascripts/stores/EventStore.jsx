@@ -45,7 +45,7 @@ class EventStore extends BaseStore {
     } else this._view.itemsLoaded = true;
   }
 
-  addCachedEvents(params) {
+  addCachedEventsToView(params) {
     let eventIds = this._cache.getItems(params);
     let page = params.page;
     if (eventIds && eventIds.length) {
@@ -94,10 +94,6 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (action.events) {
         _eventStoreInstance.addEvents(action.events, action.params);
       }
-      _eventStoreInstance.emitChange();
-      break;
-    case ActionTypes.GET_CACHED_EVENTS_RESPONSE:
-      _eventStoreInstance.addCachedEvents(action.params);
       _eventStoreInstance.emitChange();
       break;
     case ActionTypes.SEARCH_EVENTS_RESPONSE:

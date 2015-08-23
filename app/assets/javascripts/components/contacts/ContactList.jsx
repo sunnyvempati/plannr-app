@@ -22,7 +22,6 @@ const ContactList = React.createClass({
   componentDidMount() {
     // this.props.setLayoutParams({header: "Contacts", skrollable: true});
     ContactStore.addChangeListener(this._onViewContactsChange);
-    console.log(ContactStore);
   },
   componentDidUpdate: function() {
     if (!ContactStore.contactsLoaded || this.nextPage == 1) this.attachScrollListener();
@@ -31,13 +30,18 @@ const ContactList = React.createClass({
     ContactStore.removeChangeListener(this._onViewContactsChange);
   },
   _onViewContactsChange() {
-    console.log("CHANGE");
     this.setState({data: ContactStore.viewContacts});
   },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;
-    var params = this.mergeParams();
-    ContactActions.getContacts(params);
+    let params = this.mergeParams();
+    if (ContactStore.isCached(params)) {
+      // This is dangerous because we're manipulating the Store
+      // BUT!
+      // We're using ViewStore as a helper to manage our viewed items.
+      ContactStore.addCachedContactsToView(params);
+      this.setState({data: ContactStore.viewContacts});
+    } else ContactActions.getContacts(params);
   },
   getColumns: function() {
     return [

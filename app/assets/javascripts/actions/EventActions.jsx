@@ -8,15 +8,8 @@ class EventActions {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_EVENTS_REQUEST,
       params: params
-    })
-    if (EventStore.isCached(params)) {
-      AppDispatcher.handleAction({
-        type: ActionTypes.GET_CACHED_EVENTS_RESPONSE,
-        params: params
-      })
-    } else {
-      EventService.getEvents(params);
-    }
+    });
+    EventService.getEvents(params);
   }
 
   static update(id, params) {
