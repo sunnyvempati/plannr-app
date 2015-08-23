@@ -5,6 +5,7 @@ import EventContactActions from '../../actions/EventContactActions';
 import RouteActions from '../../actions/RouteActions';
 import ContactCards from './ContactCards';
 import AssociatedEventsCard from '../mixins/AssociatedEventsCard';
+import {Link} from 'react-router';
 
 var Contact = React.createClass({
   mixins: [ContactCards, AssociatedEventsCard],
@@ -61,7 +62,6 @@ var Contact = React.createClass({
   renderContact: function() {
     var contact = this.state.contact;
     if (contact) {
-      var editHref = "/contacts/"+contact.id+"/edit";
       return (
         <div>
           <div className="Show-header">
@@ -74,9 +74,9 @@ var Contact = React.createClass({
               </div>
             </div>
             <div className="Show-actions">
-              <a href={editHref}>
+              <Link to='contact_edit' params={{id: contact.id}}>
                 <i className="fa fa-pencil ShowHeaderIcon"></i>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="Show-content">

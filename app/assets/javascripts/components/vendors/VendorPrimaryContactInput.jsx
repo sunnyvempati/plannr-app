@@ -1,21 +1,27 @@
 import FormInputClassesMixin from '../mixins/FormInputClassesMixin';
 import AutocompleteInput from '../mixins/AutocompleteInput';
-import ContactActions from '../../actions/ContactActions';
 import ContactStore from '../../stores/ContactStore';
+import ContactActions from '../../actions/ContactActions';
 import FormStore from '../../stores/FormStore';
 
-var EventClientInput = React.createClass({
+var VendorPrimaryContactInput = React.createClass({
   mixins: [
     FormInputClassesMixin,
     AutocompleteInput
   ],
-  componentDidMount() {
+  componentDidMount: function() {
     ContactStore.addChangeListener(this._onContactChange);
-    FormStore.addChangeListener(this._onCreateEventClientChange);
+    FormStore.addChangeListener(this._onCreateContactChange);
   },
   componentWillUnmount() {
     ContactStore.removeChangeListener(this._onContactChange);
-    FormStore.addChangeListener(this._onCreateEventClientChange);
+    FormStore.addChangeListener(this._onCreateContactChange);
+  },
+  retrieveItem: function(id) {
+    let item = ContactStore.get(id);
+    if (item) {
+      this.setState({itemSet: true, itemDisplay: item.name});
+    } else ContactActions.get(id);
   },
   _onContactChange() {
     let returnedContacts = ContactStore.searchResults;
@@ -28,42 +34,31 @@ var EventClientInput = React.createClass({
       itemDisplay: itemFound && itemFound.name
     });
   },
-  _onCreateEventClientChange() {
+  _onCreateContactChange() {
     if (!FormStore.errors) {
-      let eventClientName = FormStore.entity.name;
+      let primaryContactName = FormStore.entity.name;
       this.setValue(FormStore.entity.id);
-      this.setState({itemSet: true, itemDisplay: eventClientName});
+      this.setState({itemSet: true, itemDisplay: primaryContactName});
     }
-  },
-  retrieveItem: function(id) {
-    let client = ContactStore.get(id);
-    if (client) {
-      this.setState({itemSet: true, itemDisplay: client.name});
-    } else ContactActions.get(id);
   },
   retrieveData: function(term) {
     var params = {
       search_query: term,
-      with_category: 1, // Search only clients
       with_search_limit: 5
     };
-
     ContactActions.search(params);
   },
-  itemSelected: function(client, term) {
+  itemSelected: function(contact, term) {
     let itemSet = false, itemDisplay = "";
-    if (client.id == -1) {
-      // category 1 = client contact
-      // take term which is the text value in input field
-      // and create contact
-      var payload = {contact: {name: term, category: 1}};
+    if (contact.id == -1) {
+      var payload = {contact: {name: term, category: 2}};
       ContactActions.create(payload);
     }
     else {
-      this.setValue(client.id);
-      this.setState({itemSet: true, itemDisplay: client.name});
+      this.setValue(contact.id);
+      this.setState({itemSet: true, itemDisplay: contact.name});
     }
   }
 });
 
-export default EventClientInput;
+export default VendorPrimaryContactInput;

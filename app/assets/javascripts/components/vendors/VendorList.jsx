@@ -49,6 +49,14 @@ const VendorList = React.createClass({
       {name: "phone", grow: 5, header: "Phone"},
     ];
   },
+  handleEdit: function(id) {
+    RouteActions.redirect('vendor_edit', {id: id});
+  },
+  handleDelete: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    VendorActions.deleteVendors(deletionIds);
+    this.setState({checkedItems: []});
+  },
   actionItems: function() {
     return [
       // global means the action is available as a mass action
@@ -62,8 +70,7 @@ const VendorList = React.createClass({
     ]
   },
   handleActionButtonClick: function() {
-    // to do
-    // RouteActions.redirect('events_new');
+    RouteActions.redirect('vendor_new');
   },
   getActionButton: function () {
     return (

@@ -42,7 +42,7 @@ class VendorsController < ApplicationController
     end
   end
 
-  def mass_destroy
+  def mass_delete
     render_success Vendor.destroy_all(id: mass_destroy_params[:ids])
   end
 

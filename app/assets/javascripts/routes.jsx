@@ -10,8 +10,12 @@ import TaskList from './components/tasks/TaskList';
 import Contacts from './components/contacts/Contacts';
 import Contact from './components/contacts/Contact';
 import ContactList from './components/contacts/ContactList';
+import ContactFormNew from './components/contacts/ContactFormNew';
+import ContactFormEdit from './components/contacts/ContactFormEdit';
 import Vendors from './components/vendors/Vendors';
 import Vendor from './components/vendors/Vendor';
+import VendorFormNew from './components/vendors/VendorFormNew';
+import VendorFormEdit from './components/vendors/VendorFormEdit';
 import VendorList from './components/vendors/VendorList';
 import LoginForm from './components/session/LoginForm';
 import SignUpForm from './components/session/SignUpForm';
@@ -34,10 +38,14 @@ export default (
         <Route name="contact" path=":id" handler={Contact} />
         <DefaultRoute handler={ContactList} />
       </Route>
+      <Route name="contact_new" path="/new_contact" handler={ContactFormNew} />
+      <Route name="contact_edit" path="/edit_contact/:id" handler={ContactFormEdit} />
       <Route name="vendors" path="/vendors" handler={Vendors}>
         <Route name="vendor" path=":id" handler={Vendor} />
         <DefaultRoute handler={VendorList} />
       </Route>
+      <Route name="vendor_new" path="/new_vendor" handler={VendorFormNew} />
+      <Route name="vendor_edit" path="/edit_vendor/:id" handler={VendorFormEdit} />
       <Route name="tasks" path="/tasks" handler={TaskList} />
     </Route>
     <Route handler={Public}>

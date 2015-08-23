@@ -30,10 +30,12 @@ Rails.application.routes.draw do
   post 'destroy_events', to: 'events#mass_delete'
 
   # contacts
-  resources :contacts, only: [:index, :create, :show]
+  resources :contacts, only: [:index, :create, :show, :update]
+  post 'destroy_contacts', to: 'contacts#mass_delete'
 
   # vendors
-  resources :vendors, only: [:index, :create, :show]
+  resources :vendors, only: [:index, :create, :show, :update]
+  post 'destroy_vendors', to: 'vendors#mass_delete'
 
   # tasks
   resources :tasks, only: [:index, :create, :update, :show]

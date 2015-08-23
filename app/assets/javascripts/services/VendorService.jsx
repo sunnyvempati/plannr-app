@@ -1,6 +1,7 @@
 import request from 'superagent';
 import {Utils} from './Utils';
 import ServerActions from '../actions/ServerActions';
+import ToastActions from '../actions/ToastActions';
 import {APIEndpoints} from '../constants/AppConstants';
 
 class VendorService {
@@ -71,6 +72,38 @@ class VendorService {
             ServerActions.receiveGetVendor(null, errors);
           }
         }
+      });
+  }
+
+  static update(id, params) {
+    request
+      .put(APIEndpoints.UPDATE_VENDOR + id)
+      .send(params)
+      .use(Utils.addAuthToken)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveUpdateVendor(json);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveUpdateVendor(null, errors);
+          }
+        }
+      });
+  }
+
+  static delete(ids) {
+    request
+      .post(APIEndpoints.DELETE_VENDORS)
+      .send({destroy_opts: {ids: ids}})
+      .use(Utils.addAuthToken)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        let errors = null;
+        if (res && error) errors = Utils.getErrors(res);
+        if (!error) { ToastActions.toast(ids.length + " vendor(s) successfully deleted!") }
+        ServerActions.receiveDeleteVendors(ids, errors);
       });
   }
 }

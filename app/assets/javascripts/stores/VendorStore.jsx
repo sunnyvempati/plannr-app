@@ -94,6 +94,7 @@ _vendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (!action.errors) _vendorStoreInstance.add(vendor);
       _vendorStoreInstance.emitChange();
       break;
+    case ActionTypes.UPDATE_VENDOR_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_VENDOR_SUCCESS_RESPONSE:
       _vendorStoreInstance.add(action.entity);
       _vendorStoreInstance.emitChange();
@@ -101,6 +102,12 @@ _vendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.SEARCH_VENDORS_RESPONSE:
       if (!action.errors) {
         _vendorStoreInstance.setSearchResults(action.vendors);
+        _vendorStoreInstance.emitChange();
+      }
+      break;
+    case ActionTypes.DELETE_VENDORS_RESPONSE:
+      if (!action.errors) {
+        _vendorStoreInstance.removeVendors(action.ids);
         _vendorStoreInstance.emitChange();
       }
       break;

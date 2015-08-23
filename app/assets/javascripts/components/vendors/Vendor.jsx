@@ -5,6 +5,7 @@ import EventVendorActions from '../../actions/EventVendorActions';
 import RouteActions from '../../actions/RouteActions';
 import VendorCards from './VendorCards';
 import AssociatedEventsCard from '../mixins/AssociatedEventsCard';
+import {Link} from 'react-router';
 
 var Vendor = React.createClass({
   mixins: [VendorCards, AssociatedEventsCard],
@@ -61,7 +62,6 @@ var Vendor = React.createClass({
   renderVendor: function() {
     var vendor = this.state.vendor;
     if (vendor) {
-      var editHref = "/vendors/"+vendor.id+"/edit";
       return (
         <div>
           <div className="Show-header">
@@ -74,9 +74,9 @@ var Vendor = React.createClass({
               </div>
             </div>
             <div className="Show-actions">
-              <a href={editHref}>
+              <Link to='vendor_edit' params={{id: vendor.id}}>
                 <i className="fa fa-pencil ShowHeaderIcon"></i>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="Show-content">

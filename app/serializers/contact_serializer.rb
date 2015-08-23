@@ -1,5 +1,7 @@
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :phone, :company, :type, :description
+  attributes :id, :name, :email, :phone, :type, :description, :organization, :category, :company, :vendor_id
+
+  has_one :vendor
 
   def type
     if object.category == 1

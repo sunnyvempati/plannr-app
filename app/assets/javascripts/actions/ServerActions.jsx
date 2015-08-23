@@ -187,6 +187,28 @@ class ServerActions {
     });
   }
 
+  static receiveUpdateContact(json, errors) {
+    let type = !errors ? ActionTypes.UPDATE_CONTACT_SUCCESS_RESPONSE :
+                         ActionTypes.UPDATE_CONTACT_ERROR_RESPONSE;
+    let entity = json && json.contact;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
+
+  static receiveUpdateVendor(json, errors) {
+    let type = !errors ? ActionTypes.UPDATE_VENDOR_SUCCESS_RESPONSE :
+                         ActionTypes.UPDATE_VENDOR_ERROR_RESPONSE;
+    let entity = json && json.vendor;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
+
   static receiveDeleteTasks(ids, errors) {
     AppDispatcher.handleAction({
       type: ActionTypes.DELETE_TASK_RESPONSE,
@@ -246,6 +268,22 @@ class ServerActions {
     AppDispatcher.handleAction({
       type: type,
       entity: entity,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteContacts(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_CONTACTS_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteVendors(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_VENDORS_RESPONSE,
+      ids: ids,
       errors: errors
     });
   }

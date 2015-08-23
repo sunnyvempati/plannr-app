@@ -26,7 +26,6 @@ var EventForm = React.createClass({
   },
   mapInputs: function (inputs) {
     return {
-      'authenticity_token': inputs.authenticity_token,
       'event': {
         'name': inputs.name,
         'start_date': inputs.start_date,
@@ -52,9 +51,6 @@ var EventForm = React.createClass({
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
     this.props.type == "NEW" ? EventActions.create(data) : EventActions.update(data);
-  },
-  formSuccess() {
-    RouteActions.redirect('event', {id: event_id});
   },
   setEventState: function(item) {
     var eventTemplate = {

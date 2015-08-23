@@ -28,11 +28,28 @@ export default class VendorActions {
     VendorService.create(params);
   }
 
+  static update(id, params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_VENDOR_REQUEST,
+      id: id,
+      params: params
+    });
+    VendorService.update(id, params);
+  }
+
   static get(id) {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_VENDOR_REQUEST,
       id: id
     });
     VendorService.get(id);
+  }
+
+  static deleteVendors(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_VENDORS_REQUEST,
+      ids: ids
+    })
+    VendorService.delete(ids);
   }
 }

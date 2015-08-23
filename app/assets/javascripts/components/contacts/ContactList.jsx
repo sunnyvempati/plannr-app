@@ -52,6 +52,14 @@ const ContactList = React.createClass({
       {name: "type", grow: 5, header: "Type"}
     ];
   },
+  handleEdit: function(id) {
+    RouteActions.redirect('contact_edit', {id: id});
+  },
+  handleDelete: function(id) {
+    var deletionIds = !!id ? [id] : this.state.checkedItems;
+    ContactActions.deleteContacts(deletionIds);
+    this.setState({checkedItems: []});
+  },
   actionItems: function() {
     return [
       // global means the action is available as a mass action
@@ -65,8 +73,7 @@ const ContactList = React.createClass({
     ]
   },
   handleActionButtonClick: function() {
-    // to do
-    // RouteActions.redirect('events_new');
+    RouteActions.redirect('contact_new');
   },
   getActionButton: function () {
     return (

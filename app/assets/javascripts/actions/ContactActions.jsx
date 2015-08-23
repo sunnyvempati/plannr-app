@@ -28,11 +28,28 @@ export default class ContactActions {
     ContactService.create(params);
   }
 
+  static update(id, params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_CONTACT_REQUEST,
+      id: id,
+      params: params
+    });
+    ContactService.update(id, params);
+  }
+
   static get(id) {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_CONTACT_REQUEST,
       id: id
     });
     ContactService.get(id);
+  }
+
+  static deleteContacts(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_CONTACTS_REQUEST,
+      ids: ids
+    })
+    ContactService.delete(ids);
   }
 }

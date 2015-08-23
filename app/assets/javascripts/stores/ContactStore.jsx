@@ -94,6 +94,7 @@ _contactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (!action.errors) _contactStoreInstance.add(contact);
       _contactStoreInstance.emitChange();
       break;
+    case ActionTypes.UPDATE_CONTACT_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_CONTACT_SUCCESS_RESPONSE:
       _contactStoreInstance.add(action.entity);
       _contactStoreInstance.emitChange();
@@ -101,6 +102,12 @@ _contactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.SEARCH_CONTACTS_RESPONSE:
       if (!action.errors) {
         _contactStoreInstance.setSearchResults(action.contacts);
+        _contactStoreInstance.emitChange();
+      }
+      break;
+    case ActionTypes.DELETE_CONTACTS_RESPONSE:
+      if (!action.errors) {
+        _contactStoreInstance.removeContacts(action.ids);
         _contactStoreInstance.emitChange();
       }
       break;
