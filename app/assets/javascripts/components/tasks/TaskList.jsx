@@ -22,7 +22,7 @@ const TaskList = React.createClass({
     };
   },
   componentDidMount() {
-    this.props.setLayoutParams({header: "Tasks", skrollable: true});
+    // this.props.setLayoutParams({header: "Tasks", skrollable: true});
     TaskStore.addChangeListener(this._onViewTasksChange);
   },
   componentDidUpdate: function() {

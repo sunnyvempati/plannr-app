@@ -95,6 +95,7 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventStoreInstance.addEvents(action.events, action.params);
       }
       _eventStoreInstance.emitChange();
+      break;
     case ActionTypes.GET_CACHED_EVENTS_RESPONSE:
       _eventStoreInstance.addCachedEvents(action.params);
       _eventStoreInstance.emitChange();
@@ -104,7 +105,6 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventStoreInstance.setSearchResults(action.events);
         _eventStoreInstance.emitChange();
       }
-      break;
       break;
     case ActionTypes.GET_EVENT_RESPONSE:
     case ActionTypes.UPDATE_EVENT_RESPONSE:

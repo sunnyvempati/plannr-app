@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   # contacts
   resources :contacts, only: [:index, :create, :show]
 
+  # vendors
+  resources :vendors, only: [:index, :create, :show]
+
   # tasks
   resources :tasks, only: [:index, :create, :update, :show]
   post 'destroy_tasks', to:'tasks#mass_destroy'

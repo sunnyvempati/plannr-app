@@ -8,6 +8,7 @@ export default {
   },
   componentDidMount: function() {
     this.initializeFilterSort(this.defaultFilterSortParams());
+    this.fetchNextPage(1);
   },
   initializeFilterSort: function(defaultParams) {
     this.filterParams = defaultParams.filter;

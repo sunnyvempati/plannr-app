@@ -90,16 +90,19 @@ class ServerActions {
   }
 
   static receiveCreateContact(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_CONTACT_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_CONTACT_ERROR_RESPONSE;
+    let entity = json && json.contact;
     AppDispatcher.handleAction({
-      type: ActionTypes.CREATE_EVENT_CLIENT_RESPONSE,
-      json: json,
+      type: type,
+      entity: entity,
       errors: errors
     });
   }
 
-  static receiveEventClient(json, errors) {
+  static receiveGetContact(json, errors) {
     AppDispatcher.handleAction({
-      type: ActionTypes.GET_EVENT_CLIENT_RESPONSE,
+      type: ActionTypes.GET_CONTACT_RESPONSE,
       json: json,
       errors: errors
     });
@@ -180,6 +183,43 @@ class ServerActions {
     AppDispatcher.handleAction({
       type: ActionTypes.DELETE_TASK_RESPONSE,
       ids: ids,
+      errors: errors
+    });
+  }
+
+  static receiveGetContacts(contacts, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_CONTACTS_RESPONSE,
+      contacts: contacts,
+      params: params,
+      errors: errors
+    })
+  }
+
+  static receiveGetVendors(vendors, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_VENDORS_RESPONSE,
+      vendors: vendors,
+      params: params,
+      errors: errors
+    })
+  }
+
+  static receiveVendorSearch(vendors, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.SEARCH_VENDORS_RESPONSE,
+      vendors: vendors,
+      errors: errors
+    });
+  }
+
+  static receiveCreateVendor(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_VENDOR_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_VENDOR_ERROR_RESPONSE;
+    let entity = json && json.vendor;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
       errors: errors
     });
   }

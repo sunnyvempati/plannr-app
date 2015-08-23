@@ -3,6 +3,7 @@ import TableAction from './TableAction';
 import TableFilter from './TableFilter';
 import TableSort from './TableSort';
 import classNames from 'classnames';
+import CheckboxInput from './CheckboxInput';
 
 var Table = React.createClass({
   getDefaultProps: function() {

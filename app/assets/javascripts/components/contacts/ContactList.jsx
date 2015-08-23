@@ -1,12 +1,14 @@
+import RouteActions from '../../actions/RouteActions';
+import SessionActions from '../../actions/SessionActions';
 import TableCheckbox from '../mixins/TableCheckbox';
 import FilterSort from '../mixins/FilterSort';
 import InfiniteScrollMixin from '../mixins/InfiniteScrollMixin';
-import VendorActions from '../../actions/VendorActions';
-import VendorStore from '../../stores/VendorStore';
+import ContactActions from '../../actions/ContactActions';
+import ContactStore from '../../stores/ContactStore';
 import Table from '../generic/Table';
 import ActionButton from '../generic/ActionButton';
 
-const VendorList = React.createClass({
+const ContactList = React.createClass({
   mixins: [
     TableCheckbox,
     FilterSort,
@@ -18,28 +20,32 @@ const VendorList = React.createClass({
     };
   },
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Vendors", skrollable: true});
-    VendorStore.addChangeListener(this._onViewVendorsChange);
+    // this.props.setLayoutParams({header: "Contacts", skrollable: true});
+    ContactStore.addChangeListener(this._onViewContactsChange);
+    console.log(ContactStore);
   },
   componentDidUpdate: function() {
-    if (!VendorStore.vendorsLoaded || this.nextPage == 1) this.attachScrollListener();
+    if (!ContactStore.contactsLoaded || this.nextPage == 1) this.attachScrollListener();
   },
   componentWillUnmount() {
-    VendorStore.removeChangeListener(this._onViewVendorsChange);
+    ContactStore.removeChangeListener(this._onViewContactsChange);
   },
-  _onViewVendorsChange() {
-    this.setState({data: VendorStore.viewVendors});
+  _onViewContactsChange() {
+    console.log("CHANGE");
+    this.setState({data: ContactStore.viewContacts});
   },
   fetchNextPage: function(nextPage) {
     this.page = nextPage;
     var params = this.mergeParams();
-    VendorActions.getVendors(params);
+    ContactActions.getContacts(params);
   },
   getColumns: function() {
     return [
       {name: "name", grow: 10, header: "Name"},
-      {name: "location", grow: 10, header: "Location"},
+      {name: "email", grow: 10, header: "Email"},
       {name: "phone", grow: 5, header: "Phone"},
+      {name: "company", grow: 10, header: "Company"},
+      {name: "type", grow: 5, header: "Type"}
     ];
   },
   actionItems: function() {
@@ -61,14 +67,14 @@ const VendorList = React.createClass({
   getActionButton: function () {
     return (
       <ActionButton handleClick={this.handleActionButtonClick}
-                    label='Add Vendor'
-                    svgClass='createVendor'
+                    label='Add Contact'
+                    svgClass='createContact'
                     extraPad={false} />
     );
   },
-  goToVendor: function(data) {
+  goToContact: function(data) {
     // to do
-    // this.transitionTo('vendor', {id: data.id, currentUser: this.props.currentUser});
+    // this.transitionTo('contact', {id: data.id, currentUser: this.props.currentUser});
   },
   render: function() {
     return (
@@ -76,7 +82,6 @@ const VendorList = React.createClass({
         results={this.state.data}
         columns={this.getColumns()}
         useCustomRowComponent={false}
-        showHeaders={true}
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
         sortItems={this.sortItems()}
@@ -85,8 +90,9 @@ const VendorList = React.createClass({
         showActions={this.state.checkedItems.length > 0}
         actionItems={this.actionItems()}
         extraPadding={true}
-        searchPlaceholder="Search Vendors..."
-        onClick={this.goToVendor}
+        showHeaders={true}
+        searchPlaceholder="Search Contacts..."
+        onClick={this.goToContact}
         actionButton={this.getActionButton()}
         handleCheckAllChanged={this.toggleCheckAll}
       />
@@ -94,4 +100,4 @@ const VendorList = React.createClass({
   }
 });
 
-export default VendorList;
+export default ContactList;

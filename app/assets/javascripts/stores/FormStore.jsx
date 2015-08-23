@@ -5,6 +5,7 @@ import SessionStore from './SessionStore';
 import UserStore from './UserStore';
 import EventStore from './EventStore';
 import ContactStore from './ContactStore';
+import VendorStore from './VendorStore';
 import TaskStore from './TaskStore';
 
 class FormStore extends BaseStore {
@@ -30,6 +31,7 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     UserStore.dispatchToken,
     EventStore.dispatchToken,
     ContactStore.dispatchToken,
+    VendorStore.dispatchToken,
     TaskStore.dispatchToken
   ]);
 
@@ -49,6 +51,7 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         else _formStoreInstance.clear();
       _formStoreInstance.emitChange();
       break;
+    case ActionTypes.CREATE_CONTACT_RESPONSE:
     case ActionTypes.UPDATE_TASK_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_TASK_SUCCESS_RESPONSE:
       _formStoreInstance.entity = action.entity;

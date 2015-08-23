@@ -2,7 +2,7 @@ import FormInputClassesMixin from '../mixins/FormInputClassesMixin';
 import AutocompleteInput from '../mixins/AutocompleteInput';
 import ContactActions from '../../actions/ContactActions';
 import ContactStore from '../../stores/ContactStore';
-import EventContactStore from '../../stores/EventContactStore';
+import FormStore from '../../stores/FormStore';
 
 var EventClientInput = React.createClass({
   mixins: [
@@ -10,32 +10,37 @@ var EventClientInput = React.createClass({
     AutocompleteInput
   ],
   componentDidMount() {
-    ContactStore.addChangeListener(this._onSearchItemsChange);
-    EventContactStore.addChangeListener(this._eventClientChange);
+    ContactStore.addChangeListener(this._onContactChange);
+    FormStore.addChangeListener(this._onCreateEventClientChange);
   },
   componentWillUnmount() {
-    ContactStore.removeChangeListener(this._onSearchItemsChange);
-    EventContactStore.addChangeListener(this._eventClientChange);
+    ContactStore.removeChangeListener(this._onContactChange);
+    FormStore.addChangeListener(this._onCreateEventClientChange);
   },
-  _onSearchItemsChange() {
+  _onContactChange() {
     let returnedContacts = ContactStore.searchResults;
     if (!returnedContacts.length) returnedContacts.push({name: 'Create new contact', id: -1});
-    this.setState({items: returnedContacts});
+    let id = this.getValue();
+    let itemFound = !!id && ContactStore.get(id);
+    this.setState({
+      items: returnedContacts,
+      itemSet: !!itemFound,
+      itemDisplay: itemFound && itemFound.name
+    });
   },
-  _eventClientChange() {
-    let eventClient = EventContactStore.eventClient;
-    if (eventClient) {
-      let clientName = ContactStore.getContact(eventClient.contact_id).name;
-      this.setState({itemSet: true, itemDisplay: clientName});
+  _onCreateEventClientChange() {
+    if (!FormStore.errors) {
+      let eventClientName = FormStore.entity.name;
+      this.setValue(FormStore.entity.id);
+      this.setState({itemSet: true, itemDisplay: eventClientName});
     }
   },
   retrieveItem: function(id) {
-    if (id) {
-      let client = ContactStore.getContact(id), itemDisplay = "";
-      if (client) {
-        itemDisplay = client.name
-      } else ContactActions.getEventClient(id);
-    }
+    let client = ContactStore.get(id);
+    if (client) {
+      this.setState({itemSet: true, itemDisplay: client.name});
+      itemDisplay = client.name
+    } else ContactActions.get(id);
   },
   retrieveData: function(term) {
     var params = {

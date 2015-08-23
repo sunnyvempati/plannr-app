@@ -6,9 +6,13 @@ import Authenticated from './components/Authenticated';
 import EventList from './components/events/EventList';
 import EventFormNew from './components/events/EventFormNew';
 import EventRouter from './components/events/EventRouter';
-import ContactList from './components/contacts/ContactsList';
-import VendorList from './components/vendors/VendorList';
 import TaskList from './components/tasks/TaskList';
+import Contacts from './components/contacts/Contacts';
+import Contact from './components/contacts/Contact';
+import ContactList from './components/contacts/ContactList';
+import Vendors from './components/vendors/Vendors';
+import Vendor from './components/vendors/Vendor';
+import VendorList from './components/vendors/VendorList';
 import LoginForm from './components/session/LoginForm';
 import SignUpForm from './components/session/SignUpForm';
 import ResetPasswordForm from './components/session/ResetPasswordForm';
@@ -16,6 +20,7 @@ import ResetPasswordRequestForm from './components/session/ResetPasswordRequestF
 import ProfileForm from './components/session/ProfileForm';
 import CheckEmail from './components/session/CheckEmail';
 import Verify from './components/session/Verify';
+
 
 export default (
   <Route name="app" path="/" handler={App}>
@@ -25,9 +30,15 @@ export default (
       <Route name="events_list" path="/events" handler={EventList} />
       <Route name="events_new" path="/events/new" handler={EventFormNew} />
       <Route name="event" path="/events/:id" handler={EventRouter} />
-      <Route name="contacts" path="/contacts" handler={ContactList} />
+      <Route name="contacts" path="/contacts" handler={Contacts}>
+        <Route name="contact" path=":id" handler={Contact} />
+        <DefaultRoute handler={ContactList} />
+      </Route>
+      <Route name="vendors" path="/vendors" handler={Vendors}>
+        <Route name="vendor" path=":id" handler={Vendor} />
+        <DefaultRoute handler={VendorList} />
+      </Route>
       <Route name="tasks" path="/tasks" handler={TaskList} />
-      <Route name="vendors" path="/vendors" handler={VendorList} />
     </Route>
     <Route handler={Public}>
       <Route name="login" path="/login" handler={LoginForm} />

@@ -3,20 +3,20 @@ import {Utils} from './Utils';
 import ServerActions from '../actions/ServerActions';
 import {APIEndpoints} from '../constants/AppConstants';
 
-class ContactService {
-  static getContacts(params) {
+class VendorService {
+  static getVendors(params) {
     request
-      .get(APIEndpoints.GET_CONTACTS)
+      .get(APIEndpoints.GET_VENDORS)
       .query(params)
       .set('Accept', 'application/json')
       .end((error, res) => {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveGetContacts(json.contacts, params, null);
+            ServerActions.receiveGetVendors(json.vendors, params, null);
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveGetContacts(null, null, errors);
+            ServerActions.receiveGetVendors(null, null, errors);
           }
         }
       });
@@ -24,17 +24,17 @@ class ContactService {
 
   static search(params) {
     request
-      .get(APIEndpoints.GET_CONTACTS)
+      .get(APIEndpoints.GET_VENDORS)
       .query(params)
       .set('Accept', 'application/json')
       .end((error, res) => {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveContactSearch(json.contacts);
+            ServerActions.receiveVendorSearch(json.vendors);
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveContactSearch(null, errors);
+            ServerActions.receiveVendorSearch(null, errors);
           }
         }
       });
@@ -42,17 +42,17 @@ class ContactService {
 
   static create(params) {
     request
-      .post(APIEndpoints.CREATE_CONTACT)
+      .post(APIEndpoints.CREATE_VENDOR)
       .send(params)
       .use(Utils.addAuthToken)
       .end((error, res) => {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveCreateContact(json);
+            ServerActions.receiveCreateVendor(json);
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveCreateContact(null, errors);
+            ServerActions.receiveCreateVendor(null, errors);
           }
         }
       });
@@ -60,19 +60,19 @@ class ContactService {
 
   static get(id) {
     request
-      .get(APIEndpoints.GET_CONTACT + id)
+      .get(APIEndpoints.GET_VENDOR + id)
       .end((error, res) => {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveGetContact(json);
+            ServerActions.receiveGetVendor(json);
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveGetContact(null, errors);
+            ServerActions.receiveGetVendor(null, errors);
           }
         }
       });
   }
 }
 
-export default ContactService;
+export default VendorService;
