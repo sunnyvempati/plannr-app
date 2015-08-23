@@ -17,8 +17,6 @@ postgres:
 
 elasticsearch:
   image: elasticsearch:1.7
-  volumes_from:
-    - elasticsearch_data
   ports:
     - "9200:9200"
     - "9300:9300"
@@ -48,8 +46,8 @@ nginx:
 
 plannr-app:
   build: ./
-  # volumes:
-  #   - .:/home/app/plannr
+  volumes:
+    - .:/home/app/plannr
   links:
     - postgres:postgres
     - elasticsearch:elasticsearch
