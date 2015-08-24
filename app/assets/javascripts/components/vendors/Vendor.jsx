@@ -6,6 +6,7 @@ import RouteActions from '../../actions/RouteActions';
 import VendorCards from './VendorCards';
 import AssociatedEventsCard from '../mixins/AssociatedEventsCard';
 import {Link} from 'react-router';
+import Comments from '../comments/Comments';
 
 var Vendor = React.createClass({
   mixins: [VendorCards, AssociatedEventsCard],
@@ -54,7 +55,8 @@ var Vendor = React.createClass({
       <div className="Card">
         <div className="Card-title">Comments</div>
         <div className="Card-content">
-          To do
+          <Comments entity="Vendor"
+                    entity_id={this.props.params.id} />
         </div>
       </div>
     )

@@ -117,9 +117,12 @@ class ServerActions {
   }
 
   static receiveCreateEvent(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_EVENT_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_EVENT_ERROR_RESPONSE;
+    let entity = json && json.event;
     AppDispatcher.handleAction({
-      type: ActionTypes.CREATE_EVENT_RESPONSE,
-      json: json,
+      type: type,
+      entity: entity,
       errors: errors
     });
   }
@@ -133,9 +136,12 @@ class ServerActions {
   }
 
   static receiveUpdateEvent(json, errors) {
+    let type = !errors ? ActionTypes.UPDATE_EVENT_SUCCESS_RESPONSE :
+                         ActionTypes.UPDATE_EVENT_ERROR_RESPONSE;
+    let entity = json && json.event;
     AppDispatcher.handleAction({
-      type: ActionTypes.UPDATE_EVENT_RESPONSE,
-      json: json,
+      type: type,
+      entity: entity,
       errors: errors
     });
   }

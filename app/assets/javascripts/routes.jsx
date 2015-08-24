@@ -5,6 +5,7 @@ import Public from './components/Public';
 import Authenticated from './components/Authenticated';
 import EventList from './components/events/EventList';
 import EventFormNew from './components/events/EventFormNew';
+import EventFormEdit from './components/events/EventFormEdit';
 import TaskList from './components/tasks/TaskList';
 import Contacts from './components/contacts/Contacts';
 import Contact from './components/contacts/Contact';
@@ -38,14 +39,15 @@ export default (
     <Route handler={Authenticated}>
       <Route name="events" path="/" handler={EventList} />
       <Route name="events_list" path="/events" handler={EventList} />
-      <Route name="events_new" path="/events/new" handler={EventFormNew} />
-      <Route name="event" path="/events/:id" handler={EventDashboard}>
-        <Route name="event_contacts" path="contacts" handler={EventContactList} />
-        <Route name="event_tasks" path="tasks" handler={EventTaskList} />
-        <Route name="event_attachments" path="attachments" handler={EventAttachmentList} />
-        <Route name="event_vendors" path="vendors" handler={EventVendorList} />
-        <Route name="event_comments" path="comments" handler={EventComments} />
-        <DefaultRoute name="event_app" handler={EventApp} />
+      <Route name="event_new" path="/events/new" handler={EventFormNew} />
+      <Route name="event_edit" path="/edit_event/:id" handler={EventFormEdit} />
+      <Route name="event" path="/events/:id" handler={EventDashboard} ignoreScrollBehavior>
+        <Route name="event_contacts" path="contacts" handler={EventContactList} ignoreScrollBehavior />
+        <Route name="event_tasks" path="tasks" handler={EventTaskList} ignoreScrollBehavior />
+        <Route name="event_attachments" path="attachments" handler={EventAttachmentList} ignoreScrollBehavior />
+        <Route name="event_vendors" path="vendors" handler={EventVendorList} ignoreScrollBehavior />
+        <Route name="event_comments" path="comments" handler={EventComments} ignoreScrollBehavior />
+        <DefaultRoute name="event_app" handler={EventApp} ignoreScrollBehavior />
       </Route>
       <Route name="contacts" path="/contacts" handler={Contacts}>
         <Route name="contact" path=":id" handler={Contact} />

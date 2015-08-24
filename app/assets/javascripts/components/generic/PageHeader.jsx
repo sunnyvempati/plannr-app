@@ -28,6 +28,7 @@ var PageHeader = React.createClass({
   },
   render: function() {
     if (this.props.skrollable) this.enableSkrollrHeader();
+    // to do disable else
     return (
       <div id="mainHeader"
            className="PageHeader">

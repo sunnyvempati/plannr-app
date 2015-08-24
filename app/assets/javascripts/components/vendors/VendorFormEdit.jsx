@@ -1,6 +1,7 @@
 import VendorForm from './VendorForm';
 import VendorStore from '../../stores/VendorStore';
 import VendorActions from '../../actions/VendorActions';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 var VendorFormEdit = React.createClass({
   getVendorState() {
@@ -12,6 +13,7 @@ var VendorFormEdit = React.createClass({
     return this.getVendorState();
   },
   componentDidMount() {
+    PageTitleActions.setPageTitle("Edit Vendor", true);
     VendorStore.addChangeListener(this._onChange);
     if (!this.state.vendor) VendorActions.get(this.props.params.id);
   },

@@ -6,6 +6,7 @@ import RouteActions from '../../actions/RouteActions';
 import ContactCards from './ContactCards';
 import AssociatedEventsCard from '../mixins/AssociatedEventsCard';
 import {Link} from 'react-router';
+import Comments from '../comments/Comments';
 
 var Contact = React.createClass({
   mixins: [ContactCards, AssociatedEventsCard],
@@ -54,7 +55,8 @@ var Contact = React.createClass({
       <div className="Card">
         <div className="Card-title">Comments</div>
         <div className="Card-content">
-          To do
+          <Comments entity="Contact"
+                    entity_id={this.props.params.id} />
         </div>
       </div>
     )

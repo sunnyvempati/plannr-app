@@ -47,8 +47,6 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.RESET_PASSWORD_REQUEST_RESPONSE:
     case ActionTypes.RESET_PASSWORD_RESPONSE:
     case ActionTypes.SIGNUP_RESPONSE:
-    case ActionTypes.UPDATE_EVENT_RESPONSE:
-    case ActionTypes.CREATE_EVENT_RESPONSE:
     case ActionTypes.CREATE_EVENT_CONTACT_RESPONSE:
     case ActionTypes.CREATE_EVENT_VENDOR_RESPONSE:
       let errors = action.errors;
@@ -56,16 +54,20 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         else _formStoreInstance.clear();
       _formStoreInstance.emitChange();
       break;
+    case ActionTypes.UPDATE_EVENT_SUCCESS_RESPONSE:
     case ActionTypes.UPDATE_TASK_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_TASK_SUCCESS_RESPONSE:
     case ActionTypes.UPDATE_VENDOR_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_VENDOR_SUCCESS_RESPONSE:
     case ActionTypes.UPDATE_CONTACT_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_CONTACT_SUCCESS_RESPONSE:
+    case ActionTypes.CREATE_EVENT_SUCCESS_RESPONSE:
       _formStoreInstance.entity = action.entity;
       _formStoreInstance.errors = null;
       _formStoreInstance.emitChange();
       break;
+    case ActionTypes.UPDATE_EVENT_ERROR_RESPONSE:
+    case ActionTypes.CREATE_EVENT_ERROR_RESPONSE:
     case ActionTypes.CREATE_CONTACT_ERROR_RESPONSE:
     case ActionTypes.CREATE_VENDOR_ERROR_RESPONSE:
     case ActionTypes.UPDATE_TASK_ERROR_RESPONSE:

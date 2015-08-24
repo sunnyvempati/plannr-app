@@ -1,5 +1,6 @@
 import {RouteHandler} from 'react-router';
 import SessionStore from '../stores/SessionStore';
+import PageTitleStore from '../stores/PageTitleStore';
 import RouteActions from '../actions/RouteActions';
 import UserActions from '../actions/UserActions';
 import UserStore from '../stores/UserStore';
@@ -13,6 +14,20 @@ export default AuthenticatedComponent(
     constructor() {
       super();
       this.state = {header: null, skrollable: false};
+      this._onPageTitleChange = this._onPageTitleChange.bind(this);
+    }
+
+    componentDidMount() {
+      PageTitleStore.addChangeListener(this._onPageTitleChange);
+    }
+
+    componentWillUnmount() {
+      PageTitleStore.removeChangeListener(this._onPageTitleChange);
+    }
+
+    _onPageTitleChange() {
+      let header = PageTitleStore.header, skrollable = PageTitleStore.skrollable;
+      this.setState({header: header, skrollable: skrollable});
     }
 
     _closeMenu() {

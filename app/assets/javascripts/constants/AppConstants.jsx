@@ -85,9 +85,11 @@ const AppConstants = {
     SEARCH_EVENTS_REQUEST: null,
     SEARCH_EVENTS_RESPONSE: null,
     CREATE_EVENT_REQUEST: null,
-    CREATE_EVENT_RESPONSE: null,
+    CREATE_EVENT_SUCCESS_RESPONSE: null,
+    CREATE_EVENT_ERROR_RESPONSE: null,
     UPDATE_EVENT_REQUEST: null,
-    UPDATE_EVENT_RESPONSE: null,
+    UPDATE_EVENT_SUCCESS_RESPONSE: null,
+    UPDATE_EVENT_ERROR_RESPONSE: null,
 
     // Contacts
     SEARCH_CONTACTS_REQUEST: null,
@@ -165,6 +167,9 @@ const AppConstants = {
     UPDATE_COMMENT_RESPONSE: null,
     GET_COMMENTS_RESPONSE: null,
     DELETE_COMMENT_RESPONSE: null,
+
+    // Page Title
+    SET_PAGE_TITLE: null,
 
     // Toast
     TOAST_MESSAGE: null,

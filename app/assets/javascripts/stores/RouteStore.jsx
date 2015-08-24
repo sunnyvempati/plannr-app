@@ -76,11 +76,6 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       break;
 
-    case ActionTypes.CREATE_EVENT_RESPONSE:
-      let event = action.json && action.json.event;
-      if (!action.errors && event) router.transitionTo('event', {id: event.id});
-      break;
-
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) {
         router.transitionTo('login');

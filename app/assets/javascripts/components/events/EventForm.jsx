@@ -20,9 +20,11 @@ var EventForm = React.createClass({
   ],
   getInitialState: function() {
     return {
-      startDate: this.props.model.start_date ? moment(this.props.model.start_date) : null,
       model: this.props.model
     };
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({model: nextProps.model});
   },
   mapInputs: function (inputs) {
     return {
@@ -39,10 +41,15 @@ var EventForm = React.createClass({
     };
   },
   setStartDate: function(date) {
-    this.setState({startDate: date});
+    let model = this.state.model;
+    model.start_date = date;
+    this.setState({model: model});
   },
   onSecondaryClick: function() {
     RouteActions.redirect('events');
+  },
+  onSuccess: function (result) {
+    RouteActions.redirect('event', {id: result.id});
   },
   massageDataAndSubmit: function(data, reset, invalidate) {
     data.event.start_date = data.event.start_date && data.event.start_date.format();
@@ -50,7 +57,7 @@ var EventForm = React.createClass({
     var budget = data.event.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
-    this.props.type == "NEW" ? EventActions.create(data) : EventActions.update(data);
+    this.props.type == "NEW" ? EventActions.create(data) : EventActions.update(this.props.model && this.props.model.id, data);
   },
   setEventState: function(item) {
     var eventTemplate = {
@@ -74,7 +81,18 @@ var EventForm = React.createClass({
   },
   render: function () {
     var id = 'event_form';
-    var endDate = this.props.model.end_date ? moment(this.props.model.end_date) : null;
+    let model = this.state.model, event = {};
+    if (model) {
+      event = {
+        name: model.name,
+        start_date: model.start_date ? moment(model.start_date) : null,
+        end_date: model.end_date ? moment(model.end_date) : null,
+        location: model.location,
+        client_id: model.client_id,
+        budget: model.budget,
+        description: model.description
+      };
+    }
     var primaryButtonText = this.props.type == "NEW" ? "Create" : "Update";
     return (
       <div className="FormContainer--leftAligned">
@@ -93,13 +111,13 @@ var EventForm = React.createClass({
             placeholder="Give it a unique name"
             type="text"
             label="Name*"
-            value={this.state.model.name}
+            value={event.name}
             required
           />
           <DatePickerInput
             name="start_date"
             label="Start Date"
-            value={this.state.startDate}
+            value={event.start_date}
             placeholder="When does it start?"
             onValueSet={this.setStartDate}
             minDate={moment()}
@@ -107,21 +125,21 @@ var EventForm = React.createClass({
           <DatePickerInput
             name="end_date"
             label="End Date"
-            value={endDate}
+            value={event.end_date}
             placeholder="When does it end?"
-            minDate={this.state.startDate}
+            minDate={event.start_date}
           />
           <FormInput
             name="location"
             id="event_location"
             type="text"
             label="Location"
-            value={this.state.model.location}
+            value={event.location}
             placeholder="Where will it be held?"
           />
           <EventClientInput
             name='client'
-            value={this.state.model.client_id}
+            value={event.client_id}
             id='event_client'
             label='Client' />
           <FormInput
@@ -129,14 +147,14 @@ var EventForm = React.createClass({
             id="event_budget"
             type="text"
             label="Budget"
-            value={this.state.model.budget}
+            value={event.budget}
             placeholder="How much will it cost?"
             validations="isCurrency"
           />
           <TextAreaInput
             name="description"
             form={id}
-            value={this.state.model.description}
+            value={event.description}
             label="Description"
             placeholder="What else do you need to know?"
           />

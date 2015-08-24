@@ -2,6 +2,7 @@ import {RouteHandler, Link, State} from 'react-router';
 import EventStore from '../../stores/EventStore';
 import RouteStore from '../../stores/RouteStore';
 import EventActions from '../../actions/EventActions';
+import PageTitleActions from '../../actions/PageTitleActions';
 import Event from './Event';
 import classNames from 'classnames';
 
@@ -26,6 +27,7 @@ var EventDashboard = React.createClass({
     EventStore.addChangeListener(this._onEventChange);
     let id = this.props.params.id;
     let event = EventStore.get(id);
+    PageTitleActions.setPageTitle(event && event.name, false);
     if (event) this.setState({event: event});
     else EventActions.get(id);
   },
@@ -33,7 +35,9 @@ var EventDashboard = React.createClass({
     EventStore.removeChangeListener(this._onEventChange);
   },
   _onEventChange() {
-    this.setState({event: EventStore.get(this.props.params.id)});
+    let event = EventStore.get(this.props.params.id);
+    PageTitleActions.setPageTitle(event.name, false);
+    this.setState({event: event});
   },
   getNavTitle() {
     let header = "";
@@ -52,6 +56,9 @@ var EventDashboard = React.createClass({
         break;
       case this.isActive('event_attachments'):
         header = "Attachments";
+        break;
+      case this.isActive('event_comments'):
+        header = "Comments";
         break;
       default:
     }

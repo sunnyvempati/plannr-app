@@ -38,3 +38,8 @@
 .Event-desc {
   @include font($body-1-font, normal, 0);
 }
+
+.EventEditIcon {
+  font-size: 24px;
+  color: rgba(255,255,255,0.87);
+}

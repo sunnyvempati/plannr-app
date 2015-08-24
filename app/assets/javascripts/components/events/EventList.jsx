@@ -7,6 +7,7 @@ import InfiniteScrollMixin from '../mixins/InfiniteScrollMixin';
 import Table from '../generic/Table';
 import ActionButton from '../generic/ActionButton';
 import EventRow from './EventRow';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 const EventList = React.createClass({
   mixins: [
@@ -20,6 +21,7 @@ const EventList = React.createClass({
     };
   },
   componentDidMount() {
+    PageTitleActions.setPageTitle("Events", true);
     EventStore.addChangeListener(this._onViewEventsChange);
   },
   componentDidUpdate: function() {
@@ -80,7 +82,7 @@ const EventList = React.createClass({
     ]
   },
   handleActionButtonClick: function() {
-    RouteActions.redirect('events_new');
+    RouteActions.redirect('event_new');
   },
   getActionButton: function () {
     return (

@@ -1,8 +1,9 @@
 import EventForm from './EventForm';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 class EventFormNew extends React.Component {
   componentDidMount() {
-    this.props.setLayoutParams({header: "Create Event", skrollable: true});
+    PageTitleActions.setPageTitle("Create Event", true);
   }
 
   render() {

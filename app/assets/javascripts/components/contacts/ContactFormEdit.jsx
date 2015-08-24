@@ -1,6 +1,7 @@
 import ContactForm from './ContactForm';
 import ContactStore from '../../stores/ContactStore';
 import ContactActions from '../../actions/ContactActions';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 var ContactFormEdit = React.createClass({
   getContactState() {
@@ -12,6 +13,7 @@ var ContactFormEdit = React.createClass({
     return this.getContactState();
   },
   componentDidMount() {
+    PageTitleActions.setPageTitle("Edit Contact", true);
     ContactStore.addChangeListener(this._onChange);
     if (!this.state.contact) ContactActions.get(this.props.params.id);
   },

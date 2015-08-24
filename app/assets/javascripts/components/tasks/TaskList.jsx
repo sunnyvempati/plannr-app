@@ -8,6 +8,7 @@ import Table from '../generic/Table';
 import ActionButton from '../generic/ActionButton';
 import TaskCheckboxRows from './TaskCheckboxRows';
 import SessionStore from '../../stores/SessionStore';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 const TaskList = React.createClass({
   mixins: [
@@ -22,7 +23,7 @@ const TaskList = React.createClass({
     };
   },
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Tasks", skrollable: true});
+    PageTitleActions.setPageTitle("Tasks", true);
     TaskStore.addChangeListener(this._onViewTasksChange);
   },
   componentDidUpdate: function() {

@@ -1,8 +1,9 @@
 import VendorForm from './VendorForm';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 class VendorFormNew extends React.Component {
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Create Event", skrollable: true});
+    PageTitleActions.setPageTitle("Vendors", true);
   }
 
   render() {

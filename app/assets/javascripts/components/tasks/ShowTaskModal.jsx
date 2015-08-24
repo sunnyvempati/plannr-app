@@ -4,6 +4,7 @@ import TaskDeadline from './TaskDeadline';
 import Button from '../generic/Button';
 import CheckboxInput from '../generic/CheckboxInput';
 import TaskStore from '../../stores/TaskStore';
+import Comments from '../comments/Comments';
 
 var ShowTaskModal = React.createClass({
   mixins: [ModalMixin],
@@ -88,7 +89,8 @@ var ShowTaskModal = React.createClass({
         </div>
         <div className="Card">
           <div className="Card-content">
-            Comments to do
+            <Comments entity="Task"
+                      entity_id={task.id} />
           </div>
         </div>
       </div>

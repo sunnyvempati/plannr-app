@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import ReactIntl from 'react-intl';
+import {Link} from 'react-router';
 
 var Event = React.createClass({
   getDefaultProps: function() {
@@ -107,9 +108,9 @@ var Event = React.createClass({
           </div>
           <div className={editClasses}>
             <div className="Edit-btn">
-              <button className="Button Button--simple" onClick={this.editEvent.bind(this, event.id)}>
-                Edit
-              </button>
+              <Link to='event_edit' params={{id: event && event.id || 0}}>
+                <i className="fa fa-pencil EventEditIcon"></i>
+              </Link>
             </div>
           </div>
         </div>

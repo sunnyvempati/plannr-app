@@ -103,10 +103,13 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       break;
     case ActionTypes.GET_EVENT_RESPONSE:
-    case ActionTypes.UPDATE_EVENT_RESPONSE:
-    case ActionTypes.CREATE_EVENT_RESPONSE:
       let event = action.json && action.json.event;
       if (event) _eventStoreInstance.addEvent(event);
+      _eventStoreInstance.emitChange();
+      break;
+    case ActionTypes.UPDATE_EVENT_SUCCESS_RESPONSE:
+    case ActionTypes.CREATE_EVENT_SUCCESS_RESPONSE:
+      _eventStoreInstance.addEvent(action.entity);
       _eventStoreInstance.emitChange();
       break;
     case ActionTypes.DELETE_EVENT_RESPONSE:

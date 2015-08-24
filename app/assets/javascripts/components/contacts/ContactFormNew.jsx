@@ -1,8 +1,9 @@
 import ContactForm from './ContactForm';
+import PageTitleActions from '../../actions/PageTitleActions';
 
 class ContactFormNew extends React.Component {
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Create Event", skrollable: true});
+    PageTitleActions.setPageTitle("Create Contact", true);
   }
 
   render() {
