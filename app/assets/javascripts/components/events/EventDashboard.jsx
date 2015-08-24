@@ -18,7 +18,8 @@ var EventDashboard = React.createClass({
       {to: "event_tasks", title: 'tasks', iconClass: "fa fa-check"},
       {to: "event_contacts", title: 'contacts', iconClass: "fa fa-book"},
       {to: "event_vendors", title: 'vendors', iconClass: "fa fa-truck"},
-      {to: "event_attachments", title: 'attachments', iconClass: "fa fa-paperclip"}
+      {to: "event_attachments", title: 'attachments', iconClass: "fa fa-paperclip"},
+      {to: "event_comments", title: 'comments', iconClass: "fa fa-comments"}
     ]
   },
   componentDidMount: function() {

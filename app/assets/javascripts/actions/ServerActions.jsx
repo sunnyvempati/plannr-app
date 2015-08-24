@@ -319,6 +319,41 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveComments(comments, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_COMMENTS_RESPONSE,
+      comments: comments,
+      params: params,
+      errors: errors
+    })
+  }
+
+  static receiveUpdateComment(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_COMMENT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteComment(id, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_COMMENT_RESPONSE,
+      id: id,
+      params: params,
+      errors: errors
+    });
+  }
+
+  static receiveCreateComment(json, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.CREATE_COMMENT_RESPONSE,
+      json: json,
+      params: params,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

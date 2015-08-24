@@ -36,7 +36,11 @@ const AppConstants = {
     DELETE_EVENT_VENDORS:       '/destroy_event_vendors',
     GET_EVENT_VENDORS:          '/event_vendors',
     CREATE_EVENT_VENDOR:        '/event_vendors',
-    CREATE_ATTACHMENT:          '/attachments'
+    CREATE_ATTACHMENT:          '/attachments',
+    CREATE_COMMENT:             '/comments',
+    UPDATE_COMMENT:             '/comments/',
+    GET_COMMENTS:               '/comments',
+    DELETE_COMMENT:             '/comments/'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -151,6 +155,16 @@ const AppConstants = {
     // Attachments
     CREATE_ATTACHMENT_REQUEST: null,
     CREATE_ATTACHMENT_RESPONSE: null,
+
+    // Comments
+    CREATE_COMMENT_REQUEST: null,
+    UPDATE_COMMENT_REQUEST: null,
+    GET_COMMENTS_REQUEST: null,
+    DELETE_COMMENT_REQUEST: null,
+    CREATE_COMMENT_RESPONSE: null,
+    UPDATE_COMMENT_RESPONSE: null,
+    GET_COMMENTS_RESPONSE: null,
+    DELETE_COMMENT_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,

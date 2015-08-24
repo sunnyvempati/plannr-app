@@ -5,7 +5,6 @@ import EventContactStore from '../../stores/EventContactStore';
 var ShowContactModal = React.createClass({
   mixins: [ModalMixin, ContactCards],
   renderModalContent: function() {
-    console.log(this.props);
     var contact = EventContactStore.getContact(this.props.id);
     if (contact) {
       var contactHref = "/#/contacts/"+contact.id;

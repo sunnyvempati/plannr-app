@@ -52,6 +52,9 @@ Rails.application.routes.draw do
   # attachments
   resources :attachments, only: [:index, :create]
 
+  # comments
+  resources :comments, only: [:index, :create, :update, :destroy]
+
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'
 

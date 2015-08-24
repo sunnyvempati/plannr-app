@@ -20,6 +20,14 @@ class CacheStore {
     return this._contexts[JSON.stringify(params)];
   }
 
+  removeItem(id, params) {
+    let items = this._contexts[JSON.stringify(params)];
+    items.forEach((item, i) => {
+      if (item == id) items.splice(i, 1);
+    });
+    return items;
+  }
+
   spliceAndClear(params) {
     let contextIds = this._contexts[JSON.stringify(params)];
     ids.map((id) => {

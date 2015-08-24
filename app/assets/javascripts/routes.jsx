@@ -29,6 +29,7 @@ import EventContactList from './components/event_contacts/EventContactList';
 import EventTaskList from './components/event_tasks/EventTaskList';
 import EventAttachmentList from './components/events/EventAttachmentList';
 import EventVendorList from './components/event_vendors/EventVendorList';
+import EventComments from './components/events/EventComments';
 
 
 export default (
@@ -43,6 +44,7 @@ export default (
         <Route name="event_tasks" path="tasks" handler={EventTaskList} />
         <Route name="event_attachments" path="attachments" handler={EventAttachmentList} />
         <Route name="event_vendors" path="vendors" handler={EventVendorList} />
+        <Route name="event_comments" path="comments" handler={EventComments} />
         <DefaultRoute name="event_app" handler={EventApp} />
       </Route>
       <Route name="contacts" path="/contacts" handler={Contacts}>

@@ -3,11 +3,6 @@ import EventContactAutocomplete from './EventContactAutocomplete';
 
 var AddContactModal = React.createClass({
   mixins: [ModalMixin],
-  closeAndRefreshData: function() {
-    console.log("CLOSE AND REFRESH?");
-    this.closeModal();
-    this.props.refreshData();
-  },
   renderModalContent: function() {
     return (
       <div className="AddEntityModal">
