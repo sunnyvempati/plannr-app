@@ -8,8 +8,8 @@
 ---
 postgres:
   image: postgres:9.4.2
-  expose:
-    - "5432"
+  ports:
+    - "5432:5432"
   volumes:
     - ./docker_compose/postgres-setup:/docker-entrypoint-initdb.d
   environment:
@@ -21,6 +21,25 @@ elasticsearch:
     - "9200:9200"
     - "9300:9300"
   command: '-Des.http.cors.enabled=true'
+
+influxdb:
+  image: tutum/influxdb:latest
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+  environment:
+    PRE_CREATE_DB: "metrics"
+    ADMIN_USER: "admin"
+    INFLUXDB_INIT_PWD: "plannr12"
+
+grafana:
+  image: grafana/grafana
+  ports:
+    - "3001:3000"
+  links:
+    - influxdb
+  environment:
+    GF_SECURITY_ADMIN_PASSWORD: "plannr12"
 
 logstash:
   image: docker.yourplannr.com/logstash-plannr:latest
@@ -48,10 +67,12 @@ plannr-app:
   build: ./
   volumes:
     - .:/home/app/plannr
+    - ~/projects/hallmonitor:/home/projects/hallmonitor
   links:
     - postgres:postgres
     - elasticsearch:elasticsearch
     - logstash:logstash
+    - influxdb:influxdb
   ports:
     - "3000:3000"
   environment:
@@ -60,3 +81,6 @@ plannr-app:
     RAILS_ENV: development
     BUNDLE_PATH: /home/app/.bundle
     SECRET_KEY_BASE: 53e47c5e0272188f533e9dfdd46faa69be4a14a126c98863eb55ce131efa01d350b4e3cf363822646ddd959ebafe677b2c8b2815ca5988cd1c0984b414c35ef6
+    PLANNR_INFLUXDB_USER: admin
+    PLANNR_INFLUXDB_PASS: plannr12
+    PLANNR_INFLUXDB_DB: metrics

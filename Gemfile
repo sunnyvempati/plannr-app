@@ -35,6 +35,7 @@ gem 'deep_cloneable'
 gem 'log4r'
 gem 'logstash-event'
 gem 'statsd-ruby'
+gem 'influxdb'
 gem 'hallmonitor'
 
 gem 'browserify-rails'
