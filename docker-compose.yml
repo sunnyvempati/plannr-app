@@ -56,31 +56,30 @@ kibana:
   ports:
     - 5601:5601
 
-nginx:
-  image: docker.yourplannr.com/nginx-plannr:latest
-  links:
-    - plannr-app:plannr01
-  ports:
-    - "80:80"
+# nginx:
+#   image: docker.yourplannr.com/nginx-plannr:latest
+#   links:
+#     - plannr-app:plannr01
+#   ports:
+#     - "80:80"
 
-plannr-app:
-  build: ./
-  volumes:
-    - .:/home/app/plannr
-    - ~/projects/hallmonitor:/home/projects/hallmonitor
-  links:
-    - postgres:postgres
-    - elasticsearch:elasticsearch
-    - logstash:logstash
-    - influxdb:influxdb
-  ports:
-    - "3000:3000"
-  environment:
-    DATABASE_URL: postgres://postgres:plannr@postgres:5432/plannr_development?pool=5&encoding=unicode
-    RACK_ENV: development
-    RAILS_ENV: development
-    BUNDLE_PATH: /home/app/.bundle
-    SECRET_KEY_BASE: 53e47c5e0272188f533e9dfdd46faa69be4a14a126c98863eb55ce131efa01d350b4e3cf363822646ddd959ebafe677b2c8b2815ca5988cd1c0984b414c35ef6
-    PLANNR_INFLUXDB_USER: admin
-    PLANNR_INFLUXDB_PASS: plannr12
-    PLANNR_INFLUXDB_DB: metrics
+# plannr-app:
+#   build: ./
+#   volumes:
+#     - .:/home/app/plannr
+#   links:
+#     - postgres:postgres
+#     - elasticsearch:elasticsearch
+#     - logstash:logstash
+#     - influxdb:influxdb
+#   ports:
+#     - "3000:3000"
+#   environment:
+#     DATABASE_URL: postgres://postgres:plannr@postgres:5432/plannr_development?pool=5&encoding=unicode
+#     RACK_ENV: development
+#     RAILS_ENV: development
+#     BUNDLE_PATH: /home/app/.bundle
+#     SECRET_KEY_BASE: 53e47c5e0272188f533e9dfdd46faa69be4a14a126c98863eb55ce131efa01d350b4e3cf363822646ddd959ebafe677b2c8b2815ca5988cd1c0984b414c35ef6
+#     PLANNR_INFLUXDB_USER: admin
+#     PLANNR_INFLUXDB_PASS: plannr12
+#     PLANNR_INFLUXDB_DB: metrics
