@@ -31,7 +31,12 @@ const AppConstants = {
     UPDATE_TASK:                '/tasks/',
     DELETE_TASKS:               '/destroy_tasks',
     GET_EVENT_CONTACTS:         '/event_contacts',
-    GET_EVENT_VENDORS:          '/event_vendors'
+    CREATE_EVENT_CONTACT:       '/event_contacts',
+    DELETE_EVENT_CONTACTS:      '/destroy_event_contacts',
+    DELETE_EVENT_VENDORS:       '/destroy_event_vendors',
+    GET_EVENT_VENDORS:          '/event_vendors',
+    CREATE_EVENT_VENDOR:        '/event_vendors',
+    CREATE_ATTACHMENT:          '/attachments'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -130,10 +135,22 @@ const AppConstants = {
     // Event Contacts
     GET_EVENT_CONTACTS_REQUEST: null,
     GET_EVENT_CONTACTS_RESPONSE: null,
+    CREATE_EVENT_CONTACT_REQUEST: null,
+    CREATE_EVENT_CONTACT_RESPONSE: null,
+    DELETE_EVENT_CONTACTS_REQUEST: null,
+    DELETE_EVENT_CONTACTS_RESPONSE: null,
 
     // Event Vendors
     GET_EVENT_VENDORS_REQUEST: null,
     GET_EVENT_VENDORS_RESPONSE: null,
+    CREATE_EVENT_VENDOR_REQUEST: null,
+    CREATE_EVENT_VENDOR_RESPONSE: null,
+    DELETE_EVENT_VENDORS_REQUEST: null,
+    DELETE_EVENT_VENDORS_RESPONSE: null,
+
+    // Attachments
+    CREATE_ATTACHMENT_REQUEST: null,
+    CREATE_ATTACHMENT_RESPONSE: null,
 
     // Toast
     TOAST_MESSAGE: null,

@@ -18,10 +18,24 @@ class EventContactStore extends BaseStore {
   get eventContactsLoaded() { return this._view.itemsLoaded; }
   get viewEventContacts() {
     let viewEventContactIds = this._view.viewItems;
-    return viewEventContactIds.map((id) => this._eventContacts[id]);
+    return viewEventContactIds.map((id) => {
+      let contact = this._eventContacts[id].contact;
+      return {
+        id: id,
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email,
+        company: contact.company,
+        type: contact.type
+      }
+    });
   }
   get searchResults() { return this._searchResults; }
   setSearchResults(results) { this._searchResults = results; }
+
+  getContact(id) {
+    return this._eventContacts[id].contact;
+  }
 
   addEventContacts(eventContacts, params) {
     let isSearchQuery = !!params.search_query;
@@ -91,6 +105,18 @@ _eventContactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       _eventContactStoreInstance.emitChange();
       break;
+    case ActionTypes.CREATE_EVENT_CONTACT_RESPONSE:
+      let eventContact = action.json && action.json.event_contact;
+      if (eventContact) {
+        _eventContactStoreInstance.add(eventContact);
+        _eventContactStoreInstance.emitChange();
+      }
+      break;
+    case ActionTypes.DELETE_EVENT_CONTACTS_RESPONSE:
+      if (!action.errors) {
+        _eventContactStoreInstance.removeEventContacts(action.ids);
+        _eventContactStoreInstance.emitChange();
+      }
     default:
   }
 });

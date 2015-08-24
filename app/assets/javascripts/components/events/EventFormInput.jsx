@@ -42,7 +42,6 @@ var EventFormInput = React.createClass({
       with_search_limit: 5
     };
     EventActions.search(params);
-    // to do
   },
   itemSelected: function(item) {
     this.setState({itemSet: true, itemDisplay: item.name});

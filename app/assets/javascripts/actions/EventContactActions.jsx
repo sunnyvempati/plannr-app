@@ -12,27 +12,20 @@ export default class EventContactActions {
     EventContactService.getContacts(params);
   }
 
-  // static search(params) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.SEARCH_CONTACTS_REQUEST,
-  //     params: params
-  //   })
-  //   EventContactService.search(params);
-  // }
+  static create(eventId, contactId) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.CREATE_EVENT_CONTACT_REQUEST,
+      contactId: contactId,
+      eventId: eventId
+    });
+    EventContactService.create(eventId, contactId);
+  }
 
-  // static create(params) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.CREATE_CONTACT_REQUEST,
-  //     params: params
-  //   });
-  //   EventContactService.create(params);
-  // }
-
-  // static get(id) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.GET_CONTACT_REQUEST,
-  //     id: id
-  //   });
-  //   EventContactService.get(id);
-  // }
+  static remove(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_EVENT_CONTACTS_REQUEST,
+      ids: ids
+    })
+    EventContactService.remove(ids);
+  }
 }

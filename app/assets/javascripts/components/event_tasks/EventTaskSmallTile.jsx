@@ -23,7 +23,6 @@ var EventTaskSmallTile = React.createClass({
   getTaskState: function() {
     var params = {with_event_id: this.props.eventId};
     let eventTasksCached = TaskStore.isCached(params);
-    console.log(eventTasksCached);
     if (eventTasksCached) this.setState({tasks: TaskStore.getFromCache(params)});
     else TaskActions.getTasks(params);
   },

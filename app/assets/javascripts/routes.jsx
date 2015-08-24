@@ -23,14 +23,12 @@ import ResetPasswordRequestForm from './components/session/ResetPasswordRequestF
 import ProfileForm from './components/session/ProfileForm';
 import CheckEmail from './components/session/CheckEmail';
 import Verify from './components/session/Verify';
-
-// to do
 import EventDashboard from './components/events/EventDashboard';
 import EventApp from './components/events/EventApp';
-import EventContactList from './components/events/EventContactList';
+import EventContactList from './components/event_contacts/EventContactList';
 import EventTaskList from './components/event_tasks/EventTaskList';
 import EventAttachmentList from './components/events/EventAttachmentList';
-import EventVendorList from './components/events/EventVendorList';
+import EventVendorList from './components/event_vendors/EventVendorList';
 
 
 export default (

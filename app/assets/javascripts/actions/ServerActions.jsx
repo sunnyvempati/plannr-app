@@ -287,6 +287,38 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveCreateEventContact(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.CREATE_EVENT_CONTACT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveCreateEventVendor(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.CREATE_EVENT_VENDOR_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteEventContacts(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_EVENT_CONTACTS_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteEventVendors(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_EVENT_VENDORS_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

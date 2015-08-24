@@ -12,27 +12,20 @@ export default class EventVendorActions {
     EventVendorService.getVendors(params);
   }
 
-  // static search(params) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.SEARCH_CONTACTS_REQUEST,
-  //     params: params
-  //   })
-  //   EventVendorService.search(params);
-  // }
+  static create(eventId, vendorId) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.CREATE_EVENT_VENDOR_REQUEST,
+      vendorId: vendorId,
+      eventId: eventId
+    });
+    EventVendorService.create(eventId, vendorId);
+  }
 
-  // static create(params) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.CREATE_CONTACT_REQUEST,
-  //     params: params
-  //   });
-  //   EventVendorService.create(params);
-  // }
-
-  // static get(id) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.GET_CONTACT_REQUEST,
-  //     id: id
-  //   });
-  //   EventVendorService.get(id);
-  // }
+  static remove(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_EVENT_VENDORS_REQUEST,
+      ids: ids
+    })
+    EventVendorService.remove(ids);
+  }
 }

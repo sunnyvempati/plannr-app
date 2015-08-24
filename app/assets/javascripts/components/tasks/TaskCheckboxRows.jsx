@@ -36,7 +36,7 @@ var TaskCheckboxRows = {
   },
   openCreateTaskModal: function() {
     var props = {
-      model: {event_id: this.props.eventId},
+      model: {event_id: this.props.params.id},
       onSuccess: this.onTaskSuccess,
       type: 'NEW'
     }

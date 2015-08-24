@@ -84,10 +84,11 @@ var ContactForm = React.createClass({
     this.props.type == 'NEW' ? ContactActions.create(data) : ContactActions.update(this.props.model && this.props.model.id, data);
   },
   onSecondaryClick: function() {
-    RouteActions.redirect('contacts');
+    if (this.props.onSecondaryClick) this.props.onSecondaryClick();
+    else RouteActions.redirect('contacts');
   },
   onSuccess: function (result) {
-    !!this.props.onSuccess ? this.props.onSuccess(result, false) : RouteActions.redirect('contact', {id: result.id});
+    !!this.props.onSuccess ? this.props.onSuccess(result) : RouteActions.redirect('contact', {id: result.id});
   },
   render: function () {
     var compact = this.props.compact;

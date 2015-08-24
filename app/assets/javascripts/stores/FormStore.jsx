@@ -7,6 +7,8 @@ import EventStore from './EventStore';
 import ContactStore from './ContactStore';
 import VendorStore from './VendorStore';
 import TaskStore from './TaskStore';
+import EventContactStore from './EventContactStore';
+import EventVendorStore from './EventVendorStore';
 
 class FormStore extends BaseStore {
   constructor() {
@@ -32,7 +34,9 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     EventStore.dispatchToken,
     ContactStore.dispatchToken,
     VendorStore.dispatchToken,
-    TaskStore.dispatchToken
+    TaskStore.dispatchToken,
+    EventContactStore.dispatchToken,
+    EventVendorStore.dispatchToken
   ]);
 
   let action = payload.action;
@@ -45,12 +49,13 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.SIGNUP_RESPONSE:
     case ActionTypes.UPDATE_EVENT_RESPONSE:
     case ActionTypes.CREATE_EVENT_RESPONSE:
+    case ActionTypes.CREATE_EVENT_CONTACT_RESPONSE:
+    case ActionTypes.CREATE_EVENT_VENDOR_RESPONSE:
       let errors = action.errors;
       if (errors) { _formStoreInstance.errors = errors }
         else _formStoreInstance.clear();
       _formStoreInstance.emitChange();
       break;
-    case ActionTypes.CREATE_CONTACT_RESPONSE:
     case ActionTypes.UPDATE_TASK_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_TASK_SUCCESS_RESPONSE:
     case ActionTypes.UPDATE_VENDOR_SUCCESS_RESPONSE:
