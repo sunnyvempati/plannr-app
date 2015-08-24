@@ -48,6 +48,11 @@ const TaskForm = React.createClass({
   },
   formatDateAndSubmit: function(data, reset, invalidate) {
     data.task.deadline = data.task.deadline && data.task.deadline.format();
+    // set event id if it's not set
+    let eventId = this.props.model && this.props.model.event_id;
+    if (!data.task.event_id && eventId) {
+      data.task.event_id = eventId;
+    }
     this.props.type == "NEW" ? TaskActions.create(data) : TaskActions.update(this.props.model && this.props.model.id, data);
   },
   handleCreateAndNewClick: function() {

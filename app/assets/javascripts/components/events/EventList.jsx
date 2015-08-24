@@ -20,7 +20,6 @@ const EventList = React.createClass({
     };
   },
   componentDidMount() {
-    this.props.setLayoutParams({header: "Events", skrollable: true});
     EventStore.addChangeListener(this._onViewEventsChange);
   },
   componentDidUpdate: function() {

@@ -5,7 +5,6 @@ import Public from './components/Public';
 import Authenticated from './components/Authenticated';
 import EventList from './components/events/EventList';
 import EventFormNew from './components/events/EventFormNew';
-import EventRouter from './components/events/EventRouter';
 import TaskList from './components/tasks/TaskList';
 import Contacts from './components/contacts/Contacts';
 import Contact from './components/contacts/Contact';
@@ -25,6 +24,14 @@ import ProfileForm from './components/session/ProfileForm';
 import CheckEmail from './components/session/CheckEmail';
 import Verify from './components/session/Verify';
 
+// to do
+import EventDashboard from './components/events/EventDashboard';
+import EventApp from './components/events/EventApp';
+import EventContactList from './components/events/EventContactList';
+import EventTaskList from './components/event_tasks/EventTaskList';
+import EventAttachmentList from './components/events/EventAttachmentList';
+import EventVendorList from './components/events/EventVendorList';
+
 
 export default (
   <Route name="app" path="/" handler={App}>
@@ -33,7 +40,13 @@ export default (
       <Route name="events" path="/" handler={EventList} />
       <Route name="events_list" path="/events" handler={EventList} />
       <Route name="events_new" path="/events/new" handler={EventFormNew} />
-      <Route name="event" path="/events/:id" handler={EventRouter} />
+      <Route name="event" path="/events/:id" handler={EventDashboard}>
+        <Route name="event_contacts" path="contacts" handler={EventContactList} />
+        <Route name="event_tasks" path="tasks" handler={EventTaskList} />
+        <Route name="event_attachments" path="attachments" handler={EventAttachmentList} />
+        <Route name="event_vendors" path="vendors" handler={EventVendorList} />
+        <DefaultRoute name="event_app" handler={EventApp} />
+      </Route>
       <Route name="contacts" path="/contacts" handler={Contacts}>
         <Route name="contact" path=":id" handler={Contact} />
         <DefaultRoute handler={ContactList} />

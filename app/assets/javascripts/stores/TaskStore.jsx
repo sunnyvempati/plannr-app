@@ -58,6 +58,13 @@ class TaskStore extends BaseStore {
     return this._tasks[id];
   }
 
+  getFromCache(params) {
+    let taskIds = this._cache.getItems(params);
+    return taskIds.map((id) => {
+      return this._tasks[id];
+    });
+  }
+
   isCached(params) {
     return !!this._cache.contextExists(params);
   }

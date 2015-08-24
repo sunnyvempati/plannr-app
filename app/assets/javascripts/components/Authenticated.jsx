@@ -13,16 +13,10 @@ export default AuthenticatedComponent(
     constructor() {
       super();
       this.state = {header: null, skrollable: false};
-      // uses BaseComponent bind helper
-      this._bind('_handleSetLayoutParams');
     }
 
     _closeMenu() {
       document.getElementById('menu-trigger').checked = false;
-    }
-
-    _handleSetLayoutParams(params) {
-      this.setState(params);
     }
 
     _renderPageDecoration() {

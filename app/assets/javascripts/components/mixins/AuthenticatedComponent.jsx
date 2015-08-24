@@ -45,10 +45,10 @@ export default (PrivateComponent) => {
 
     render() {
       return (
-      <PrivateComponent
-        {...this.props}
-        currentUser={this.state.user}
-        userLoggedIn={this.state.userLoggedIn} />
+        <PrivateComponent
+          {...this.props}
+          currentUser={this.state.user}
+          userLoggedIn={this.state.userLoggedIn} />
       );
     }
   }

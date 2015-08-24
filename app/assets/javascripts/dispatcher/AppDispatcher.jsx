@@ -16,20 +16,6 @@ class AppDispatcher extends Dispatcher {
       queue.next();
     });
   }
-  // handleServerAction(action) {
-  //   const payload = {
-  //     source: PayloadSources.SERVER_ACTION,
-  //     action: action
-  //   };
-  //   this.dispatch(payload);
-  // }
-  // handleViewAction(action) {
-  //   const payload = {
-  //     source: PayloadSources.VIEW_ACTION,
-  //     action: action
-  //   };
-  //   this.dispatch(payload);
-  // }
 }
 
 var _appDispatcherInstance = new AppDispatcher();

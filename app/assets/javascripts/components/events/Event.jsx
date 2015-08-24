@@ -47,7 +47,7 @@ var Event = React.createClass({
       'u-flexGrow-4': true,
       'u-hidden': !this.props.editable
     });
-    var client = this.props.client;
+    var client = event.client;
     var clientName = "", clientOrg = "", clientEmail = "", clientPhone = "";
     if (!!client) {
       clientName = client.name;
