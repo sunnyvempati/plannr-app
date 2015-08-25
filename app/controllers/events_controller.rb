@@ -31,6 +31,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    binding.pry
     @event = Event.new
     template_event = template_params && template_params[:parent_event_id]
     if template_event
@@ -91,9 +92,6 @@ class EventsController < ApplicationController
     t_params = {}
     if params[:template] && !params[:template].empty?
       t_params = params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments)
-      [:contacts, :vendors, :tasks, :comments].each do |entity|
-        t_params[entity] = t_params[entity] == 'true'
-      end
     end
     t_params
   end

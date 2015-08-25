@@ -57,6 +57,7 @@ var EventForm = React.createClass({
     var budget = data.event.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
+    console.log(data);
     this.props.type == "NEW" ? EventActions.create(data) : EventActions.update(this.props.model && this.props.model.id, data);
   },
   setEventState: function(item) {

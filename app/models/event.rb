@@ -68,6 +68,7 @@ class Event < ActiveRecord::Base
       task.status = TaskStatuses::TODO
       task.assigned_to_id = nil
     end
+    binding.pry
     cloned_event
     # this will create a duplicate of the instance with the above config
   end
