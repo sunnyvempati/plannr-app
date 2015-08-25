@@ -28,12 +28,12 @@ var ContactForm = React.createClass({
   },
   getInitialState: function() {
     return {
-      category: this.props.model && this.props.model.category || 1
+      category: (this.props.model && this.props.model.category) || 1
     };
   },
   componentWillReceiveProps: function(nextProps) {
     let category = nextProps.model && nextProps.model.category;
-    this.setState({category: category});
+    this.setState({category: category || 1});
   },
   mapInputs: function (inputs) {
     return {
