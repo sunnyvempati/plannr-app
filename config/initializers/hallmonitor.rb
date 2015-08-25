@@ -26,7 +26,7 @@ Hallmonitor.add_outputter Hallmonitor::Outputters::InfluxdbOutputter.new(client,
 
 # Set up listeners to auto-monitor action controllers
 ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |name, start, finish, id, data|
-  duration = finish - start
+  duration = (finish - start) * 1000 # To get ms, Time - Time gives fractional seconds
   controller = data[:controller].gsub('Controller', '').underscore.parameterize
   action = data[:action].parameterize
 
