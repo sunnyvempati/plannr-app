@@ -40,7 +40,7 @@ var EventVendorSmallTile = React.createClass({
             <EventVendorAutocomplete eventId={this.props.eventId} />
           </div>
           <div className="TileContent-count">
-            {eventVendors && eventVendors.length}
+            {eventVendors && eventVendors.length || 0}
           </div>
           <div className="TileContent-title">
             Vendors

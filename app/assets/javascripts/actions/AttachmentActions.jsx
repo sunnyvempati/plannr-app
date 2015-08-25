@@ -3,35 +3,20 @@ import {ActionTypes} from '../constants/AppConstants';
 import AttachmentService from '../services/AttachmentService';
 
 export default class AttachmentActions {
-  static getEventContacts(params) {
+  static getAttachments(params) {
     AppDispatcher.handleAction({
-      type: ActionTypes.GET_EVENT_CONTACTS_REQUEST,
+      type: ActionTypes.GET_ATTACHMENTS_REQUEST,
       params: params
     });
-    EventContactService.getContacts(params);
+    AttachmentService.getAttachments(params);
   }
 
-  // static search(params) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.SEARCH_CONTACTS_REQUEST,
-  //     params: params
-  //   })
-  //   EventContactService.search(params);
-  // }
-
-  static create(file) {
+  static create(formData, eventId) {
     AppDispatcher.handleAction({
       type: ActionTypes.CREATE_ATTACHMENT_REQUEST,
-      file: file
+      formData: formData,
+      eventId: eventId
     });
-    AttachmentService.create(file);
+    AttachmentService.create(formData, eventId);
   }
-
-  // static get(id) {
-  //   AppDispatcher.handleAction({
-  //     type: ActionTypes.GET_CONTACT_REQUEST,
-  //     id: id
-  //   });
-  //   EventContactService.get(id);
-  // }
 }

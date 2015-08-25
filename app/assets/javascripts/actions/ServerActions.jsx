@@ -360,6 +360,15 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveGetAttachments(attachments, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_ATTACHMENTS_RESPONSE,
+      attachments: attachments,
+      params: params,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

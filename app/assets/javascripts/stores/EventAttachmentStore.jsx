@@ -49,6 +49,13 @@ class EventAttachmentStore extends BaseStore {
     } else this._view.itemsLoaded = true;
   }
 
+  getFromCache(params) {
+    let eventAttachmentIds = this._cache.getItems(params);
+    return eventAttachmentIds.map((id) => {
+      return this._eventAttachments[id];
+    });
+  }
+
   isCached(params) {
     return !!this._cache.contextExists(params);
   }
@@ -70,9 +77,10 @@ _eventAttachmentStoreInstance.dispatchToken = AppDispatcher.register((payload) =
   let action = payload.action;
 
   switch (action.type) {
-    case ActionTypes.GET_EVENT_ATTACHMENTS_RESPONSE:
-      if (action.eventAttachments) {
-        _eventAttachmentStoreInstance.addEventAttachments(action.eventAttachments, action.params);
+    case ActionTypes.GET_ATTACHMENTS_RESPONSE:
+      let attachments = action.attachments;
+      if (attachments) {
+        _eventAttachmentStoreInstance.addEventAttachments(attachments, action.params);
       }
       _eventAttachmentStoreInstance.emitChange();
       break;

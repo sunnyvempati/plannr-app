@@ -2,7 +2,6 @@ import GlobalStore from '../stores/GlobalStore.jsx';
 import Intercept from 'superagent-intercept';
 import Router from 'react-router';
 import SessionActions from '../actions/SessionActions';
-import RouteActions from '../actions/RouteActions';
 import ToastActions from '../actions/ToastActions';
 
 export class Utils {
@@ -16,8 +15,13 @@ export class Utils {
 }
 
 export let AuthIntercept = Intercept((err, res) => {
-  if (res.status == 401) {
-    SessionActions.errorAuthenticating();
-    // RouteActions.redirect('login');
+  switch (res.status) {
+    case 401:
+      SessionActions.errorAuthenticating();
+      break;
+    case 500:
+      ToastActions.toastServerError();
+      break;
+    default:
   }
 });

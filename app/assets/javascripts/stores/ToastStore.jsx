@@ -49,6 +49,14 @@ _toastStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       _toastStoreInstance.emitChange();
       break;
+    case ActionTypes.SERVER_500_ERROR:
+      let message = 'Aw man.  Something went wrong!  Let us know about it!';
+      _toastStoreInstance._message = {
+        text: message,
+        error: true
+      };
+      _toastStoreInstance.emitChange();
+      break;
     case ActionTypes.CLOSE_TOAST:
       _toastStoreInstance._message = null;
       _toastStoreInstance.emitChange();

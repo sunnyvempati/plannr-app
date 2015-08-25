@@ -37,6 +37,7 @@ const AppConstants = {
     GET_EVENT_VENDORS:          '/event_vendors',
     CREATE_EVENT_VENDOR:        '/event_vendors',
     CREATE_ATTACHMENT:          '/attachments',
+    GET_ATTACHMENTS:            '/attachments',
     CREATE_COMMENT:             '/comments',
     UPDATE_COMMENT:             '/comments/',
     GET_COMMENTS:               '/comments',
@@ -157,6 +158,8 @@ const AppConstants = {
     // Attachments
     CREATE_ATTACHMENT_REQUEST: null,
     CREATE_ATTACHMENT_RESPONSE: null,
+    GET_ATTACHMENTS_REQUEST: null,
+    GET_ATTACHMENTS_RESPONSE: null,
 
     // Comments
     CREATE_COMMENT_REQUEST: null,
@@ -180,8 +183,9 @@ const AppConstants = {
     OPEN_MODAL: null,
     CLOSE_MODAL: null,
 
-    // Unauthorized
+    // Error Statuses
     UNAUTHORIZED_REQUEST: null,
+    SERVER_500_ERROR: null,
 
     // Error
     RESET: null,

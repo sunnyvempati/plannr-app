@@ -1,37 +1,36 @@
 import request from 'superagent';
-import {Utils} from './Utils';
+import {Utils, AuthIntercept} from './Utils';
 import ServerActions from '../actions/ServerActions';
 import ToastActions from '../actions/ToastActions';
 import GlobalStore from '../stores/GlobalStore.jsx';
 import {APIEndpoints} from '../constants/AppConstants';
 
 class AttachmentService {
-  // static getContacts(params) {
-  //   request
-  //     .get(APIEndpoints.GET_EVENT_CONTACTS)
-  //     .query(params)
-  //     .set('Accept', 'application/json')
-  //     .end((error, res) => {
-  //       if (res) {
-  //         if (!error) {
-  //           let json = JSON.parse(res.text);
-  //           // rails serializer returns json.eventcontacts if none are returned
-  //           let eventContacts = json.event_contacts || [];
-  //           ServerActions.receiveGetEventContacts(eventContacts, params, null);
-  //         } else {
-  //           let errors = Utils.getErrors(res);
-  //           ServerActions.receiveGetEventContacts(null, null, errors);
-  //         }
-  //       }
-  //     });
-  // }
-
-  static create(file) {
+  static getAttachments(params) {
     request
-      .post(APIEndpoints.CREATE_ATTACHMENT)
-      .attach(file, file, file)
-      .send({authenticity_token: GlobalStore.AuthToken})
-      .use(Utils.addAuthToken)
+      .get(APIEndpoints.GET_ATTACHMENTS)
+      .query(params)
+      .set('Accept', 'application/json')
+      .use(AuthIntercept)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveGetAttachments(json.attachments, params, null);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveGetAttachments(null, null, errors);
+          }
+        }
+      });
+  }
+
+  static create(formData, eventId) {
+    request
+      .post(APIEndpoints.CREATE_ATTACHMENT +"?event_id=" + eventId + "&authenticity_token=" + encodeURIComponent(GlobalStore.AuthToken))
+      .send(formData)
+      .use(AuthIntercept)
+      .set('multipart/form-data')
       .end((error, res) => {
         console.log(res);
         if (res) {

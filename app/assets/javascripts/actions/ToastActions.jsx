@@ -16,6 +16,12 @@ class ToastActions {
     });
   }
 
+  static toastServerError(message) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.SERVER_500_ERROR
+    });
+  }
+
   static loading() {
     AppDispatcher.handleAction({
       type: ActionTypes.TOAST_LOADING

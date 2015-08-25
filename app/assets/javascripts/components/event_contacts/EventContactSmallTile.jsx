@@ -40,7 +40,7 @@ var EventContactSmallTile = React.createClass({
             <EventContactAutocomplete eventId={this.props.eventId} />
           </div>
           <div className="TileContent-count">
-            {eventContacts && eventContacts.length}
+            {eventContacts && eventContacts.length || 0}
           </div>
           <div className="TileContent-title">
             Contacts

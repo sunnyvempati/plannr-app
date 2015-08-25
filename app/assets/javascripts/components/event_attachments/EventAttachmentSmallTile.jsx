@@ -1,30 +1,27 @@
 import {Link} from 'react-router';
 import AttachmentBrowse from './AttachmentBrowse';
+import AttachmentActions from '../../actions/AttachmentActions';
+import EventAttachmentStore from '../../stores/EventAttachmentStore';
 
 var EventAttachmentSmallTile = React.createClass({
   getInitialState: function () {
     return {
-      count: null
+      eventAttachments: null
     };
   },
   componentDidMount: function () {
-    var params = {
-      filter_sort: {
-        with_event_id: this.props.eventId
-      }
-    };
-    $.get("/attachments.json", params, function (results) {
-      if (this.isMounted()) {
-        this.setState({
-          count: results.attachments.length
-        })
-      }
-    }.bind(this))
+    EventAttachmentStore.addChangeListener(this._onEventAttachmentsRetrieved);
+    this.getEventAttachmentState();
   },
-  incrementCount: function (attachment) {
-    // ToastMessages.toast(attachment.file_name + " has been added to this event.");
-    var count = this.state.count;
-    this.setState({count: count + 1});
+  componentWillUnmount() {
+    EventAttachmentStore.removeChangeListener(this._onEventAttachmentsRetrieved);
+  },
+  _onEventAttachmentsRetrieved() { this.getEventAttachmentState(); },
+  getEventAttachmentState() {
+    let params = {with_event_id: this.props.eventId};
+    let eventAttachmentsCached = EventAttachmentStore.isCached(params);
+    if (eventAttachmentsCached) this.setState({eventAttachments: EventAttachmentStore.getFromCache(params)});
+    else AttachmentActions.getAttachments(params);
   },
   getActionButtonClickableElement: function () {
     return (
@@ -34,10 +31,12 @@ var EventAttachmentSmallTile = React.createClass({
   getBrowseButton: function () {
     return (
       <AttachmentBrowse clickableElement={this.getActionButtonClickableElement()}
-                        onAssociation={this.incrementCount}/>
+                        onAssociation={this.incrementCount}
+                        eventId={this.props.eventId} />
     );
   },
   render: function () {
+    let eventAttachments = this.state.eventAttachments;
     return (
       <div className="Tile">
         <div className="Tile-header">
@@ -51,7 +50,7 @@ var EventAttachmentSmallTile = React.createClass({
             {this.getBrowseButton()}
           </div>
           <div className="TileContent-count">
-            {this.state.count}
+            {eventAttachments && eventAttachments.length || 0}
           </div>
           <div className="TileContent-title">
             Attachments
