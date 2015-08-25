@@ -11,6 +11,7 @@ import DatePickerInput from '../generic/DatePickerInput';
 import EventClientInput from './EventClientInput';
 import TextAreaInput from '../generic/TextAreaInput';
 import CurrencyValidator from '../validators/currency';
+import extend from 'extend';
 
 var EventForm = React.createClass({
   mixins: [
@@ -41,9 +42,7 @@ var EventForm = React.createClass({
     };
   },
   setStartDate: function(date) {
-    let model = this.state.model;
-    model.start_date = date;
-    this.setState({model: model});
+    this.setState({model: extend({}, this.state.model, {start_date: date})});
   },
   onSecondaryClick: function() {
     RouteActions.redirect('events');
@@ -57,7 +56,6 @@ var EventForm = React.createClass({
     var budget = data.event.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event.budget = budget;
-    console.log(data);
     this.props.type == "NEW" ? EventActions.create(data) : EventActions.update(this.props.model && this.props.model.id, data);
   },
   setEventState: function(item) {
