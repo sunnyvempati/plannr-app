@@ -58,6 +58,12 @@ class SessionActions {
     });
     SessionService.updateProfile(first, last);
   }
+
+  static errorAuthenticating() {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UNAUTHORIZED_REQUEST
+    });
+  }
 }
 
 export default SessionActions;

@@ -180,6 +180,9 @@ const AppConstants = {
     OPEN_MODAL: null,
     CLOSE_MODAL: null,
 
+    // Unauthorized
+    UNAUTHORIZED_REQUEST: null,
+
     // Error
     RESET: null,
 

@@ -6,6 +6,7 @@ import {ActionTypes} from '../constants/AppConstants';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
 import EventStore from './EventStore';
+import ToastActions from '../actions/ToastActions';
 
 const router = Router.create({
   routes: routes,
@@ -78,10 +79,12 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
 
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) {
+        ToastActions.toast("You've been successfully logged out!");
         router.transitionTo('login');
       }
       break;
-
+    case ActionTypes.UNAUTHORIZED_REQUEST:
+      router.transitionTo('login');
     default:
   }
 })

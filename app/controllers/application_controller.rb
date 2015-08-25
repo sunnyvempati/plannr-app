@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     unless current_user
-      render_error message: 'You must be logged in to access this page'
+      render_auth_error message: 'You must be logged in to access this page'
       return false
     end
   end

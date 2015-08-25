@@ -20,6 +20,10 @@ module ResponseHelpers
     render json: json, status: 403
   end
 
+  def render_auth_error(json={})
+    render json: json, status: 401
+  end
+
   def errors_hash(entity_errors)
     errors = {}
     entity_errors.messages.each {|k,v| errors[k] = v.first}

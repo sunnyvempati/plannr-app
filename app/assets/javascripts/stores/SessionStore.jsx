@@ -21,6 +21,20 @@ class SessionStore extends BaseStore {
     }
   }
 
+  login(token, userId) {
+    this._sessionToken = token;
+    this._userId = userId;
+    localStorage.setItem('sessionToken', token);
+    localStorage.setItem('userId', userId);
+  }
+
+  logout() {
+    this._sessionToken = null;
+    this._userId = null;
+    localStorage.removeItem('sessionToken');
+    localStorage.removeItem('userId');
+  }
+
   get userId() {
     return this._userId;
   }
@@ -41,21 +55,18 @@ _sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
           action.json.user_session.token) {
         let token = action.json.user_session.token;
         let userId = action.json.user_session.user_id;
-        _sessionStoreInstance._sessionToken = token;
-        _sessionStoreInstance._userId = userId;
-        localStorage.setItem('sessionToken', token);
-        localStorage.setItem('userId', userId);
+        _sessionStoreInstance.login(token, userId);
       }
       _sessionStoreInstance.emitChange();
       break;
     case ActionTypes.LOGOUT_RESPONSE:
       if (!action.errors) {
-        _sessionStoreInstance._sessionToken = null;
-        _sessionStoreInstance._userId = null;
-        localStorage.removeItem('sessionToken');
-        localStorage.removeItem('userId');
+        _sessionStoreInstance.logout();
         _sessionStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.UNAUTHORIZED_REQUEST:
+      _sessionStoreInstance.logout();
       break;
     default:
   }

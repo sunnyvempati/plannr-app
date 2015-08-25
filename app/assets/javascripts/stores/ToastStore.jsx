@@ -42,6 +42,13 @@ _toastStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       _toastStoreInstance.emitChange();
       break;
+    case ActionTypes.UNAUTHORIZED_REQUEST:
+      _toastStoreInstance._message = {
+        text: 'You must be logged in to access that page',
+        error: true
+      }
+      _toastStoreInstance.emitChange();
+      break;
     case ActionTypes.CLOSE_TOAST:
       _toastStoreInstance._message = null;
       _toastStoreInstance.emitChange();
