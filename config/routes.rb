@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   post 'sign_up', to: 'users#create'
   get 'sign_up', to: 'users#new'
 
-  # post 'toggle_admin', to: 'users#toggle_admin'
-  # post '/users/mass_delete', to: 'users#mass_delete'
+  post 'toggle_admin', to: 'users#toggle_admin'
+  post '/destroy_users', to: 'users#mass_delete'
 
   # # password reset
   post 'reset_password_request', to: 'password_resets#create'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post 'verify', to: 'user_verifications#verify'
 
   # users
-  resources :users, only: [:index, :create]
+  resources :users, only: [:index, :create, :update]
   get 'users/:id', to: 'users#show'
 
   # events
@@ -51,9 +51,13 @@ Rails.application.routes.draw do
 
   # attachments
   resources :attachments, only: [:index, :create]
+  post 'destroy_event_attachments', to: 'attachments#mass_delete'
 
   # comments
   resources :comments, only: [:index, :create, :update, :destroy]
+
+  # user invitations
+  resources :invitations, only: [:create]
 
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'

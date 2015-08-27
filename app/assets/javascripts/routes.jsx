@@ -28,10 +28,11 @@ import EventDashboard from './components/events/EventDashboard';
 import EventApp from './components/events/EventApp';
 import EventContactList from './components/event_contacts/EventContactList';
 import EventTaskList from './components/event_tasks/EventTaskList';
-import EventAttachmentList from './components/events/EventAttachmentList';
+import EventAttachmentList from './components/event_attachments/EventAttachmentList';
 import EventVendorList from './components/event_vendors/EventVendorList';
 import EventComments from './components/events/EventComments';
 
+import Company from './components/companies/Company';
 
 export default (
   <Route name="app" path="/" handler={App}>
@@ -62,6 +63,7 @@ export default (
       <Route name="vendor_new" path="/new_vendor" handler={VendorFormNew} />
       <Route name="vendor_edit" path="/edit_vendor/:id" handler={VendorFormEdit} />
       <Route name="tasks" path="/tasks" handler={TaskList} />
+      <Route name="company" path="/company" handler={Company} />
     </Route>
     <Route handler={Public}>
       <Route name="login" path="/login" handler={LoginForm} />

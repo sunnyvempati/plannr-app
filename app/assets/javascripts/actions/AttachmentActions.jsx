@@ -19,4 +19,12 @@ export default class AttachmentActions {
     });
     AttachmentService.create(formData, eventId);
   }
+
+  static delete(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_ATTACHMENTS_REQUEST,
+      ids: ids
+    });
+    AttachmentService.delete(ids);
+  }
 }

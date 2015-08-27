@@ -1,4 +1,5 @@
 import MenuItem from './MenuItem';
+import RouteActions from '../../actions/RouteActions';
 
 var MenuContent = React.createClass({
   _mainMenuItems() {
@@ -26,7 +27,8 @@ var MenuContent = React.createClass({
     ];
   },
   goToCompanyPage: function() {
-    location.href = '/company';
+    document.getElementById('menu-trigger').checked = false;
+    RouteActions.redirect('company');
   },
   companyItem: function() {
     var company = this.props.company;

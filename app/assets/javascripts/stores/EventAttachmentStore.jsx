@@ -11,7 +11,11 @@ class EventAttachmentStore extends BaseStore {
     this._cache = new CacheStore();
     // use for pagination/sort/filter
     this._view = new ViewStore;
+    this._loading = false;
   }
+
+  get attachmentsLoading() { return this._loading; }
+  set loading(val) { this._loading = val; }
 
   get eventAttachmentsLoaded() { return this._view.itemsLoaded; }
   get viewEventAttachments() {
@@ -20,6 +24,7 @@ class EventAttachmentStore extends BaseStore {
   }
 
   addEventAttachments(eventAttachments, params) {
+    this._loading = false;
     let isSearchQuery = !!params.search_query;
     if (!isSearchQuery) this._cache.createContext(params);
     let page = params.page;
@@ -33,7 +38,9 @@ class EventAttachmentStore extends BaseStore {
         // then add to cache
         if (!isSearchQuery) this._cache.add(eventAttachment.id, params);
       });
-    } else this._view.itemsLoaded = true;
+    } else {
+      this._view.itemsLoaded = true;
+    }
   }
 
   add(eventAttachment) {
@@ -62,7 +69,7 @@ class EventAttachmentStore extends BaseStore {
 
   removeEventAttachments(ids) {
     this._cache.clear();
-    // remove from global contact map
+    // remove from global attachments map
     ids.map((id) => {
       this._eventAttachments.splice(id, 1);
     });
@@ -77,7 +84,11 @@ _eventAttachmentStoreInstance.dispatchToken = AppDispatcher.register((payload) =
   let action = payload.action;
 
   switch (action.type) {
+    case ActionTypes.GET_ATTACHMENTS_REQUEST:
+      _eventAttachmentStoreInstance.loading = true;
+      break;
     case ActionTypes.GET_ATTACHMENTS_RESPONSE:
+    _eventAttachmentStoreInstance.loading = false;
       let attachments = action.attachments;
       if (attachments) {
         _eventAttachmentStoreInstance.addEventAttachments(attachments, action.params);
@@ -85,12 +96,17 @@ _eventAttachmentStoreInstance.dispatchToken = AppDispatcher.register((payload) =
       _eventAttachmentStoreInstance.emitChange();
       break;
     case ActionTypes.CREATE_EVENT_ATTACHMENT_RESPONSE:
-      let eventAttachment = action.json && action.json.event_contact;
+      let eventAttachment = action.json && action.json.attachment;
       if (eventAttachment) {
         _eventAttachmentStoreInstance.add(eventAttachment);
         _eventAttachmentStoreInstance.emitChange();
       }
       break;
+    case ActionTypes.DELETE_ATTACHMENTS_RESPONSE:
+      if (!action.errors) {
+        _eventAttachmentStoreInstance.removeEventAttachments(action.ids);
+        _eventAttachmentStoreInstance.emitChange();
+      }
     default:
   }
 });

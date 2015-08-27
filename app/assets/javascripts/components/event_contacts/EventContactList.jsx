@@ -23,7 +23,6 @@ var EventContactList = React.createClass({
     }
   },
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Contacts", skrollable: true});
     EventContactStore.addChangeListener(this._onViewEventContactsChange);
     FormStore.addChangeListener(this._onFormChange);
   },

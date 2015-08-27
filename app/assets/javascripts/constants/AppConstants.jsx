@@ -11,6 +11,8 @@ const AppConstants = {
     RESET_PASSWORD:             '/reset_password',
     GET_USER:                   '/users/',
     GET_USERS:                  '/users',
+    UPDATE_USER:                '/users/',
+    DELETE_USERS:               '/destroy_users',
     GET_EVENTS:                 '/events',
     GET_EVENT:                  '/events/',
     CREATE_EVENT:               '/events',
@@ -38,10 +40,12 @@ const AppConstants = {
     CREATE_EVENT_VENDOR:        '/event_vendors',
     CREATE_ATTACHMENT:          '/attachments',
     GET_ATTACHMENTS:            '/attachments',
+    DELETE_ATTACHMENTS:         '/destroy_event_attachments',
     CREATE_COMMENT:             '/comments',
     UPDATE_COMMENT:             '/comments/',
     GET_COMMENTS:               '/comments',
-    DELETE_COMMENT:             '/comments/'
+    DELETE_COMMENT:             '/comments/',
+    INVITE_USER:                '/invitations'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -74,6 +78,8 @@ const AppConstants = {
     GET_USERS_RESPONSE: null,
     SEARCH_USERS_REQUEST: null,
     SEARCH_USERS_RESPONSE: null,
+    UPDATE_USER_REQUEST: null,
+    UPDATE_USER_RESPONSE: null,
 
     // Events
     GET_EVENTS_REQUEST: null,
@@ -160,6 +166,8 @@ const AppConstants = {
     CREATE_ATTACHMENT_RESPONSE: null,
     GET_ATTACHMENTS_REQUEST: null,
     GET_ATTACHMENTS_RESPONSE: null,
+    DELETE_ATTACHMENTS_REQUEST: null,
+    DELETE_ATTACHMENTS_RESPONSE: null,
 
     // Comments
     CREATE_COMMENT_REQUEST: null,
@@ -170,6 +178,10 @@ const AppConstants = {
     UPDATE_COMMENT_RESPONSE: null,
     GET_COMMENTS_RESPONSE: null,
     DELETE_COMMENT_RESPONSE: null,
+
+    // Invitaitons
+    INVITE_USER_REQUEST: null,
+    INVITE_USER_RESPONSE: null,
 
     // Page Title
     SET_PAGE_TITLE: null,

@@ -58,7 +58,7 @@ export default AuthenticatedComponent(
                           email={currentUser.email}
                           skrollable={this.state.skrollable} />
               <div className="MainContainer-content">
-                <RouteHandler setLayoutParams={this._handleSetLayoutParams} />
+                <RouteHandler user={currentUser} />
               </div>
             </div>
           </div>

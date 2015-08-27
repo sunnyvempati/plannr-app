@@ -18,6 +18,39 @@ class UserActions {
     })
     UserService.search(params);
   }
+
+  static invite(email) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.INVITE_USER_REQUEST,
+      email: email
+    })
+    UserService.invite(email);
+  }
+
+  static getUsers(params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_USERS_REQUEST,
+      params: params
+    });
+    UserService.getUsers(params);
+  }
+
+  static update(id, params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_USER_REQUEST,
+      id: id,
+      params: params
+    });
+    UserService.update(id, params);
+  }
+
+  static deleteUsers(ids) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_USERS_REQUEST,
+      ids: ids
+    })
+    UserService.delete(ids);
+  }
 };
 
 export default UserActions;

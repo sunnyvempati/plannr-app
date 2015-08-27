@@ -204,6 +204,14 @@ class ServerActions {
     });
   }
 
+  static receiveUpdateUser(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_USER_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
   static receiveUpdateVendor(json, errors) {
     let type = !errors ? ActionTypes.UPDATE_VENDOR_SUCCESS_RESPONSE :
                          ActionTypes.UPDATE_VENDOR_ERROR_RESPONSE;
@@ -227,6 +235,15 @@ class ServerActions {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_CONTACTS_RESPONSE,
       contacts: contacts,
+      params: params,
+      errors: errors
+    })
+  }
+
+  static receiveGetUsers(users, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_USERS_RESPONSE,
+      users: users,
       params: params,
       errors: errors
     })
@@ -280,7 +297,15 @@ class ServerActions {
 
   static receiveDeleteContacts(ids, errors) {
     AppDispatcher.handleAction({
-      type: ActionTypes.DELETE_CONTACTS_RESPONSE,
+      type: ActionTypes.DELETE_USERS_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
+  }
+
+  static receiveDeleteUsers(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_USERS_RESPONSE,
       ids: ids,
       errors: errors
     });
@@ -361,12 +386,35 @@ class ServerActions {
     });
   }
 
+  static receiveCreateEventAttachment(json, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.CREATE_EVENT_ATTACHMENT_RESPONSE,
+      json: json,
+      params: params,
+      errors: errors
+    });
+  }
+
   static receiveGetAttachments(attachments, params, errors) {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_ATTACHMENTS_RESPONSE,
       attachments: attachments,
       params: params,
       errors: errors
+    });
+  }
+
+  static receiveDeleteAttachments(ids, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_ATTACHMENTS_RESPONSE,
+      ids: ids,
+      errors: errors
+    });
+  }
+
+  static receiveInviteUser() {
+    AppDispatcher.handleAction({
+      type: ActionTypes.INVITE_USER_RESPONSE
     });
   }
 };

@@ -20,7 +20,6 @@ const ContactList = React.createClass({
     };
   },
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Contacts", skrollable: true});
     ContactStore.addChangeListener(this._onViewContactsChange);
   },
   componentDidUpdate: function() {

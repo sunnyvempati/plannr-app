@@ -26,7 +26,8 @@ class AttachmentsController < ApplicationController
     render_success if @attachment.destroy
   end
 
-  def mass_destroy
+  def mass_delete
+    binding.pry
     render_success Attachment.destroy_all(id: mass_destroy_params[:ids])
   end
 
@@ -42,7 +43,6 @@ class AttachmentsController < ApplicationController
     }
   end
 
-  # TODO: mass destroy mixin
   def mass_destroy_params
     params.require(:destroy_opts).permit(ids: [])
   end

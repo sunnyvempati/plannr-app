@@ -32,18 +32,31 @@ class AttachmentService {
       .use(AuthIntercept)
       .set('multipart/form-data')
       .end((error, res) => {
-        console.log(res);
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveCreateEventContact(json);
-            let contactName = json.event_contact.contact.name;
-            ToastActions.toast(contactName + " has been added to the event!");
+            ServerActions.receiveCreateEventAttachment(json);
+            let attachmentName = json.attachment.file_name;
+            ToastActions.toast(attachmentName + " has been added to the event!");
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveCreateEventContact(null, errors);
+            ServerActions.receiveCreateEventAttachment(null, errors);
           }
         }
+      });
+  }
+
+  static delete(ids) {
+    request
+      .post(APIEndpoints.DELETE_ATTACHMENTS)
+      .send({destroy_opts: {ids: ids}})
+      .use(Utils.addAuthToken)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        let errors = null;
+        if (res && error) errors = Utils.getErrors(res);
+        if (!error) { ToastActions.toast(ids.length + " attachment(s) successfully deleted!") }
+        ServerActions.receiveDeleteAttachments(ids, errors);
       });
   }
 }
