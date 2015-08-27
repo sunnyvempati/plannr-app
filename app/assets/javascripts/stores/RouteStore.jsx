@@ -56,13 +56,21 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       break;
 
+    case ActionTypes.RESEND_VERIFY_SUCCESS_RESPONSE:
+      router.transitionTo('login');
+      ToastActions.toast('Email verification email sent.');
+      break;
+
     case ActionTypes.RESET_PASSWORD_REQUEST_RESPONSE:
     case ActionTypes.RESET_PASSWORD_RESPONSE:
       if (!action.errors) router.transitionTo('app');
       break;
 
     case ActionTypes.VERIFY_RESPONSE:
-      router.transitionTo('app');
+      if (!action.error) {
+        console.log(action);
+        router.transitionTo('app');
+      }
       break;
 
     case ActionTypes.SIGNUP_RESPONSE:

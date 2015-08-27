@@ -7,9 +7,13 @@ class SessionStore extends BaseStore {
     super();
     this._sessionToken = null;
     this._userId = null;
+    this._error = null;
 
     this._autoLogin();
   }
+
+  set error(val) { this._error = val; }
+  get error() { return this._error; }
 
   _autoLogin() {
     let token = localStorage.getItem("sessionToken");
@@ -67,6 +71,12 @@ _sessionStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       break;
     case ActionTypes.UNAUTHORIZED_REQUEST:
       _sessionStoreInstance.logout();
+      break;
+    case ActionTypes.VERIFY_RESPONSE:
+      if (action.error) {
+        _sessionStoreInstance.error = action.error;
+      } else _sessionStoreInstance.error = null;
+      _sessionStoreInstance.emitChange();
       break;
     default:
   }

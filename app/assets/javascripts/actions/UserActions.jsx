@@ -19,14 +19,6 @@ class UserActions {
     UserService.search(params);
   }
 
-  static invite(email) {
-    AppDispatcher.handleAction({
-      type: ActionTypes.INVITE_USER_REQUEST,
-      email: email
-    })
-    UserService.invite(email);
-  }
-
   static getUsers(params) {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_USERS_REQUEST,

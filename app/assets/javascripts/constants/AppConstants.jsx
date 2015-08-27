@@ -7,6 +7,7 @@ const AppConstants = {
     LOGOUT:                     '/logout',
     PROFILE:                    '/profile',
     VERIFY:                     '/verify',
+    RESEND_VERIFY:              '/resend_verify',
     RESET_PASSWORD_REQUEST:     '/reset_password_request',
     RESET_PASSWORD:             '/reset_password',
     GET_USER:                   '/users/',
@@ -45,7 +46,8 @@ const AppConstants = {
     UPDATE_COMMENT:             '/comments/',
     GET_COMMENTS:               '/comments',
     DELETE_COMMENT:             '/comments/',
-    INVITE_USER:                '/invitations'
+    CREATE_INVITE:              '/invitations',
+    GET_INVITE:                 '/invitation_by_token'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -64,6 +66,9 @@ const AppConstants = {
     PROFILE_RESPONSE: null,
     VERIFY_REQUEST: null,
     VERIFY_RESPONSE: null,
+    RESEND_VERIFY_REQUEST: null,
+    RESEND_VERIFY_SUCCESS_RESPONSE: null,
+    RESEND_VERIFY_ERROR_RESPONSE: null,
     RESET_PASSWORD_REQUEST: null,
     RESET_PASSWORD_REQUEST_RESPONSE: null,
     RESET_PASSWORD: null,
@@ -180,8 +185,10 @@ const AppConstants = {
     DELETE_COMMENT_RESPONSE: null,
 
     // Invitaitons
-    INVITE_USER_REQUEST: null,
-    INVITE_USER_RESPONSE: null,
+    CREATE_INVITATION_REQUEST: null,
+    CREATE_INVITATION_RESPONSE: null,
+    GET_INVITATION_REQUEST: null,
+    GET_INVITATION_RESPONSE: null,
 
     // Page Title
     SET_PAGE_TITLE: null,

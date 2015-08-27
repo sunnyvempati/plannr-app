@@ -48,7 +48,6 @@ class UserService {
   }
 
   static update(id, params) {
-    console.log("USER SERVICE UPDATE", id, params);
     request
       .put(APIEndpoints.UPDATE_USER + id)
       .send(params)

@@ -18,9 +18,20 @@ class ServerActions {
     });
   }
 
-  static receiveVerify(errors) {
+  static receiveVerify(error) {
     AppDispatcher.handleAction({
       type: ActionTypes.VERIFY_RESPONSE,
+      error: error
+    });
+  }
+
+  static receiveResendVerify(json, errors) {
+    let type = !errors ? ActionTypes.RESEND_VERIFY_SUCCESS_RESPONSE :
+                         ActionTypes.RESEND_VERIFY_ERROR_RESPONSE;
+    let entity = json;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
       errors: errors
     });
   }
@@ -414,7 +425,15 @@ class ServerActions {
 
   static receiveInviteUser() {
     AppDispatcher.handleAction({
-      type: ActionTypes.INVITE_USER_RESPONSE
+      type: ActionTypes.CREATE_INVITATION_RESPONSE
+    });
+  }
+
+  static receiveInvitation(json, error) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_INVITATION_RESPONSE,
+      json: json,
+      error: error
     });
   }
 };

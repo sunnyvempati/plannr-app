@@ -29,6 +29,14 @@ class SessionActions {
     SessionService.verify(token);
   }
 
+  static resendVerify(email) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.RESEND_VERIFY_REQUEST,
+      email: email
+    });
+    SessionService.resendVerify(email);
+  }
+
   static resetPasswordRequest(email) {
     AppDispatcher.handleAction({
       type: ActionTypes.RESET_PASSWORD_REQUEST,

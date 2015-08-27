@@ -41,6 +41,24 @@ class SessionService {
       });
   }
 
+  static resendVerify(email) {
+    request
+      .post(APIEndpoints.RESEND_VERIFY)
+      .send({email: email})
+      .use(Utils.addAuthToken)
+      .end((error, res) => {
+        if (res) {
+          if (res.error) {
+            let error = res.status == 404 ? {email: 'not found'} : Utils.getErrors(res);
+            ServerActions.receiveResendVerify(null, error);
+          } else {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveResendVerify(json, null);
+          }
+        }
+      });
+  }
+
   static verify(token) {
     request
       .post(APIEndpoints.VERIFY)
@@ -50,13 +68,11 @@ class SessionService {
         if (res) {
           let errors = null;
           if (res.error) {
-            errors = Utils.getErrors(res);
-            ToastActions.toastError(errors.message);
+            ServerActions.receiveVerify("User not found.  Try requesting a new confirmation email.");
           } else {
-            let json = JSON.parse(res.text);
-            ToastActions.toast(json.message);
+            ServerActions.receiveVerify(null);
+            ToastActions.toast("You're verified!  Login to get started!");
           }
-          ServerActions.receiveVerify(errors);
         }
       })
   }

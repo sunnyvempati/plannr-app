@@ -57,12 +57,6 @@ class UsersController < ApplicationController
   def verify
   end
 
-  def toggle_admin
-    user = User.find(params[:id])
-    user.update_attribute(:company_admin, !user.company_admin)
-    render json: {message: "success", admin: user.company_admin}
-  end
-
   def mass_delete
     User.destroy_all(id: mass_delete_params[:ids])
     render_success
@@ -88,11 +82,6 @@ class UsersController < ApplicationController
 
   def check_invitation!
     @invitation = Invitation.find_by_token(params[:invite_token])
-    # if invitation is used, recipient gets set, which means invitation has expired.
-    if @invitation && @invitation.recipient
-      flash[:error] = "Invitation has expired or been used already. Request new invitation"
-      redirect_to login_path
-    end
   end
 
   def model

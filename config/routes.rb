@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   # # email verification
   post 'verify', to: 'user_verifications#verify'
+  post '/resend_verify', to: 'user_verifications#create'
 
   # users
   resources :users, only: [:index, :create, :update]
@@ -58,6 +59,7 @@ Rails.application.routes.draw do
 
   # user invitations
   resources :invitations, only: [:create]
+  get 'invitation_by_token', to: 'invitations#get_by_token'
 
   # # invitation
   # post 'resend_invitation', to: 'invitations#resend'
