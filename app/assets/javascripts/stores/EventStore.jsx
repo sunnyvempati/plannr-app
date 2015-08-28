@@ -69,6 +69,13 @@ class EventStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  clear() {
+    this._searchResults = [];
+    this._events = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   removeEvents(ids) {
     this._cache.clear();
     // remove from global event map
@@ -117,6 +124,9 @@ _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventStoreInstance.removeEvents(action.ids);
         _eventStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _eventStoreInstance.clear();
       break;
     default:
   }

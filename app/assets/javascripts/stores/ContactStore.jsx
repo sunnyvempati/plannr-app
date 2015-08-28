@@ -61,6 +61,13 @@ class ContactStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  clear() {
+    this._searchResults = [];
+    this._contacts = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   removeContacts(ids) {
     this._cache.clear();
     // remove from global contact map
@@ -110,6 +117,9 @@ _contactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _contactStoreInstance.removeContacts(action.ids);
         _contactStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _contactStoreInstance.clear();
       break;
     default:
   }

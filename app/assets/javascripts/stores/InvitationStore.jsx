@@ -2,6 +2,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
 import CacheStore from './CacheStore';
+import SessionStore from './SessionStore';
 
 class InvitationStore extends BaseStore {
   constructor() {
@@ -20,11 +21,19 @@ class InvitationStore extends BaseStore {
   get(token) {
     return this._invitations[token];
   }
+
+  clear() {
+    this._invitations = [];
+    this._error = null;
+  }
 }
 
 let _invitationStoreInstance = new InvitationStore();
 
 _invitationStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
+  AppDispatcher.waitFor([
+    SessionStore.dispatchToken
+  ]);
   let action = payload.action;
 
   switch(action.type) {
@@ -33,6 +42,9 @@ _invitationStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (invitation) _invitationStoreInstance.add(invitation);
       else _invitationStoreInstance.error = action.error;
       _invitationStoreInstance.emitChange();
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _invitationStoreInstance.clear();
       break;
     default:
   }

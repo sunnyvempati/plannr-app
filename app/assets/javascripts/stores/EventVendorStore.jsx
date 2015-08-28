@@ -4,6 +4,7 @@ import BaseStore from './BaseStore';
 import VendorStore from './VendorStore';
 import ViewStore from './ViewStore';
 import CacheStore from './CacheStore';
+import SessionStore from './SessionStore';
 
 class EventVendorStore extends BaseStore {
   constructor() {
@@ -76,6 +77,13 @@ class EventVendorStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  clear() {
+    this._searchResults = [];
+    this._eventVendors = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   removeEventVendors(ids) {
     this._cache.clear();
     // remove from global contact map
@@ -91,6 +99,7 @@ let _eventVendorStoreInstance = new EventVendorStore();
 
 _eventVendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
+    SessionStore.dispatchToken,
     VendorStore.dispatchToken
   ]);
 
@@ -115,6 +124,9 @@ _eventVendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventVendorStoreInstance.removeEventVendors(action.ids);
         _eventVendorStoreInstance.emitChange();
       }
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _eventVendorStoreInstance.clear();
+      break;
     default:
   }
 });

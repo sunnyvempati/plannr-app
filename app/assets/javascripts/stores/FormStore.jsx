@@ -84,6 +84,9 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.RESET:
       _formStoreInstance.clear();
       break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _formStoreInstance.clear();
+      break;
     default:
   }
 });

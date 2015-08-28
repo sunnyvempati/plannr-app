@@ -4,6 +4,7 @@ import BaseStore from './BaseStore';
 import ContactStore from './ContactStore';
 import ViewStore from './ViewStore';
 import CacheStore from './CacheStore';
+import SessionStore from './SessionStore';
 
 class EventContactStore extends BaseStore {
   constructor() {
@@ -87,13 +88,21 @@ class EventContactStore extends BaseStore {
     // remove from view
     this._view.remove(ids);
   }
+
+  clear() {
+    this._searchResults = [];
+    this._eventContacts = [];
+    this._cache.clear();
+    this._view.reset();
+  }
 }
 
 let _eventContactStoreInstance = new EventContactStore();
 
 _eventContactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
-    ContactStore.dispatchToken
+    ContactStore.dispatchToken,
+    SessionStore.dispatchToken
   ]);
 
   let action = payload.action;
@@ -117,6 +126,9 @@ _eventContactStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _eventContactStoreInstance.removeEventContacts(action.ids);
         _eventContactStoreInstance.emitChange();
       }
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _eventContactStoreInstance.clear();
+      break;
     default:
   }
 });

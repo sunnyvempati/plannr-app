@@ -65,6 +65,12 @@ class TaskStore extends BaseStore {
     });
   }
 
+  clear() {
+    this._tasks = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   isCached(params) {
     return !!this._cache.contextExists(params);
   }
@@ -107,6 +113,9 @@ _taskStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _taskStoreInstance.removeTasks(action.ids);
         _taskStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _taskStoreInstance.clear();
       break;
     default:
   }

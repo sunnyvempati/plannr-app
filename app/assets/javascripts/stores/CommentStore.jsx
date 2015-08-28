@@ -2,6 +2,8 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
 import CacheStore from './CacheStore';
+import SessionStore from './SessionStore';
+import UserStore from './UserStore';
 import moment from 'moment';
 
 class CommentStore extends BaseStore {
@@ -51,6 +53,11 @@ class CommentStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  clear() {
+    this._cache.clear();
+    this._comments = [];
+  }
+
   remove(id, params) {
     // to do fix comments splice
     delete this._comments[id];
@@ -61,6 +68,10 @@ class CommentStore extends BaseStore {
 let _commentStoreInstance = new CommentStore();
 
 _commentStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
+  AppDispatcher.waitFor([
+    SessionStore.dispatchToken,
+    UserStore.dispatchToken
+  ]);
   let action = payload.action;
 
   switch(action.type) {
@@ -85,6 +96,9 @@ _commentStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _commentStoreInstance.remove(action.id, action.params);
         _commentStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _commentStoreInstance.clear();
       break;
     default:
   }

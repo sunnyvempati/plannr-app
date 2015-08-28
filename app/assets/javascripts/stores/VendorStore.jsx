@@ -61,6 +61,13 @@ class VendorStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  clear() {
+    this._searchResults = [];
+    this._vendors = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   removeVendors(ids) {
     this._cache.clear();
     // remove from global vendor map
@@ -110,6 +117,9 @@ _vendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _vendorStoreInstance.removeVendors(action.ids);
         _vendorStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _vendorStoreInstance.clear();
       break;
     default:
   }

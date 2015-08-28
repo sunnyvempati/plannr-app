@@ -3,6 +3,8 @@ import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
 import ViewStore from './ViewStore';
 import CacheStore from './CacheStore';
+import SessionStore from './SessionStore';
+import UserStore from './UserStore';
 
 class EventAttachmentStore extends BaseStore {
   constructor() {
@@ -67,6 +69,13 @@ class EventAttachmentStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  clear() {
+    this._loading = false;
+    this._eventAttachments = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   removeEventAttachments(ids) {
     this._cache.clear();
     // remove from global attachments map
@@ -81,6 +90,10 @@ class EventAttachmentStore extends BaseStore {
 let _eventAttachmentStoreInstance = new EventAttachmentStore();
 
 _eventAttachmentStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
+  AppDispatcher.waitFor([
+    SessionStore.dispatchToken,
+    UserStore.dispatchToken
+  ]);
   let action = payload.action;
 
   switch (action.type) {
@@ -107,6 +120,10 @@ _eventAttachmentStoreInstance.dispatchToken = AppDispatcher.register((payload) =
         _eventAttachmentStoreInstance.removeEventAttachments(action.ids);
         _eventAttachmentStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _eventAttachmentStoreInstance.clear();
+      break;
     default:
   }
 });

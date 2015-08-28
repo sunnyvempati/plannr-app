@@ -77,6 +77,13 @@ class UserStore extends BaseStore {
     return this._users[SessionStore.userId];
   }
 
+  clear() {
+    this._searchResults = [];
+    this._users = [];
+    this._cache.clear();
+    this._view.reset();
+  }
+
   addUser(user) {
     this._users[user.id] = user;
   }
@@ -124,6 +131,9 @@ _userStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _userStoreInstance.removeUsers(action.ids);
         _userStoreInstance.emitChange();
       }
+      break;
+    case ActionTypes.LOGOUT_RESPONSE:
+      if (!SessionStore.isLoggedIn()) _userStoreInstance.clear();
       break;
     default:
   }
