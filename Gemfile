@@ -49,7 +49,7 @@ group 'development' do
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
   gem 'capistrano-linked-files'
-  gem 'capistrano-bower'
+  gem 'capistrano-npm'
   gem 'spring'
 end
 
