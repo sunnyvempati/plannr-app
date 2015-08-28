@@ -10,6 +10,7 @@ var AutocompleteInput = {
   getInitialState: function() {
     return {
       originalValue: null, // this is used to check if value was changed outside the component via props
+      originalValue: null,
       itemSet: false,
       itemDisplay: null,
       items: [],
