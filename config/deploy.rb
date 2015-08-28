@@ -73,4 +73,4 @@ end
 #   end
 # end
 
-before 'deploy:updated', 'bower:install'
+# before 'deploy:updated', 'bower:install'
