@@ -47,7 +47,8 @@ const AppConstants = {
     GET_COMMENTS:               '/comments',
     DELETE_COMMENT:             '/comments/',
     CREATE_INVITE:              '/invitations',
-    GET_INVITE:                 '/invitation_by_token'
+    GET_INVITE:                 '/invitation_by_token',
+    FEEDBACK:                   '/feedback'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -189,6 +190,11 @@ const AppConstants = {
     CREATE_INVITATION_RESPONSE: null,
     GET_INVITATION_REQUEST: null,
     GET_INVITATION_RESPONSE: null,
+
+    // Feedback
+    CREATE_FEEDBACK_REQUEST: null,
+    CREATE_FEEDBACK_SUCCESS_RESPONSE: null,
+    CREATE_FEEDBACK_ERROR_RESPONSE: null,
 
     // Page Title
     SET_PAGE_TITLE: null,

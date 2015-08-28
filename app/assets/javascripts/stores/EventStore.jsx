@@ -73,7 +73,7 @@ class EventStore extends BaseStore {
     this._cache.clear();
     // remove from global event map
     ids.map((id) => {
-      this._events.splice(id, 1);
+      delete this._events[id];
     });
 
     this._view.remove(ids);

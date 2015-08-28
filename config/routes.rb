@@ -61,8 +61,7 @@ Rails.application.routes.draw do
   resources :invitations, only: [:create]
   get 'invitation_by_token', to: 'invitations#get_by_token'
 
-  # # invitation
-  # post 'resend_invitation', to: 'invitations#resend'
+  post '/feedback', to: 'feedback#create'
 
   # # company
   # get 'company', to: 'companies#show'

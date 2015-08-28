@@ -31,7 +31,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    binding.pry
     @event = Event.new
     template_event = template_params && template_params[:parent_event_id]
     if template_event

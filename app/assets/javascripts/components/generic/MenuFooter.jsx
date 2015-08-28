@@ -1,11 +1,13 @@
+import ModalActions from '../../actions/ModalActions';
+
 var MenuFooter = React.createClass({
-  // openFeedbackModal: function() {
-  //   document.getElementById('menu-trigger').checked = false;
-  //   Modal.mount({}, FeedbackModal);
-  // },
+  openFeedbackModal: function() {
+    document.getElementById('menu-trigger').checked = false;
+    ModalActions.openFeedbackModal();
+  },
   render: function() {
     return (
-      <div className="MenuFooter">
+      <div className="MenuFooter" onClick={this.openFeedbackModal}>
         Leave us feedback
       </div>
     );

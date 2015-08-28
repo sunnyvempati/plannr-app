@@ -8,6 +8,7 @@ import ShowContactModal from '../components/contacts/ShowContactModal';
 import ShowVendorModal from '../components/vendors/ShowVendorModal';
 import AddVendorModal from '../components/event_vendors/AddVendorModal';
 import AddContactModal from '../components/event_contacts/AddContactModal';
+import FeedbackModal from '../components/session/FeedbackModal';
 
 class ModalActions {
   static openShowTaskModal(props) {
@@ -68,6 +69,14 @@ class ModalActions {
 
   static openAddVendorModal(props) {
     let modal = React.createElement(AddVendorModal, props);
+    AppDispatcher.handleAction({
+      type: ActionTypes.OPEN_MODAL,
+      modal: modal
+    });
+  }
+
+  static openFeedbackModal() {
+    let modal = React.createElement(FeedbackModal, {});
     AppDispatcher.handleAction({
       type: ActionTypes.OPEN_MODAL,
       modal: modal

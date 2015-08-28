@@ -65,7 +65,7 @@ class VendorStore extends BaseStore {
     this._cache.clear();
     // remove from global vendor map
     ids.map((id) => {
-      this._vendors.splice(id, 1);
+      delete this._vendors[id];
     });
     // remove from view
     this._view.remove(ids);

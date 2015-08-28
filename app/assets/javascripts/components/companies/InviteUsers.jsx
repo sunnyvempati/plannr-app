@@ -2,7 +2,7 @@ import ButtonListMixin from '../mixins/ButtonListMixin';
 import Form from '../generic/Form';
 import FormInput from '../generic/FormInput';
 import FormMixin from '../mixins/FormMixin';
-import UserActions from '../../actions/UserActions';
+import InvitationActions from '../../actions/InvitationActions';
 
 var InviteUsers = React.createClass({
   mixins: [FormMixin, ButtonListMixin],
@@ -14,7 +14,7 @@ var InviteUsers = React.createClass({
   },
   submitForm(data, reset, invalidateForm) {
     this.refs.inviteEmail.resetValue();
-    UserActions.invite(data.email);
+    InvitationActions.create(data.email);
   },
   render: function() {
     return (

@@ -10,6 +10,9 @@
   &.compact {
     padding: 0px;
   }
+  &.profile {
+    margin-top: $grid-increment;
+  }
 }
 
 .FormContainer-startDatetimeContainer {

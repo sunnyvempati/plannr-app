@@ -63,7 +63,7 @@ class UserStore extends BaseStore {
     this._cache.clear();
     // remove from global user map
     ids.map((id) => {
-      this._uysers.splice(id, 1);
+      delete this._users[id];
     });
     // remove from view
     this._view.remove(ids);

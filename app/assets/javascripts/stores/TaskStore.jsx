@@ -73,7 +73,7 @@ class TaskStore extends BaseStore {
     this._cache.clear();
     // remove from global task map
     ids.map((id) => {
-      this._tasks.splice(id, 1);
+      delete this._tasks[id];
     });
     // remove from view
     this._view.remove(ids);

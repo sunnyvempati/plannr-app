@@ -16,11 +16,12 @@ var ProfileDropdownMenu = React.createClass({
   },
   getProfileMenu: function() {
     var profile = this.props.profile;
+    let name = profile && profile.first_name + " " + profile.last_name;
     return (
       <div className="ProfileMenu">
         <div className="ProfileMenu-header">
           <div className="ProfileMenu-name">
-            {profile.first_name + " " + profile.last_name}
+            {name}
           </div>
           <div className="ProfileMenu-email">
             {this.props.email}
@@ -35,12 +36,15 @@ var ProfileDropdownMenu = React.createClass({
     )
   },
   getTrigger: function() {
-    return (
-      <div className="ProfileTrigger">
-        {this.props.profile.first_name}
-        <i className="fa fa-chevron-down ProfileIcon"></i>
-      </div>
-    )
+    let name = this.props.profile && this.props.profile.first_name;
+    if (name) {
+      return (
+        <div className="ProfileTrigger">
+          {this.props.profile.first_name}
+          <i className="fa fa-chevron-down ProfileIcon"></i>
+        </div>
+      )
+    }
   },
   render: function() {
     return (

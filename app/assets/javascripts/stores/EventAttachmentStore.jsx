@@ -71,7 +71,7 @@ class EventAttachmentStore extends BaseStore {
     this._cache.clear();
     // remove from global attachments map
     ids.map((id) => {
-      this._eventAttachments.splice(id, 1);
+      delete this._eventAttachments[id];
     });
     // remove from view
     this._view.remove(ids);

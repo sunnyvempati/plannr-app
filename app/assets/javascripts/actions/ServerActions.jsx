@@ -436,6 +436,17 @@ class ServerActions {
       error: error
     });
   }
+
+  static receiveCreateFeedback(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_FEEDBACK_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_FEEDBACK_ERROR_RESPONSE;
+    let entity = json && json.feedback;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

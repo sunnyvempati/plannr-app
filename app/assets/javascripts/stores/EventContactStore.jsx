@@ -82,7 +82,7 @@ class EventContactStore extends BaseStore {
     this._cache.clear();
     // remove from global contact map
     ids.map((id) => {
-      this._eventContacts.splice(id, 1);
+      delete this._eventContacts[id];
     });
     // remove from view
     this._view.remove(ids);

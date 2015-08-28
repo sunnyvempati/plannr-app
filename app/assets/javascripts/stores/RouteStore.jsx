@@ -68,7 +68,6 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
 
     case ActionTypes.VERIFY_RESPONSE:
       if (!action.error) {
-        console.log(action);
         router.transitionTo('app');
       }
       break;

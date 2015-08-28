@@ -30,9 +30,10 @@ var EventClientInput = React.createClass({
   },
   _onCreateEventClientChange() {
     if (!FormStore.errors) {
-      let eventClientName = FormStore.entity.name;
-      this.setValue(FormStore.entity.id);
-      this.setState({itemSet: true, itemDisplay: eventClientName});
+      let entity = FormStore.entity;
+      let eventClientName = entity && entity.name;
+      this.setValue(entity && entity.id);
+      if (eventClientName) this.setState({itemSet: true, itemDisplay: eventClientName});
     }
   },
   retrieveItem: function(id) {

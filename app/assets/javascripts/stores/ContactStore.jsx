@@ -65,7 +65,7 @@ class ContactStore extends BaseStore {
     this._cache.clear();
     // remove from global contact map
     ids.map((id) => {
-      this._contacts.splice(id, 1);
+      delete this._contacts[id];
     });
     // remove from view
     this._view.remove(ids);

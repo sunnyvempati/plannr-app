@@ -2,15 +2,13 @@ import skrollr from 'skrollr';
 import ProfileDropdownMenu from './ProfileDropdownMenu';
 
 var PageHeader = React.createClass({
-  propTypes: {
-    header: React.PropTypes.string,
-    profile: React.PropTypes.object,
-    email: React.PropTypes.string
-  },
-  getDefaultProps: function() {
-    return {
-      skrollable: false
-    };
+  // getDefaultProps: function() {
+  //   return {
+  //     skrollable: true
+  //   };
+  // },
+  componentDidMount: function() {
+    this.enableSkrollrHeader();
   },
   enableSkrollrHeader: function () {
     this.setSkrollr($('#mainHeader'), [[0, 'height:128px'], [56, 'height:64px']]);
@@ -27,7 +25,7 @@ var PageHeader = React.createClass({
     }
   },
   render: function() {
-    if (this.props.skrollable) this.enableSkrollrHeader();
+    // if (this.props.skrollable) this.enableSkrollrHeader();
     // to do disable else
     return (
       <div id="mainHeader"

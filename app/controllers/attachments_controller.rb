@@ -27,7 +27,6 @@ class AttachmentsController < ApplicationController
   end
 
   def mass_delete
-    binding.pry
     render_success Attachment.destroy_all(id: mass_destroy_params[:ids])
   end
 

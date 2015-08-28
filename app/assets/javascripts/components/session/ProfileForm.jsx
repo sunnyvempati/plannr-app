@@ -22,7 +22,7 @@ var ProfileForm = React.createClass({
   },
   render: function() {
     return (
-      <div className="FormContainer">
+      <div className="FormContainer profile">
         <Form mapping={this.mapInputs}
               onSubmit={this.postForm}
               onValid={this.enableButton}

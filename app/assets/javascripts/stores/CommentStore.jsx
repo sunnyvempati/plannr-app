@@ -53,7 +53,7 @@ class CommentStore extends BaseStore {
 
   remove(id, params) {
     // to do fix comments splice
-    this._comments.splice(id, 1);
+    delete this._comments[id];
     this._cache.removeItem(id, params);
   }
 }

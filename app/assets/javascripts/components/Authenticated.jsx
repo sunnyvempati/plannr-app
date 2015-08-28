@@ -13,7 +13,7 @@ export default AuthenticatedComponent(
   class Authenticated extends BaseComponent {
     constructor() {
       super();
-      this.state = {header: null, skrollable: false};
+      this.state = {header: null};
       this._onPageTitleChange = this._onPageTitleChange.bind(this);
     }
 
@@ -26,8 +26,8 @@ export default AuthenticatedComponent(
     }
 
     _onPageTitleChange() {
-      let header = PageTitleStore.header, skrollable = PageTitleStore.skrollable;
-      this.setState({header: header, skrollable: skrollable});
+      let header = PageTitleStore.header;
+      this.setState({header: header});
     }
 
     _closeMenu() {
@@ -55,8 +55,7 @@ export default AuthenticatedComponent(
             <div className="MainContainer">
               <PageHeader header={this.state.header || "Plannr"}
                           profile={currentUser.profile}
-                          email={currentUser.email}
-                          skrollable={this.state.skrollable} />
+                          email={currentUser.email} />
               <div className="MainContainer-content">
                 <RouteHandler user={currentUser} />
               </div>
