@@ -6,10 +6,7 @@ class EventsController < ApplicationController
 
   def index
     @events = @filter_sort.find.page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render_success @events }
-    end
+    render_success @events
   end
 
   def show
@@ -49,7 +46,10 @@ class EventsController < ApplicationController
 
   def update
     @event.assign_attributes event_params
-    render_entity @event do
+    # need to skip validation on archive update
+    # so it doesn't validate if past start_date
+    skip_validation = event_params[:status] == 2;
+    render_entity @event, skip_validation do
       EventContact.find_or_create_by(contact_id: @event.client_id, event_id: @event.id) if @event.client_id
     end
   end
@@ -91,9 +91,6 @@ class EventsController < ApplicationController
     t_params = {}
     if params[:template] && !params[:template].empty?
       t_params = params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments)
-      [:contacts, :vendors, :tasks, :comments].each do |entity|
-        t_params[entity] = t_params[entity] == 'true'
-      end
     end
     t_params
   end

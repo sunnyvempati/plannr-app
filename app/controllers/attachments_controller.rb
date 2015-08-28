@@ -4,10 +4,7 @@ class AttachmentsController < ApplicationController
 
   def index
     @attachments = @filter_sort.find.page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render json: @attachments }
-    end
+    render_success @attachments
   end
 
   def new
@@ -22,8 +19,6 @@ class AttachmentsController < ApplicationController
     # once you create, update company attachment status
     # if not - error
     @attachment = Attachment.new(attachment_params)
-    @attachment.event_id = params[:event_id]
-
     render_entity @attachment
   end
 
@@ -31,7 +26,7 @@ class AttachmentsController < ApplicationController
     render_success if @attachment.destroy
   end
 
-  def mass_destroy
+  def mass_delete
     render_success Attachment.destroy_all(id: mass_destroy_params[:ids])
   end
 
@@ -47,7 +42,6 @@ class AttachmentsController < ApplicationController
     }
   end
 
-  # TODO: mass destroy mixin
   def mass_destroy_params
     params.require(:destroy_opts).permit(ids: [])
   end

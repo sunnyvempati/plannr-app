@@ -35,28 +35,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= current_user_session && current_user_session.user
   end
 
-  def require_no_user
-    if current_user
-      store_location
-      flash[:notice] = "You must be logged out to access this page"
-      redirect_to root_path
-      return false
-    end
-  end
-
   def authenticate_user
     unless current_user
-      store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to login_path
+      render_auth_error message: 'You must be logged in to access this page'
       return false
-    else
-      redirect_to new_profile_path if !current_user.profile
     end
-  end
-
-  def store_location
-    session[:return_to] = request.original_url
   end
 
   def check_admin

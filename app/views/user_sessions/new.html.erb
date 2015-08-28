@@ -1,3 +1,3 @@
 <% content_for(:title) { "Login" } %>
 
-<%= react_component("LoginForm", error: flash[:error], notice: flash[:notice], authToken: form_authenticity_token) %>
+<%= react_component("LoginForm", authToken: form_authenticity_token) %>

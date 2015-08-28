@@ -15,7 +15,7 @@ Bundler.require(*Rails.groups)
 
 module PlannrApp
   class Application < Rails::Application
-    config.assets.paths << Rails.root.join("vendor","assets","bower_components","components-font-awesome","fonts")
+    config.assets.paths << Rails.root.join("node_modules")
     config.react.addons = true
     config.action_controller.default_url_options = { :trailing_slash => true }
     config.active_record.raise_in_transactional_callbacks = true
@@ -36,5 +36,10 @@ module PlannrApp
     end
 
     config.logger = Log4r::Logger.get('plannr_logger')
+
+    config.browserify_rails.commandline_options = "-t babelify --extension=\".jsx\""
+    config.browserify_rails.source_map_environments << "development"
+
+    ActiveModel::Serializer.config.adapter = :json
   end
 end

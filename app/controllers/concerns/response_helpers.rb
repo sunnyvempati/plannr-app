@@ -3,13 +3,10 @@ module ResponseHelpers
     render entity, status: 200
   end
 
-  def render_entity(entity)
-    if entity.save
+  def render_entity(entity, skip_validation=false)
+    if entity.save(validate: !skip_validation)
       yield if block_given?
-      respond_to do |format|
-        format.html
-        format.json { render_success(entity) }
-      end
+      render_success entity
     else
       render json: errors_hash(entity.errors), status: 403
     end
@@ -21,6 +18,10 @@ module ResponseHelpers
 
   def render_error(json={})
     render json: json, status: 403
+  end
+
+  def render_auth_error(json={})
+    render json: json, status: 401
   end
 
   def errors_hash(entity_errors)

@@ -1,5 +1,5 @@
 class InvitationsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:get_by_token]
   before_action :check_admin, only: [:create]
 
   def index
@@ -15,6 +15,15 @@ class InvitationsController < ApplicationController
       render json: @invitation
     else
       render_error(@invitation.errors)
+    end
+  end
+
+  def get_by_token
+    @invitation = Invitation.find_by_token(params[:token])
+    if @invitation
+      render json: @invitation, serializer: InvitationSerializer
+    else
+      render json: {}, status: 403
     end
   end
 

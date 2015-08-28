@@ -10,20 +10,21 @@
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   border-radius: 2px;
   bottom: 48px;
-  right: 48px;
   font-size: 14px;
   cursor: default;
   z-index: $toast-z-index;
   animation-name: Toast-enter;
   animation-duration: 0.3s;
+  &.normal {
+    left: 48px;
+    background: $plannr-blue;
+  }
   &.loading {
     min-width: 30px;
+    right: 48px;
   }
   &.error {
     background: #CC0000;
-  }
-  &.notice {
-    background: $plannr-blue;
   }
 }
 

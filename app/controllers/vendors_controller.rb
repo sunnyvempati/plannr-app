@@ -6,17 +6,11 @@ class VendorsController < ApplicationController
 
   def index
     @vendors = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
-    respond_to do |format|
-      format.html
-      format.json { render json: @vendors }
-    end
+    render_success @vendors
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json { render json: @vendor }
-    end
+    render_success @vendor
   end
 
   def contacts
@@ -48,7 +42,7 @@ class VendorsController < ApplicationController
     end
   end
 
-  def mass_destroy
+  def mass_delete
     render_success Vendor.destroy_all(id: mass_destroy_params[:ids])
   end
 

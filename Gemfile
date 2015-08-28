@@ -12,7 +12,6 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
-gem 'bower-rails'
 gem 'authlogic'
 gem 'react-rails', '~> 1.0'
 
@@ -20,7 +19,7 @@ gem 'acts_as_tenant'
 
 gem 'responders', '~> 2.0'
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.10.0.rc1'
 gem 'faker'
 gem 'autoprefixer-rails'
 
@@ -37,6 +36,8 @@ gem 'log4r'
 gem 'statsd-ruby'
 gem 'hallmonitor'
 
+gem 'browserify-rails'
+
 group 'development' do
   gem 'pry'
   gem 'pry-rails'
@@ -48,8 +49,7 @@ group 'development' do
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'
   gem 'capistrano-linked-files'
-  gem 'capistrano-bower'
-  gem 'rack-mini-profiler'
+  gem 'capistrano-npm'
   gem 'spring'
 end
 

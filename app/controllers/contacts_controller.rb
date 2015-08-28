@@ -7,10 +7,7 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
-    respond_to do |format|
-      format.html
-      format.json { render json: @contacts }
-    end
+    render_success @contacts
   end
 
   def show
@@ -42,7 +39,7 @@ class ContactsController < ApplicationController
     end
   end
 
-  def mass_destroy
+  def mass_delete
     render_success Contact.destroy_all(id: mass_destroy_params[:ids])
   end
 

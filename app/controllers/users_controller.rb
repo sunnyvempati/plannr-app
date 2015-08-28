@@ -1,25 +1,28 @@
 class UsersController < ApplicationController
   include FilterSort
-  before_action :authenticate_user, :only => [:show, :edit, :update]
-  before_action :check_invitation!, :require_no_user, only: [:new, :create]
+  before_action :authenticate_user, only: [:show, :edit, :update]
+  before_action :check_invitation!, only: [:new, :create]
+  before_action :set_user, only: [:update, :show]
 
   # only admins can toggle admin abilities
   before_action :check_admin, only: [:toggle_admin]
 
   def index
     @users = @filter_sort.find.page(params[:page])
-    respond_to do |format|
-      format.html
-      format.json { render json: @users, each_serializer: CompanyUserSerializer }
-    end
+    render_success @users
   end
 
   def show
-    render json: User.includes(:profile).find(params[:id])
+    render json: @user
   end
 
   def new
     @user = @invitation ? User.new(email: @invitation.email, company: @invitation.company) : User.new
+  end
+
+  def update
+    @user.assign_attributes(user_params)
+    render_entity @user
   end
 
   def create
@@ -54,12 +57,6 @@ class UsersController < ApplicationController
   def verify
   end
 
-  def toggle_admin
-    user = User.find(params[:id])
-    user.update_attribute(:company_admin, !user.company_admin)
-    render json: {message: "success", admin: user.company_admin}
-  end
-
   def mass_delete
     User.destroy_all(id: mass_delete_params[:ids])
     render_success
@@ -67,8 +64,12 @@ class UsersController < ApplicationController
 
   private
 
+  def set_user
+    @user = User.includes(:profile).find(params[:id])
+  end
+
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :company_admin)
   end
 
   def company_params
@@ -81,11 +82,6 @@ class UsersController < ApplicationController
 
   def check_invitation!
     @invitation = Invitation.find_by_token(params[:invite_token])
-    # if invitation is used, recipient gets set, which means invitation has expired.
-    if @invitation && @invitation.recipient
-      flash[:error] = "Invitation has expired or been used already. Request new invitation"
-      redirect_to login_path
-    end
   end
 
   def model

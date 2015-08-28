@@ -1,6 +1,5 @@
 class PasswordResetsController < ApplicationController
-  before_filter :require_no_user
-  before_filter :load_user_using_perishable_token, :only => [ :edit, :update ]
+  before_filter :load_user_using_perishable_token, :only => [ :update ]
 
   def new
   end
@@ -9,22 +8,18 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by_email(params[:email])
     if @user
       @user.deliver_password_reset_instructions!
-      flash[:notice] = "Instructions to reset your password have been emailed to you"
-      render_success({redirect_to: login_path})
+      flash[:notice] =
+      render_success({message: "Instructions to reset your password have been emailed to you"})
     else
       render_error({email: "not found. Try a different one."})
     end
-  end
-
-  def edit
   end
 
   def update
     @user.password = reset_params[:password]
     @user.password_confirmation = reset_params[:password_confirmation]
     if @user.save
-      flash[:success] = "Your password was successfully updated"
-      render_success({redirect_to: root_path})
+      render_success({message: "Your password was successfully updated"})
     else
       render_error(errors_hash(@user.errors))
     end
@@ -40,11 +35,7 @@ class PasswordResetsController < ApplicationController
   def load_user_using_perishable_token
     @user = User.find_using_perishable_token(params[:id])
     unless @user
-      flash[:error] = "We're sorry, but we could not locate your account"
-      respond_to do |format|
-        format.html { redirect_to login_path }
-        format.json { render_redirect(login_path) }
-      end
+      render_error(message: "We're sorry, but we could not locate your account")
     end
   end
 end

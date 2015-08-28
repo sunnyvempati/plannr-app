@@ -3,26 +3,27 @@ class EventContactsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    serializer = filter_sort_params && filter_sort_params[:with_event_id] ? EventContactWithContactSerializer : EventContactWithEventSerializer
     @event_contacts = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
-    respond_to do |format|
-      format.html
-      format.json { render json: @event_contacts, each_serializer: serializer }
-    end
+    render_success @event_contacts
   end
 
+  # def create
+  #   event_contact = EventContact.new event_id: params[:event_id]
+  #   if event_contact_params[:contact_id]
+  #     event_contact.contact_id = event_contact_params[:contact_id]
+  #   else
+  #     event_contact.contact_id = Contact.create!(name: event_contact_params[:name]).id
+  #   end
+  #   if event_contact.save
+  #     render json: event_contact, serializer: EventContactWithContactSerializer
+  #   else
+  #     render_error
+  #   end
+  # end
+
   def create
-    event_contact = EventContact.new event_id: params[:event_id]
-    if event_contact_params[:contact_id]
-      event_contact.contact_id = event_contact_params[:contact_id]
-    else
-      event_contact.contact_id = Contact.create!(name: event_contact_params[:name]).id
-    end
-    if event_contact.save
-      render json: event_contact, serializer: EventContactWithContactSerializer
-    else
-      render_error
-    end
+    @event_contact = EventContact.new event_contact_params
+    render_entity @event_contact
   end
 
   def mass_delete
@@ -33,8 +34,12 @@ class EventContactsController < ApplicationController
 
   private
 
+  # def event_contact_params
+  #   params.require(:event_contact).permit(:contact_id, :name)
+  # end
+
   def event_contact_params
-    params.require(:event_contact).permit(:contact_id, :name)
+    params.require(:event_contact).permit(:contact_id, :event_id)
   end
 
   def mass_delete_params

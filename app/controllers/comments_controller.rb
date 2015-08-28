@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :find_commentable, except: [:destroy, :edit]
-  before_action :find_comment, only: [:destroy, :edit]
+  before_action :find_commentable, except: [:destroy, :update]
+  before_action :find_comment, only: [:destroy, :update]
 
   def index
     comments = @commentable.filtered_comments(current_user.id)
@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     render_success created_comment
   end
 
-  def edit
+  def update
     render_success @comment if @comment.update_attributes!(comment_params)
   end
 

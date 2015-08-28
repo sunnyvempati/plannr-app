@@ -10,8 +10,8 @@
   display: flex;
   padding-top: $size-increment * 4;
   @include font($body-1-font, normal, 0);
-  &.is-selected {
-    font-weight: 700;
+  &.active {
+    font-weight: 600;
     opacity: 0.5;
   }
   &:hover {

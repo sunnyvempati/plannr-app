@@ -124,3 +124,21 @@
 .TaskTableRow-leave.TaskTableRow-leave-active {
   opacity: 0.01;
 }
+
+.EventTableContainer {
+  display: flex;
+}
+
+.Table-sidebarContainer {
+  width: 70px;
+  background-color: $header-bg;
+  heigth: 100%;
+  border-top: 1px solid rgba(255,255,255,0.33);
+}
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 class InvitationSerializer < ActiveModel::Serializer
-  attributes :id, :email, :recipient
+  attributes :id, :email, :company, :token
 
   has_one :sender, :recipient
 end
