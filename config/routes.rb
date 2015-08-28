@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'start#new'
 
+  namespace :admin do
+    get 'report/companies', defaults: {format: :json}
+    get 'report/users', defaults: {format: :json}
+  end
+
   # login/logout
   # get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
