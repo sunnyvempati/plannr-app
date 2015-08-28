@@ -14,10 +14,10 @@ var TopMenu = React.createClass({
             <a href="http://plannr.wordpress.com">Blog</a>
           </div>
           <div className="TopMenu-item">
-            <a href='/sign_up'>Free Trial</a>
+            <a href='/#/sign_up'>Free Trial</a>
           </div>
           <div className="TopMenu-item">
-            <a href="/login">Sign In</a>
+            <a href="/#/login">Sign In</a>
           </div>
         </div>
       </div>
