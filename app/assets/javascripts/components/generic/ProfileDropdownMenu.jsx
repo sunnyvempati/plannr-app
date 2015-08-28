@@ -28,7 +28,7 @@ var ProfileDropdownMenu = React.createClass({
           </div>
         </div>
         <div className="ProfileMenu-actions">
-          <div onClick={this._logout}>
+          <div onClick={this._logout} className="u-clickable">
             Logout
           </div>
         </div>

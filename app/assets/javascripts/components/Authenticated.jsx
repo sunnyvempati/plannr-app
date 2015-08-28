@@ -8,6 +8,7 @@ import PageHeader from './generic/PageHeader';
 import Menu from './generic/Menu';
 import BaseComponent from './BaseComponent';
 import AuthenticatedComponent from './mixins/AuthenticatedComponent';
+import skrollr from 'skrollr';
 
 export default AuthenticatedComponent(
   class Authenticated extends BaseComponent {
@@ -19,6 +20,21 @@ export default AuthenticatedComponent(
 
     componentDidMount() {
       PageTitleStore.addChangeListener(this._onPageTitleChange);
+      this.enableSkrollrHeader();
+    }
+    enableSkrollrHeader() {
+      this.setSkrollr($('#mainHeader'), [[0, 'height:128px'], [56, 'height:64px']]);
+      this.setSkrollr($('#mainTitle'), [[56, 'padding-top:6px;font-size:34px'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
+      $('.MainContainer-content').css('padding-top', '128px');
+      var s = skrollr.init({forceHeight: false});
+    }
+    setSkrollr($element, data) {
+      for(var i = 0, l = data.length; i < l; i++) {
+        var d = data[i], // the current data entry
+            px = d[0], // the scroll position (in pixels)
+            css = d[1]; // the css property + value to set
+        $element.attr('data-' + px, css);
+      }
     }
 
     componentWillUnmount() {
