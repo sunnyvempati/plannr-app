@@ -11,11 +11,11 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+/tmp/*
+!/tmp/restart.txt
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
-
-!/tmp/restart.txt
 
 # Ignore all vendor assets
 /vendor
