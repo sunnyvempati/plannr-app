@@ -31,7 +31,6 @@ import EventTaskList from './components/event_tasks/EventTaskList';
 import EventAttachmentList from './components/event_attachments/EventAttachmentList';
 import EventVendorList from './components/event_vendors/EventVendorList';
 import EventComments from './components/events/EventComments';
-
 import Company from './components/companies/Company';
 
 export default (

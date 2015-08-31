@@ -7,6 +7,15 @@
   display: flex;
   align-items: center;
   z-index: $page-header-z-index;
+  &.tasks {
+    background-color: $plannr-green;
+  }
+  &.vendors {
+    background-color: $plannr-blue;
+  }
+  &.contacts {
+    background-color: $plannr-teal;
+  }
 }
 
 .PageHeader-title {

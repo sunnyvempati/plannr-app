@@ -29,7 +29,7 @@ var EventContactSmallTile = React.createClass({
     let eventContacts = this.state.eventContacts;
     return (
       <div className="Tile">
-        <div className="Tile-header">
+        <div className="Tile-header contacts">
           <Link to="event_contacts" params={{id: this.props.eventId}} className="Tile-headerLink">
             <div className="Tile-imgContact"></div>
             <div className="Tile-title">Contacts</div>

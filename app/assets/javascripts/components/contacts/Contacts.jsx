@@ -3,7 +3,7 @@ import PageTitleActions from '../../actions/PageTitleActions';
 
 var Contacts = React.createClass({
   componentDidMount: function() {
-    PageTitleActions.setPageTitle("Contacts", true);
+    PageTitleActions.setPageTitle("Contacts", "contacts");
   },
   render: function() {
     return (

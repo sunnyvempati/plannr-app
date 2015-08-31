@@ -5,12 +5,12 @@ import BaseStore from './BaseStore';
 class PageTitleStore extends BaseStore {
   constructor() {
     super();
-    this._skrollable = false;
+    this._pageClass = false;
     this._header = "";
   }
 
-  get skrollable() { return this._skrollable; }
-  set skrollable(val) { this._skrollable = val }
+  get pageClass() { return this._pageClass; }
+  set pageClass(val) { this._pageClass = val }
   get header() { return this._header; }
   set header(val) { this._header = val }
 }
@@ -21,7 +21,7 @@ _pageTitleStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   let action = payload.action;
   switch (action.type) {
     case ActionTypes.SET_PAGE_TITLE:
-      _pageTitleStoreInstance.skrollable = action.skrollable;
+      _pageTitleStoreInstance.pageClass = action.pageClass;
       _pageTitleStoreInstance.header = action.header;
       _pageTitleStoreInstance.emitChange();
       break;

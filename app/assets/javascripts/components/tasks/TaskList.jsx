@@ -23,7 +23,7 @@ const TaskList = React.createClass({
     };
   },
   componentDidMount() {
-    PageTitleActions.setPageTitle("Tasks", true);
+    PageTitleActions.setPageTitle("Tasks", "tasks");
     TaskStore.addChangeListener(this._onViewTasksChange);
   },
   componentDidUpdate: function() {

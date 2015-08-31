@@ -29,7 +29,7 @@ var EventVendorSmallTile = React.createClass({
     let eventVendors = this.state.eventVendors;
     return (
       <div className="Tile">
-        <div className="Tile-header">
+        <div className="Tile-header vendors">
           <Link to="event_vendors" params={{id: this.props.eventId}} className="Tile-headerLink">
             <div className="Tile-imgVendor"></div>
             <div className="Tile-title">Vendors</div>

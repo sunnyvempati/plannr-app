@@ -11,9 +11,10 @@ var PageHeader = React.createClass({
   render: function() {
     // if (this.props.skrollable) this.enableSkrollrHeader();
     // to do disable else
+    let className = "PageHeader " + this.props.pageClass;
     return (
       <div id="mainHeader"
-           className="PageHeader">
+           className={className}>
         <div id="mainTitle"
              className="PageHeader-title u-wrapWithEllipsis">
           {this.props.header}
