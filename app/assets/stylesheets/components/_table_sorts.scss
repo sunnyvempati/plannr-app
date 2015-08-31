@@ -7,7 +7,7 @@
 
 .TableSort-orderDisplay {
   @include font($body-1-font, 600, 0);
-  color: $black-half;
+  color: rgba(255,255,255,0.8);
 }
 
 .TableSortMenu {

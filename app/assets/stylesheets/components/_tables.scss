@@ -6,13 +6,21 @@
 }
 
 .Table-toolbar {
-  padding: $size-increment*4 $size-increment*3;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: $size-increment*2 $size-increment*3;
   display: flex;
+  background-color: $header-bg;
   &.extraPad {
-    padding: $size-increment*5 $size-increment*6;
+    padding: $size-increment*2 $size-increment*6;
   }
-
+  &.taskList {
+    background-color: $plannr-green;
+  }
+  &.vendorList {
+    background-color: $plannr-blue;
+  }
+  &.contactList {
+    background-color: $plannr-teal;
+  }
 }
 
 .Toolbar-actionButton {

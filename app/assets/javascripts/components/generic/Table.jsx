@@ -53,16 +53,18 @@ var Table = React.createClass({
       'Toolbar-actions': true,
       'u-hidden': !this.props.showActions
     })
-    var toolbarClasses = classNames({
+    var toolbarClasses = {
       'Table-toolbar': true,
       'extraPad': this.props.extraPadding
-    });
+    };
+    let tableActionClass = this.props.tableActionClass;
+    if (tableActionClass) toolbarClasses[tableActionClass] = true;
     var filterClasses = classNames({
       'Toolbar-filter': true,
       'u-hidden': !this.props.filterable
     })
     return (
-      <div className={toolbarClasses}>
+      <div className={classNames(toolbarClasses)}>
         <div className="Toolbar-items">
           <div className={actionClasses}>
             {this.actionMenu()}
