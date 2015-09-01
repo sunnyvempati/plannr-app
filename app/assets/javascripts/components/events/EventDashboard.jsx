@@ -19,6 +19,7 @@ var EventDashboard = React.createClass({
       {to: "event_tasks", title: 'tasks', iconClass: "fa fa-check"},
       {to: "event_contacts", title: 'contacts', iconClass: "fa fa-book"},
       {to: "event_vendors", title: 'vendors', iconClass: "fa fa-truck"},
+      {to: "event_budget", title: 'budget', iconClass: "fa fa-money"},
       {to: "event_attachments", title: 'attachments', iconClass: "fa fa-paperclip"},
       {to: "event_comments", title: 'comments', iconClass: "fa fa-comments"}
     ]
@@ -53,6 +54,9 @@ var EventDashboard = React.createClass({
         break;
       case this.isActive('event_vendors'):
         header = "Vendors";
+        break;
+      case this.isActive('event_budget'):
+        header = "Budget";
         break;
       case this.isActive('event_attachments'):
         header = "Attachments";

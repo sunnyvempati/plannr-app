@@ -2,15 +2,16 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  padding-bottom: $size-increment*2;
 }
 
 .Table-toolbar {
-  padding: $size-increment*2 $size-increment*3;
+  padding: $size-increment*3 $size-increment*3;
   display: flex;
-  background-color: $header-bg;
   &.extraPad {
-    padding: $size-increment*2 $size-increment*6;
+    padding: $size-increment*3 $size-increment*6;
+  }
+  &.eventList {
+    background-color: $header-bg;
   }
   &.taskList {
     background-color: $plannr-green;
@@ -140,8 +141,19 @@
 .Table-sidebarContainer {
   width: 70px;
   background-color: $header-bg;
-  heigth: 100%;
-  border-top: 1px solid rgba(255,255,255,0.33);
+  // border-right: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  top: 0; bottom: 0; left: 0;
+  min-height: 600px;
+}
+
+.SideBarIconWithName {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  color: $white-three-fourths;
+  padding: 16px 0;
 }
 
 

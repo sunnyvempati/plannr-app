@@ -2,4 +2,7 @@
   font-size: 24px;
   padding-right: $size-increment;
   color: $black-half;
+  &.invert {
+    color: $white-three-fourths;
+  }
 }

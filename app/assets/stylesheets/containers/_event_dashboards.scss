@@ -16,9 +16,11 @@
   color: rgba(255,255,255,0.87);
   max-height: 500px;
   transition: all 500ms;
+  opacity: 1;
   &.collapse {
-    padding-bottom: 0;
-    max-height: 125px;
+    padding: 0;
+    max-height: 0px;
+    opacity: 0;
   }
 }
 

@@ -95,24 +95,33 @@ var EventContactList = React.createClass({
   },
   render: function() {
     return (
-      <Table
-        results={this.state.data}
-        columns={this.getColumns()}
-        useCustomRowComponent={false}
-        showHeaders={true}
-        checkedItems={this.state.checkedItems}
-        rowChanged={this.rowChanged}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sort}
-        handleSearch={this.search}
-        showActions={this.state.checkedItems.length > 0}
-        actionItems={this.actionItems()}
-        extraPadding={false}
-        searchPlaceholder="Search Contacts..."
-        onClick={this.openContactModal}
-        actionButton={this.getActionButton()}
-        handleCheckAllChanged={this.toggleCheckAll}
-      />
+      <div className="EventTableContainer">
+        <div className="Table-sidebarContainer">
+          <div className="SideBarIconWithName u-clickable" onClick={this.openAddModal}>
+            <i className="fa fa-plus Nav-icon"></i>
+            <div className="Nav-name">Add New</div>
+          </div>
+        </div>
+        <Table
+          results={this.state.data}
+          columns={this.getColumns()}
+          useCustomRowComponent={false}
+          showHeaders={true}
+          checkedItems={this.state.checkedItems}
+          rowChanged={this.rowChanged}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sort}
+          handleSearch={this.search}
+          showActions={this.state.checkedItems.length > 0}
+          actionItems={this.actionItems()}
+          extraPadding={false}
+          searchPlaceholder="Search Contacts..."
+          onClick={this.openContactModal}
+          actionButton={this.getActionButton()}
+          handleCheckAllChanged={this.toggleCheckAll}
+          invertToolbarColors={false}
+        />
+      </div>
     );
   }
 });

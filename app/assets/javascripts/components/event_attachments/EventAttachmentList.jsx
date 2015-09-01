@@ -138,6 +138,13 @@ var EventAttachmentsList = React.createClass({
   },
   render: function () {
     return (
+      <div className="EventTableContainer">
+        <div className="Table-sidebarContainer">
+          <div className="SideBarIconWithName u-clickable" onClick={this.openCreateTaskModal}>
+            <i className="fa fa-plus Nav-icon"></i>
+            <div className="Nav-name">Add New</div>
+          </div>
+        </div>
         <Table
             results={this.state.data}
             columns={this.columns()}
@@ -152,11 +159,12 @@ var EventAttachmentsList = React.createClass({
             showActions={this.state.checkedItems.length > 0}
             actionItems={this.actionItems()}
             extraPadding={false}
-            tableDataClassName="scrollable"
             searchPlaceholder="Search Attachments..."
             actionButton={this.getActionButton()}
             handleCheckAllChanged={this.toggleCheckAll}
+            invertToolbarColors={false}
         />
+      </div>
     );
   }
 });
