@@ -109,6 +109,7 @@ const EventList = React.createClass({
           searchPlaceholder="Search Events..."
           actionButton={this.getActionButton()}
           handleCheckAllChanged={this.toggleCheckAll}
+          tableActionClass="eventList"
         />
       </div>
     );

@@ -1,4 +1,5 @@
 import DropdownMenu from './DropdownMenu';
+import classNames from 'classnames';
 
 var TableFilter = React.createClass({
   getInitialState: function() {
@@ -12,10 +13,19 @@ var TableFilter = React.createClass({
     })[0];
   },
   getTrigger: function() {
+    let invert = this.props.invertColor;
+    let displayClasses = classNames({
+      'TableFilter-display': true,
+      'invert': invert
+    });
+    let iconClasses = classNames({
+      'fa fa-filter tableIcon': true,
+      'invert': invert
+    });
     return (
       <div className="TableFilter-trigger">
-        <i className="fa fa-filter tableIcon"></i>
-        <div className="TableFilter-display">
+        <i className={iconClasses}></i>
+        <div className={displayClasses}>
           {this.state.activeItem.name}
         </div>
       </div>

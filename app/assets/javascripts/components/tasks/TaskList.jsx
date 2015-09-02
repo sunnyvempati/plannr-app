@@ -23,7 +23,7 @@ const TaskList = React.createClass({
     };
   },
   componentDidMount() {
-    PageTitleActions.setPageTitle("Tasks", true);
+    PageTitleActions.setPageTitle("Tasks", "tasks");
     TaskStore.addChangeListener(this._onViewTasksChange);
   },
   componentDidUpdate: function() {
@@ -97,11 +97,12 @@ const TaskList = React.createClass({
         handleSortClick={this.sort}
         handleSearch={this.search}
         showActions={false}
+        tableActionClass="taskList"
         actionItems={this.actionItems()}
         extraPadding={true}
         filterable={true}
         filterItems={this.filterItems()}
-        searchPlaceholder="Search Tasks..."
+        searchPlaceholder="Search..."
         onClick={this.goToTask}
         actionButton={this.getActionButton()}
       />

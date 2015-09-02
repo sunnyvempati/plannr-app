@@ -79,32 +79,33 @@ var EventTaskList = React.createClass({
       {name: "My Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2, with_assigned_to: SessionStore.userId})},
     ]
   },
-  getActionButton: function () {
-    return (
-      <ActionButton handleClick={this.openCreateTaskModal}
-                    svgClass='createTask'
-                    extraPad={false} />
-    );
-  },
   render: function() {
     return (
-      <Table
-        columns={this.getColumns()}
-        showHeaders={true}
-        useCustomRowComponent={true}
-        customRows={this.getCustomRows(true, this.goToTask)}
-        sortItems={this.sortItems()}
-        handleSortClick={this.sort}
-        handleSearch={this.search}
-        showActions={false}
-        actionItems={this.actionItems()}
-        extraPadding={true}
-        filterable={true}
-        filterItems={this.filterItems()}
-        searchPlaceholder="Search Tasks..."
-        onClick={this.goToTask}
-        actionButton={this.getActionButton()}
-      />
+      <div className="EventTableContainer">
+        <div className="Table-sidebarContainer">
+          <div className="SideBarIconWithName u-clickable" onClick={this.openCreateTaskModal}>
+            <i className="fa fa-plus Nav-icon"></i>
+            <div className="Nav-name">Add New</div>
+          </div>
+        </div>
+        <Table
+          columns={this.getColumns()}
+          showHeaders={true}
+          useCustomRowComponent={true}
+          customRows={this.getCustomRows(false, this.goToTask)}
+          sortItems={this.sortItems()}
+          handleSortClick={this.sort}
+          handleSearch={this.search}
+          showActions={false}
+          extraPadding={false}
+          actionItems={this.actionItems()}
+          filterable={true}
+          filterItems={this.filterItems()}
+          searchPlaceholder="Search Tasks..."
+          onClick={this.goToTask}
+          invertToolbarColors={false}
+        />
+      </div>
     );
   }
 });

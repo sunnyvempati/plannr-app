@@ -2,17 +2,26 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  padding-bottom: $size-increment*2;
 }
 
 .Table-toolbar {
-  padding: $size-increment*4 $size-increment*3;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: $size-increment*3 $size-increment*3;
   display: flex;
   &.extraPad {
-    padding: $size-increment*5 $size-increment*6;
+    padding: $size-increment*3 $size-increment*6;
   }
-
+  &.eventList {
+    background-color: $header-bg;
+  }
+  &.taskList {
+    background-color: $plannr-green;
+  }
+  &.vendorList {
+    background-color: $plannr-blue;
+  }
+  &.contactList {
+    background-color: $plannr-teal;
+  }
 }
 
 .Toolbar-actionButton {
@@ -132,8 +141,19 @@
 .Table-sidebarContainer {
   width: 70px;
   background-color: $header-bg;
-  heigth: 100%;
-  border-top: 1px solid rgba(255,255,255,0.33);
+  // border-right: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  top: 0; bottom: 0; left: 0;
+  min-height: 800px;
+}
+
+.SideBarIconWithName {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  color: $white-three-fourths;
+  padding: 16px 0;
 }
 
 

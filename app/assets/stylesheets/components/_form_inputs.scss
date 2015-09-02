@@ -51,5 +51,17 @@
 .SearchInput {
   @extend .FormInput-field;
   width: 400px;
+  &.invert {
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    &:focus {
+      border-bottom: 2px solid #00bea4;
+    }
+    &:-moz-placeholder {color: white;}
+    &::-webkit-input-placeholder {color: white;}
+    &::-moz-placeholder          {color: white;}
+    *:-ms-input-placeholder      {color: white;}
+  }
 }
+
 

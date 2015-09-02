@@ -37,6 +37,7 @@ var MenuContent = React.createClass({
         <div className="MenuList-companyName u-clickableOnHover"
              onClick={this.goToCompanyPage}>
           {company.name}
+          <i className="fa fa-cog menuIcon"></i>
         </div>
       );
     } else {

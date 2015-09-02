@@ -92,6 +92,7 @@ const VendorList = React.createClass({
         showHeaders={true}
         checkedItems={this.state.checkedItems}
         rowChanged={this.rowChanged}
+        tableActionClass="vendorList"
         sortItems={this.sortItems()}
         handleSortClick={this.sort}
         handleSearch={this.search}

@@ -1,10 +1,7 @@
 .ActionButton {
   position: relative;
   cursor: pointer;
-  top: 32px;
-  &.extraPad {
-    top: 40px;
-  }
+  top: 16px;
 }
 
 .ActionButton-svg {

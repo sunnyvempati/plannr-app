@@ -1,10 +1,15 @@
 import DropdownMenu from './DropdownMenu';
+import classNames from 'classnames';
 
 var TableAction = React.createClass({
   getTrigger: function() {
+    let iconClasses = classNames({
+      "fa fa-ellipsis-v ActionIcon": true,
+      "invert": this.props.invertColor
+    })
     return (
       <div className="TableSort-display u-clickable">
-        <i className="fa fa-ellipsis-v ActionIcon"></i>
+        <i className={iconClasses}></i>
       </div>
     )
   },

@@ -14,28 +14,28 @@ export default AuthenticatedComponent(
   class Authenticated extends BaseComponent {
     constructor() {
       super();
-      this.state = {header: null};
+      this.state = {header: null, pageClass: ""};
       this._onPageTitleChange = this._onPageTitleChange.bind(this);
     }
 
     componentDidMount() {
       PageTitleStore.addChangeListener(this._onPageTitleChange);
-      this.enableSkrollrHeader();
+      // this.enableSkrollrHeader();
     }
-    enableSkrollrHeader() {
-      this.setSkrollr($('#mainHeader'), [[0, 'height:128px'], [56, 'height:64px']]);
-      this.setSkrollr($('#mainTitle'), [[56, 'padding-top:6px;font-size:34px'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
-      $('.MainContainer-content').css('padding-top', '128px');
-      var s = skrollr.init({forceHeight: false});
-    }
-    setSkrollr($element, data) {
-      for(var i = 0, l = data.length; i < l; i++) {
-        var d = data[i], // the current data entry
-            px = d[0], // the scroll position (in pixels)
-            css = d[1]; // the css property + value to set
-        $element.attr('data-' + px, css);
-      }
-    }
+    // enableSkrollrHeader() {
+    //   this.setSkrollr($('#mainHeader'), [[0, 'height:128px'], [56, 'height:64px']]);
+    //   this.setSkrollr($('#mainTitle'), [[56, 'padding-top:6px;font-size:34px'],[57, 'padding-top:0;font-size:20px;margin:auto']]);
+    //   $('.MainContainer-content').css('padding-top', '128px');
+    //   var s = skrollr.init({forceHeight: false});
+    // }
+    // setSkrollr($element, data) {
+    //   for(var i = 0, l = data.length; i < l; i++) {
+    //     var d = data[i], // the current data entry
+    //         px = d[0], // the scroll position (in pixels)
+    //         css = d[1]; // the css property + value to set
+    //     $element.attr('data-' + px, css);
+    //   }
+    // }
 
     componentWillUnmount() {
       PageTitleStore.removeChangeListener(this._onPageTitleChange);
@@ -43,7 +43,8 @@ export default AuthenticatedComponent(
 
     _onPageTitleChange() {
       let header = PageTitleStore.header;
-      this.setState({header: header});
+      let pageClass = PageTitleStore.pageClass;
+      this.setState({header: header, pageClass: pageClass});
     }
 
     _closeMenu() {
@@ -71,7 +72,8 @@ export default AuthenticatedComponent(
             <div className="MainContainer">
               <PageHeader header={this.state.header || "Plannr"}
                           profile={currentUser.profile}
-                          email={currentUser.email} />
+                          email={currentUser.email}
+                          pageClass={this.state.pageClass} />
               <div className="MainContainer-content">
                 <RouteHandler user={currentUser} />
               </div>

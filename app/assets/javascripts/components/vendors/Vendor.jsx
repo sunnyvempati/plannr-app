@@ -66,7 +66,7 @@ var Vendor = React.createClass({
     if (vendor) {
       return (
         <div>
-          <div className="Show-header">
+          <div className="Show-header is-vendor">
             <div className="Show-nav">
               <div onClick={this.backToList} className="u-clickable">
                 <div className="BackIcon"></div>

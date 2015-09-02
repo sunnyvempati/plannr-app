@@ -3,7 +3,7 @@ import PageTitleActions from '../../actions/PageTitleActions';
 
 var Vendors = React.createClass({
   componentDidMount: function() {
-    PageTitleActions.setPageTitle("Vendors", true);
+    PageTitleActions.setPageTitle("Vendors", "vendors");
   },
   render: function() {
     return (

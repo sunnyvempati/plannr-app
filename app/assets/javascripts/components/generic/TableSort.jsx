@@ -51,10 +51,23 @@ var TableSort = React.createClass({
   },
   getTrigger: function() {
     var sortIconClass = this.state.sortAscending ? "fa-sort-amount-asc" : "fa-sort-amount-desc";
+    console.log(this.props.invertColor);
+    let orderDisplayClasses = classNames({
+      'TableSort-orderDisplay': true,
+      'invert': this.props.invertColor
+    });
+    let iconClasses = classNames({
+      "fa": true,
+      "fa-sort-amount-asc": this.state.sortAscending,
+      "fa-sort-amount-desc": !this.state.sortAscending,
+      "tableIcon": true,
+      "invert": this.props.invertColor,
+      "u-clickable": true
+    });
     return (
       <div className="TableSort-display u-clickable">
-        <i className={"fa " + sortIconClass + " tableIcon u-clickable"}></i>
-        <div className="TableSort-orderDisplay">
+        <i className={iconClasses}></i>
+        <div className={orderDisplayClasses}>
           by: {this.state.activeItem.display}
         </div>
       </div>

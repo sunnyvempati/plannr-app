@@ -10,7 +10,8 @@ var Table = React.createClass({
     return {
       showToolbar: true,
       extraPadding: false,
-      filterable: false
+      filterable: false,
+      invertToolbarColors: true // make all icons white for darker background; default is black
     };
   },
   handleRowClick: function(data) {
@@ -34,51 +35,60 @@ var Table = React.createClass({
     }, this);
     return rows;
   },
-  actionMenu: function() {
+  actionMenu: function(invert) {
     if (this.props.showActions) {
       return (
-        <TableAction items={this.props.actionItems} />
+        <TableAction items={this.props.actionItems} invertColor={invert} />
       );
     }
   },
-  filterMenu: function() {
+  filterMenu: function(invert) {
     if (this.props.filterable) {
       return (
-        <TableFilter items={this.props.filterItems} />
+        <TableFilter items={this.props.filterItems} invertColor={invert} />
       );
     }
   },
   renderToolbar: function() {
+    let invert = this.props.invertToolbarColors;
+    let tableIconClass = invert ? "tableIcon invert" : "tableIcon";
+    let searchClass = classNames({
+      'SearchInput': true,
+      'invert': invert
+    });
     var actionClasses = classNames({
       'Toolbar-actions': true,
       'u-hidden': !this.props.showActions
-    })
-    var toolbarClasses = classNames({
+    });
+    var toolbarClasses = {
       'Table-toolbar': true,
       'extraPad': this.props.extraPadding
-    });
+    };
+    let tableActionClass = this.props.tableActionClass;
+    if (tableActionClass) toolbarClasses[tableActionClass] = true;
     var filterClasses = classNames({
       'Toolbar-filter': true,
       'u-hidden': !this.props.filterable
-    })
+    });
     return (
-      <div className={toolbarClasses}>
+      <div className={classNames(toolbarClasses)}>
         <div className="Toolbar-items">
           <div className={actionClasses}>
-            {this.actionMenu()}
+            {this.actionMenu(invert)}
           </div>
           <div className="Toolbar-search">
-            <i className="fa fa-search tableIcon"></i>
+            <i className={"fa fa-search " + tableIconClass}></i>
             <input placeholder={this.props.searchPlaceholder}
-                   className="SearchInput"
+                   className={searchClass}
                    onChange={this.props.handleSearch} />
           </div>
           <div className="Toolbar-sort">
             <TableSort items={this.props.sortItems}
-                       handleSortClick={this.props.handleSortClick} />
+                       handleSortClick={this.props.handleSortClick}
+                       invertColor={invert} />
           </div>
           <div className={filterClasses}>
-            {this.filterMenu()}
+            {this.filterMenu(invert)}
           </div>
         </div>
         <div className="Toolbar-actionButton">
