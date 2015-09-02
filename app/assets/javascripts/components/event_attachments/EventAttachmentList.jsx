@@ -124,12 +124,13 @@ var EventAttachmentsList = React.createClass({
   },
   getAttachmentButtonClickableElement: function () {
     return (
-        <ActionButton handleClick={this.openAddModal}
-                      svgClass='createAttachment'
-                      extraPad={false}/>
+        <div className="SideBarIconWithName u-clickable" onClick={this.openAddModal}>
+          <i className="fa fa-plus Nav-icon"></i>
+          <div className="Nav-name">Add New</div>
+        </div>
     );
   },
-  getActionButton: function () {
+  getActionButton() {
     return (
         <AttachmentBrowse clickableElement={this.getAttachmentButtonClickableElement()}
                           onAssociation={this.handleAssociation}
@@ -140,10 +141,7 @@ var EventAttachmentsList = React.createClass({
     return (
       <div className="EventTableContainer">
         <div className="Table-sidebarContainer">
-          <div className="SideBarIconWithName u-clickable" onClick={this.openCreateTaskModal}>
-            <i className="fa fa-plus Nav-icon"></i>
-            <div className="Nav-name">Add New</div>
-          </div>
+          {this.getActionButton()}
         </div>
         <Table
             results={this.state.data}
@@ -160,7 +158,6 @@ var EventAttachmentsList = React.createClass({
             actionItems={this.actionItems()}
             extraPadding={false}
             searchPlaceholder="Search Attachments..."
-            actionButton={this.getActionButton()}
             handleCheckAllChanged={this.toggleCheckAll}
             invertToolbarColors={false}
         />

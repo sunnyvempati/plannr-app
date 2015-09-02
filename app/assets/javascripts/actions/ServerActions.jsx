@@ -401,7 +401,6 @@ class ServerActions {
     AppDispatcher.handleAction({
       type: ActionTypes.CREATE_EVENT_ATTACHMENT_RESPONSE,
       json: json,
-      params: params,
       errors: errors
     });
   }

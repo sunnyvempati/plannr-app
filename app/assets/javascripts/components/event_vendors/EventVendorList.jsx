@@ -84,18 +84,11 @@ var EventVendorList = React.createClass({
     var props = {eventId: this.props.params.id};
     ModalActions.openAddVendorModal(props);
   },
-  getActionButton: function () {
-    return (
-      <ActionButton handleClick={this.openAddModal}
-                    svgClass='createVendor'
-                    extraPad={false} />
-    );
-  },
   render: function() {
     return (
       <div className="EventTableContainer">
         <div className="Table-sidebarContainer">
-          <div className="SideBarIconWithName u-clickable" onClick={this.openCreateTaskModal}>
+          <div className="SideBarIconWithName u-clickable" onClick={this.openAddModal}>
             <i className="fa fa-plus Nav-icon"></i>
             <div className="Nav-name">Add New</div>
           </div>
@@ -115,7 +108,6 @@ var EventVendorList = React.createClass({
           extraPadding={false}
           searchPlaceholder="Search Vendors..."
           onClick={this.openVendorModal}
-          actionButton={this.getActionButton()}
           handleCheckAllChanged={this.toggleCheckAll}
           invertToolbarColors={false}
         />

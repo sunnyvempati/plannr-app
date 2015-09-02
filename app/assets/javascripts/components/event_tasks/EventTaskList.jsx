@@ -79,13 +79,6 @@ var EventTaskList = React.createClass({
       {name: "My Tasks - Completed", handler: this.filterWithEvent.bind(this, {with_status: 2, with_assigned_to: SessionStore.userId})},
     ]
   },
-  getActionButton: function () {
-    return (
-      <ActionButton handleClick={this.openCreateTaskModal}
-                    svgClass='createTask'
-                    extraPad={false} />
-    );
-  },
   render: function() {
     return (
       <div className="EventTableContainer">

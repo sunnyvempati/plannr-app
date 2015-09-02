@@ -13,7 +13,7 @@ export default class AttachmentActions {
 
   static create(formData, eventId) {
     AppDispatcher.handleAction({
-      type: ActionTypes.CREATE_ATTACHMENT_REQUEST,
+      type: ActionTypes.CREATE_EVENT_ATTACHMENT_REQUEST,
       formData: formData,
       eventId: eventId
     });
