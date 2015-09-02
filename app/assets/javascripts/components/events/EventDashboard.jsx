@@ -44,7 +44,7 @@ var EventDashboard = React.createClass({
     let header = "";
     switch(true) {
       case this.isActive('event_app'):
-        header = "Home";
+        header = "";
         break;
       case this.isActive('event_tasks'):
         header = "Tasks";
