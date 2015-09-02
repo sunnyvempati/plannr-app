@@ -15,7 +15,13 @@ export default {
     this.sortParams = defaultParams.sort;
   },
   sort: function(entity, order) {
-    this.sortParams = {sorted_by: entity + "_" + order};
+    this.resetPage();
+    if(entity) {
+      this.sortParams = {sorted_by: entity + "_" + order};
+    }
+    else {
+      this.sortParams = {}
+    }
     this.resetPageAndFetch();
   },
   search: function(e) {

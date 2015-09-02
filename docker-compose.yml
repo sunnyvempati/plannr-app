@@ -1,0 +1,85 @@
+## IMPORTANT!
+## The Postgres and Elasticsearch containers pull in volumes from
+## data containers called 'postgres_data' and 'elasticsearch_data'.
+## This compose setup does not create those and you need to do it
+## manually:
+## docker create -v /var/lib/postgresql/data --name postgres_data postgres:9.4.2 /bin/true
+## docker create -v /usr/share/elasticsearch/data --name elasticsearch_data elasticsearch:1.7 /bin/true
+---
+postgres:
+  image: postgres:9.4.2
+  ports:
+    - "5432:5432"
+  volumes:
+    - ./docker_compose/postgres-setup:/docker-entrypoint-initdb.d
+  environment:
+    POSTGRES_PASSWORD: plannr
+
+elasticsearch:
+  image: elasticsearch:1.7
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  command: '-Des.http.cors.enabled=true'
+
+influxdb:
+  image: tutum/influxdb:latest
+  ports:
+    - "8083:8083"
+    - "8086:8086"
+  environment:
+    PRE_CREATE_DB: "metrics"
+    ADMIN_USER: "admin"
+    INFLUXDB_INIT_PWD: "plannr12"
+
+grafana:
+  image: grafana/grafana
+  ports:
+    - "3001:3000"
+  links:
+    - influxdb
+  environment:
+    GF_SECURITY_ADMIN_PASSWORD: "plannr12"
+
+logstash:
+  image: docker.yourplannr.com/logstash-plannr:latest
+  ports:
+    - "9998:9998"
+    - "9999:9999/udp"
+  links:
+    - elasticsearch:elasticsearch
+
+kibana:
+  image: kibana:4.1
+  links:
+    - elasticsearch:elasticsearch
+  ports:
+    - 5601:5601
+
+# nginx:
+#   image: docker.yourplannr.com/nginx-plannr:latest
+#   links:
+#     - plannr-app:plannr01
+#   ports:
+#     - "80:80"
+
+# plannr-app:
+#   build: ./
+#   volumes:
+#     - .:/home/app/plannr
+#   links:
+#     - postgres:postgres
+#     - elasticsearch:elasticsearch
+#     - logstash:logstash
+#     - influxdb:influxdb
+#   ports:
+#     - "3000:3000"
+#   environment:
+#     DATABASE_URL: postgres://postgres:plannr@postgres:5432/plannr_development?pool=5&encoding=unicode
+#     RACK_ENV: development
+#     RAILS_ENV: development
+#     BUNDLE_PATH: /home/app/.bundle
+#     SECRET_KEY_BASE: 53e47c5e0272188f533e9dfdd46faa69be4a14a126c98863eb55ce131efa01d350b4e3cf363822646ddd959ebafe677b2c8b2815ca5988cd1c0984b414c35ef6
+#     PLANNR_INFLUXDB_USER: admin
+#     PLANNR_INFLUXDB_PASS: plannr12
+#     PLANNR_INFLUXDB_DB: metrics

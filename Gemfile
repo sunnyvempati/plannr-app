@@ -33,10 +33,14 @@ gem 'kaminari'
 gem 'deep_cloneable'
 
 gem 'log4r'
+gem 'logstash-event'
 gem 'statsd-ruby'
+gem 'influxdb'
 gem 'hallmonitor'
 
 gem 'browserify-rails'
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
 
 group 'development' do
   gem 'pry'

@@ -7,10 +7,14 @@ default: &default
 
 development:
   <<: *default
+  host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] || ENV['POSTGRES_HOST'] || 'localhost' %>
+  port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] || ENV['POSTGRES_PORT'] || 5432 %>
   database: plannr-app_development
 
 test:
   <<: *default
+  host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] || ENV['POSTGRES_HOST'] || 'localhost' %>
+  port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] || ENV['POSTGRES_PORT'] || 5432 %>
   database: plannr-app_test
 
 staging:

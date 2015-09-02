@@ -16,8 +16,8 @@ catersource_conf:
 
 dance_party:
   name: Sunny's Dance Party
-  start_date: 08/18/2015
-  end_date: 08/28/2015
+  start_date: 08/18/2016
+  end_date: 08/28/2016
   budget: 1200
   owner: sunny@yourplannr.com
   company: Event'd
