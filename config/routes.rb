@@ -57,6 +57,9 @@ Rails.application.routes.draw do
   # comments
   resources :comments, only: [:index, :create, :update, :destroy]
 
+  # expenses
+  resources :expenses, only: [:index]
+
   # user invitations
   resources :invitations, only: [:create]
   get 'invitation_by_token', to: 'invitations#get_by_token'

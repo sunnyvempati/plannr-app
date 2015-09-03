@@ -51,7 +51,6 @@ var TableSort = React.createClass({
   },
   getTrigger: function() {
     var sortIconClass = this.state.sortAscending ? "fa-sort-amount-asc" : "fa-sort-amount-desc";
-    console.log(this.props.invertColor);
     let orderDisplayClasses = classNames({
       'TableSort-orderDisplay': true,
       'invert': this.props.invertColor
