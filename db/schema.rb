@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729203253) do
+ActiveRecord::Schema.define(version: 20150903200807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(version: 20150729203253) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.uuid     "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "body"
     t.uuid     "commenter_id"
@@ -75,6 +82,14 @@ ActiveRecord::Schema.define(version: 20150729203253) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.uuid     "vendor_id"
+  end
+
+  create_table "event_categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "event_id"
+    t.uuid     "category_id"
+    t.decimal  "budget"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "event_contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -109,6 +124,17 @@ ActiveRecord::Schema.define(version: 20150729203253) do
     t.uuid     "parent_id"
   end
 
+  create_table "expenses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "event_category_id"
+    t.uuid     "vendor_id"
+    t.string   "name"
+    t.text     "notes"
+    t.decimal  "price"
+    t.integer  "quantity"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.uuid     "sender_id",  null: false
     t.text     "message"
@@ -124,6 +150,17 @@ ActiveRecord::Schema.define(version: 20150729203253) do
     t.string   "token"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "payments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.date     "due_date"
+    t.uuid     "expense_id"
+    t.decimal  "amount"
+    t.integer  "method"
+    t.boolean  "paid"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
