@@ -3,7 +3,7 @@ class ExpensesController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @expenses = @filter_sort.find.page(params[:page])
+    @expenses = @filter_sort.find
     render_success @expenses
   end
 

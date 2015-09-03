@@ -48,7 +48,8 @@ const AppConstants = {
     DELETE_COMMENT:             '/comments/',
     CREATE_INVITE:              '/invitations',
     GET_INVITE:                 '/invitation_by_token',
-    FEEDBACK:                   '/feedback'
+    FEEDBACK:                   '/feedback',
+    GET_EXPENSES:               '/expenses'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -187,6 +188,10 @@ const AppConstants = {
     UPDATE_COMMENT_RESPONSE: null,
     GET_COMMENTS_RESPONSE: null,
     DELETE_COMMENT_RESPONSE: null,
+
+    // Expenses
+    GET_EXPENSES_REQUEST: null,
+    GET_EXPENSES_RESPONSE: null,
 
     // Invitaitons
     CREATE_INVITATION_REQUEST: null,

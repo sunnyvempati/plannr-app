@@ -446,6 +446,15 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveExpenses(expenses, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EXPENSES_RESPONSE,
+      expenses: expenses,
+      params: params,
+      errors: errors
+    })
+  }
 };
 
 export default ServerActions;

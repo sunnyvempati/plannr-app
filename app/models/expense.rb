@@ -5,6 +5,8 @@ class Expense < ActiveRecord::Base
 
   has_many :payments
 
+  validates :event_category, presence: true
+
   # scopes
   scope :with_event_id, lambda { |event_id|
     where(event_id: [event_id]).includes(:event)

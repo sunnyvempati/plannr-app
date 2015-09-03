@@ -1,6 +1,25 @@
 import DropdownMenu from '../generic/DropdownMenu';
+import ExpenseActions from '../../actions/ExpenseActions';
+import RouteActions from '../../actions/RouteActions';
+import ExpenseStore from '../../stores/ExpenseStore';
 
 var EventBudgetList = React.createClass({
+  componentDidMount() {
+    ExpenseStore.addChangeListener(this._onExpenseChange);
+    this.setExpenses();
+  },
+  componentWillUnmount() {
+    ExpenseStore.removeChangeListener(this._onExpenseChange);
+  },
+  _onExpenseChange() {
+    this.setExpenses();
+  },
+  setExpenses() {
+    let params = {event_id: this.props.params.id}
+    let expenses = ExpenseStore.getFromCache(params);
+    if (expenses) this.setState({data: expenses});
+    else ExpenseActions.getExpenses(params);
+  },
   goToAddExpense() {
     console.log("add expense");
   },
