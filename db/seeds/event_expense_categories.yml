@@ -1,19 +1,19 @@
 1:
-  category: Entertainment
+  expense_category: Entertainment
   event: Catersource Conference 2015
   budget: 4000
 
 2:
-  category: Food
+  expense_category: Food
   event: Catersource Conference 2015
   budget: 1000
 
 3:
-  category: Insurance
+  expense_category: Insurance
   event: Catersource Conference 2015
   budget: 5000
 
 4:
-  category: Equipment Rentals
+  expense_category: Equipment Rentals
   event: Catersource Conference 2015
   budget: 1000

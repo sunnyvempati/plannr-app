@@ -46,13 +46,6 @@ ActiveRecord::Schema.define(version: 20150903200807) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name"
-    t.uuid     "company_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "comments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "body"
     t.uuid     "commenter_id"
@@ -84,14 +77,6 @@ ActiveRecord::Schema.define(version: 20150903200807) do
     t.uuid     "vendor_id"
   end
 
-  create_table "event_categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "event_id"
-    t.uuid     "category_id"
-    t.decimal  "budget"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "event_contacts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid "contact_id"
     t.uuid "event_id"
@@ -99,6 +84,14 @@ ActiveRecord::Schema.define(version: 20150903200807) do
 
   add_index "event_contacts", ["contact_id"], name: "index_event_contacts_on_contact_id", using: :btree
   add_index "event_contacts", ["event_id"], name: "index_event_contacts_on_event_id", using: :btree
+
+  create_table "event_expense_categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "event_id"
+    t.uuid     "expense_category_id"
+    t.decimal  "budget"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "event_vendors", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid "vendor_id"
@@ -124,15 +117,22 @@ ActiveRecord::Schema.define(version: 20150903200807) do
     t.uuid     "parent_id"
   end
 
+  create_table "expense_categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.uuid     "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "expenses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "event_category_id"
+    t.uuid     "event_expense_category_id"
     t.uuid     "vendor_id"
     t.string   "name"
     t.text     "notes"
     t.decimal  "price"
     t.integer  "quantity"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "feedbacks", force: :cascade do |t|

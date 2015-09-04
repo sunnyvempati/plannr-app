@@ -4,6 +4,12 @@ import RouteActions from '../../actions/RouteActions';
 import ExpenseStore from '../../stores/ExpenseStore';
 
 var EventBudgetList = React.createClass({
+  getInitialState: function() {
+    return {
+      expenses: [],
+      categories: []
+    };
+  },
   componentDidMount() {
     ExpenseStore.addChangeListener(this._onExpenseChange);
     this.setExpenses();
@@ -40,6 +46,15 @@ var EventBudgetList = React.createClass({
       {name: "Expense", handler: this.goToAddExpense}
     ]
   },
+  renderCategoryRows() {
+    let expenses = this.state.expenses;
+    if (expenses.length) {
+      let categories
+    }
+    return (
+
+    )
+  },
   render: function() {
     return (
       <div className="EventTableContainer">
@@ -47,7 +62,7 @@ var EventBudgetList = React.createClass({
           <DropdownMenu trigger={this.getAddNewTrigger()}
                         items={this.getAddNewItems()} />
         </div>
-        Budget Table
+        {this.renderCategoryRows()}
       </div>
     );
   }

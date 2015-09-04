@@ -14,7 +14,6 @@ class ExpenseService {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            console.log("EXPENSE", json);
             ServerActions.receiveExpenses(json.expenses, params, null);
           } else {
             let errors = Utils.getErrors(res);

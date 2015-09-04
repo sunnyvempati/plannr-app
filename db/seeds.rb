@@ -5,7 +5,7 @@ require 'faker'
 
 # yml seed file path: db/seeds/*
 def load_ymls
-  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks', 'attachment_limits', 'categories', 'event_categories', 'expenses', 'payments'].each do |file|
+  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks', 'attachment_limits', 'expense_categories', 'event_expense_categories', 'expenses', 'payments'].each do |file|
     filename = ENV["staging"] ? "staging_#{file}.yml" : "#{file}.yml"
     print "filename=@#{filename}..."
     instance_variable_set("@#{file}", YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', filename))))
@@ -147,25 +147,25 @@ def create_attachment_limits
   end
 end
 
-def create_categories
-  return if Category.all.count > 5
+def create_expense_categories
+  return if ExpenseCategory.all.count > 5
 
-  @categories.values.each do |c|
+  @expense_categories.values.each do |c|
     c.symbolize_keys!
-    created_category = Category.create!(name: c[:name],
+    created_expense_category = ExpenseCategory.create!(name: c[:name],
                                         company: Company.find_by_name(c[:company]))
-    puts "Created Category: #{created_category.name}" if created_category
+    puts "Created Expense Category: #{created_expense_category.name}" if created_expense_category
   end
 end
 
-def create_event_categories
-  return if EventCategory.all.count > 4
+def create_event_expense_categories
+  return if EventExpenseCategory.all.count > 4
 
-  @event_categories.values.each do |ec|
+  @event_expense_categories.values.each do |ec|
     ec.symbolize_keys!
     event = Event.find_by_name(ec[:event])
-    category = Category.find_by_name(ec[:category])
-    created_event_category = EventCategory.create!(event: event, category: category, budget: ec[:budget])
+    category = ExpenseCategory.find_by_name(ec[:expense_category])
+    created_event_category = EventExpenseCategory.create!(event: event, expense_category: category, budget: ec[:budget])
   end
 end
 
@@ -175,11 +175,11 @@ def create_expenses
   @expenses.values.each do |e|
     e.symbolize_keys!
     event = Event.find_by_name(e[:event])
-    category = Category.find_by_name(e[:category])
-    event_category = EventCategory.where(event: event, category: category).first
+    category = ExpenseCategory.find_by_name(e[:expense_category])
+    event_expense_category = EventExpenseCategory.where(event: event, expense_category: category).first
     vendor = Vendor.where(company: event.company).first
     created_expense = Expense.create!(name: e[:name],
-                                      event_category: event_category,
+                                      event_expense_category: event_expense_category,
                                       vendor: vendor,
                                       price: e[:price],
                                       quantity: e[:quantity])
@@ -207,7 +207,7 @@ end
 # commands
 # ----
 load_ymls
-%w(companies users events vendors contacts tasks attachment_limits categories event_categories expenses payments).each do |entity|
+%w(companies users events vendors contacts tasks attachment_limits expense_categories event_expense_categories expenses payments).each do |entity|
   send("create_#{entity}")
 end
 # ----
