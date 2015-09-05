@@ -59,6 +59,7 @@ Rails.application.routes.draw do
 
   # expenses
   resources :expenses, only: [:index]
+  resources :event_expense_categories, only: [:index]
 
   # user invitations
   resources :invitations, only: [:create]

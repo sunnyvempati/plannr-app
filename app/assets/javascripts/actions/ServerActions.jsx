@@ -455,6 +455,15 @@ class ServerActions {
       errors: errors
     })
   }
+
+  static receiveGetExpenseCategories(expenseCategories, params, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_EXPENSE_CATEGORIES_RESPONSE,
+      expenseCategories: expenseCategories,
+      params: params,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

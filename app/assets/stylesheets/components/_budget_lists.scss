@@ -1,0 +1,36 @@
+.BudgetListContainer {
+  padding: $size-increment*3;
+  width: 100%;
+}
+
+.BudgetList-row {
+  padding: $size-increment*3 0;
+}
+
+.Category-row {
+  display: flex;
+  align-items: center;
+  background-color: $plannr-green;
+  height: $grid-increment;
+}
+
+.Category-name {
+  flex: 4;
+  color: rgba(255,255,255,0.87);
+  @include font($headline-font, bold, 0);
+}
+
+.Category-expenses {
+
+}
+
+.Category-estimated {
+  flex: 1;
+  &.display {
+    color: $white-half;
+  }
+  &.price {
+    color: $white-three-fourths;
+    padding-left: $size-increment*2;
+  }
+}
