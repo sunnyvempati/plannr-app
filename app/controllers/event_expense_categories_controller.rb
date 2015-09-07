@@ -8,14 +8,8 @@ class EventExpenseCategoriesController < ApplicationController
   end
 
   def create
-    # get company attachment status (size)
-    # get file size of the to-be created attachment
-    # do a check
-    # if all good - create
-    # once you create, update company attachment status
-    # if not - error
-    # @attachment = Attachment.new(attachment_params)
-    # render_entity @attachment
+    @event_expense_category = EventExpenseCategory.new(event_expense_category_params)
+    render_entity @event_expense_category
   end
 
   # def mass_delete
@@ -24,10 +18,8 @@ class EventExpenseCategoriesController < ApplicationController
 
   private
 
-  def expense_params
-    # to do
-    # params.require(:expense)
-    #       .permit(:name, :email, :category, :phone, :organization, :description, :vendor_id)
+  def event_expense_category_params
+    params.require(:event_expense_category).permit(:expense_category_id, :event_id, :budget)
   end
 
   def mass_destroy_params

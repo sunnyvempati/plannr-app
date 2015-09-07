@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20150903200807) do
   create_table "event_expense_categories", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "event_id"
     t.uuid     "expense_category_id"
-    t.decimal  "budget"
+    t.float    "budget"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end

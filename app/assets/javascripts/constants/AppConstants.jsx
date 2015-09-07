@@ -50,7 +50,11 @@ const AppConstants = {
     GET_INVITE:                   '/invitation_by_token',
     FEEDBACK:                     '/feedback',
     GET_EXPENSES:                 '/expenses',
-    GET_EVENT_EXPENSE_CATEGORIES: '/event_expense_categories'
+    GET_EVENT_EXPENSE_CATEGORIES: '/event_expense_categories',
+    GET_EXPENSE_CATEGORIES:       '/expense_categories',
+    GET_EXPENSE_CATEGORY:         '/expense_categories/',
+    CREATE_EXPENSE_CATEGORY:      '/expense_categories',
+    CREATE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories',
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -195,6 +199,16 @@ const AppConstants = {
     GET_EXPENSES_RESPONSE: null,
     GET_EVENT_EXPENSE_CATEGORIES_REQUEST: null,
     GET_EVENT_EXPENSE_CATEGORIES_RESPONSE: null,
+    SEARCH_EXPENSE_CATEGORIES_REQUEST: null,
+    SEARCH_EXPENSE_CATEGORIES_RESPONSE: null,
+    GET_EXPENSE_CATEGORY_REQUEST: null,
+    GET_EXPENSE_CATEGORY_RESPONSE: null,
+    CREATE_EXPENSE_CATEGORY_REQUEST: null,
+    CREATE_EXPENSE_CATEGORY_SUCCESS_RESPONSE: null,
+    CREATE_EXPENSE_CATEGORY_ERROR_RESPONSE: null,
+    CREATE_EVENT_EXPENSE_CATEGORY_REQUEST: null,
+    CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE: null,
+    CREATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE: null,
 
 
     // Invitaitons

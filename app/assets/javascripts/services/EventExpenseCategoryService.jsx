@@ -22,6 +22,24 @@ class EventExpenseCategoryService {
         }
       });
   }
+
+  static create(params) {
+    request
+      .post(APIEndpoints.CREATE_EVENT_EXPENSE_CATEGORY)
+      .send(params)
+      .use(Utils.addAuthToken)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveCreateEventExpenseCategory(json);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveCreateEventExpenseCategory(null, errors);
+          }
+        }
+      });
+  }
 }
 
 export default EventExpenseCategoryService;

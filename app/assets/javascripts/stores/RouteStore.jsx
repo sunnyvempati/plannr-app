@@ -84,6 +84,9 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       break;
 
+    case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
+      router.transitionTo('event_budget', {id: action.entity.event_id});
+
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) {
         ToastActions.toast("You've been successfully logged out!");

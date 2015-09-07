@@ -9,6 +9,8 @@ import VendorStore from './VendorStore';
 import TaskStore from './TaskStore';
 import EventContactStore from './EventContactStore';
 import EventVendorStore from './EventVendorStore';
+import ExpenseCategoryStore from './ExpenseCategoryStore';
+import EventExpenseCategoryStore from './EventExpenseCategoryStore';
 
 class FormStore extends BaseStore {
   constructor() {
@@ -36,7 +38,9 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     VendorStore.dispatchToken,
     TaskStore.dispatchToken,
     EventContactStore.dispatchToken,
-    EventVendorStore.dispatchToken
+    EventVendorStore.dispatchToken,
+    ExpenseCategoryStore.dispatchToken,
+    EventExpenseCategoryStore.dispatchToken
   ]);
 
   let action = payload.action;
@@ -64,6 +68,7 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.CREATE_EVENT_SUCCESS_RESPONSE:
     case ActionTypes.RESEND_VERIFY_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_FEEDBACK_SUCCESS_RESPONSE:
+    case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
       _formStoreInstance.entity = action.entity;
       _formStoreInstance.errors = null;
       _formStoreInstance.emitChange();
@@ -78,6 +83,7 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.UPDATE_VENDOR_ERROR_RESPONSE:
     case ActionTypes.RESEND_VERIFY_ERROR_RESPONSE:
     case ActionTypes.CREATE_FEEDBACK_ERROR_RESPONSE:
+    case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE:
       _formStoreInstance.entity = null;
       _formStoreInstance.errors = action.errors;
       _formStoreInstance.emitChange();

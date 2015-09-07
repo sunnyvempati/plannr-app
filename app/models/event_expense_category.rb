@@ -8,7 +8,7 @@ class EventExpenseCategory < ActiveRecord::Base
 
   scope :with_event_id, lambda { |event_id|
     includes(:expense_category)
-      .joins('INNER JOIN expense_categories ON expense_categories.id = event_expense_categories.expense_cateory_id')
+      .joins('INNER JOIN expense_categories ON expense_categories.id = event_expense_categories.expense_category_id')
       .where("event_id = '#{event_id}'")
   }
 

@@ -464,6 +464,44 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveExpenseCategoriesSearch(expenseCategories, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.SEARCH_EXPENSE_CATEGORIES_RESPONSE,
+      expenseCategories: expenseCategories,
+      errors: errors
+    })
+  }
+
+  static receiveGetExpenseCategory(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EXPENSE_CATEGORY_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveCreateExpenseCategory(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_EXPENSE_CATEGORY_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_EXPENSE_CATEGORY_ERROR_RESPONSE;
+    let entity = json && json.expense_category;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
+
+  static receiveCreateEventExpenseCategory(json, errors) {
+    let type = !errors ? ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE;
+    let entity = json && json.event_expense_category;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

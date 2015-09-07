@@ -12,7 +12,11 @@ class EventExpenseCategory extends BaseStore {
     super();
     this._cache = new CacheStore();
     this._eventExpenseCategories = [];
+    this._searchResults = [];
   }
+
+  get searchResults() { return this._searchResults; }
+  setSearchResults(results) { this._searchResults = results; }
 
   getFromCache(params) {
     let categoryIds = this._cache.getItems(params);
@@ -33,6 +37,11 @@ class EventExpenseCategory extends BaseStore {
         this._cache.add(category.id, params);
       });
     }
+  }
+
+  add(eventExpenseCategory) {
+    this._eventExpenseCategories[eventExpenseCategory.id] = eventExpenseCategory;
+    this._cache.clear();
   }
 
   clear() {
@@ -59,6 +68,10 @@ _eventExpenseCategoryStoreInstance.dispatchToken = AppDispatcher.register((paylo
       break;
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) _eventExpenseCategoryStoreInstance.clear();
+      break;
+    case ActionTypes.CREATE_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
+      _eventExpenseCategoryStoreInstance.add(action.entity);
+      _eventExpenseCategoryStoreInstance.emitChange();
       break;
     default:
   }
