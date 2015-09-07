@@ -69,7 +69,7 @@ _eventExpenseCategoryStoreInstance.dispatchToken = AppDispatcher.register((paylo
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) _eventExpenseCategoryStoreInstance.clear();
       break;
-    case ActionTypes.CREATE_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
+    case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
       _eventExpenseCategoryStoreInstance.add(action.entity);
       _eventExpenseCategoryStoreInstance.emitChange();
       break;
