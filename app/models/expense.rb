@@ -12,6 +12,10 @@ class Expense < ActiveRecord::Base
     where(event_id: [event_id]).includes(:event)
   }
 
+  scope :with_event_expense_category_id, lambda{ |id|
+    where(event_expense_category_id: id)
+  }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)
@@ -38,6 +42,7 @@ class Expense < ActiveRecord::Base
     %w(
       search_query
       with_event_id
+      with_event_expense_category_id
     )
   end
 

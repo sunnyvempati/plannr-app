@@ -7,30 +7,52 @@
   padding: $size-increment*3 0;
 }
 
-.Category-row {
+.Category-header {
   display: flex;
   align-items: center;
   background-color: $plannr-green;
   height: $grid-increment;
 }
 
+.Category-toggleExpense {
+  flex: 1;
+  padding: 0 $size-increment*2;
+}
+
 .Category-name {
-  flex: 4;
+  flex: 10;
   color: rgba(255,255,255,0.87);
   @include font($headline-font, bold, 0);
 }
 
-.Category-expenses {
-
-}
-
+.Category-remaining,
+.Category-expenses,
 .Category-estimated {
-  flex: 1;
-  &.display {
-    color: $white-half;
+  flex: 4;
+  display: flex;
+  @include font($subheader-font, 600, 0);
+  & .display {
+    color: rgba(255,255,255,0.67);
   }
-  &.price {
-    color: $white-three-fourths;
+  & .price {
+    color: rgba(255,255,255,0.87);
     padding-left: $size-increment*2;
   }
 }
+
+.Category-addExpense {
+  display: flex;
+  align-items: center;
+  padding: $size-increment*2 0 0 0;
+  color: $black-half;
+  & .display {
+    padding-left: $size-increment;
+  }
+}
+
+.CategoryIcon {
+  color: $white-three-fourths;
+  font-size: 24px;
+  padding-right: $size-increment*2;
+}
+

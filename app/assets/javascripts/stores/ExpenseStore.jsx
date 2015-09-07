@@ -30,7 +30,7 @@ class ExpenseStore extends BaseStore {
         // add to global
         this._expenses[expense.id] = expense;
         // then add to cache
-        this._cache.add(event.id, params);
+        this._cache.add(expense.id, params);
       });
     }
   }

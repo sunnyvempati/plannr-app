@@ -3,7 +3,7 @@ class CreatePayments < ActiveRecord::Migration
     create_table :payments, id: :uuid do |t|
       t.date :due_date
       t.uuid :expense_id
-      t.decimal :amount
+      t.float :amount
       t.integer :method
       t.boolean :paid
       t.text :notes

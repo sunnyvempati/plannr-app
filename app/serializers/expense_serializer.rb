@@ -7,9 +7,14 @@ class ExpenseSerializer < ActiveModel::Serializer
              :notes,
              :price,
              :quantity,
-             :payments
+             :payments,
+             :total
 
   def vendor_name
     object.vendor.name
+  end
+
+  def total
+    object.price * object.quantity
   end
 end

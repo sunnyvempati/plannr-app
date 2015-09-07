@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20150903200807) do
     t.uuid     "vendor_id"
     t.string   "name"
     t.text     "notes"
-    t.decimal  "price"
+    t.float    "price"
     t.integer  "quantity"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20150903200807) do
   create_table "payments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.date     "due_date"
     t.uuid     "expense_id"
-    t.decimal  "amount"
+    t.float    "amount"
     t.integer  "method"
     t.boolean  "paid"
     t.text     "notes"

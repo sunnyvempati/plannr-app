@@ -182,6 +182,7 @@ def create_expenses
                                       event_expense_category: event_expense_category,
                                       vendor: vendor,
                                       price: e[:price],
+                                      notes: Faker::Lorem.paragraph(2),
                                       quantity: e[:quantity])
     puts "Created expense: #{created_expense.name}" if created_expense
   end
@@ -193,11 +194,10 @@ def create_payments
   @payments.values.each do |p|
     p.symbolize_keys!
     expense = Expense.find_by_name(p[:expense])
-    paid = p[:paid] == 'true' ? true : false
     created_payment = Payment.create!(expense: expense,
                                       method: p[:method],
                                       amount: p[:amount],
-                                      paid: paid)
+                                      paid: p[:paid])
 
     puts "Created payment successfully" if created_payment
   end

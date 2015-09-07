@@ -1,0 +1,71 @@
+// used with Table.jsx
+.ExpenseData {
+  width: 95%;
+}
+
+.ExpenseRow {
+  padding: $size-increment*2 0;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.ExpenseRow-title {
+  color: black;
+  & .name {
+    @include font($body-1-font, bold, 0);
+  }
+  & .vendor {
+    @include font($body-1-font, normal, 0);
+    color: $black-quarter;
+  }
+}
+
+.ExpenseRow-cost {
+  & .quantity {
+    border-bottom: solid 1px rgba(0,0,0,0.1);
+    padding-bottom: 4px;
+  }
+}
+
+.ExpenseRow-paid {
+  & .paid {
+    padding-bottom: 4px;
+    opacity: 0.5;
+    border-bottom: solid 1px rgba(0,0,0,0.1);
+  }
+  & .total,.leftOver {
+    padding-left: 7px;
+  }
+}
+
+.ExpenseRow-payment {
+  display: flex;
+  padding-bottom: $size-increment;
+  & .checkbox {
+    opacity: 0.75;
+  }
+  & .status {
+    opacity: 0.5;
+    padding-left: $size-increment;
+  }
+  & .details {
+    padding-left: $size-increment;
+    >* {
+      padding-bottom: 4px;
+    }
+    & .method {
+      opacity: 0.5;
+    }
+  }
+}
+
+.ExpenseRow-item {
+  text-align: left;
+  flex: 1;
+  padding: 0 $size-increment*2;
+}
+
+.ExpenseRow-actions {
+  display: flex;
+  align-items: center;
+}

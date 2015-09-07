@@ -11,7 +11,8 @@ var Table = React.createClass({
       showToolbar: true,
       extraPadding: false,
       filterable: false,
-      invertToolbarColors: true // make all icons white for darker background; default is black
+      invertToolbarColors: true, // make all icons white for darker background; default is black
+      hideHeaderCheckbox: false
     };
   },
   handleRowClick: function(data) {
@@ -109,6 +110,15 @@ var Table = React.createClass({
       );
     }
   },
+  renderHeaderCheckbox() {
+    if (!this.props.hideHeaderCheckbox) {
+      return (
+        <div className="Table-checkbox u-flexGrow-1">
+          {this.checkAllInput()}
+        </div>
+      )
+    }
+  },
   getHeaders: function() {
     var headers = this.props.columns.map(function(column) {
       var rowClass = "Table-rowItem u-wrapWithEllipsis " + "u-flexGrow-" + column.grow;
@@ -118,9 +128,7 @@ var Table = React.createClass({
     });
     return (
       <div className="Table-header">
-        <div className="Table-checkbox u-flexGrow-1">
-          {this.checkAllInput()}
-        </div>
+        {this.renderHeaderCheckbox()}
         {headers}
         <div className="Table-action"></div>
       </div>

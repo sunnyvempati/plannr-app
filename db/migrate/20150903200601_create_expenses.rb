@@ -5,7 +5,7 @@ class CreateExpenses < ActiveRecord::Migration
       t.uuid :vendor_id
       t.string :name
       t.text :notes
-      t.decimal :price
+      t.float :price
       t.integer :quantity
 
       t.timestamps null: false
