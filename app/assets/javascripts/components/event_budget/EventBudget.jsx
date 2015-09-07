@@ -22,7 +22,7 @@ var EventBudget = React.createClass({
   },
   goToAddCategory() {
     let props = {id: this.props.params.id};
-    RouteActions.redirect('expense_category_form', props);
+    RouteActions.redirect('expense_category_form_new', props);
   },
   render: function() {
     return (
@@ -31,7 +31,7 @@ var EventBudget = React.createClass({
           <DropdownMenu trigger={this.getAddNewTrigger()}
                         items={this.getAddNewItems()} />
         </div>
-        <RouteHandler />
+        <RouteHandler eventId={this.props.params.id} />
       </div>
     );
   }

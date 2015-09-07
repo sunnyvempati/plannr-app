@@ -11,9 +11,6 @@ var Event = React.createClass({
   propTypes: {
     model: React.PropTypes.object
   },
-  editEvent: function(id) {
-    location.href = "/events/" + id + "/edit/";
-  },
   renderDate: function(date) {
     if (date) {
       return (

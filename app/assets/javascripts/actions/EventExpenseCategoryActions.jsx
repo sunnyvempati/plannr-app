@@ -19,4 +19,29 @@ export default class EventExpenseCategoryActions {
     });
     EventExpenseCategoryService.create(params);
   }
+
+  static update(id, params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_REQUEST,
+      id: id,
+      params: params
+    });
+    EventExpenseCategoryService.update(id, params);
+  }
+
+  static remove(id) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_EVENT_EXPENSE_CATEGORY_REQUEST,
+      id: id
+    })
+    EventExpenseCategoryService.remove(id);
+  }
+
+  static get(id) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_EXPENSE_CATEGORY_REQUEST,
+      id: id
+    });
+    EventExpenseCategoryService.get(id);
+  }
 }

@@ -69,6 +69,7 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.RESEND_VERIFY_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_FEEDBACK_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
+    case ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
       _formStoreInstance.entity = action.entity;
       _formStoreInstance.errors = null;
       _formStoreInstance.emitChange();
@@ -84,6 +85,7 @@ _formStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.RESEND_VERIFY_ERROR_RESPONSE:
     case ActionTypes.CREATE_FEEDBACK_ERROR_RESPONSE:
     case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE:
+    case ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE:
       _formStoreInstance.entity = null;
       _formStoreInstance.errors = action.errors;
       _formStoreInstance.emitChange();

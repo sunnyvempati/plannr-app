@@ -19,6 +19,10 @@ class ExpenseCategoryStore extends BaseStore {
   add(expenseCategory) {
     this._expenseCategories[expenseCategory.id] = expenseCategory;
   }
+
+  get(id) {
+    return this._expenseCategories[id];
+  }
 }
 
 let _expenseCategoryStoreInstance = new ExpenseCategoryStore();

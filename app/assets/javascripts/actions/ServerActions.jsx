@@ -502,6 +502,33 @@ class ServerActions {
       errors: errors
     });
   }
+
+  static receiveDeleteEventExpenseCategory(id, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_EVENT_EXPENSE_CATEGORY_RESPONSE,
+      id: id,
+      errors: errors
+    });
+  }
+
+  static receiveGetEventExpenseCategory(json, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_EXPENSE_CATEGORY_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  }
+
+  static receiveUpdateEventExpenseCategory(json, errors) {
+    let type = !errors ? ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE :
+                         ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE;
+    let entity = json && json.event_expense_category;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

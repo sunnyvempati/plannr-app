@@ -55,6 +55,9 @@ const AppConstants = {
     GET_EXPENSE_CATEGORY:         '/expense_categories/',
     CREATE_EXPENSE_CATEGORY:      '/expense_categories',
     CREATE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories',
+    UPDATE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories/',
+    DELETE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories/',
+    GET_EVENT_EXPENSE_CATEGORY:   '/event_expense_categories/'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -209,6 +212,13 @@ const AppConstants = {
     CREATE_EVENT_EXPENSE_CATEGORY_REQUEST: null,
     CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE: null,
     CREATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE: null,
+    DELETE_EVENT_EXPENSE_CATEGORY_REQUEST: null,
+    DELETE_EVENT_EXPENSE_CATEGORY_RESPONSE: null,
+    GET_EVENT_EXPENSE_CATEGORY_REQUEST: null,
+    GET_EVENT_EXPENSE_CATEGORY_RESPONSE: null,
+    UPDATE_EVENT_EXPENSE_CATEGORY_REQUEST: null,
+    UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE: null,
+    UPDATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE: null,
 
 
     // Invitaitons

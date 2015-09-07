@@ -39,9 +39,19 @@ class EventExpenseCategory extends BaseStore {
     }
   }
 
+  get(id) {
+    return this._eventExpenseCategories[id];
+  }
+
   add(eventExpenseCategory) {
     this._eventExpenseCategories[eventExpenseCategory.id] = eventExpenseCategory;
     this._cache.clear();
+  }
+
+  remove(id) {
+    delete this._eventExpenseCategories[id];
+    this._cache.clear();
+
   }
 
   clear() {
@@ -69,9 +79,21 @@ _eventExpenseCategoryStoreInstance.dispatchToken = AppDispatcher.register((paylo
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) _eventExpenseCategoryStoreInstance.clear();
       break;
+    case ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
       _eventExpenseCategoryStoreInstance.add(action.entity);
       _eventExpenseCategoryStoreInstance.emitChange();
+      break;
+    case ActionTypes.GET_EVENT_EXPENSE_CATEGORY_RESPONSE:
+      let eventExpenseCategory = action.json && action.json.event_expense_category;
+      if (eventExpenseCategory) _eventExpenseCategoryStoreInstance.add(eventExpenseCategory);
+      _eventExpenseCategoryStoreInstance.emitChange();
+      break;
+    case ActionTypes.DELETE_EVENT_EXPENSE_CATEGORY_RESPONSE:
+      if (!action.errors) {
+        _eventExpenseCategoryStoreInstance.remove(action.id);
+        _eventExpenseCategoryStoreInstance.emitChange();
+      }
       break;
     default:
   }

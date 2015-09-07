@@ -34,7 +34,8 @@ import EventBudget from './components/event_budget/EventBudget';
 import EventBudgetList from './components/event_budget/EventBudgetList';
 import EventComments from './components/events/EventComments';
 import Company from './components/companies/Company';
-import ExpenseCategoryForm from './components/event_budget/ExpenseCategoryForm';
+import ExpenseCategoryFormNew from './components/event_budget/ExpenseCategoryFormNew';
+import ExpenseCategoryFormEdit from './components/event_budget/ExpenseCategoryFormEdit';
 
 export default (
   <Route name="app" path="/" handler={App}>
@@ -50,7 +51,8 @@ export default (
         <Route name="event_attachments" path="attachments" handler={EventAttachmentList} ignoreScrollBehavior />
         <Route name="event_vendors" path="vendors" handler={EventVendorList} ignoreScrollBehavior />
         <Route name="event_budget" path="budget" handler={EventBudget} ignoreScrollBehavior>
-          <Route name="expense_category_form" path="add_category" handler={ExpenseCategoryForm} ignoreScrollBehavior />
+          <Route name="expense_category_form_new" path="add_new_category" handler={ExpenseCategoryFormNew} ignoreScrollBehavior />
+          <Route name="expense_category_form_edit" path="edit_category/:budget_category_id" handler={ExpenseCategoryFormEdit} ignoreScrollBehavior />
           <DefaultRoute name="event_budget_list" handler={EventBudgetList} ignoreScrollBehavior />
         </Route>
         <Route name="event_comments" path="comments" handler={EventComments} ignoreScrollBehavior />

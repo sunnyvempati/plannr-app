@@ -1,5 +1,7 @@
 import ExpenseStore from '../../stores/ExpenseStore';
 import ExpenseActions from '../../actions/ExpenseActions';
+import RouteActions from '../../actions/RouteActions';
+import EventExpenseCategoryActions from '../../actions/EventExpenseCategoryActions';
 import ExpenseList from './ExpenseList';
 import DropdownMenu from '../generic/DropdownMenu';
 import ReactIntl from 'react-intl';
@@ -48,8 +50,36 @@ var CategoryRow = React.createClass({
       </div>
     )
   },
+  handleActionClick(item) {
+    item.handler(this.props.category.id);
+  },
+  handleEdit(id) {
+    let props = {id: this.props.eventId, budget_category_id: id};
+    RouteActions.redirect('expense_category_form_edit', props);
+  },
+  handleRemove(id) {
+    EventExpenseCategoryActions.remove(id);
+  },
+  actionItems() {
+    let items = [{name: "Edit", handler: this.handleEdit}];
+    if (!this.state.expenses.length) items.push({name: "Remove", handler: this.handleRemove});
+    return items;
+  },
   getRowActionMenu() {
-    return [];
+    var globalItems = this.actionItems().map((item) => {
+      return (
+        <div className="DropdownMenu-item"
+             onClick={this.handleActionClick.bind(this, item)}
+             key={item.name}>
+          {item.name}
+        </div>
+      )
+    }.bind(this));
+    return (
+      <div className="TableRow-actions">
+        {globalItems}
+      </div>
+    )
   },
   render: function() {
     let category = this.props.category;

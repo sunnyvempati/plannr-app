@@ -13,7 +13,7 @@ var ExpenseCategoryForm = React.createClass({
       'event_expense_category': {
         'expense_category_id': inputs.expense_category,
         'budget': inputs.budget,
-        'event_id': this.props.params.id
+        'event_id': this.props.eventId
       }
     };
   },
@@ -21,10 +21,11 @@ var ExpenseCategoryForm = React.createClass({
     let budget = data.event_expense_category.budget;
     budget = !!budget && budget.toString().replace('$','').replace(/,/g,'');
     data.event_expense_category.budget = budget;
-    EventExpenseCategoryActions.create(data);
+    if (this.props.type == 'NEW') EventExpenseCategoryActions.create(data);
+    else EventExpenseCategoryActions.update(this.props.model.id, data);
   },
   onSuccess(result) {
-    RouteActions.redirect('event_budget', {id: this.props.params.id});
+    RouteActions.redirect('event_budget', {id: this.props.eventId});
   },
   onSecondaryClick() {
     this.onSuccess();
@@ -44,7 +45,7 @@ var ExpenseCategoryForm = React.createClass({
             <CategoryInput name='expense_category'
                            value={eventCategory.expense_category_id}
                            id='expense_category_input'
-                           eventId={this.props.params.id}
+                           eventId={this.props.eventId}
                            autocompleteClassName='CompactAutocomplete'
                            className='CompactFormInput'
                            label='Name'
