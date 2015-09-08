@@ -3,6 +3,7 @@ import ReactIntl from 'react-intl';
 import CheckboxInput from '../generic/CheckboxInput';
 import ExpenseActions from '../../actions/ExpenseActions';
 import RouteActions from '../../actions/RouteActions';
+import PaymentStore from '../../stores/PaymentStore';
 
 var ExpenseRow = React.createClass({
   paymentTypes: {
@@ -62,16 +63,17 @@ var ExpenseRow = React.createClass({
   renderPayments(payments) {
     if (payments.length) {
       return payments.map((p) => {
-        let date = p.paid_date ? p.paid_date : p.due_date;
+        let payment = PaymentStore.get(p.id);
+        let date = payment.paid_date ? payment.paid_date : payment.due_date;
         return (
-          <div className="ExpenseRow-payment" key={p.id}>
+          <div className="ExpenseRow-payment" key={payment.id}>
             <div className="checkbox">
               <CheckboxInput onChange={this.paidChanged}
-                             value={p.id}
-                             checked={!!p.paid_date} />
+                             value={payment.id}
+                             checked={!!payment.paid_date} />
             </div>
             <div className="status">
-              {p.paid_date ? "Paid" : "Due"}
+              {payment.paid_date ? "Paid" : "Due"}
             </div>
             <div className="details">
               <div className="date">
@@ -82,9 +84,9 @@ var ExpenseRow = React.createClass({
                   value={date} />
               </div>
               <div className="amount">
-                <ReactIntl.FormattedNumber value={p.amount} style="currency" currency="USD" />
+                <ReactIntl.FormattedNumber value={payment.amount} style="currency" currency="USD" />
               </div>
-              <div className="method">{p.type_display}</div>
+              <div className="method">{payment.type_display}</div>
             </div>
           </div>
         )
@@ -99,7 +101,7 @@ var ExpenseRow = React.createClass({
     let expense = this.props.data;
     let paidTotal = 0, payments = expense.payments;
     payments.forEach((p) => {
-      if (p.paid) paidTotal += p.amount;
+      if (!!p.paid_date) paidTotal += p.amount;
     });
     let unpaidTotal = expense.total - paidTotal;
     return (

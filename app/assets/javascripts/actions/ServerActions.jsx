@@ -591,6 +591,40 @@ class ServerActions {
       errors: errors
     })
   }
+
+  static receiveCreatePayment(expenseId, json, errors) {
+    let type = !errors ? ActionTypes.CREATE_PAYMENT_SUCCESS_RESPONSE :
+                         ActionTypes.CREATE_PAYMENT_ERROR_RESPONSE;
+    let entity = json && json.payment;
+    console.log("RECEIVE", type, json);
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      expenseId: expenseId,
+      errors: errors
+    });
+  }
+
+  static receiveUpdatePayment(expenseId, json, errors) {
+    let type = !errors ? ActionTypes.UPDATE_PAYMENT_SUCCESS_RESPONSE :
+                         ActionTypes.UPDATE_PAYMENT_ERROR_RESPONSE;
+    let entity = json && json.payment;
+    AppDispatcher.handleAction({
+      type: type,
+      entity: entity,
+      expenseId: expenseId,
+      errors: errors
+    });
+  }
+
+  static receiveDeletePayment(expenseId, id, errors) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.DELETE_PAYMENT_RESPONSE,
+      id: id,
+      expenseId: expenseId,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActions;

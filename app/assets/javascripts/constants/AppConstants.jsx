@@ -62,7 +62,10 @@ const AppConstants = {
     CREATE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories',
     UPDATE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories/',
     DELETE_EVENT_EXPENSE_CATEGORY:'/event_expense_categories/',
-    GET_EVENT_EXPENSE_CATEGORY:   '/event_expense_categories/'
+    GET_EVENT_EXPENSE_CATEGORY:   '/event_expense_categories/',
+    CREATE_PAYMENT:               '/payments',
+    UPDATE_PAYMENT:               '/payments/',
+    DESTROY_PAYMENT:              '/payments/'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -240,6 +243,15 @@ const AppConstants = {
     UPDATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE: null,
     SEARCH_EVENT_EXPENSE_CATEGORIES_REQUEST: null,
     SEARCH_EVENT_EXPENSE_CATEGORIES_RESPONSE: null,
+
+    // Payments
+    CREATE_PAYMENT_REQUEST: null,
+    CREATE_PAYMENT_SUCCESS_RESPONSE: null,
+    CREATE_PAYMENT_ERROR_RESPONSE: null,
+    UPDATE_PAYMENT_SUCCESS_RESPONSE: null,
+    UPDATE_PAYMENT_ERROR_RESPONSE: null,
+    DELETE_PAYMENT_REQUEST: null,
+    DELETE_PAYMENT_RESPONSE: null,
 
 
     // Invitaitons

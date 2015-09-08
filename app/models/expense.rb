@@ -2,7 +2,7 @@ class Expense < ActiveRecord::Base
   belongs_to :event_vendor
   belongs_to :event_expense_category
 
-  has_many :payments
+  has_many :payments, dependent: :destroy
 
   validates :event_expense_category, presence: true
 

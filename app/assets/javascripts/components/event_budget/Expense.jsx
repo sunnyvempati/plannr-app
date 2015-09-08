@@ -1,10 +1,13 @@
 import ExpenseStore from '../../stores/ExpenseStore';
 import ExpenseActions from '../../actions/ExpenseActions';
 import RouteActions from '../../actions/RouteActions';
+import ModalActions from '../../actions/ModalActions';
 import Button from '../generic/Button';
 import CheckboxInput from '../generic/CheckboxInput';
 import ReactIntl from 'react-intl';
 import Payment from './Payment';
+import EditPaymentModal from './EditPaymentModal';
+import PaymentStore from '../../stores/PaymentStore';
 
 var Expense = React.createClass({
   getExpenseState() {
@@ -26,7 +29,12 @@ var Expense = React.createClass({
     this.setState(this.getExpenseState());
   },
   handleAddPayment() {
-
+    var props = {
+      model: {},
+      expense: this.state.expense,
+      type: 'NEW'
+    }
+    ModalActions.openEditPaymentModal(props);
   },
   paidChanged() {
 
@@ -36,7 +44,7 @@ var Expense = React.createClass({
       return payments.map((p) => {
         let expenseId = this.state.expense && this.state.expense.id;
         return (
-          <Payment data={p} expenseId={expenseId} />
+          <Payment data={PaymentStore.get(p.id)} expenseId={expenseId} />
         )
       });
     }
@@ -48,7 +56,7 @@ var Expense = React.createClass({
     let expense = this.state.expense || {};
     let paidTotal = 0, payments = expense.payments || [];
     payments.forEach((p) => {
-      if (p.paid) paidTotal += p.amount;
+      if (!!p.paid_date) paidTotal += p.amount;
     });
     let remaining = expense.total - paidTotal;
     return (

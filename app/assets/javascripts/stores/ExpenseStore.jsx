@@ -4,6 +4,7 @@ import BaseStore from './BaseStore';
 import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
+import PaymentStore from './PaymentStore';
 import extend from 'extend';
 
 
@@ -44,6 +45,29 @@ class ExpenseStore extends BaseStore {
     this._cache.clear();
   }
 
+  addPayment(expenseId, payment) {
+    let expense = this._expenses[expenseId]
+    if (expense.payments) expense.payments.push(payment);
+    else expense.payments = [payment];
+  }
+
+  updatePayment(expenseId, payment) {
+    let expense = this._expenses[expenseId];
+    expense.payments.forEach((p) => {
+      if (p.id == payment.id) {
+        p = extend({}, p, payment);
+      }
+    })
+  }
+
+  removePayment(expenseId, paymentId) {
+    let expense = this._expenses[expenseId];
+    let payments = expense.payments.filter((p) => {
+      return p.id != paymentId;
+    });
+    this._expenses[expenseId].payments = payments;
+  }
+
   remove(id) {
     delete this._expenses[id];
     this._cache.clear();
@@ -60,7 +84,8 @@ let _expenseStoreInstance = new ExpenseStore();
 _expenseStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
     SessionStore.dispatchToken,
-    UserStore.dispatchToken
+    UserStore.dispatchToken,
+    PaymentStore.dispatchToken
   ]);
   let action = payload.action;
 
@@ -84,6 +109,20 @@ _expenseStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.DELETE_EXPENSE_RESPONSE:
       if (!action.errors) {
         _expenseStoreInstance.remove(action.id);
+        _expenseStoreInstance.emitChange();
+      }
+      break;
+    case ActionTypes.CREATE_PAYMENT_SUCCESS_RESPONSE:
+      _expenseStoreInstance.addPayment(action.expenseId, action.entity);
+      _expenseStoreInstance.emitChange();
+      break;
+    case ActionTypes.UPDATE_PAYMENT_SUCCESS_RESPONSE:
+      _expenseStoreInstance.updatePayment(action.expenseId, action.entity);
+      _expenseStoreInstance.emitChange();
+      break;
+    case ActionTypes.DELETE_PAYMENT_RESPONSE:
+      if (!action.errors) {
+        _expenseStoreInstance.removePayment(action.expenseId, action.paymentId);
         _expenseStoreInstance.emitChange();
       }
       break;

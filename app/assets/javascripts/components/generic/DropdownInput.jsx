@@ -24,7 +24,7 @@ var DropdownInput = React.createClass({
   },
   changeValue: function(o) {
     this.setState({open: false});
-    this.props.handleContactChange(o.value);
+    this.props.handleChange(o.value);
   },
   renderInput: function(className) {
     var activeItem = this.getActiveItem();

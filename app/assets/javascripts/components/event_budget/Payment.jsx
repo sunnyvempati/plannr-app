@@ -48,7 +48,8 @@ var Payment = React.createClass({
         <div className="Payment-check">
           <CheckboxInput onChange={this.paidChanged}
                          value={p.id}
-                         checked={!!p.paid_date} />
+                         checked={!!p.paid_date}
+                         rounded={true} />
         </div>
         <div className="Payment-details">
           <div className="Info">

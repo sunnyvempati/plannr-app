@@ -1,15 +1,7 @@
 class PaymentSerializer < ActiveModel::Serializer
-  attributes :id, :paid_date, :due_date, :amount, :type, :type_display
+  attributes :id, :due_date, :amount, :paid_date, :type
 
-  def type_display
-    case object.type
-    when 1
-      "Credit"
-    when 2
-      "Debit"
-    when 3
-      "Check"
-    else ""
-    end
+  def type
+    object.method
   end
 end
