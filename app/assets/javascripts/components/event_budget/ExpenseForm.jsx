@@ -16,12 +16,13 @@ var ExpenseForm = React.createClass({
     return {
       'expense': {
         'name': inputs.name,
-        'event_vendor_id': inputs.vendor,
+        'vendor_id': inputs.vendor,
         'event_expense_category_id': inputs.category,
         'notes': inputs.notes,
         'price': inputs.price,
         'quantity': inputs.quantity
-      }
+      },
+      'event_id': this.props.eventId
     };
   },
   postForm(data) {
@@ -76,7 +77,7 @@ var ExpenseForm = React.createClass({
                                   label='Category*'
                                   required />
             <ExpenseVendorInput name='vendor'
-                                value={expense.event_vendor_id}
+                                value={expense.vendor_id}
                                 id='expense_vendor_input'
                                 eventId={this.props.eventId}
                                 autocompleteClassName='CompactAutocomplete'

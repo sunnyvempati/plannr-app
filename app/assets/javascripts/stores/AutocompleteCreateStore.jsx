@@ -37,11 +37,13 @@ _autocompleteStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
 
   switch(action.type) {
     case ActionTypes.CREATE_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
+    case ActionTypes.CREATE_AUTOCOMPLETE_VENDOR_SUCCESS_RESPONSE:
       _autocompleteStoreInstance.entity = action.entity;
       _autocompleteStoreInstance.errors = null;
       _autocompleteStoreInstance.emitChange();
       break;
     case ActionTypes.CREATE_EXPENSE_CATEGORY_ERROR_RESPONSE:
+    case ActionTypes.CREATE_AUTOCOMPLETE_VENDOR_ERROR_RESPONSE:
       _autocompleteStoreInstance.entity = null;
       _autocompleteStoreInstance.errors = action.errors;
       _autocompleteStoreInstance.emitChange();

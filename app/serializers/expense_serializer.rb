@@ -4,6 +4,7 @@ class ExpenseSerializer < ActiveModel::Serializer
              :event_expense_category_name,
              :event_vendor_name,
              :event_vendor_id,
+             :vendor_id,
              :name,
              :notes,
              :price,
@@ -17,6 +18,10 @@ class ExpenseSerializer < ActiveModel::Serializer
 
   def event_expense_category_name
     object.event_expense_category.expense_category.name if object.event_expense_category
+  end
+
+  def vendor_id
+    object.event_vendor.vendor_id
   end
 
   def total

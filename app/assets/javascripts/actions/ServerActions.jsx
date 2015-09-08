@@ -303,9 +303,15 @@ class ServerActions {
     });
   }
 
-  static receiveCreateVendor(json, errors) {
-    let type = !errors ? ActionTypes.CREATE_VENDOR_SUCCESS_RESPONSE :
-                         ActionTypes.CREATE_VENDOR_ERROR_RESPONSE;
+  static receiveCreateVendor(json, errors, autocomplete) {
+    let type;
+    if (autocomplete) {
+      type = !errors ? ActionTypes.CREATE_AUTOCOMPLETE_VENDOR_SUCCESS_RESPONSE :
+                       ActionTypes.CREATE_AUTOCOMPLETE_VENDOR_ERROR_RESPONSE;
+    } else {
+      type = !errors ? ActionTypes.CREATE_VENDOR_SUCCESS_RESPONSE :
+                       ActionTypes.CREATE_VENDOR_ERROR_RESPONSE;
+    }
     let entity = json && json.vendor;
     AppDispatcher.handleAction({
       type: type,

@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
   include FilterSort
   before_action :authenticate_user
   before_action :find_expense, only: [:destroy, :update, :show]
+  before_action :set_event_vendor, only: [:create, :update]
 
   def index
     @expenses = @filter_sort.find
@@ -10,6 +11,7 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(expense_params)
+    @expense.event_vendor = @event_vendor
     render_entity @expense
   end
 
@@ -18,7 +20,11 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    render_success @expense if @expense.update_attributes!(expense_params)
+    if @event_vendor
+      update_params = expense_params
+      update_params.merge!(event_vendor_id: @event_vendor.id)
+    end
+    render_success @expense if @expense.update_attributes!(update_params)
   end
 
   def destroy
@@ -32,8 +38,16 @@ class ExpensesController < ApplicationController
   end
 
   def expense_params
-    # to do
-    params.require(:expense).permit(:name, :event_vendor_id, :event_expense_category_id, :notes, :price, :quantity)
+    params.require(:expense).permit(:name, :event_expense_category_id, :notes, :price, :quantity)
+  end
+
+  def set_event_vendor
+    @event_vendor = nil
+    vendor_id = params[:expense][:vendor_id]
+    if vendor_id
+      @event_vendor = EventVendor.find_or_create_by!(event_id: params[:event_id], vendor_id: vendor_id)
+    end
+    @event_vendor
   end
 
   def mass_destroy_params
