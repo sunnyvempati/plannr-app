@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 20150903200807) do
     t.uuid     "expense_id"
     t.float    "amount"
     t.integer  "method"
-    t.boolean  "paid"
+    t.date     "paid_date"
     t.text     "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

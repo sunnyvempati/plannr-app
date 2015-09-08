@@ -5,7 +5,7 @@ class CreatePayments < ActiveRecord::Migration
       t.uuid :expense_id
       t.float :amount
       t.integer :method
-      t.boolean :paid
+      t.date :paid_date
       t.text :notes
 
       t.timestamps null: false

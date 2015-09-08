@@ -195,10 +195,13 @@ def create_payments
   @payments.values.each do |p|
     p.symbolize_keys!
     expense = Expense.find_by_name(p[:expense])
+    due_date = expense.event_expense_category.event.start_date + 2.days
+    paid_date = p[:paid] ? due_date + 2.days : nil
     created_payment = Payment.create!(expense: expense,
                                       method: p[:method],
                                       amount: p[:amount],
-                                      paid: p[:paid])
+                                      due_date: due_date,
+                                      paid_date: paid_date)
 
     puts "Created payment successfully" if created_payment
   end

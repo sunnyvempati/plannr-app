@@ -62,15 +62,16 @@ var ExpenseRow = React.createClass({
   renderPayments(payments) {
     if (payments.length) {
       return payments.map((p) => {
+        let date = p.paid_date ? p.paid_date : p.due_date;
         return (
           <div className="ExpenseRow-payment" key={p.id}>
             <div className="checkbox">
               <CheckboxInput onChange={this.paidChanged}
                              value={p.id}
-                             checked={p.paid} />
+                             checked={!!p.paid_date} />
             </div>
             <div className="status">
-              {p.paid ? "Paid" : "Due"}
+              {p.paid_date ? "Paid" : "Due"}
             </div>
             <div className="details">
               <div className="date">
@@ -78,12 +79,12 @@ var ExpenseRow = React.createClass({
                   day="numeric"
                   month="numeric"
                   year="numeric"
-                  value={p.due_date} />
+                  value={date} />
               </div>
               <div className="amount">
                 <ReactIntl.FormattedNumber value={p.amount} style="currency" currency="USD" />
               </div>
-              <div className="method">{this.paymentTypes[p.method]}</div>
+              <div className="method">{p.type_display}</div>
             </div>
           </div>
         )

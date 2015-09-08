@@ -53,6 +53,44 @@
       flex: 5;
     }
   }
+  & .Action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: $size-increment*2 0;
+    @include font($body-1-font, normal, 0);
+    color: $black-half;
+    >* {
+      padding-left: $size-increment;
+    }
+  }
 }
 
+.Payment {
+  padding-top: $size-increment;
+  display: flex;
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.Payment-check {
+  flex: 1;
+  padding: $size-increment $size-increment*2;
+}
+
+.Payment-details {
+  flex: 12;
+}
+
+.Payment-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.PaymentActionIcon {
+  color: $black-half;
+  font-size: 24px;
+  padding-top: $size-increment;
+  padding-right: $size-increment*2;
+}
 

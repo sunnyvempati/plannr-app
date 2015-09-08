@@ -1,5 +1,4 @@
 class Expense < ActiveRecord::Base
-  belongs_to :event
   belongs_to :event_vendor
   belongs_to :event_expense_category
 

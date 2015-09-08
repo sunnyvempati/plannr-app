@@ -2,7 +2,9 @@ import ExpenseStore from '../../stores/ExpenseStore';
 import ExpenseActions from '../../actions/ExpenseActions';
 import RouteActions from '../../actions/RouteActions';
 import Button from '../generic/Button';
+import CheckboxInput from '../generic/CheckboxInput';
 import ReactIntl from 'react-intl';
+import Payment from './Payment';
 
 var Expense = React.createClass({
   getExpenseState() {
@@ -23,9 +25,20 @@ var Expense = React.createClass({
   _onChange() {
     this.setState(this.getExpenseState());
   },
-  renderPayments(payments) {
-    if (payments.length) {
+  handleAddPayment() {
 
+  },
+  paidChanged() {
+
+  },
+  renderPayments(payments) {
+    if (payments && payments.length) {
+      return payments.map((p) => {
+        let expenseId = this.state.expense && this.state.expense.id;
+        return (
+          <Payment data={p} expenseId={expenseId} />
+        )
+      });
     }
   },
   goToEditExpense() {
@@ -91,9 +104,11 @@ var Expense = React.createClass({
                 </div>
               </div>
             </div>
-            <div className="Info">
-              {this.renderPayments(expense.payments)}
+            <div className="Action u-clickable" onClick={this.handleAddPayment}>
+              <i className="fa fa-plus"></i>
+              Add Payment
             </div>
+            {this.renderPayments(expense.payments)}
           </div>
         </div>
         <div className="ExpenseActions">
