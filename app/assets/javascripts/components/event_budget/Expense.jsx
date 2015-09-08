@@ -11,9 +11,6 @@ import PaymentStore from '../../stores/PaymentStore';
 
 var Expense = React.createClass({
   getExpenseState() {
-    // let expense = ExpenseStore.get(this.props.params.expense_id);
-    // console.log(expense);
-    // console.log()
     return {
       expense: ExpenseStore.get(this.props.params.expense_id) || null
     }
@@ -56,7 +53,6 @@ var Expense = React.createClass({
       id: this.props.eventId,
       expense_id: this.state.expense && this.state.expense.id
     };
-    console.log(props);
     RouteActions.redirect('expense_form_edit', props);
   },
   render: function() {
