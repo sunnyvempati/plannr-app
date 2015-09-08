@@ -5,14 +5,10 @@ import ExpenseActions from '../../actions/ExpenseActions';
 import RouteActions from '../../actions/RouteActions';
 import PaymentActions from '../../actions/PaymentActions';
 import PaymentStore from '../../stores/PaymentStore';
+import PaymentTypes from './PaymentTypes';
 import moment from 'moment';
 
 var ExpenseRow = React.createClass({
-  paymentTypes: {
-    1: "Credit",
-    2: "Debit",
-    3: "Check"
-  },
   actionItems() {
     return [
       {name: "Edit", handler: this.handleEdit},
@@ -90,7 +86,7 @@ var ExpenseRow = React.createClass({
               <div className="amount">
                 <ReactIntl.FormattedNumber value={payment.amount} style="currency" currency="USD" />
               </div>
-              <div className="method">{payment.type_display}</div>
+              <div className="method">{PaymentTypes.getPaymentDisplay(payment.payment_method)}</div>
             </div>
           </div>
         )

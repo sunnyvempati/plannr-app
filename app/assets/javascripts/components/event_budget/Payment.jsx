@@ -5,6 +5,7 @@ import ExpenseStore from '../../stores/ExpenseStore';
 import PaymentStore from '../../stores/PaymentStore';
 import ModalActions from '../../actions/ModalActions';
 import PaymentActions from '../../actions/PaymentActions';
+import PaymentTypes from './PaymentTypes';
 import moment from 'moment';
 
 var Payment = React.createClass({
@@ -82,7 +83,7 @@ var Payment = React.createClass({
           </div>
           <div className="Info">
             <div className="Display">Type</div>
-            <div className="Content">{p.type_display}</div>
+            <div className="Content">{PaymentTypes.getPaymentDisplay(p.payment_method)}</div>
           </div>
         </div>
         <div className="Payment-actions">

@@ -4,7 +4,7 @@ class CreatePayments < ActiveRecord::Migration
       t.date :due_date
       t.uuid :expense_id
       t.float :amount
-      t.integer :method
+      t.integer :payment_method
       t.date :paid_date
       t.text :notes
 

@@ -16,7 +16,7 @@ const PaymentForm = React.createClass({
   ],
   getInitialState: function() {
     return {
-      type: (this.props.model && this.props.model.type) || 1
+      method: (this.props.model && this.props.model.payment_method) || 1
     };
   },
   propTypes: {
@@ -30,7 +30,7 @@ const PaymentForm = React.createClass({
     {value: 3, display: 'Check'}
   ],
   paymentTypeChange: function(value) {
-    this.setState({type: value});
+    this.setState({method: value});
   },
   mapInputs: function(inputs) {
     return {
@@ -38,7 +38,7 @@ const PaymentForm = React.createClass({
         'expense_id': this.props.expense.id,
         'due_date': inputs.due_date,
         'amount': inputs.amount,
-        'method': inputs.type
+        'payment_method': inputs.method
       }
     };
   },
@@ -63,7 +63,7 @@ const PaymentForm = React.createClass({
       payment = {
         due_date: model.due_date,
         amount: model.amount,
-        method: model.method
+        method: model.method_type
       };
     }
     return (
@@ -96,10 +96,10 @@ const PaymentForm = React.createClass({
           />
           <DropdownInput
             options={this.typeOptions}
-            value={this.state.type}
-            id='payment_type'
-            name='type'
-            label='Type'
+            value={this.state.method}
+            id='payment_method'
+            name='method'
+            label='Method'
             handleChange={this.paymentTypeChange}
             className='CompactFormInput'
             dropdownOptionsClass='DropdownMenu-options compact'

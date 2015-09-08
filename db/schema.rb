@@ -156,11 +156,11 @@ ActiveRecord::Schema.define(version: 20150903200807) do
     t.date     "due_date"
     t.uuid     "expense_id"
     t.float    "amount"
-    t.integer  "method"
+    t.integer  "payment_method"
     t.date     "paid_date"
     t.text     "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
