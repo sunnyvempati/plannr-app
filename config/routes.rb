@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   post 'destroy_event_contacts', to: 'event_contacts#mass_delete'
 
   # event vendors
-  resources :event_vendors, only: [:index, :create]
+  resources :event_vendors, only: [:index, :create, :show]
   post 'destroy_event_vendors', to: 'event_vendors#mass_delete'
 
   # attachments
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:index, :create, :update, :destroy]
 
   # expenses
-  resources :expenses, only: [:index]
+  resources :expenses, only: [:index, :show, :create, :destroy, :update]
   resources :event_expense_categories, only: [:index, :show, :create, :destroy, :update]
   resources :expense_categories, only: [:index, :show, :create]
 

@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20150903200807) do
 
   create_table "expenses", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "event_expense_category_id"
-    t.uuid     "vendor_id"
+    t.uuid     "event_vendor_id"
     t.string   "name"
     t.text     "notes"
     t.float    "price"

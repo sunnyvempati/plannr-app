@@ -35,6 +35,20 @@ class ExpenseStore extends BaseStore {
     }
   }
 
+  get(id) {
+    return this._expenses[id];
+  }
+
+  add(expense) {
+    this._expenses[expense.id] = expense;
+    this._cache.clear();
+  }
+
+  remove(id) {
+    delete this._expenses[id];
+    this._cache.clear();
+  }
+
   clear() {
     this._expenses = [];
     this._cache.clear();
@@ -56,6 +70,22 @@ _expenseStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
         _expenseStoreInstance.addExpenses(action.expenses, action.params);
       }
       _expenseStoreInstance.emitChange();
+      break;
+    case ActionTypes.UPDATE_EXPENSE_SUCCESS_RESPONSE:
+    case ActionTypes.CREATE_EXPENSE_SUCCESS_RESPONSE:
+      _expenseStoreInstance.add(action.entity);
+      _expenseStoreInstance.emitChange();
+      break;
+    case ActionTypes.GET_EXPENSE_RESPONSE:
+      let expense = action.json && action.json.expense;
+      if (expense) _expenseStoreInstance.add(expense);
+      _expenseStoreInstance.emitChange();
+      break;
+    case ActionTypes.DELETE_EXPENSE_RESPONSE:
+      if (!action.errors) {
+        _expenseStoreInstance.remove(action.id);
+        _expenseStoreInstance.emitChange();
+      }
       break;
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) _expenseStoreInstance.clear();

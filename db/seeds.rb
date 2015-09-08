@@ -178,9 +178,10 @@ def create_expenses
     category = ExpenseCategory.find_by_name(e[:expense_category])
     event_expense_category = EventExpenseCategory.where(event: event, expense_category: category).first
     vendor = Vendor.where(company: event.company).first
+    event_vendor = EventVendor.find_or_create_by!(event: event, vendor: vendor)
     created_expense = Expense.create!(name: e[:name],
                                       event_expense_category: event_expense_category,
-                                      vendor: vendor,
+                                      event_vendor: event_vendor,
                                       price: e[:price],
                                       notes: Faker::Lorem.paragraph(2),
                                       quantity: e[:quantity])

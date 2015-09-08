@@ -12,6 +12,10 @@ class EventExpenseCategory < ActiveRecord::Base
       .where("event_id = '#{event_id}'")
   }
 
+  scope :with_search_limit, lambda { |num|
+    limit(num)
+  }
+
   scope :search_query, lambda { |query|
     return nil  if query.blank?
     terms = query.downcase.split(/\s+/)
@@ -52,6 +56,7 @@ class EventExpenseCategory < ActiveRecord::Base
       search_query
       with_event_id
       sorted_by
+      with_search_limit
     )
   end
 

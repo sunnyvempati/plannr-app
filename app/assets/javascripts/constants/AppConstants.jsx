@@ -38,7 +38,9 @@ const AppConstants = {
     DELETE_EVENT_CONTACTS:        '/destroy_event_contacts',
     DELETE_EVENT_VENDORS:         '/destroy_event_vendors',
     GET_EVENT_VENDORS:            '/event_vendors',
+    SEARCH_EVENT_VENDORS:         '/event_vendors',
     CREATE_EVENT_VENDOR:          '/event_vendors',
+    GET_EVENT_VENDOR:             '/event_vendors/',
     CREATE_ATTACHMENT:            '/attachments',
     GET_ATTACHMENTS:              '/attachments',
     DELETE_ATTACHMENTS:           '/destroy_event_attachments',
@@ -50,6 +52,9 @@ const AppConstants = {
     GET_INVITE:                   '/invitation_by_token',
     FEEDBACK:                     '/feedback',
     GET_EXPENSES:                 '/expenses',
+    CREATE_EXPENSE:               '/expenses',
+    UPDATE_EXPENSE:               '/expenses/',
+    GET_EXPENSE:                  '/expenses/',
     GET_EVENT_EXPENSE_CATEGORIES: '/event_expense_categories',
     GET_EXPENSE_CATEGORIES:       '/expense_categories',
     GET_EXPENSE_CATEGORY:         '/expense_categories/',
@@ -178,6 +183,10 @@ const AppConstants = {
     CREATE_EVENT_VENDOR_RESPONSE: null,
     DELETE_EVENT_VENDORS_REQUEST: null,
     DELETE_EVENT_VENDORS_RESPONSE: null,
+    SEARCH_EVENT_VENDORS_REQUEST: null,
+    SEARCH_EVENT_VENDORS_RESPONSE: null,
+    GET_EVENT_VENDOR_REQUEST: null,
+    GET_EVENT_VENDOR_RESPONSE: null,
 
     // Attachments
     CREATE_EVENT_ATTACHMENT_REQUEST: null,
@@ -200,6 +209,16 @@ const AppConstants = {
     // Expenses
     GET_EXPENSES_REQUEST: null,
     GET_EXPENSES_RESPONSE: null,
+    CREATE_EXPENSE_REQUEST: null,
+    CREATE_EXPENSE_SUCCESS_RESPONSE: null,
+    CREATE_EXPENSE_ERROR_RESPONSE: null,
+    GET_EXPENSE_REQUEST: null,
+    GET_EXPENSE_RESPONSE: null,
+    UPDATE_EXPENSE_REQUEST: null,
+    UPDATE_EXPENSE_SUCCESS_RESPONSE: null,
+    UPDATE_EXPENSE_ERROR_RESPONSE: null,
+    DELETE_EXPENSE_REQUEST: null,
+    DELETE_EXPENSE_RESPONSE: null,
     GET_EVENT_EXPENSE_CATEGORIES_REQUEST: null,
     GET_EVENT_EXPENSE_CATEGORIES_RESPONSE: null,
     SEARCH_EXPENSE_CATEGORIES_REQUEST: null,
@@ -219,6 +238,8 @@ const AppConstants = {
     UPDATE_EVENT_EXPENSE_CATEGORY_REQUEST: null,
     UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE: null,
     UPDATE_EVENT_EXPENSE_CATEGORY_ERROR_RESPONSE: null,
+    SEARCH_EVENT_EXPENSE_CATEGORIES_REQUEST: null,
+    SEARCH_EVENT_EXPENSE_CATEGORIES_RESPONSE: null,
 
 
     // Invitaitons

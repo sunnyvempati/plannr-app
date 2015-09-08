@@ -44,4 +44,12 @@ export default class EventExpenseCategoryActions {
     });
     EventExpenseCategoryService.get(id);
   }
+
+  static search(params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.SEARCH_EVENT_EXPENSE_CATEGORIES_REQUEST,
+      params: params
+    });
+    EventExpenseCategoryService.search(params);
+  }
 }

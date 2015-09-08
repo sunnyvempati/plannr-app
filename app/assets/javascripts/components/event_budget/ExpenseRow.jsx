@@ -1,6 +1,8 @@
 import DropdownMenu from '../generic/DropdownMenu';
 import ReactIntl from 'react-intl';
 import CheckboxInput from '../generic/CheckboxInput';
+import ExpenseActions from '../../actions/ExpenseActions';
+import RouteActions from '../../actions/RouteActions';
 
 var ExpenseRow = React.createClass({
   paymentTypes: {
@@ -8,8 +10,27 @@ var ExpenseRow = React.createClass({
     2: "Debit",
     3: "Check"
   },
+  actionItems() {
+    return [
+      {name: "Edit", handler: this.handleEdit},
+      {name: "Delete", handler: this.handleDelete},
+    ];
+  },
   getRowActionMenu() {
-    return [];
+    var globalItems = this.actionItems().map((item) => {
+      return (
+        <div className="DropdownMenu-item"
+             onClick={this.handleActionClick.bind(this, item)}
+             key={item.name}>
+          {item.name}
+        </div>
+      )
+    }.bind(this));
+    return (
+      <div className="TableRow-actions">
+        {globalItems}
+      </div>
+    )
   },
   getActionTrigger() {
     return (
@@ -18,9 +39,25 @@ var ExpenseRow = React.createClass({
       </div>
     )
   },
+  handleActionClick(item) {
+    item.handler(this.props.data.id);
+  },
+  handleDelete(id) {
+    ExpenseActions.delete(id);
+  },
+  handleEdit(id) {
+    let props = {
+      id: this.props.eventId,
+      expense_id: id
+    };
+    RouteActions.redirect('expense_form_edit', props);
+  },
   paidChanged(id) {
     // to do
     console.log(id + " changed");
+  },
+  goToExpense() {
+    RouteActions.redirect('expense', {id: this.props.eventId, expense_id: this.props.data.id});
   },
   renderPayments(payments) {
     if (payments.length) {
@@ -66,10 +103,10 @@ var ExpenseRow = React.createClass({
     let unpaidTotal = expense.total - paidTotal;
     return (
       <div className="Table-row ExpenseRow">
-        <div className="ExpenseRow-item u-flexGrow-5 u-clickable">
+        <div className="ExpenseRow-item u-flexGrow-5 u-clickable" onClick={this.goToExpense}>
           <div className="ExpenseRow-title">
             <div className="name">{expense.name}</div>
-            <div className="vendor">{expense.vendor_name}</div>
+            <div className="vendor">{expense.event_vendor_name}</div>
           </div>
         </div>
         <div className="ExpenseRow-item u-flexGrow-8">

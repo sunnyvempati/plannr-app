@@ -18,7 +18,8 @@ var EventBudget = React.createClass({
     ]
   },
   goToAddExpense() {
-    console.log("add expense");
+    let props = {id: this.props.params.id};
+    RouteActions.redirect('expense_form_new', props);
   },
   goToAddCategory() {
     let props = {id: this.props.params.id};

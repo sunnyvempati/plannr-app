@@ -51,7 +51,6 @@ class EventExpenseCategory extends BaseStore {
   remove(id) {
     delete this._eventExpenseCategories[id];
     this._cache.clear();
-
   }
 
   clear() {
@@ -78,6 +77,12 @@ _eventExpenseCategoryStoreInstance.dispatchToken = AppDispatcher.register((paylo
       break;
     case ActionTypes.LOGOUT_RESPONSE:
       if (!SessionStore.isLoggedIn()) _eventExpenseCategoryStoreInstance.clear();
+      break;
+    case ActionTypes.SEARCH_EVENT_EXPENSE_CATEGORIES_RESPONSE:
+      if (!action.errors) {
+        _eventExpenseCategoryStoreInstance.setSearchResults(action.eventExpenseCategories);
+        _eventExpenseCategoryStoreInstance.emitChange();
+      }
       break;
     case ActionTypes.UPDATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
     case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:

@@ -1,5 +1,6 @@
 import Table from '../generic/Table';
 import ExpenseRow from './ExpenseRow';
+import RouteActions from '../../actions/RouteActions';
 
 var ExpenseList = React.createClass({
   getColumns() {
@@ -11,16 +12,15 @@ var ExpenseList = React.createClass({
       {name: "payments", grow: 4, header: "Payments"}
     ];
   },
-  goToExpense() {
-    // to do
-    console.log("go to expense");
+  goToExpense(data) {
+    RouteActions.redirect('expense', {id: this.props.eventId, expense_id: data.id});
   },
   getCustomRows() {
     let expenses = this.props.data;
     if (expenses) {
       return expenses.map((expense) => {
         return (
-          <ExpenseRow key={expense.id} data={expense} />
+          <ExpenseRow key={expense.id} data={expense} eventId={this.props.eventId} />
         );
       });
     }
@@ -36,7 +36,6 @@ var ExpenseList = React.createClass({
         customRows={this.getCustomRows()}
         extraPadding={false}
         hideHeaderCheckbox={true}
-        onClick={this.goToExpense}
       />
     );
   }

@@ -36,7 +36,10 @@ var CategoryRow = React.createClass({
     this.setState({collapse: !this.state.collapse});
   },
   goToAddExpense() {
-    console.log("Go to add expense");
+    let props = {
+      id: this.props.eventId
+    };
+    RouteActions.redirect('expense_form_new', props, {category_id: this.props.category.id})
   },
   getExpenseTotal() {
     let expenses = this.state.expenses, total=0;
@@ -126,7 +129,7 @@ var CategoryRow = React.createClass({
                         align="right" />
         </div>
         <div className={expenseClasses}>
-          <ExpenseList data={this.state.expenses} />
+          <ExpenseList data={this.state.expenses} eventId={this.props.eventId} />
         </div>
         <div className="Category-addExpense u-clickable" onClick={this.goToAddExpense}>
           <i className="fa fa-plus"></i>

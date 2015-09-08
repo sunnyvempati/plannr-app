@@ -13,7 +13,6 @@ var ExpenseCategoryFormEdit = React.createClass({
   },
   componentDidMount() {
     EventExpenseCategoryStore.addChangeListener(this._onChange);
-    console.log(this.state.expenseCategory);
     if (!this.state.expenseCategory) EventExpenseCategoryActions.get(this.props.params.budget_category_id);
   },
   componentWillUnmount() {

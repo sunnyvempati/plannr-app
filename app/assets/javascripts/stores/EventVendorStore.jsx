@@ -60,6 +60,10 @@ class EventVendorStore extends BaseStore {
     });
   }
 
+  get(id) {
+    return this._eventVendors[id];
+  }
+
   add(eventVendor) {
     this._eventVendors[eventVendor.id] = eventVendor;
     this._cache.clear();
@@ -112,10 +116,17 @@ _eventVendorStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       }
       _eventVendorStoreInstance.emitChange();
       break;
+    case ActionTypes.GET_EVENT_VENDOR_RESPONSE:
     case ActionTypes.CREATE_EVENT_VENDOR_RESPONSE:
       let eventVendor = action.json && action.json.event_vendor;
       if (eventVendor) {
         _eventVendorStoreInstance.add(eventVendor);
+        _eventVendorStoreInstance.emitChange();
+      }
+      break;
+    case ActionTypes.SEARCH_EVENT_VENDORS_RESPONSE:
+      if (!action.errors) {
+        _eventVendorStoreInstance.setSearchResults(action.eventVendors);
         _eventVendorStoreInstance.emitChange();
       }
       break;

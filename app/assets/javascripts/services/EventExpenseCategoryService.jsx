@@ -23,6 +23,25 @@ class EventExpenseCategoryService {
       });
   }
 
+  static search(params) {
+    request
+      .get(APIEndpoints.GET_EVENT_EXPENSE_CATEGORIES)
+      .query(params)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            let expenseCategories = json.event_expense_categories || [];
+            ServerActions.receiveSearchEventExpenseCategories(expenseCategories);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveSearchEventExpenseCategories(null, errors);
+          }
+        }
+      });
+  }
+
   static create(params) {
     request
       .post(APIEndpoints.CREATE_EVENT_EXPENSE_CATEGORY)
