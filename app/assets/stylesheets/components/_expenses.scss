@@ -55,7 +55,6 @@
   }
   & .Action {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     padding: $size-increment*2 0;
     @include font($body-1-font, normal, 0);

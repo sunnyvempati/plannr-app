@@ -70,7 +70,8 @@ var ExpenseRow = React.createClass({
             <div className="checkbox">
               <CheckboxInput onChange={this.paidChanged}
                              value={payment.id}
-                             checked={!!payment.paid_date} />
+                             checked={!!payment.paid_date}
+                             rounded={true} />
             </div>
             <div className="status">
               {payment.paid_date ? "Paid" : "Due"}
