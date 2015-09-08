@@ -285,7 +285,8 @@ const AppConstants = {
     RESET: null,
 
     // Routes
-    REDIRECT: null
+    REDIRECT: null,
+    REFRESH: null
   })
 };
 

@@ -43,6 +43,10 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       router.transitionTo(action.route, action.params, action.query);
       break;
 
+    case ActionTypes.REFRESH:
+      router.RefreshLocation();
+      break;
+
     case ActionTypes.LOGIN_RESPONSE:
       // no profile
       if (SessionStore.isLoggedIn()) {

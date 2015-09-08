@@ -21,7 +21,7 @@ var EventBudget = React.createClass({
             <div className="Nav-name">Add New Category</div>
           </div>
         </div>
-        <RouteHandler eventId={this.props.params.id} />
+        <RouteHandler ref="routeHandler" eventId={this.props.params.id} />
       </div>
     );
   }

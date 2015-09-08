@@ -4,6 +4,7 @@ import FormInput from '../generic/FormInput';
 import FormMixin from '../mixins/FormMixin';
 import CategoryInput from './CategoryInput';
 import RouteActions from '../../actions/RouteActions';
+import RouteStore from '../../stores/RouteStore';
 import ExpenseActions from '../../actions/ExpenseActions';
 import ExpenseVendorInput from './ExpenseVendorInput';
 import ExpenseCategoryInput from './ExpenseCategoryInput';
@@ -31,10 +32,16 @@ var ExpenseForm = React.createClass({
     else ExpenseActions.update(this.props.model.id, data);
   },
   onSuccess(result) {
-    RouteActions.redirect('expense', {id: this.props.eventId, expense_id: result.id});
+    if (this.createAndNewClicked) {
+      window.location.reload();
+    } else RouteActions.redirect('expense', {id: this.props.eventId, expense_id: result.id});
   },
   onSecondaryClick() {
     RouteActions.redirect('event_budget', {id: this.props.eventId});
+  },
+  renderButtonList: function() {
+    if (this.props.type == "NEW") return this.renderCreateAndNewButtons();
+    else return this.renderFormTwoButtons("Update", 'Cancel');
   },
   render: function() {
     let expense = this.props.model || {};
@@ -49,7 +56,6 @@ var ExpenseForm = React.createClass({
                 validationErrors={this.state.errors}
                 resetErrors={this.resetErrors}
                 id={id}>
-            {this.renderFormTwoButtons('Save', 'Cancel')}
             <FormInput
               id='expense_name'
               name='name'
@@ -107,6 +113,7 @@ var ExpenseForm = React.createClass({
               placeholder="Add notes about this expense"
               className="CompactFormInput"
             />
+            {this.renderButtonList()}
           </Form>
         </div>
       </div>
