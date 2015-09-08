@@ -20,12 +20,13 @@ export default class VendorActions {
     VendorService.search(params);
   }
 
-  static create(params) {
+  static create(params, autocomplete) {
+    let type = autocomplete ? ActionTypes.CREATE_AUTOCOMPLETE_VENDOR_REQUEST : ActionTypes.CREATE_VENDOR_REQUEST
     AppDispatcher.handleAction({
-      type: ActionTypes.CREATE_VENDOR_REQUEST,
+      type: type,
       params: params
     });
-    VendorService.create(params);
+    VendorService.create(params, autocomplete);
   }
 
   static update(id, params) {

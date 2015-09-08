@@ -41,20 +41,20 @@ class VendorService {
       });
   }
 
-  static create(params) {
+  static create(params, autocomplete) {
     request
       .post(APIEndpoints.CREATE_VENDOR)
       .send(params)
       .use(Utils.addAuthToken)
       .end((error, res) => {
         if (res) {
+          let json = null, errors = null;
           if (!error) {
-            let json = JSON.parse(res.text);
-            ServerActions.receiveCreateVendor(json);
+            json = JSON.parse(res.text);
           } else {
-            let errors = Utils.getErrors(res);
-            ServerActions.receiveCreateVendor(null, errors);
+            errors = Utils.getErrors(res);
           }
+          ServerActions.receiveCreateVendor(json, errors, autocomplete);
         }
       });
   }

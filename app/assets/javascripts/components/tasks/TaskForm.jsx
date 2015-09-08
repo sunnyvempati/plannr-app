@@ -55,28 +55,9 @@ const TaskForm = React.createClass({
     }
     this.props.type == "NEW" ? TaskActions.create(data) : TaskActions.update(this.props.model && this.props.model.id, data);
   },
-  handleCreateAndNewClick: function() {
-    this.createAndNewClicked = true;
-  },
   renderButtonList: function() {
-    if (this.props.type == "NEW") {
-      return (
-        <FormButtonList>
-          <Button onClick={this.handleSecondaryClick} className="Button--secondary">
-            Cancel
-          </Button>
-          <Button type="submit" className="Button--primary" disabled={this.state.disabled}>
-            Create
-          </Button>
-          <Button onClick={this.handleCreateAndNewClick} type="submit" className="Button--primary" disabled={this.state.disabled}>
-            Create and New
-          </Button>
-        </FormButtonList>
-      )
-    }
-    else {
-      return this.renderFormTwoButtons("Update", 'Cancel');
-    }
+    if (this.props.type == "NEW") return this.renderCreateAndNewButtons();
+    else return this.renderFormTwoButtons("Update", 'Cancel');
   },
   renderEventInput: function(val, className) {
     if (!val || this.props.type == "OLD") {
