@@ -33,6 +33,7 @@ class EventStore extends BaseStore {
     let isSearchQuery = !!params.search_query;
     let page = params.page;
     if (!isSearchQuery) this._cache.createContext(params);
+    if (page == 1 && !events.length) this._view.reset();
     if (events.length > 0) {
       this._view.addPage(page);
       events.forEach((event) => {
@@ -48,6 +49,7 @@ class EventStore extends BaseStore {
   addCachedEventsToView(params) {
     let eventIds = this._cache.getItems(params);
     let page = params.page;
+    if (page == 1 && !eventIds.length) this._view.reset();
     if (eventIds && eventIds.length) {
       this._view.addItemsToPage(eventIds, page);
     } else this._view.itemsLoaded = true;

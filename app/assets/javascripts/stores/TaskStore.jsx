@@ -29,6 +29,7 @@ class TaskStore extends BaseStore {
     let isSearchQuery = !!params.search_query;
     if (!isSearchQuery) this._cache.createContext(params);
     let page = params.page;
+    if (page == 1 && !tasks.length) this._view.reset();
     if (tasks.length > 0) {
       this._view.addPage(page);
       tasks.forEach((task) => {
@@ -49,6 +50,7 @@ class TaskStore extends BaseStore {
   addCachedTasksToView(params) {
     let taskIds = this._cache.getItems(params);
     let page = params.page;
+    if (page == 1 && !taskIds.length) this._view.reset();
     if (taskIds && taskIds.length) {
       this._view.addItemsToPage(taskIds, page);
     } else this._view.itemsLoaded = true;

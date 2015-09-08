@@ -22,7 +22,6 @@ var EventTaskList = React.createClass({
     };
   },
   componentDidMount() {
-    // this.props.setLayoutParams({header: "Tasks", skrollable: true});
     TaskStore.addChangeListener(this._onViewTasksChange);
   },
   componentDidUpdate: function() {
