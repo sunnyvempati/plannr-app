@@ -1,10 +1,15 @@
 class EventVendorsController < ApplicationController
   include FilterSort
   before_action :authenticate_user
+  before_action :set_event_vendor, only: [:show]
 
   def index
     @event_vendors = params[:page] ? @filter_sort.find.page(params[:page]) : @filter_sort.find
     render json: @event_vendors
+  end
+
+  def show
+    render_success @event_vendor
   end
 
   # def create
@@ -33,6 +38,10 @@ class EventVendorsController < ApplicationController
   end
 
   private
+
+  def set_event_vendor
+    @event_vendor = EventVendor.find(params[:id])
+  end
 
   def mass_delete_params
     params.require(:destroy_opts).permit(ids: [])

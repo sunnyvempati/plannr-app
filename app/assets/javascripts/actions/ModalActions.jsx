@@ -9,6 +9,7 @@ import ShowVendorModal from '../components/vendors/ShowVendorModal';
 import AddVendorModal from '../components/event_vendors/AddVendorModal';
 import AddContactModal from '../components/event_contacts/AddContactModal';
 import FeedbackModal from '../components/session/FeedbackModal';
+import EditPaymentModal from '../components/event_budget/EditPaymentModal';
 
 class ModalActions {
   static openShowTaskModal(props) {
@@ -21,6 +22,14 @@ class ModalActions {
 
   static openEditTaskModal(props) {
     let modal = React.createElement(EditTaskModal, props);
+    AppDispatcher.handleAction({
+      type: ActionTypes.OPEN_MODAL,
+      modal: modal
+    });
+  }
+
+  static openEditPaymentModal(props) {
+    let modal = React.createElement(EditPaymentModal, props);
     AppDispatcher.handleAction({
       type: ActionTypes.OPEN_MODAL,
       modal: modal

@@ -22,3 +22,12 @@
     flex: 0 $grid-increment*2;
   }
 }
+
+.ExpenseCategoryFormContainer {
+  padding: $size-increment*3;
+  width: 80%;
+}
+
+.ExpenseCategoryForm-form {
+  width: 50%;
+}

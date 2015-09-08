@@ -58,6 +58,41 @@ class EventVendorService {
         ServerActions.receiveDeleteEventVendors(ids, errors);
       });
   }
+
+  static search(params) {
+    request
+      .get(APIEndpoints.SEARCH_EVENT_VENDORS)
+      .query(params)
+      .set('Accept', 'application/json')
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            let eventVendors = json.event_vendors || [];
+            ServerActions.receiveEventVendorSearch(eventVendors);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveEventVendorSearch(null, errors);
+          }
+        }
+      });
+  }
+
+  static get(id) {
+    request
+      .get(APIEndpoints.GET_EVENT_VENDOR + id)
+      .end((error, res) => {
+        if (res) {
+          if (!error) {
+            let json = JSON.parse(res.text);
+            ServerActions.receiveGetEventVendor(json);
+          } else {
+            let errors = Utils.getErrors(res);
+            ServerActions.receiveGetEventVendor(null, errors);
+          }
+        }
+      });
+  }
 }
 
 export default EventVendorService;

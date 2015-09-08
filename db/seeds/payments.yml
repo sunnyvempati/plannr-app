@@ -1,0 +1,17 @@
+1:
+  expense: Balloons
+  amount: 500
+  paid: true
+  method: 1
+
+2:
+  expense: Potato Launcher
+  amount: 50
+  paid: false
+  method: 2
+
+3:
+  expense: Potato Launcher
+  amount: 25
+  paid: true
+  method: 1

@@ -1,0 +1,96 @@
+.ExpenseContainer {
+  display: flex;
+  width: 100%;
+}
+
+.ExpenseDetails {
+  padding: $size-increment*3 0 0 $size-increment*3;
+  flex: 1;
+}
+
+.ExpenseActions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding: $size-increment*3 $size-increment*10;
+}
+
+.ExpenseCard {
+  margin-bottom: $size-increment*4;
+  & .Header {
+    width: 100%;
+    background-color: #D0D0D0;
+    padding: $size-increment $size-increment*2;
+    @include font($title-font, bold, 10);
+    display: flex;
+    & .Total {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: $size-increment * 2;
+      & .Display {
+        color: $black-half;
+        @include font($body-1-font, bold, 20);
+      }
+      & .Content {
+        padding-left: $size-increment;
+        @include font($body-1-font, 500, 20);
+      }
+    }
+  }
+  & .Info {
+    display: flex;
+    align-items: center;
+    padding: $size-increment $size-increment*2;
+    & .Display {
+      flex: 1;
+      @include font($body-1-font, bold, 20);
+      color: $black-quarter;
+    }
+    & .Content {
+      @include font($body-1-font, normal, 0);
+      flex: 5;
+    }
+  }
+  & .Action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: $size-increment*2 0;
+    @include font($body-1-font, normal, 0);
+    color: $black-half;
+    >* {
+      padding-left: $size-increment;
+    }
+  }
+}
+
+.Payment {
+  padding-top: $size-increment;
+  display: flex;
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.Payment-check {
+  flex: 1;
+  padding: $size-increment $size-increment*2;
+}
+
+.Payment-details {
+  flex: 12;
+}
+
+.Payment-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.PaymentActionIcon {
+  color: $black-half;
+  font-size: 24px;
+  padding-top: $size-increment;
+  padding-right: $size-increment*2;
+}
+

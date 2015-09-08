@@ -5,7 +5,7 @@ require 'faker'
 
 # yml seed file path: db/seeds/*
 def load_ymls
-  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks', 'attachment_limits'].each do |file|
+  ['companies', 'users', 'events', 'vendors', 'contacts', 'tasks', 'attachment_limits', 'expense_categories', 'event_expense_categories', 'expenses', 'payments'].each do |file|
     filename = ENV["staging"] ? "staging_#{file}.yml" : "#{file}.yml"
     print "filename=@#{filename}..."
     instance_variable_set("@#{file}", YAML::load(File.open(File.join(Rails.root, 'db', 'seeds', filename))))
@@ -147,11 +147,71 @@ def create_attachment_limits
   end
 end
 
+def create_expense_categories
+  return if ExpenseCategory.all.count > 5
+
+  @expense_categories.values.each do |c|
+    c.symbolize_keys!
+    created_expense_category = ExpenseCategory.create!(name: c[:name],
+                                        company: Company.find_by_name(c[:company]))
+    puts "Created Expense Category: #{created_expense_category.name}" if created_expense_category
+  end
+end
+
+def create_event_expense_categories
+  return if EventExpenseCategory.all.count > 4
+
+  @event_expense_categories.values.each do |ec|
+    ec.symbolize_keys!
+    event = Event.find_by_name(ec[:event])
+    category = ExpenseCategory.find_by_name(ec[:expense_category])
+    created_event_category = EventExpenseCategory.create!(event: event, expense_category: category, budget: ec[:budget])
+  end
+end
+
+def create_expenses
+  return if Expense.all.count > 5
+
+  @expenses.values.each do |e|
+    e.symbolize_keys!
+    event = Event.find_by_name(e[:event])
+    category = ExpenseCategory.find_by_name(e[:expense_category])
+    event_expense_category = EventExpenseCategory.where(event: event, expense_category: category).first
+    vendor = Vendor.where(company: event.company).first
+    event_vendor = EventVendor.find_or_create_by!(event: event, vendor: vendor)
+    created_expense = Expense.create!(name: e[:name],
+                                      event_expense_category: event_expense_category,
+                                      event_vendor: event_vendor,
+                                      price: e[:price],
+                                      notes: Faker::Lorem.paragraph(2),
+                                      quantity: e[:quantity])
+    puts "Created expense: #{created_expense.name}" if created_expense
+  end
+end
+
+def create_payments
+  return if Payment.all.count > 3
+
+  @payments.values.each do |p|
+    p.symbolize_keys!
+    expense = Expense.find_by_name(p[:expense])
+    due_date = expense.event_expense_category.event.start_date + 2.days
+    paid_date = p[:paid] ? due_date + 2.days : nil
+    created_payment = Payment.create!(expense: expense,
+                                      payment_method: p[:method],
+                                      amount: p[:amount],
+                                      due_date: due_date,
+                                      paid_date: paid_date)
+
+    puts "Created payment successfully" if created_payment
+  end
+end
+
 
 # commands
 # ----
 load_ymls
-%w(companies users events vendors contacts tasks attachment_limits).each do |entity|
+%w(companies users events vendors contacts tasks attachment_limits expense_categories event_expense_categories expenses payments).each do |entity|
   send("create_#{entity}")
 end
 # ----

@@ -1,6 +1,10 @@
 class EventVendorSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name
 
   has_one :vendor
   has_one :event
+
+  def name
+    object.vendor.name
+  end
 end

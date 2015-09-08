@@ -28,4 +28,20 @@ export default class EventVendorActions {
     })
     EventVendorService.remove(ids);
   }
+
+  static search(params) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.SEARCH_EVENT_VENDORS_REQUEST,
+      params: params
+    })
+    EventVendorService.search(params);
+  }
+
+  static get(id) {
+    AppDispatcher.handleAction({
+      type: ActionTypes.GET_EVENT_VENDOR_REQUEST,
+      id: id
+    });
+    EventVendorService.get(id);
+  }
 }

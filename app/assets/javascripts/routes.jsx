@@ -30,9 +30,15 @@ import EventContactList from './components/event_contacts/EventContactList';
 import EventTaskList from './components/event_tasks/EventTaskList';
 import EventAttachmentList from './components/event_attachments/EventAttachmentList';
 import EventVendorList from './components/event_vendors/EventVendorList';
+import EventBudget from './components/event_budget/EventBudget';
 import EventBudgetList from './components/event_budget/EventBudgetList';
 import EventComments from './components/events/EventComments';
 import Company from './components/companies/Company';
+import ExpenseCategoryFormNew from './components/event_budget/ExpenseCategoryFormNew';
+import ExpenseCategoryFormEdit from './components/event_budget/ExpenseCategoryFormEdit';
+import ExpenseFormNew from './components/event_budget/ExpenseFormNew';
+import ExpenseFormEdit from './components/event_budget/ExpenseFormEdit';
+import Expense from './components/event_budget/Expense';
 
 export default (
   <Route name="app" path="/" handler={App}>
@@ -47,7 +53,14 @@ export default (
         <Route name="event_tasks" path="tasks" handler={EventTaskList} ignoreScrollBehavior />
         <Route name="event_attachments" path="attachments" handler={EventAttachmentList} ignoreScrollBehavior />
         <Route name="event_vendors" path="vendors" handler={EventVendorList} ignoreScrollBehavior />
-        <Route name="event_budget" path="budget" handler={EventBudgetList} ignoreScrollBehavior />
+        <Route name="event_budget" path="budget" handler={EventBudget} ignoreScrollBehavior>
+          <Route name="expense_category_form_new" path="add_new_category" handler={ExpenseCategoryFormNew} ignoreScrollBehavior />
+          <Route name="expense_category_form_edit" path="edit_category/:budget_category_id" handler={ExpenseCategoryFormEdit} ignoreScrollBehavior />
+          <Route name="expense_form_new" path="add_new_expense" handler={ExpenseFormNew} ignoreScrollBehavior />
+          <Route name="expense_form_edit" path="edit_expense/:expense_id" handler={ExpenseFormEdit} ignoreScrollBehavior />
+          <Route name="expense" path="expense/:expense_id" handler={Expense} ignoreScrollBehavior />
+          <DefaultRoute name="event_budget_list" handler={EventBudgetList} ignoreScrollBehavior />
+        </Route>
         <Route name="event_comments" path="comments" handler={EventComments} ignoreScrollBehavior />
         <DefaultRoute name="event_app" handler={EventApp} ignoreScrollBehavior />
       </Route>
