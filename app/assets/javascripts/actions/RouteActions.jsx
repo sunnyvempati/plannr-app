@@ -10,12 +10,6 @@ class RouteActions {
       query: query
     });
   }
-
-  static refresh() {
-    AppDispatcher.handleAction({
-      type: ActionTypes.REFRESH
-    });
-  }
 };
 
 export default RouteActions;
