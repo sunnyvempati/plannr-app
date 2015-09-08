@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:expense_id, :due_date, :amount, :method, :paid, :notes)
+    params.require(:payment).permit(:expense_id, :due_date, :amount, :method, :paid_date, :notes)
   end
 
   def mass_destroy_params

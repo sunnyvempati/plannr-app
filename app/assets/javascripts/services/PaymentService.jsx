@@ -15,6 +15,7 @@ class PaymentService {
           let json=null, errors=null;
           if (!error) {
             json = JSON.parse(res.text);
+            ToastActions.toast('Created new payment for expense!');
           } else {
             errors = Utils.getErrors(res);
           }
@@ -33,6 +34,7 @@ class PaymentService {
           let json=null, errors=null;
           if (!error) {
             json = JSON.parse(res.text);
+            ToastActions.toast('Updated payment successfully!');
           } else {
             errors = Utils.getErrors(res);
           }
@@ -41,7 +43,7 @@ class PaymentService {
       });
   }
 
-  static remove(id, expenseId) {
+  static delete(id, expenseId) {
     request
       .del(APIEndpoints.DELETE_PAYMENT + id)
       .use(Utils.addAuthToken)

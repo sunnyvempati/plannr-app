@@ -5,6 +5,7 @@ import EventExpenseCategoryActions from '../../actions/EventExpenseCategoryActio
 import ExpenseList from './ExpenseList';
 import DropdownMenu from '../generic/DropdownMenu';
 import ReactIntl from 'react-intl';
+import PaymentActions from '../../actions/PaymentActions';
 import classNames from 'classnames';
 
 var CategoryRow = React.createClass({
@@ -64,7 +65,10 @@ var CategoryRow = React.createClass({
     EventExpenseCategoryActions.remove(id);
   },
   actionItems() {
-    let items = [{name: "Edit", handler: this.handleEdit}];
+    let items = [
+      {name: "Add Expense", handler: this.goToAddExpense},
+      {name: "Edit", handler: this.handleEdit}
+    ];
     if (!this.state.expenses.length) items.push({name: "Remove", handler: this.handleRemove});
     return items;
   },

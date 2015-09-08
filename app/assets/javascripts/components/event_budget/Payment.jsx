@@ -1,6 +1,11 @@
 import CheckboxInput from '../generic/CheckboxInput';
 import ReactIntl from 'react-intl';
 import DropdownMenu from '../generic/DropdownMenu';
+import ExpenseStore from '../../stores/ExpenseStore';
+import PaymentStore from '../../stores/PaymentStore';
+import ModalActions from '../../actions/ModalActions';
+import PaymentActions from '../../actions/PaymentActions';
+import moment from 'moment';
 
 var Payment = React.createClass({
   actionItems() {
@@ -36,10 +41,21 @@ var Payment = React.createClass({
     )
   },
   handleEdit(id) {
-
+    var props = {
+      model: PaymentStore.get(id),
+      expense: this.props.expense,
+      type: 'OLD'
+    }
+    ModalActions.openEditPaymentModal(props);
   },
   handleDelete(id) {
-
+    PaymentActions.delete(id, this.props.expense.id);
+  },
+  paidChanged(checked, id) {
+    let params = {payment: {}};
+    if (checked) params.payment.paid_date = moment().format();
+    else params.payment.paid_date = null;
+    PaymentActions.update(id, this.props.expense.id, params);
   },
   render() {
     let p = this.props.data;

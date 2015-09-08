@@ -11,6 +11,9 @@ import PaymentStore from '../../stores/PaymentStore';
 
 var Expense = React.createClass({
   getExpenseState() {
+    // let expense = ExpenseStore.get(this.props.params.expense_id);
+    // console.log(expense);
+    // console.log()
     return {
       expense: ExpenseStore.get(this.props.params.expense_id) || null
     }
@@ -42,21 +45,26 @@ var Expense = React.createClass({
   renderPayments(payments) {
     if (payments && payments.length) {
       return payments.map((p) => {
-        let expenseId = this.state.expense && this.state.expense.id;
         return (
-          <Payment data={PaymentStore.get(p.id)} expenseId={expenseId} />
+          <Payment data={PaymentStore.get(p.id)} expense={this.state.expense} key={p.id} />
         )
       });
     }
   },
   goToEditExpense() {
-    // to do
+    let props = {
+      id: this.props.eventId,
+      expense_id: this.state.expense && this.state.expense.id
+    };
+    console.log(props);
+    RouteActions.redirect('expense_form_edit', props);
   },
   render: function() {
     let expense = this.state.expense || {};
     let paidTotal = 0, payments = expense.payments || [];
     payments.forEach((p) => {
-      if (!!p.paid_date) paidTotal += p.amount;
+      let payment = PaymentStore.get(p.id);
+      if (!!payment.paid_date) paidTotal += payment.amount;
     });
     let remaining = expense.total - paidTotal;
     return (

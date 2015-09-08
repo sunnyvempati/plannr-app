@@ -62,10 +62,9 @@ class ExpenseStore extends BaseStore {
 
   removePayment(expenseId, paymentId) {
     let expense = this._expenses[expenseId];
-    let payments = expense.payments.filter((p) => {
-      return p.id != paymentId;
+    expense.payments.forEach((p, i) => {
+      if (p.id == paymentId) expense.payments.splice(i, 1);
     });
-    this._expenses[expenseId].payments = payments;
   }
 
   remove(id) {
@@ -122,7 +121,7 @@ _expenseStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       break;
     case ActionTypes.DELETE_PAYMENT_RESPONSE:
       if (!action.errors) {
-        _expenseStoreInstance.removePayment(action.expenseId, action.paymentId);
+        _expenseStoreInstance.removePayment(action.expenseId, action.id);
         _expenseStoreInstance.emitChange();
       }
       break;

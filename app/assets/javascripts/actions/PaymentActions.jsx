@@ -20,16 +20,16 @@ class PaymentActions {
       expenseId: expenseId,
       params: params
     });
-    ExpenseService.update(id, expenseId, params);
+    PaymentService.update(id, expenseId, params);
   }
 
-  static remove(id, expenseId) {
+  static delete(id, expenseId) {
     AppDispatcher.handleAction({
       type: ActionTypes.DELETE_PAYMENT_REQUEST,
       id: id,
       expenseId: expenseId
     })
-    ExpenseService.remove(id, expenseId);
+    PaymentService.delete(id, expenseId);
   }
 }
 

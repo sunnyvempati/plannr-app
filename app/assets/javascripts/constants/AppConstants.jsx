@@ -65,7 +65,7 @@ const AppConstants = {
     GET_EVENT_EXPENSE_CATEGORY:   '/event_expense_categories/',
     CREATE_PAYMENT:               '/payments',
     UPDATE_PAYMENT:               '/payments/',
-    DESTROY_PAYMENT:              '/payments/'
+    DELETE_PAYMENT:               '/payments/'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,

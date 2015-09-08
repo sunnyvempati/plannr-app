@@ -596,7 +596,6 @@ class ServerActions {
     let type = !errors ? ActionTypes.CREATE_PAYMENT_SUCCESS_RESPONSE :
                          ActionTypes.CREATE_PAYMENT_ERROR_RESPONSE;
     let entity = json && json.payment;
-    console.log("RECEIVE", type, json);
     AppDispatcher.handleAction({
       type: type,
       entity: entity,

@@ -3,7 +3,9 @@ import ReactIntl from 'react-intl';
 import CheckboxInput from '../generic/CheckboxInput';
 import ExpenseActions from '../../actions/ExpenseActions';
 import RouteActions from '../../actions/RouteActions';
+import PaymentActions from '../../actions/PaymentActions';
 import PaymentStore from '../../stores/PaymentStore';
+import moment from 'moment';
 
 var ExpenseRow = React.createClass({
   paymentTypes: {
@@ -53,9 +55,11 @@ var ExpenseRow = React.createClass({
     };
     RouteActions.redirect('expense_form_edit', props);
   },
-  paidChanged(id) {
-    // to do
-    console.log(id + " changed");
+  paidChanged(checked, id) {
+    let params = {payment: {}};
+    if (checked) params.payment.paid_date = moment().format();
+    else params.payment.paid_date = null;
+    PaymentActions.update(id, this.props.data.id, params);
   },
   goToExpense() {
     RouteActions.redirect('expense', {id: this.props.eventId, expense_id: this.props.data.id});
@@ -101,7 +105,8 @@ var ExpenseRow = React.createClass({
     let expense = this.props.data;
     let paidTotal = 0, payments = expense.payments;
     payments.forEach((p) => {
-      if (!!p.paid_date) paidTotal += p.amount;
+      let payment = PaymentStore.get(p.id);
+      if (!!payment.paid_date) paidTotal += payment.amount;
     });
     let unpaidTotal = expense.total - paidTotal;
     return (

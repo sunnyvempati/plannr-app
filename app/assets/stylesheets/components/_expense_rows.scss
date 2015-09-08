@@ -69,3 +69,9 @@
   display: flex;
   align-items: center;
 }
+
+.EventCategoryHelperText {
+  padding: $size-increment * 5;
+  color: $black-half;
+  @include font($title-font, 500, 10);
+}

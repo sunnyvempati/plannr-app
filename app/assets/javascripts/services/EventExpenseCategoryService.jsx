@@ -14,7 +14,8 @@ class EventExpenseCategoryService {
         if (res) {
           if (!error) {
             let json = JSON.parse(res.text);
-            ServerActions.receiveGetExpenseCategories(json.event_expense_categories, params, null);
+            let eventExpenseCategories = json.event_expense_categories || [];
+            ServerActions.receiveGetExpenseCategories(eventExpenseCategories, params, null);
           } else {
             let errors = Utils.getErrors(res);
             ServerActions.receiveGetExpenseCategories(null, null, errors);

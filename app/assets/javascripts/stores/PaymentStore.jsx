@@ -20,7 +20,6 @@ class PaymentStore extends BaseStore {
   }
 
   add(payment) {
-    console.log(payment);
     this._payments[payment.id] = payment;
   }
 

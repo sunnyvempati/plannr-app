@@ -3,23 +3,10 @@ import RouteActions from '../../actions/RouteActions';
 import DropdownMenu from '../generic/DropdownMenu';
 
 var EventBudget = React.createClass({
-  getAddNewTrigger() {
-    return (
-      <div className="SideBarIconWithName">
-        <i className="fa fa-plus Nav-icon"></i>
-        <div className="Nav-name">Add New</div>
-      </div>
-    )
-  },
   getAddNewItems() {
     return [
-      {name: "Category", handler: this.goToAddCategory},
-      {name: "Expense", handler: this.goToAddExpense}
+      {name: "Budget Category", handler: this.goToAddCategory}
     ]
-  },
-  goToAddExpense() {
-    let props = {id: this.props.params.id};
-    RouteActions.redirect('expense_form_new', props);
   },
   goToAddCategory() {
     let props = {id: this.props.params.id};
@@ -29,8 +16,10 @@ var EventBudget = React.createClass({
     return (
       <div className="EventTableContainer">
         <div className="Table-sidebarContainer">
-          <DropdownMenu trigger={this.getAddNewTrigger()}
-                        items={this.getAddNewItems()} />
+          <div className="SideBarIconWithName u-clickable" onClick={this.goToAddCategory}>
+            <i className="fa fa-plus Nav-icon"></i>
+            <div className="Nav-name">Add New Category</div>
+          </div>
         </div>
         <RouteHandler eventId={this.props.params.id} />
       </div>

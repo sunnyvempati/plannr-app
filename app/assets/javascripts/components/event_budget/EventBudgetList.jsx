@@ -22,6 +22,7 @@ var EventBudgetList = React.createClass({
   },
   setCategories() {
     let params = {with_event_id: this.props.eventId, sorted_by: 'expense_category_name_asc'};
+    if (EventExpenseCategoryStore.loading) return;
     let categories = EventExpenseCategoryStore.getFromCache(params);
     if (categories) this.setState({categories: categories});
     else EventExpenseCategoryActions.getEventExpenseCategories(params);
@@ -36,6 +37,12 @@ var EventBudgetList = React.createClass({
           </div>
         )
       });
+    } else {
+      return (
+        <div className="EventCategoryHelperText u-italics">
+          No expenses added.  Start by adding a new budget category!
+        </div>
+      )
     }
   },
   render: function() {
