@@ -20,12 +20,13 @@ export default class ContactActions {
     ContactService.search(params);
   }
 
-  static create(params) {
+  static create(params, autocomplete) {
+    let type = autocomplete ? ActionTypes.CREATE_AUTOCOMPLETE_CONTACT_REQUEST : ActionTypes.CREATE_CONTACT_REQUEST
     AppDispatcher.handleAction({
-      type: ActionTypes.CREATE_CONTACT_REQUEST,
+      type: type,
       params: params
     });
-    ContactService.create(params);
+    ContactService.create(params, autocomplete);
   }
 
   static update(id, params) {

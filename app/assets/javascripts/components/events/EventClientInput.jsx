@@ -2,7 +2,7 @@ import FormInputClassesMixin from '../mixins/FormInputClassesMixin';
 import AutocompleteInput from '../mixins/AutocompleteInput';
 import ContactActions from '../../actions/ContactActions';
 import ContactStore from '../../stores/ContactStore';
-import FormStore from '../../stores/FormStore';
+import AutocompleteCreateStore from '../../stores/AutocompleteCreateStore';
 
 var EventClientInput = React.createClass({
   mixins: [
@@ -11,11 +11,11 @@ var EventClientInput = React.createClass({
   ],
   componentDidMount() {
     ContactStore.addChangeListener(this._onContactChange);
-    FormStore.addChangeListener(this._onCreateEventClientChange);
+    AutocompleteCreateStore.addChangeListener(this._onCreateEventClientChange);
   },
   componentWillUnmount() {
     ContactStore.removeChangeListener(this._onContactChange);
-    FormStore.addChangeListener(this._onCreateEventClientChange);
+    AutocompleteCreateStore.addChangeListener(this._onCreateEventClientChange);
   },
   _onContactChange() {
     let returnedContacts = ContactStore.searchResults;
@@ -29,8 +29,8 @@ var EventClientInput = React.createClass({
     });
   },
   _onCreateEventClientChange() {
-    if (!FormStore.errors) {
-      let entity = FormStore.entity;
+    if (!AutocompleteCreateStore.errors) {
+      let entity = AutocompleteCreateStore.entity;
       let eventClientName = entity && entity.name;
       this.setValue(entity && entity.id);
       if (eventClientName) this.setState({itemSet: true, itemDisplay: eventClientName});
@@ -58,7 +58,7 @@ var EventClientInput = React.createClass({
       // take term which is the text value in input field
       // and create contact
       var payload = {contact: {name: term, category: 1}};
-      ContactActions.create(payload);
+      ContactActions.create(payload, true);
     }
     else {
       this.setValue(client.id);
