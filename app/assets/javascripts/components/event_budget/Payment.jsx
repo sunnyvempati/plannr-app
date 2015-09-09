@@ -87,6 +87,10 @@ var Payment = React.createClass({
             <div className="Display">Type</div>
             <div className="Content">{PaymentTypes.getPaymentDisplay(p.payment_method)}</div>
           </div>
+          <div className="Info">
+            <div className="Display">Notes</div>
+            <div className="Content">{p.notes}</div>
+          </div>
         </div>
         <div className="Payment-actions">
           <DropdownMenu trigger={this.getActionTrigger()}
