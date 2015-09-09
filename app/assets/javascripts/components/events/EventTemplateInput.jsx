@@ -29,6 +29,7 @@ var EventTemplateInput = React.createClass({
         contacts: checked,
         vendors: checked,
         comments: checked,
+        categories: checked,
         tasks: checked
       };
     }
@@ -77,6 +78,10 @@ var EventTemplateInput = React.createClass({
             <CheckboxInput checked={!!value.tasks}
                            value="tasks"
                            checkboxDisplay={<div className="TemplateText">Tasks</div>}
+                           onChange={this.handleTemplateItemsCheckChange} />
+            <CheckboxInput checked={!!value.categories}
+                           value="categories"
+                           checkboxDisplay={<div className="TemplateText">Budget Categories</div>}
                            onChange={this.handleTemplateItemsCheckChange} />
             <CheckboxInput checked={!!value.comments}
                            value="comments"
