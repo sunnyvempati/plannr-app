@@ -45,8 +45,7 @@ var CategoryInput = React.createClass({
   retrieveData: function(term) {
     var params = {
       search_query: term,
-      not_in_event_id: this.props.eventId,
-      with_search_limit: 5
+      not_in_event_id: this.props.eventId
     };
     ExpenseCategoryActions.search(params);
   },

@@ -7,7 +7,7 @@ class ExpenseCategory < ActiveRecord::Base
   validates :name, presence: true
 
   scope :not_in_event_id, lambda { |event_id|
-    where("id not in (select expense_category_id from event_expense_categories where event_id = '#{event_id}')").limit(5)
+    where("id not in (select expense_category_id from event_expense_categories where event_id = '#{event_id}')")
   }
 
   scope :search_query, lambda { |query|
