@@ -35,6 +35,9 @@
   &.is-invalid {
     border-bottom: 1px solid red;
   }
+  &:disabled {
+    color: rgba(0,0,0,0.26);
+  }
 }
 
 .CompactFormInput-fieldErrorMessage {

@@ -57,6 +57,15 @@ var ExpenseForm = React.createClass({
                 validationErrors={this.state.errors}
                 resetErrors={this.resetErrors}
                 id={id}>
+            <ExpenseCategoryInput name='category'
+                                  value={expense.event_expense_category_id}
+                                  id='expense_category_input'
+                                  eventId={this.props.eventId}
+                                  autocompleteClassName='CompactAutocomplete'
+                                  className='CompactFormInput'
+                                  label='Category'
+                                  disabled={true}
+                                  required />
             <FormInput
               id='expense_name'
               name='name'
@@ -67,15 +76,6 @@ var ExpenseForm = React.createClass({
               value={expense.name}
               className="CompactFormInput"
               required />
-
-            <ExpenseCategoryInput name='category'
-                                  value={expense.event_expense_category_id}
-                                  id='expense_category_input'
-                                  eventId={this.props.eventId}
-                                  autocompleteClassName='CompactAutocomplete'
-                                  className='CompactFormInput'
-                                  label='Category*'
-                                  required />
             <ExpenseVendorInput name='vendor'
                                 value={expense.vendor_id}
                                 id='expense_vendor_input'

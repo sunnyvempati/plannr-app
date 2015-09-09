@@ -19,6 +19,7 @@ var AutocompleteInput = {
   },
   getDefaultProps: function() {
     return {
+      disabled: false,
       autocompleteClassName: "Autocomplete"
     };
   },
@@ -38,6 +39,7 @@ var AutocompleteInput = {
     this.setState({itemSet: false, itemDisplay: null});
   },
   editField: function() {
+    if (this.props.disabled) return;
     this.setValue(null);
     this.setState({itemSet: false, itemDisplay: null, items: [], focus: true});
   },
@@ -48,19 +50,29 @@ var AutocompleteInput = {
                     itemSelected={this.itemSelected}
                     data={this.state.items}
                     focus={this.state.focus}
+                    disabled={this.props.disabled}
                     className={this.props.autocompleteClassName}
                     invalid={!this.isValid() && !this.isPristine()} />
     );
   },
   renderSelectedItem: function(className) {
+    let pencilRender = this.props.disabled ? null : <i className="fa fa-pencil"></i>;
+    let itemClasses = classNames({
+      "Autocomplete-pickedName u-wrapWithEllipsis": true,
+      "disabled": this.props.disabled
+    });
+    let pickedClasses = classNames({
+      'Autocomplete-picked': true,
+      'disabled': this.props.disabled
+    });
     return (
       <div className={classNames(className)}>
-        <div className="Autocomplete-picked" onClick={this.editField}>
-          <div className="Autocomplete-pickedName u-wrapWithEllipsis">
+        <div className={pickedClasses} onClick={this.editField}>
+          <div className={itemClasses}>
             {this.state.itemDisplay}
           </div>
           <div className="Autocomplete-edit">
-            <i className="fa fa-pencil"></i>
+            {pencilRender}
           </div>
         </div>
       </div>

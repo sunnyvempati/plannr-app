@@ -102,6 +102,7 @@ var Autocomplete = React.createClass({
                className={classNames(inputClasses)}
                onKeyDown={this.keyDown}
                onBlur={this.onBlur}
+               disabled={this.props.disabled}
                ref="autocompleteInput">
         </input>
         {this.getResults()}

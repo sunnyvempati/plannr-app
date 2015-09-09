@@ -35,6 +35,12 @@
   }
 }
 
+.Autocomplete-pickedName {
+  &.disabled {
+    color: rgba(0,0,0,0.26);
+  }
+}
+
 .CompactAutocomplete-resultsItem {
   @extend .Autocomplete-resultsItem;
   @include font($body-1-font, normal, 0);
@@ -44,6 +50,10 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  &.disabled {
+    background-color: #E8E8E8;
+    margin: -4px 0;
+  }
 }
 
 .Autocomplete-edit {
