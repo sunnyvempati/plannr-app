@@ -45,7 +45,10 @@ var EventForm = React.createClass({
     this.setState({model: extend({}, this.state.model, {start_date: date})});
   },
   onSecondaryClick: function() {
-    RouteActions.redirect('events');
+    if (this.props.type == 'NEW') RouteActions.redirect('events');
+    else {
+      RouteActions.redirect('event', {id: this.state.model.id});
+    }
   },
   onSuccess: function (result) {
     RouteActions.redirect('event', {id: result.id});
