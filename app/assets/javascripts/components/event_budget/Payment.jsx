@@ -79,7 +79,9 @@ var Payment = React.createClass({
           </div>
           <div className="Info">
             <div className="Display">Amount</div>
-            <div className="Content">{p.amount}</div>
+            <div className="Content">
+              <ReactIntl.FormattedNumber value={p.amount} style="currency" currency="USD" />
+            </div>
           </div>
           <div className="Info">
             <div className="Display">Type</div>
