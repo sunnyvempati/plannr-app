@@ -24,6 +24,15 @@
 
 .Info-content {
   @include font($body-1-font, normal, 0);
+  & .Budget {
+    display: flex;
+    >* {
+      flex: 1;
+    }
+    & .Value {
+      font-weight: bold;
+    }
+  }
 }
 
 .Event-descriptionContainer {

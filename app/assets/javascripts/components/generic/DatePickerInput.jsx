@@ -26,7 +26,7 @@ var DatePickerInput = React.createClass({
                       dateFormat="MM/DD/YYYY"
                       onChange={this.changeValue}
                       minDate={this.props.minDate}
-                      weekStart="1"
+                      weekStart="0"
           />
         </div>
         <span className="FormInput-fieldErrorMessage">{this.getErrorMessage()}</span>

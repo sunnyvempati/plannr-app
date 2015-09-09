@@ -57,6 +57,18 @@ var Event = React.createClass({
       'Event-infoContainer': true,
       'is-described': this.props.editable
     });
+    let total = 0,
+        estimated = 0,
+        expenses = 0,
+        remaining = 0,
+        budgetTotals = event.budget_totals;
+    if (budgetTotals) {
+      total = budgetTotals.total;
+      estimated = budgetTotals.estimated,
+      expenses = budgetTotals.expenses,
+      remaining = budgetTotals.estimated - budgetTotals.expenses
+    }
+    event.budget_totals && event.budget_totals.total;
     return (
       <div className="EventContainer">
         <div className="Event-infoContainer">
@@ -95,12 +107,35 @@ var Event = React.createClass({
               {this.renderDate(event.end_date)}
             </div>
           </div>
-          <div className="Event-info u-flexGrow-1">
+          <div className="Event-info u-flexGrow-2">
             <div className="Info-header">
               Budget
             </div>
-            <div className="Info-content u-wrapWithEllipsis u-bold">
-              <ReactIntl.FormattedNumber value={event.budget} style="currency" currency="USD" />
+            <div className="Info-content">
+              <div className="Budget">
+                <div className="Display">Total</div>
+                <div className="Value">
+                  <ReactIntl.FormattedNumber value={total} style="currency" currency="USD" />
+                </div>
+              </div>
+              <div className="Budget">
+                <div className="Display">Estimated</div>
+                <div className="Value">
+                  <ReactIntl.FormattedNumber value={estimated} style="currency" currency="USD" />
+                </div>
+              </div>
+              <div className="Budget">
+                <div className="Display">Expenses</div>
+                <div className="Value">
+                  <ReactIntl.FormattedNumber value={expenses} style="currency" currency="USD" />
+                </div>
+              </div>
+              <div className="Budget">
+                <div className="Display">Remaining</div>
+                <div className="Value">
+                  <ReactIntl.FormattedNumber value={remaining} style="currency" currency="USD" />
+                </div>
+              </div>
             </div>
           </div>
           <div className={editClasses}>

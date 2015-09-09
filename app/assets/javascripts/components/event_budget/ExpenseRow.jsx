@@ -82,7 +82,7 @@ var ExpenseRow = React.createClass({
                   day="numeric"
                   month="numeric"
                   year="numeric"
-                  value={date} />
+                  value={moment(date)} />
               </div>
               <div className="amount">
                 <ReactIntl.FormattedNumber value={payment.amount} style="currency" currency="USD" />

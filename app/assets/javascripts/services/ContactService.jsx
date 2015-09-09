@@ -41,20 +41,20 @@ class ContactService {
       });
   }
 
-  static create(params) {
+  static create(params, autocomplete) {
     request
       .post(APIEndpoints.CREATE_CONTACT)
       .send(params)
       .use(Utils.addAuthToken)
       .end((error, res) => {
         if (res) {
+          let json = null, errors = null;
           if (!error) {
-            let json = JSON.parse(res.text);
-            ServerActions.receiveCreateContact(json);
+            json = JSON.parse(res.text);
           } else {
-            let errors = Utils.getErrors(res);
-            ServerActions.receiveCreateContact(null, errors);
+            errors = Utils.getErrors(res);
           }
+          ServerActions.receiveCreateContact(json, errors, autocomplete);
         }
       });
   }

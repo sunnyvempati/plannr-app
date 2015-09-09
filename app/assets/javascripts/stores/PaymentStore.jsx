@@ -2,6 +2,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 import {ActionTypes} from '../constants/AppConstants.jsx';
 import BaseStore from './BaseStore';
 import CacheStore from './CacheStore';
+import SessionStore from './SessionStore';
 
 class PaymentStore extends BaseStore {
   constructor() {

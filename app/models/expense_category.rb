@@ -39,6 +39,30 @@ class ExpenseCategory < ActiveRecord::Base
     end
   }
 
+  def self.default_expense_categories
+    [
+      'Audio/Visual & Technical',
+      'Booth Rental',
+      'Catering & Beverage',
+      'Design & Decor',
+      'Entertainment',
+      'Facilities & Campus Services',
+      'Parking/Transportation',
+      'Travel',
+      'Lodging',
+      'Photography/Video',
+      'Postage/Mail/Shipping',
+      'Publicity/Marketing',
+      'Rentals',
+      'Security/Safety',
+      'Signage',
+      'Supplies & Miscellaneous',
+      'Venue',
+      'Miscellaneous Contingency',
+      'Other'
+    ]
+  end
+
   def self.default_filter_options
     {
       sorted_by: 'name_asc'

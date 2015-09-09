@@ -6,6 +6,7 @@ import PaymentActions from '../../actions/PaymentActions';
 import moment from 'moment';
 import DatePickerInput from '../generic/DatePickerInput';
 import DropdownInput from '../generic/DropdownInput';
+import TextAreaInput from '../generic/TextAreaInput';
 import classNames from 'classnames';
 
 const PaymentForm = React.createClass({
@@ -38,7 +39,8 @@ const PaymentForm = React.createClass({
         'expense_id': this.props.expense.id,
         'due_date': inputs.due_date,
         'amount': inputs.amount,
-        'payment_method': inputs.method
+        'payment_method': inputs.method,
+        'notes': inputs.notes
       }
     };
   },
@@ -63,9 +65,11 @@ const PaymentForm = React.createClass({
       payment = {
         due_date: model.due_date,
         amount: model.amount,
-        method: model.method_type
+        method: model.method_type,
+        notes: model.notes
       };
     }
+    let formId = 'payment_form';
     return (
       <div className="FormContainer--leftAligned compact">
         <Form mapping={this.mapInputs}
@@ -74,7 +78,7 @@ const PaymentForm = React.createClass({
               onInvalid={this.disableButton}
               validationErrors={this.state.errors}
               resetErrors={this.resetErrors}
-              id='payment_form'>
+              id={formId}>
           <FormInput
               name="amount"
               id="payment_amount"
@@ -104,6 +108,15 @@ const PaymentForm = React.createClass({
             className='CompactFormInput'
             dropdownOptionsClass='DropdownMenu-options compact'
             dropdownItemClass='DropdownMenu-item compact'
+          />
+          <TextAreaInput
+            name="notes"
+            form={formId}
+            value={payment.notes}
+            label="Notes"
+            disabled={this.props.disableForm}
+            placeholder="What else do you need to know?"
+            className='CompactFormInput'
           />
           {this.renderFormTwoButtons('Save', 'Cancel')}
         </Form>

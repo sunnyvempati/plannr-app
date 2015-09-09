@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
   has_many :vendors, through: :event_vendors
   has_many :tasks, dependent: :destroy
   has_many :attachments, dependent: :destroy
+  has_many :event_expense_categories, dependent: :destroy
   belongs_to :owner, class_name: "User"
   belongs_to :client, class_name: "Contact"
   belongs_to :parent, class_name: "Event"

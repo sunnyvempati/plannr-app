@@ -34,7 +34,7 @@ var SignUpForm = React.createClass({
   },
   componentDidMount: function() {
     InvitationStore.addChangeListener(this._onInvitationChange);
-    InvitationActions.get(this.props.query.invite_token);
+    if (this.props.query.invite_token) InvitationActions.get(this.props.query.invite_token);
   },
   componentWillUnmount: function() {
     InvitationStore.removeChangeListener(this._onInvitationChange);

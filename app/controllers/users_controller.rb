@@ -41,6 +41,7 @@ class UsersController < ApplicationController
 
       @user.company = Company.create(company_params)
       set_current_tenant(@user.company)
+      create_default_expense_categories
       @user.company_admin = true
     end
 
@@ -82,6 +83,12 @@ class UsersController < ApplicationController
 
   def check_invitation!
     @invitation = Invitation.find_by_token(params[:invite_token])
+  end
+
+  def create_default_expense_categories
+    ExpenseCategory.default_expense_categories.each do |ec|
+      ExpenseCategory.create!(name: ec)
+    end
   end
 
   def model

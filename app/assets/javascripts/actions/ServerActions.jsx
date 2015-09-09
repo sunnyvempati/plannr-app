@@ -100,9 +100,15 @@ class ServerActions {
     });
   }
 
-  static receiveCreateContact(json, errors) {
-    let type = !errors ? ActionTypes.CREATE_CONTACT_SUCCESS_RESPONSE :
-                         ActionTypes.CREATE_CONTACT_ERROR_RESPONSE;
+  static receiveCreateContact(json, errors, autocomplete) {
+    let type;
+    if (autocomplete) {
+      type = !errors ? ActionTypes.CREATE_AUTOCOMPLETE_CONTACT_SUCCESS_RESPONSE :
+                       ActionTypes.CREATE_AUTOCOMPLETE_CONTACT_ERROR_RESPONSE;
+    } else {
+      type = !errors ? ActionTypes.CREATE_CONTACT_SUCCESS_RESPONSE :
+                       ActionTypes.CREATE_CONTACT_ERROR_RESPONSE;
+    }
     let entity = json && json.contact;
     AppDispatcher.handleAction({
       type: type,
