@@ -48,7 +48,9 @@ const AppConstants = {
     DELETE_COMMENT:             '/comments/',
     CREATE_INVITE:              '/invitations',
     GET_INVITE:                 '/invitation_by_token',
-    FEEDBACK:                   '/feedback'
+    FEEDBACK:                   '/feedback',
+    ADMIN_REPORTS_USERS:        '/admin/report/users',
+    ADMIN_REPORTS_COMPANIES:    '/admin/report/companies'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
