@@ -29,7 +29,7 @@ class ExpenseActions {
     ExpenseService.update(id, params);
   }
 
-  static remove(id) {
+  static delete(id) {
     AppDispatcher.handleAction({
       type: ActionTypes.DELETE_EXPENSE_REQUEST,
       id: id

@@ -119,7 +119,7 @@ var CategoryRow = React.createClass({
           <div className="Category-expenses">
             <div className="display">Expenses</div>
             <div className="price">
-              <ReactIntl.FormattedNumber value={expenseTotal} style="currency" currency="USD" />
+              <ReactIntl.FormattedNumber value={category.expense_total} style="currency" currency="USD" />
             </div>
           </div>
           <div className="Category-remaining">

@@ -4,12 +4,12 @@ import EventExpenseCategoryService from '../services/EventExpenseCategoryService
 import EventExpenseCategoryStore from '../stores/EventExpenseCategoryStore';
 
 export default class EventExpenseCategoryActions {
-  static getEventExpenseCategories(params) {
+  static getEventExpenseCategories(params, eventId) {
     AppDispatcher.handleAction({
       type: ActionTypes.GET_EVENT_EXPENSE_CATEGORY_REQUEST,
       params: params
     });
-    EventExpenseCategoryService.getCategories(params);
+    EventExpenseCategoryService.getCategories(params, eventId);
   }
 
   static create(params) {

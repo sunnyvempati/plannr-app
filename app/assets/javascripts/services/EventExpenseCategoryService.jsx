@@ -5,7 +5,7 @@ import {APIEndpoints} from '../constants/AppConstants';
 import ToastActions from '../actions/ToastActions';
 
 class EventExpenseCategoryService {
-  static getCategories(params) {
+  static getCategories(params, eventId) {
     request
       .get(APIEndpoints.GET_EVENT_EXPENSE_CATEGORIES)
       .query(params)
@@ -15,10 +15,10 @@ class EventExpenseCategoryService {
           if (!error) {
             let json = JSON.parse(res.text);
             let eventExpenseCategories = json.event_expense_categories || [];
-            ServerActions.receiveGetExpenseCategories(eventExpenseCategories, params, null);
+            ServerActions.receiveGetExpenseCategories(eventExpenseCategories, params, null, eventId);
           } else {
             let errors = Utils.getErrors(res);
-            ServerActions.receiveGetExpenseCategories(null, null, errors);
+            ServerActions.receiveGetExpenseCategories(null, null, errors, eventId);
           }
         }
       });
@@ -43,20 +43,17 @@ class EventExpenseCategoryService {
       });
   }
 
-  static create(params) {
+  static create(params, eventId) {
     request
       .post(APIEndpoints.CREATE_EVENT_EXPENSE_CATEGORY)
       .send(params)
       .use(Utils.addAuthToken)
       .end((error, res) => {
         if (res) {
-          if (!error) {
-            let json = JSON.parse(res.text);
-            ServerActions.receiveCreateEventExpenseCategory(json);
-          } else {
-            let errors = Utils.getErrors(res);
-            ServerActions.receiveCreateEventExpenseCategory(null, errors);
-          }
+          let json = null, errors = null;
+          if (!error) json = JSON.parse(res.text);
+          else errors = Utils.getErrors(res);
+          ServerActions.receiveCreateEventExpenseCategory(json, errors);
         }
       });
   }

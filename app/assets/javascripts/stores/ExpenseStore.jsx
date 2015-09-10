@@ -5,6 +5,7 @@ import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
 import PaymentStore from './PaymentStore';
+import EventExpenseCategoryStore from './EventExpenseCategoryStore';
 import extend from 'extend';
 
 
@@ -42,6 +43,13 @@ class ExpenseStore extends BaseStore {
 
   add(expense) {
     this._expenses[expense.id] = expense;
+    let eventExpenseCategoryId = expense.event_expense_category_id;
+    let expenseTotal = 0;
+    Object.keys(this._expenses).forEach((key) => {
+      let e = this._expenses[key];
+      if (e.event_expense_category_id == eventExpenseCategoryId) expenseTotal += e.price;
+    });
+    EventExpenseCategoryStore.addExpenseTotal(eventExpenseCategoryId, expenseTotal);
     this._cache.clear();
   }
 

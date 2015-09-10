@@ -4,10 +4,17 @@ class EventExpenseCategorySerializer < ActiveModel::Serializer
              :budget,
              :expense_category_id,
              :event_id,
-             :name
+             :name,
+             :expense_total
 
   def expense_category_name
     object.expense_category.name
+  end
+
+  def expense_total
+    total = 0
+    object.expenses.each {|e| total += e.price}
+    total
   end
 
   def name
