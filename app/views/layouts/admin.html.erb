@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+  <title>Plannr - Administration</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin/application' %>
+  <%= csrf_meta_tags %>
+
+  <%= favicon_link_tag 'favicon-16.ico', {sizes: '16x16'} %>
+  <%= favicon_link_tag 'favicon-32.ico', {sizes: '32x32'} %>
+  <%= favicon_link_tag 'favicon-48.ico', {sizes: '48x48'} %>
+  <%= favicon_link_tag 'favicon-256.ico', {sizes: '256x256'} %>
+</head>
+<body>
+
+<%= react_component("ToastMessage", prerender: true) %>
+<%= react_component("Loading", prerender: true) %>
+<%= react_component("Modal", prerender: true) %>
+<div class="AppContainer">
+  <%= react_component("Admin", authToken: form_authenticity_token, webPath: Rails.configuration.web_path, prerender: true) %>
+</div>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'start#new'
 
   namespace :admin do
+    get '/', to: 'home#index'
     get 'report/companies', defaults: {format: :json}
     get 'report/users', defaults: {format: :json}
   end

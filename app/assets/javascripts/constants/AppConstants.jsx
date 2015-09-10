@@ -55,6 +55,13 @@ const AppConstants = {
     VIEW_ACTION: null
   }),
 
+  AdminActions: keyMirror({
+    FETCH_USER_INFOS: null,
+    FETCH_USER_INFOS_RESPONSE: null,
+    FETCH_COMPANY_INFOS: null,
+    FETCH_COMPANY_INFOS_RESPONSE: null
+  }),
+
   ActionTypes: keyMirror({
     // Session
     LOGIN_REQUEST: null,
