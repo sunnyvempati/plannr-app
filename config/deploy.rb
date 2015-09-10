@@ -40,6 +40,8 @@ set :linked_files, fetch(:linked_files, []).push('config/secrets.yml').push('con
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
+set :log_level, :debug
+
 namespace :deploy do
 
   desc 'Restart application'

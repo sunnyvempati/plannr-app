@@ -11,6 +11,10 @@ role :app, %w{deployer@yourplannr.com}
 role :web, %w{deployer@yourplannr.com}
 role :db,  %w{deployer@yourplannr.com}
 
+set :ssh_options, {
+    verbose: :debug
+}
+
 set :stage, :production
 
 server 'yourplannr.com', user: 'deployer', roles: %w{web app}
