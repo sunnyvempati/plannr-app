@@ -13,7 +13,7 @@ class EventExpenseCategorySerializer < ActiveModel::Serializer
 
   def expense_total
     total = 0
-    object.expenses.each {|e| total += e.price}
+    object.expenses.each {|e| total += e.price*e.quantity}
     total
   end
 

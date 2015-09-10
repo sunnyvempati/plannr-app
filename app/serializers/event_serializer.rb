@@ -17,7 +17,7 @@ class EventSerializer < ActiveModel::Serializer
     if object.event_expense_categories
       object.event_expense_categories.each do |ec|
         expenses = Expense.where(event_expense_category_id: ec.id)
-        expenses.each{|e| expense_total += e.price}
+        expenses.each{|e| expense_total += e.price*e.quantity}
         estimated += ec.budget
       end
     end

@@ -47,7 +47,9 @@ class ExpenseStore extends BaseStore {
     let expenseTotal = 0;
     Object.keys(this._expenses).forEach((key) => {
       let e = this._expenses[key];
-      if (e.event_expense_category_id == eventExpenseCategoryId) expenseTotal += e.price;
+      if (e.event_expense_category_id == eventExpenseCategoryId)
+        console.log(e.price, e.quantity);
+        expenseTotal += e.price*e.quantity;
     });
     EventExpenseCategoryStore.addExpenseTotal(eventExpenseCategoryId, expenseTotal);
     this._cache.clear();
