@@ -80,7 +80,7 @@ class EventsController < ApplicationController
     # comments: bool
     t_params = {}
     if params[:template] && !params[:template].empty?
-      t_params = params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :comments)
+      t_params = params.require(:template).permit(:parent_event_id, :contacts, :vendors, :tasks, :categories, :comments)
     end
     t_params
   end

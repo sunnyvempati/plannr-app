@@ -5,6 +5,8 @@ import ViewStore from './ViewStore';
 import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
+import EventExpenseCategoryStore from './EventExpenseCategoryStore';
+import ExpenseStore from './ExpenseStore';
 import extend from 'extend';
 
 
@@ -71,6 +73,35 @@ class EventStore extends BaseStore {
     return !!this._cache.contextExists(params);
   }
 
+  getBudgetTotals(id) {
+    let event = this.get(id);
+    let total = 0,
+        estimated = 0,
+        expenses = 0,
+        remaining = 0,
+        budgetTotals = event && event.budget_totals;
+    if (budgetTotals) {
+      total = budgetTotals.total;
+      estimated = budgetTotals.estimated,
+      expenses = budgetTotals.expenses,
+      remaining = budgetTotals.estimated - budgetTotals.expenses
+    }
+    return {
+      total: total,
+      estimated: estimated,
+      expenses: expenses,
+      remaining: remaining
+    }
+  }
+
+  setTotals(id, estimated, expenses) {
+    let event = this.get(id);
+    if (event) {
+      event.budget_totals.estimated = estimated;
+      if (expenses) event.budget_totals.expenses = expenses;
+    }
+  }
+
   clear() {
     this._searchResults = [];
     this._events = [];
@@ -94,7 +125,9 @@ let _eventStoreInstance = new EventStore();
 _eventStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
   AppDispatcher.waitFor([
     SessionStore.dispatchToken,
-    UserStore.dispatchToken
+    UserStore.dispatchToken,
+    EventExpenseCategoryStore.dispatchToken,
+    ExpenseStore.dispatchToken
   ]);
   let action = payload.action;
 

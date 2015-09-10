@@ -60,6 +60,7 @@ class Event < ActiveRecord::Base
     included_options << :event_contacts if options[:contacts]
     included_options << :event_vendors if options[:vendors]
     included_options << :tasks if options[:tasks]
+    included_options << :event_expense_categories if options[:categories]
     included_options << :comments if options[:comments]
     cloned_event = deep_clone include: included_options
     cloned_event.parent_id = options[:parent_event_id]

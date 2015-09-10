@@ -1,12 +1,35 @@
 import classNames from 'classnames';
 import ReactIntl from 'react-intl';
 import {Link} from 'react-router';
+import EventStore from '../../stores/EventStore';
+import EventExpenseCategoryStore from '../../stores/EventExpenseCategoryStore';
 
 var Event = React.createClass({
   getDefaultProps: function() {
     return {
       editable: true
     };
+  },
+  getInitialState: function() {
+    let event = this.props.model;
+    return {
+      budget: EventStore.getBudgetTotals(event.id)
+    };
+  },
+  componentDidMount: function() {
+    EventExpenseCategoryStore.addChangeListener(this._onCategoryChange);
+  },
+  componentWillUnmount: function() {
+    EventExpenseCategoryStore.removeChangeListener(this._onCategoryChange);
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.setBudget(nextProps.model.id);
+  },
+  _onCategoryChange() {
+    this.setBudget(this.props.model.id);
+  },
+  setBudget(eventId) {
+    this.setState({budget: EventStore.getBudgetTotals(eventId)});
   },
   propTypes: {
     model: React.PropTypes.object
@@ -57,18 +80,7 @@ var Event = React.createClass({
       'Event-infoContainer': true,
       'is-described': this.props.editable
     });
-    let total = 0,
-        estimated = 0,
-        expenses = 0,
-        remaining = 0,
-        budgetTotals = event.budget_totals;
-    if (budgetTotals) {
-      total = budgetTotals.total;
-      estimated = budgetTotals.estimated,
-      expenses = budgetTotals.expenses,
-      remaining = budgetTotals.estimated - budgetTotals.expenses
-    }
-    event.budget_totals && event.budget_totals.total;
+    let budgetTotals = this.state.budget;
     return (
       <div className="EventContainer">
         <div className="Event-infoContainer">
@@ -115,25 +127,25 @@ var Event = React.createClass({
               <div className="Budget">
                 <div className="Display">Total</div>
                 <div className="Value">
-                  <ReactIntl.FormattedNumber value={total} style="currency" currency="USD" />
+                  <ReactIntl.FormattedNumber value={budgetTotals.total} style="currency" currency="USD" />
                 </div>
               </div>
               <div className="Budget">
                 <div className="Display">Estimated</div>
                 <div className="Value">
-                  <ReactIntl.FormattedNumber value={estimated} style="currency" currency="USD" />
+                  <ReactIntl.FormattedNumber value={budgetTotals.estimated} style="currency" currency="USD" />
                 </div>
               </div>
               <div className="Budget">
                 <div className="Display">Expenses</div>
                 <div className="Value">
-                  <ReactIntl.FormattedNumber value={expenses} style="currency" currency="USD" />
+                  <ReactIntl.FormattedNumber value={budgetTotals.expenses} style="currency" currency="USD" />
                 </div>
               </div>
               <div className="Budget">
                 <div className="Display">Remaining</div>
                 <div className="Value">
-                  <ReactIntl.FormattedNumber value={remaining} style="currency" currency="USD" />
+                  <ReactIntl.FormattedNumber value={budgetTotals.remaining} style="currency" currency="USD" />
                 </div>
               </div>
             </div>

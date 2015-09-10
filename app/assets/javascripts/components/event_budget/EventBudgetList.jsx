@@ -24,7 +24,7 @@ var EventBudgetList = React.createClass({
     let params = {with_event_id: this.props.eventId, sorted_by: 'expense_category_name_asc'};
     let categories = EventExpenseCategoryStore.getFromCache(params);
     if (categories) this.setState({categories: categories});
-    else EventExpenseCategoryActions.getEventExpenseCategories(params);
+    else EventExpenseCategoryActions.getEventExpenseCategories(params, this.props.eventId);
   },
   renderCategoryRows() {
     let categories = this.state.categories;

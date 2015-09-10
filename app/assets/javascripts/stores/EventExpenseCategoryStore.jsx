@@ -4,6 +4,7 @@ import BaseStore from './BaseStore';
 import CacheStore from './CacheStore';
 import SessionStore from './SessionStore';
 import UserStore from './UserStore';
+import EventStore from './EventStore';
 import extend from 'extend';
 
 
@@ -29,13 +30,16 @@ class EventExpenseCategory extends BaseStore {
 
   addCategories(categories, params) {
     this._cache.createContext(params);
+    let estimated = 0, eventId = params.with_event_id;
     if (categories.length > 0) {
       categories.forEach((category) => {
         // add to global
+        if (eventId) estimated += category.budget;
         this._eventExpenseCategories[category.id] = category;
         // then add to cache
         this._cache.add(category.id, params);
       });
+      if (eventId) EventStore.setTotals(eventId, estimated);
     }
   }
 
@@ -45,7 +49,27 @@ class EventExpenseCategory extends BaseStore {
 
   add(eventExpenseCategory) {
     this._eventExpenseCategories[eventExpenseCategory.id] = eventExpenseCategory;
+    let eventId = eventExpenseCategory.event_id;
+    this.setEventTotals(eventId);
     this._cache.clear();
+  }
+
+  setEventTotals(eventId) {
+    let estimated = 0, expenses = 0;
+    Object.keys(this._eventExpenseCategories).forEach((key) => {
+      let category = this._eventExpenseCategories[key];
+      if (category.event_id == eventId) {
+        expenses += category.expense_total;
+        estimated += category.budget;
+      }
+    });
+    EventStore.setTotals(eventId, estimated, expenses);
+  }
+
+  addExpenseTotal(id, expenseTotal) {
+    let eventExpenseCategory = this.get(id);
+    eventExpenseCategory.expense_total = expenseTotal;
+    this.setEventTotals(eventExpenseCategory.event_id);
   }
 
   remove(id) {

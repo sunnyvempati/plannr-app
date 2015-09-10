@@ -55,6 +55,7 @@ const AppConstants = {
     CREATE_EXPENSE:               '/expenses',
     UPDATE_EXPENSE:               '/expenses/',
     GET_EXPENSE:                  '/expenses/',
+    DELETE_EXPENSE:               '/expenses/',
     GET_EVENT_EXPENSE_CATEGORIES: '/event_expense_categories',
     GET_EXPENSE_CATEGORIES:       '/expense_categories',
     GET_EXPENSE_CATEGORY:         '/expense_categories/',
