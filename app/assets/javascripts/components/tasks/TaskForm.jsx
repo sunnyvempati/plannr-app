@@ -7,6 +7,7 @@ import ModalActions from '../../actions/ModalActions';
 import TaskStore from '../../stores/TaskStore';
 import moment from 'moment';
 import DatePickerInput from '../generic/DatePickerInput';
+import CheckboxInput from '../generic/CheckboxInput';
 import TextAreaInput from '../generic/TextAreaInput';
 import FormButtonList from '../generic/FormButtonList';
 import TaskAssignedToInput from './TaskAssignedToInput';
@@ -29,6 +30,11 @@ const TaskForm = React.createClass({
       compact: false
     };
   },
+  getInitialState: function() {
+    return {
+      notifyUser: false
+    }
+  },
   mapInputs: function(inputs) {
     return {
       'task': {
@@ -50,10 +56,14 @@ const TaskForm = React.createClass({
     data.task.deadline = data.task.deadline && data.task.deadline.format();
     // set event id if it's not set
     let eventId = this.props.model && this.props.model.event_id;
+    data.task.notify_user = this.state.notifyUser;
     if (!data.task.event_id && eventId) {
       data.task.event_id = eventId;
     }
     this.props.type == "NEW" ? TaskActions.create(data) : TaskActions.update(this.props.model && this.props.model.id, data);
+  },
+  notifyUserChanged(checked) {
+    this.setState({notifyUser: checked});
   },
   renderButtonList: function() {
     if (this.props.type == "NEW") return this.renderCreateAndNewButtons();
@@ -69,6 +79,17 @@ const TaskForm = React.createClass({
           label='Event'
           className={className}
           autocompleteClassName={this.props.compact ? 'CompactAutocomplete' : 'Autocomplete'} />
+      );
+    }
+  },
+  renderNotificationOptions() {
+    if (this.props.type == "NEW") {
+      return (
+        <CheckboxInput onChange={this.notifyUserChanged}
+                       checked={this.state.notifyUser}
+                       name="notifyUser"
+                       checkboxDisplay={<div className="TaskModal-checkbox">Notify assigned user</div>}
+        />
       );
     }
   },
@@ -140,6 +161,7 @@ const TaskForm = React.createClass({
             placeholder="How would you describe this task?"
             className={className}
           />
+          {this.renderNotificationOptions()}
           {this.renderButtonList()}
         </Form>
       </div>

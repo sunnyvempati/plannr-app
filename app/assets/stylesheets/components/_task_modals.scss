@@ -40,3 +40,9 @@
 .TaskModal-description {
   @include font($body-1-font, normal, 0);
 }
+
+.TaskModal-checkbox {
+  @include font($body-1-font, normal, 0);
+  padding-left: $size-increment;
+  color: $black-half;
+}

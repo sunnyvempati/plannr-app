@@ -16,16 +16,16 @@ catersource_conf:
 
 dance_party:
   name: Sunny's Dance Party
-  start_date: 01/18/2016
-  end_date: 01/28/2016
+  start_date: 01/18/2017
+  end_date: 01/28/2017
   budget: 1200
   owner: sunny@yourplannr.com
   company: Event'd
 
 fashion_show:
   name: Ultimate Fashion Show
-  start_date: 02/18/2016
-  end_date: 02/28/2016
+  start_date: 02/18/2017
+  end_date: 02/28/2017
   budget: 18500
   owner: sunny@yourplannr.com
   company: Event'd
