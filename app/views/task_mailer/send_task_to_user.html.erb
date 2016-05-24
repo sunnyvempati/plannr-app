@@ -1,0 +1,47 @@
+<%= render partial: "mailer_partials/html_jargon" %>
+
+<body bgcolor="#FFFFFF">
+
+<%= render partial: "mailer_partials/header" %>
+<!-- BODY -->
+<table class="body-wrap">
+  <tr>
+    <td></td>
+    <td class="container" bgcolor="#FFFFFF">
+
+      <div class="content">
+      <table>
+        <tr>
+          <td>
+            <h3>Hi <%= @assigned_to_name %></h3>
+            <p class="lead"><%= @assigned_from_name %> assigned you a task</p>
+            <p class="lead"><%= @task.name %></p>
+            <table>
+              <tr>
+                <td class="column_name">Description</td>
+                <td><%= @task.description %></td>
+              </tr>
+              <tr>
+                <td class="column_name">Event</td>
+                <td><%= @event_name %></td>
+              </tr>
+            </table>
+            <br />
+            <!-- Callout Panel -->
+            <p class="callout">
+              <a href=<%= @url %>>Go to tasks</a>
+            </p><!-- /Callout Panel -->
+
+            <%= render partial: "mailer_partials/social_and_contact" %>
+
+          </td>
+        </tr>
+      </table>
+      </div><!-- /content -->
+
+    </td>
+    <td></td>
+  </tr>
+</table><!-- /BODY -->
+</body>
+</html>

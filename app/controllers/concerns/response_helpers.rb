@@ -5,7 +5,7 @@ module ResponseHelpers
 
   def render_entity(entity, skip_validation=false)
     if entity.save(validate: !skip_validation)
-      yield if block_given?
+      yield entity if block_given?
       render_success entity
     else
       render json: errors_hash(entity.errors), status: 403

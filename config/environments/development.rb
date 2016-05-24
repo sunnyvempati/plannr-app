@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.web_path = "http://plannr-web.dev/"
+  config.web_path = "http://plannr-app.dev/"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -44,9 +44,11 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = {
-    :host => 'plannr-app.dev',
-    :port => 3000
+    :port => 3000,
+    :only_path => true
   }
+  config.action_controller.asset_host = 'plannr-app.dev'
+  config.action_mailer.asset_host = 'http://plannr-app.dev'
 
   config.react.variant = :development
   # Raises error for missing translations
