@@ -33,19 +33,17 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => '3225465a8db58135e',
-    :password => '62abf789f9499b',
-    :address => 'mailtrap.io',
-    :domain => 'mailtrap.io',
-    :port => '2525',
-    :authentication => :cram_md5
+    address: 'smtp.mandrillapp.com',
+    port: 587,
+    user_name: 'sunny@yourplannr.com',
+    password: '7de0Hncw5HD6p44YRilDJw'
   }
 
   config.action_mailer.default_url_options = {
     :port => 3000,
-    :only_path => true
+    :only_path => true,
+    :host => 'localhost'
   }
   config.action_controller.asset_host = 'plannr-app.dev'
   config.action_mailer.asset_host = 'http://plannr-app.dev'

@@ -6,7 +6,7 @@ class TaskMailer < ApplicationMailer
     @assigned_from_name = assigned_from.profile.full_name
     @event_name = event.name
     @task = task
-    @url = root_url + "#/#{event.id}/tasks"
+    @url = "#{build_url}/#/events/#{event.id}/tasks"
     attachment = create_calendar_event(task) if task.deadline
     mail.attachments['taskreminder.ics'] = { mime_type: 'application/ics', content: attachment.to_ical } if attachment
     mail(to: assigned_to.email, subject: "Task assigned to you: #{task.name}")
@@ -25,5 +25,9 @@ class TaskMailer < ApplicationMailer
       e.ip_class = "PRIVATE"
     end
     cal
+  end
+
+  def build_url
+    "http://#{url_options[:host]}:#{url_options[:port]}"
   end
 end
