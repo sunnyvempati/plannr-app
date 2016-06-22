@@ -16,14 +16,27 @@ const router = Router.create({
 class RouteStore extends BaseStore {
   constructor() {
     super();
+    this._returnLocation = null;
   }
 
   getRouter() {
     return router;
   }
 
+  getStoredLocation() {
+    return this._returnLocation;
+  }
+
+  resetStoredLocation() {
+    this._returnLocation = null;
+  }
+
   redirectHome() {
     router.transitionTo('app');
+  }
+
+  storeLocation(location) {
+    this._returnLocation = location;
   }
 }
 
@@ -46,7 +59,13 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
     case ActionTypes.LOGIN_RESPONSE:
       // no profile
       if (SessionStore.isLoggedIn()) {
-        router.transitionTo('app');
+        let storedLocation = _routeStoreInstance.getStoredLocation();
+        if (storedLocation) {
+          _routeStoreInstance.resetStoredLocation();
+          router.transitionTo(storedLocation);
+        } else router.transitionTo('app');
+        let goToLocation = !!storedLocation ? storedLocation : 'app';
+        router.transitionTo(goToLocation);
       }
       break;
 
@@ -82,6 +101,11 @@ _routeStoreInstance.dispatchToken = AppDispatcher.register((payload) => {
       if (!action.errors && !UserStore.currentUser.profile) {
         router.transitionTo('profile');
       }
+      break;
+
+    case ActionTypes.STORE_LOCATION:
+      let location = router.getLocation().getCurrentPath();
+      _routeStoreInstance.storeLocation(location);
       break;
 
     case ActionTypes.CREATE_EVENT_EXPENSE_CATEGORY_SUCCESS_RESPONSE:
