@@ -38,6 +38,9 @@ gem 'hallmonitor'
 
 gem 'browserify-rails'
 
+gem 'icalendar'
+gem 'premailer-rails'
+
 group 'development' do
   gem 'pry'
   gem 'pry-rails'

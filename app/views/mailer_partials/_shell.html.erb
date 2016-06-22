@@ -1,0 +1,19 @@
+<%= render partial: "mailer_partials/html_jargon", locals: { title: title } %>
+
+<body bgcolor="#FFFFFF">
+
+<%= render partial: "mailer_partials/header" %>
+<!-- BODY -->
+<table class="body-wrap">
+  <tr>
+    <td></td>
+    <td class="container" bgcolor="#FFFFFF">
+      <% if content_for?(:body_content) %>
+        <div class="content"><%= yield(:body_content) %></div>
+      <% end %>
+    </td>
+    <td></td>
+  </tr>
+</table><!-- /BODY -->
+</body>
+</html>

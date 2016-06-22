@@ -41,6 +41,7 @@ GEM
     acts_as_tenant (0.3.8)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    addressable (2.4.0)
     arel (6.0.3)
     authlogic (3.4.5)
       activerecord (>= 3.2)
@@ -106,6 +107,8 @@ GEM
     colorize (0.7.7)
     columnize (0.9.0)
     connection_pool (2.2.0)
+    css_parser (1.4.1)
+      addressable
     deep_cloneable (2.1.1)
       activerecord (>= 3.1.0, < 5.0.0)
     diff-lcs (1.2.5)
@@ -187,8 +190,10 @@ GEM
     hallmonitor (1.0.0)
       json
     hitimes (1.2.2)
+    htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
+    icalendar (2.3.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jbuilder (2.2.16)
@@ -227,6 +232,12 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.18.2)
+    premailer (1.8.6)
+      css_parser (>= 1.3.6)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.9.2)
+      actionmailer (>= 3, < 6)
+      premailer (~> 1.7, >= 1.7.9)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -380,11 +391,13 @@ DEPENDENCIES
   fuubar
   guard-livereload
   hallmonitor
+  icalendar
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
   log4r
   pg
+  premailer-rails
   pry
   pry-byebug
   pry-rails

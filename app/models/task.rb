@@ -57,6 +57,13 @@ class Task < ActiveRecord::Base
     end
   }
 
+  def send_to(user)
+    assigned_to = user
+    assigned_from = User.find(owner_id)
+    event = Event.find(event_id)
+    TaskMailer.send_task_to_user(assigned_from, assigned_to, event, self).deliver_later
+  end
+
   def self.default_filter_options
     {
       sorted_by: 'deadline_asc'

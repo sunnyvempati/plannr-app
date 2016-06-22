@@ -10,6 +10,12 @@ class RouteActions {
       query: query
     });
   }
+
+  static storeLocation() {
+    AppDispatcher.handleAction({
+      type: ActionTypes.STORE_LOCATION
+    })
+  }
 };
 
 export default RouteActions;

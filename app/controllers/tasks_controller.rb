@@ -21,9 +21,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new task_params
+    @task = Task.new task_params.except!(:notify_user)
     @task.status = 1 # TODO
-    render_entity @task
+    render_entity @task do |task|
+      user = User.find task_params[:assigned_to_id]
+      task.send_to(user) if user
+    end
   end
 
   def update
@@ -50,7 +53,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :deadline, :event_id, :assigned_to_id, :status, :description).merge(owner: current_user)
+    params.require(:task).permit(:name, :notify_user, :deadline, :event_id, :assigned_to_id, :status, :description).merge(owner: current_user)
   end
 
   def mass_destroy_params
