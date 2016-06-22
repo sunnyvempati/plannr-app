@@ -292,7 +292,8 @@ const AppConstants = {
 
     // Routes
     REDIRECT: null,
-    REFRESH: null
+    REFRESH: null,
+    STORE_LOCATION: null
   })
 };
 

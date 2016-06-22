@@ -10,7 +10,7 @@ export default (PrivateComponent) => {
         // let transitionPath = transition.path;
 
         // RouteActions.storeTransitionPath(transitionPath);
-
+        RouteActions.storeLocation();
         RouteActions.redirect('login');
       }
     }
